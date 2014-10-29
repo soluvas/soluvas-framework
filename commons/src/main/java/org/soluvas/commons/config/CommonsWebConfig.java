@@ -2,8 +2,6 @@ package org.soluvas.commons.config;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.net.ssl.SSLContext;
@@ -30,12 +28,7 @@ import org.soluvas.commons.Cpu;
 import org.soluvas.commons.IdAsyncEventBus;
 import org.soluvas.commons.Network;
 import org.soluvas.commons.util.AppUtils;
-import org.soluvas.json.EmfModule;
-import org.soluvas.json.JacksonMapperFactory;
-import org.soluvas.json.JacksonMapperFactoryImpl;
-import org.soluvas.json.LowerEnumModule;
-import org.soluvas.json.jscience.JscienceModule;
-import org.soluvas.json.money.JodaMoneyModule;
+import org.soluvas.json.JsonUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -44,14 +37,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.guava.GuavaModule;
-import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.code.morphia.logging.MorphiaLoggerFactory;
 import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;
-import com.google.common.base.Supplier;
-import com.google.common.base.Suppliers;
 import com.google.common.eventbus.EventBus;
 import com.google.common.util.concurrent.ListeningExecutorService;
 
@@ -217,21 +205,22 @@ public class CommonsWebConfig {
 		return HttpClientBuilder.create().setConnectionManager(httpClientConnMgr43()).build();
 	}
 	
-	@Bean
-	public JacksonMapperFactory jacksonMapperFactory() {
-		final List<Supplier<Module>> modules = new ArrayList<>();
-		modules.add(Suppliers.<Module>ofInstance(new JodaModule()));
-		modules.add(Suppliers.<Module>ofInstance(new GuavaModule()));
-		modules.add(Suppliers.<Module>ofInstance(new JodaMoneyModule()));
-		modules.add(Suppliers.<Module>ofInstance(new LowerEnumModule()));
-		modules.add(Suppliers.<Module>ofInstance(new EmfModule()));
-		modules.add(Suppliers.<Module>ofInstance(new JscienceModule()));
-		return new JacksonMapperFactoryImpl(modules);
-	}
+//	@Bean
+//	public JacksonMapperFactory jacksonMapperFactory() {
+//		final List<Supplier<Module>> modules = new ArrayList<>();
+//		modules.add(Suppliers.<Module>ofInstance(new JodaModule()));
+//		modules.add(Suppliers.<Module>ofInstance(new GuavaModule()));
+//		modules.add(Suppliers.<Module>ofInstance(new JodaMoneyModule()));
+//		modules.add(Suppliers.<Module>ofInstance(new LowerEnumModule()));
+//		modules.add(Suppliers.<Module>ofInstance(new EmfModule()));
+//		modules.add(Suppliers.<Module>ofInstance(new JscienceModule()));
+//		return new JacksonMapperFactoryImpl(modules);
+//	}
 	
 	@Bean
 	public ObjectMapper jacksonMapper() {
-		return jacksonMapperFactory().get();
+		return JsonUtils.mapper;
+//		return jacksonMapperFactory().get();
 	}
 	
 }
