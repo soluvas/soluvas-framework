@@ -89,7 +89,7 @@ public class ScheduleConfig {
 	@Bean
 	public LoggingJobHistoryPlugin loggingJobHistoryPlugin() throws SchedulerException {
 		final Scheduler scheduler = scheduler().getObject();
-		final LoggingJobHistoryPlugin loggingJobListener = new LoggingJobHistoryPlugin();
+		final LoggingJobHistoryPlugin loggingJobListener = new LoggingJobHistoryPlugin2();
 		loggingJobListener.initialize("logging", scheduler, null);
 		return loggingJobListener;
 	}

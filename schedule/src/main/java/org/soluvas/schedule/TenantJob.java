@@ -20,14 +20,14 @@ import org.springframework.context.ApplicationContext;
  * Base class for tenant-aware Quartz {@link Job},
  * with built-in support for {@link #tenantId}, {@link #appManifest}, {@link #appCtx}, and {@link #getBean(Class)}.
  * 
- * it may -- <strong>Important:</strong> It does <strong>not</strong> use {@link CommandRequestAttributes#withTenant(String)},
+ * <p><strong>Important:</strong> It <strong>does</strong> use {@link CommandRequestAttributes#withTenant(String)},
  * @author ceefour
  */
 public abstract class TenantJob implements Job {
 	
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	protected String tenantId;
-	protected AppManifest appManifest;
+	private AppManifest appManifest;
 	protected ApplicationContext appCtx;
 	
 	/**
@@ -40,8 +40,21 @@ public abstract class TenantJob implements Job {
 	/**
 	 * @param appManifest the appManifest to set
 	 */
+	@Deprecated
 	public void setAppManifest(AppManifest appManifest) {
 		this.appManifest = appManifest;
+	}
+	
+	/**
+	 * Returns the {@link AppManifest} for the currently executing tenant,
+	 * equivalent to calling {@link #getBean(AppManifest.class)}.
+	 * @return
+	 */
+	public AppManifest getAppManifest() {
+		if (appManifest == null) {
+			appManifest = getBean(AppManifest.class);
+		}
+		return appManifest;
 	}
 	
 	/**
