@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.apache.commons.beanutils.PropertyUtils;
@@ -412,12 +413,26 @@ public class XmiCategoryRepository
 				}
 			}
 		};
-		final List<Category> sorted = ordering.immutableSortedCopy(filtered);
+		final List<Category> sorted = sortingCategories(filtered.toList(), ordering);
 		final FluentIterable<Category> limited = FluentIterable.from(sorted)
 				.skip((int) pageable.getOffset()).limit((int) pageable.getPageSize());
 		return limited;
 	}
-
+	
+	@SuppressWarnings("null")
+	private List<Category> sortingCategories(@Nonnull final List<Category> categories, final Ordering<Category> ordering) {
+		final List<Category> sortedCategories = ordering.immutableSortedCopy(categories);
+		for (final Category category : sortedCategories) {
+			if (!category.getCategories().isEmpty()) {
+				//punya anak++
+				final List<Category> sortedDeeperCategories = sortingCategories(category.getCategories(), ordering);
+				category.getCategories().clear();
+				category.getCategories().addAll(sortedDeeperCategories);
+			}
+		}
+		return sortedCategories;
+	}
+	
 	@Override
 	public Page<String> findAllIds(Pageable pageable) {
 		final int allSize = Iterables.size(getFlattenedCategories());
