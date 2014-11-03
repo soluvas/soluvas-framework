@@ -291,11 +291,11 @@ public class XmiCategoryRepository
 	}
 	
 	protected Iterable<Category> getFlattenedCategories() {
-		return CategoryUtils.flatten(catalog.getCategories());
+		return EcoreUtil.copyAll(CategoryUtils.flatten(catalog.getCategories()));
 	}
 	
 	protected Iterable<Category> getCategories() {
-		return catalog.getCategories();
+		return EcoreUtil.copyAll(catalog.getCategories());
 	}
 
 	@Override
