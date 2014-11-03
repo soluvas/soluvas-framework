@@ -4,6 +4,8 @@ import javax.annotation.Nullable;
 
 import org.soluvas.commons.ResourceNotFoundException;
 import org.soluvas.data.repository.CrudRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.google.common.base.Optional;
 
@@ -35,6 +37,7 @@ import com.google.common.base.Optional;
  * @todo What about {@link ResourceNotFoundException}? I think it's a different thing. EntityLookupException is meant for low-level stuff,
  * 		while {@link ResourceNotFoundException} is for the main entity of a show page, e.g. {@code product} on a {@code ProductShowPage}.
  */
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class EntityLookupException extends Exception {
 
 	private static final long serialVersionUID = 1L;

@@ -2,6 +2,9 @@ package org.soluvas.commons;
 
 import javax.annotation.Nullable;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 /**
  * General exception to throw if a resource such as a person, article,
  * or other entity is not found during lookup and should be handled by the UI request controller.
@@ -10,11 +13,9 @@ import javax.annotation.Nullable;
  * @author ceefour
  * @todo Merge with {@link org.soluvas.data.EntityLookupException}
  */
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public static enum LookupType {
 		ID,
