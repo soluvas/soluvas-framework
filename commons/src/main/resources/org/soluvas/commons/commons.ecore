@@ -1633,4 +1633,5 @@
     <eTypeParameters name="K"/>
     <eTypeParameters name="V"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="UUID" instanceClassName="java.util.UUID"/>
 </ecore:EPackage>

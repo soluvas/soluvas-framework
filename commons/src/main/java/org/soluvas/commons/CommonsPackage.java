@@ -6011,6 +6011,16 @@ public interface CommonsPackage extends EPackage {
 	int LIST_MULTIMAP = 114;
 
 	/**
+	 * The meta object id for the '<em>UUID</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.UUID
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUUID()
+	 * @generated
+	 */
+	int UUID = 115;
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9833,6 +9843,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getListMultimap();
 
 	/**
+	 * Returns the meta object for data type '{@link java.util.UUID <em>UUID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>UUID</em>'.
+	 * @see java.util.UUID
+	 * @model instanceClass="java.util.UUID"
+	 * @generated
+	 */
+	EDataType getUUID();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12939,6 +12960,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType LIST_MULTIMAP = eINSTANCE.getListMultimap();
+
+		/**
+		 * The meta object literal for the '<em>UUID</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.UUID
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getUUID()
+		 * @generated
+		 */
+		EDataType UUID = eINSTANCE.getUUID();
 
 	}
 

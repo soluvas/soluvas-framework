@@ -15,6 +15,7 @@ import java.util.NavigableMap;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
+import java.util.UUID;
 import javax.measure.Measurable;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
@@ -245,6 +246,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createExceptionFromString(eDataType, initialValue);
 			case CommonsPackage.LIST_MULTIMAP:
 				return createListMultimapFromString(eDataType, initialValue);
+			case CommonsPackage.UUID:
+				return createUUIDFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -338,6 +341,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertExceptionToString(eDataType, instanceValue);
 			case CommonsPackage.LIST_MULTIMAP:
 				return convertListMultimapToString(eDataType, instanceValue);
+			case CommonsPackage.UUID:
+				return convertUUIDToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -1437,6 +1442,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 */
 	public String convertListMultimapToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public UUID createUUIDFromString(EDataType eDataType, String initialValue) {
+		return (UUID)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUUIDToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
