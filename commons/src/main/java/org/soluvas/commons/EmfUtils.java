@@ -70,6 +70,7 @@ public class EmfUtils {
 	 * Overlays another {@link EObject} on top of an existing {@link EObject}.
 	 * @param current
 	 * @param overlay
+	 * @see #combineAttributes(EObject, EObject, EAttribute...)
 	 */
 	public static void combineEObject(EObject current, EObject overlay) {
 		for (EAttribute attr : overlay.eClass().getEAllAttributes()) {
@@ -96,6 +97,30 @@ public class EmfUtils {
 					// current doesn't have this containment, so directly set using a copied instance
 					log.debug("Setting {}.{} to {}", current.eClass().getName(), containment.getName(), overlayContainment);
 					current.eSet(containment, EcoreUtil.copy(overlayContainment));
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Combine specific {@code attrs} (if they're set and not null) from {@code overlay} into {@code current}.
+	 * @param current
+	 * @param overlay
+	 * @param attrs
+	 * @see #combineEObject(EObject, EObject)
+	 */
+	public static void combineAttributes(EObject current, EObject overlay, EAttribute... attrs) {
+		for (EAttribute attr : attrs) {
+			if (attr.isChangeable() && overlay.eIsSet(attr)) {
+				final Object newAttrValue = overlay.eGet(attr);
+				if (newAttrValue != null) {
+					log.trace("Override {}.{} to {}", current.eClass().getName(), attr.getName(), newAttrValue);
+					try {
+						current.eSet(attr, newAttrValue);
+					} catch (Exception e) {
+						throw new CommonsException(String.format("Cannot override %s.%s to %s", 
+								current.eClass().getName(), attr.getName(), newAttrValue), e);
+					}
 				}
 			}
 		}
