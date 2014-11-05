@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -133,6 +134,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		log.debug("Found {} AppManifests: {}", resources.length, Iterables.limit(ImmutableList.copyOf(resources), 10));
 		final Pattern appManifestXmiPattern = Pattern.compile("([^_]+).*\\.AppManifest\\.xmi");
 		
+		final Set<String> skippeds = new LinkedHashSet<>();
 		for (final Resource res : resources) {
 			final String filename = res.getFilename();
 			final Matcher matcher = appManifestXmiPattern.matcher(filename);
@@ -143,7 +145,8 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 			final String tenantId = matcher.group(1);
 			
 			if (whitelist != null && !whitelist.contains(tenantId)) {
-				log.info("Skipped tenant '{}' because not in whitelist.", tenantId);
+				log.trace("Skipped tenant '{}' because not in whitelist", tenantId);
+				skippeds.add(tenantId);
 				continue;
 			}
 			
@@ -153,6 +156,9 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 			tenantStateMap.put(tenantId, TenantState.ACTIVE);
 		}
 		
+		if (skippeds.isEmpty()) {
+			log.info("Skipped {} tenants because not in whitelist: {}", skippeds.size(), skippeds);
+		}
 		log.info("Loaded {} initial tenants from '{}': {}", tenantMap.size(), rootDir, Iterables.limit(tenantMap.keySet(), 10));
 	}
 	
