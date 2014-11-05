@@ -23,10 +23,6 @@ public class MongoPersonConfig implements PersonConfig {
 	
 	@Inject
 	private Environment env;
-	/**
-	 * Note: SysConfig object must contain {@code getMongoUri()}.
-	 * @todo Better mechanism?
-	 */
 	@Inject
 	private SysConfigMapHolder<? extends MongoSysConfig> sysConfigMapHolder;
 
