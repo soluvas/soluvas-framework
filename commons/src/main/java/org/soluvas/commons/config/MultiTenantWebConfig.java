@@ -93,20 +93,22 @@ public class MultiTenantWebConfig implements TenantSelector {
 	 * If you can't use Spring dependency injection, use this to get the {@link TenantRef}
 	 * from a {@link HttpServletRequest}. 
 	 * @param httpRequest
+	 * @param openDomain {@link MultiTenantConfig#getOpenDomain()}
+	 * @param manageDomain {@link MultiTenantConfig#getManageDomain()}
 	 * @return
 	 * @see MultiTenantConfig#tenantMap()
 	 */
-	public TenantRef getTenantRefMultiHost(HttpServletRequest httpRequest, String tenantEnv,
-			Map<String, AppManifest> tenantMap) {
+	public static TenantRef getTenantRefMultiHost(HttpServletRequest httpRequest, String tenantEnv,
+			Map<String, AppManifest> tenantMap, String openDomain, String manageDomain) {
 		Optional<String> tenantId = Optional.absent();
 		final String origRequestHost = httpRequest.getServerName().toLowerCase();
 		// use AppManifest.domain matching first
 		final String requestHostNoWww = origRequestHost.startsWith("www.") ? origRequestHost.substring(4) : origRequestHost;
 		
-		Preconditions.checkState(!tenantConfig.getOpenDomain().equalsIgnoreCase(requestHostNoWww),
-				"Trying to get TenantRef for OPEN domain '%s'. Probably incorrect @Inject, check the stacktrace to find out which bean is accessed.", tenantConfig.getOpenDomain());
-		Preconditions.checkState(!tenantConfig.getManageDomain().equalsIgnoreCase(requestHostNoWww),
-				"Trying to get TenantRef for MANAGE domain '%s'. Probably incorrect @Inject, check the stacktrace to find out which bean is accessed.", tenantConfig.getManageDomain());
+		Preconditions.checkState(!openDomain.equalsIgnoreCase(requestHostNoWww),
+				"Trying to get TenantRef for OPEN domain '%s'. Probably incorrect @Inject, check the stacktrace to find out which bean is accessed.", openDomain);
+		Preconditions.checkState(!manageDomain.equalsIgnoreCase(requestHostNoWww),
+				"Trying to get TenantRef for MANAGE domain '%s'. Probably incorrect @Inject, check the stacktrace to find out which bean is accessed.", manageDomain);
 		
 		for (final Map.Entry<String, AppManifest> entry : tenantMap.entrySet()) {
 			Preconditions.checkNotNull(entry.getValue().getDomain(),
@@ -152,7 +154,7 @@ public class MultiTenantWebConfig implements TenantSelector {
 				break;
 			case MULTI_HOST:
 				tenant = getTenantRefMultiHost(getRequest(), env.getRequiredProperty("tenantEnv"),
-						tenantConfig.tenantMap());
+						tenantConfig.tenantMap(), tenantConfig.getOpenDomain(), tenantConfig.getManageDomain());
 				break;
 			default:
 				throw new IllegalArgumentException("Unsupported tenantMode: " + tenantMode);

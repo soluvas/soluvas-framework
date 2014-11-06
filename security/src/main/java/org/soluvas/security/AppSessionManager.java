@@ -14,7 +14,7 @@ import org.soluvas.data.EntityLookup;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>App Session Manager</b></em>'.
- * @todo Do we still need this? Or Shiro's {@link Session} is enough for all purposes (i.e. REST API sessions)?
+ * @deprecated Do we still need this? Or Shiro's {@link Session} is enough for all purposes (i.e. REST API sessions)?
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -33,6 +33,7 @@ import org.soluvas.data.EntityLookup;
  * @model
  * @generated
  */
+@Deprecated
 public interface AppSessionManager extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Security Manager</b></em>' attribute.
