@@ -40,6 +40,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isHistorySalesOrderEnabled <em>History Sales Order Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isAgentSalesReportEnabled <em>Agent Sales Report Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isTransactionHistoryEnabled <em>Transaction History Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isBookingEnabled <em>Booking Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -306,6 +307,26 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected boolean transactionHistoryEnabled = TRANSACTION_HISTORY_ENABLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isBookingEnabled() <em>Booking Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isBookingEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean BOOKING_ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isBookingEnabled() <em>Booking Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isBookingEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean bookingEnabled = BOOKING_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -605,6 +626,27 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isBookingEnabled() {
+		return bookingEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBookingEnabled(boolean newBookingEnabled) {
+		boolean oldBookingEnabled = bookingEnabled;
+		bookingEnabled = newBookingEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__BOOKING_ENABLED, oldBookingEnabled, bookingEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -634,6 +676,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return isAgentSalesReportEnabled();
 			case CommonsPackage.CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED:
 				return isTransactionHistoryEnabled();
+			case CommonsPackage.CUSTOMER_ROLE__BOOKING_ENABLED:
+				return isBookingEnabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -681,6 +725,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED:
 				setTransactionHistoryEnabled((Boolean)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__BOOKING_ENABLED:
+				setBookingEnabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -730,6 +777,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED:
 				setTransactionHistoryEnabled(TRANSACTION_HISTORY_ENABLED_EDEFAULT);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__BOOKING_ENABLED:
+				setBookingEnabled(BOOKING_ENABLED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -768,6 +818,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return agentSalesReportEnabled != AGENT_SALES_REPORT_ENABLED_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__TRANSACTION_HISTORY_ENABLED:
 				return transactionHistoryEnabled != TRANSACTION_HISTORY_ENABLED_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__BOOKING_ENABLED:
+				return bookingEnabled != BOOKING_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -886,6 +938,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(agentSalesReportEnabled);
 		result.append(", transactionHistoryEnabled: ");
 		result.append(transactionHistoryEnabled);
+		result.append(", bookingEnabled: ");
+		result.append(bookingEnabled);
 		result.append(')');
 		return result.toString();
 	}

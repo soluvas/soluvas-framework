@@ -19,6 +19,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#isHistorySalesOrderEnabled <em>History Sales Order Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isAgentSalesReportEnabled <em>Agent Sales Report Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isTransactionHistoryEnabled <em>Transaction History Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#isBookingEnabled <em>Booking Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -245,5 +246,32 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @generated
 	 */
 	void setTransactionHistoryEnabled(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Booking Enabled</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Booking Enabled</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Booking Enabled</em>' attribute.
+	 * @see #setBookingEnabled(boolean)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_BookingEnabled()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isBookingEnabled();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#isBookingEnabled <em>Booking Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Booking Enabled</em>' attribute.
+	 * @see #isBookingEnabled()
+	 * @generated
+	 */
+	void setBookingEnabled(boolean value);
 
 } // CustomerRole
