@@ -141,7 +141,7 @@ public class XmiCategoryRepository
 				catalog.getCategories().size(), xmiResources.size(), xmiFiles.size(),
 				xmiResources, xmiFiles);
 		
-		final List<Category> flatCategories = CategoryUtils.flatten(catalog.getCategories());
+		final List<Category> flatCategories = CategoryUtils.flatten(EcoreUtil.copyAll(catalog.getCategories()));
 		for (final Category category : flatCategories) {
 			log.trace("Resolving Category {}: {}", category.getUName(), category.getName());
 			category.resolve(null);
@@ -291,7 +291,7 @@ public class XmiCategoryRepository
 	}
 	
 	protected Iterable<Category> getFlattenedCategories() {
-		return EcoreUtil.copyAll(CategoryUtils.flatten(catalog.getCategories()));
+		return CategoryUtils.flatten(EcoreUtil.copyAll(catalog.getCategories()));
 	}
 	
 	protected Iterable<Category> getCategories() {
