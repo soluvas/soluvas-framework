@@ -548,7 +548,13 @@ public class XmiCategoryRepository
 		final Predicate<Category> filter = new Predicate<Category>() {
 			@Override
 			public boolean apply(@Nullable Category input) {
-				return input.getLevel() == level && statuses.contains(input.getStatus()) && (notForHasChildren ? input.getCategories().isEmpty() : true);
+				boolean tmp = true;
+				if (input.getLevel() != null) {
+					tmp = input.getLevel() == level && statuses.contains(input.getStatus()) && (notForHasChildren ? input.getCategories() == null || input.getCategories().isEmpty() : true);;
+				} else {
+					tmp = false;
+				}
+				return tmp;
 			}
 		};
 		final int filteredCount = FluentIterable.from(getFlattenedCategories()).filter(filter).size();
