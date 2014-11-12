@@ -305,4 +305,5 @@
   <eClassifiers xsi:type="ecore:EDataType" name="DateTimeZone" instanceClassName="org.joda.time.DateTimeZone"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Locale" instanceClassName="java.util.Locale"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DayOfWeek" instanceClassName="java.time.DayOfWeek"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="LocalTime" instanceClassName="org.joda.time.LocalTime"/>
 </ecore:EPackage>

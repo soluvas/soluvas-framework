@@ -207,6 +207,18 @@
             <styles xmi:type="notation:ShapeStyle" xmi:id="_uE8ccWo5EeSkRO79BewOAQ" fontName="Liberation Sans" fontHeight="8"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uE8ccmo5EeSkRO79BewOAQ" x="178" y="269" width="140" height="50"/>
           </children>
+          <children xmi:type="notation:Node" xmi:id="_SSld4Go7EeSkRO79BewOAQ" type="2003" element="_SSMcUGo7EeSkRO79BewOAQ">
+            <children xmi:type="notation:Node" xmi:id="_SSld42o7EeSkRO79BewOAQ" type="5007"/>
+            <children xmi:type="notation:Node" xmi:id="_SSld5Go7EeSkRO79BewOAQ" type="7004">
+              <children xmi:type="notation:Node" xmi:id="_SSmE8Go7EeSkRO79BewOAQ" type="3010" element="_SSf-UGo7EeSkRO79BewOAQ">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_SSmE8Wo7EeSkRO79BewOAQ"/>
+              </children>
+              <styles xmi:type="notation:SortingStyle" xmi:id="_SSld5Wo7EeSkRO79BewOAQ"/>
+              <styles xmi:type="notation:FilteringStyle" xmi:id="_SSld5mo7EeSkRO79BewOAQ"/>
+            </children>
+            <styles xmi:type="notation:ShapeStyle" xmi:id="_SSld4Wo7EeSkRO79BewOAQ" fontName="Liberation Sans" fontHeight="8"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SSld4mo7EeSkRO79BewOAQ" x="117" y="189" width="140" height="50"/>
+          </children>
           <styles xmi:type="notation:DiagramStyle" xmi:id="_aEws4h3gEeSGQZWhD4VikA"/>
           <edges xmi:type="notation:Edge" xmi:id="_HvoA0CghEeSnNqFJrc3SlQ" type="4001" element="_HveP0CghEeSnNqFJrc3SlQ" source="_l0K6UB3gEeSGQZWhD4VikA" target="_l0PLwB3gEeSGQZWhD4VikA">
             <children xmi:type="notation:Node" xmi:id="_Hvon4CghEeSnNqFJrc3SlQ" type="6001">
@@ -835,6 +847,32 @@
             <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']/@subNodeMappings[name='EC_DataType_InstanceClassName']/@style"/>
             <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_uE3j82o5EeSkRO79BewOAQ"/>
             <color xmi:type="viewpoint:RGBValues" xmi:id="_uE3j9Go5EeSkRO79BewOAQ"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']/@subNodeMappings[name='EC_DataType_InstanceClassName']"/>
+        </ownedElements>
+      </ownedDiagramElements>
+      <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_SSMcUGo7EeSkRO79BewOAQ" name="LocalTime" tooltipText="" width="14" height="5">
+        <target xmi:type="ecore:EDataType" href="jpa.ecore#//LocalTime"/>
+        <semanticElements xmi:type="ecore:EDataType" href="jpa.ecore#//LocalTime"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_SSNDYGo7EeSkRO79BewOAQ" backgroundStyle="Liquid">
+          <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_SSNDYWo7EeSkRO79BewOAQ"/>
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']/@style"/>
+          <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_SSNDYmo7EeSkRO79BewOAQ" red="125" green="125" blue="125"/>
+          <backgroundColor xmi:type="viewpoint:RGBValues" xmi:id="_SSNDY2o7EeSkRO79BewOAQ" red="255" green="255" blue="255"/>
+          <foregroundColor xmi:type="viewpoint:RGBValues" xmi:id="_SSNDZGo7EeSkRO79BewOAQ" red="255" green="250" blue="191"/>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_SSf-UGo7EeSkRO79BewOAQ" name="org.joda.time.LocalTime" tooltipText="">
+          <target xmi:type="ecore:EDataType" href="jpa.ecore#//LocalTime"/>
+          <semanticElements xmi:type="ecore:EDataType" href="jpa.ecore#//LocalTime"/>
+          <decorations xmi:type="viewpoint:Decoration" xmi:id="_SSglZGo7EeSkRO79BewOAQ">
+            <description xmi:type="description:SemanticBasedDecoration" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@decorationDescriptionsSet/@decorationDescriptions[name='External']"/>
+          </decorations>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_SSglYGo7EeSkRO79BewOAQ" labelFormat="italic" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_SSglYWo7EeSkRO79BewOAQ"/>
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']/@subNodeMappings[name='EC_DataType_InstanceClassName']/@style"/>
+            <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_SSglYmo7EeSkRO79BewOAQ"/>
+            <color xmi:type="viewpoint:RGBValues" xmi:id="_SSglY2o7EeSkRO79BewOAQ"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']/@subNodeMappings[name='EC_DataType_InstanceClassName']"/>
         </ownedElements>

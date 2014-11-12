@@ -21,6 +21,7 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.GenericStatus;
 
@@ -205,6 +206,8 @@ public class JpaModelFactory implements ModelFactory {
 			return createLocaleFromString(value);
 		case JpaModelPackage.DAYOFWEEK_CLASSIFIER_ID:
 			return createDayOfWeekFromString(value);
+		case JpaModelPackage.LOCALTIME_CLASSIFIER_ID:
+			return createLocalTimeFromString(value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage");
@@ -249,6 +252,8 @@ public class JpaModelFactory implements ModelFactory {
 			return convertLocaleToString((Locale) value);
 		case JpaModelPackage.DAYOFWEEK_CLASSIFIER_ID:
 			return convertDayOfWeekToString((DayOfWeek) value);
+		case JpaModelPackage.LOCALTIME_CLASSIFIER_ID:
+			return convertLocalTimeToString((LocalTime) value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage.");
@@ -770,6 +775,46 @@ public class JpaModelFactory implements ModelFactory {
 			return null;
 		}
 		EDataType eDataType = JpaModelPackage.INSTANCE.getDayOfWeekEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: LocalTime to a String. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertLocalTimeToString(LocalTime value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getLocalTimeEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: LocalTime from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public LocalTime createLocalTimeFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getLocalTimeEDataType();
 		throw new UnsupportedOperationException(
 				"Operation not support for EDataType " + eDataType.getName()
 						+ " converting from value " + value);

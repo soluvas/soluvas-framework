@@ -21,6 +21,7 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.GenericStatus;
 
@@ -147,6 +148,13 @@ public class JpaModelPackage extends ModelPackage {
 	 * @generated
 	 */
 	public static final int DAYOFWEEK_CLASSIFIER_ID = 19;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int LOCALTIME_CLASSIFIER_ID = 20;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1384,6 +1392,19 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EDataType} '<em><b>LocalTime</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>LocalTime</b></em>'
+	 * @generated
+	 */
+	public EDataType getLocalTimeEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				LOCALTIME_CLASSIFIER_ID);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param eClassifier
@@ -1434,6 +1455,8 @@ public class JpaModelPackage extends ModelPackage {
 			return Locale.class;
 		case DAYOFWEEK_CLASSIFIER_ID:
 			return DayOfWeek.class;
+		case LOCALTIME_CLASSIFIER_ID:
+			return LocalTime.class;
 		default:
 			throw new IllegalArgumentException("The EClassifier '"
 					+ eClassifier + "' is not defined in this EPackage");
