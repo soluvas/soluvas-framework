@@ -1324,8 +1324,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		if (catalog instanceof CategoryCatalog) {
 			setCatalogName(((CategoryCatalog) catalog).getName());
 		} else {
-			log.warn("Expected root container to be {}, got {} for {}",
-					CategoryCatalog.class.getName(), catalog, this);
+			// TODO: hendy, please fix this -- happens to gerairazha
+			log.warn("Unable to resolve(): Expected root container to be {}, got {} for {}. Stacktrace: {}",
+					CategoryCatalog.class.getName(), catalog.getClass().getName(), this.getClass().getName(), new Exception().getStackTrace());
 		}
 		
 		if (getParent() == null && getParentUName() != null && categoryLookup != null) {
