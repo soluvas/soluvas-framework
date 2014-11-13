@@ -141,12 +141,13 @@ public class XmiCategoryRepository
 				catalog.getCategories().size(), xmiResources.size(), xmiFiles.size(),
 				xmiResources, xmiFiles);
 		
-		final List<Category> flatCategories = CategoryUtils.flatten(EcoreUtil.copyAll(catalog.getCategories()));
+		// don't EcoreUtil.copy here, because CategoryImpl.resolve() requires the top-level CategoryCatalog
+		final List<Category> flatCategories = CategoryUtils.flatten(catalog.getCategories());
 		for (final Category category : flatCategories) {
 			log.trace("Resolving Category {}: {}", category.getUName(), category.getName());
 			category.resolve(null);
 		}
-}
+	}
 
 	@Override
 	public long count() {
