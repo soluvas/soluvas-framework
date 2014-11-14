@@ -24,35 +24,50 @@
         <processorPath useClasspath="true" />
         <module name="org.soluvas.category" />
         <module name="org.soluvas.commons" />
+        <module name="org.soluvas.couchdb" />
         <module name="org.soluvas.data" />
         <module name="org.soluvas.email" />
         <module name="org.soluvas.folder" />
+        <module name="org.soluvas.geo" />
         <module name="org.soluvas.image" />
         <module name="org.soluvas.jaxrs" />
+        <module name="org.soluvas.jpa" />
         <module name="org.soluvas.ldap" />
         <module name="org.soluvas.mongo" />
+        <module name="org.soluvas.newsletter" />
+        <module name="org.soluvas.notify" />
+        <module name="org.soluvas.rules" />
+        <module name="org.soluvas.schedule" />
         <module name="org.soluvas.security" />
         <module name="org.soluvas.social" />
         <module name="org.soluvas.socmed" />
+        <module name="org.soluvas.story" />
         <module name="org.soluvas.taxonomy" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="org.soluvas.category" target="1.7" />
       <module name="org.soluvas.commons" target="1.7" />
+      <module name="org.soluvas.couchdb" target="1.7" />
       <module name="org.soluvas.data" target="1.7" />
       <module name="org.soluvas.email" target="1.7" />
       <module name="org.soluvas.folder" target="1.7" />
+      <module name="org.soluvas.geo" target="1.7" />
       <module name="org.soluvas.image" target="1.7" />
       <module name="org.soluvas.jaxrs" target="1.7" />
+      <module name="org.soluvas.jpa" target="1.7" />
       <module name="org.soluvas.ldap" target="1.7" />
       <module name="org.soluvas.mongo" target="1.7" />
+      <module name="org.soluvas.newsletter" target="1.7" />
+      <module name="org.soluvas.notify" target="1.7" />
       <module name="org.soluvas.parent" target="1.7" />
+      <module name="org.soluvas.rules" target="1.7" />
+      <module name="org.soluvas.schedule" target="1.7" />
       <module name="org.soluvas.security" target="1.7" />
       <module name="org.soluvas.social" target="1.7" />
       <module name="org.soluvas.socmed" target="1.7" />
+      <module name="org.soluvas.story" target="1.7" />
       <module name="org.soluvas.taxonomy" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
-
