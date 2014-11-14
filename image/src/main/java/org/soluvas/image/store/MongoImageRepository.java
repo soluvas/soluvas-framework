@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
@@ -79,6 +80,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClientURI;
+import com.mongodb.MongoException;
 import com.mongodb.ReadPreference;
 
 /**
@@ -345,144 +347,134 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		}
 	}
 	
-	@Override
-	public <S extends Image> List<S> add(Collection<S> newImages, final ProgressMonitor monitor) {
-		// 1. Upload original images
-		final List<ListenableFuture<OriginalUpload>> originalFutures = Lists.newArrayList();
-		monitor.beginTask("Uploading " + newImages.size() + " original images", newImages.size());
-		for (final Image newImage : newImages) {
-			final ListenableFuture<OriginalUpload> imageIdFuture = doCreateOriginal(newImage.getId(), newImage.getOriginalFile(), newImage.getContentType(),
-					newImage.getOriginalFile().length(), newImage.getName(),
-					newImage.getOriginalFile().getName(), true);
-			Futures.addCallback(imageIdFuture, new FutureCallback<OriginalUpload>() {
-				@Override
-				public void onSuccess(OriginalUpload original) {
-					log.info("Added original image {} from {}", original.imageId, newImage);
-					monitor.worked(1);
+	/**
+	 * Rollback only successfully added images, if possible. Never throws exception, even if rollback fails.
+	 * @param futures
+	 */
+	protected <S extends Image> void doRollback(List<ListenableFuture<S>> futures) {
+		try {
+			final List<S> alreadyAddeds = Futures.successfulAsList(futures).get();
+			log.info("Rolling back {} of {} {} images: {}", alreadyAddeds.size(), futures.size(), getNamespace(),
+					Lists.transform(alreadyAddeds, new Function<Image, String>() {
+						@Override
+						public String apply(Image input) {
+							return input.getId();
+						}
+					}));
+			for (S alreadyAdded : alreadyAddeds) {
+				try {
+					boolean deleted = delete(alreadyAdded);
+					log.debug("Rolled back {} image '{}'", getNamespace(), alreadyAdded.getId());
+				} catch (Exception e) {
+					log.error(String.format("Error while trying to rollback/delete %s image '%s': %s", getNamespace(), alreadyAdded.getId(), e), e);
 				}
-				
+			}
+		} catch (Exception e) {
+			log.error(String.format("Error while trying to rollback %s images: %s", getNamespace(), e), e);
+		}
+	}
+
+	@Override
+	public <S extends Image> List<S> add(final Collection<S> newImages, final ProgressMonitor monitor) {
+		final List<ListenableFuture<S>> futures = addAsync(newImages, monitor);
+		try {
+			final ListenableFuture<List<S>> allAsList = Futures.allAsList(futures);
+			Futures.addCallback(allAsList, new FutureCallback<List<S>>() {
+				@Override
+				public void onSuccess(List<S> result) {
+					log.info("Successfully uploaded {} {} images: {}",
+							result.size(), getNamespace(), Image.toIds(result));
+				}
+
 				@Override
 				public void onFailure(Throwable t) {
-					log.error("Error adding original image " + newImage, t);
-					monitor.worked(1, ProgressStatus.ERROR);
+					log.error(String.format("Error uploading %s %s images: %s",
+							newImages.size(), getNamespace(), t), t);
 				}
 			});
-			originalFutures.add(imageIdFuture);
+			return allAsList.get();
+		} catch (ExecutionException e) {
+			doRollback(futures);
+			throw new ImageException(e.getCause(), "Cannot add %s %s images: %s", newImages.size(), getNamespace(), e.getCause());
+		} catch (InterruptedException e) {
+			doRollback(futures);
+			throw new ImageException(e, "Interrupted while adding %s %s images: %s", newImages.size(), getNamespace(), e);
+		} catch (CancellationException e) {
+			doRollback(futures);
+			throw new ImageException(e, "Cancelled while adding %s %s images: %s", newImages.size(), getNamespace(), e);
 		}
-		// use ArrayList because can contain nulls
-		final ListenableFuture<List<OriginalUpload>> originalsFuture = Futures.successfulAsList(originalFutures);
-		Futures.addCallback(originalsFuture, new FutureCallback<List<OriginalUpload>>() {
-			@Override
-			public void onSuccess(List<OriginalUpload> result) {
-				log.info("Uploaded {} original images: {}", result.size(), result);
-				monitor.done();
-			}
-
-			@Override
-			public void onFailure(Throwable t) {
-				monitor.done(ProgressStatus.ERROR);
-				throw new ImageException("Cannot add " + originalFutures.size() + " images", t);
-			}
-		});
-		
-		// 2. Transform those original images (a local transformer may actually download the originals first,
-		// please avoid!)
-		final ListenableFuture<List<OriginalUpload>> transformedsFuture = Futures.transform(originalsFuture, new AsyncFunction<List<OriginalUpload>, List<OriginalUpload>>() {
-			@Override
-			public ListenableFuture<List<OriginalUpload>> apply(
-					List<OriginalUpload> input) throws Exception {
-				monitor.beginTask("Transforming " + input.size() + " images", input.size());
-				final List<ListenableFuture<OriginalUpload>> transformedFutures = Lists.transform(input, new Function<OriginalUpload, ListenableFuture<OriginalUpload>>() {
-					@Override @Nullable
-					public ListenableFuture<OriginalUpload> apply(@Nullable final OriginalUpload input) {
-						if (input == null) {
-							monitor.worked(1, ProgressStatus.SKIPPED);
-							return Futures.immediateFailedFuture(new ImageException("Null input"));
-						}
-						final ListenableFuture<OriginalUpload> transformFuture = doTransform(input);
-						Futures.addCallback(transformFuture, new FutureCallback<OriginalUpload>() {
-							@Override
-							public void onSuccess(OriginalUpload transformed) {
-								log.info("Transformed {} variants for {}", transformed.transformeds.size(), input.imageId);
-								monitor.worked(1);
-							}
+	}
+	
+	@Override
+	public <S extends Image> List<ListenableFuture<S>> addAsync(
+			Collection<S> newImages, final ProgressMonitor monitor) {
+		final List<ListenableFuture<S>> resultFutures = Lists.newArrayList();
+		monitor.beginTask("Uploading " + newImages.size() + " images", newImages.size() * 3); // 3 steps per image: original, transform, MongoDB
+		for (final Image newImage : newImages) {
+			final ListenableFuture<S> future = executor.submit(new Callable<S>() {
+				@Override
+				public S call() throws Exception {
+					// 1. Upload original images
+					final ListenableFuture<OriginalUpload> imageIdFuture = doCreateOriginal(newImage.getId(), newImage.getOriginalFile(), newImage.getContentType(),
+							newImage.getOriginalFile().length(), newImage.getName(),
+							newImage.getOriginalFile().getName(), true);
+					try {
+						final OriginalUpload original = imageIdFuture.get();
+						log.info("Added original image '{}' from {}", original.imageId, newImage);
+						monitor.worked(1);
+						
+						// 2. Transform those original images (a local transformer may actually download the originals first,
+						// please avoid!)
+						try {
+							final OriginalUpload transformed = doTransform(original).get();
+							log.info("Transformed {} image '{}'", getNamespace(), original.imageId);
+							monitor.worked(1);
 							
-							@Override
-							public void onFailure(Throwable t) {
-								log.error("Error transforming image " + input.imageId, t);
-								monitor.worked(1, ProgressStatus.ERROR);
-							}
-						});
-						return transformFuture;
-					}
-				});
-				return Futures.successfulAsList(transformedFutures);
-			}
-		});
-		Futures.addCallback(transformedsFuture, new FutureCallback<List<OriginalUpload>>() {
-			@Override
-			public void onSuccess(List<OriginalUpload> result) {
-				log.info("Transformed {} images", result.size());
-				monitor.done();
-			}
-
-			@Override
-			public void onFailure(Throwable t) {
-				monitor.done(ProgressStatus.ERROR);
-				throw new ImageException("Cannot transform " + originalFutures.size() + " images", t);
-			}
-		});
-
-		// 3. Insert to MongoDB
-		final ListenableFuture<List<Image>> imageIdsFuture = Futures.transform(transformedsFuture,
-				new AsyncFunction<List<OriginalUpload>, List<Image>>() {
-			@Override
-			public ListenableFuture<List<Image>> apply(
-					List<OriginalUpload> input) throws Exception {
-				monitor.beginTask("Inserting " + input.size() + " MongoDB documents", input.size());
-				final List<ListenableFuture<Image>> imageIdFutures = Lists.transform(input, 
-						new Function<OriginalUpload, ListenableFuture<Image>>() {
-					@Override @Nullable
-					public ListenableFuture<Image> apply(@Nullable final OriginalUpload input) {
-						if (input == null) {
-							monitor.worked(1, ProgressStatus.SKIPPED);
-							return Futures.immediateFailedFuture(new ImageException("Null input"));
-						}
-						final ListenableFuture<Image> imageIdFuture = doInsertMongo(input);
-						Futures.addCallback(imageIdFuture, new FutureCallback<Image>() {
-							@Override
-							public void onSuccess(Image image) {
-								log.trace("Inserted image document {}", image.getId());
+							// 3. Insert to MongoDB
+							try {
+								final Image added = doInsertMongo(transformed).get();
+								log.debug("Inserted image document {}", added.getId());
 								monitor.worked(1);
-							}
-							
-							@Override
-							public void onFailure(Throwable t) {
-								log.error("Error inserting image document " + input.imageId, t);
+								return (S) added;
+							} catch (Exception e) {
+								log.error(String.format("Error inserting %s image document '%s': %s", getNamespace(), transformed.imageId, e), e);
 								monitor.worked(1, ProgressStatus.ERROR);
+								// rollback styleds
+								try {
+									doDeleteStyleds(transformed.imageId, Lists.transform(transformed.transformeds, new Function<UploadedImage, StyledImage>() {
+										@Override
+										public StyledImage apply(UploadedImage input) {
+											return new StyledImage(styles.get(input.getStyleCode()).getName(), input.getStyleCode(), 
+													input.getOriginUri(), null, input.getSize(), input.getWidth(), input.getHeight());
+										}
+									}));
+								} catch (Exception e1) {
+									log.error(String.format("Error rolling back %s styleds image '%s': %s", getNamespace(), transformed.imageId, e1), e1);
+								}
+								throw e;
 							}
-						});
-						return imageIdFuture;
+						} catch (Exception e) {
+							log.error("Error transforming " + getNamespace() + " image '" + original.imageId + "'", e);
+							monitor.worked(1, ProgressStatus.ERROR);
+							try {
+								// rollback original
+								doDeleteOriginal(original.imageId, original.originUri, original.fileName, Optional.of(original.extension));
+							} catch (Exception e1) {
+								log.error(String.format("Error rolling back %s original image '%s': %s", getNamespace(), original.imageId, e1), e1);
+							}
+							throw e;
+						}
+					} catch (Exception e) {
+						log.error("Error adding original image " + newImage, e);
+						monitor.worked(1, ProgressStatus.ERROR);
+						throw new ImageException(e, "Cannot upload %s image '%s' from '%s' file '%s' type '%s' size '%s': %s", getNamespace(), newImage.getId(), 
+								newImage.getOriginalFile(), newImage.getContentType(), newImage.getOriginalFile().length(), e);
 					}
-				});
-				return Futures.successfulAsList(imageIdFutures);
-			}
-		});
-		Futures.addCallback(imageIdsFuture, new FutureCallback<List<Image>>() {
-			@Override
-			public void onSuccess(List<Image> result) {
-				log.info("Inserted {} image documents: {}", result.size(),
-						Lists.transform(result, new IdFunction()));
-				monitor.done();
-			}
-
-			@Override
-			public void onFailure(Throwable t) {
-				monitor.done(ProgressStatus.ERROR);
-				throw new ImageException("Cannot insert " + originalFutures.size() + " documents", t);
-			}
-		});
-		return (List) Futures.getUnchecked(imageIdsFuture);
+				}
+			});
+			resultFutures.add(future);
+		}
+		return resultFutures;
 	}
 	
 	/**
@@ -730,26 +722,10 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 //			}
 //		}, system.dispatcher());
 
-			for (StyledImage styled : image.getStyles().values()) {
-				log.info("Deleting {} image {} - {}: {}",
-						namespace, id, styled.getStyleName(), styled.getUri() );
-				try {
-					// TODO: don't hardcode extension
-					String styledExtension = "jpg";
-					// TODO: support variant
-					connector.delete(namespace, id, styled.getCode(), styled.getCode(), styledExtension);
-				} catch (Exception e) {
-					log.error("Cannot delete " + namespace + " image " + id + ": " + styled.getStyleName() + " at " + styled.getUri(), e);
-				}
-			}
-		
 			try {
-		//		Iterable<StatusLine> statuses = Await.result(styledsFuture, Duration.create(60, TimeUnit.SECONDS));
-		//		log.info("Delete styled {} image {} status codes: {}", namespace, id, statuses );
-		//		StatusLine status = Await.result(originalFuture, Duration.create(60, TimeUnit.SECONDS));
-		//		log.info("Delete original {} image {} status code: {}", namespace, id, status );
+				doDeleteStyleds(image.getId(), image.getStyles().values());
 			} catch (Exception e) {
-				log.error("Error deleting " + namespace + " image " + id + " from WebDAV", e);
+				log.error("Error deleting styleds for " + namespace + " image '" + id + "': " + e, e);
 			}
 
 		// -------- Delete originals -------
@@ -773,17 +749,15 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 //				}
 //			}, system.dispatcher());
 
-			final String originalUri = image.getUri();
-			log.info("Deleting {} image {} - original: {}", 
-					namespace, id, originalUri);
-			// TODO: should store extension of original, also the styleds
-			final String fileName = image.getFileName();
-			final String originalExtension = !Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg";
-			connector.delete(namespace, id, ImageRepository.ORIGINAL_CODE, ImageRepository.ORIGINAL_CODE, originalExtension);
-			
-			log.debug("Deleting {} image metadata {}", namespace, id);
 			try {
-				mongoColl.remove(new BasicDBObject("_id", id));
+				doDeleteOriginal(image.getId(), image.getOriginUri(), image.getFileName(),
+						Optional.fromNullable(Strings.emptyToNull(image.getExtension())));
+			} catch (Exception e) {
+				log.error("Error deleting original for " + namespace + " image '" + id + "' from '" + image.getOriginUri() + "': " + e, e);
+			}
+			
+			try {
+				doDeleteMetadata(id);
 			} catch (Exception e) {
 				log.error("Error deleting " + namespace + " image metadata " + id, e);
 			}
@@ -791,6 +765,33 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 			deleted++;
 		}
 		return deleted;
+	}
+
+	protected void doDeleteOriginal(String imageId, String originalOriginUri, String fileName, Optional<String> upExtension) throws Exception {
+		log.info("Deleting {} image {} - original: {}", namespace, imageId, originalOriginUri);
+		final String originalExtension = upExtension.or(
+				!Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg");
+		connector.delete(namespace, imageId, ImageRepository.ORIGINAL_CODE, ImageRepository.ORIGINAL_CODE, originalExtension);
+	}
+	
+	protected void doDeleteStyleds(final String imageId, final Collection<StyledImage> styleds) throws ImageException {
+		for (StyledImage styled : styleds) {
+			log.info("Deleting {} image {} - {}: {}",
+					namespace, imageId, styled.getStyleName(), styled.getUri() );
+			try {
+				// TODO: don't hardcode extension
+				String styledExtension = "jpg";
+				// TODO: support variant
+				connector.delete(namespace, imageId, styled.getCode(), styled.getCode(), styledExtension);
+			} catch (Exception e) {
+				throw new ImageException("Cannot delete " + namespace + " image " + imageId + ": " + styled.getStyleName() + " at " + styled.getUri(), e);
+			}
+		}
+	}
+
+	protected void doDeleteMetadata(String imageId) throws MongoException {
+		log.debug("Deleting {} image metadata {}", namespace, imageId);
+		mongoColl.remove(new BasicDBObject("_id", imageId));
 	}
 	
 	@Override
