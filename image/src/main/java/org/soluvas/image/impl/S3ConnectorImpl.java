@@ -2,6 +2,7 @@ package org.soluvas.image.impl;
 
 import java.io.File;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import javax.annotation.PreDestroy;
 
@@ -19,8 +20,6 @@ import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.event.ProgressEvent;
-import com.amazonaws.event.ProgressListener;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.AccessControlList;
 import com.amazonaws.services.s3.model.CanonicalGrantee;
@@ -31,6 +30,7 @@ import com.amazonaws.services.s3.model.StorageClass;
 import com.amazonaws.services.s3.transfer.Download;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
+import com.amazonaws.services.s3.transfer.model.UploadResult;
 import com.damnhandy.uri.template.MalformedUriTemplateException;
 import com.damnhandy.uri.template.UriTemplate;
 import com.damnhandy.uri.template.VariableExpansionException;
@@ -38,7 +38,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.SettableFuture;
 
 /**
  * <!-- begin-user-doc -->
@@ -297,7 +296,7 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(extension), "Cannot upload image without extension, namespace=%s imageId=%s styleCode=%s styleVariant=%s file=%s contentType=%s",
 				namespace, imageId, styleCode, styleVariant, file, contentType);
 		
-		final SettableFuture<UploadedImage> future = SettableFuture.create();
+//		final SettableFuture<UploadedImage> future = SettableFuture.create();
 		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
 		final String key = String.format("%s_%s/%s/%s/%s_%s.%s",
 				tenantId, tenantEnv, namespace, styleCode, imageId, styleVariant, extension);
@@ -311,52 +310,65 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 			.withStorageClass(useHi ? StorageClass.Standard : StorageClass.ReducedRedundancy);
 		final Upload upload = transferMgr.upload(putReq);
 		final String s3Uri = "s3://" + bucket + "/" + key;
-		upload.addProgressListener(new ProgressListener() {
+//		upload.addProgressListener(new ProgressListener() {
+//			@Override
+//			public void progressChanged(ProgressEvent ev) {
+//				switch (ev.getEventType()) {
+//				case TRANSFER_STARTED_EVENT:
+//					log.debug("Starting upload {} to {} ({} bytes)", file, s3Uri,
+//							upload.getProgress().getTotalBytesToTransfer());
+//					break;
+//				case TRANSFER_COMPLETED_EVENT:
+//					// see: https://github.com/aws/aws-sdk-java/issues/52
+////						final UploadResult uploadResult = upload.waitForUploadResult();
+////						final UploadResult uploadResult = (UploadResult) ((UploadImpl)upload).getMonitor().getFuture().get();
+////						log.info("Uploaded {} to {}, {} bytes transferred: etag={} versionId={} bucket={} key={}",
+////								file, s3Uri, ev.getBytesTransfered(),
+////								uploadResult.getETag(),
+////								uploadResult.getVersionId(),
+////								uploadResult.getBucketName(),
+////								uploadResult.getKey() );
+//					break;
+//				case TRANSFER_FAILED_EVENT:
+//					log.error("Failed upload {} to {}, {} of {} bytes transferred", file, s3Uri,
+//							upload.getProgress().getBytesTransferred(), file.length());
+//					future.setException(new ImageException("Failed upload " + file + " to " + s3Uri + ". " +
+//							upload.getProgress().getBytesTransferred() + " of " + file.length() + " bytes transferred"));
+//					break;
+//				case 
+////				case BYTE_TRANSFER_EVENT:
+////					// nothing...?
+////					break;
+//				default:
+//					log.error("Unknown error code {} during upload {} to {}, {} of {} bytes transferred",
+//							ev.getEventType(), file, s3Uri, upload.getProgress().getBytesTransferred(), file.length());
+//					future.setException(new ImageException(String.format("Unknown error code %s during upload %s to %s, %s of %s bytes transferred",
+//							ev.getEventType(), file, s3Uri, upload.getProgress().getBytesTransferred(), file.length())));
+//					break;
+//				}
+//			}
+//		});
+		return executor.submit(new Callable<UploadedImage>() {
 			@Override
-			public void progressChanged(ProgressEvent ev) {
-				switch (ev.getEventType()) {
-				case TRANSFER_STARTED_EVENT:
-					log.debug("Starting upload {} to {} ({} bytes)", file, s3Uri,
-							upload.getProgress().getTotalBytesToTransfer());
-					break;
-				case TRANSFER_COMPLETED_EVENT:
-					// see: https://github.com/aws/aws-sdk-java/issues/52
-//						final UploadResult uploadResult = upload.waitForUploadResult();
-//						final UploadResult uploadResult = (UploadResult) ((UploadImpl)upload).getMonitor().getFuture().get();
-//						log.info("Uploaded {} to {}, {} bytes transferred: etag={} versionId={} bucket={} key={}",
-//								file, s3Uri, ev.getBytesTransfered(),
-//								uploadResult.getETag(),
-//								uploadResult.getVersionId(),
-//								uploadResult.getBucketName(),
-//								uploadResult.getKey() );
-					log.info("Uploaded {} to {}, {} bytes transferred: bucket={} key={}",
-							file, s3Uri, upload.getProgress().getBytesTransferred(), bucket, key );
+			public UploadedImage call() throws Exception {
+				try {
+					final UploadResult uploadResult = upload.waitForUploadResult();
+					log.info("Uploaded '{}' to '{}', {} of {} bytes transferred: bucket={} key={}",
+							file, s3Uri, upload.getProgress().getBytesTransferred(), file.length(), bucket, key );
 					final String realOriginAlias = Strings.isNullOrEmpty(originAlias) ? bucket + ".s3.amazonaws.com" : originAlias;
 					final String realCdnAlias = Strings.isNullOrEmpty(cdnAlias) ? bucket + ".s3.amazonaws.com" : cdnAlias;
 					final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
 					uploadedImage.setOriginUri("http://" + realOriginAlias + "/" + key);
 					uploadedImage.setUri("http://" + realCdnAlias + "/" + key);
-					future.set(uploadedImage);
-					break;
-				case TRANSFER_FAILED_EVENT:
-					log.error("Failed upload {} to {}, {} of {} bytes transferred", file, s3Uri,
-							upload.getProgress().getBytesTransferred(), file.length());
-					future.setException(new ImageException("Failed upload " + file + " to " + s3Uri + ". " +
-							upload.getProgress().getBytesTransferred() + " of " + file.length() + " bytes transferred"));
-					break;
-//				case BYTE_TRANSFER_EVENT:
-//					// nothing...?
-//					break;
-				default:
-					log.error("Unknown error code {} during upload {} to {}, {} of {} bytes transferred",
-							ev.getEventType(), file, s3Uri, upload.getProgress().getBytesTransferred(), file.length());
-					future.setException(new ImageException(String.format("Unknown error code %s during upload %s to %s, %s of %s bytes transferred",
-							ev.getEventType(), file, s3Uri, upload.getProgress().getBytesTransferred(), file.length())));
-					break;
+					return uploadedImage;
+				} catch (Exception e) {
+					final String errorMessage = String.format("Failed upload '%s' to '%s' (%s) - %s of %s bytes transferred: %s",
+							file, s3Uri, upload.getState(), upload.getProgress().getBytesTransferred(), file.length(), e);
+					log.error(errorMessage, e);
+					throw new ImageException(errorMessage, e);
 				}
 			}
 		});
-		return future;
 	}
 	
 	@Override
