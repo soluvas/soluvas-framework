@@ -19,13 +19,13 @@ import com.amazonaws.ClientConfiguration;
 import com.amazonaws.Protocol;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.event.ProgressEvent;
+import com.amazonaws.event.ProgressListener;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.AccessControlList;
 import com.amazonaws.services.s3.model.CanonicalGrantee;
 import com.amazonaws.services.s3.model.GroupGrantee;
 import com.amazonaws.services.s3.model.Permission;
-import com.amazonaws.services.s3.model.ProgressEvent;
-import com.amazonaws.services.s3.model.ProgressListener;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.StorageClass;
 import com.amazonaws.services.s3.transfer.Download;
@@ -314,12 +314,12 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		upload.addProgressListener(new ProgressListener() {
 			@Override
 			public void progressChanged(ProgressEvent ev) {
-				switch (ev.getEventCode()) {
-				case ProgressEvent.STARTED_EVENT_CODE:
+				switch (ev.getEventType()) {
+				case TRANSFER_STARTED_EVENT:
 					log.debug("Starting upload {} to {} ({} bytes)", file, s3Uri,
 							upload.getProgress().getTotalBytesToTransfer());
 					break;
-				case ProgressEvent.COMPLETED_EVENT_CODE:
+				case TRANSFER_COMPLETED_EVENT:
 					// see: https://github.com/aws/aws-sdk-java/issues/52
 //						final UploadResult uploadResult = upload.waitForUploadResult();
 //						final UploadResult uploadResult = (UploadResult) ((UploadImpl)upload).getMonitor().getFuture().get();
@@ -330,7 +330,7 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 //								uploadResult.getBucketName(),
 //								uploadResult.getKey() );
 					log.info("Uploaded {} to {}, {} bytes transferred: bucket={} key={}",
-							file, s3Uri, upload.getProgress().getBytesTransfered(), bucket, key );
+							file, s3Uri, upload.getProgress().getBytesTransferred(), bucket, key );
 					final String realOriginAlias = Strings.isNullOrEmpty(originAlias) ? bucket + ".s3.amazonaws.com" : originAlias;
 					final String realCdnAlias = Strings.isNullOrEmpty(cdnAlias) ? bucket + ".s3.amazonaws.com" : cdnAlias;
 					final UploadedImage uploadedImage = ImageFactory.eINSTANCE.createUploadedImage();
@@ -338,20 +338,20 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 					uploadedImage.setUri("http://" + realCdnAlias + "/" + key);
 					future.set(uploadedImage);
 					break;
-				case ProgressEvent.FAILED_EVENT_CODE:
-					log.error("Failed upload {} to {}, {} bytes transferred", file, s3Uri,
-							upload.getProgress().getBytesTransfered());
+				case TRANSFER_FAILED_EVENT:
+					log.error("Failed upload {} to {}, {} of {} bytes transferred", file, s3Uri,
+							upload.getProgress().getBytesTransferred(), file.length());
 					future.setException(new ImageException("Failed upload " + file + " to " + s3Uri + ". " +
-							upload.getProgress().getBytesTransfered() + " bytes transferred"));
+							upload.getProgress().getBytesTransferred() + " of " + file.length() + " bytes transferred"));
 					break;
-				case 0:
-					// nothing...?
-					break;
+//				case BYTE_TRANSFER_EVENT:
+//					// nothing...?
+//					break;
 				default:
-					log.error("Unknown error code {} during upload {} to {}, {} bytes transferred",
-							ev.getEventCode(), file, s3Uri, upload.getProgress().getBytesTransfered());
-					future.setException(new ImageException(String.format("Unknown error code %s during upload %s to %s, %s bytes transferred",
-							ev.getEventCode(), file, s3Uri, upload.getProgress().getBytesTransfered())));
+					log.error("Unknown error code {} during upload {} to {}, {} of {} bytes transferred",
+							ev.getEventType(), file, s3Uri, upload.getProgress().getBytesTransferred(), file.length());
+					future.setException(new ImageException(String.format("Unknown error code %s during upload %s to %s, %s of %s bytes transferred",
+							ev.getEventType(), file, s3Uri, upload.getProgress().getBytesTransferred(), file.length())));
 					break;
 				}
 			}

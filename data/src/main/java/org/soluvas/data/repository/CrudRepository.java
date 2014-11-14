@@ -62,6 +62,9 @@ public interface CrudRepository<T, ID extends Serializable> extends Repository<T
 	/**
 	 * Adds all given entities.
 	 * If any error occurs, the whole operation must be rolled back, and appropriate {@link Exception} is thrown.
+	 * Note: While add-with-rollback is possible to be implemented in non-transactional data stores like MongoDB, S3, etc.
+	 * modify and delete is practically impossible to implement. In the future, bulk add/modify/delete should use the async
+	 * form in order to retrieve status individually, and rollback is not guaranteed (except for {@code add} when desirable). 
 	 * 
 	 * @param entities It may be {@link Collection#isEmpty()}, part of the reason is because {@link PagingAndSortingRepositoryBase#save(Collection)} expects it that way.
 	 * @return the saved entities

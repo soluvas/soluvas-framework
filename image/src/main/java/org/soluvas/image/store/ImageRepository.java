@@ -13,6 +13,8 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.TransformGravity;
 
+import com.google.common.util.concurrent.ListenableFuture;
+
 /**
  * @todo extend {@link EntityLookup}. However, namespace needs to be changed, e.g. image_person, otherwise REAL 'person' repo/lookup will conflict with IMAGE 'person' repo/lookup. 
  * @todo extend {@link PagingAndSortingRepository}
@@ -161,6 +163,8 @@ public interface ImageRepository extends EntityLookup<Image, String>,
 	public abstract boolean exists(String id);
 
 	<S extends Image> List<S> add(Collection<S> newImages, ProgressMonitor monitor);
+	
+	<S extends Image> List<ListenableFuture<S>> addAsync(Collection<S> newImages, ProgressMonitor monitor);
 
 	void fixExtensionAll();
 
