@@ -20,3 +20,11 @@ build
 /image-store
 /parent
 /libraries.gradle
+
+# Intellij
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+.idea_modules/
