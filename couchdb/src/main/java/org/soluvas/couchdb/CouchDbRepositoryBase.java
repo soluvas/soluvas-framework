@@ -639,6 +639,8 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	@Override
 	public final Page<T> findAll(StatusMask statusMask, Pageable pageable) {
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("modificationTime"));
+		// FIXME: can't use this: queryForPage requires having the previous PageRequest instance because it uses startKey internally
+		// see for proper working example: <T extends Checklist> Page<T> com.quikdo.guardian.core.impl.CouchDbChecklistRepository.doFindAllIn(StatusMask statusMask, @Nullable String parentId, Pageable pageable)
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
 			.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
 			.descending(!sort.iterator().next().isAscending())
@@ -656,17 +658,6 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 			}
 		}
 		return new PageImpl<T>((List) page.getRows(), pageable, page.getTotalSize());
-		
-//		final BasicDBObject query = new BasicDBObject();
-//		final long total = coll.count(query);
-//		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
-//		final DBCursor cursor = coll.find(query)
-//				.sort(sortQuery)
-//				.skip((int) pageable.getOffset())
-//				.limit((int) pageable.getPageSize());
-//		final List<T> physicalInventories = MongoUtils
-//				.transform(cursor, new DBObjectToEntity());
-//		return new PageImpl<>(physicalInventories, pageable, total);
 	}
 
 	/* (non-Javadoc)
