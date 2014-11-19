@@ -6,6 +6,16 @@ package org.soluvas.image;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>S3 Connector</b></em>'.
+ *
+ * <p>Note: The aws-java-sdk-s3 dependency is optional, to use this you must add it to your project:
+ *
+ * <pre>{@literal
+ * 	<dependency>
+ * 	    <groupId>com.amazonaws</groupId>
+ * 	    <artifactId>aws-java-sdk-s3</artifactId>
+ * 	</dependency>
+ * }</pre>
+ *
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
