@@ -648,7 +648,10 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 				.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
 //				.startKey(startKey).endKey(endKey)
 				.reduce(true);
-		final long totalSize = Iterables.getFirst(dbConn.queryView(countQuery, Long.class), 0l);
+		final List<Long> countQueryResult = Preconditions.checkNotNull(dbConn.queryView(countQuery, Long.class),
+				"Cannot get count for %s %s, make sure view '%s/%s' exists",
+				statusMask, entityClass.getSimpleName(), getDesignDocId(), countQuery.getViewName());
+		final long totalSize = Iterables.getFirst(countQueryResult, 0l);
 		final ViewQuery idQuery = new ViewQuery().designDocId(getDesignDocId())
 				.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
 //				.startKey(ascending ? startKey : endKey).endKey(ascending ? endKey : startKey)
@@ -699,15 +702,25 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	 */
 	@Override
 	public long count(StatusMask statusMask) {
+		// TODO: don't hardcode this?
 		final Sort sort = new Sort("modificationTime");
-		// for second-level filtering, e.g. parentId
-//		final ComplexKey startKey = ComplexKey.emptyObject();
-//		final ComplexKey endKey = ComplexKey.of( parentId, ComplexKey.emptyObject());
-		final ViewQuery countQuery = new ViewQuery().designDocId(getDesignDocId())
-				.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
-//				.startKey(startKey).endKey(endKey)
-				.reduce(true);
-		final long totalSize = Iterables.getFirst(dbConn.queryView(countQuery, Long.class), 0l);
+		final ViewQuery countQuery;
+		if (StatusMask.RAW == statusMask) {
+			countQuery = new ViewQuery().designDocId(getDesignDocId())
+					.viewName("count").reduce(true);
+		} else {
+			// for second-level filtering, e.g. parentId
+			//		final ComplexKey startKey = ComplexKey.emptyObject();
+			//		final ComplexKey endKey = ComplexKey.of( parentId, ComplexKey.emptyObject());
+			countQuery = new ViewQuery().designDocId(getDesignDocId())
+					.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
+							//				.startKey(startKey).endKey(endKey)
+					.reduce(true);
+		}
+		final List<Long> countQueryResult = Preconditions.checkNotNull(dbConn.queryView(countQuery, Long.class),
+				"Cannot get count for %s %s, make sure view '%s/%s' exists",
+				statusMask, entityClass.getSimpleName(), getDesignDocId(), countQuery.getViewName());
+		final long totalSize = Iterables.getFirst(countQueryResult, 0l);
 		return totalSize;
 	}
 
@@ -716,10 +729,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	 */
 	@Override
 	public final long count() {
-		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-				.viewName("count");
-		final List<Long> view = dbConn.queryView(query, Long.class);
-		return Iterables.getFirst(view, 0L);
+		return count(StatusMask.RAW);
 	}
 
 	/**
