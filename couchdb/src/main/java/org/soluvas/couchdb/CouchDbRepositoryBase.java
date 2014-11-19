@@ -24,7 +24,6 @@ import org.ektorp.ComplexKey;
 import org.ektorp.CouchDbConnector;
 import org.ektorp.DbAccessException;
 import org.ektorp.DocumentNotFoundException;
-import org.ektorp.PageRequest;
 import org.ektorp.ViewQuery;
 import org.ektorp.ViewResult.Row;
 import org.ektorp.http.HttpClient;
@@ -69,6 +68,7 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -639,25 +639,55 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	@Override
 	public final Page<T> findAll(StatusMask statusMask, Pageable pageable) {
 		final Sort sort = Optional.fromNullable(pageable.getSort()).or(new Sort("modificationTime"));
-		// FIXME: can't use this: queryForPage requires having the previous PageRequest instance because it uses startKey internally
-		// see for proper working example: <T extends Checklist> Page<T> com.quikdo.guardian.core.impl.CouchDbChecklistRepository.doFindAllIn(StatusMask statusMask, @Nullable String parentId, Pageable pageable)
-		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-			.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
-			.descending(!sort.iterator().next().isAscending())
-			.includeDocs(true);
-		final PageRequest pageRequest = new PageRequest.Builder().page((int) pageable.getPageNumber()).pageSize((int) pageable.getPageSize()).build();
-		org.ektorp.Page<? extends T> page;
-		try {
-			page = dbConn.queryForPage(query, pageRequest, implClass);
-		} catch (DbAccessException e) {
-			if (e.getMessage().contains("update_seq")) {
-				log.debug("Returning empty page for DbAccessException " + e, e);
-				return new PageImpl<T>(ImmutableList.<T>of(), pageable, 0l);
-			} else {
-				throw e;
+		final boolean ascending = sort.iterator().next().isAscending();
+		// for second-level filtering, e.g. parentId
+//		final ComplexKey startKey = ComplexKey.emptyObject();
+//		final ComplexKey endKey = ComplexKey.of( parentId, ComplexKey.emptyObject());
+		final ViewQuery countQuery = new ViewQuery().designDocId(getDesignDocId())
+				.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
+//				.startKey(startKey).endKey(endKey)
+				.reduce(true);
+		final long totalSize = Iterables.getFirst(dbConn.queryView(countQuery, Long.class), 0l);
+		final ViewQuery idQuery = new ViewQuery().designDocId(getDesignDocId())
+				.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
+//				.startKey(ascending ? startKey : endKey).endKey(ascending ? endKey : startKey)
+				.descending(!ascending)
+				.limit((int) (pageable.getOffset() + pageable.getPageSize()))
+				.includeDocs(false)
+				.reduce(false);
+		final ImmutableSet<String> ids = FluentIterable.from(dbConn.queryView(idQuery))
+				.skip((int) pageable.getOffset()).transform(new Function<Row, String>() {
+			@Override
+			public String apply(Row input) {
+				return input.getId();
 			}
-		}
-		return new PageImpl<T>((List) page.getRows(), pageable, page.getTotalSize());
+		}).toSet();
+		log.debug("findAll {} {} {} using IDs {}", statusMask, entityClass.getSimpleName(), pageable, ids);
+		final ViewQuery query = new ViewQuery().viewName("_all_docs")
+				.keys(ids)
+				.includeDocs(true);
+		final List<T> entities = (List<T>) dbConn.queryView(query, implClass);
+		return new PageImpl<>(entities, pageable, totalSize);
+		
+		// can't use this: queryForPage requires having the previous PageRequest instance because it uses startKey internally
+		// inspired by: <T extends Checklist> Page<T> com.quikdo.guardian.core.impl.CouchDbChecklistRepository.doFindAllIn(StatusMask statusMask, @Nullable String parentId, Pageable pageable)
+//		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
+//			.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
+//			.descending(!sort.iterator().next().isAscending())
+//			.includeDocs(true);
+//		final PageRequest pageRequest = new PageRequest.Builder().page((int) pageable.getPageNumber()).pageSize((int) pageable.getPageSize()).build();
+//		org.ektorp.Page<? extends T> page;
+//		try {
+//			page = dbConn.queryForPage(query, pageRequest, implClass);
+//		} catch (DbAccessException e) {
+//			if (e.getMessage().contains("update_seq")) {
+//				log.debug("Returning empty page for DbAccessException " + e, e);
+//				return new PageImpl<T>(ImmutableList.<T>of(), pageable, 0l);
+//			} else {
+//				throw e;
+//			}
+//		}
+//		return new PageImpl<T>((List) page.getRows(), pageable, page.getTotalSize());
 	}
 
 	/* (non-Javadoc)
