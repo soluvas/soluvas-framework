@@ -635,6 +635,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	 * If you are concerned about this, you can emit the full doc in each row; 
 	 * this will increase view index time and space requirements, but will make view reads optimally fast.
 	 * @see org.soluvas.data.repository.PagingAndSortingRepositoryBase#findAll(org.soluvas.data.domain.Pageable)
+	 * @see #count(StatusMask)
 	 */
 	@Override
 	public final Page<T> findAll(StatusMask statusMask, Pageable pageable) {
@@ -688,6 +689,26 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 //			}
 //		}
 //		return new PageImpl<T>((List) page.getRows(), pageable, page.getTotalSize());
+	}
+	
+	/**
+	 * Requires this view:
+	 * {VIEW_STATUSMASK_PREFIX}statusMask_by_modificationTime
+	 * @see #findAll(StatusMask, Pageable)
+	 * @see org.soluvas.couchdb.CouchDbRepository#count(org.soluvas.data.StatusMask)
+	 */
+	@Override
+	public long count(StatusMask statusMask) {
+		final Sort sort = new Sort("modificationTime");
+		// for second-level filtering, e.g. parentId
+//		final ComplexKey startKey = ComplexKey.emptyObject();
+//		final ComplexKey endKey = ComplexKey.of( parentId, ComplexKey.emptyObject());
+		final ViewQuery countQuery = new ViewQuery().designDocId(getDesignDocId())
+				.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
+//				.startKey(startKey).endKey(endKey)
+				.reduce(true);
+		final long totalSize = Iterables.getFirst(dbConn.queryView(countQuery, Long.class), 0l);
+		return totalSize;
 	}
 
 	/* (non-Javadoc)
