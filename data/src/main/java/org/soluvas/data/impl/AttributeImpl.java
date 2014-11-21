@@ -880,6 +880,11 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 		return getMaxValues() > 1;
 	}
 
+	@Override
+	public String getUName() {
+		return getNsPrefix() + "_" + getName();
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

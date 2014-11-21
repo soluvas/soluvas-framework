@@ -495,4 +495,5 @@ public interface Attribute extends NsPrefixable, NameContainer, Imageable, Descr
 	@JsonIgnore
 	boolean isMultiple();
 
+	String getUName();
 } // AttributeType
