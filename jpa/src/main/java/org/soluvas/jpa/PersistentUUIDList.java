@@ -55,12 +55,11 @@ public class PersistentUUIDList implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names,
 			SessionImplementor session, Object owner)
 			throws HibernateException, SQLException {
+		final Array theArray = rs.getArray(names[0]);
 	    if (rs.wasNull()) {
 	        return null;
 	    }
-
-	    final List<UUID> list = Arrays.asList( (UUID[]) rs.getArray(names[0]).getArray() );
-	    return list;
+		return Arrays.asList( (UUID[]) theArray.getArray() );
     }
 
 	@Override

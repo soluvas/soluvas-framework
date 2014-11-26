@@ -86,29 +86,25 @@ public class PersistentEnumSet /*extends AbstractReflectionUserType<Set<Enum<?>>
 	public Object nullSafeGet(ResultSet rs, String[] names,
 			SessionImplementor session, Object owner)
 			throws HibernateException, SQLException {
+	    final Array theArray = rs.getArray(names[0]);
 	    if (rs.wasNull()) {
-	        return null;
-	    }
-
-	    if (rs.getArray(names[0]) != null) {
-	    	final Set<Enum<?>> enums = new TreeSet<>();
-	    	Object origArray = rs.getArray(names[0]).getArray();
-	    	// Notice how Object is mapped to PGobject. This makes this implementation Postgres specific
-	    	if (origArray instanceof PGobject[]) {
-	    		for (PGobject identifier : (PGobject[]) origArray) {
-	    			enums.add(Enum.valueOf((Class) enumClass, identifier.getValue()));
-	    		}
-	    	} else if (origArray instanceof String[]) {
-	    		for (String identifier : (String[]) origArray) {
-	    			enums.add(Enum.valueOf((Class) enumClass, identifier));
-	    		}
-	    	} else {
-	    		throw new IllegalArgumentException("PersistentEnum type expects PGobject[], got " + origArray.getClass().getName() + " for value '" + origArray + "'");
-	    	}
-	    	return enums;
-	    } else {
 	    	return null;
 	    }
+    	final Set<Enum<?>> enums = new TreeSet<>();
+    	Object origArray = theArray.getArray();
+    	// Notice how Object is mapped to PGobject. This makes this implementation Postgres specific
+    	if (origArray instanceof PGobject[]) {
+    		for (PGobject identifier : (PGobject[]) origArray) {
+    			enums.add(Enum.valueOf((Class) enumClass, identifier.getValue()));
+    		}
+    	} else if (origArray instanceof String[]) {
+    		for (String identifier : (String[]) origArray) {
+    			enums.add(Enum.valueOf((Class) enumClass, identifier));
+    		}
+    	} else {
+    		throw new IllegalArgumentException("PersistentEnum type expects PGobject[], got " + origArray.getClass().getName() + " for value '" + origArray + "'");
+    	}
+    	return enums;
     }
 
 	@Override

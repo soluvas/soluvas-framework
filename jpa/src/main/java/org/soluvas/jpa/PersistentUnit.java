@@ -72,12 +72,12 @@ public class PersistentUnit implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names,
 			SessionImplementor session, Object owner)
 			throws HibernateException, SQLException {
-        String name = rs.getString(names[0]);   
-        Unit<?> result = null;   
+        final String name = rs.getString(names[0]);   
         if (!rs.wasNull()) {   
-            result = Unit.valueOf(name);   
-        }   
-        return result;   
+            return Unit.valueOf(name);   
+        } else {
+        	return null;
+        }
     }
 
 	/* (non-Javadoc)

@@ -70,12 +70,12 @@ public class PersistentLocale implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names,
 			SessionImplementor session, Object owner)
 			throws HibernateException, SQLException {
-        String name = rs.getString(names[0]);   
-        Locale result = null;   
+        final String name = rs.getString(names[0]);   
         if (!rs.wasNull()) {   
-            result = Locale.forLanguageTag(name);   
-        }   
-        return result;   
+            return Locale.forLanguageTag(name);   
+        } else {
+        	return null;
+        }
     }
 
 	/* (non-Javadoc)

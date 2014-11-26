@@ -31,13 +31,10 @@ public class PersistentEnum extends org.jadira.usertype.corejava.PersistentEnum 
 			SessionImplementor session, Object owner)
 			throws HibernateException, SQLException, IllegalArgumentException,
 			IllegalAccessException, InvocationTargetException {
-		
-		Object identifier = rs.getObject(names[0]);
-		
+		final Object identifier = rs.getObject(names[0]);
 		if (rs.wasNull()) {
 			return null;
 		}
-
         // Notice how Object is mapped to PGobject. This makes this implementation Postgres specific
         if (identifier instanceof PGobject) {
             PGobject pg = (PGobject) identifier;

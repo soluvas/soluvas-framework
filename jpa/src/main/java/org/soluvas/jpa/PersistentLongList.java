@@ -52,17 +52,11 @@ public class PersistentLongList implements UserType {
 	public Object nullSafeGet(ResultSet rs, String[] names,
 			SessionImplementor session, Object owner)
 			throws HibernateException, SQLException {
-	    if (rs.wasNull()) {
-	        return null;
-	    }
-
-	    final List<Long> list;
-	    if (rs.getArray(names[0]) != null) {
-	    	list = Arrays.asList( (Long[]) rs.getArray(names[0]).getArray() );
-	    } else {
-	    	list = null;
-	    }
-	    return list;
+		final Array theArray = rs.getArray(names[0]);
+		if (rs.wasNull()) {
+			return null;
+		}
+	    return Arrays.asList( (Long[]) theArray.getArray() );
     }
 
 	@Override
