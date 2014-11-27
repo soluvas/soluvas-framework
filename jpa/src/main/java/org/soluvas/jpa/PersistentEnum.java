@@ -26,6 +26,15 @@ public class PersistentEnum extends org.jadira.usertype.corejava.PersistentEnum 
 	
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * @see <a href="https://github.com/JadiraOrg/jadira/issues/33">JadiraOrg/jadira#33</a>
+	 * @see org.jadira.usertype.spi.shared.AbstractReflectionUserType#returnedClass()
+	 */
+	@Override
+	public Class<Enum<?>> returnedClass() {
+		return (Class<Enum<?>>) getMappedClass();
+	}
+	
 	@Override
 	public Object doNullSafeGet(ResultSet rs, String[] names,
 			SessionImplementor session, Object owner)
