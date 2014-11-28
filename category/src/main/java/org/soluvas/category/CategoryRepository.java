@@ -1,9 +1,11 @@
 package org.soluvas.category;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
@@ -23,6 +25,14 @@ public interface CategoryRepository extends
 
 	@Nullable
 	Category findOneBySlugPath(String slugPath, Collection<CategoryStatus> statuses);
+	
+	/**
+	 * Find category by {@link Category#getPrimaryUri()} or {@link Category#getSameAsUris()}.
+	 * @param statuses
+	 * @param uri
+	 * @return
+	 */
+	Category lookupOneByUri(Set<CategoryStatus> statuses, String uri) throws EntityLookupException;
 	
 	Page<Category> findAllOriginalByStatus(Collection<CategoryStatus> statuses, Pageable pageable);
 	

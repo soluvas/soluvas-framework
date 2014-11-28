@@ -43,7 +43,9 @@ import org.soluvas.commons.StaticXmiLoader;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.data.DataException;
 import org.soluvas.data.DataPackage;
+import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
+import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
@@ -574,6 +576,30 @@ public class XmiCategoryRepository
 				return input.getCategories().isEmpty() && input.getStatus() == CategoryStatus.ACTIVE;
 			}
 		});
+	}
+
+	@Override
+	public Category lookupOneByUri(final Set<CategoryStatus> statuses,
+			final String uri) throws EntityLookupException {
+		final Predicate<Category> filter = new Predicate<Category>() {
+			@Override
+			public boolean apply(@Nullable Category input) {
+				if (statuses.contains(input.getStatus())) {
+					return uri.equals(input.getPrimaryUri()) ||
+							input.getSameAsUris().contains(uri);
+				} else {
+					return false;
+				}
+			}
+		};
+		final Optional<Category> found = Iterables.tryFind(getFlattenedCategories(), filter);
+		if (found.isPresent()) {
+			log.debug("findOneByUri {} {} = {}", statuses, uri, found.get().getId());
+			return EcoreUtil.copy(found.get());
+		} else {
+			log.debug("findOneByUri {} {} not found", statuses, uri);
+			throw new EntityLookupException(Category.class, StatusMask.RAW, LookupKey.URI, uri);
+		}
 	}
 
 }

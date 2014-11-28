@@ -97,7 +97,15 @@ public enum LookupKey implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MOBILE_NUMBER(8, "mobile_number", "mobile_number");
+	MOBILE_NUMBER(8, "mobile_number", "mobile_number"), /**
+	 * The '<em><b>Uri</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #URI_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	URI(0, "uri", "uri");
 
 	/**
 	 * The '<em><b>Id</b></em>' literal value.
@@ -229,6 +237,20 @@ public enum LookupKey implements Enumerator {
 	public static final int MOBILE_NUMBER_VALUE = 8;
 
 	/**
+	 * The '<em><b>Uri</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Linked Data URI.
+	 * <!-- end-model-doc -->
+	 * @see #URI
+	 * @model name="uri"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int URI_VALUE = 0;
+
+	/**
 	 * An array of all the '<em><b>Lookup Key</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,6 +267,7 @@ public enum LookupKey implements Enumerator {
 			TWITTER_ID,
 			TWITTER_SCREENNAME,
 			MOBILE_NUMBER,
+			URI,
 		};
 
 	/**

@@ -71,6 +71,16 @@ public class EntityLookupException extends Exception {
 		this.status = (Optional<Enum<?>>) status;
 	}
 
+	public <T, K, S extends Enum<?>> EntityLookupException(Class<T> clazz, StatusMask statusMask, LookupKey lookupKey, @Nullable K key) {
+		super("Cannot lookup " + statusMask + " " + clazz.getName() + " " + lookupKey + "=" + key);
+		this.clazz = clazz;
+		this.statusMask = statusMask;
+		this.lookupKey = lookupKey;
+		this.key = key;
+		this.lookup = null;
+		this.status = Optional.<Enum<?>>absent();
+	}
+
 	/**
 	 * @return the clazz
 	 */
