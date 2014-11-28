@@ -2,6 +2,7 @@
  */
 package org.soluvas.data;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.Describable;
@@ -9,6 +10,8 @@ import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.ResourceAware;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,6 +62,7 @@ public interface Kind extends NsPrefixable, BundleAware, NameContainer, Resource
 	 * @model
 	 * @generated
 	 */
+	@Override
 	String getImageId();
 
 	/**
@@ -110,5 +114,6 @@ public interface Kind extends NsPrefixable, BundleAware, NameContainer, Resource
 	 * @model
 	 * @generated
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	EList<String> getSameAsUris();
 } // Kind

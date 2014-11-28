@@ -3,17 +3,14 @@
 package org.soluvas.data.impl;
 
 import java.util.Collection;
-import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.osgi.framework.Bundle;
-
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
@@ -22,7 +19,6 @@ import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.Nameable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
-
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Kind;
 
@@ -263,6 +259,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
@@ -272,6 +269,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNsPrefix(String newNsPrefix) {
 		String oldNsPrefix = nsPrefix;
 		nsPrefix = newNsPrefix;
@@ -284,6 +282,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Bundle getBundle() {
 		return bundle;
 	}
@@ -293,6 +292,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBundle(Bundle newBundle) {
 		Bundle oldBundle = bundle;
 		bundle = newBundle;
@@ -305,6 +305,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -314,6 +315,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -326,6 +328,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResourceType getResourceType() {
 		return resourceType;
 	}
@@ -335,6 +338,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceType(ResourceType newResourceType) {
 		ResourceType oldResourceType = resourceType;
 		resourceType = newResourceType == null ? RESOURCE_TYPE_EDEFAULT : newResourceType;
@@ -347,6 +351,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceUri() {
 		return resourceUri;
 	}
@@ -356,6 +361,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceUri(String newResourceUri) {
 		String oldResourceUri = resourceUri;
 		resourceUri = newResourceUri;
@@ -368,6 +374,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getResourceName() {
 		return resourceName;
 	}
@@ -377,6 +384,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResourceName(String newResourceName) {
 		String oldResourceName = resourceName;
 		resourceName = newResourceName;
@@ -389,6 +397,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -398,6 +407,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
@@ -410,6 +420,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getImageId() {
 		return imageId;
 	}
@@ -419,6 +430,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImageId(String newImageId) {
 		String oldImageId = imageId;
 		imageId = newImageId;
@@ -431,6 +443,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrimaryUri() {
 		return primaryUri;
 	}
@@ -440,6 +453,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryUri(String newPrimaryUri) {
 		String oldPrimaryUri = primaryUri;
 		primaryUri = newPrimaryUri;
@@ -452,11 +466,17 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getSameAsUris() {
 		if (sameAsUris == null) {
 			sameAsUris = new EDataTypeUniqueEList<String>(String.class, this, DataPackage.KIND__SAME_AS_URIS);
 		}
 		return sameAsUris;
+	}
+	
+	protected void setSameAsUris(EList<String> sameAsUris) {
+		getSameAsUris().clear();
+		getSameAsUris().addAll(sameAsUris);
 	}
 
 	/**

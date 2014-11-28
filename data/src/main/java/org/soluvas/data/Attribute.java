@@ -4,6 +4,7 @@ package org.soluvas.data;
 
 import javax.measure.unit.Unit;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Imageable;
@@ -375,6 +376,7 @@ public interface Attribute extends NsPrefixable, NameContainer, Imageable, Descr
 	 * @model
 	 * @generated
 	 */
+	@Override
 	String getImageId();
 
 	/**
@@ -479,6 +481,7 @@ public interface Attribute extends NsPrefixable, NameContainer, Imageable, Descr
 	 * @model
 	 * @generated
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	EList<String> getSameAsUris();
 
 	/**

@@ -4,6 +4,7 @@ package org.soluvas.data;
 
 import javax.annotation.Nullable;
 
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.Colorable;
@@ -275,6 +276,7 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 * @model
 	 * @generated
 	 */
+	@JsonDeserialize(as=BasicEList.class)
 	EList<String> getSameAsUris();
 
 	/**
