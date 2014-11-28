@@ -2,6 +2,8 @@
  */
 package org.soluvas.data.impl;
 
+import java.util.Collection;
+
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -22,7 +24,6 @@ import org.soluvas.data.InputMethod;
 import org.soluvas.data.Value;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -517,6 +518,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -526,6 +528,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
@@ -538,6 +541,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getPositioner() {
 		return positioner;
 	}
@@ -547,6 +551,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPositioner(Integer newPositioner) {
 		Integer oldPositioner = positioner;
 		positioner = newPositioner;
@@ -582,6 +587,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -591,6 +597,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEnabled(boolean newEnabled) {
 		boolean oldEnabled = enabled;
 		enabled = newEnabled;
@@ -764,6 +771,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isVisibleInSimple() {
 		return visibleInSimple;
 	}
@@ -773,6 +781,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVisibleInSimple(boolean newVisibleInSimple) {
 		boolean oldVisibleInSimple = visibleInSimple;
 		visibleInSimple = newVisibleInSimple;
@@ -785,6 +794,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSearchableInQuick() {
 		return searchableInQuick;
 	}
@@ -794,6 +804,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSearchableInQuick(boolean newSearchableInQuick) {
 		boolean oldSearchableInQuick = searchableInQuick;
 		searchableInQuick = newSearchableInQuick;
@@ -806,6 +817,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getImageId() {
 		return imageId;
 	}
@@ -815,6 +827,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImageId(String newImageId) {
 		String oldImageId = imageId;
 		imageId = newImageId;
@@ -827,6 +840,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getFieldWidth() {
 		return fieldWidth;
 	}
@@ -836,6 +850,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFieldWidth(int newFieldWidth) {
 		int oldFieldWidth = fieldWidth;
 		fieldWidth = newFieldWidth;
@@ -848,6 +863,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPrincipal() {
 		return principal;
 	}
@@ -857,6 +873,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrincipal(boolean newPrincipal) {
 		boolean oldPrincipal = principal;
 		principal = newPrincipal;
@@ -869,6 +886,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrimaryUri() {
 		return primaryUri;
 	}
@@ -878,6 +896,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryUri(String newPrimaryUri) {
 		String oldPrimaryUri = primaryUri;
 		primaryUri = newPrimaryUri;
@@ -890,11 +909,17 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getSameAsUris() {
 		if (sameAsUris == null) {
 			sameAsUris = new EDataTypeUniqueEList<String>(String.class, this, DataPackage.ATTRIBUTE__SAME_AS_URIS);
 		}
 		return sameAsUris;
+	}
+
+	protected void setSameAsUris(EList<String> sameAsUris) {
+		getSameAsUris().clear();
+		getSameAsUris().addAll(sameAsUris);
 	}
 
 	/**
@@ -948,7 +973,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 		return getMaxValues() > 1;
 	}
 
-	@Override
+	@Override @JsonIgnore
 	public String getUName() {
 		return getNsPrefix() + "_" + getName();
 	}

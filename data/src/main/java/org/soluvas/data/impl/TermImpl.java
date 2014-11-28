@@ -1006,6 +1006,11 @@ public class TermImpl extends EObjectImpl implements Term {
 		}
 		return sameAsUris;
 	}
+	
+	protected void setSameAsUris(EList<String> sameAsUris) {
+		getSameAsUris().clear();
+		getSameAsUris().addAll(sameAsUris);
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -1352,6 +1352,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrimaryUri() {
 		return primaryUri;
 	}
@@ -1361,6 +1362,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryUri(String newPrimaryUri) {
 		String oldPrimaryUri = primaryUri;
 		primaryUri = newPrimaryUri;
@@ -1373,11 +1375,17 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getSameAsUris() {
 		if (sameAsUris == null) {
 			sameAsUris = new EDataTypeUniqueEList<String>(String.class, this, CategoryPackage.CATEGORY__SAME_AS_URIS);
 		}
 		return sameAsUris;
+	}
+	
+	protected void setSameAsUris(List<String> sameAsUris) {
+		getSameAsUris().clear();
+		getSameAsUris().addAll(sameAsUris);
 	}
 
 	/**
