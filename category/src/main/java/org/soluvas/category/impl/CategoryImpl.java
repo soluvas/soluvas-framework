@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -82,6 +83,8 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getDefaultMixin <em>Default Mixin</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getUName <em>UName</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getParentUName <em>Parent UName</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
  * </p>
  *
@@ -632,6 +635,36 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	protected String parentUName = PARENT_UNAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PRIMARY_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String primaryUri = PRIMARY_URI_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSameAsUris() <em>Same As Uris</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSameAsUris()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> sameAsUris;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1001,7 +1034,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	@Override
 	public EList<Category> getCategories() {
 		if (categories == null) {
-			categories = new EObjectContainmentEList<>(Category.class, this, CategoryPackage.CATEGORY__CATEGORIES);
+			categories = new EObjectContainmentEList<Category>(Category.class, this, CategoryPackage.CATEGORY__CATEGORIES);
 		}
 		return categories;
 	}
@@ -1317,6 +1350,39 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPrimaryUri() {
+		return primaryUri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrimaryUri(String newPrimaryUri) {
+		String oldPrimaryUri = primaryUri;
+		primaryUri = newPrimaryUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__PRIMARY_URI, oldPrimaryUri, primaryUri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getSameAsUris() {
+		if (sameAsUris == null) {
+			sameAsUris = new EDataTypeUniqueEList<String>(String.class, this, CategoryPackage.CATEGORY__SAME_AS_URIS);
+		}
+		return sameAsUris;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public void resolve(EntityLookup<Category, String> categoryLookup) {
@@ -1459,6 +1525,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getUName();
 			case CategoryPackage.CATEGORY__PARENT_UNAME:
 				return getParentUName();
+			case CategoryPackage.CATEGORY__PRIMARY_URI:
+				return getPrimaryUri();
+			case CategoryPackage.CATEGORY__SAME_AS_URIS:
+				return getSameAsUris();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1557,6 +1627,13 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__PARENT_UNAME:
 				setParentUName((String)newValue);
 				return;
+			case CategoryPackage.CATEGORY__PRIMARY_URI:
+				setPrimaryUri((String)newValue);
+				return;
+			case CategoryPackage.CATEGORY__SAME_AS_URIS:
+				getSameAsUris().clear();
+				getSameAsUris().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1653,6 +1730,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__PARENT_UNAME:
 				setParentUName(PARENT_UNAME_EDEFAULT);
 				return;
+			case CategoryPackage.CATEGORY__PRIMARY_URI:
+				setPrimaryUri(PRIMARY_URI_EDEFAULT);
+				return;
+			case CategoryPackage.CATEGORY__SAME_AS_URIS:
+				getSameAsUris().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1723,6 +1806,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return UNAME_EDEFAULT == null ? getUName() != null : !UNAME_EDEFAULT.equals(getUName());
 			case CategoryPackage.CATEGORY__PARENT_UNAME:
 				return PARENT_UNAME_EDEFAULT == null ? parentUName != null : !PARENT_UNAME_EDEFAULT.equals(parentUName);
+			case CategoryPackage.CATEGORY__PRIMARY_URI:
+				return PRIMARY_URI_EDEFAULT == null ? primaryUri != null : !PRIMARY_URI_EDEFAULT.equals(primaryUri);
+			case CategoryPackage.CATEGORY__SAME_AS_URIS:
+				return sameAsUris != null && !sameAsUris.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1951,6 +2038,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(defaultMixin);
 		result.append(", parentUName: ");
 		result.append(parentUName);
+		result.append(", primaryUri: ");
+		result.append(primaryUri);
+		result.append(", sameAsUris: ");
+		result.append(sameAsUris);
 		result.append(')');
 		return result.toString();
 	}

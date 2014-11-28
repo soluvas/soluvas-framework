@@ -171,7 +171,7 @@ public class CategoryCatalogImpl extends EObjectImpl implements CategoryCatalog 
 	@Override
 	public EList<Category> getCategories() {
 		if (categories == null) {
-			categories = new EObjectContainmentEList<>(Category.class, this, CategoryPackage.CATEGORY_CATALOG__CATEGORIES);
+			categories = new EObjectContainmentEList<Category>(Category.class, this, CategoryPackage.CATEGORY_CATALOG__CATEGORIES);
 		}
 		return categories;
 	}

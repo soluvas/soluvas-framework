@@ -272,6 +272,24 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCategory_PrimaryUri() {
+		return (EAttribute)categoryEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCategory_SameAsUris() {
+		return (EAttribute)categoryEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getCategoryContainer() {
 		return categoryContainerEClass;
@@ -369,6 +387,8 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		createEAttribute(categoryEClass, CATEGORY__DEFAULT_MIXIN);
 		createEAttribute(categoryEClass, CATEGORY__UNAME);
 		createEAttribute(categoryEClass, CATEGORY__PARENT_UNAME);
+		createEAttribute(categoryEClass, CATEGORY__PRIMARY_URI);
+		createEAttribute(categoryEClass, CATEGORY__SAME_AS_URIS);
 
 		categoryContainerEClass = createEClass(CATEGORY_CONTAINER);
 		createEReference(categoryContainerEClass, CATEGORY_CONTAINER__CATEGORIES);
@@ -409,7 +429,6 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 
 		// Obtain other dependent packages
 		CommonsPackage theCommonsPackage = (CommonsPackage)EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI);
-		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 		addETypeParameter(entityLookupEDataType, "T");
@@ -446,26 +465,28 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		// Initialize classes and features; add operations and parameters
 		initEClass(categoryEClass, Category.class, "Category", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCategory_Status(), this.getCategoryStatus(), "status", "active", 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_MetaDescription(), theEcorePackage.getEString(), "metaDescription", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_MetaKeywords(), theEcorePackage.getEString(), "metaKeywords", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_MetaTitle(), theEcorePackage.getEString(), "metaTitle", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_MetaDescription(), ecorePackage.getEString(), "metaDescription", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_MetaKeywords(), ecorePackage.getEString(), "metaKeywords", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_MetaTitle(), ecorePackage.getEString(), "metaTitle", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getList());
-		g2 = createEGenericType(theEcorePackage.getEString());
+		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getCategory_AvailableSortBy(), g1, "availableSortBy", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_DefaultSortBy(), theEcorePackage.getEString(), "defaultSortBy", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_Anchor(), theEcorePackage.getEBoolean(), "anchor", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_IncludeInMenu(), theEcorePackage.getEBoolean(), "includeInMenu", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_CatalogName(), theEcorePackage.getEString(), "catalogName", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_DefaultMixin(), theEcorePackage.getEString(), "defaultMixin", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_UName(), theEcorePackage.getEString(), "uName", null, 0, 1, Category.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCategory_ParentUName(), theEcorePackage.getEString(), "parentUName", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_DefaultSortBy(), ecorePackage.getEString(), "defaultSortBy", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_Anchor(), ecorePackage.getEBoolean(), "anchor", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_IncludeInMenu(), ecorePackage.getEBoolean(), "includeInMenu", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_CatalogName(), ecorePackage.getEString(), "catalogName", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_DefaultMixin(), ecorePackage.getEString(), "defaultMixin", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_UName(), ecorePackage.getEString(), "uName", null, 0, 1, Category.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_ParentUName(), ecorePackage.getEString(), "parentUName", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_SameAsUris(), ecorePackage.getEString(), "sameAsUris", null, 0, -1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(categoryEClass, null, "resolve", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getEntityLookup());
 		g2 = createEGenericType(this.getCategory());
 		g1.getETypeArguments().add(g2);
-		g2 = createEGenericType(theEcorePackage.getEString());
+		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "categoryLookup", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -501,37 +522,49 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		String source = "http://www.eclipse.org/emf/2002/GenModel";	
 		addAnnotation
 		  (categoryEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Provide default values for id, slug, slugPath, etc.\n\nIf categoryLookup is provided, it will lookup the parentUName and set the parent reference.\nThis is optional and unnecessary during loading from XMI, but is required during EmfModel deserialization."
-		   });		
+		   });	
 		addAnnotation
 		  (getCategory_CatalogName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of the category catalog."
-		   });		
+		   });	
 		addAnnotation
 		  (getCategory_DefaultMixin(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Default {@link org.soluvas.data.Mixin} UName, including nsPrefix, e.g. \"base_Apparel\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getCategory_UName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "nsPrefix + \"_\" + id."
-		   });		
+		   });	
 		addAnnotation
 		  (getCategory_ParentUName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Parent Category UName (\"{nsPrefix}_{ID}\"), useful during serialization/deserialization to get a real reference to the parent (which may/may not be found)."
-		   });		
+		   });	
+		addAnnotation
+		  (getCategory_PrimaryUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Primary Linked Data URI, this will be used as <code>@id</code> in JSON-LD."
+		   });	
+		addAnnotation
+		  (getCategory_SameAsUris(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Additional <a href=\"http://schema.org/sameAs\">sameAs</a> Linked Data URIs."
+		   });	
 		addAnnotation
 		  (getCategoryContainer_Categories(), 
 		   source, 

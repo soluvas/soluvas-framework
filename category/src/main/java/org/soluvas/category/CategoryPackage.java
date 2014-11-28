@@ -331,13 +331,31 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY__PARENT_UNAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 18;
 
 	/**
+	 * The feature id for the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__PRIMARY_URI = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 19;
+
+	/**
+	 * The feature id for the '<em><b>Same As Uris</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__SAME_AS_URIS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 20;
+
+	/**
 	 * The number of structural features of the '<em>Category</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 19;
+	int CATEGORY_FEATURE_COUNT = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 21;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.
@@ -624,6 +642,28 @@ public interface CategoryPackage extends EPackage {
 	EAttribute getCategory_ParentUName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.category.Category#getPrimaryUri <em>Primary Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Uri</em>'.
+	 * @see org.soluvas.category.Category#getPrimaryUri()
+	 * @see #getCategory()
+	 * @generated
+	 */
+	EAttribute getCategory_PrimaryUri();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.category.Category#getSameAsUris <em>Same As Uris</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Same As Uris</em>'.
+	 * @see org.soluvas.category.Category#getSameAsUris()
+	 * @see #getCategory()
+	 * @generated
+	 */
+	EAttribute getCategory_SameAsUris();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.category.CategoryContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -812,6 +852,22 @@ public interface CategoryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY__PARENT_UNAME = eINSTANCE.getCategory_ParentUName();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY__PRIMARY_URI = eINSTANCE.getCategory_PrimaryUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Same As Uris</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY__SAME_AS_URIS = eINSTANCE.getCategory_SameAsUris();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.

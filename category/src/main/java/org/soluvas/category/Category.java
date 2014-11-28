@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import org.eclipse.emf.common.util.EList;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CategoryLike;
@@ -41,6 +42,8 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.Category#getDefaultMixin <em>Default Mixin</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getUName <em>UName</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getParentUName <em>Parent UName</em>}</li>
+ *   <li>{@link org.soluvas.category.Category#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.category.Category#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
  * </p>
  *
@@ -359,7 +362,7 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>UName</em>' attribute.
 	 * @see org.soluvas.category.CategoryPackage#getCategory_UName()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @model transient="true" changeable="false" volatile="true"
 	 * @generated
 	 */
 	String getUName();
@@ -388,6 +391,46 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 	 * @generated
 	 */
 	void setParentUName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Primary Linked Data URI, this will be used as <code>@id</code> in JSON-LD.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Primary Uri</em>' attribute.
+	 * @see #setPrimaryUri(String)
+	 * @see org.soluvas.category.CategoryPackage#getCategory_PrimaryUri()
+	 * @model
+	 * @generated
+	 */
+	String getPrimaryUri();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.category.Category#getPrimaryUri <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Primary Uri</em>' attribute.
+	 * @see #getPrimaryUri()
+	 * @generated
+	 */
+	void setPrimaryUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Same As Uris</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Additional <a href="http://schema.org/sameAs">sameAs</a> Linked Data URIs.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Same As Uris</em>' attribute list.
+	 * @see org.soluvas.category.CategoryPackage#getCategory_SameAsUris()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getSameAsUris();
 
 	/**
 	 * <!-- begin-user-doc -->
