@@ -5,9 +5,11 @@ package org.soluvas.data.impl;
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Imageable;
@@ -20,6 +22,7 @@ import org.soluvas.data.InputMethod;
 import org.soluvas.data.Value;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Collection;
 
 /**
  * <!-- begin-user-doc -->
@@ -46,6 +49,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getFieldWidth <em>Field Width</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#isPrincipal <em>Principal</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.AttributeImpl#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
  * </p>
  *
@@ -411,6 +416,36 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * @ordered
 	 */
 	protected boolean principal = PRINCIPAL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PRIMARY_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String primaryUri = PRIMARY_URI_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSameAsUris() <em>Same As Uris</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSameAsUris()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> sameAsUris;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -832,6 +867,39 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPrimaryUri() {
+		return primaryUri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrimaryUri(String newPrimaryUri) {
+		String oldPrimaryUri = primaryUri;
+		primaryUri = newPrimaryUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.ATTRIBUTE__PRIMARY_URI, oldPrimaryUri, primaryUri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getSameAsUris() {
+		if (sameAsUris == null) {
+			sameAsUris = new EDataTypeUniqueEList<String>(String.class, this, DataPackage.ATTRIBUTE__SAME_AS_URIS);
+		}
+		return sameAsUris;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override @JsonIgnore
 	public Unit getInputUnit() {
@@ -929,6 +997,10 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return getFieldWidth();
 			case DataPackage.ATTRIBUTE__PRINCIPAL:
 				return isPrincipal();
+			case DataPackage.ATTRIBUTE__PRIMARY_URI:
+				return getPrimaryUri();
+			case DataPackage.ATTRIBUTE__SAME_AS_URIS:
+				return getSameAsUris();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -938,6 +1010,7 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -994,6 +1067,13 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return;
 			case DataPackage.ATTRIBUTE__PRINCIPAL:
 				setPrincipal((Boolean)newValue);
+				return;
+			case DataPackage.ATTRIBUTE__PRIMARY_URI:
+				setPrimaryUri((String)newValue);
+				return;
+			case DataPackage.ATTRIBUTE__SAME_AS_URIS:
+				getSameAsUris().clear();
+				getSameAsUris().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1061,6 +1141,12 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 			case DataPackage.ATTRIBUTE__PRINCIPAL:
 				setPrincipal(PRINCIPAL_EDEFAULT);
 				return;
+			case DataPackage.ATTRIBUTE__PRIMARY_URI:
+				setPrimaryUri(PRIMARY_URI_EDEFAULT);
+				return;
+			case DataPackage.ATTRIBUTE__SAME_AS_URIS:
+				getSameAsUris().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1109,6 +1195,10 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 				return fieldWidth != FIELD_WIDTH_EDEFAULT;
 			case DataPackage.ATTRIBUTE__PRINCIPAL:
 				return principal != PRINCIPAL_EDEFAULT;
+			case DataPackage.ATTRIBUTE__PRIMARY_URI:
+				return PRIMARY_URI_EDEFAULT == null ? primaryUri != null : !PRIMARY_URI_EDEFAULT.equals(primaryUri);
+			case DataPackage.ATTRIBUTE__SAME_AS_URIS:
+				return sameAsUris != null && !sameAsUris.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1235,6 +1325,10 @@ public class AttributeImpl extends EObjectImpl implements Attribute {
 		result.append(fieldWidth);
 		result.append(", principal: ");
 		result.append(principal);
+		result.append(", primaryUri: ");
+		result.append(primaryUri);
+		result.append(", sameAsUris: ");
+		result.append(sameAsUris);
 		result.append(')');
 		return result.toString();
 	}

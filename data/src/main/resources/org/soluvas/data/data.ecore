@@ -107,6 +107,17 @@
         <details key="documentation" value="If true, this attribute will be used as principal in VariedProduct (has no effect in SimpleProduct).&#xA;&#xA;A VariedProduct may also override the principals in use for that specific product (this mechanism is not yet defined)."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Primary Linked Data URI for &lt;a href=&quot;http://www.w3.org/2002/07/owl#ObjectProperty&quot;>owl:ObjectProperty&lt;/a>, to be usable as {@code additionalProperty}, e.g. {@code http://purl.org/opdm/garment#liningFabric}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sameAsUris" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Additional &lt;a href=&quot;http://schema.org/sameAs&quot;>sameAs&lt;/a> Linked Data URIs for &lt;a href=&quot;http://www.w3.org/2002/07/owl#ObjectProperty&quot;>owl:ObjectProperty&lt;/a>, to be usable for inference or other purposes,&#xA;e.g. http://purl.org/opdm/garment#liningFabric."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -219,6 +230,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Primary Linked Data URI, to be usable as property &lt;tt>@vocab&lt;/tt> value or &lt;tt>@id&lt;/tt>, e.g. {@code http://purl.org/opdm/garment#Polyester}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eGenericSuperTypes eClassifier="#//Value">
       <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eGenericSuperTypes>
@@ -273,6 +289,17 @@
         <details key="documentation" value="Digunakan untuk mendapatkan imageUri dari proses API."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Primary Linked Data URI, to be usable as property &lt;tt>@vocab&lt;/tt> value or &lt;tt>@id&lt;/tt>, e.g. {@code http://purl.org/opdm/garment#Polyester}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sameAsUris" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Additional &lt;a href=&quot;http://schema.org/sameAs&quot;>sameAs&lt;/a> Linked Data URIs, to be usable for inference or other purposes, e.g. {@code http://purl.org/opdm/garment#Polyester}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ListVocab" eSuperTypes="#//Vocab">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -316,6 +343,17 @@
       <details key="documentation" value="1. Kind (Attribute Type / Vocab) is like an EMF DataType or Enum.&#xA;A Kind is always type-agnostic, but a default input method &amp; unit can be hinted by the attribute (see below).&#xA;A Kind is always cardinality agnostic.&#xA;For example, Length kind is hinted as &quot;measure&quot; with &quot;cm&quot; unit, however all the attribute values below are valid:&#xA;1. 9 cm (just like the hint)&#xA;2. 10 km (different unit)&#xA;3. 9-12 cm (use unit like the hint, but RangeValue instead)&#xA;4. 5-6 kg (different unit and use RangeValue)&#xA;5. &quot;cukup panjang untuk orang dewasa&quot; (StringValue)&#xA;6. base_very_long (TermValue from base nsPrefix)&#xA;7. tuneeca_half_a_mile (TermValue from tuneeca nsPrefix)&#xA;In addition, all of the above can have multiple cardinality or no value."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Primary Linked Data URI for &lt;a href=&quot;http://www.w3.org/2002/07/owl#Class&quot;>owl:Class&lt;/a>, to be usable as property range, e.g. {@code http://purl.org/opdm/garment#Fabric}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sameAsUris" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Additional &lt;a href=&quot;http://schema.org/sameAs&quot;>sameAs&lt;/a> Linked Data URIs for &lt;a href=&quot;http://www.w3.org/2002/07/owl#Class&quot;>owl:Class&lt;/a>, to be usable for inference or other purposes,&#xA;e.g. {@code http://purl.org/opdm/garment#Fabric}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="InputMethod">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

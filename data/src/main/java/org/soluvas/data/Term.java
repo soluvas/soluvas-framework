@@ -4,6 +4,7 @@ package org.soluvas.data;
 
 import javax.annotation.Nullable;
 
+import org.eclipse.emf.common.util.EList;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.Colorable;
 import org.soluvas.commons.Imageable;
@@ -31,6 +32,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.data.Term#getKindName <em>Kind Name</em>}</li>
  *   <li>{@link org.soluvas.data.Term#isBordered <em>Bordered</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getImageUri <em>Image Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.Term#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
  * </p>
  *
@@ -233,6 +236,46 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 * @generated
 	 */
 	void setImageUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Primary Linked Data URI, to be usable as property <tt>@vocab</tt> value or <tt>@id</tt>, e.g. {@code http://purl.org/opdm/garment#Polyester}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Primary Uri</em>' attribute.
+	 * @see #setPrimaryUri(String)
+	 * @see org.soluvas.data.DataPackage#getTerm_PrimaryUri()
+	 * @model
+	 * @generated
+	 */
+	String getPrimaryUri();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Term#getPrimaryUri <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Primary Uri</em>' attribute.
+	 * @see #getPrimaryUri()
+	 * @generated
+	 */
+	void setPrimaryUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Same As Uris</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Additional <a href="http://schema.org/sameAs">sameAs</a> Linked Data URIs, to be usable for inference or other purposes, e.g. {@code http://purl.org/opdm/garment#Polyester}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Same As Uris</em>' attribute list.
+	 * @see org.soluvas.data.DataPackage#getTerm_SameAsUris()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getSameAsUris();
 
 	/**
 	 * <!-- begin-user-doc -->

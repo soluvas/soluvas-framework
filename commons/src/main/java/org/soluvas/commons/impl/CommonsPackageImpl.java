@@ -2238,6 +2238,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCategoryInfo_PrimaryUri() {
+		return (EAttribute)categoryInfoEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getProgressMonitor() {
 		return progressMonitorEClass;
@@ -4770,6 +4779,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		categoryInfoEClass = createEClass(CATEGORY_INFO);
 		createEReference(categoryInfoEClass, CATEGORY_INFO__PARENTS);
+		createEAttribute(categoryInfoEClass, CATEGORY_INFO__PRIMARY_URI);
 
 		progressMonitorEClass = createEClass(PROGRESS_MONITOR);
 		createEAttribute(progressMonitorEClass, PROGRESS_MONITOR__CANCELED);
@@ -5452,6 +5462,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(categoryInfoEClass, CategoryInfo.class, "CategoryInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCategoryInfo_Parents(), this.getCategoryInfo(), null, "parents", null, 0, -1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategoryInfo_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(progressMonitorEClass, ProgressMonitor.class, "ProgressMonitor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProgressMonitor_Canceled(), ecorePackage.getEBoolean(), "canceled", null, 0, 1, ProgressMonitor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -6418,6 +6429,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Used to help query performance. And also to display breadcrumbs."
+		   });	
+		addAnnotation
+		  (getCategoryInfo_PrimaryUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Linked Data URI for <tt>@id</tt> in JSON-LD."
 		   });	
 		addAnnotation
 		  (progressMonitorEClass, 

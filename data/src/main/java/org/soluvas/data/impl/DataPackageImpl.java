@@ -477,6 +477,24 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAttribute_PrimaryUri() {
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAttribute_SameAsUris() {
+		return (EAttribute)attributeEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getValue() {
 		return valueEClass;
@@ -677,6 +695,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTermValue_PrimaryUri() {
+		return (EAttribute)termValueEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getVocab() {
 		return vocabEClass;
@@ -759,6 +786,24 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 */
 	public EAttribute getTerm_ImageUri() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTerm_PrimaryUri() {
+		return (EAttribute)termEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTerm_SameAsUris() {
+		return (EAttribute)termEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -869,6 +914,24 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	@Override
 	public EAttribute getKind_ImageId() {
 		return (EAttribute)kindEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKind_PrimaryUri() {
+		return (EAttribute)kindEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getKind_SameAsUris() {
+		return (EAttribute)kindEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1075,6 +1138,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEAttribute(attributeEClass, ATTRIBUTE__IMAGE_ID);
 		createEAttribute(attributeEClass, ATTRIBUTE__FIELD_WIDTH);
 		createEAttribute(attributeEClass, ATTRIBUTE__PRINCIPAL);
+		createEAttribute(attributeEClass, ATTRIBUTE__PRIMARY_URI);
+		createEAttribute(attributeEClass, ATTRIBUTE__SAME_AS_URIS);
 
 		valueEClass = createEClass(VALUE);
 		createEAttribute(valueEClass, VALUE__SEMANTIC);
@@ -1102,6 +1167,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEReference(termValueEClass, TERM_VALUE__TERM);
 		createEAttribute(termValueEClass, TERM_VALUE__SLUG_PATH);
 		createEAttribute(termValueEClass, TERM_VALUE__VALUE);
+		createEAttribute(termValueEClass, TERM_VALUE__PRIMARY_URI);
 
 		vocabEClass = createEClass(VOCAB);
 
@@ -1113,6 +1179,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEAttribute(termEClass, TERM__KIND_NAME);
 		createEAttribute(termEClass, TERM__BORDERED);
 		createEAttribute(termEClass, TERM__IMAGE_URI);
+		createEAttribute(termEClass, TERM__PRIMARY_URI);
+		createEAttribute(termEClass, TERM__SAME_AS_URIS);
 
 		listVocabEClass = createEClass(LIST_VOCAB);
 
@@ -1130,6 +1198,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		kindEClass = createEClass(KIND);
 		createEAttribute(kindEClass, KIND__IMAGE_ID);
+		createEAttribute(kindEClass, KIND__PRIMARY_URI);
+		createEAttribute(kindEClass, KIND__SAME_AS_URIS);
 
 		mixinCatalogEClass = createEClass(MIXIN_CATALOG);
 		createEReference(mixinCatalogEClass, MIXIN_CATALOG__MIXINS);
@@ -1285,6 +1355,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getAttribute_ImageId(), ecorePackage.getEString(), "imageId", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_FieldWidth(), ecorePackage.getEInt(), "fieldWidth", "20", 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAttribute_Principal(), ecorePackage.getEBoolean(), "principal", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAttribute_SameAsUris(), ecorePackage.getEString(), "sameAsUris", null, 0, -1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(attributeEClass, null, "valueOf", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "stringValue", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -1354,6 +1426,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEReference(getTermValue_Term(), this.getTerm(), null, "term", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTermValue_SlugPath(), ecorePackage.getEString(), "slugPath", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTermValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTermValue_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(vocabEClass, Vocab.class, "Vocab", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1365,6 +1438,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getTerm_KindName(), ecorePackage.getEString(), "kindName", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTerm_Bordered(), ecorePackage.getEBoolean(), "bordered", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTerm_ImageUri(), ecorePackage.getEString(), "imageUri", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTerm_SameAsUris(), ecorePackage.getEString(), "sameAsUris", null, 0, -1, Term.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(termEClass, ecorePackage.getEString(), "getQName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1389,6 +1464,8 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		initEClass(kindEClass, Kind.class, "Kind", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getKind_ImageId(), ecorePackage.getEString(), "imageId", null, 0, 1, Kind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKind_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, Kind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getKind_SameAsUris(), ecorePackage.getEString(), "sameAsUris", null, 0, -1, Kind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mixinCatalogEClass, MixinCatalog.class, "MixinCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMixinCatalog_Mixins(), this.getMixin(), null, "mixins", null, 0, -1, MixinCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1557,6 +1634,18 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "If true, this attribute will be used as principal in VariedProduct (has no effect in SimpleProduct).\n\nA VariedProduct may also override the principals in use for that specific product (this mechanism is not yet defined)."
 		   });	
 		addAnnotation
+		  (getAttribute_PrimaryUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Primary Linked Data URI for <a href=\"http://www.w3.org/2002/07/owl#ObjectProperty\">owl:ObjectProperty</a>, to be usable as {@code additionalProperty}, e.g. {@code http://purl.org/opdm/garment#liningFabric}."
+		   });	
+		addAnnotation
+		  (getAttribute_SameAsUris(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Additional <a href=\"http://schema.org/sameAs\">sameAs</a> Linked Data URIs for <a href=\"http://www.w3.org/2002/07/owl#ObjectProperty\">owl:ObjectProperty</a>, to be usable for inference or other purposes,\ne.g. http://purl.org/opdm/garment#liningFabric."
+		   });	
+		addAnnotation
 		  (valueEClass, 
 		   source, 
 		   new String[] {
@@ -1617,6 +1706,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "\'/\'-separated slug path."
 		   });	
 		addAnnotation
+		  (getTermValue_PrimaryUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Primary Linked Data URI, to be usable as property <tt>@vocab</tt> value or <tt>@id</tt>, e.g. {@code http://purl.org/opdm/garment#Polyester}."
+		   });	
+		addAnnotation
 		  (vocabEClass, 
 		   source, 
 		   new String[] {
@@ -1665,6 +1760,18 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "Digunakan untuk mendapatkan imageUri dari proses API."
 		   });	
 		addAnnotation
+		  (getTerm_PrimaryUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Primary Linked Data URI, to be usable as property <tt>@vocab</tt> value or <tt>@id</tt>, e.g. {@code http://purl.org/opdm/garment#Polyester}."
+		   });	
+		addAnnotation
+		  (getTerm_SameAsUris(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Additional <a href=\"http://schema.org/sameAs\">sameAs</a> Linked Data URIs, to be usable for inference or other purposes, e.g. {@code http://purl.org/opdm/garment#Polyester}."
+		   });	
+		addAnnotation
 		  (getTermContainer_Terms(), 
 		   source, 
 		   new String[] {
@@ -1681,6 +1788,18 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "1. Kind (Attribute Type / Vocab) is like an EMF DataType or Enum.\nA Kind is always type-agnostic, but a default input method & unit can be hinted by the attribute (see below).\nA Kind is always cardinality agnostic.\nFor example, Length kind is hinted as \"measure\" with \"cm\" unit, however all the attribute values below are valid:\n1. 9 cm (just like the hint)\n2. 10 km (different unit)\n3. 9-12 cm (use unit like the hint, but RangeValue instead)\n4. 5-6 kg (different unit and use RangeValue)\n5. \"cukup panjang untuk orang dewasa\" (StringValue)\n6. base_very_long (TermValue from base nsPrefix)\n7. tuneeca_half_a_mile (TermValue from tuneeca nsPrefix)\nIn addition, all of the above can have multiple cardinality or no value."
+		   });	
+		addAnnotation
+		  (getKind_PrimaryUri(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Primary Linked Data URI for <a href=\"http://www.w3.org/2002/07/owl#Class\">owl:Class</a>, to be usable as property range, e.g. {@code http://purl.org/opdm/garment#Fabric}."
+		   });	
+		addAnnotation
+		  (getKind_SameAsUris(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Additional <a href=\"http://schema.org/sameAs\">sameAs</a> Linked Data URIs for <a href=\"http://www.w3.org/2002/07/owl#Class\">owl:Class</a>, to be usable for inference or other purposes,\ne.g. {@code http://purl.org/opdm/garment#Fabric}."
 		   });	
 		addAnnotation
 		  (inputMethodEEnum, 

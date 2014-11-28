@@ -231,13 +231,31 @@ public interface DataPackage extends EPackage {
 	int ATTRIBUTE__PRINCIPAL = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 16;
 
 	/**
+	 * The feature id for the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__PRIMARY_URI = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 17;
+
+	/**
+	 * The feature id for the '<em><b>Same As Uris</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__SAME_AS_URIS = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 18;
+
+	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 17;
+	int ATTRIBUTE_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 19;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
@@ -652,13 +670,22 @@ public interface DataPackage extends EPackage {
 	int TERM_VALUE__VALUE = VALUE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_VALUE__PRIMARY_URI = VALUE_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Term Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 5;
+	int TERM_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.TermContainer <em>Term Container</em>}' class.
@@ -961,13 +988,31 @@ public interface DataPackage extends EPackage {
 	int TERM__IMAGE_URI = TERM_CONTAINER_FEATURE_COUNT + 18;
 
 	/**
+	 * The feature id for the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__PRIMARY_URI = TERM_CONTAINER_FEATURE_COUNT + 19;
+
+	/**
+	 * The feature id for the '<em><b>Same As Uris</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM__SAME_AS_URIS = TERM_CONTAINER_FEATURE_COUNT + 20;
+
+	/**
 	 * The number of structural features of the '<em>Term</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 19;
+	int TERM_FEATURE_COUNT = TERM_CONTAINER_FEATURE_COUNT + 21;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.
@@ -1389,13 +1434,31 @@ public interface DataPackage extends EPackage {
 	int KIND__IMAGE_ID = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__PRIMARY_URI = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Same As Uris</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KIND__SAME_AS_URIS = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Kind</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KIND_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 7;
+	int KIND_FEATURE_COUNT = CommonsPackage.NS_PREFIXABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.MixinCatalogImpl <em>Mixin Catalog</em>}' class.
@@ -1749,6 +1812,28 @@ public interface DataPackage extends EPackage {
 	EAttribute getAttribute_Principal();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Attribute#getPrimaryUri <em>Primary Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Uri</em>'.
+	 * @see org.soluvas.data.Attribute#getPrimaryUri()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_PrimaryUri();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.data.Attribute#getSameAsUris <em>Same As Uris</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Same As Uris</em>'.
+	 * @see org.soluvas.data.Attribute#getSameAsUris()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EAttribute getAttribute_SameAsUris();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1962,6 +2047,17 @@ public interface DataPackage extends EPackage {
 	EAttribute getTermValue_Value();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.TermValue#getPrimaryUri <em>Primary Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Uri</em>'.
+	 * @see org.soluvas.data.TermValue#getPrimaryUri()
+	 * @see #getTermValue()
+	 * @generated
+	 */
+	EAttribute getTermValue_PrimaryUri();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.Vocab <em>Vocab</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2057,6 +2153,28 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTerm_ImageUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Term#getPrimaryUri <em>Primary Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Uri</em>'.
+	 * @see org.soluvas.data.Term#getPrimaryUri()
+	 * @see #getTerm()
+	 * @generated
+	 */
+	EAttribute getTerm_PrimaryUri();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.data.Term#getSameAsUris <em>Same As Uris</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Same As Uris</em>'.
+	 * @see org.soluvas.data.Term#getSameAsUris()
+	 * @see #getTerm()
+	 * @generated
+	 */
+	EAttribute getTerm_SameAsUris();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.ListVocab <em>List Vocab</em>}'.
@@ -2172,6 +2290,28 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getKind_ImageId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.Kind#getPrimaryUri <em>Primary Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Uri</em>'.
+	 * @see org.soluvas.data.Kind#getPrimaryUri()
+	 * @see #getKind()
+	 * @generated
+	 */
+	EAttribute getKind_PrimaryUri();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.data.Kind#getSameAsUris <em>Same As Uris</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Same As Uris</em>'.
+	 * @see org.soluvas.data.Kind#getSameAsUris()
+	 * @see #getKind()
+	 * @generated
+	 */
+	EAttribute getKind_SameAsUris();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.MixinCatalog <em>Mixin Catalog</em>}'.
@@ -2488,6 +2628,22 @@ public interface DataPackage extends EPackage {
 		EAttribute ATTRIBUTE__PRINCIPAL = eINSTANCE.getAttribute_Principal();
 
 		/**
+		 * The meta object literal for the '<em><b>Primary Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__PRIMARY_URI = eINSTANCE.getAttribute_PrimaryUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Same As Uris</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE__SAME_AS_URIS = eINSTANCE.getAttribute_SameAsUris();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.ValueImpl <em>Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2662,6 +2818,14 @@ public interface DataPackage extends EPackage {
 		EAttribute TERM_VALUE__VALUE = eINSTANCE.getTermValue_Value();
 
 		/**
+		 * The meta object literal for the '<em><b>Primary Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM_VALUE__PRIMARY_URI = eINSTANCE.getTermValue_PrimaryUri();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.VocabImpl <em>Vocab</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2736,6 +2900,22 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TERM__IMAGE_URI = eINSTANCE.getTerm_ImageUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM__PRIMARY_URI = eINSTANCE.getTerm_PrimaryUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Same As Uris</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM__SAME_AS_URIS = eINSTANCE.getTerm_SameAsUris();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.ListVocabImpl <em>List Vocab</em>}' class.
@@ -2836,6 +3016,22 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute KIND__IMAGE_ID = eINSTANCE.getKind_ImageId();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KIND__PRIMARY_URI = eINSTANCE.getKind_PrimaryUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Same As Uris</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute KIND__SAME_AS_URIS = eINSTANCE.getKind_SameAsUris();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.MixinCatalogImpl <em>Mixin Catalog</em>}' class.

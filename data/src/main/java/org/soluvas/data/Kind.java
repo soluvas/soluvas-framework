@@ -2,6 +2,7 @@
  */
 package org.soluvas.data;
 
+import org.eclipse.emf.common.util.EList;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Imageable;
@@ -33,6 +34,8 @@ import org.soluvas.commons.ResourceAware;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.data.Kind#getImageId <em>Image Id</em>}</li>
+ *   <li>{@link org.soluvas.data.Kind#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.Kind#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,4 +70,45 @@ public interface Kind extends NsPrefixable, BundleAware, NameContainer, Resource
 	 * @generated
 	 */
 	void setImageId(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Primary Linked Data URI for <a href="http://www.w3.org/2002/07/owl#Class">owl:Class</a>, to be usable as property range, e.g. {@code http://purl.org/opdm/garment#Fabric}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Primary Uri</em>' attribute.
+	 * @see #setPrimaryUri(String)
+	 * @see org.soluvas.data.DataPackage#getKind_PrimaryUri()
+	 * @model
+	 * @generated
+	 */
+	String getPrimaryUri();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Kind#getPrimaryUri <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Primary Uri</em>' attribute.
+	 * @see #getPrimaryUri()
+	 * @generated
+	 */
+	void setPrimaryUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Same As Uris</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Additional <a href="http://schema.org/sameAs">sameAs</a> Linked Data URIs for <a href="http://www.w3.org/2002/07/owl#Class">owl:Class</a>, to be usable for inference or other purposes,
+	 * e.g. {@code http://purl.org/opdm/garment#Fabric}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Same As Uris</em>' attribute list.
+	 * @see org.soluvas.data.DataPackage#getKind_SameAsUris()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getSameAsUris();
 } // Kind

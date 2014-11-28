@@ -7,6 +7,7 @@ import org.soluvas.commons.Sluggable;
 import org.soluvas.data.impl.TermValueImpl;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.data.TermValue#getTerm <em>Term</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getValue <em>Value</em>}</li>
+ *   <li>{@link org.soluvas.data.TermValue#getPrimaryUri <em>Primary Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,5 +112,30 @@ public interface TermValue extends Value<String>, Identifiable, Sluggable {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Primary Linked Data URI, to be usable as property <tt>@vocab</tt> value or <tt>@id</tt>, e.g. {@code http://purl.org/opdm/garment#Polyester}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Primary Uri</em>' attribute.
+	 * @see #setPrimaryUri(String)
+	 * @see org.soluvas.data.DataPackage#getTermValue_PrimaryUri()
+	 * @model
+	 * @generated
+	 */
+	String getPrimaryUri();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.TermValue#getPrimaryUri <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Primary Uri</em>' attribute.
+	 * @see #getPrimaryUri()
+	 * @generated
+	 */
+	void setPrimaryUri(String value);
 
 } // TermValue

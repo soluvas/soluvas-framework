@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.commons.CategoryInfo#getParents <em>Parents</em>}</li>
+ *   <li>{@link org.soluvas.commons.CategoryInfo#getPrimaryUri <em>Primary Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,4 +48,29 @@ public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
 	 */
 	@JsonDeserialize(as=BasicEList.class)
 	EList<CategoryInfo> getParents();
+
+	/**
+	 * Returns the value of the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Linked Data URI for <tt>@id</tt> in JSON-LD.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Primary Uri</em>' attribute.
+	 * @see #setPrimaryUri(String)
+	 * @see org.soluvas.commons.CommonsPackage#getCategoryInfo_PrimaryUri()
+	 * @model
+	 * @generated
+	 */
+	String getPrimaryUri();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CategoryInfo#getPrimaryUri <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Primary Uri</em>' attribute.
+	 * @see #getPrimaryUri()
+	 * @generated
+	 */
+	void setPrimaryUri(String value);
 } // CategoryInfo

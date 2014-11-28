@@ -677,6 +677,9 @@
           <children xmi:type="notation:Node" xmi:id="_Ux26YynJEeS_v590s3-tNw" type="2003" element="_UuNwhSnJEeS_v590s3-tNw">
             <children xmi:type="notation:Node" xmi:id="_Ux26ZinJEeS_v590s3-tNw" type="5007"/>
             <children xmi:type="notation:Node" xmi:id="_Ux26ZynJEeS_v590s3-tNw" type="7004">
+              <children xmi:type="notation:Node" xmi:id="_NtdGMHa6EeSiW4emc5jg9Q" type="3010" element="_NrxEIHa6EeSiW4emc5jg9Q">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_NtdGMXa6EeSiW4emc5jg9Q"/>
+              </children>
               <styles xmi:type="notation:SortingStyle" xmi:id="_Ux26aCnJEeS_v590s3-tNw"/>
               <styles xmi:type="notation:FilteringStyle" xmi:id="_Ux26aSnJEeS_v590s3-tNw"/>
             </children>
@@ -4433,14 +4436,25 @@
       <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_UuNwhSnJEeS_v590s3-tNw" name="CategoryInfo" tooltipText="" outgoingEdges="_UwaI5inJEeS_v590s3-tNw _UwzKcCnJEeS_v590s3-tNw _UwzxgCnJEeS_v590s3-tNw" incomingEdges="_UwaI5inJEeS_v590s3-tNw" width="12" height="10">
         <target xmi:type="ecore:EClass" href="commons.ecore#//CategoryInfo"/>
         <semanticElements xmi:type="ecore:EClass" href="commons.ecore#//CategoryInfo"/>
-        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_UuOXkCnJEeS_v590s3-tNw" backgroundStyle="Liquid">
-          <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UuOXkSnJEeS_v590s3-tNw"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_OfBGAHa6EeSiW4emc5jg9Q" backgroundStyle="Liquid">
+          <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_OfBGAXa6EeSiW4emc5jg9Q"/>
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
-          <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_UuOXkinJEeS_v590s3-tNw"/>
-          <backgroundColor xmi:type="viewpoint:RGBValues" xmi:id="_UuOXkynJEeS_v590s3-tNw" red="255" green="255" blue="255"/>
-          <foregroundColor xmi:type="viewpoint:RGBValues" xmi:id="_UuOXlCnJEeS_v590s3-tNw" red="255" green="252" blue="216"/>
+          <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_OfBGAna6EeSiW4emc5jg9Q"/>
+          <backgroundColor xmi:type="viewpoint:RGBValues" xmi:id="_OfBGA3a6EeSiW4emc5jg9Q" red="255" green="255" blue="255"/>
+          <foregroundColor xmi:type="viewpoint:RGBValues" xmi:id="_OfBGBHa6EeSiW4emc5jg9Q" red="255" green="252" blue="216"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_NrxEIHa6EeSiW4emc5jg9Q" name="primaryUri : EString" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@3e26d9a{platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//CategoryInfo/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+          <target xmi:type="ecore:EAttribute" href="commons.ecore#//CategoryInfo/primaryUri"/>
+          <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//CategoryInfo/primaryUri"/>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_OfVPEHa6EeSiW4emc5jg9Q" labelAlignment="LEFT">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_OfVPEXa6EeSiW4emc5jg9Q"/>
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
+            <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_OfVPEna6EeSiW4emc5jg9Q"/>
+            <color xmi:type="viewpoint:RGBValues" xmi:id="_OfVPE3a6EeSiW4emc5jg9Q"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+        </ownedElements>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_UuOXlSnJEeS_v590s3-tNw" name="ProgressMonitor" tooltipText="" incomingEdges="_UwbXACnJEeS_v590s3-tNw _UwzxhynJEeS_v590s3-tNw _Uw0YlinJEeS_v590s3-tNw _Uw0_oCnJEeS_v590s3-tNw" width="12" height="10">
         <target xmi:type="ecore:EClass" href="commons.ecore#//ProgressMonitor"/>
@@ -6242,7 +6256,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_r7Y7oGYrEeSIqrbD1NH-zg" name="bookingEnabled : EBoolean = false" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@183a8a24{platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//CustomerRole/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_r7Y7oGYrEeSIqrbD1NH-zg" name="bookingEnabled : EBoolean = false" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/bookingEnabled"/>
           <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/bookingEnabled"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_vMxz4GYrEeSIqrbD1NH-zg" labelAlignment="LEFT">
@@ -7053,14 +7067,14 @@
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//CategoryInfo/@eGenericSuperTypes.0"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//CategoryInfo/@eGenericSuperTypes.1"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//CategoryInfo/@eGenericSuperTypes.1/@eTypeArguments.0"/>
-        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_UwzKcSnJEeS_v590s3-tNw" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
+        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_OfxT8Ha6EeSiW4emc5jg9Q" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
           <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@conditionnalStyles.0/@style"/>
-          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_UwzKcinJEeS_v590s3-tNw" red="136" green="136" blue="136"/>
-          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_UwzKcynJEeS_v590s3-tNw" labelFormat="italic" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UwzKdCnJEeS_v590s3-tNw"/>
+          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_OfxT8Xa6EeSiW4emc5jg9Q" red="136" green="136" blue="136"/>
+          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_OfxT8na6EeSiW4emc5jg9Q" labelFormat="italic" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_OfxT83a6EeSiW4emc5jg9Q"/>
           </beginLabelStyle>
-          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_UwzKdSnJEeS_v590s3-tNw" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UwzKdinJEeS_v590s3-tNw"/>
+          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_OfxT9Ha6EeSiW4emc5jg9Q" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_OfxT9Xa6EeSiW4emc5jg9Q"/>
           </centerLabelStyle>
         </ownedStyle>
         <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>
@@ -7070,14 +7084,14 @@
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//CategoryInfo/@eGenericSuperTypes.0"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//CategoryInfo/@eGenericSuperTypes.1"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//CategoryInfo/@eGenericSuperTypes.1/@eTypeArguments.0"/>
-        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_UwzxgSnJEeS_v590s3-tNw" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
+        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_Ofx7AHa6EeSiW4emc5jg9Q" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
           <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@conditionnalStyles.0/@style"/>
-          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_UwzxginJEeS_v590s3-tNw" red="136" green="136" blue="136"/>
-          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_UwzxgynJEeS_v590s3-tNw" labelFormat="italic" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UwzxhCnJEeS_v590s3-tNw"/>
+          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_Ofx7AXa6EeSiW4emc5jg9Q" red="136" green="136" blue="136"/>
+          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_Ofx7Ana6EeSiW4emc5jg9Q" labelFormat="italic" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_Ofx7A3a6EeSiW4emc5jg9Q"/>
           </beginLabelStyle>
-          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_UwzxhSnJEeS_v590s3-tNw" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UwzxhinJEeS_v590s3-tNw"/>
+          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_Ofx7BHa6EeSiW4emc5jg9Q" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_Ofx7BXa6EeSiW4emc5jg9Q"/>
           </centerLabelStyle>
         </ownedStyle>
         <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>

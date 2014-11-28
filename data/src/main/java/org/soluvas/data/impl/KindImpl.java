@@ -2,13 +2,16 @@
  */
 package org.soluvas.data.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.osgi.framework.Bundle;
 
 import org.soluvas.commons.BundleAware;
@@ -38,6 +41,8 @@ import org.soluvas.data.Kind;
  *   <li>{@link org.soluvas.data.impl.KindImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.KindImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.data.impl.KindImpl#getImageId <em>Image Id</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.KindImpl#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.KindImpl#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
  * </p>
  *
@@ -203,6 +208,36 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * @ordered
 	 */
 	protected String imageId = IMAGE_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PRIMARY_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String primaryUri = PRIMARY_URI_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSameAsUris() <em>Same As Uris</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSameAsUris()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> sameAsUris;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -396,6 +431,39 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getPrimaryUri() {
+		return primaryUri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrimaryUri(String newPrimaryUri) {
+		String oldPrimaryUri = primaryUri;
+		primaryUri = newPrimaryUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.KIND__PRIMARY_URI, oldPrimaryUri, primaryUri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getSameAsUris() {
+		if (sameAsUris == null) {
+			sameAsUris = new EDataTypeUniqueEList<String>(String.class, this, DataPackage.KIND__SAME_AS_URIS);
+		}
+		return sameAsUris;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -415,6 +483,10 @@ public class KindImpl extends EObjectImpl implements Kind {
 				return getDescription();
 			case DataPackage.KIND__IMAGE_ID:
 				return getImageId();
+			case DataPackage.KIND__PRIMARY_URI:
+				return getPrimaryUri();
+			case DataPackage.KIND__SAME_AS_URIS:
+				return getSameAsUris();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -424,6 +496,7 @@ public class KindImpl extends EObjectImpl implements Kind {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -450,6 +523,13 @@ public class KindImpl extends EObjectImpl implements Kind {
 				return;
 			case DataPackage.KIND__IMAGE_ID:
 				setImageId((String)newValue);
+				return;
+			case DataPackage.KIND__PRIMARY_URI:
+				setPrimaryUri((String)newValue);
+				return;
+			case DataPackage.KIND__SAME_AS_URIS:
+				getSameAsUris().clear();
+				getSameAsUris().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -487,6 +567,12 @@ public class KindImpl extends EObjectImpl implements Kind {
 			case DataPackage.KIND__IMAGE_ID:
 				setImageId(IMAGE_ID_EDEFAULT);
 				return;
+			case DataPackage.KIND__PRIMARY_URI:
+				setPrimaryUri(PRIMARY_URI_EDEFAULT);
+				return;
+			case DataPackage.KIND__SAME_AS_URIS:
+				getSameAsUris().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -515,6 +601,10 @@ public class KindImpl extends EObjectImpl implements Kind {
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case DataPackage.KIND__IMAGE_ID:
 				return IMAGE_ID_EDEFAULT == null ? imageId != null : !IMAGE_ID_EDEFAULT.equals(imageId);
+			case DataPackage.KIND__PRIMARY_URI:
+				return PRIMARY_URI_EDEFAULT == null ? primaryUri != null : !PRIMARY_URI_EDEFAULT.equals(primaryUri);
+			case DataPackage.KIND__SAME_AS_URIS:
+				return sameAsUris != null && !sameAsUris.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -637,6 +727,10 @@ public class KindImpl extends EObjectImpl implements Kind {
 		result.append(description);
 		result.append(", imageId: ");
 		result.append(imageId);
+		result.append(", primaryUri: ");
+		result.append(primaryUri);
+		result.append(", sameAsUris: ");
+		result.append(sameAsUris);
 		result.append(')');
 		return result.toString();
 	}

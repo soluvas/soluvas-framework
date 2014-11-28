@@ -2,11 +2,14 @@
  */
 package org.soluvas.data.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Sluggable;
@@ -26,6 +29,7 @@ import org.soluvas.data.TermValue;
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getTerm <em>Term</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermValueImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -128,6 +132,26 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 	protected String value = VALUE_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PRIMARY_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String primaryUri = PRIMARY_URI_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -136,10 +160,23 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 		super();
 	}
 
+	/**
+	 * @param id
+	 * @param displayValue
+	 * @deprecated Use {@link #TermValueImpl(String, String, String)}
+	 */
+	@Deprecated
 	public TermValueImpl(String id, String displayValue) {
 		super();
 		setValue(id);
 		setDisplayValue(displayValue);
+	}
+
+	public TermValueImpl(String id, String displayValue, String primaryUri) {
+		super();
+		setValue(id);
+		setDisplayValue(displayValue);
+		setPrimaryUri(primaryUri);
 	}
 
 	public TermValueImpl(Term term) {
@@ -147,6 +184,7 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 		setTerm(term);
 		setValue(term.getQName());
 		setDisplayValue(term.getDisplayName());
+		setPrimaryUri(term.getPrimaryUri());
 	}
 
 	/**
@@ -297,6 +335,29 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 	 * @generated
 	 */
 	@Override
+	public String getPrimaryUri() {
+		return primaryUri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setPrimaryUri(String newPrimaryUri) {
+		String oldPrimaryUri = primaryUri;
+		primaryUri = newPrimaryUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM_VALUE__PRIMARY_URI, oldPrimaryUri, primaryUri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DataPackage.TERM_VALUE__ID:
@@ -310,6 +371,8 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 				return getSlugPath();
 			case DataPackage.TERM_VALUE__VALUE:
 				return getValue();
+			case DataPackage.TERM_VALUE__PRIMARY_URI:
+				return getPrimaryUri();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -319,6 +382,7 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -336,6 +400,9 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 				return;
 			case DataPackage.TERM_VALUE__VALUE:
 				setValue((String)newValue);
+				return;
+			case DataPackage.TERM_VALUE__PRIMARY_URI:
+				setPrimaryUri((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -364,6 +431,9 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 			case DataPackage.TERM_VALUE__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case DataPackage.TERM_VALUE__PRIMARY_URI:
+				setPrimaryUri(PRIMARY_URI_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -386,6 +456,8 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 				return SLUG_PATH_EDEFAULT == null ? slugPath != null : !SLUG_PATH_EDEFAULT.equals(slugPath);
 			case DataPackage.TERM_VALUE__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case DataPackage.TERM_VALUE__PRIMARY_URI:
+				return PRIMARY_URI_EDEFAULT == null ? primaryUri != null : !PRIMARY_URI_EDEFAULT.equals(primaryUri);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -452,6 +524,8 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 		result.append(slugPath);
 		result.append(", value: ");
 		result.append(value);
+		result.append(", primaryUri: ");
+		result.append(primaryUri);
 		result.append(')');
 		return result.toString();
 	}

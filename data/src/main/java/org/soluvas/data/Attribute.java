@@ -4,6 +4,7 @@ package org.soluvas.data;
 
 import javax.measure.unit.Unit;
 
+import org.eclipse.emf.common.util.EList;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
@@ -63,6 +64,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.data.Attribute#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.data.Attribute#getFieldWidth <em>Field Width</em>}</li>
  *   <li>{@link org.soluvas.data.Attribute#isPrincipal <em>Principal</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.Attribute#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
  * </p>
  *
@@ -436,6 +439,47 @@ public interface Attribute extends NsPrefixable, NameContainer, Imageable, Descr
 	 * @generated
 	 */
 	void setPrincipal(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Primary Linked Data URI for <a href="http://www.w3.org/2002/07/owl#ObjectProperty">owl:ObjectProperty</a>, to be usable as {@code additionalProperty}, e.g. {@code http://purl.org/opdm/garment#liningFabric}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Primary Uri</em>' attribute.
+	 * @see #setPrimaryUri(String)
+	 * @see org.soluvas.data.DataPackage#getAttribute_PrimaryUri()
+	 * @model
+	 * @generated
+	 */
+	String getPrimaryUri();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.Attribute#getPrimaryUri <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Primary Uri</em>' attribute.
+	 * @see #getPrimaryUri()
+	 * @generated
+	 */
+	void setPrimaryUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Same As Uris</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Additional <a href="http://schema.org/sameAs">sameAs</a> Linked Data URIs for <a href="http://www.w3.org/2002/07/owl#ObjectProperty">owl:ObjectProperty</a>, to be usable for inference or other purposes,
+	 * e.g. http://purl.org/opdm/garment#liningFabric.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Same As Uris</em>' attribute list.
+	 * @see org.soluvas.data.DataPackage#getAttribute_SameAsUris()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getSameAsUris();
 
 	/**
 	 * <!-- begin-user-doc -->

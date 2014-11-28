@@ -44,6 +44,7 @@ import org.soluvas.commons.Sluggable;
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getCategoryCount <em>Category Count</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getParents <em>Parents</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  * </ul>
  * </p>
  *
@@ -270,6 +271,26 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * @ordered
 	 */
 	protected EList<CategoryInfo> parents;
+
+	/**
+	 * The default value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PRIMARY_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String primaryUri = PRIMARY_URI_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -573,6 +594,27 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 		return parents;
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getPrimaryUri() {
+		return primaryUri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrimaryUri(String newPrimaryUri) {
+		String oldPrimaryUri = primaryUri;
+		primaryUri = newPrimaryUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CATEGORY_INFO__PRIMARY_URI, oldPrimaryUri, primaryUri));
+	}
+
 	protected void setParents(List<CategoryInfo> parents) {
 		getParents().clear();
 		getParents().addAll(parents);
@@ -625,6 +667,8 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 				return basicGetParent();
 			case CommonsPackage.CATEGORY_INFO__PARENTS:
 				return getParents();
+			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
+				return getPrimaryUri();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -675,6 +719,9 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 				getParents().clear();
 				getParents().addAll((Collection<? extends CategoryInfo>)newValue);
 				return;
+			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
+				setPrimaryUri((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -723,6 +770,9 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			case CommonsPackage.CATEGORY_INFO__PARENTS:
 				getParents().clear();
 				return;
+			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
+				setPrimaryUri(PRIMARY_URI_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -759,6 +809,8 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 				return parent != null;
 			case CommonsPackage.CATEGORY_INFO__PARENTS:
 				return parents != null && !parents.isEmpty();
+			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
+				return PRIMARY_URI_EDEFAULT == null ? primaryUri != null : !PRIMARY_URI_EDEFAULT.equals(primaryUri);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -893,6 +945,8 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 		result.append(level);
 		result.append(", categoryCount: ");
 		result.append(categoryCount);
+		result.append(", primaryUri: ");
+		result.append(primaryUri);
 		result.append(')');
 		return result.toString();
 	}

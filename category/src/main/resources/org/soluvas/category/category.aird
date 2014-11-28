@@ -171,6 +171,11 @@
               <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
             </endLabelStyleDescription>
           </computedStyleDescriptions>
+          <computedStyleDescriptions xmi:type="style:BundledImageDescription" xmi:id="_n29ls3a6EeSiW4emc5jg9Q" labelExpression="service:render" labelAlignment="LEFT" tooltipExpression="service:renderTooltip" sizeComputationExpression="1">
+            <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
+            <color xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </computedStyleDescriptions>
           <cache xmi:type="diagram:DiagramElementMapping2ModelElement" xmi:id="_rEkkcHaqEeSiW4emc5jg9Q">
             <key xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
             <value xmi:type="diagram:ModelElement2ViewVariable" xmi:id="_rEkkcXaqEeSiW4emc5jg9Q">
@@ -178,6 +183,17 @@
               <value xmi:type="diagram:ViewVariable2ContainerVariable" xmi:id="_rEkkcnaqEeSiW4emc5jg9Q" key="_rEhhIHaqEeSiW4emc5jg9Q">
                 <value xmi:type="diagram:ContainerVariable2StyleDescription" xmi:id="_rEkkdnaqEeSiW4emc5jg9Q" value="_rEkkc3aqEeSiW4emc5jg9Q">
                   <key xmi:type="ecore:EPackage" href="category.ecore#/"/>
+                </value>
+              </value>
+            </value>
+          </cache>
+          <cache xmi:type="diagram:DiagramElementMapping2ModelElement" xmi:id="_n29lsHa6EeSiW4emc5jg9Q">
+            <key xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+            <value xmi:type="diagram:ModelElement2ViewVariable" xmi:id="_n29lsXa6EeSiW4emc5jg9Q">
+              <key xmi:type="ecore:EAttribute" href="category.ecore#//Category/uName"/>
+              <value xmi:type="diagram:ViewVariable2ContainerVariable" xmi:id="_n29lsna6EeSiW4emc5jg9Q" key="_rEV69HaqEeSiW4emc5jg9Q">
+                <value xmi:type="diagram:ContainerVariable2StyleDescription" xmi:id="_n29ltHa6EeSiW4emc5jg9Q" value="_n29ls3a6EeSiW4emc5jg9Q">
+                  <key xmi:type="ecore:EClass" href="category.ecore#//Category"/>
                 </value>
               </value>
             </value>
@@ -305,14 +321,13 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_rEV69HaqEeSiW4emc5jg9Q" name="uName : EString" tooltipText="">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_rEV69HaqEeSiW4emc5jg9Q" name="/uName : EString" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="category.ecore#//Category/uName"/>
           <semanticElements xmi:type="ecore:EAttribute" href="category.ecore#//Category/uName"/>
-          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_sR56QHaqEeSiW4emc5jg9Q" labelAlignment="LEFT">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_sR56QXaqEeSiW4emc5jg9Q"/>
-            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
-            <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_sR56QnaqEeSiW4emc5jg9Q"/>
-            <color xmi:type="viewpoint:RGBValues" xmi:id="_sR56Q3aqEeSiW4emc5jg9Q"/>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_n29ltXa6EeSiW4emc5jg9Q" labelAlignment="LEFT" description="_n29ls3a6EeSiW4emc5jg9Q">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_n29ltna6EeSiW4emc5jg9Q" red="39" green="76" blue="114"/>
+            <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_n29lt3a6EeSiW4emc5jg9Q"/>
+            <color xmi:type="viewpoint:RGBValues" xmi:id="_n29luHa6EeSiW4emc5jg9Q"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
@@ -327,7 +342,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_srL88HaqEeSiW4emc5jg9Q" name="primaryUri : EString" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@43d80ddc{platform:/resource/org.soluvas.category/src/main/resources/org/soluvas/category/category.ecore#//Category/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_srL88HaqEeSiW4emc5jg9Q" name="primaryUri : EString" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="category.ecore#//Category/primaryUri"/>
           <semanticElements xmi:type="ecore:EAttribute" href="category.ecore#//Category/primaryUri"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_togg0HaqEeSiW4emc5jg9Q" labelAlignment="LEFT">
@@ -338,7 +353,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_y4udQHaqEeSiW4emc5jg9Q" name="sameAsUris : EString" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@6d2b5225{platform:/resource/org.soluvas.category/src/main/resources/org/soluvas/category/category.ecore#//Category/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_y4udQHaqEeSiW4emc5jg9Q" name="sameAsUris : EString" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="category.ecore#//Category/sameAsUris"/>
           <semanticElements xmi:type="ecore:EAttribute" href="category.ecore#//Category/sameAsUris"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_4K3sUHaqEeSiW4emc5jg9Q" labelAlignment="LEFT">

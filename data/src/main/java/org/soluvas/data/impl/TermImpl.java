@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -71,6 +72,8 @@ import com.google.common.base.Strings;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getKindName <em>Kind Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#isBordered <em>Bordered</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getImageUri <em>Image Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermImpl#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
  * </p>
  *
@@ -451,6 +454,36 @@ public class TermImpl extends EObjectImpl implements Term {
 	 * @ordered
 	 */
 	protected String imageUri = IMAGE_URI_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PRIMARY_URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getPrimaryUri() <em>Primary Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrimaryUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String primaryUri = PRIMARY_URI_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSameAsUris() <em>Same As Uris</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSameAsUris()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> sameAsUris;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -941,6 +974,42 @@ public class TermImpl extends EObjectImpl implements Term {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getPrimaryUri() {
+		return primaryUri;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setPrimaryUri(String newPrimaryUri) {
+		String oldPrimaryUri = primaryUri;
+		primaryUri = newPrimaryUri;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM__PRIMARY_URI, oldPrimaryUri, primaryUri));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<String> getSameAsUris() {
+		if (sameAsUris == null) {
+			sameAsUris = new EDataTypeUniqueEList<String>(String.class, this, DataPackage.TERM__SAME_AS_URIS);
+		}
+		return sameAsUris;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	@JsonIgnore
@@ -954,7 +1023,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	 */
 	@Override
 	public TermValue toValue() {
-		final TermValue value = new TermValueImpl(getQName(), getDisplayName());
+		final TermValue value = new TermValueImpl(getQName(), getDisplayName(), getPrimaryUri());
 		return value;
 	}
 
@@ -1043,6 +1112,10 @@ public class TermImpl extends EObjectImpl implements Term {
 				return isBordered();
 			case DataPackage.TERM__IMAGE_URI:
 				return getImageUri();
+			case DataPackage.TERM__PRIMARY_URI:
+				return getPrimaryUri();
+			case DataPackage.TERM__SAME_AS_URIS:
+				return getSameAsUris();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1117,6 +1190,13 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__IMAGE_URI:
 				setImageUri((String)newValue);
 				return;
+			case DataPackage.TERM__PRIMARY_URI:
+				setPrimaryUri((String)newValue);
+				return;
+			case DataPackage.TERM__SAME_AS_URIS:
+				getSameAsUris().clear();
+				getSameAsUris().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1189,6 +1269,12 @@ public class TermImpl extends EObjectImpl implements Term {
 			case DataPackage.TERM__IMAGE_URI:
 				setImageUri(IMAGE_URI_EDEFAULT);
 				return;
+			case DataPackage.TERM__PRIMARY_URI:
+				setPrimaryUri(PRIMARY_URI_EDEFAULT);
+				return;
+			case DataPackage.TERM__SAME_AS_URIS:
+				getSameAsUris().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1241,6 +1327,10 @@ public class TermImpl extends EObjectImpl implements Term {
 				return bordered != BORDERED_EDEFAULT;
 			case DataPackage.TERM__IMAGE_URI:
 				return IMAGE_URI_EDEFAULT == null ? imageUri != null : !IMAGE_URI_EDEFAULT.equals(imageUri);
+			case DataPackage.TERM__PRIMARY_URI:
+				return PRIMARY_URI_EDEFAULT == null ? primaryUri != null : !PRIMARY_URI_EDEFAULT.equals(primaryUri);
+			case DataPackage.TERM__SAME_AS_URIS:
+				return sameAsUris != null && !sameAsUris.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1423,6 +1513,10 @@ public class TermImpl extends EObjectImpl implements Term {
 		result.append(bordered);
 		result.append(", imageUri: ");
 		result.append(imageUri);
+		result.append(", primaryUri: ");
+		result.append(primaryUri);
+		result.append(", sameAsUris: ");
+		result.append(sameAsUris);
 		result.append(')');
 		return result.toString();
 	}

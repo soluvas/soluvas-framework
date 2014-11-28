@@ -73,15 +73,17 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 			catInfo.setImageId(cat.getImageId());
 			catInfo.setLevel(cat.getLevel());
 			catInfo.setName(cat.getName());
+			catInfo.setPositioner(cat.getPositioner());
+			catInfo.setSlug(cat.getSlug());
+			catInfo.setSlugPath(cat.getSlugPath());
+			catInfo.setPrimaryUri(cat.getPrimaryUri());
+			
 			if (cat.getParent() != null) {
 				catInfo.setParent(cat.getParent().toInfo());
 			}
 			final List<Category> parentCats = ImmutableList.copyOf(getParents(cat));
 			final List<CategoryInfo> parentInfos = ImmutableList.copyOf(Iterables.transform(parentCats, this));
 			catInfo.getParents().addAll(parentInfos);
-			catInfo.setPositioner(cat.getPositioner());
-			catInfo.setSlug(cat.getSlug());
-			catInfo.setSlugPath(cat.getSlugPath());
 			
 			return catInfo;
 		}
@@ -362,7 +364,7 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>UName</em>' attribute.
 	 * @see org.soluvas.category.CategoryPackage#getCategory_UName()
-	 * @model transient="true" changeable="false" volatile="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	String getUName();

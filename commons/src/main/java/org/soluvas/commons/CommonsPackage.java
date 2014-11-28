@@ -2478,13 +2478,22 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO__PARENTS = CATEGORY_LIKE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Primary Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__PRIMARY_URI = CATEGORY_LIKE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Category Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 2;
+	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Get Name</em>' operation.
@@ -7338,6 +7347,17 @@ public interface CommonsPackage extends EPackage {
 	EReference getCategoryInfo_Parents();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CategoryInfo#getPrimaryUri <em>Primary Uri</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Primary Uri</em>'.
+	 * @see org.soluvas.commons.CategoryInfo#getPrimaryUri()
+	 * @see #getCategoryInfo()
+	 * @generated
+	 */
+	EAttribute getCategoryInfo_PrimaryUri();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ProgressMonitor <em>Progress Monitor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10946,6 +10966,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CATEGORY_INFO__PARENTS = eINSTANCE.getCategoryInfo_Parents();
+
+		/**
+		 * The meta object literal for the '<em><b>Primary Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY_INFO__PRIMARY_URI = eINSTANCE.getCategoryInfo_PrimaryUri();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.
