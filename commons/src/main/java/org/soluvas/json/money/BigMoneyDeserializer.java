@@ -25,7 +25,7 @@ public class BigMoneyDeserializer extends JsonDeserializer<BigMoney> {
 			throws IOException, JsonProcessingException {
 		Map<String, Object> obj = jp.readValueAs(new TypeReference<Map<String, Object>>() {});
 		// WARNING: MathContext.DECIMAL64 is not accurate! Please use string amount when serializing Money/BigMoney!
-		return BigMoney.of(CurrencyUnit.of((String)obj.get("currencyCode")),
+		return BigMoney.of(CurrencyUnit.of((String)obj.get("currency")),
 				obj.get("amount") instanceof Double ? new BigDecimal((Double)obj.get("amount"), MathContext.DECIMAL64) : new BigDecimal(obj.get("amount").toString()));
 	}
 

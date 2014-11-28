@@ -20,7 +20,7 @@ public class BigMoneySerializer extends JsonSerializer<BigMoney> {
 	public void serialize(BigMoney value, JsonGenerator jgen,
 			SerializerProvider provider) throws IOException,
 			JsonProcessingException {
-		jgen.writeObject(ImmutableMap.of("currencyCode", value.getCurrencyUnit().getCode(),
+		jgen.writeObject(ImmutableMap.of("currency", value.getCurrencyUnit().getCode(),
 				"amount", value.getAmount().toPlainString() ));
 	}
 
