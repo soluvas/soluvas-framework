@@ -133,7 +133,7 @@ public abstract class TrashableCouchDbRepositoryBase<T extends Identifiable, E e
 //		final Object[] viewKey = new Object[] { StatusMask.RAW.getLiteral(), key };
 		final String viewName = "statusMask_uid";
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-				.viewName(viewName).keys(viewKeys).includeDocs(true);
+				.viewName(viewName).keys(viewKeys).reduce(false).includeDocs(true);
 		log.debug("Querying {} view {} for {} keys to trash: {}", 
 				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
 		final List<T> fetcheds = (List) dbConn.queryView(query, implClass);
@@ -214,7 +214,7 @@ public abstract class TrashableCouchDbRepositoryBase<T extends Identifiable, E e
 //		final Object[] viewKey = new Object[] { StatusMask.RAW.getLiteral(), key };
 		final String viewName = "statusMask_uid";
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-				.viewName(viewName).keys(viewKeys).includeDocs(true);
+				.viewName(viewName).keys(viewKeys).reduce(false).includeDocs(true);
 		log.debug("Querying {} view {} for {} keys to untrash: {}", 
 				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
 		final List<T> fetcheds = (List) dbConn.queryView(query, implClass);

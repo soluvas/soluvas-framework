@@ -364,73 +364,73 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		
 		if (statusProperty != null) {
 			design.addView(VIEW_UID_PREFIX + StatusMask.RAW.getLiteral(), 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }", "_count"));
 			design.addView(VIEW_UID_PREFIX + StatusMask.ACTIVE_ONLY.getLiteral(), new View(
 					  "function(doc) {"
 					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + activeOnlyRegex + ")$/) != null )"
 					+ "    emit( doc.uid, null );"
-					+ "}"));
+					+ "}", "_count"));
 			design.addView(VIEW_UID_PREFIX + StatusMask.INCLUDE_INACTIVE.getLiteral(), new View(
 					  "function(doc) {"
 					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + includeInactiveRegex + ")$/) != null )"
 					+ "    emit( doc.uid, null );"
-					+ "}"));
+					+ "}", "_count"));
 			design.addView(VIEW_UID_PREFIX + StatusMask.DRAFT_ONLY.getLiteral(), new View(
 					  "function(doc) {"
 					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + draftOnlyRegex + ")$/) != null )"
 					+ "    emit( doc.uid, null );"
-					+ "}"));
+					+ "}", "_count"));
 			design.addView(VIEW_UID_PREFIX + StatusMask.VOID_ONLY.getLiteral(), new View(
 					  "function(doc) {"
 					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + voidOnlyRegex + ")$/) != null )"
 					+ "    emit( doc.uid, null );"
-					+ "}"));
+					+ "}", "_count"));
 
 			design.addView("statusMask_raw_by_modificationTime", 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }", "_count"));
 			design.addView("statusMask_active_only_by_modificationTime", new View(
 					  "function(doc) {"
 					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + activeOnlyRegex + ")$/) != null )"
 					+ "    emit( [doc.modificationTime, doc._id], null );"
-					+ "}"));
+					+ "}", "_count"));
 			design.addView("statusMask_include_inactive_by_modificationTime", new View(
 					  "function(doc) {"
 					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + includeInactiveRegex + ")$/) != null )"
 					+ "    emit( [doc.modificationTime, doc._id], null );"
-					+ "}"));
+					+ "}", "_count"));
 			design.addView("statusMask_draft_only_by_modificationTime", new View(
 					  "function(doc) {"
 					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + draftOnlyRegex + ")$/) != null )"
 					+ "    emit( [doc.modificationTime, doc._id], null );"
-					+ "}"));
+					+ "}", "_count"));
 			design.addView("statusMask_void_only_by_modificationTime", new View(
 					  "function(doc) {"
 					+ "  if (doc.type == '" + entityClass.getSimpleName() + "' && doc." + statusProperty + ".match(/^(" + voidOnlyRegex + ")$/) != null )"
 					+ "    emit( [doc.modificationTime, doc._id], null );"
-					+ "}"));
+					+ "}", "_count"));
 		} else {
 			// no status, means everything is identical to 'raw'
 			design.addView(VIEW_UID_PREFIX + StatusMask.RAW.getLiteral(), 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }", "_count"));
 			design.addView(VIEW_UID_PREFIX + StatusMask.ACTIVE_ONLY.getLiteral(), 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }", "_count"));
 			design.addView(VIEW_UID_PREFIX + StatusMask.INCLUDE_INACTIVE.getLiteral(), 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }", "_count"));
 			design.addView(VIEW_UID_PREFIX + StatusMask.DRAFT_ONLY.getLiteral(), 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }", "_count"));
 			design.addView(VIEW_UID_PREFIX + StatusMask.VOID_ONLY.getLiteral(), 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( doc.uid, null ); }", "_count"));
 
 			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.RAW.getLiteral() + "_by_modificationTime", 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }", "_count"));
 			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.ACTIVE_ONLY.getLiteral() + "_by_modificationTime", 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }", "_count"));
 			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.INCLUDE_INACTIVE.getLiteral() + "_by_modificationTime", 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }", "_count"));
 			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.DRAFT_ONLY.getLiteral() + "_by_modificationTime", 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }", "_count"));
 			design.addView(VIEW_STATUSMASK_PREFIX + StatusMask.VOID_ONLY.getLiteral() + "_by_modificationTime", 
-					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }"));
+					new View("function(doc) { if (doc.type == '" + entityClass.getSimpleName() + "' ) emit( [doc.modificationTime, doc._id], null ); }", "_count"));
 		}
 		
 //		addStatusMaskDesignView(design, "modificationTime", null);
@@ -571,7 +571,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		final String viewName = VIEW_STATUSMASK_PREFIX + targetProperty;
 		LoggerFactory.getLogger(CouchDbRepositoryBase.class).debug("Dynamic view '{}' for actives={} inactives={} drafts={} voids={}: {}", 
 				viewName, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses, map);
-		final View view = new View(map);
+		final View view = new View(map, "_count");
 		design.addView(viewName, view);
 		return view;
 	}
@@ -600,7 +600,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		final String viewName = VIEW_STATUSMASK_PREFIX + targetProperty;
 		LoggerFactory.getLogger(CouchDbRepositoryBase.class).debug("Dynamic view '{}' for dummy StatusMask: {}", 
 				viewName, map);
-		final View view = new View(map);
+		final View view = new View(map, "_count");
 		design.addView(viewName, view);
 		return view;
 	}
@@ -669,6 +669,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		log.debug("findAll {} {} {} using IDs {}", statusMask, entityClass.getSimpleName(), pageable, ids);
 		final ViewQuery query = new ViewQuery().viewName("_all_docs")
 				.keys(ids)
+				.reduce(false)
 				.includeDocs(true);
 		final List<T> entities = (List<T>) dbConn.queryView(query, implClass);
 		return new PageImpl<>(entities, pageable, totalSize);
@@ -888,7 +889,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		
 		final String viewName = "uid";
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-				.viewName(viewName).keys(ids);
+				.viewName(viewName).keys(ids).reduce(false);
 		log.debug("Querying {} view {} for {} keys: {}", 
 				getDesignDocId(), viewName, ids.size(), Iterables.limit(ids, 10));
 		final List<Row> fetcheds = dbConn.queryView(query).getRows();
@@ -912,7 +913,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
 		// FIXME: support sorting
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-				.viewName(VIEW_UID).keys(ids).includeDocs(true);
+				.viewName(VIEW_UID).keys(ids).reduce(false).includeDocs(true);
 		log.debug("Querying {} view {} for {} keys: {}", 
 				getDesignDocId(), VIEW_UID, ids.size(), Iterables.limit(ids, 10));
 		List<T> fetcheds;
@@ -939,7 +940,8 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		case DELETE:
 			log.debug("DELETEing {} {}: {}", ids.size(), collName, ids);
 			final Set<String> deletedRevs = new HashSet<>();
-			final ViewQuery query = new ViewQuery().designDocId(getDesignDocId()).viewName(VIEW_UID).keys(ids);
+			final ViewQuery query = new ViewQuery().designDocId(getDesignDocId()).viewName(VIEW_UID)
+					.keys(ids).reduce(false);
 			for (final Row row : dbConn.queryView(query)) {
 				final String id = row.getKey();
 				final String guid = row.getId();
@@ -965,7 +967,8 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		case MARK_DELETED:
 			log.debug("Marking _deleted {} {}: {}", ids.size(), collName, ids);
 			final Set<String> markedDeletedRevs = new HashSet<>();
-			final ViewQuery markQuery = new ViewQuery().designDocId(getDesignDocId()).viewName(VIEW_UID).keys(ids).includeDocs(true);
+			final ViewQuery markQuery = new ViewQuery().designDocId(getDesignDocId()).viewName(VIEW_UID)
+					.keys(ids).reduce(false).includeDocs(true);
 			for (final T entity : dbConn.queryView(markQuery, implClass)) {
 				final String id = entity.getId();
 				try {
@@ -1076,7 +1079,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		final Collection<String> viewKeys = ids;
 		final String viewName = VIEW_UID_PREFIX + statusMask.getLiteral();
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-				.viewName(viewName).keys(viewKeys);
+				.viewName(viewName).keys(viewKeys).reduce(false);
 		log.debug("Querying {} view {} for {} keys: {}", 
 				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
 		List<Row> fetcheds = dbConn.queryView(query).getRows();
@@ -1114,7 +1117,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 //		final Object[] viewKey = new Object[] { StatusMask.RAW.getLiteral(), key };
 		final String viewName = "statusMask_uid";
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-				.viewName(viewName).keys(viewKeys).includeDocs(true);
+				.viewName(viewName).keys(viewKeys).reduce(false).includeDocs(true);
 		log.debug("Querying {} view {} for {} keys: {}", 
 				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
 		final List<S> fetcheds = (List) dbConn.queryView(query, implClass);
