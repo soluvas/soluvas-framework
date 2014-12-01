@@ -6,6 +6,7 @@ import java.nio.file.Files;
 
 import javax.ws.rs.core.Response;
 
+import org.soluvas.couchdb.CouchDbRepository;
 import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
 import org.soluvas.data.StatusMask;
@@ -23,7 +24,8 @@ public interface MediaRepository extends
 		PagingAndSortingRepository<Media, String>,
 		GenericLookup<Media>,
 		StatusAwareRepository<Media, String>,
-		Trashable<Media, String> {
+		Trashable<Media, String>,
+		CouchDbRepository<Media> {
 
 	Existence<String> existsById(StatusMask statusMask, String id);
 
