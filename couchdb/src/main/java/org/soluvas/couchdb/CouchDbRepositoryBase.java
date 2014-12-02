@@ -678,6 +678,7 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		// inspired by: <T extends Checklist> Page<T> com.quikdo.guardian.core.impl.CouchDbChecklistRepository.doFindAllIn(StatusMask statusMask, @Nullable String parentId, Pageable pageable)
 //		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
 //			.viewName(VIEW_STATUSMASK_PREFIX + statusMask.getLiteral() + "_by_" + sort.iterator().next().getProperty())
+//			.reduce(false)
 //			.descending(!sort.iterator().next().isAscending())
 //			.includeDocs(true);
 //		final PageRequest pageRequest = new PageRequest.Builder().page((int) pageable.getPageNumber()).pageSize((int) pageable.getPageSize()).build();

@@ -142,7 +142,8 @@ public class CouchDbRolePersonRepository extends AssocRepositoryBase<String, Str
 
 	@Override
 	public Multimap<String, String> findAll() {
-		final ViewQuery viewQuery = new ViewQuery().designDocId(DESIGN_DOC_ID).viewName(CouchDbPersonRepository.VIEW_SECURITY_ROLE_IDS);
+		final ViewQuery viewQuery = new ViewQuery().designDocId(DESIGN_DOC_ID).viewName(CouchDbPersonRepository.VIEW_SECURITY_ROLE_IDS)
+				.reduce(false);
 		final ViewResult viewResult = dbConn.queryView(viewQuery);
 		final ImmutableMultimap.Builder<String, String> rolePeopleb = ImmutableMultimap.builder();
 		for (final Row row : viewResult) {
@@ -155,7 +156,8 @@ public class CouchDbRolePersonRepository extends AssocRepositoryBase<String, Str
 
 	@Override
 	public List<String> getLeft(String roleId) {
-		final ViewQuery viewQuery = new ViewQuery().designDocId(DESIGN_DOC_ID).viewName(CouchDbPersonRepository.VIEW_SECURITY_ROLE_MEMBERS).key(roleId);
+		final ViewQuery viewQuery = new ViewQuery().designDocId(DESIGN_DOC_ID).viewName(CouchDbPersonRepository.VIEW_SECURITY_ROLE_MEMBERS)
+				.key(roleId).reduce(false);
 		final ViewResult viewResult = dbConn.queryView(viewQuery);
 		final ImmutableList<String> roleIds = FluentIterable.from(viewResult).transform(new Function<Row, String>() {
 			@Override @Nullable
@@ -169,7 +171,8 @@ public class CouchDbRolePersonRepository extends AssocRepositoryBase<String, Str
 
 	@Override
 	public List<String> getRight(String personId) {
-		final ViewQuery viewQuery = new ViewQuery().designDocId(DESIGN_DOC_ID).viewName(CouchDbPersonRepository.VIEW_SECURITY_ROLE_IDS).key(personId);
+		final ViewQuery viewQuery = new ViewQuery().designDocId(DESIGN_DOC_ID).viewName(CouchDbPersonRepository.VIEW_SECURITY_ROLE_IDS)
+				.key(personId).reduce(false);
 		final ViewResult viewResult = dbConn.queryView(viewQuery);
 		final ImmutableList<String> roleIds = FluentIterable.from(viewResult).transform(new Function<Row, String>() {
 			@Override @Nullable

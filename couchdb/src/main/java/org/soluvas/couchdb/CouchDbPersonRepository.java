@@ -239,7 +239,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		}));
 		final String viewName = "statusMask_email";
 		final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-				.viewName(viewName).key(viewKeys).includeDocs(true);
+				.viewName(viewName).key(viewKeys).reduce(false).includeDocs(true);
 		log.debug("Querying {} view {} for {} keys: {}", 
 				getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
 		final ViewResult fetcheds = dbConn.queryView(query);
@@ -319,7 +319,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 //			final Object[] viewKey = new Object[] { StatusMask.RAW.getLiteral(), key };
 			final String viewName = "statusMask_canonicalSlug";
 			final ViewQuery query = new ViewQuery().designDocId(getDesignDocId())
-					.viewName(viewName).keys(viewKeys).includeDocs(true);
+					.viewName(viewName).keys(viewKeys).reduce(false).includeDocs(true);
 			log.debug("Querying {} view {} for {} keys: {}", 
 					getDesignDocId(), viewName, viewKeys.size(), Iterables.limit(viewKeys, 10));
 			final List<S> fetcheds = (List) dbConn.queryView(query, implClass);
@@ -436,7 +436,8 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	@Override
 	public Page<Person> findBySearchText(StatusMask statusMask,
 			final String searchText, Pageable pageable) {
-		final ViewQuery viewQuery = new ViewQuery().designDocId(getDesignDocId()).viewName("searchText").includeDocs(false);
+		final ViewQuery viewQuery = new ViewQuery().designDocId(getDesignDocId()).viewName("searchText")
+				.reduce(false).includeDocs(false);
 		final ViewResult viewResult = dbConn.queryView(viewQuery);
 		final Set<String> matchingGuids = FluentIterable.from(viewResult)
 				.filter(new Predicate<Row>() {
@@ -457,7 +458,8 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		log.debug("Find {} by searchText '{}' returned {} matches out of {}, paging by {} offset {} contains {} entities: {}",
 				entityClass.getSimpleName(), searchText, matchingGuids.size(), viewResult.getSize(), pageable.getPageSize(), pageable.getOffset(),
 				limitedGuids.size(), limitedGuids);
-		final ViewQuery guidsViewQuery = new ViewQuery().allDocs().keys(limitedGuids).includeDocs(true);
+		final ViewQuery guidsViewQuery = new ViewQuery().allDocs()
+				.keys(limitedGuids).reduce(false).includeDocs(true);
 		final List<Person> limiteds = (List) dbConn.queryView(guidsViewQuery, implClass);
 		
 		return new PageImpl<>(limiteds, pageable, matchingGuids.size());
@@ -465,7 +467,8 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	public long countBySearchText(StatusMask statusMask, final String searchText) {
-		final ViewQuery viewQuery = new ViewQuery().designDocId(getDesignDocId()).viewName("searchText").includeDocs(false);
+		final ViewQuery viewQuery = new ViewQuery().designDocId(getDesignDocId()).viewName("searchText")
+				.reduce(false).includeDocs(false);
 		final ViewResult viewResult = dbConn.queryView(viewQuery);
 		final Set<String> matchingGuids = FluentIterable.from(viewResult)
 				.filter(new Predicate<Row>() {

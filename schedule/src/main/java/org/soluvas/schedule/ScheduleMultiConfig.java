@@ -15,8 +15,10 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.jdbcjobstore.PostgreSQLDelegate;
+import org.quartz.plugins.history.LoggingJobHistoryPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
@@ -113,6 +115,11 @@ public class ScheduleMultiConfig {
 			schedulerFactoryBean.setApplicationContextSchedulerContextKey("applicationContext");
 			schedulerFactoryBean.afterPropertiesSet();
 //			final Scheduler scheduler = schedulerFactoryBean.getObject();
+
+			// Creates and adds {@link org.quartz.plugins.history.LoggingJobHistoryPlugin} using {@link org.quartz.ListenerManager}.
+			final LoggingJobHistoryPlugin loggingJobListener = new LoggingJobHistoryPlugin2();
+			loggingJobListener.initialize(entry.getKey(), schedulerFactoryBean.getScheduler(), null);
+
 			schedulerFactoryBeanMap.put(tenantId, schedulerFactoryBean);
 			
 			log.info("Creating '{}' SchedulerFactoryBean using: {}", tenantId, props);
@@ -168,7 +175,7 @@ public class ScheduleMultiConfig {
 			}
 		}));
 	}
-	
+
 //	@Bean
 //	public SchedulerManager schedulerMgr() {
 //		return new SchedulerManager();

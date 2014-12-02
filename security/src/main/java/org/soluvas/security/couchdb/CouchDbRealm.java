@@ -210,7 +210,8 @@ public class CouchDbRealm extends AuthorizingRealm {
 				final ViewQuery query = new ViewQuery()
 					.designDocId("_design/Person")
 			        .viewName("password")
-			        .key(tokenKey);
+			        .key(tokenKey)
+					.reduce(false);
 				
 				final ViewResult matched = conn.queryView(query);
 				if (!matched.isEmpty()) {
