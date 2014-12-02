@@ -29,6 +29,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Throwables;
 
 /**
  * The {@link RequestAttributes} implementation used by {@link RequestOrCommandScope} Spring {@link Scope}.
@@ -192,9 +193,12 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * @return
 	 * @throws Exception
 	 */
-	public static <T> T withTenant(String tenantId, Callable<T> func) throws Exception {
+	public static <T> T withTenant(String tenantId, Callable<T> func) {
 		try (Closeable cl = withTenant(tenantId)) {
 			return func.call();
+		} catch (Exception e) {
+			Throwables.propagate(e);
+			return null;
 		}
 	}
 	

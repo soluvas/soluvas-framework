@@ -2,11 +2,17 @@ package org.soluvas.push;
 
 import java.io.Serializable;
 
+import org.soluvas.commons.tenant.TenantSubscribers;
+
 /**
  * @author rudi
+ * @deprecated Use {@link TenantEvent}.
+ * @see TenantSubscribers
  */
-@SuppressWarnings("serial")
+@Deprecated
 public class TrackableEvent implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String trackingId;
 

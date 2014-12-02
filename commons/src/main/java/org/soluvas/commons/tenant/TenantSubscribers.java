@@ -15,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.config.MultiTenantConfig;
+import org.soluvas.push.TenantEvent;
+import org.soluvas.push.TrackableEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
@@ -27,8 +29,66 @@ import com.google.common.eventbus.EventBus;
 /**
  * Manages tenant {@link EventBus} subscribers.
  * <p>Note: Make sure you mark your {@link Bean} as {@link Lazy}=false.
+ * 
+ * <p>UPDATE: because of deprecation, the recommended way to implement subscribers is:
+ * 
+ * <pre>
+ * public class ProductEffectivePriceUpdater {
+ * 	
+ * private static final Logger log = LoggerFactory
+ * 		.getLogger(ProductEffectivePriceUpdater.class);
+ * 	
+ * &commat;Inject &commat;Named(CommonsWebConfig.APP_EVENT_BUS)
+ * private EventBus appEventBus;
+ * &commat;Inject
+ * private TenantBeans&lt;Mall> malls;
+ * &commat;Inject
+ * private PromoRepository promoRepo;
+ * &commat;Inject
+ * private TenantBeans&lt;ProductRepository> productRepos;
+ * 	
+ * &commat;PostConstruct
+ * public void init() {
+ * 	log.info("Registering subscriber {} to {}", this, appEventBus);
+ * 	appEventBus.register(this);
+ * }
+ * 	
+ * &commat;PreDestroy
+ * public void destroy() {
+ * 	log.info("Unregistering subscriber {} from {}", this, appEventBus);
+ * 	appEventBus.unregister(this);
+ * }
+ * 	
+ * &commat;Transactional
+ * &commat;Subscribe
+ * public void recalcAll(CustomerRolesAdded ev) {
+ * 	final ProductRepository productRepo = productRepos.get(ev.getTenantId());
+ * 	final Mall mall = malls.get(ev.getTenantId());
+ * 	CommandRequestAttributes.withTenant(ev.getTenantId(), () -> {
+ * 		final ImmutableSet&lt;String> customerRoleIds = FluentIterable.from(ev.getCustomerRoles())
+ * 				.transform(new IdFunction()).toSet();
+ * 		recalcForNonVoidCustomerRoles(productRepo, mall, customerRoleIds);
+ * 		return null;
+ * 	});
+ * }
+ * </pre>
+ * 
+ * Although implementation is more complex, it's easier to wire the bean with:
+ * 
+ * <pre>
+ * &commat;Bean
+ * public ProductEffectivePriceUpdater productEffectivePriceUpdater() {
+ * 	return new ProductEffectivePriceUpdater();
+ * }
+ * </pre>
+ * 
  * @author ceefour
+ * @deprecated In the future, there are no tenant-specific subscribers, {@link EventBus}, or
+ * 		{@link TrackableEvent}. All subscribers are app-wide, there is only one {@link EventBus},
+ * 		and events use {@link TenantEvent}.
+ * @see id.co.bippo.product.subcriber.ProductEffectivePriceUpdater
  */
+@Deprecated
 public abstract class TenantSubscribers implements TenantRepositoryListener {
 	
 	private static final Logger log = LoggerFactory

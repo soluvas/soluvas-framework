@@ -1,7 +1,7 @@
 package org.soluvas.data.customerrole.event;
 
 import org.soluvas.commons.CustomerRole;
-import org.soluvas.push.TrackableEvent;
+import org.soluvas.push.TenantEvent;
 
 import com.google.common.collect.ImmutableList;
 
@@ -9,17 +9,17 @@ import com.google.common.collect.ImmutableList;
  * @author rudi
  *
  */
-public class CustomerRolesAdded extends TrackableEvent {
+public class CustomerRolesAdded extends TenantEvent {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private final ImmutableList<CustomerRole> customerRoles;
 	
-	public CustomerRolesAdded(ImmutableList<CustomerRole> customerRoles, String trackingId) {
-		super(trackingId);
+	public CustomerRolesAdded(String tenantId, ImmutableList<CustomerRole> customerRoles, String trackingId) {
+		super(tenantId, trackingId);
 		this.customerRoles = customerRoles;
 	}
-
+	
 	public ImmutableList<CustomerRole> getCustomerRoles() {
 		return customerRoles;
 	}
