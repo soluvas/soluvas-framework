@@ -14,7 +14,13 @@ public class CustomerRolesDeleted extends TenantEvent {
 	private static final long serialVersionUID = 1L;
 	
 	private final ImmutableList<CustomerRole> customerRoles;
-	
+
+	@Deprecated
+	public CustomerRolesDeleted(ImmutableList<CustomerRole> customerRoles, String trackingId) {
+		super(null, trackingId);
+		this.customerRoles = customerRoles;
+	}
+
 	public CustomerRolesDeleted(String tenantId, ImmutableList<CustomerRole> customerRoles, String trackingId) {
 		super(tenantId, trackingId);
 		this.customerRoles = customerRoles;

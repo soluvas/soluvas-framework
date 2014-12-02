@@ -15,6 +15,12 @@ public class CustomerRolesAdded extends TenantEvent {
 	
 	private final ImmutableList<CustomerRole> customerRoles;
 	
+	@Deprecated
+	public CustomerRolesAdded(ImmutableList<CustomerRole> customerRoles, String trackingId) {
+		super(null, trackingId);
+		this.customerRoles = customerRoles;
+	}
+	
 	public CustomerRolesAdded(String tenantId, ImmutableList<CustomerRole> customerRoles, String trackingId) {
 		super(tenantId, trackingId);
 		this.customerRoles = customerRoles;
