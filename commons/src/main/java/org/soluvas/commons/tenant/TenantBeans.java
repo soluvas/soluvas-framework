@@ -330,6 +330,8 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 	 * @throws NullPointerException
 	 */
 	public T get(String tenantId) {
+		Preconditions.checkNotNull("Cannot get %s bean: tenantId argument cannot be null",
+				implClass.getName());
 		final ImmutableSet<String> tenantIds = keySet();
 		return Preconditions.checkNotNull( beanMap.get(tenantId),
 				"Cannot get %s bean for '%s'. %s available are: %s",

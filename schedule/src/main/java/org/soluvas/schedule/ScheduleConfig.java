@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
@@ -26,7 +25,6 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
  * @author rudi
  */
 @Configuration
-@ComponentScan("org.soluvas.schedule.shell")
 public class ScheduleConfig {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduleConfig.class);
