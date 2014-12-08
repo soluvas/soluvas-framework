@@ -73,4 +73,6 @@ public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
 	 * @generated
 	 */
 	void setPrimaryUri(String value);
+
+	String getFullName();
 } // CategoryInfo

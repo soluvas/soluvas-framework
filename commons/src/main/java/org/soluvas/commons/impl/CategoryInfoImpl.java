@@ -25,6 +25,8 @@ import org.soluvas.commons.Parentable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.Sluggable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Category Info</b></em>'.
@@ -599,6 +601,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrimaryUri() {
 		return primaryUri;
 	}
@@ -608,6 +611,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrimaryUri(String newPrimaryUri) {
 		String oldPrimaryUri = primaryUri;
 		primaryUri = newPrimaryUri;
@@ -949,6 +953,20 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 		result.append(primaryUri);
 		result.append(')');
 		return result.toString();
+	}
+	
+	/**
+	 * Full name of this category including its parents, separated by slash.
+	 * <a href="http://schema.org/category">schema:Category</a>: A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
+	 * @return
+	 */
+	@JsonIgnore @Override
+	public String getFullName() {
+		String fullName = "";
+		for (final CategoryInfo parent : getParents()) {
+			fullName += parent.getName() + "/";
+		}
+		return fullName + getName();
 	}
 
 } //CategoryInfoImpl
