@@ -120,7 +120,7 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * A. if threadlocal doesn't yet exist, sets the threadlocal {@link CommandRequestAttributes}
 	 * 		based on {@link CommandSession}, then afterwards, mark it as {@link #requestCompleted()} and removes it from the thread.
 	 * B. if threadlocal already exist and is the same {@code tenantId}, simply uses the existing {@link CommandSession}. Otherwise throw {@link IllegalStateException}.
-	 * @param requestAttributes
+	 * @param session
 	 * @return 
 	 * @throw {@link IllegalStateException}
 	 * @see #withTenant(String)

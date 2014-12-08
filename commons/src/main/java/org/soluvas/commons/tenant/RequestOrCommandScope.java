@@ -23,6 +23,7 @@ public class RequestOrCommandScope implements Scope {
 
 	private static final Logger log = LoggerFactory
 			.getLogger(RequestOrCommandScope.class);
+
 	/**
 	 * Return the RequestAttributes currently bound to the thread.
 	 * Will call {@link RequestContextHolder#currentRequestAttributes()}
