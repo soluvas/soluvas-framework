@@ -61,7 +61,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Freeform hashtags, however do not put special characters like space, comma, and semicolon.&#xA;Dash, underscore, and dot are usually okay.&#xA;Can be used for putting a product uploaded from Instagram or Twitter to specified category based on Instagram/Twitter hashtags."/>
+        <details key="documentation" value="Freeform hashtags, however do not put special characters like space, comma, and semicolon.&#xA;Dash, underscore, and dot are usually okay.&#xA;Can be used for both inbound and outbound.&#xA;Inbound: putting a product uploaded from Instagram or Twitter to specified category based on Instagram/Twitter hashtags.&#xA;Outbound: publishing a product or category to Instagram/Twitter/Facebook, while hashtagging based on category's tags."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//CategoryLike"/>

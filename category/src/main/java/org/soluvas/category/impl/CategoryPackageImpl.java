@@ -582,7 +582,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		  (getCategory_Tags(), 
 		   source, 
 		   new String[] {
-			 "documentation", "Freeform hashtags, however do not put special characters like space, comma, and semicolon.\nDash, underscore, and dot are usually okay.\nCan be used for putting a product uploaded from Instagram or Twitter to specified category based on Instagram/Twitter hashtags."
+			 "documentation", "Freeform hashtags, however do not put special characters like space, comma, and semicolon.\nDash, underscore, and dot are usually okay.\nCan be used for both inbound and outbound.\nInbound: putting a product uploaded from Instagram or Twitter to specified category based on Instagram/Twitter hashtags.\nOutbound: publishing a product or category to Instagram/Twitter/Facebook, while hashtagging based on category\'s tags."
 		   });	
 		addAnnotation
 		  (getCategoryContainer_Categories(), 

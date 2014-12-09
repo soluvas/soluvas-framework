@@ -447,7 +447,9 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 	 * <!-- begin-model-doc -->
 	 * Freeform hashtags, however do not put special characters like space, comma, and semicolon.
 	 * Dash, underscore, and dot are usually okay.
-	 * Can be used for putting a product uploaded from Instagram or Twitter to specified category based on Instagram/Twitter hashtags.
+	 * Can be used for both inbound and outbound.
+	 * Inbound: putting a product uploaded from Instagram or Twitter to specified category based on Instagram/Twitter hashtags.
+	 * Outbound: publishing a product or category to Instagram/Twitter/Facebook, while hashtagging based on category's tags.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Tags</em>' attribute list.
 	 * @see org.soluvas.category.CategoryPackage#getCategory_Tags()

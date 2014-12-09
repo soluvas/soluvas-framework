@@ -545,7 +545,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_7lnxQH-EEeS1n-FlNjjK5w" name="tags : EString" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@20fe3a28{platform:/resource/org.soluvas.category/src/main/resources/org/soluvas/category/category.ecore#//Category/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_7lnxQH-EEeS1n-FlNjjK5w" name="tags : EString" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="category.ecore#//Category/tags"/>
           <semanticElements xmi:type="ecore:EAttribute" href="category.ecore#//Category/tags"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_8zFp8H-EEeS1n-FlNjjK5w" labelAlignment="LEFT">
