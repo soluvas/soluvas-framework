@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.joda.time.DateTime;
 import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,7 @@ import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.data.EntityLookup;
 
 import com.google.common.base.Joiner;
@@ -71,6 +73,8 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCategories <em>Categories</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCreationTime <em>Creation Time</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getModificationTime <em>Modification Time</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getMetaDescription <em>Meta Description</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getMetaKeywords <em>Meta Keywords</em>}</li>
@@ -85,6 +89,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getParentUName <em>Parent UName</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getSameAsUris <em>Same As Uris</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getTags <em>Tags</em>}</li>
  * </ul>
  * </p>
  *
@@ -415,6 +420,46 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getCreationTime() <em>Creation Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCreationTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DateTime CREATION_TIME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCreationTime() <em>Creation Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCreationTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected DateTime creationTime = CREATION_TIME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getModificationTime() <em>Modification Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModificationTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DateTime MODIFICATION_TIME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getModificationTime() <em>Modification Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModificationTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected DateTime modificationTime = MODIFICATION_TIME_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -663,6 +708,16 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected EList<String> sameAsUris;
+
+	/**
+	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTags()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> tags;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1091,6 +1146,52 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @generated
 	 */
 	@Override
+	public DateTime getCreationTime() {
+		return creationTime;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setCreationTime(DateTime newCreationTime) {
+		DateTime oldCreationTime = creationTime;
+		creationTime = newCreationTime;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__CREATION_TIME, oldCreationTime, creationTime));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DateTime getModificationTime() {
+		return modificationTime;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setModificationTime(DateTime newModificationTime) {
+		DateTime oldModificationTime = modificationTime;
+		modificationTime = newModificationTime;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__MODIFICATION_TIME, oldModificationTime, modificationTime));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String getNsPrefix() {
 		return nsPrefix;
 	}
@@ -1391,6 +1492,24 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<String> getTags() {
+		if (tags == null) {
+			tags = new EDataTypeUniqueEList<String>(String.class, this, CategoryPackage.CATEGORY__TAGS);
+		}
+		return tags;
+	}
+
+	protected void setTags(List<String> tags) {
+		getTags().clear();
+		getTags().addAll(tags);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public void resolve(EntityLookup<Category, String> categoryLookup) {
@@ -1509,6 +1628,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getCategories();
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				return getDescription();
+			case CategoryPackage.CATEGORY__CREATION_TIME:
+				return getCreationTime();
+			case CategoryPackage.CATEGORY__MODIFICATION_TIME:
+				return getModificationTime();
 			case CategoryPackage.CATEGORY__STATUS:
 				return getStatus();
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
@@ -1537,6 +1660,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getPrimaryUri();
 			case CategoryPackage.CATEGORY__SAME_AS_URIS:
 				return getSameAsUris();
+			case CategoryPackage.CATEGORY__TAGS:
+				return getTags();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1602,6 +1727,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				setDescription((String)newValue);
 				return;
+			case CategoryPackage.CATEGORY__CREATION_TIME:
+				setCreationTime((DateTime)newValue);
+				return;
+			case CategoryPackage.CATEGORY__MODIFICATION_TIME:
+				setModificationTime((DateTime)newValue);
+				return;
 			case CategoryPackage.CATEGORY__STATUS:
 				setStatus((CategoryStatus)newValue);
 				return;
@@ -1641,6 +1772,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__SAME_AS_URIS:
 				getSameAsUris().clear();
 				getSameAsUris().addAll((Collection<? extends String>)newValue);
+				return;
+			case CategoryPackage.CATEGORY__TAGS:
+				getTags().clear();
+				getTags().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1705,6 +1840,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case CategoryPackage.CATEGORY__CREATION_TIME:
+				setCreationTime(CREATION_TIME_EDEFAULT);
+				return;
+			case CategoryPackage.CATEGORY__MODIFICATION_TIME:
+				setModificationTime(MODIFICATION_TIME_EDEFAULT);
+				return;
 			case CategoryPackage.CATEGORY__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
@@ -1743,6 +1884,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return;
 			case CategoryPackage.CATEGORY__SAME_AS_URIS:
 				getSameAsUris().clear();
+				return;
+			case CategoryPackage.CATEGORY__TAGS:
+				getTags().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -1790,6 +1934,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return categories != null && !categories.isEmpty();
 			case CategoryPackage.CATEGORY__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case CategoryPackage.CATEGORY__CREATION_TIME:
+				return CREATION_TIME_EDEFAULT == null ? creationTime != null : !CREATION_TIME_EDEFAULT.equals(creationTime);
+			case CategoryPackage.CATEGORY__MODIFICATION_TIME:
+				return MODIFICATION_TIME_EDEFAULT == null ? modificationTime != null : !MODIFICATION_TIME_EDEFAULT.equals(modificationTime);
 			case CategoryPackage.CATEGORY__STATUS:
 				return status != STATUS_EDEFAULT;
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
@@ -1818,6 +1966,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return PRIMARY_URI_EDEFAULT == null ? primaryUri != null : !PRIMARY_URI_EDEFAULT.equals(primaryUri);
 			case CategoryPackage.CATEGORY__SAME_AS_URIS:
 				return sameAsUris != null && !sameAsUris.isEmpty();
+			case CategoryPackage.CATEGORY__TAGS:
+				return tags != null && !tags.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1897,6 +2047,13 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		}
 		if (baseClass == Informer.class) {
 			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Timestamped.class) {
+			switch (derivedFeatureID) {
+				case CategoryPackage.CATEGORY__CREATION_TIME: return CommonsPackage.TIMESTAMPED__CREATION_TIME;
+				case CategoryPackage.CATEGORY__MODIFICATION_TIME: return CommonsPackage.TIMESTAMPED__MODIFICATION_TIME;
 				default: return -1;
 			}
 		}
@@ -1981,6 +2138,13 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				default: return -1;
 			}
 		}
+		if (baseClass == Timestamped.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.TIMESTAMPED__CREATION_TIME: return CategoryPackage.CATEGORY__CREATION_TIME;
+				case CommonsPackage.TIMESTAMPED__MODIFICATION_TIME: return CategoryPackage.CATEGORY__MODIFICATION_TIME;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -2024,6 +2188,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(bundle);
 		result.append(", description: ");
 		result.append(description);
+		result.append(", creationTime: ");
+		result.append(creationTime);
+		result.append(", modificationTime: ");
+		result.append(modificationTime);
 		result.append(", status: ");
 		result.append(status);
 		result.append(", metaDescription: ");
@@ -2050,6 +2218,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(primaryUri);
 		result.append(", sameAsUris: ");
 		result.append(sameAsUris);
+		result.append(", tags: ");
+		result.append(tags);
 		result.append(')');
 		return result.toString();
 	}

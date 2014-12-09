@@ -22,6 +22,7 @@ import org.soluvas.commons.Parentable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.commons.Timestamped;
 
 /**
  * <!-- begin-user-doc -->
@@ -90,6 +91,7 @@ public class CategorySwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseCategoryContainer(category);
 				if (result == null) result = caseDescribable(category);
 				if (result == null) result = caseInformer(category);
+				if (result == null) result = caseTimestamped(category);
 				if (result == null) result = caseIdentifiable(category);
 				if (result == null) result = caseNsPrefixable(category);
 				if (result == null) result = caseNameContainer(category);
@@ -364,6 +366,21 @@ public class CategorySwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public <T extends Identifiable> T1 caseInformer(Informer<T> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Timestamped</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Timestamped</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseTimestamped(Timestamped object) {
 		return null;
 	}
 

@@ -223,13 +223,31 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY__DESCRIPTION = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__CREATION_TIME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Modification Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__MODIFICATION_TIME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 8;
+
+	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__STATUS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 7;
+	int CATEGORY__STATUS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Meta Description</b></em>' attribute.
@@ -238,7 +256,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__META_DESCRIPTION = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 8;
+	int CATEGORY__META_DESCRIPTION = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Meta Keywords</b></em>' attribute.
@@ -247,7 +265,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__META_KEYWORDS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 9;
+	int CATEGORY__META_KEYWORDS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Meta Title</b></em>' attribute.
@@ -256,7 +274,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__META_TITLE = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 10;
+	int CATEGORY__META_TITLE = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Available Sort By</b></em>' attribute.
@@ -265,7 +283,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__AVAILABLE_SORT_BY = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 11;
+	int CATEGORY__AVAILABLE_SORT_BY = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Default Sort By</b></em>' attribute.
@@ -274,7 +292,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__DEFAULT_SORT_BY = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 12;
+	int CATEGORY__DEFAULT_SORT_BY = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Anchor</b></em>' attribute.
@@ -283,7 +301,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__ANCHOR = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 13;
+	int CATEGORY__ANCHOR = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Include In Menu</b></em>' attribute.
@@ -292,7 +310,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__INCLUDE_IN_MENU = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 14;
+	int CATEGORY__INCLUDE_IN_MENU = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Catalog Name</b></em>' attribute.
@@ -301,7 +319,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__CATALOG_NAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 15;
+	int CATEGORY__CATALOG_NAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Default Mixin</b></em>' attribute.
@@ -310,7 +328,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__DEFAULT_MIXIN = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 16;
+	int CATEGORY__DEFAULT_MIXIN = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>UName</b></em>' attribute.
@@ -319,7 +337,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__UNAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 17;
+	int CATEGORY__UNAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Parent UName</b></em>' attribute.
@@ -328,7 +346,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__PARENT_UNAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 18;
+	int CATEGORY__PARENT_UNAME = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Primary Uri</b></em>' attribute.
@@ -337,7 +355,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__PRIMARY_URI = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 19;
+	int CATEGORY__PRIMARY_URI = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Same As Uris</b></em>' attribute list.
@@ -346,7 +364,16 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY__SAME_AS_URIS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 20;
+	int CATEGORY__SAME_AS_URIS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 22;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__TAGS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 23;
 
 	/**
 	 * The number of structural features of the '<em>Category</em>' class.
@@ -355,7 +382,7 @@ public interface CategoryPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 21;
+	int CATEGORY_FEATURE_COUNT = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 24;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.
@@ -664,6 +691,17 @@ public interface CategoryPackage extends EPackage {
 	EAttribute getCategory_SameAsUris();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.category.Category#getTags <em>Tags</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Tags</em>'.
+	 * @see org.soluvas.category.Category#getTags()
+	 * @see #getCategory()
+	 * @generated
+	 */
+	EAttribute getCategory_Tags();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.category.CategoryContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -868,6 +906,14 @@ public interface CategoryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY__SAME_AS_URIS = eINSTANCE.getCategory_SameAsUris();
+
+		/**
+		 * The meta object literal for the '<em><b>Tags</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY__TAGS = eINSTANCE.getCategory_Tags();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.

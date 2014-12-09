@@ -24,6 +24,7 @@ import org.soluvas.commons.Parentable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.commons.Timestamped;
 
 /**
  * <!-- begin-user-doc -->
@@ -148,6 +149,10 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public <T extends Identifiable> Adapter caseInformer(Informer<T> object) {
 				return createInformerAdapter();
+			}
+			@Override
+			public Adapter caseTimestamped(Timestamped object) {
+				return createTimestampedAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -390,6 +395,20 @@ public class CategoryAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInformerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.commons.Timestamped
+	 * @generated
+	 */
+	public Adapter createTimestampedAdapter() {
 		return null;
 	}
 

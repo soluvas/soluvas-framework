@@ -17,6 +17,7 @@ import org.soluvas.commons.Informer;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.ResourceAware;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.data.EntityLookup;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -46,6 +47,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.Category#getParentUName <em>Parent UName</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getSameAsUris <em>Same As Uris</em>}</li>
+ *   <li>{@link org.soluvas.category.Category#getTags <em>Tags</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,7 +55,7 @@ import com.google.common.collect.Iterables;
  * @model
  * @generated
  */
-public interface Category extends CategoryLike, NsPrefixable, Parentable<Category>, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo> {
+public interface Category extends CategoryLike, NsPrefixable, Parentable<Category>, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo>, Timestamped {
 	
 	public class ToCategoryInfo implements Function<Category, CategoryInfo> {
 		
@@ -436,6 +438,23 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 	 */
 	@JsonDeserialize(as=BasicEList.class)
 	EList<String> getSameAsUris();
+
+	/**
+	 * Returns the value of the '<em><b>Tags</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Freeform hashtags, however do not put special characters like space, comma, and semicolon.
+	 * Dash, underscore, and dot are usually okay.
+	 * Can be used for putting a product uploaded from Instagram or Twitter to specified category based on Instagram/Twitter hashtags.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Tags</em>' attribute list.
+	 * @see org.soluvas.category.CategoryPackage#getCategory_Tags()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getTags();
 
 	/**
 	 * <!-- begin-user-doc -->
