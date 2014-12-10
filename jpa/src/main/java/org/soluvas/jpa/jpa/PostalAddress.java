@@ -57,12 +57,7 @@ public class PostalAddress implements Describable, Serializable {
 		emfPostalAddress.setId(jpaPostalAddressUp.getId() != null ? jpaPostalAddressUp.getId().toString() : UUID.randomUUID().toString());
 		emfPostalAddress.setCity(jpaPostalAddressUp.getCity());
 		emfPostalAddress.setCountry(jpaPostalAddressUp.getCountry());
-		if (jpaPostalAddressUp.getCountryCode() != null) {
-			if (jpaPostalAddressUp.getCountryCode().length() > 1)
-				emfPostalAddress.setCountryCode("ID");
-			else
-				emfPostalAddress.setCountryCode(jpaPostalAddressUp.getCountryCode());
-		}
+		emfPostalAddress.setCountryCode(jpaPostalAddressUp.getCountryCode());
 		emfPostalAddress.setDescription(jpaPostalAddressUp.getDescription());
 		if (jpaPostalAddressUp.getEmails() != null && !jpaPostalAddressUp.getEmails().isEmpty()) {
 			emfPostalAddress.getEmails().addAll(jpaPostalAddressUp.getEmails());
@@ -104,12 +99,7 @@ public class PostalAddress implements Describable, Serializable {
 		jpaPostalAddress.setId(commonsPostalAddressUp.getId() != null ? UUID.fromString(commonsPostalAddressUp.getId()) : UUID.randomUUID());
 		jpaPostalAddress.setCity(commonsPostalAddressUp.getCity());
 		jpaPostalAddress.setCountry(commonsPostalAddressUp.getCountry());
-		if (commonsPostalAddressUp.getCountryCode() != null) {
-			if (commonsPostalAddressUp.getCountryCode().length() > 1)
-				jpaPostalAddress.setCountryCode("ID");
-			else
-				jpaPostalAddress.setCountryCode(commonsPostalAddressUp.getCountryCode());
-		}
+		jpaPostalAddress.setCountryCode(commonsPostalAddressUp.getCountryCode());
 		jpaPostalAddress.setDescription(commonsPostalAddressUp.getDescription());
 		if (commonsPostalAddressUp.getEmails() != null && !commonsPostalAddressUp.getEmails().isEmpty()) {
 			jpaPostalAddress.getEmails().addAll(commonsPostalAddressUp.getEmails());
@@ -441,12 +431,7 @@ public class PostalAddress implements Describable, Serializable {
 				.getId()) : UUID.randomUUID());
 		setCity(postalAddressUp.getCity());
 		setCountry(postalAddressUp.getCountry());
-		if (postalAddressUp.getCountryCode() != null) {
-			if (postalAddressUp.getCountryCode().length() > 1)
-				setCountryCode("ID");
-			else
-				setCountryCode(postalAddressUp.getCountryCode());
-		}
+		setCountryCode(postalAddressUp.getCountryCode());
 		setDescription(postalAddressUp.getDescription());
 		setEmails(new ArrayList<>(postalAddressUp.getEmails()));
 		setHomePhones(new ArrayList<>(postalAddressUp.getHomePhones()));
