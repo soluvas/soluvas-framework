@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsFactory;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
 /**
  * A representation of the model object '<em><b>PostalAddress</b></em>'. <!--
@@ -441,11 +442,10 @@ public class PostalAddress implements Describable, Serializable {
 				.getId()) : UUID.randomUUID());
 		setCity(postalAddressUp.getCity());
 		setCountry(postalAddressUp.getCountry());
-		if (postalAddressUp.getCountryCode() != null) {
-			if (postalAddressUp.getCountryCode().length() > 1)
-				setCountryCode("ID");
-			else
-				setCountryCode(postalAddressUp.getCountryCode());
+		if (Strings.isNullOrEmpty(postalAddressUp.getCountryCode())) {
+			setCountryCode("ID");
+		} else {
+			setCountryCode(postalAddressUp.getCountryCode());
 		}
 		setDescription(postalAddressUp.getDescription());
 		setEmails(new ArrayList<>(postalAddressUp.getEmails()));
