@@ -105,11 +105,10 @@ public class PostalAddress implements Describable, Serializable {
 		jpaPostalAddress.setId(commonsPostalAddressUp.getId() != null ? UUID.fromString(commonsPostalAddressUp.getId()) : UUID.randomUUID());
 		jpaPostalAddress.setCity(commonsPostalAddressUp.getCity());
 		jpaPostalAddress.setCountry(commonsPostalAddressUp.getCountry());
-		if (commonsPostalAddressUp.getCountryCode() != null) {
-			if (commonsPostalAddressUp.getCountryCode().length() > 1)
-				jpaPostalAddress.setCountryCode("ID");
-			else
-				jpaPostalAddress.setCountryCode(commonsPostalAddressUp.getCountryCode());
+		if (Strings.isNullOrEmpty(commonsPostalAddressUp.getCountryCode())) {
+			jpaPostalAddress.setCountryCode("ID");
+		} else {
+			jpaPostalAddress.setCountryCode(commonsPostalAddressUp.getCountryCode());
 		}
 		jpaPostalAddress.setDescription(commonsPostalAddressUp.getDescription());
 		if (commonsPostalAddressUp.getEmails() != null && !commonsPostalAddressUp.getEmails().isEmpty()) {
