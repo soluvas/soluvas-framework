@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsFactory;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
 
 /**
  * A representation of the model object '<em><b>PostalAddress</b></em>'. <!--
@@ -58,12 +57,7 @@ public class PostalAddress implements Describable, Serializable {
 		emfPostalAddress.setId(jpaPostalAddressUp.getId() != null ? jpaPostalAddressUp.getId().toString() : UUID.randomUUID().toString());
 		emfPostalAddress.setCity(jpaPostalAddressUp.getCity());
 		emfPostalAddress.setCountry(jpaPostalAddressUp.getCountry());
-		if (jpaPostalAddressUp.getCountryCode() != null) {
-			if (jpaPostalAddressUp.getCountryCode().length() > 1)
-				emfPostalAddress.setCountryCode("ID");
-			else
-				emfPostalAddress.setCountryCode(jpaPostalAddressUp.getCountryCode());
-		}
+		emfPostalAddress.setCountryCode(jpaPostalAddressUp.getCountryCode());
 		emfPostalAddress.setDescription(jpaPostalAddressUp.getDescription());
 		if (jpaPostalAddressUp.getEmails() != null && !jpaPostalAddressUp.getEmails().isEmpty()) {
 			emfPostalAddress.getEmails().addAll(jpaPostalAddressUp.getEmails());
@@ -105,11 +99,7 @@ public class PostalAddress implements Describable, Serializable {
 		jpaPostalAddress.setId(commonsPostalAddressUp.getId() != null ? UUID.fromString(commonsPostalAddressUp.getId()) : UUID.randomUUID());
 		jpaPostalAddress.setCity(commonsPostalAddressUp.getCity());
 		jpaPostalAddress.setCountry(commonsPostalAddressUp.getCountry());
-		if (Strings.isNullOrEmpty(commonsPostalAddressUp.getCountryCode())) {
-			jpaPostalAddress.setCountryCode("ID");
-		} else {
-			jpaPostalAddress.setCountryCode(commonsPostalAddressUp.getCountryCode());
-		}
+		jpaPostalAddress.setCountryCode(commonsPostalAddressUp.getCountryCode());
 		jpaPostalAddress.setDescription(commonsPostalAddressUp.getDescription());
 		if (commonsPostalAddressUp.getEmails() != null && !commonsPostalAddressUp.getEmails().isEmpty()) {
 			jpaPostalAddress.getEmails().addAll(commonsPostalAddressUp.getEmails());
@@ -441,11 +431,7 @@ public class PostalAddress implements Describable, Serializable {
 				.getId()) : UUID.randomUUID());
 		setCity(postalAddressUp.getCity());
 		setCountry(postalAddressUp.getCountry());
-		if (Strings.isNullOrEmpty(postalAddressUp.getCountryCode())) {
-			setCountryCode("ID");
-		} else {
-			setCountryCode(postalAddressUp.getCountryCode());
-		}
+		setCountryCode(postalAddressUp.getCountryCode());
 		setDescription(postalAddressUp.getDescription());
 		setEmails(new ArrayList<>(postalAddressUp.getEmails()));
 		setHomePhones(new ArrayList<>(postalAddressUp.getHomePhones()));
