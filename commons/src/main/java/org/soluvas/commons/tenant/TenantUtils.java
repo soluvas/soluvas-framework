@@ -140,7 +140,7 @@ public class TenantUtils {
 	 * @deprecated Use {@link TenantBeans#get(String)}
 	 */
 	@Deprecated
-	public static <T> T selectBean(TenantSelector tenantSelector, Map<String, T> map, Class<T> clazz) {
+	public static <T> T selectBean(TenantSelector tenantSelector, Map<String, T> map, Class<T> clazz) throws TenantNotFoundException {
 		final String tenantId = tenantSelector.tenantRef().getTenantId();
 		return selectBean(tenantId, map, clazz);
 	}
@@ -151,14 +151,19 @@ public class TenantUtils {
 	 * @param clazz
 	 * @return
 	 */
-	public static <T> T selectBean(String tenantId, Map<String, ? extends T> map, Class<T> clazz) {
+	public static <T> T selectBean(String tenantId, Map<String, ? extends T> map, Class<T> clazz) throws TenantNotFoundException {
 		// ImmutableMap is important to make it threadsafe
 //		return Preconditions.checkNotNull(ImmutableMap.copyOf(map).get(tenantId),
 //				"No %s for tenant '%s'. %s available: %s",
 //				clazz.getSimpleName(), tenantId, map.size(), map.keySet());
-		return Preconditions.checkNotNull(map.get(tenantId),
-				"No %s for tenant '%s'. %s available: %s",
-				clazz.getSimpleName(), tenantId, map.size(), map.keySet());
+		@Nullable
+		final T bean = map.get(tenantId);
+		if (bean != null) {
+			return bean;
+		} else {
+			throw new TenantNotFoundException(String.format("No %s for tenant '%s'. %s available: %s",
+				clazz.getSimpleName(), tenantId, map.size(), map.keySet()));
+		}
 	}
 
 }

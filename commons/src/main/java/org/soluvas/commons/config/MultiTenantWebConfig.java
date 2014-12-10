@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.tenant.CommandRequestAttributes;
 import org.soluvas.commons.tenant.RequestOrCommandScope;
 import org.soluvas.commons.tenant.TenantMode;
+import org.soluvas.commons.tenant.TenantNotFoundException;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRefImpl;
 import org.soluvas.commons.tenant.TenantUtils;
@@ -187,14 +189,23 @@ public class MultiTenantWebConfig implements TenantSelector {
 	}
 	
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
-	public AppManifest appManifest() throws IOException {
-		return Preconditions.checkNotNull(
-				tenantConfig.tenantMap().get(tenantRef().getTenantId()),
-				"Unknown tenant '%s'. %s available tenants are: %s",
-				tenantRef().getTenantId(), tenantConfig.tenantMap().size(), tenantConfig.tenantMap().keySet());
+	public AppManifest appManifest() throws TenantNotFoundException {
+		@Nullable
+		final AppManifest appManifest = tenantConfig.tenantMap().get(tenantRef().getTenantId());
+		if (appManifest != null) {
+			return appManifest;
+		} else {
+			throw new TenantNotFoundException(String.format("Unknown tenant '%s'. %s available tenants are: %s",
+				tenantRef().getTenantId(), tenantConfig.tenantMap().size(), tenantConfig.tenantMap().keySet()));
+		}
 	}
 
-	@Bean @Scope(value="request") @Primary
+	/**
+	 * @return
+	 * @throws IOException
+	 * @deprecated Use the global app-wide {@link EventBus} instead.
+	 */
+	@Bean @Scope(value="request") @Primary @Deprecated
 	public EventBus tenantEventBus() throws IOException {
 		return Preconditions.checkNotNull(
 				tenantConfig.eventBusMap().get(tenantRef().getTenantId()),
@@ -203,11 +214,15 @@ public class MultiTenantWebConfig implements TenantSelector {
 	}
 	
 	@Bean @Scope(value="request")
-	public WebAddress webAddress() throws IOException {
-		return Preconditions.checkNotNull(
-				tenantConfig.webAddressMap().get(tenantRef().getTenantId()),
-				"Unknown tenant WebAddress '%s'. %s available WebAddresses are for: %s",
-				tenantRef().getTenantId(), tenantConfig.webAddressMap().size(), tenantConfig.webAddressMap().keySet());
+	public WebAddress webAddress() throws TenantNotFoundException {
+		@Nullable
+		final WebAddress webAddress = tenantConfig.webAddressMap().get(tenantRef().getTenantId());
+		if (webAddress != null) {
+			return webAddress;
+		} else {
+			throw new TenantNotFoundException(String.format("Unknown tenant WebAddress '%s'. %s available WebAddresses are for: %s",
+					tenantRef().getTenantId(), tenantConfig.webAddressMap().size(), tenantConfig.webAddressMap().keySet()));
+		}
 	}
 
 	@Override

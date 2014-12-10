@@ -327,22 +327,29 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 	 * Returns the bean for {@code tenantId}, or throws a {@link NullPointerException} if not found.
 	 * @param tenantId
 	 * @return
+	 * @throws TenantNotFoundException 
 	 * @throws NullPointerException
 	 */
-	public T get(String tenantId) {
+	public T get(String tenantId) throws TenantNotFoundException {
 		Preconditions.checkNotNull("Cannot get %s bean: tenantId argument cannot be null",
 				implClass.getName());
 		final ImmutableSet<String> tenantIds = keySet();
-		return Preconditions.checkNotNull( beanMap.get(tenantId),
-				"Cannot get %s bean for '%s'. %s available are: %s",
-				implClass.getSimpleName(), tenantId, tenantIds.size(), tenantIds);
+		@Nullable
+		final T bean = beanMap.get(tenantId);
+		if (bean != null) {
+			return bean;
+		} else {
+			throw new TenantNotFoundException(String.format("Cannot get %s bean for '%s'. %s available are: %s",
+					implClass.getSimpleName(), tenantId, tenantIds.size(), tenantIds));
+		}
 	}
 	
 	/**
 	 * Get bean based on {@link TenantSelector#tenantRef()}.
 	 * @return
+	 * @throws TenantNotFoundException 
 	 */
-	public T getCurrent() {
+	public T getCurrent() throws TenantNotFoundException {
 		return get(tenantSelector.tenantRef().getTenantId());
 	}
 	
