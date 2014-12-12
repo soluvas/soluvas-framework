@@ -383,7 +383,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Set<String> findAllSlugsByStatus(StatusMask statusMask) {
+	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask) {
 		throw new UnsupportedOperationException();
 	}
 

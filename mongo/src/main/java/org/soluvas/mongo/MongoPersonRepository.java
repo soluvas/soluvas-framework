@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
@@ -483,13 +482,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public Set<String> findAllSlugsByStatus(StatusMask statusMask) {
+	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask) {
 		final BasicDBObject query = new BasicDBObject();
 		augmentQueryForStatusMask(query, statusMask);
 		return findSecondary(query, new BasicDBObject(ImmutableMap.of("slug", true, "_id", false)),
-				null, 0, 0, new CursorFunction<Set<String>>() {
+				null, 0, 0, new CursorFunction<ImmutableSet<String>>() {
 					@Override
-					public Set<String> apply(DBCursor cursor) throws Exception {
+					public ImmutableSet<String> apply(DBCursor cursor) throws Exception {
 						return FluentIterable.from(cursor).transform(new Function<DBObject, String>() {
 							@Override
 							public String apply(DBObject input) {

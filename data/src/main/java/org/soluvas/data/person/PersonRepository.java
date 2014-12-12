@@ -2,7 +2,6 @@ package org.soluvas.data.person;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -16,6 +15,8 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.Trashable;
+
+import com.google.common.collect.ImmutableSet;
 
 /**
  * {@link Person} repository that supports paging and sorting.
@@ -100,7 +101,7 @@ public interface PersonRepository extends
 	@Nullable
 	String getCustomerRoleByPersonId(String personId);
 
-	public Set<String> findAllSlugsByStatus(StatusMask statusMask);
+	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask);
 	
 	/**
 	 * @param statusMask
