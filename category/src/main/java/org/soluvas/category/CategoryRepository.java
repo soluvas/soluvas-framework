@@ -46,5 +46,8 @@ public interface CategoryRepository extends
 	Optional<Category> getFirstActiveLeaf();
 
 	Existence<String> existsBySlugPath(StatusMask statusMask, String upSlugPath);
+	
+	Set<String> findAllSlugPathsByStatus(Collection<CategoryStatus> statuses);
+	
 
 }

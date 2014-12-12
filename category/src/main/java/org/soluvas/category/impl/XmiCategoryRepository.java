@@ -56,6 +56,7 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import org.soluvas.data.repository.XmiRepositoryBase;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
@@ -467,6 +468,23 @@ public class XmiCategoryRepository
 		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
 		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(limited.toList())),
 				pageable, filteredCount);
+	}
+	
+	@Override
+	public Set<String> findAllSlugPathsByStatus(final Collection<CategoryStatus> statuses) {
+		final Predicate<Category> filter = new Predicate<Category>() {
+			@Override
+			public boolean apply(@Nullable Category input) {
+				return statuses.contains(input.getStatus());
+			}
+		};
+		final FluentIterable<Category> filtered = FluentIterable.from(getFlattenedCategories()).filter(filter);
+		return filtered.transform(new Function<Category, String>() {
+			@Override
+			public String apply(Category input) {
+				return input.getSlugPath();
+			}
+		}).toSet();
 	}
 	
 	/**
