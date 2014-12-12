@@ -251,9 +251,9 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 
 	protected T load() {
 		if (bundle != null) {
-			log.debug("Loading XMI from URI: {} using bundle {}", resourceUri, bundle);
+			log.trace("Loading XMI from URI: {} using bundle {}", resourceUri, bundle);
 		} else {
-			log.debug("Loading XMI from URI: {} using {}", resourceUri, resourceType);
+			log.trace("Loading XMI from URI: {} using {}", resourceUri, resourceType);
 		}
 		
 		final ResourceSetImpl rset = new ResourceSetImpl();
@@ -267,7 +267,7 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 			rset.getPackageRegistry().put(ePackage.getNsURI(), ePackage);
 			final Resource resource = rset.getResource(resourceUri, true);
 			obj = (T)resource.getContents().get(0);
-			log.info("Loaded {} object from {}", obj.getClass().getName(), resourceUri);
+			log.debug("Loaded {} object from {}", obj.getClass().getName(), resourceUri);
 		} catch (Exception e) {
 			log.error("Cannot load " + resourceUri + " using package " + ePackage, e);
 			throw new CommonsException("Cannot load " + resourceUri + " using package " + ePackage, e);
@@ -283,7 +283,7 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 				augmented += augmentResourceInfo(resourceType, resourceUri, resourceName, content);
 			}
 			if (augmented > 0)
-				log.debug("Augmented {} EObjects with resource information from {}",
+				log.trace("Augmented {} EObjects with resource information from {}",
 						augmented, resourceUri);
 		}
 		
@@ -297,7 +297,7 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 				augmented += augmentBundleInfo(bundle, content);
 			}
 			if (augmented > 0) {
-				log.debug("Augmented {} EObjects with Bundle information from {} [{}]",
+				log.trace("Augmented {} EObjects with Bundle information from {} [{}]",
 						augmented, bundle.getSymbolicName(), bundle.getBundleId());
 			} else {
 //				final int allContentsSize = Iterators.size(allContents);
@@ -317,7 +317,7 @@ public class OnDemandXmiLoader<T extends EObject> implements Supplier<T> {
 			augmented += expand(content);
 		}
 		if (augmented > 0)
-			log.debug("Expanded {} EObjects with Scope {}",
+			log.trace("Expanded {} EObjects with Scope {}",
 					augmented, scope);
 		
 		return obj;

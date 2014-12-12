@@ -112,7 +112,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 	@PostConstruct
 	public void init() {
 		final ImmutableMap<String, AppManifest> initialTenantMap = tenantConfig.tenantMap();
-		log.info("Initializing {} {} tenant beans: {}", 
+		log.debug("Initializing {} {} tenant beans: {}", 
 				initialTenantMap.size(), implClass.getSimpleName(), initialTenantMap.keySet());
 //		for (final Map.Entry<String, AppManifest> tenant : initialTenantMap.entrySet()) {
 //			final String tenantId = tenant.getKey();
@@ -144,7 +144,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 	@PreDestroy
 	public void destroy() {
 		final ImmutableList<String> tenantIdsToRemove = ImmutableList.copyOf(beanMap.keySet());
-		log.info("Shutting down {} {} beans: {}",
+		log.debug("Shutting down {} {} beans: {}",
 				beanMap.size(), implClass.getSimpleName(), tenantIdsToRemove);
 		
 		final ImmutableList<RemoveAndDestroy> tasks = FluentIterable.from(tenantIdsToRemove)
@@ -183,7 +183,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 		@Override
 		public String call() throws Exception {
 			try (Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
-				log.debug("Initializing '{}' {} {}",
+				log.trace("Initializing '{}' {} {}",
 						tenantId, implClass.getSimpleName(), initMethod != null ? "using init method " + initMethod : "without init method");
 				final T bean = create(tenantId, appManifest);
 				if (initMethod != null) {
@@ -211,7 +211,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 		@Override
 		public String call() throws Exception {
 			try (Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
-				log.info("Shutting down '{}' {} {}",
+				log.trace("Shutting down '{}' {} {}",
 						tenantId, implClass.getSimpleName(), destroyMethod != null ? "using destroy method " + destroyMethod : "without destroy method");
 				final T bean = beanMap.get(tenantId);
 				if (bean != null) {

@@ -52,7 +52,7 @@ public class Neo4jUtils {
 	public static Index<Node> ensureIndex(@Nonnull final GraphDatabaseService graph,
 			@Nonnull final String indexName) {
 		final ImmutableMap<String, String> indexConfig = ImmutableMap.of("_blueprints:type", "MANUAL", "type", "exact");
-		log.debug("Getting vertex index '{}' with config {}", indexName, indexConfig);
+		log.trace("Getting vertex index '{}' with config {}", indexName, indexConfig);
 		Index<Node> index;
 		try {
 			index = graph.index().forNodes(indexName,

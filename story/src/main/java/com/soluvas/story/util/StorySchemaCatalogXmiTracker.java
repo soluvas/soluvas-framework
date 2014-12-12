@@ -168,7 +168,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 		// ------------------ Story Ecore package files ------------
 		final List<StorySchemaCatalog> catalogs = new ArrayList<>();
 		for (final URL xmiUrl : xmiUrls) {
-			log.debug("Getting StorySchemaCatalog XMI {} from {} in {}", suppliedClassName, xmiUrl);
+			log.trace("Getting StorySchemaCatalog XMI {} from {} in {}", suppliedClassName, xmiUrl);
 			final StaticXmiLoader<StorySchemaCatalog> loader;
 			if (bundle != null) {
 				loader = new StaticXmiLoader<StorySchemaCatalog>(xmiEPackage, xmiUrl, bundle);
@@ -188,7 +188,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 			storySchemaCatalog.setEcoreUrl(ecoreUrl);
 		}
 
-		log.info("Scanning {} Ecore packages from {}", catalogs.size(), xmiUrls);
+		log.debug("Scanning {} Ecore packages from {}", catalogs.size(), xmiUrls);
 		// Must do ImmutableList.copyOf(), so the epackageMapBuilder gets used
 		final List<Map<String, EClass>> ecoreFileObjs = ImmutableList.copyOf(Collections2.transform(
 				catalogs, new Function<StorySchemaCatalog, Map<String, EClass>>() {
@@ -241,14 +241,14 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 					if (!(eClassifier instanceof EClass))
 						continue;
 					EClass eClass = (EClass) eClassifier;
-					log.debug("Mapping EClass {}.{} as {}:{} from {}",
+					log.trace("Mapping EClass {}.{} as {}:{} from {}",
 							ecorePackage.getName(), eClass.getName(),
 							ecorePackage.getNsPrefix(), eClass.getName(), ecoreUrl);
 					eClassMapBuilder.put(ecorePackage.getNsPrefix() + ":" + eClass.getName(), eClass);
 				}
 				
 				final Map<String, EClass> eClassMap = eClassMapBuilder.build();
-				log.debug("Loaded {} EClasses from StorySchema ecore package {}",
+				log.trace("Loaded {} EClasses from StorySchema ecore package {}",
 						eClassMap.size(), ecoreUrl );
 				return eClassMap;
 			}
@@ -258,7 +258,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 			eClassMapBuilder.putAll(ecoreFileObj);
 		}
 		final Map<String, EClass> eClassMap = eClassMapBuilder.build();
-		log.info("Loaded {} EClasses from {} StorySchema ecore packages in {}: {}",
+		log.debug("Loaded {} EClasses from {} StorySchema ecore packages in {}: {}",
 				eClassMap.size(), ecoreFileObjs.size(), xmiUrls, eClassMap.keySet() );
 
 		// ------------------ StorySchemaCatalog XMI files ------------
@@ -269,7 +269,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 			final String storySchemaCatalogNsPrefix = catalog.getEPackage().getNsPrefix().replace("-story", "");
 			
 			for (final ActionType actionType : ImmutableList.copyOf(catalog.getActionTypes())) {
-				log.debug("Adding ActionType {} from {}", actionType.getName(), catalog.getXmiUrl());
+				log.trace("Adding ActionType {} from {}", actionType.getName(), catalog.getXmiUrl());
 				final ActionType added = EcoreUtil.copy(actionType);
 				added.setNsPrefix(storySchemaCatalogNsPrefix);
 				added.setEFactory(catalog.getEFactory());
@@ -288,7 +288,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 			}
 			
 			for (final AggregationType aggType : ImmutableList.copyOf(catalog.getAggregationTypes())) {
-				log.debug("Adding AggregationType {} from {}", aggType.getName(), catalog.getXmiUrl());
+				log.trace("Adding AggregationType {} from {}", aggType.getName(), catalog.getXmiUrl());
 				final AggregationType added;
 				synchronized (storyRepo) {
 					added = EcoreUtil.copy(aggType);
@@ -302,7 +302,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 			}
 			
 			for (final StoryType storyType : ImmutableList.copyOf(catalog.getStoryTypes())) {
-				log.debug("Adding StoryType {} from {}", storyType.getName(), catalog.getXmiUrl());
+				log.trace("Adding StoryType {} from {}", storyType.getName(), catalog.getXmiUrl());
 				final StoryType added;
 				synchronized (storyRepo) {
 					added = EcoreUtil.copy(storyType);
@@ -314,12 +314,12 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 				}
 				innerEobjects.add(added);
 			}
-			log.debug("Loaded {} EObjects from StorySchema {}",
+			log.trace("Loaded {} EObjects from StorySchema {}",
 					innerEobjects.size(), catalog.getXmiUrl());
 			
 			loadedEobjects.addAll(innerEobjects);
 		}
-		log.info("Loaded {} EObjects from {}", loadedEobjects.size(), xmiUrls);
+		log.debug("Loaded {} EObjects from {}", loadedEobjects.size(), xmiUrls);
 		
 		// -------- Resolve EClass-es -----------
 		final Collection<EClassLinked> eClassLinkeds = Collections2.filter(Lists.transform(
@@ -329,7 +329,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 				return input instanceof EClassLinked ? (EClassLinked) input : null;				
 			}
 		}), new NotNullPredicate<EClassLinked>());
-		log.info("Resolving {} EClassLinkeds from {}", eClassLinkeds.size(), xmiUrls);
+		log.trace("Resolving {} EClassLinkeds from {}", eClassLinkeds.size(), xmiUrls);
 		for (final EClassLinked eClassLinked : eClassLinkeds) {
 			eClassLinked.resolveEClass(eClassMap);
 		}
@@ -341,7 +341,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 				return input instanceof JavaClassLinked ? (JavaClassLinked<?>) input : null;				
 			}
 		}), new NotNullPredicate<JavaClassLinked<?>>());
-		log.info("Resolving {} JavaClassLinkeds from {}", javaClassLinkeds.size(), xmiUrls);
+		log.trace("Resolving {} JavaClassLinkeds from {}", javaClassLinkeds.size(), xmiUrls);
 		for (final JavaClassLinked<?> javaClassLinked : javaClassLinkeds) {
 			javaClassLinked.resolveJavaClass(bundle);
 		}
@@ -396,7 +396,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 		final Map<String, TargetType> targetTypeMap = ImmutableMap.copyOf(
 				Maps.uniqueIndex(socialRepo.getTargetTypes(),
 				new TargetType.ToQName()));
-		log.info("Replacing {} unresolved ActionType.subjectTypes from {} TargetTypes: {}",
+		log.debug("Replacing {} unresolved ActionType.subjectTypes from {} TargetTypes: {}",
 				unresolvedActionTypes.size(), socialRepo.getTargetTypes().size(), targetTypeMap.keySet());
 		for (final ActionType actionType : unresolvedActionTypes) {
 			final String actionTypeQName = actionType.getNsPrefix() + ":" + actionType.getName();
@@ -440,7 +440,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 				});
 		final Map<String, TargetType> targetTypeMap = Maps.uniqueIndex(socialRepo.getTargetTypes(),
 				new TargetType.ToQName());
-		log.info("Re-checking {} resolved ActionType.subjectTypes from {} TargetTypes: {}",
+		log.debug("Re-checking {} resolved ActionType.subjectTypes from {} TargetTypes: {}",
 				resolvedActionTypes.size(), socialRepo.getTargetTypes().size(), targetTypeMap.keySet());
 		for (final ActionType actionType : resolvedActionTypes) {
 			final String actionTypeQName = actionType.getEPackageNsPrefix() + ":" + actionType.getName();
@@ -499,7 +499,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 		if (eobjects.isEmpty())
 			return;
 
-		log.debug("Removing {} EObjects provided by {}",
+		log.trace("Removing {} EObjects provided by {}",
 				eobjects.size(), resourceContainer);
 		long removedCount = 0;
 		for (final EObject eobject : eobjects) {
@@ -515,7 +515,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 			// Unregister from repo
 			if (eobject instanceof StoryType) {
 				final StoryType storyType = (StoryType) eobject;
-				log.debug("Removing StoryType {} from {}", storyType.getName(),
+				log.trace("Removing StoryType {} from {}", storyType.getName(),
 						resourceContainer);
 				synchronized (storyRepo) {
 					if (storyRepo.getStoryTypes().remove(storyType))
@@ -523,7 +523,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 				}
 			} else if (eobject instanceof ActionType) {
 				final ActionType actionType = (ActionType) eobject;
-				log.debug("Removing ActionType {} from {}", actionType.getName(),
+				log.trace("Removing ActionType {} from {}", actionType.getName(),
 						resourceContainer);
 				synchronized (storyRepo) {
 					if (storyRepo.getActionTypes().remove(actionType))
@@ -531,7 +531,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 				}
 			} else if (eobject instanceof AggregationType) {
 				final AggregationType aggType = (AggregationType) eobject;
-				log.debug("Removing AggregationType {} from {}", aggType.getName(),
+				log.trace("Removing AggregationType {} from {}", aggType.getName(),
 						resourceContainer);
 				synchronized (storyRepo) {
 					if (storyRepo.getAggregationTypes().remove(aggType))
@@ -542,7 +542,7 @@ public class StorySchemaCatalogXmiTracker implements BundleTrackerCustomizer<Lis
 						resourceContainer);
 			}
 		}
-		log.info("Removed {} EObjects from {}",
+		log.debug("Removed {} EObjects from {}",
 				removedCount, resourceContainer);
 	}
 
