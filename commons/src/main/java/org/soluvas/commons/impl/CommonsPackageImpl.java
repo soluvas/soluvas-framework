@@ -3847,6 +3847,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getGeneralSysConfig_SslSupported() {
+		return (EAttribute)generalSysConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getOrganization() {
 		return organizationEClass;
@@ -4968,6 +4977,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(thingInfoEClass, THING_INFO__IMAGE_ID);
 
 		generalSysConfigEClass = createEClass(GENERAL_SYS_CONFIG);
+		createEAttribute(generalSysConfigEClass, GENERAL_SYS_CONFIG__SSL_SUPPORTED);
 
 		organizationEClass = createEClass(ORGANIZATION);
 		createEAttribute(organizationEClass, ORGANIZATION__SCHEMA_VERSION);
@@ -5688,6 +5698,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getThingInfo_ImageId(), ecorePackage.getEString(), "imageId", null, 0, 1, ThingInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(generalSysConfigEClass, GeneralSysConfig.class, "GeneralSysConfig", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getGeneralSysConfig_SslSupported(), ecorePackage.getEBooleanObject(), "sslSupported", null, 0, 1, GeneralSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(organizationEClass, Organization.class, "Organization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getOrganization_SchemaVersion(), ecorePackage.getELong(), "schemaVersion", "1", 0, 1, Organization.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -7191,6 +7202,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "A condensed version of a (probably app-specific) Thing."
+		   });	
+		addAnnotation
+		  (getGeneralSysConfig_SslSupported(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Whether Wicket/Spring MVC controllers can require secure channel, and whether URI generators (used in Sitemaps, Atom Feeds, Canonical URIs, etc.) use HTTPS URIs. This should always be {@code true}.\n\n<p>For development and debugging purposes (i.e. a bug is caused or made harder to diagnose due to SSL mechanism), this can be set to false. Otherwise, the development Tomcat/Undertow container should have SSL configured using self-signed (wildcard?) certificates.\n\n<p>For production purpose, when the customer doesn\'t have an SSL certificate yet, this can be disabled. But such scenario should be temporary and SSL should be enabled whenever possible."
 		   });	
 		addAnnotation
 		  (getCustomerRole_ReadOnly(), 

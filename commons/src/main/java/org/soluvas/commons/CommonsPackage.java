@@ -5098,13 +5098,22 @@ public interface CommonsPackage extends EPackage {
 	int GENERAL_SYS_CONFIG__TENANT_ID = EXPANDABLE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ssl Supported</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERAL_SYS_CONFIG__SSL_SUPPORTED = EXPANDABLE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>General Sys Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERAL_SYS_CONFIG_FEATURE_COUNT = EXPANDABLE_FEATURE_COUNT + 3;
+	int GENERAL_SYS_CONFIG_FEATURE_COUNT = EXPANDABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -9077,6 +9086,17 @@ public interface CommonsPackage extends EPackage {
 	EClass getGeneralSysConfig();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.GeneralSysConfig#getSslSupported <em>Ssl Supported</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ssl Supported</em>'.
+	 * @see org.soluvas.commons.GeneralSysConfig#getSslSupported()
+	 * @see #getGeneralSysConfig()
+	 * @generated
+	 */
+	EAttribute getGeneralSysConfig_SslSupported();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Organization <em>Organization</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12310,6 +12330,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass GENERAL_SYS_CONFIG = eINSTANCE.getGeneralSysConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Ssl Supported</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERAL_SYS_CONFIG__SSL_SUPPORTED = eINSTANCE.getGeneralSysConfig_SslSupported();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.OrganizationImpl <em>Organization</em>}' class.

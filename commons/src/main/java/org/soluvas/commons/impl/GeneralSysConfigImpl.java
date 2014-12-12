@@ -28,6 +28,7 @@ import org.soluvas.commons.Timestamped;
  *   <li>{@link org.soluvas.commons.impl.GeneralSysConfigImpl#getCreationTime <em>Creation Time</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.GeneralSysConfigImpl#getModificationTime <em>Modification Time</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.GeneralSysConfigImpl#getTenantId <em>Tenant Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.GeneralSysConfigImpl#getSslSupported <em>Ssl Supported</em>}</li>
  * </ul>
  * </p>
  *
@@ -113,6 +114,26 @@ public abstract class GeneralSysConfigImpl extends MinimalEObjectImpl.Container 
 	 * @ordered
 	 */
 	protected String tenantId = TENANT_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSslSupported() <em>Ssl Supported</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSslSupported()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean SSL_SUPPORTED_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSslSupported() <em>Ssl Supported</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSslSupported()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean sslSupported = SSL_SUPPORTED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -209,6 +230,27 @@ public abstract class GeneralSysConfigImpl extends MinimalEObjectImpl.Container 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getSslSupported() {
+		return sslSupported;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSslSupported(Boolean newSslSupported) {
+		Boolean oldSslSupported = sslSupported;
+		sslSupported = newSslSupported;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.GENERAL_SYS_CONFIG__SSL_SUPPORTED, oldSslSupported, sslSupported));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public void expand(Map<String, Object> scope) throws Exception {
@@ -230,6 +272,8 @@ public abstract class GeneralSysConfigImpl extends MinimalEObjectImpl.Container 
 				return getModificationTime();
 			case CommonsPackage.GENERAL_SYS_CONFIG__TENANT_ID:
 				return getTenantId();
+			case CommonsPackage.GENERAL_SYS_CONFIG__SSL_SUPPORTED:
+				return getSslSupported();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -250,6 +294,9 @@ public abstract class GeneralSysConfigImpl extends MinimalEObjectImpl.Container 
 				return;
 			case CommonsPackage.GENERAL_SYS_CONFIG__TENANT_ID:
 				setTenantId((String)newValue);
+				return;
+			case CommonsPackage.GENERAL_SYS_CONFIG__SSL_SUPPORTED:
+				setSslSupported((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -272,6 +319,9 @@ public abstract class GeneralSysConfigImpl extends MinimalEObjectImpl.Container 
 			case CommonsPackage.GENERAL_SYS_CONFIG__TENANT_ID:
 				setTenantId(TENANT_ID_EDEFAULT);
 				return;
+			case CommonsPackage.GENERAL_SYS_CONFIG__SSL_SUPPORTED:
+				setSslSupported(SSL_SUPPORTED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -292,6 +342,8 @@ public abstract class GeneralSysConfigImpl extends MinimalEObjectImpl.Container 
 				return MODIFICATION_TIME_EDEFAULT == null ? modificationTime != null : !MODIFICATION_TIME_EDEFAULT.equals(modificationTime);
 			case CommonsPackage.GENERAL_SYS_CONFIG__TENANT_ID:
 				return TENANT_ID_EDEFAULT == null ? tenantId != null : !TENANT_ID_EDEFAULT.equals(tenantId);
+			case CommonsPackage.GENERAL_SYS_CONFIG__SSL_SUPPORTED:
+				return SSL_SUPPORTED_EDEFAULT == null ? sslSupported != null : !SSL_SUPPORTED_EDEFAULT.equals(sslSupported);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -381,6 +433,8 @@ public abstract class GeneralSysConfigImpl extends MinimalEObjectImpl.Container 
 		result.append(modificationTime);
 		result.append(", tenantId: ");
 		result.append(tenantId);
+		result.append(", sslSupported: ");
+		result.append(sslSupported);
 		result.append(')');
 		return result.toString();
 	}

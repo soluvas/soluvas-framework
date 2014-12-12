@@ -1533,7 +1533,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imageId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception"/>
-  <eClassifiers xsi:type="ecore:EClass" name="GeneralSysConfig" abstract="true" eSuperTypes="#//Expandable #//SysConfig"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GeneralSysConfig" abstract="true" eSuperTypes="#//Expandable #//SysConfig">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sslSupported" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Whether Wicket/Spring MVC controllers can require secure channel, and whether URI generators (used in Sitemaps, Atom Feeds, Canonical URIs, etc.) use HTTPS URIs. This should always be {@code true}.&#xA;&#xA;&lt;p>For development and debugging purposes (i.e. a bug is caused or made harder to diagnose due to SSL mechanism), this can be set to false. Otherwise, the development Tomcat/Undertow container should have SSL configured using self-signed (wildcard?) certificates.&#xA;&#xA;&lt;p>For production purpose, when the customer doesn't have an SSL certificate yet, this can be disabled. But such scenario should be temporary and SSL should be enabled whenever possible."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Organization" eSuperTypes="#//Identifiable #//SchemaVersionable #//NameContainer">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="schemaVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
         changeable="false" defaultValueLiteral="1"/>
