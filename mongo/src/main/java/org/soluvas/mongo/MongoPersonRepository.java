@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
@@ -31,10 +32,12 @@ import org.soluvas.data.person.PersonRepository;
 
 import scala.util.Try;
 
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
@@ -477,6 +480,24 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final String customerRole = (String) object.get("customerRole");
 		log.debug("Person {}'s customerRole is {}", personId, customerRole);
 		return customerRole;
+	}
+
+	@Override
+	public Set<String> findAllSlugsByStatus(StatusMask statusMask) {
+		final BasicDBObject query = new BasicDBObject();
+		augmentQueryForStatusMask(query, statusMask);
+		return findSecondary(query, new BasicDBObject(ImmutableMap.of("slug", true, "_id", false)),
+				null, 0, 0, new CursorFunction<Set<String>>() {
+					@Override
+					public Set<String> apply(DBCursor cursor) throws Exception {
+						return FluentIterable.from(cursor).transform(new Function<DBObject, String>() {
+							@Override
+							public String apply(DBObject input) {
+								return (String) input.get("slug");
+							}
+						}).toSet();
+					}
+				}, "findAllSlugsByStatus", statusMask);
 	}
 
 //	@Override

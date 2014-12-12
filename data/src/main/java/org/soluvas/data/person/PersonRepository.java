@@ -2,6 +2,7 @@ package org.soluvas.data.person;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
@@ -98,6 +99,8 @@ public interface PersonRepository extends
 	
 	@Nullable
 	String getCustomerRoleByPersonId(String personId);
+
+	public Set<String> findAllSlugsByStatus(StatusMask statusMask);
 	
 	/**
 	 * @param statusMask

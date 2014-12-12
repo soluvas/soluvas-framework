@@ -554,20 +554,22 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	@Override
 	public boolean existByCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setNullCustomerRole(Collection<String> customerRoleIds) {
-		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getCustomerRoleByPersonId(String personId) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Set<String> findAllSlugsByStatus(StatusMask statusMask) {
+		throw new UnsupportedOperationException();
 	}
 
 }

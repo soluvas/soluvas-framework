@@ -312,87 +312,79 @@ public class EmfPersonRepository extends
 
 	@Override
 	public Page<Person> findAll(StatusMask statusMask, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public long count(StatusMask statusMask) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<Person> findAll(StatusMask statusMask, Collection<String> ids) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<Person> findAllBySecRoleIds(StatusMask statusMask,
 			Collection<String> secRoleIds) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<Person> findAllCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Page<Person> findBySearchText(
 			Collection<AccountStatus> accountStatuses, String searchText,
 			Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
 			Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public long countBySearchText(Collection<AccountStatus> accountStatus,
 			String searchText) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public long countByStatuses(Collection<AccountStatus> accountStatuses) {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean existByCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void setNullCustomerRole(Collection<String> customerRoleIds) {
-		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException();		
 	}
 
 	@Override
 	public String getCustomerRoleByPersonId(String personId) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Set<String> findAllSlugsByStatus(StatusMask statusMask) {
+		throw new UnsupportedOperationException();
 	}
 
 }
