@@ -66,5 +66,13 @@ public class Projection {
 	public Set<String> getExcludedFields() {
 		return excludedFields;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Projection{" +
+				"idIncluded=" + idIncluded +
+				", includedFields=" + includedFields +
+				", excludedFields=" + excludedFields +
+				'}';
+	}
 }

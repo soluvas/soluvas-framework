@@ -1,17 +1,13 @@
 package org.soluvas.mongo;
 
-import java.io.Closeable;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-import javax.annotation.PreDestroy;
-
+import com.google.code.morphia.Morphia;
+import com.google.code.morphia.mapping.DefaultCreator;
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.*;
+import com.mongodb.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -24,40 +20,17 @@ import org.soluvas.commons.impl.EmailImpl;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.DataException;
-import org.soluvas.data.domain.Page;
-import org.soluvas.data.domain.PageImpl;
-import org.soluvas.data.domain.Pageable;
-import org.soluvas.data.domain.Projection;
-import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.*;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
-import com.google.code.morphia.Morphia;
-import com.google.code.morphia.mapping.DefaultCreator;
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.mongodb.BasicDBObject;
-import com.mongodb.BulkWriteOperation;
-import com.mongodb.BulkWriteResult;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-import com.mongodb.MongoException;
-import com.mongodb.ReadPreference;
-import com.mongodb.WriteResult;
-import com.mongodb.util.JSON;
+import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * {@link PagingAndSortingRepository} implemented using MongoDB, with {@link SchemaVersionable} support.
@@ -689,6 +662,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			CursorFunction<R> func, String methodName, @Nullable Object... params) {
 		final long startTime = System.currentTimeMillis();
 		final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").skipNulls().join(params) : "") + ")";
+		log.trace("Find {} {} {} fields={} sort={} page={}/{} for method {}… db.{}.find({}, {}).sort({}).skip({}).limit({})",
+				coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature,
+				collName, query, fields, sort, skip, limit);
 		Integer cursorSize = null;
 		try (final DBCursor cursor = coll.find(query, fields).addSpecial("$comment", Thread.currentThread().getName() + ": " + methodSignature)
 			.sort(sort).skip((int) skip).limit((int) limit)) {
@@ -708,7 +684,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 						final int millis = (int) explain.get("millis");
 						log.warn("Slow find {} {} {} fields={} sort={} page={}/{} for method {} size {} took {}ms (DB scanned {} to get {} for {}ms, {}% efficiency). db.{}.find({}, {}).sort({}).skip({}).limit({}).explain() >> {}",
 								coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration,
-								nscanned, n, millis, efficiency, collName, JSON.serialize(query), JSON.serialize(fields), JSON.serialize(sort), skip, limit, explain);
+								nscanned, n, millis, efficiency, collName, query, fields, sort, skip, limit, explain);
 					} catch (Exception e) {
 						log.warn(String.format("Slow find %s %s %s fields=%s sort=%s page=%s/%s for method %s size %s took %sms. explain() throws error",
 								coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, cursorSize, duration),
