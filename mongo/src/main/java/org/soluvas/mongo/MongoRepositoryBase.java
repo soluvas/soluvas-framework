@@ -20,6 +20,7 @@ import org.soluvas.commons.impl.EmailImpl;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.DataException;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.*;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.repository.CrudRepository;

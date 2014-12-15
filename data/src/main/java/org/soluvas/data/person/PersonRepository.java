@@ -13,6 +13,7 @@ import org.soluvas.data.SlugLookup;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Projection;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.Trashable;
 
@@ -91,7 +92,9 @@ public interface PersonRepository extends
 	boolean existByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
 	
 	boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds);
-	
+
+	Page<Person> findAll(StatusMask statusMask, Projection projection, Pageable pageable);
+
 	long count(StatusMask statusMask);
 	
 	long countByStatuses(Collection<AccountStatus> accountStatuses);
@@ -102,7 +105,9 @@ public interface PersonRepository extends
 	String getCustomerRoleByPersonId(String personId);
 
 	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask);
-	
+
+	ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask, Pageable pageable);
+
 	/**
 	 * @param statusMask
 	 * @param slug

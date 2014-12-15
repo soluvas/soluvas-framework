@@ -23,10 +23,7 @@ import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.UntrashResult;
-import org.soluvas.data.domain.Page;
-import org.soluvas.data.domain.PageImpl;
-import org.soluvas.data.domain.Pageable;
-import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.*;
 import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
@@ -337,6 +334,11 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
+	public Page<Person> findAll(StatusMask statusMask, Projection projection, Pageable pageable) {
+		return null;
+	}
+
+	@Override
 	public List<Person> findAllCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
 		throw new UnsupportedOperationException();
@@ -384,6 +386,11 @@ public class EmfPersonRepository extends
 
 	@Override
 	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask, Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
 

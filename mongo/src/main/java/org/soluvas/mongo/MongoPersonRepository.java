@@ -21,11 +21,7 @@ import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.UntrashResult;
-import org.soluvas.data.domain.CappedRequest;
-import org.soluvas.data.domain.Page;
-import org.soluvas.data.domain.PageRequest;
-import org.soluvas.data.domain.Pageable;
-import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.*;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.person.PersonRepository;
 
@@ -217,6 +213,18 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		augmentQueryForStatusMask(query, statusMask);
 		final Page<Person> page = findAllByQuery(query, pageable);
 		return page;
+	}
+
+	@Override
+	public Page<Person> findAll(StatusMask statusMask, Projection projection, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		augmentQueryForStatusMask(query, statusMask);
+		final long total = count(statusMask);
+		final ImmutableList<Person> people = findSecondary(query, getProjectionDBObject(projection),
+				MongoUtils.getSort(pageable.getSort()),
+				pageable.getOffset(), pageable.getPageSize(),
+				"findAll", statusMask, projection);
+		return new PageImpl<>(people, pageable, total);
 	}
 
 	@Override
@@ -487,6 +495,25 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		augmentQueryForStatusMask(query, statusMask);
 		return findSecondary(query, new BasicDBObject(ImmutableMap.of("slug", true, "_id", false)),
 				null, 0, 0, new CursorFunction<ImmutableSet<String>>() {
+					@Override
+					public ImmutableSet<String> apply(DBCursor cursor) throws Exception {
+						return FluentIterable.from(cursor).transform(new Function<DBObject, String>() {
+							@Override
+							public String apply(DBObject input) {
+								return (String) input.get("slug");
+							}
+						}).toSet();
+					}
+				}, "findAllSlugsByStatus", statusMask);
+	}
+
+	@Override
+	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		final BasicDBObject sort = MongoUtils.getSort(pageable.getSort());
+		augmentQueryForStatusMask(query, statusMask);
+		return findSecondary(query, new BasicDBObject(ImmutableMap.of("slug", true, "_id", false)),
+				sort, pageable.getOffset(), pageable.getPageSize(), new CursorFunction<ImmutableSet<String>>() {
 					@Override
 					public ImmutableSet<String> apply(DBCursor cursor) throws Exception {
 						return FluentIterable.from(cursor).transform(new Function<DBObject, String>() {
