@@ -79,11 +79,13 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(ImageManagerImpl.class);
+	
 	private String maleDefaultPhotoId;
 	private String femaleDefaultPhotoId;
 	private String unknownDefaultPhotoId;
 	private WebAddress webAddress;
 	final Map<ImageType, ImageRepository> imageRepos;
+	private boolean sslSupported;
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,8 +96,9 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	}
 	
 	@Inject
-	public ImageManagerImpl(WebAddress webAddress, Map<ImageType, ImageRepository> imageRepos) {
+	public ImageManagerImpl(boolean sslSupported, WebAddress webAddress, Map<ImageType, ImageRepository> imageRepos) {
 		super();
+		this.sslSupported = sslSupported;
 		this.webAddress = webAddress;
 		this.imageRepos = imageRepos;
 	}
@@ -422,6 +425,19 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		
 		return importedCount;
 	}
+	
+	/**
+	 * Return HTTPS URI if {@link #sslSupported}.
+	 * @param insecureImageUri
+	 * @return
+	 */
+	protected String getSecurableUri(String insecureImageUri) {
+		if (sslSupported) {
+			return insecureImageUri.replaceFirst("^http:", "https:");
+		} else {
+			return insecureImageUri;
+		}
+	}
 
 	private DisplayImage grabDisplayImage(ImageType namespace,
 			List<org.soluvas.image.store.ImageStyle> styleDefs, @Nullable final String imageId,
@@ -431,7 +447,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		
 		if (image != null) {
 			if (style == ImageStyles.ORIGINAL) {
-				displayImage.setSrc(image.getUri());
+				displayImage.setSrc(getSecurableUri(image.getUri()));
 				displayImage.setAlt(image.getName());
 				displayImage.setTitle(image.getName());
 //				TODO: where is original width & height?
@@ -439,7 +455,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 //				displayImage.setHeight(image.getHeight());
 			} else if (image.getStyles() != null && image.getStyles().get(styleKey) != null
 					&& image.getStyles().get(styleKey).getUri() != null) {
-				displayImage.setSrc(image.getStyles().get(styleKey).getUri());
+				displayImage.setSrc(getSecurableUri(image.getStyles().get(styleKey).getUri()));
 				displayImage.setAlt(image.getName());
 				displayImage.setTitle(image.getName());
 			} else {
@@ -490,7 +506,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 		if (image != null) {
 			if (image.getStyles() != null && image.getStyles().get(styleKey) != null
 					&& image.getStyles().get(styleKey).getUri() != null) {
-				displayImage.setSrc(image.getStyles().get(styleKey).getUri());
+				displayImage.setSrc(getSecurableUri(image.getStyles().get(styleKey).getUri()));
 				displayImage.setAlt(image.getName());
 				displayImage.setTitle(image.getName());
 			} else {
@@ -741,7 +757,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				log.debug("Photo id {}", personImage.getId());
 				final StyledImage personThumbnailImage = personImage.getStyles().get("thumbnail");
 				if (personThumbnailImage != null) {
-					return personThumbnailImage.getUri();
+					return getSecurableUri(personThumbnailImage.getUri());
 				} else {
 					log.warn("Cannot get thumbnail image {} for person {} using {}", photoId, person.getId(), getPersonImageRepository());
 					return getPersonPhotoUri(person.getGender());
