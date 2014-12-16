@@ -62,6 +62,8 @@ public class MultiTenantWebConfig implements TenantSelector {
 	private Environment env;
 	@Inject
 	private MultiTenantConfig tenantConfig;
+	@Inject
+	private MultiTenantWebAddressConfig webAddressConfig;
 	
 	/**
 	 * @todo Replace with annotation https://jira.springsource.org/browse/SPR-5192 when it's supported.
@@ -216,12 +218,12 @@ public class MultiTenantWebConfig implements TenantSelector {
 	@Bean @Scope(value="request")
 	public WebAddress webAddress() throws TenantNotFoundException {
 		@Nullable
-		final WebAddress webAddress = tenantConfig.webAddressMap().get(tenantRef().getTenantId());
+		final WebAddress webAddress = webAddressConfig.webAddressMap().get(tenantRef().getTenantId());
 		if (webAddress != null) {
 			return webAddress;
 		} else {
 			throw new TenantNotFoundException(String.format("Unknown tenant WebAddress '%s'. %s available WebAddresses are for: %s",
-					tenantRef().getTenantId(), tenantConfig.webAddressMap().size(), tenantConfig.webAddressMap().keySet()));
+					tenantRef().getTenantId(), webAddressConfig.webAddressMap().size(), webAddressConfig.webAddressMap().keySet()));
 		}
 	}
 

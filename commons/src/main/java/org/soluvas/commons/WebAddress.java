@@ -46,6 +46,8 @@ public interface WebAddress extends Positionable, BundleAware, ResourceAware, Ex
 	 * @generated
 	 */
 	String getBaseUri();
+	
+//	String getRealBaseUri(boolean secure);
 
 	/**
 	 * Sets the value of the '{@link org.soluvas.commons.WebAddress#getBaseUri <em>Base Uri</em>}' attribute.
@@ -122,6 +124,8 @@ public interface WebAddress extends Positionable, BundleAware, ResourceAware, Ex
 	 * @generated
 	 */
 	String getImagesUri();
+	
+//	String getRealImagesUri(boolean secure);
 
 	/**
 	 * Sets the value of the '{@link org.soluvas.commons.WebAddress#getImagesUri <em>Images Uri</em>}' attribute.
@@ -147,6 +151,8 @@ public interface WebAddress extends Positionable, BundleAware, ResourceAware, Ex
 	 * @generated
 	 */
 	String getSkinUri();
+	
+//	String getRealSkinUri(boolean secure);
 
 	/**
 	 * Sets the value of the '{@link org.soluvas.commons.WebAddress#getSkinUri <em>Skin Uri</em>}' attribute.
@@ -157,7 +163,7 @@ public interface WebAddress extends Positionable, BundleAware, ResourceAware, Ex
 	 * @generated
 	 */
 	void setSkinUri(String value);
-
+	
 	/**
 	 * Returns the value of the '<em><b>Js Uri</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -172,6 +178,8 @@ public interface WebAddress extends Positionable, BundleAware, ResourceAware, Ex
 	 * @generated
 	 */
 	String getJsUri();
+	
+//	String getRealJsUri(boolean secure);
 
 	/**
 	 * Sets the value of the '{@link org.soluvas.commons.WebAddress#getJsUri <em>Js Uri</em>}' attribute.

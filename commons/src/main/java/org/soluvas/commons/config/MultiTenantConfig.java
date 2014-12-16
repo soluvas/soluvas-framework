@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -29,7 +28,6 @@ import org.soluvas.commons.Network;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.TenantSource;
-import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.commons.tenant.TenantRepositoryListener;
 import org.soluvas.commons.tenant.TenantsStarting;
@@ -118,7 +116,6 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 
 	private final Map<String, EventBus> eventBusMap = new LinkedHashMap<>();
 	private final Map<String, File> dataDirMap = new LinkedHashMap<>();
-	private final Map<String, WebAddress> webAddressMap = new LinkedHashMap<>();
 
 	public static String getFqdn() {
 		final String fqdn;
@@ -225,7 +222,6 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 		
 		initEventBusMap();
 		initDataDirMap();
-		initWebAddressMap();
 		
 		if (tenantRepo != null) {
 			tenantRepo.addListener(this);
@@ -286,59 +282,6 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 		return Collections.unmodifiableMap(dataDirMap);
 	}
 
-	private void createWebAddressAndPut(String tenantId, AppManifest appManifest, @Nullable File dataDir) {
-		final Map<String, Object> scope = new HashMap<>();
-		scope.put("appId", app.getId());
-		scope.put("tenantId", tenantId);
-		scope.put("tenantEnv", tenantEnv);
-		scope.put("appDomain", appDomain);
-		scope.put("domain", appManifest.getDomain());
-		scope.put("fqdn", getFqdn());
-		scope.put("webHost", appManifest.getWebHost());
-		final OnDemandXmiLoader<WebAddress> loader;
-		
-		final String webAddressRes = "/META-INF/template.WebAddress.xmi";
-		if (dataDir != null) {
-			final File webAddressFile = new File(dataDir, "model/" + tenantId + "_" + tenantEnv + ".WebAddress.xmi");
-			if (webAddressFile.exists()) {
-				log.info("Tenant '{}' WebAddress file '{}' exists, loading WebAddress model from file",
-						tenantId, webAddressFile);
-				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, webAddressFile, scope);
-			} else {
-				log.info("Tenant '{}' WebAddress file '{}' does not exist, loading generic WebAddress model from classpath: {}",
-						tenantId, webAddressFile, webAddressRes);
-				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantConfig.class, webAddressRes, scope);
-			}
-		} else {
-			log.info("Tenant '{}' has no data dir mapping, loading generic WebAddress model from classpath: {}",
-					tenantId, dataDir, webAddressRes);
-			loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantConfig.class, webAddressRes, scope);
-		}
-		
-//		final String tenantKey = tenant.getKey() + "_" + tenantEnv;
-//				return new StaticXmiLoader<WebAddress>(CommonsPackage.eINSTANCE,
-//						new File(dataFolder(), "model/custom.WebAddress.xmi").toString()).get();
-		final WebAddress webAddress = loader.get();
-		webAddressMap.put(tenantId, webAddress);
-	}
-	
-	private void initWebAddressMap() {
-		for (final Map.Entry<String, AppManifest> tenant : tenantMap().entrySet()) {
-			final String tenantId = tenant.getKey();
-			final File dataDir = dataDirMap.get(tenantId);
-			createWebAddressAndPut(tenantId, tenant.getValue(), dataDir);
-		}
-		log.info("Initialized WebAddressMap with {} entries: {}", webAddressMap.size(), webAddressMap.keySet());
-	}
-
-	/**
-	 * @return Unmodifiable {@link Map} of tenant {@link WebAddress}es.
-	 */
-	@Bean
-	public Map<String, WebAddress> webAddressMap() {
-		return Collections.unmodifiableMap(webAddressMap);
-	}
-
 	@Override
 	public void onTenantsStarting(TenantsStarting starting) {
 		for (Map.Entry<String, AppManifest> tenant : starting.getAddeds().entrySet()) {
@@ -352,8 +295,6 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 			final File dataDir = new File(workspaceDir, dataDirName);
 			dataDirMap.put(tenant.getKey(), dataDir);
 			log.info("Registered dataDir for tenant '{}'", tenantId, dataDir);
-			// WebAddress
-			createWebAddressAndPut(tenantId, tenant.getValue(), dataDir);
 		}
 	}
 
@@ -361,9 +302,6 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 	public void onTenantsStopping(TenantsStopping stopping) {
 		for (Map.Entry<String, AppManifest> tenant : stopping.getTenants().entrySet()) {
 			final String tenantId = tenant.getKey();
-			// WebAddress
-			webAddressMap.remove(tenantId);
-			log.info("Destroyed WebAddress for tenant '{}'", tenantId);
 			// DataDir
 			final File dataDir = dataDirMap.remove(tenantId);
 			log.info("Unregistered dataDir for tenant '{}': {}", tenantId, dataDir);

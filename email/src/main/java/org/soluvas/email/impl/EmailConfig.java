@@ -7,7 +7,7 @@ import javax.inject.Named;
 import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.config.CommonsWebConfig;
-import org.soluvas.commons.config.MultiTenantConfig;
+import org.soluvas.commons.config.MultiTenantWebAddressConfig;
 import org.soluvas.commons.tenant.TenantBeans;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.email.EmailCatalog;
@@ -33,7 +33,7 @@ public class EmailConfig {
 	@Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
 	private EventBus appEventBus;
 	@Inject
-	private MultiTenantConfig tenantConfig;
+	private MultiTenantWebAddressConfig webAddressConfig;
 	@Autowired(required=false) @Nullable
 	private TenantRepository<?> tenantRepo;
 	
@@ -75,7 +75,7 @@ public class EmailConfig {
 			@Override
 			protected EmailManagerImpl create(String tenantId, AppManifest appManifest) throws Exception {
 //					final EventBus tenantEventBus = tenantConfig.eventBusMap().get(tenantId);
-				final WebAddress webAddress = tenantConfig.webAddressMap().get(tenantId);
+				final WebAddress webAddress = webAddressConfig.webAddressMap().get(tenantId);
 				final EmailManagerImpl emailMgr = new EmailManagerImpl(emailCatalog(), layoutClass, layoutNsPrefix,
 						layoutName, smtpHost, smtpPort, smtpUser, smtpPassword,
 						smtpSecurity, appManifest, webAddress);
