@@ -104,7 +104,7 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 	@PostConstruct
 	public void init() {
 		final ImmutableMap<String, AppManifest> initialTenantMap = tenantConfig.tenantMap();
-		log.info("Registering {} subscribers for {} tenants: {}",
+		log.debug("Registering {} subscribers for {} tenants: {}",
 				getClass().getName(), initialTenantMap.size(), initialTenantMap.keySet());
 		for (final Map.Entry<String, AppManifest> tenant : initialTenantMap.entrySet()) {
 			createSubscribers(tenant.getKey(), tenant.getValue(), "Init");
@@ -132,7 +132,7 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 				getClass().getName(), tenantId, existing != null ? existing.size() : null);
 		try (Closeable cl = CommandRequestAttributes.withMdc(tenantId)) {
 			final List<?> subscribers = onReady(tenantId, appManifest);
-			log.info("Subscribing {} objects to '{}' EventBus: {}. Reason: {}",
+			log.debug("Subscribing {} objects to '{}' EventBus: {}. Reason: {}",
 					subscribers.size(), tenantId, subscribers, reason);
 			final EventBus tenantEventBus = tenantConfig.eventBusMap().get(tenantId);
 			subscriberMap.put(tenantId, ImmutableList.copyOf(subscribers));
@@ -154,7 +154,7 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 				"Cannot unsubscribe %s tenant '%s' (reason: %s) because subscribers not found, createSubscribers() never called? %s available: %s",
 				getClass().getName(), tenantId, reason, subscriberMap.size(), subscriberMap.keySet()); 
 		final List<Object> subscribers = subscriberMap.get(tenantId);
-		log.info("Unsubscribing {} objects from '{}' EventBus: {}. Reason: {}",
+		log.debug("Unsubscribing {} objects from '{}' EventBus: {}. Reason: {}",
 				subscribers.size(), tenantId, subscribers, reason);
 		for (Object subscriber : subscribers) {
 			tenantEventBus.unregister(subscriber);
