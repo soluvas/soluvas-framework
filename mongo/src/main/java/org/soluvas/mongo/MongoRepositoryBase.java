@@ -1,13 +1,17 @@
 package org.soluvas.mongo;
 
-import com.google.code.morphia.Morphia;
-import com.google.code.morphia.mapping.DefaultCreator;
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.*;
-import com.mongodb.*;
+import java.io.Closeable;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -20,18 +24,39 @@ import org.soluvas.commons.impl.EmailImpl;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.commons.util.Profiled;
 import org.soluvas.data.DataException;
-import org.soluvas.data.StatusMask;
-import org.soluvas.data.domain.*;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Projection;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
-import javax.annotation.Nullable;
-import javax.annotation.PreDestroy;
-import java.io.Closeable;
-import java.io.IOException;
-import java.util.*;
+import com.google.code.morphia.Morphia;
+import com.google.code.morphia.mapping.DefaultCreator;
+import com.google.common.base.Function;
+import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+import com.mongodb.BasicDBObject;
+import com.mongodb.BulkWriteOperation;
+import com.mongodb.BulkWriteResult;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.MongoException;
+import com.mongodb.ReadPreference;
+import com.mongodb.WriteResult;
 
 /**
  * {@link PagingAndSortingRepository} implemented using MongoDB, with {@link SchemaVersionable} support.
@@ -61,8 +86,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				return morphia.fromDBObject(implClass, input);
 			} catch (Exception e) {
 				throw new MongoRepositoryException(e,
-						"Cannot deserialize MongoDB object to %s: %s",
-								entityClass.getName(), input);
+						"%s: Cannot deserialize MongoDB object to %s: %s",
+								db.getName(), entityClass.getName(), input);
 			}
 		}
 	}
@@ -150,6 +175,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	protected final String mongoUri;
 	protected final boolean migrationEnabled;
 	protected final boolean autoExplainSlow;
+	protected final DB db;
 
 	/**
 	 * @param intfClass
@@ -178,6 +204,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			switch (readPattern) {
 			case PRIMARY:
 				final DB primDb = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
+				db = primDb;
 				Preconditions.checkState(primDb.getMongo().getReadPreference() == ReadPreference.primary(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo primDb %s",
 						ReadPreference.primary(), primDb.getMongo().getReadPreference(), primDb.getMongo());
@@ -189,6 +216,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				break;
 			case SECONDARY_PREFERRED:
 				final DB spDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
+				db = spDb;
 				Preconditions.checkState(spDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo spDb %s",
 						ReadPreference.secondaryPreferred(), spDb.getMongo().getReadPreference(), spDb.getMongo());
@@ -200,6 +228,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				break;
 			case DUAL:
 				final DB primaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
+				db = primaryDb;
 				Preconditions.checkState(primaryDb.getMongo().getReadPreference() == ReadPreference.primary(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo primaryDb %s",
 						ReadPreference.primary(), primaryDb.getMongo().getReadPreference(), primaryDb.getMongo());
@@ -328,7 +357,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		log.info("Connecting to MongoDB database {}/{} as {} for {}",
 				realMongoUri.getHosts(), realMongoUri.getDatabase(), realMongoUri.getUsername(), collName);
 		try {
-			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
+			db = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
 			primary = db.getCollection(collName);
 			secondary = primary;
 			morphia = new Morphia();
@@ -380,8 +409,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			final List<T> entities = findSecondary(null, null, sortQuery, pageable.getOffset(), pageable.getPageSize(), "findAll");
 			return new PageImpl<>(entities, pageable, total);
 		} catch (Exception e) {
-			throw new MongoRepositoryException(e, "Cannot findAll %s sort=%s skip=%s limit=%s on %s",
-					collName, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
+			throw new MongoRepositoryException(e, "%s: Cannot findAll %s sort=%s skip=%s limit=%s on %s",
+					db.getName(), collName, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
 		}
 	}
 
@@ -396,8 +425,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 					sortQuery, pageable.getOffset(), pageable.getPageSize(), "findAllFields", projection);
 			return new PageImpl<>(entities, pageable, total);
 		} catch (Exception e) {
-			throw new MongoRepositoryException(e, "Cannot findAll %s projection=%s sort=%s skip=%s limit=%s on %s",
-					collName, projection, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
+			throw new MongoRepositoryException(e, "%s: Cannot findAll %s projection=%s sort=%s skip=%s limit=%s on %s",
+					db.getName(), collName, projection, sortQuery, pageable.getOffset(), pageable.getPageSize(), entityClass);
 		}
 	}
 
@@ -448,8 +477,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			if (writeResult.getLastError() != null
 					&& writeResult.getLastError().getException() != null) {
 				throw new MongoRepositoryException(writeResult.getLastError()
-						.getException(), "Cannot add %d %s documents: %s",
-						entities.size(), collName, ids);
+						.getException(), "%s: Cannot add %d %s documents: %s",
+						db.getName(), entities.size(), collName, ids);
 			}
 			log.info("Added {} {} documents: {}", entities.size(), collName,
 					ids);
@@ -513,7 +542,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			final WriteResult writeResult = primary.update(new BasicDBObject("_id", entityId), dbo);
 			if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
 				throw new MongoRepositoryException(writeResult.getLastError().getException(),
-						"Cannot modify %s documents '%s'", collName, entityId);
+						"%s: Cannot modify %s documents '%s'", db.getName(), collName, entityId);
 			}
 			log.info("Modified {} document '{}'", collName, entityId);
 			return ImmutableList.of(entity);
@@ -592,7 +621,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final WriteResult result = primary.remove(new BasicDBObject("_id", new BasicDBObject("$in", ids)));
 		if (result.getLastError().getException() != null) {
 			throw new MongoRepositoryException(result.getLastError().getException(),
-					"Cannot delete %s %s", collName, ids);
+					"%s: Cannot delete %s %s", db.getName(), collName, ids);
 		}
 		log.info("Deleted {} out of {} {} ({})", result.getN(), ids.size(), collName, ids);
 		return result.getN();
@@ -699,8 +728,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			
 			return applied;
 		} catch (Exception e) {
-			throw new MongoRepositoryException(e, "Cannot find %s %s %s fields=%s sort=%s page=%s/%s for method %s: %s",
-					coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, e);
+			throw new MongoRepositoryException(e, "%s: Cannot find %s %s %s fields=%s sort=%s page=%s/%s for method %s: %s",
+					db.getName(), coll.getDB().getMongo().getReadPreference(), collName, query, fields, sort, skip, limit, methodSignature, e);
 		}
 	}
 
@@ -929,8 +958,8 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		} catch (Exception e) {
 			// defer methodSignature calculation until necessary to save performance
 			final String methodSignature = getClass().getSimpleName() + "." + methodName + "(" + (params != null ? Joiner.on(", ").join(params) : "") + ")";
-			throw new MongoRepositoryException(e, "Cannot findOne %s %s %s fields=%s orderBy=%s for method %s: %s",
-					coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, e);
+			throw new MongoRepositoryException(e, "%s: Cannot findOne %s %s %s fields=%s orderBy=%s for method %s: %s",
+					db.getName(), coll.getDB().getMongo().getReadPreference(), collName, query, fields, orderBy, methodSignature, e);
 		}
 	}
 
