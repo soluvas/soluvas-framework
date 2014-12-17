@@ -403,10 +403,9 @@ public class EmfPersonRepository extends
 	@Override
 	public long countAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> custoemrRoleIds,
-			Pageable pageable) {
-		// TODO Auto-generated method stub
-		return 0;
+			CustomerRole customerRole, Collection<String> custoemrRoleIds) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -414,8 +413,7 @@ public class EmfPersonRepository extends
 			Collection<AccountStatus> accountStatuses,
 			CustomerRole customerRole, Collection<String> securityRoles,
 			Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -461,7 +461,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}
 		
 		if (securityRoles != null && !securityRoles.isEmpty()) {
-			query.put("securityRoleIds", securityRoles);
+			query.put("securityRoleIds", 
+					new BasicDBObject("$in", securityRoles));
 		}
 			
 		final Sort mySort;
@@ -490,8 +491,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			String keyword,
 			Collection<AccountStatus> accountStatuses,
 			CustomerRole customerRole, 
-			Collection<String> securityRoleIds,
-			Pageable pageable) {
+			Collection<String> securityRoleIds) {
 		
 		BasicDBObject query;
 		if (keyword != null) {

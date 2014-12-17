@@ -586,8 +586,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	@Override
 	public long countAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> custoemrRoleIds,
-			Pageable pageable) {
+			CustomerRole customerRole, Collection<String> custoemrRoleIds) {
 		throw new UnsupportedOperationException();
 	}
 
