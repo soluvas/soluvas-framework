@@ -19,6 +19,7 @@ import org.ektorp.support.DesignDocument;
 import org.ektorp.support.DesignDocument.View;
 import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
@@ -28,7 +29,11 @@ import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.UntrashResult;
-import org.soluvas.data.domain.*;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Projection;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.person.PersonRepository;
 import org.soluvas.data.push.RepositoryException;
 import org.soluvas.json.JsonUtils;
@@ -530,10 +535,9 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public Page<Person> findBySearchText(
-			Collection<AccountStatus> accountStatuses, final String searchText,
-			Pageable pageable) {
-		throw new UnsupportedOperationException("to be implemented");
+	public Page<Person> findAllByKeywordAndStatus(String searchText,
+			Collection<AccountStatus> accountStatuses, Pageable pageable) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -576,6 +580,22 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask, Pageable pageable) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public long countAllByKeywordAndRoles(String keyword,
+			Collection<AccountStatus> accountStatuses,
+			CustomerRole customerRole, Collection<String> custoemrRoleIds,
+			Pageable pageable) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Page<Person> findAllByKeywordAndRoles(String keyword,
+			Collection<AccountStatus> accountStatuses,
+			CustomerRole customerRole, Collection<String> securityRoles,
+			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.EnumNameFunction;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
@@ -21,7 +22,13 @@ import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.UntrashResult;
-import org.soluvas.data.domain.*;
+import org.soluvas.data.domain.CappedRequest;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.PageRequest;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Projection;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.person.PersonRepository;
 
@@ -165,7 +172,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	@SuppressWarnings("null")
 	@Override
 	public Page<Person> findBySearchText(StatusMask statusMask, @Nullable String searchText, Pageable pageable) {
-		final BasicDBObject queryBySearchText = getQueryBySearchText(searchText);
+		final BasicDBObject queryBySearchText = getQueryByKeyword(searchText);
 		augmentQueryForStatusMask(queryBySearchText, statusMask);
 		final Sort mySort;
 		if (pageable.getSort() != null) {
@@ -179,7 +186,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		return findAllByQuery(queryBySearchText, myPageable);
 	}
 	
-	private BasicDBObject getQueryBySearchText(String searchText) {
+	private BasicDBObject getQueryByKeyword(String searchText) {
 		final Pattern regex = Pattern.compile(Pattern.quote(searchText), Pattern.CASE_INSENSITIVE);
 		
 		final BasicDBObject nameQuery = new BasicDBObject("name", regex);
@@ -199,7 +206,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 
 	@Override
 	public long countBySearchText(StatusMask statusMask, String searchText) {
-		final BasicDBObject query = getQueryBySearchText(searchText);
+		final BasicDBObject query = getQueryByKeyword(searchText);
 		augmentQueryForStatusMask(query, statusMask);
 		
 		final long count = countByQuery(query);
@@ -399,10 +406,11 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public Page<Person> findBySearchText(
-			Collection<AccountStatus> accountStatuses, String searchText,
+	public Page<Person> findAllByKeywordAndStatus(
+			String keyword,
+			Collection<AccountStatus> accountStatuses, 
 			Pageable pageable) {
-		final BasicDBObject query = getQueryBySearchText(searchText);
+		final BasicDBObject query = getQueryByKeyword(keyword);
 		if (!accountStatuses.isEmpty()) {
 			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
 		}
@@ -418,6 +426,101 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		
 		return findAllByQuery(query, myPageable);
 	}
+	
+	/**
+	 * 
+	 * @param keyword (ID, name, emails and phone numbers)
+	 * @param accountStatuses
+	 * @param customerRole
+	 * @param securityRoles
+	 * @param pageable
+	 * @return
+	 */
+	@Override
+	public Page<Person> findAllByKeywordAndRoles(
+			String keyword,
+			Collection<AccountStatus> accountStatuses,
+			CustomerRole customerRole, 
+			Collection<String> securityRoles,
+			Pageable pageable) {
+		
+		BasicDBObject query;
+		if (keyword != null) {
+			query = getQueryByKeyword(keyword);
+		} else {
+			query = new BasicDBObject();
+		}
+		
+		if (accountStatuses != null && !accountStatuses.isEmpty()){
+			query.put("accountStatus", new BasicDBObject("$in", 
+					FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		}
+		
+		if (customerRole != null) { 
+			query.put("customerRole", customerRole.getId()); 
+		}
+		
+		if (securityRoles != null && !securityRoles.isEmpty()) {
+			query.put("securityRoleIds", securityRoles);
+		}
+			
+		final Sort mySort;
+		if (pageable.getSort() != null) {
+			mySort = pageable.getSort().and(new Sort(Direction.DESC, "modificationTime"));
+		} else {
+			mySort = new Sort(Direction.DESC, "modificationTime");
+		}
+		
+		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
+		log.debug("Query findAllByKeywordAndRoles {}", query);
+		return findAllByQuery(query, myPageable);
+	}
+	
+	/**
+	 * 
+	 * @param keyword (ID, name, emails and phone numbers)
+	 * @param accountStatuses
+	 * @param customerRole
+	 * @param securityRoleIds
+	 * @param pageable
+	 * @return
+	 */
+	@Override
+	public long countAllByKeywordAndRoles(
+			String keyword,
+			Collection<AccountStatus> accountStatuses,
+			CustomerRole customerRole, 
+			Collection<String> securityRoleIds,
+			Pageable pageable) {
+		
+		BasicDBObject query;
+		if (keyword != null) {
+			query = getQueryByKeyword(keyword);
+		} else {
+			query = new BasicDBObject();
+		}
+//		final BasicDBObject query = getQueryByKeyword(keyword);
+		
+		if (accountStatuses != null && !accountStatuses.isEmpty()){
+			query.put("accountStatus", new BasicDBObject("$in", 
+					FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+		}
+		
+		if (customerRole != null) { 
+			query.put("customerRole", customerRole.getId()); 
+		}
+		
+		if (securityRoleIds != null && !securityRoleIds.isEmpty()) {
+			query.put("securityRoleIds", 
+					new BasicDBObject("$in", securityRoleIds));
+		}
+		
+		return countByQuery(query);
+	}
+	
+//	private BasicDBObject findAllByKeywordAndRoles() {
+//		return null;
+//	}
 
 	@Override
 	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
@@ -442,7 +545,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	@Override
 	public long countBySearchText(Collection<AccountStatus> accountStatuses,
 			String searchText) {
-		final BasicDBObject query = getQueryBySearchText(searchText);
+		final BasicDBObject query = getQueryByKeyword(searchText);
 		if (!accountStatuses.isEmpty()) {
 			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
 		}

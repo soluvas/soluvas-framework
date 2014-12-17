@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
 import org.soluvas.data.GenericLookup;
@@ -71,7 +72,7 @@ public interface PersonRepository extends
 	
 	public Page<Person> findBySearchText(StatusMask statusMask, String searchText, Pageable pageable);
 	
-	public Page<Person> findBySearchText(Collection<AccountStatus> accountStatuses, String searchText, Pageable pageable);
+	public Page<Person> findAllByKeywordAndStatus(String searchText, Collection<AccountStatus> accountStatuses, Pageable pageable);
 	
 	public long countBySearchText(StatusMask statusMask, String searchText);
 	
@@ -107,6 +108,15 @@ public interface PersonRepository extends
 	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask);
 
 	ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask, Pageable pageable);
+
+	long countAllByKeywordAndRoles(String keyword,
+			Collection<AccountStatus> accountStatuses,
+			CustomerRole customerRole, Collection<String> custoemrRoleIds, Pageable pageable);
+
+	Page<Person> findAllByKeywordAndRoles(String keyword,
+			Collection<AccountStatus> accountStatuses,
+			CustomerRole customerRole, Collection<String> securityRoles,
+			Pageable pageable);
 
 	/**
 	 * @param statusMask
