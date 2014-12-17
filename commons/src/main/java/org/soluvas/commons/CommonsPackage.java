@@ -5433,13 +5433,22 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE__BOOKING_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 12;
 
 	/**
+	 * The feature id for the '<em><b>Payment Gateway Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER_ROLE__PAYMENT_GATEWAY_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 13;
+
+	/**
 	 * The number of structural features of the '<em>Customer Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 13;
+	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Get Schema Version</em>' operation.
@@ -9337,6 +9346,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCustomerRole_BookingEnabled();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Payment Gateway Enabled</em>'.
+	 * @see org.soluvas.commons.CustomerRole#isPaymentGatewayEnabled()
+	 * @see #getCustomerRole()
+	 * @generated
+	 */
+	EAttribute getCustomerRole_PaymentGatewayEnabled();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.CustomerRoleCatalog <em>Customer Role Catalog</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12518,6 +12538,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOMER_ROLE__BOOKING_ENABLED = eINSTANCE.getCustomerRole_BookingEnabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Payment Gateway Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER_ROLE__PAYMENT_GATEWAY_ENABLED = eINSTANCE.getCustomerRole_PaymentGatewayEnabled();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.CustomerRoleCatalogImpl <em>Customer Role Catalog</em>}' class.

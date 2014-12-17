@@ -20,6 +20,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#isAgentSalesReportEnabled <em>Agent Sales Report Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isTransactionHistoryEnabled <em>Transaction History Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isBookingEnabled <em>Booking Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -273,5 +274,31 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @generated
 	 */
 	void setBookingEnabled(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Payment Gateway Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Payment Gateway Enabled</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Payment Gateway Enabled</em>' attribute.
+	 * @see #setPaymentGatewayEnabled(boolean)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_PaymentGatewayEnabled()
+	 * @model
+	 * @generated
+	 */
+	boolean isPaymentGatewayEnabled();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Payment Gateway Enabled</em>' attribute.
+	 * @see #isPaymentGatewayEnabled()
+	 * @generated
+	 */
+	void setPaymentGatewayEnabled(boolean value);
 
 } // CustomerRole
