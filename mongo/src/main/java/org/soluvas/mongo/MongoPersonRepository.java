@@ -443,7 +443,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			CustomerRole customerRole, 
 			Collection<String> securityRoles,
 			Pageable pageable) {
-		final BasicDBObject query = getQueryByKeyword(keyword);
+		
+		BasicDBObject query;
+		if (keyword != null) {
+			query = getQueryByKeyword(keyword);
+		} else {
+			query = new BasicDBObject();
+		}
 		
 		if (accountStatuses != null && !accountStatuses.isEmpty()){
 			query.put("accountStatus", new BasicDBObject("$in", 
@@ -466,7 +472,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}
 		
 		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
-		
+		log.debug("Query findAllByKeywordAndRoles {}", query);
 		return findAllByQuery(query, myPageable);
 	}
 	
@@ -487,7 +493,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			Collection<String> securityRoleIds,
 			Pageable pageable) {
 		
-		final BasicDBObject query = getQueryByKeyword(keyword);
+		BasicDBObject query;
+		if (keyword != null) {
+			query = getQueryByKeyword(keyword);
+		} else {
+			query = new BasicDBObject();
+		}
+//		final BasicDBObject query = getQueryByKeyword(keyword);
 		
 		if (accountStatuses != null && !accountStatuses.isEmpty()){
 			query.put("accountStatus", new BasicDBObject("$in", 
