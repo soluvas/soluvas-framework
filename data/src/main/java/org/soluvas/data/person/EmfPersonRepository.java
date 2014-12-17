@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.IdPredicate;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonCatalog;
@@ -23,7 +24,11 @@ import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.UntrashResult;
-import org.soluvas.data.domain.*;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Projection;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 
@@ -344,12 +349,7 @@ public class EmfPersonRepository extends
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public Page<Person> findBySearchText(
-			Collection<AccountStatus> accountStatuses, String searchText,
-			Pageable pageable) {
-		throw new UnsupportedOperationException();
-	}
+	
 
 	@Override
 	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
@@ -392,6 +392,30 @@ public class EmfPersonRepository extends
 	@Override
 	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask, Pageable pageable) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Page<Person> findAllByKeywordAndStatus(String searchText,
+			Collection<AccountStatus> accountStatuses, Pageable pageable) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public long countAllByKeywordAndRoles(String keyword,
+			Collection<AccountStatus> accountStatuses,
+			CustomerRole customerRole, Collection<String> custoemrRoleIds,
+			Pageable pageable) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Page<Person> findAllByKeywordAndRoles(String keyword,
+			Collection<AccountStatus> accountStatuses,
+			CustomerRole customerRole, Collection<String> securityRoles,
+			Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
