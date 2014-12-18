@@ -292,4 +292,19 @@ public class NameUtils {
 	public static String normalizeEmail(@Nullable String email) {
 		return email != null ? email.toLowerCase().trim() : null;
 	}
+	
+	/**
+	 * Strips Unicode symbols, punctuations, and control characters; and collapses whitespaces to single spaces.
+	 * @param rawName
+	 * @return
+	 * @see <a href="http://www.regular-expressions.info/unicode.html">Unicode regular expressions</a>
+	 */
+	@Nullable
+	public static String stripSymbols(@Nullable String rawName) {
+//		return rawName != null ? rawName.replaceAll("(\\p{Symbol}|\\p{Punct}|\\p{Cntrl}|\\p{IsJoin_Control}|\\p{IsNoncharacter_Code_Point})+", "")
+//				.replaceAll("\\p{Space}+", " ") :
+//					null;
+		return rawName != null ? rawName.replaceAll("\\W+", " ").replaceAll("\\s+", " ") : null;
+	}
+	
 }
