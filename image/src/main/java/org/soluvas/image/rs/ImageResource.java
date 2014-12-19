@@ -54,14 +54,14 @@ public class ImageResource {
 	}*/
 
 	@GET @Path("detail")
-	public Map<ImageStyles, DisplayImage> findImagesByProductId(@QueryParam("imageId") String imagetId) {
+	public Map<ImageStyles, DisplayImage> findImagesByProductId(@QueryParam("imageId") String imageId) {
 		final Map<ImageStyles, DisplayImage> imageProductMap = new HashMap<>();
-		imageProductMap.put(ImageStyles.LARGE, imageMgr.getSafeImage(ImageTypes.PRODUCT, imagetId, ImageStyles.LARGE));
-		imageProductMap.put(ImageStyles.NORMAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imagetId, ImageStyles.NORMAL));
-		imageProductMap.put(ImageStyles.ORIGINAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imagetId, ImageStyles.ORIGINAL));
-		imageProductMap.put(ImageStyles.SMALL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imagetId, ImageStyles.SMALL));
-		imageProductMap.put(ImageStyles.THUMBNAIL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imagetId, ImageStyles.THUMBNAIL));
-		log.debug("find Image by {} result is {} ", imagetId, imageProductMap);
+		imageProductMap.put(ImageStyles.LARGE, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.LARGE));
+		imageProductMap.put(ImageStyles.NORMAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.NORMAL));
+		imageProductMap.put(ImageStyles.ORIGINAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.ORIGINAL));
+		imageProductMap.put(ImageStyles.SMALL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.SMALL));
+		imageProductMap.put(ImageStyles.THUMBNAIL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.THUMBNAIL));
+		log.debug("find Image by {} result is {} ", imageId, imageProductMap);
 		return imageProductMap;
 	}
 	
