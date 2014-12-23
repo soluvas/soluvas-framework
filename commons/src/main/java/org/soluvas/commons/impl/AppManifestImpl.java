@@ -1756,7 +1756,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 							break;
 						}
 					}
-					setWwwUsed(withoutTld.contains("."));
+					setWwwUsed(!withoutTld.contains("."));
 					log.trace("Setting wwwUsed={} from withoutTld '{}'", isWwwUsed(), withoutTld);
 				} else {
 					log.trace("wwwUsed was already set to {}", isWwwUsed());
