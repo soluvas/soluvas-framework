@@ -331,7 +331,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 	 * @throws NullPointerException
 	 */
 	public T get(String tenantId) throws TenantNotFoundException {
-		Preconditions.checkNotNull("Cannot get %s bean: tenantId argument cannot be null",
+		Preconditions.checkNotNull(tenantId, "Cannot get %s bean: tenantId argument cannot be null",
 				implClass.getName());
 		final ImmutableSet<String> tenantIds = keySet();
 		@Nullable

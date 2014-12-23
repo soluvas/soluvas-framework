@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 
+import com.google.common.base.Strings;
 import org.apache.felix.gogo.runtime.CommandProcessorImpl;
 import org.apache.felix.gogo.runtime.CommandSessionImpl;
 import org.apache.felix.gogo.runtime.threadio.ThreadIOImpl;
@@ -169,6 +170,7 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * @see #withSession(CommandSession)
 	 */
 	public static Closeable withTenant(String tenantId) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(tenantId), "tenantId must be specified");
 		final SimpleCommandProcessor shell = new SimpleCommandProcessor(new ThreadIOImpl());
 		final SimpleCommandSession session = new SimpleCommandSession(shell, 
 				new ByteArrayInputStream(new byte[] {}), new PrintStream(new ByteArrayOutputStream()), new PrintStream(new ByteArrayOutputStream()));
@@ -194,7 +196,8 @@ public class CommandRequestAttributes extends AbstractRequestAttributes {
 	 * @throws Exception
 	 */
 	public static <T> T withTenant(String tenantId, Callable<T> func) {
-		try (Closeable cl = withTenant(tenantId)) {
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(tenantId), "tenantId must be specified");
+		try (final Closeable cl = withTenant(tenantId)) {
 			return func.call();
 		} catch (Exception e) {
 			Throwables.propagate(e);
