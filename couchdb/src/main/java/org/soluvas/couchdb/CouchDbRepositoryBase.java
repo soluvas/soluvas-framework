@@ -2,7 +2,6 @@ package org.soluvas.couchdb;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -17,8 +16,6 @@ import javax.annotation.PreDestroy;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.params.BasicHttpParams;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ektorp.ComplexKey;
 import org.ektorp.CouchDbConnector;
@@ -26,10 +23,6 @@ import org.ektorp.DbAccessException;
 import org.ektorp.DocumentNotFoundException;
 import org.ektorp.ViewQuery;
 import org.ektorp.ViewResult.Row;
-import org.ektorp.http.HttpClient;
-import org.ektorp.http.StdHttpClient;
-import org.ektorp.impl.StdCouchDbConnector;
-import org.ektorp.impl.StdCouchDbInstance;
 import org.ektorp.support.DesignDocument;
 import org.ektorp.support.DesignDocument.View;
 import org.joda.time.DateTime;
@@ -169,9 +162,8 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	protected final Class<T> entityClass;
 	protected final Class<? extends T> implClass;
 	protected long currentSchemaVersion;
-	protected final String couchDbUri;
 	protected final String dbName;
-	protected StdCouchDbConnector dbConn;
+	protected CouchDbConnector dbConn;
 
 	protected DeleteMethod deleteMethod;
 	/**
@@ -203,21 +195,19 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 	/**
 	 * @param intfClass
 	 * @param currentSchemaVersion e.g. {@link PersonImpl#CURRENT_SCHEMA_VERSION}.
-	 * @param couchDbUri Scheme (http/https), username (optional), password (optional), port, and path, e.g. {@code http://localhost:5984}.
-	 * 	Excluding databaseName.
 	 * @param dbName Database name.
 	 * @param indexedFields
 	 * @param deleteMethod TODO
+	 * @param dbInstance See {@link CouchDbConfig#couchDbInstance()}.
 	 * @param collName
 	 */
-	protected CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String couchDbUri, String dbName, List<String> uniqueFields, Map<String, Integer> indexedFields,
-			DeleteMethod deleteMethod, @Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
+	protected CouchDbRepositoryBase(CouchDbConnector dbConn, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
+			String dbName, List<String> uniqueFields, Map<String, Integer> indexedFields, DeleteMethod deleteMethod,
+			@Nullable String statusProperty, Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
 		super();
 		this.entityClass = intfClass;
 		this.implClass = implClass;
 		this.currentSchemaVersion = currentSchemaVersion;
-		this.couchDbUri = couchDbUri;
 		this.dbName = dbName;
 		this.collName = StringUtils.uncapitalize(intfClass.getSimpleName());
 
@@ -259,30 +249,24 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		}));
 
 		// WARNING: couchDbUri may contain password!
-		final URI realCouchDbUri = URI.create(couchDbUri);
+		this.dbConn = dbConn;
+//		final URI realCouchDbUri = URI.create(couchDbUri);
 		this.log = LoggerFactory.getLogger(getClass().getName() + "/" + dbName + "/" + collName + "/" + currentSchemaVersion);
-		final String username = realCouchDbUri.getUserInfo() != null ? realCouchDbUri.getUserInfo().split(":")[0] : null;
-		log.info("Creating CouchDB connector {}:{}{} database {} as {} for {}",
-				realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
-		final long connectStart = System.currentTimeMillis();
-		try {
-//			final BasicHttpParams httpParams = new BasicHttpParams();
-			final HttpClient client = new StdHttpClient.Builder()
-				.connectionTimeout(60 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
-				.socketTimeout(60 * 1000) // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
-				.connectionManager(connMgr)
-				.url(couchDbUri).build();
-			final StdCouchDbInstance dbInstance = new StdCouchDbInstance(client, SoluvasObjectMapperFactory.INSTANCE);
-			dbConn = new StdCouchDbConnector(dbName, dbInstance, SoluvasObjectMapperFactory.INSTANCE);
-			final long connectDuration = System.currentTimeMillis() - connectStart;
-			log.info("Connected in {}ms to CouchDB connector {}:{}{} database {} as {} for {}",
-					connectDuration, realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
-			 // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
-//			Thread.sleep(3000);
-		} catch (Exception e) {
-			throw new CouchDbRepositoryException(e, "Cannot connect to CouchDB %s:%s%s database %s as %s for %s repository",
-					realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
-		}
+//		final String username = realCouchDbUri.getUserInfo() != null ? realCouchDbUri.getUserInfo().split(":")[0] : null;
+//		log.info("Creating CouchDB connector {}:{}{} database {} as {} for {}",
+//				realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
+//		final long connectStart = System.currentTimeMillis();
+//		try {
+//			dbConn = new StdCouchDbConnector(dbName, dbInstance, SoluvasObjectMapperFactory.INSTANCE);
+//			final long connectDuration = System.currentTimeMillis() - connectStart;
+//			log.info("Connected in {}ms to CouchDB connector {}:{}{} database {} as {} for {}",
+//					connectDuration, realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
+//			 // workaround for Cloudant: https://quikdo.atlassian.net/browse/HUB-36
+////			Thread.sleep(3000);
+//		} catch (Exception e) {
+//			throw new CouchDbRepositoryException(e, "Cannot connect to CouchDB %s:%s%s database %s as %s for %s repository",
+//					realCouchDbUri.getHost(), realCouchDbUri.getPort(), realCouchDbUri.getPath(), dbName, username, collName);
+//		}
 		beforeUpdateDesignDocument();
 		
 		DesignDocument design;
@@ -290,12 +274,12 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 			design = dbConn.get(DesignDocument.class, getDesignDocId());
 		} catch (DocumentNotFoundException e) {
 			design = new DesignDocument(getDesignDocId());
-			log.info("Creating new design document '{}'", design.getId());
+			log.info("{}» Creating new design document '{}'", dbName, design.getId());
 			dbConn.create(design);
 		}
 		updateDesignDocument(design);
-		log.info("Updating design document '{}' with {} views: {}", 
-				design.getId(), design.getViews().size(), design.getViews().keySet());
+		log.info("{}» Updating design document '{}' with {} views: {}", 
+				dbName, design.getId(), design.getViews().size(), design.getViews().keySet());
 		dbConn.update(design);
 //		final List<String> ensuredIndexes = new ArrayList<>();
 //		ensuredIndexes.addAll( MongoUtils.ensureUnique(coll, uniqueFields.toArray(new String[] {})) );
@@ -305,21 +289,20 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 
 	/**
 	 * Without status.
-	 * @param connMgr
 	 * @param intfClass
 	 * @param implClass
 	 * @param currentSchemaVersion
-	 * @param couchDbUri
 	 * @param dbName
 	 * @param deleteMethod TODO
 	 * @param uniqueFields
 	 * @param indexedFields
+	 * @param dbInstance See {@link CouchDbConfig#couchDbInstance()}.
 	 * @param collName
 	 */
-	protected CouchDbRepositoryBase(ClientConnectionManager connMgr, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
-			String couchDbUri, String dbName, DeleteMethod deleteMethod, List<String> uniqueFields, Map<String, Integer> indexedFields) {
-		this(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri, dbName, uniqueFields, indexedFields, 
-				deleteMethod, null, ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of());
+	protected CouchDbRepositoryBase(CouchDbConnector dbConn, Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
+			String dbName, DeleteMethod deleteMethod, List<String> uniqueFields, Map<String, Integer> indexedFields) {
+		this(dbConn, intfClass, implClass, currentSchemaVersion, dbName, uniqueFields, indexedFields, deleteMethod, 
+				null, ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of(), ImmutableSet.<E>of());
 	}
 
 	/**

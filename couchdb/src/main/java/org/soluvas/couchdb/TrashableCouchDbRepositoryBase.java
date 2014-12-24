@@ -9,8 +9,8 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import org.apache.http.conn.ClientConnectionManager;
 import org.ektorp.ComplexKey;
+import org.ektorp.CouchDbConnector;
 import org.ektorp.ViewQuery;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.data.StatusMask;
@@ -39,11 +39,10 @@ public abstract class TrashableCouchDbRepositoryBase<T extends Identifiable, E e
 		CouchDbRepositoryBase<T, E> implements Trashable<T, String> {
 
 	/**
-	 * @param connMgr
+	 * @param dbConn
 	 * @param intfClass
 	 * @param implClass
 	 * @param currentSchemaVersion
-	 * @param couchDbUri
 	 * @param dbName
 	 * @param deleteMethod TODO
 	 * @param uniqueFields
@@ -54,33 +53,32 @@ public abstract class TrashableCouchDbRepositoryBase<T extends Identifiable, E e
 	 * @param draftStatuses
 	 * @param voidStatuses
 	 */
-	public TrashableCouchDbRepositoryBase(ClientConnectionManager connMgr,
+	public TrashableCouchDbRepositoryBase(CouchDbConnector dbConn,
 			Class<T> intfClass, Class<? extends T> implClass,
-			long currentSchemaVersion, String couchDbUri, String dbName,
-			org.soluvas.couchdb.CouchDbRepositoryBase.DeleteMethod deleteMethod, List<String> uniqueFields,
-			Map<String, Integer> indexedFields, String statusProperty,
-			Set<E> activeStatuses, Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
-		super(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri,
+			long currentSchemaVersion, String dbName, org.soluvas.couchdb.CouchDbRepositoryBase.DeleteMethod deleteMethod,
+			List<String> uniqueFields, Map<String, Integer> indexedFields,
+			String statusProperty, Set<E> activeStatuses,
+			Set<E> inactiveStatuses, Set<E> draftStatuses, Set<E> voidStatuses) {
+		super(dbConn, intfClass, implClass, currentSchemaVersion,
 				dbName, uniqueFields, indexedFields, deleteMethod,
 				statusProperty, activeStatuses, inactiveStatuses, draftStatuses, voidStatuses);
 	}
 
 	/**
-	 * @param connMgr
+	 * @param dbConn
 	 * @param intfClass
 	 * @param implClass
 	 * @param currentSchemaVersion
-	 * @param couchDbUri
 	 * @param dbName
 	 * @param deleteMethod TODO
 	 * @param uniqueFields
 	 * @param indexedFields
 	 */
-	public TrashableCouchDbRepositoryBase(ClientConnectionManager connMgr,
+	public TrashableCouchDbRepositoryBase(CouchDbConnector dbConn,
 			Class<T> intfClass, Class<? extends T> implClass,
-			long currentSchemaVersion, String couchDbUri, String dbName,
-			org.soluvas.couchdb.CouchDbRepositoryBase.DeleteMethod deleteMethod, List<String> uniqueFields, Map<String, Integer> indexedFields) {
-		super(connMgr, intfClass, implClass, currentSchemaVersion, couchDbUri,
+			long currentSchemaVersion, String dbName, org.soluvas.couchdb.CouchDbRepositoryBase.DeleteMethod deleteMethod,
+			List<String> uniqueFields, Map<String, Integer> indexedFields) {
+		super(dbConn, intfClass, implClass, currentSchemaVersion,
 				dbName, deleteMethod, uniqueFields, indexedFields);
 	}
 	

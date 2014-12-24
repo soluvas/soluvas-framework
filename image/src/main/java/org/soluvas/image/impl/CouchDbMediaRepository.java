@@ -11,8 +11,8 @@ import javax.ws.rs.core.UriBuilder;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.http.conn.ClientConnectionManager;
 import org.ektorp.AttachmentInputStream;
+import org.ektorp.CouchDbConnector;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.couchdb.CouchDbRepositoryBase;
 import org.soluvas.data.Existence;
@@ -42,9 +42,9 @@ public class CouchDbMediaRepository extends CouchDbRepositoryBase<Media, MediaSt
 	
 	private final WebAddress webAddress;
 
-	public CouchDbMediaRepository(ClientConnectionManager connMgr,
-			String couchDbUri, String dbName, WebAddress webAddress) {
-		super(connMgr, Media.class, MediaImpl.class, 1L, couchDbUri, dbName,
+	public CouchDbMediaRepository(CouchDbConnector dbConn,
+			String dbName, WebAddress webAddress) {
+		super(dbConn, Media.class, MediaImpl.class, 1L, dbName,
 				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
 				DeleteMethod.DELETE,
 				"status",

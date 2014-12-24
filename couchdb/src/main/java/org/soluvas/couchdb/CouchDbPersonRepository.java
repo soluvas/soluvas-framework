@@ -10,8 +10,8 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.conn.ClientConnectionManager;
 import org.ektorp.ComplexKey;
+import org.ektorp.CouchDbConnector;
 import org.ektorp.ViewQuery;
 import org.ektorp.ViewResult;
 import org.ektorp.ViewResult.Row;
@@ -72,8 +72,8 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 */
 	public static final String VIEW_SECURITY_ROLE_MEMBERS = "securityRoleMembers";
 
-	public CouchDbPersonRepository(ClientConnectionManager connMgr, String couchDbUri, String dbName) {
-		super(connMgr, Person.class, PersonImpl.class, 1L, couchDbUri, dbName,
+	public CouchDbPersonRepository(CouchDbConnector dbConn, String dbName) {
+		super(dbConn, Person.class, PersonImpl.class, 1L, dbName,
 				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
 				DeleteMethod.DELETE, 
 				"accountStatus",
