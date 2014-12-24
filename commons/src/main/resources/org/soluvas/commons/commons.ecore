@@ -181,8 +181,7 @@
         <details key="documentation" value="The footnote is shown on all frontend pages, usually positioned below the main content, but above the footer."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wwwUsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        unsettable="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wwwUsed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="If {@code true}, {#link getWebHost()} will return &quot;www.&quot; + domain. If {@code false}, just domain."/>
       </eAnnotations>

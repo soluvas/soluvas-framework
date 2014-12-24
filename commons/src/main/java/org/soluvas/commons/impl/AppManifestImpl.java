@@ -73,7 +73,7 @@ import com.google.common.collect.ImmutableSet;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getLetterClosing <em>Letter Closing</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getFootnote <em>Footnote</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#isWwwUsed <em>Www Used</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getWwwUsed <em>Www Used</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getHeadNote <em>Head Note</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getHeadTitle <em>Head Title</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultStyle <em>Default Style</em>}</li>
@@ -667,32 +667,23 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected String footnote = FOOTNOTE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isWwwUsed() <em>Www Used</em>}' attribute.
+	 * The default value of the '{@link #getWwwUsed() <em>Www Used</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isWwwUsed()
+	 * @see #getWwwUsed()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean WWW_USED_EDEFAULT = false;
+	protected static final Boolean WWW_USED_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #isWwwUsed() <em>Www Used</em>}' attribute.
+	 * The cached value of the '{@link #getWwwUsed() <em>Www Used</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isWwwUsed()
+	 * @see #getWwwUsed()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean wwwUsed = WWW_USED_EDEFAULT;
-	/**
-	 * This is true if the Www Used attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean wwwUsedESet;
-
+	protected Boolean wwwUsed = WWW_USED_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getHeadNote() <em>Head Note</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -1303,7 +1294,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 */
 	@Override
-	public boolean isWwwUsed() {
+	public Boolean getWwwUsed() {
 		return wwwUsed;
 	}
 
@@ -1313,13 +1304,11 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 */
 	@Override
-	public void setWwwUsed(boolean newWwwUsed) {
-		boolean oldWwwUsed = wwwUsed;
+	public void setWwwUsed(Boolean newWwwUsed) {
+		Boolean oldWwwUsed = wwwUsed;
 		wwwUsed = newWwwUsed;
-		boolean oldWwwUsedESet = wwwUsedESet;
-		wwwUsedESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__WWW_USED, oldWwwUsed, wwwUsed, !oldWwwUsedESet));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__WWW_USED, oldWwwUsed, wwwUsed));
 	}
 
 	/**
@@ -1328,30 +1317,6 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 */
 	@Override
-	public void unsetWwwUsed() {
-		boolean oldWwwUsed = wwwUsed;
-		boolean oldWwwUsedESet = wwwUsedESet;
-		wwwUsed = WWW_USED_EDEFAULT;
-		wwwUsedESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, CommonsPackage.APP_MANIFEST__WWW_USED, oldWwwUsed, WWW_USED_EDEFAULT, oldWwwUsedESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isSetWwwUsed() {
-		return wwwUsedESet;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getHeadNote() {
 		return headNote;
 	}
@@ -1361,6 +1326,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHeadNote(String newHeadNote) {
 		String oldHeadNote = headNote;
 		headNote = newHeadNote;
@@ -1373,6 +1339,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getHeadTitle() {
 		return headTitle;
 	}
@@ -1382,6 +1349,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHeadTitle(String newHeadTitle) {
 		String oldHeadTitle = headTitle;
 		headTitle = newHeadTitle;
@@ -1394,6 +1362,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDefaultStyle() {
 		return defaultStyle;
 	}
@@ -1403,6 +1372,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefaultStyle(String newDefaultStyle) {
 		String oldDefaultStyle = defaultStyle;
 		defaultStyle = newDefaultStyle;
@@ -1415,6 +1385,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDefaultVariation() {
 		return defaultVariation;
 	}
@@ -1424,6 +1395,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefaultVariation(String newDefaultVariation) {
 		String oldDefaultVariation = defaultVariation;
 		defaultVariation = newDefaultVariation;
@@ -1602,11 +1574,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 */
 	@Override
 	public String getWebHost() {
-		if (isWwwUsed()) {
-			return "www." + getDomain();
-		} else {
-			return getDomain();
-		}
+		Preconditions.checkNotNull(getWwwUsed(),
+				"Internal error: should never throw NPE, because AppManifest.wwwUsed is always set by expand()"); 
+		return getWwwUsed() ?  "www." + getDomain() : getDomain();
 	}
 
 	/**
@@ -1736,7 +1706,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				}
 				
 				// wwwUsed
-				if (!isSetWwwUsed()) {
+				if (getWwwUsed() == null) {
 					// for appDomain: tuneeca.com
 					// current logic doesn't use appDomain but simply TLD
 					// because stg.tuneeca.com is a valid appDomain but we won't prepend "www."
@@ -1757,14 +1727,14 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 						}
 					}
 					setWwwUsed(!withoutTld.contains("."));
-					log.trace("Setting wwwUsed={} from withoutTld '{}'", isWwwUsed(), withoutTld);
+					log.trace("Setting wwwUsed={} from withoutTld '{}' for domain '{}'", getWwwUsed(), withoutTld, getDomain());
 				} else {
-					log.trace("wwwUsed was already set to {}", isWwwUsed());
+					log.trace("wwwUsed for domain '{}' was already set to {}", getDomain(), getWwwUsed());
 				}
 				
 				expansionState = ExpansionState.EXPANDED;
 				log.debug("Expanded AppManifest '{}' to domain={} generalEmail={} wwwUsed={} using {}", 
-						getTitle(), getDomain(), getGeneralEmail(), isWwwUsed(), upScope);
+						getTitle(), getDomain(), getGeneralEmail(), getWwwUsed(), upScope);
 			} catch (MalformedUriTemplateException | VariableExpansionException e) {
 				throw new CommonsException(e, "Cannot expand AppManifest '%s'", getTitle());
 			}
@@ -1842,7 +1812,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
 				return getFootnote();
 			case CommonsPackage.APP_MANIFEST__WWW_USED:
-				return isWwwUsed();
+				return getWwwUsed();
 			case CommonsPackage.APP_MANIFEST__HEAD_NOTE:
 				return getHeadNote();
 			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
@@ -2061,7 +2031,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				setFootnote(FOOTNOTE_EDEFAULT);
 				return;
 			case CommonsPackage.APP_MANIFEST__WWW_USED:
-				unsetWwwUsed();
+				setWwwUsed(WWW_USED_EDEFAULT);
 				return;
 			case CommonsPackage.APP_MANIFEST__HEAD_NOTE:
 				setHeadNote(HEAD_NOTE_EDEFAULT);
@@ -2150,7 +2120,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__FOOTNOTE:
 				return FOOTNOTE_EDEFAULT == null ? footnote != null : !FOOTNOTE_EDEFAULT.equals(footnote);
 			case CommonsPackage.APP_MANIFEST__WWW_USED:
-				return isSetWwwUsed();
+				return WWW_USED_EDEFAULT == null ? wwwUsed != null : !WWW_USED_EDEFAULT.equals(wwwUsed);
 			case CommonsPackage.APP_MANIFEST__HEAD_NOTE:
 				return HEAD_NOTE_EDEFAULT == null ? headNote != null : !HEAD_NOTE_EDEFAULT.equals(headNote);
 			case CommonsPackage.APP_MANIFEST__HEAD_TITLE:
@@ -2343,7 +2313,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(", footnote: ");
 		result.append(footnote);
 		result.append(", wwwUsed: ");
-		if (wwwUsedESet) result.append(wwwUsed); else result.append("<unset>");
+		result.append(wwwUsed);
 		result.append(", headNote: ");
 		result.append(headNote);
 		result.append(", headTitle: ");

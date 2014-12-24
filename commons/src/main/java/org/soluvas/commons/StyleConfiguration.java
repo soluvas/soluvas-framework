@@ -86,6 +86,7 @@ package org.soluvas.commons;
 
 
 
+
 /**
  * Used by {@link org.soluvas.web.site.SiteResource} to get the current Mall's default style.
  * @author rio

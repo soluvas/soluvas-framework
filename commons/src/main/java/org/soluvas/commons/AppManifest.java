@@ -3,9 +3,13 @@
 package org.soluvas.commons;
 
 import java.util.Locale;
+
+import javax.annotation.Nullable;
+
 import org.eclipse.emf.common.util.EList;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
+import org.soluvas.commons.util.AppUtils;
 
 
 /**
@@ -51,7 +55,7 @@ import org.joda.time.DateTimeZone;
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getLetterClosing <em>Letter Closing</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getFootnote <em>Footnote</em>}</li>
- *   <li>{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getWwwUsed <em>Www Used</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getHeadNote <em>Head Note</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getHeadTitle <em>Head Title</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultStyle <em>Default Style</em>}</li>
@@ -549,49 +553,23 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * If {@code true}, {#link getWebHost()} will return "www." + domain. If {@code false}, just domain.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Www Used</em>' attribute.
-	 * @see #isSetWwwUsed()
-	 * @see #unsetWwwUsed()
-	 * @see #setWwwUsed(boolean)
+	 * @see #setWwwUsed(Boolean)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_WwwUsed()
-	 * @model unsettable="true"
+	 * @model
 	 * @generated
 	 */
-	boolean isWwwUsed();
+	@Nullable
+	Boolean getWwwUsed();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getWwwUsed <em>Www Used</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Www Used</em>' attribute.
-	 * @see #isSetWwwUsed()
-	 * @see #unsetWwwUsed()
-	 * @see #isWwwUsed()
+	 * @see #getWwwUsed()
 	 * @generated
 	 */
-	void setWwwUsed(boolean value);
-
-	/**
-	 * Unsets the value of the '{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetWwwUsed()
-	 * @see #isWwwUsed()
-	 * @see #setWwwUsed(boolean)
-	 * @generated
-	 */
-	void unsetWwwUsed();
-
-	/**
-	 * Returns whether the value of the '{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Www Used</em>' attribute is set.
-	 * @see #unsetWwwUsed()
-	 * @see #isWwwUsed()
-	 * @see #setWwwUsed(boolean)
-	 * @generated
-	 */
-	boolean isSetWwwUsed();
+	void setWwwUsed(Boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Head Note</b></em>' attribute.

@@ -6318,11 +6318,11 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_Footnote();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#isWwwUsed <em>Www Used</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getWwwUsed <em>Www Used</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Www Used</em>'.
-	 * @see org.soluvas.commons.AppManifest#isWwwUsed()
+	 * @see org.soluvas.commons.AppManifest#getWwwUsed()
 	 * @see #getAppManifest()
 	 * @generated
 	 */
