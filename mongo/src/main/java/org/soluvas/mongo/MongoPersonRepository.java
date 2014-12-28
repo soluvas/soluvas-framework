@@ -473,7 +473,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}
 		
 		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
+
 		log.debug("Query findAllByKeywordAndRoles {}", query);
+		
 		return findAllByQuery(query, myPageable);
 	}
 	
@@ -499,7 +501,6 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		} else {
 			query = new BasicDBObject();
 		}
-//		final BasicDBObject query = getQueryByKeyword(keyword);
 		
 		if (accountStatuses != null && !accountStatuses.isEmpty()){
 			query.put("accountStatus", new BasicDBObject("$in", 

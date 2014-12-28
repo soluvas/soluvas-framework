@@ -404,7 +404,6 @@ public class EmfPersonRepository extends
 	public long countAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
 			CustomerRole customerRole, Collection<String> custoemrRoleIds) {
-
 		throw new UnsupportedOperationException();
 	}
 
