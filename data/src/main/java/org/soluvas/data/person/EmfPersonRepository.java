@@ -209,6 +209,11 @@ public class EmfPersonRepository extends
 	public Person findOneByEmail(StatusMask statusMask, @Nullable String email) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
+	
+	@Override @Nullable
+	public Person findOneById(StatusMask statusMask, @Nullable String id) {
+		throw new UnsupportedOperationException("to be implemented");
+	}
 
 	@Override @Nullable
 	public Person findOneByTwitter(@Nullable Long twitterId,

@@ -187,6 +187,21 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 			return null;
 		}
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.soluvas.data.person.PersonRepository#findOneByEmail(java.lang.String)
+	 */
+	@Override
+	@Nullable
+	public Person findOneById(StatusMask statusMask, @Nullable String id) {
+		try {
+			final Person found = lookupOne(statusMask, LookupKey.EMAIL, id);
+			return found;
+		} catch (EntityLookupException e) {
+			log.debug("lookupOne {} {} {} returned {}", statusMask, LookupKey.EMAIL, id, e);
+			return null;
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.person.PersonRepository#findOneByTwitter(java.lang.Long, java.lang.String)

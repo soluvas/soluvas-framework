@@ -50,6 +50,9 @@ public interface PersonRepository extends
 	public Person findOneByEmail(StatusMask statusMask, @Nullable String email);
 	
 	@Nullable
+	public Person findOneById(StatusMask statusMask, @Nullable String id);
+	
+	@Nullable
 	public Person findOneByPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber);
 
 	/**

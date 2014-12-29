@@ -129,6 +129,16 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override @Nullable
+	public Person findOneById(StatusMask statusMask, @Nullable String id) {
+		if (Strings.isNullOrEmpty(id))  {
+			return null;
+		}
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		augmentQueryForStatusMask(query, statusMask);
+		return findOneByQuery(query);
+	}
+	
+	@Override @Nullable
 	public Person findOneByPhoneNumber(StatusMask statusMask, @Nullable String phoneNumber) {
 		if (phoneNumber == null) {
 			return null;
