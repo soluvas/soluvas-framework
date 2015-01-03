@@ -13,12 +13,12 @@ import com.beust.jcommander.Parameters;
 import com.google.common.base.Joiner;
 
 /**
- * Search for users.
+ * Search for a user by name.
  * http://instagram.com/developer/endpoints/users/
  * 
  * @author ceefour
  */
-@Parameters(commandNames=InstagramSearchCommand.CMD, commandDescription="Authenticate Instagram app and get access token")
+@Parameters(commandNames=InstagramSearchCommand.CMD, commandDescription="Search for a user by name.")
 public class InstagramSearchCommand implements Callable<UserFeed> {
 	
 	public static final String CMD = "instasearch";

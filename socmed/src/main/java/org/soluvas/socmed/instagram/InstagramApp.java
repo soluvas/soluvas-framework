@@ -28,6 +28,7 @@ public class InstagramApp {
 	public Object run(String[] args) throws Exception {
 		final InstagramAuthCommand auth = new InstagramAuthCommand();
 		final InstagramSearchCommand search = new InstagramSearchCommand();
+		final InstagramRecentMediaCommand recentMedia = new InstagramRecentMediaCommand();
 		if (env.containsProperty(InstagramSysConfig.API_KEY_PROPERTY)) {
 			System.out.println("Using application.properties Instagram configuration");
 			InstagramSysConfigImpl instagramSysConfig = new InstagramSysConfigImpl(env);
@@ -38,10 +39,12 @@ public class InstagramApp {
 			System.out.println("application.properties Instagram configuration not found");
 		}
 		search.accessToken = env.getProperty(InstagramSysConfig.ACCESS_TOKEN_PROPERTY);
+		recentMedia.accessToken = env.getProperty(InstagramSysConfig.ACCESS_TOKEN_PROPERTY);
 		
 		final JCommander jc = new JCommander();
 		jc.addCommand(auth);
 		jc.addCommand(search);
+		jc.addCommand(recentMedia);
 		jc.parse(args);
 		Preconditions.checkArgument(jc.getParsedCommand() != null, "Command must be given");
 		switch (jc.getParsedCommand()) {
@@ -49,6 +52,8 @@ public class InstagramApp {
 			return auth.call();
 		case InstagramSearchCommand.CMD:
 			return search.call();
+		case InstagramRecentMediaCommand.CMD:
+			return recentMedia.call();
 		}
 		throw new IllegalArgumentException("Unknown command: " + jc.getParsedCommand());
 	}
