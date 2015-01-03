@@ -57,6 +57,10 @@ import com.google.common.eventbus.EventBus;
  */
 @Configuration("tenantConfig")
 public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConfig {
+	
+	public static final String ENV_DEV = "dev";
+	public static final String ENV_STG = "stg";
+	public static final String ENV_PRD = "prd";
 	private static final Logger log = LoggerFactory
 			.getLogger(MultiTenantConfig.class);
 
