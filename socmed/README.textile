@@ -1,9 +1,0 @@
-h1. Soluvas.org Facebook
-
-h2. Usage from Blueprint
-
-bc. <reference id="facebookUtils" interface="org.soluvas.facebook.FacebookUtilsImpl" />
-
-Java:
-
-bc. List<HintPerson> hints = facebookUtils.findFriends("**ACCESS TOKEN**");
