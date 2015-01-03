@@ -10,7 +10,7 @@
 	<artifactId>org.soluvas.socmed</artifactId>
 	<packaging>jar</packaging>
 	<name>Soluvas Social Media</name>
-	<description>Facebook, Twitter, Google, Yahoo, etc. utilities.</description>
+	<description>Facebook, Twitter, Google, Yahoo, Instagram, etc. utilities.</description>
 
 	<dependencies>
 		<dependency>
@@ -26,11 +26,17 @@
 		<dependency>
 			<groupId>com.restfb</groupId>
 			<artifactId>restfb</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 		    <groupId>org.twitter4j</groupId>
 		    <artifactId>twitter4j-core</artifactId>
-		    <version>3.0.3</version>
+		    <optional>true</optional>
+		</dependency>
+		<dependency>
+		    <groupId>com.sachinhandiekar</groupId>
+		    <artifactId>jInstagram</artifactId>
+		    <optional>true</optional>
 		</dependency>
 
 		<dependency>

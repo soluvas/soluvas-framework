@@ -481,6 +481,16 @@
 			    <artifactId>restfb</artifactId>
 			    <version>1.7.0</version>
 			</dependency>
+			<dependency>
+			    <groupId>org.twitter4j</groupId>
+			    <artifactId>twitter4j-core</artifactId>
+			    <version>3.0.6</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.sachinhandiekar</groupId>
+			    <artifactId>jInstagram</artifactId>
+			    <version>1.0.10</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
@@ -776,7 +786,7 @@
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-math3</artifactId>
-				<version>3.3</version>
+				<version>3.4</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
