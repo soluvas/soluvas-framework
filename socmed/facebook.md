@@ -1,4 +1,4 @@
-#. Soluvas.org Social Media
+# Soluvas.org Social Media
 
 ## Usage from Spring
 

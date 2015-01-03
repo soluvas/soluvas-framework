@@ -24,6 +24,10 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.scribe</groupId>
+			<artifactId>scribe</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.restfb</groupId>
 			<artifactId>restfb</artifactId>
 			<optional>true</optional>
@@ -48,6 +52,11 @@
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.beust</groupId>
+			<artifactId>jcommander</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
@@ -85,5 +94,5 @@
 			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
-
+	
 </project>
