@@ -18,7 +18,7 @@ import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.social.SocialPackage;
 import org.soluvas.social.schema.SocialSchemaCatalog;
 import org.soluvas.social.schema.TargetType;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
@@ -31,7 +31,7 @@ import com.google.common.collect.ImmutableSet;
  * List registered {@link TargetType}s.
  * @author ceefour
  */
-@Service @Lazy
+@Service @Scope("prototype")
 @Command(scope="socials", name="targetls", description="List registered TargetTypes.")
 public class SocialSTargetLsCommand extends ExtCommandSupport {
 	
