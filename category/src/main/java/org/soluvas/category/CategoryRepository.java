@@ -48,6 +48,9 @@ public interface CategoryRepository extends
 	Existence<String> existsBySlugPath(StatusMask statusMask, String upSlugPath);
 	
 	Set<String> findAllSlugPathsByStatus(Collection<CategoryStatus> statuses);
+
+	Page<Category> findAllLeavesByStatus(Collection<CategoryStatus> statuses,
+			Pageable pageable);
 	
 
 }

@@ -471,6 +471,21 @@ public class XmiCategoryRepository
 	}
 	
 	@Override
+	public Page<Category> findAllLeavesByStatus(final Collection<CategoryStatus> statuses, Pageable pageable) {
+		final Predicate<Category> filter = new Predicate<Category>() {
+			@Override
+			public boolean apply(@Nullable Category input) {
+				return statuses.contains(input.getStatus()) && input.getCategories().isEmpty();
+			}
+		};
+		final int filteredCount = FluentIterable.from(getFlattenedCategories()).filter(filter).size();
+		final FluentIterable<Category> limited = doFindAll(filter, pageable, true);
+		// must use EcoreUtil.copyAll, since transform with EcoreCopyFunction will make the object disappear if it has a parent!
+		return new PageImpl<>(ImmutableList.copyOf(EcoreUtil.copyAll(limited.toList())),
+				pageable, filteredCount);
+	}
+	
+	@Override
 	public Set<String> findAllSlugPathsByStatus(final Collection<CategoryStatus> statuses) {
 		final Predicate<Category> filter = new Predicate<Category>() {
 			@Override

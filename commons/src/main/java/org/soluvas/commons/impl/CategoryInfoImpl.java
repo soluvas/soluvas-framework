@@ -968,5 +968,10 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 		}
 		return fullName + getName();
 	}
-
+	
+	@JsonIgnore @Override
+	public String getUName() {
+		return getNsPrefix() + "_" + getId();
+	}
+	
 } //CategoryInfoImpl
