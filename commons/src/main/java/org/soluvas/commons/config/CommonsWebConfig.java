@@ -16,6 +16,7 @@ import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -121,8 +122,8 @@ public class CommonsWebConfig {
 		schemeRegistry.register(new Scheme("http", 80, PlainSocketFactory.getSocketFactory()));
 		final SSLSocketFactory sslSocketFactory;
 		if (trustAll) {
-			final SSLContext context = SSLContext.getInstance("TLS");
-			context.init(
+			final SSLContext sslContext = SSLContext.getInstance("TLS");
+			sslContext.init(
 					null,
 					new TrustManager[] { new X509TrustManager() {
 						@Override
@@ -142,7 +143,7 @@ public class CommonsWebConfig {
 								String authType) {
 						}
 					} }, null);
-			sslSocketFactory = new SSLSocketFactory(context, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+			sslSocketFactory = new SSLSocketFactory(sslContext, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 		} else {
 			sslSocketFactory = SSLSocketFactory.getSocketFactory();
 		}
@@ -161,10 +162,10 @@ public class CommonsWebConfig {
 		log.info("Creating Pooling HTTP ClientConnectionManager with {} max connections, trust all SSL certs: {}",
 				maxConnections, trustAll);
 
-		final SSLSocketFactory sslSocketFactory;
+		final SSLConnectionSocketFactory sslSocketFactory;
 		if (trustAll) {
-			final SSLContext context = SSLContext.getInstance("TLS");
-			context.init(
+			final SSLContext sslContext = SSLContext.getInstance("TLS");
+			sslContext.init(
 					null,
 					new TrustManager[] { new X509TrustManager() {
 						@Override
@@ -184,9 +185,9 @@ public class CommonsWebConfig {
 								String authType) {
 						}
 					} }, null);
-			sslSocketFactory = new SSLSocketFactory(context, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+			sslSocketFactory = new SSLConnectionSocketFactory(sslContext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
 		} else {
-			sslSocketFactory = SSLSocketFactory.getSocketFactory();
+			sslSocketFactory = SSLConnectionSocketFactory.getSocketFactory();
 		}
 		
 		final Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
@@ -200,6 +201,12 @@ public class CommonsWebConfig {
 		return cm;
 	}
 	
+	/**
+	 * Do NOT {@link CloseableHttpClient#close()}, let {@link #httpClientConnMgr43()} do it.  
+	 * @return
+	 * @throws KeyManagementException
+	 * @throws NoSuchAlgorithmException
+	 */
 	@Bean
 	public CloseableHttpClient httpClient() throws KeyManagementException, NoSuchAlgorithmException {
 		return HttpClientBuilder.create().setConnectionManager(httpClientConnMgr43()).build();
