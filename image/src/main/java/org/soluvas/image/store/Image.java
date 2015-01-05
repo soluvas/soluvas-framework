@@ -1,6 +1,7 @@
 package org.soluvas.image.store;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -10,21 +11,26 @@ import org.bson.BasicBSONObject;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.SlugUtils;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Maps.EntryTransformer;
 
 /**
- * Image descriptor;
- * @deprecated Will be replaced by EMF {@link org.soluvas.image.Image}.
+ * Image descriptor.
+ * Was to be replaced by EMF {@link org.soluvas.image.Image}, but now EMF is "deprecated". :-P
  * @author ceefour
  */
-@Deprecated
-public class Image {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Image implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	public static class ToId implements Function<Image, String> {
 		@Override @Nullable
 		public String apply(@Nullable Image input) {
@@ -49,11 +55,14 @@ public class Image {
 	 * Only used for creating/uploading new image. Otherwise it's always null.
 	 * @see MongoImageRepository#add(Image)
 	 */
+	@Nullable
 	private File originalFile;
 	/**
-	 * Only used for creating/uploading new image. Otherwise it's always null.
+	 * Only used for creating/uploading new image. Otherwise it's always {@link Optional#absent()}.
 	 * @see MongoImageRepository#add(Image)
 	 */
+	private Optional<String> sourceUri = Optional.absent();
+	@Nullable
 	private String name;
 	private DateTime created;
 	
@@ -92,6 +101,20 @@ public class Image {
 	 */
 	public Image(File originalFile, String contentType, String name) {
 		this(null, originalFile, contentType, name);
+	}
+
+	/**
+	 * Convenience for passing to {@link MongoImageRepository#add(Image)} from a remote image URI,
+	 * with unknown content type and dimensions.
+	 * @param sourceUri Source image that will be downloaded before adding.
+	 * @param name Image name, this also will be the SEO-friendly {@link Image#getId()} via
+	 * 	{@link SlugUtils#generateValidId(String, com.google.common.base.Predicate)}.
+	 */
+	public static Image fromRemote(String sourceUri, String name) {
+		final Image image = new Image();
+		image.setSourceUri(Optional.of(sourceUri));
+		image.setName(name);
+		return image;
 	}
 
 	public Image(ImageRepository imageStore, BasicBSONObject dbo) {
@@ -212,6 +235,14 @@ public class Image {
 	 */
 	public void setOriginalFile(File originalFile) {
 		this.originalFile = originalFile;
+	}
+	
+	public Optional<String> getSourceUri() {
+		return sourceUri;
+	}
+	
+	public void setSourceUri(Optional<String> sourceUri) {
+		this.sourceUri = sourceUri;
 	}
 
 	/**

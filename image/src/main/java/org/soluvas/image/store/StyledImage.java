@@ -2,10 +2,10 @@ package org.soluvas.image.store;
 
 
 /**
- * @deprecated Will be replaced by EMF {@link org.soluvas.image.StyledImage}.
+ * Was to be replaced by EMF {@link org.soluvas.image.StyledImage},
+ * but now EMF is "deprecated". ;-)
  * @author ceefour
  */
-@Deprecated
 public class StyledImage {
 
 	private final String styleName;
