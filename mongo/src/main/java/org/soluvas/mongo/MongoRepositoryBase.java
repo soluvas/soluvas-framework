@@ -269,7 +269,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			log.info("Migrating collection {}...", collName);
 			beforeEnsureIndexes();
 		} else {
-			log.info("Migration disabled for collection {}", collName);
+			log.debug("Migration disabled for collection {}", collName);
 		}
 		final List<String> ensuredIndexes = MongoUtils.ensureIndexes(primary, indexes);
 		MongoUtils.retainIndexes(primary, ensuredIndexes.toArray(new String[] {}));
