@@ -177,7 +177,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 
 		final AppManifest appManifest;
 		if (appManifestTemplate != null) {
-			log.info("Combining template AppManifest '{}' with customized", appManifestTemplate);
+			log.debug("Combining template AppManifest '{}' with customized", appManifestTemplate);
 			appManifest = new OnDemandXmiLoader<AppManifest>(CommonsPackage.eINSTANCE, appManifestTemplate, ResourceType.CLASSPATH)
 					.autoExpand(false).get();
 		} else {
