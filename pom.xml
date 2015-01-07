@@ -285,12 +285,8 @@
 				<version>3.3.1</version>
 				<classifier>soluvas</classifier>
 			</dependency>
-			<dependency>
-			    <groupId>org.ow2.asm</groupId>
-			    <artifactId>asm</artifactId>
-			    <version>4.2</version><!-- TODO: should we update to 5.0.3? -->
-			</dependency>
 
+			<!-- WARNING: Spark 1.2.0 brings custom-versioned dependencies like akka, protobuf, huh!?!? -->
 			<dependency>
 			    <groupId>org.apache.spark</groupId>
 			    <artifactId>spark-core_2.11</artifactId>
@@ -304,6 +300,11 @@
 			    		<artifactId>slf4j-log4j12</artifactId>
 			    		<groupId>org.slf4j</groupId>
 			    	</exclusion>
+			    	<!-- TODO: jersey-server requires asm 3.1 that we don't support, please tell Spark to upgrade jersey or we simply don't use jersey-related stuff -->
+					<exclusion>
+						<artifactId>jersey-server</artifactId>
+						<groupId>com.sun.jersey</groupId>
+					</exclusion>
 			    </exclusions>
 			</dependency>
 			<dependency>
@@ -870,6 +871,13 @@
 				<version>18.0</version>
 			</dependency>
 			
+			<dependency>
+				<!-- use cglib 3.1 combined with asm 4.2+. do NOT use cglib-nodep because then we'll have two cglibs -->
+				<!-- cglib is required by wicket-spring, among others -->
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>3.1</version>
+			</dependency>
 			<!-- cglib 3.1 uses asm 4.2, pegdown/parboiled uses asm+analysis+tree+util 4.1 that we'll upgrade. latest asm is 5.0.3 though! -->
 			<dependency>
 				<groupId>org.ow2.asm</groupId>
