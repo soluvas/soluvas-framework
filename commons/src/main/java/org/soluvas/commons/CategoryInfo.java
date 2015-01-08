@@ -30,6 +30,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
 
 	/**
+	 * Single right guillemet surrounded by space.
+	 */
+	public static final String RSAQUO = " › ";
+
+	/**
 	 * Returns the value of the '<em><b>Parents</b></em>' containment reference list.
 	 * The list contents are of type {@link org.soluvas.commons.CategoryInfo}.
 	 * <!-- begin-user-doc -->
@@ -76,5 +81,8 @@ public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
 
 	String getFullName();
 
+	String getFullName(String separator);
+	
 	String getUName();
+
 } // CategoryInfo

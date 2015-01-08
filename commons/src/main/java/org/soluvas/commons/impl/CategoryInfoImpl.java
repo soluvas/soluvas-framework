@@ -962,9 +962,20 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 */
 	@JsonIgnore @Override
 	public String getFullName() {
+		return getFullName("/");
+	}
+	
+	/**
+	 * Full name of this category including its parents, separated by separator.
+	 * <a href="http://schema.org/category">schema:Category</a>: A category for the item. Greater signs or slashes can be used to informally indicate a category hierarchy.
+	 * @param separator For nice presentation, use {@link CategoryInfo#RSAQUO}.
+	 * @return
+	 */
+	@JsonIgnore @Override
+	public String getFullName(String separator) {
 		String fullName = "";
 		for (final CategoryInfo parent : getParents()) {
-			fullName += parent.getName() + "/";
+			fullName += parent.getName() + separator;
 		}
 		return fullName + getName();
 	}
