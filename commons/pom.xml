@@ -29,6 +29,12 @@
 			<version>0.13</version>
 			<optional>true</optional>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 		<dependency>
 		    <groupId>io.dropwizard.metrics</groupId>
