@@ -164,6 +164,11 @@
         <details key="java.member" value="validationTime"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="district" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="org.eclipse.emf.texo">
+        <details key="java.member" value="district"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Geolocation">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -304,4 +309,6 @@
   <eClassifiers xsi:type="ecore:EDataType" name="Gender" instanceClassName="org.soluvas.commons.Gender"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTimeZone" instanceClassName="org.joda.time.DateTimeZone"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Locale" instanceClassName="java.util.Locale"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="DayOfWeek" instanceClassName="java.time.DayOfWeek"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="LocalTime" instanceClassName="org.joda.time.LocalTime"/>
 </ecore:EPackage>

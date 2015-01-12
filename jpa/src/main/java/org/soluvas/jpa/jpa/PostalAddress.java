@@ -4,17 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
-
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsFactory;
-
 import com.google.common.base.Preconditions;
 
 /**
@@ -37,7 +34,7 @@ import com.google.common.base.Preconditions;
  */
 @Embeddable()
 public class PostalAddress implements Describable, Serializable {
-	
+
 	private static final Logger log = LoggerFactory
 			.getLogger(PostalAddress.class);
 
@@ -50,87 +47,130 @@ public class PostalAddress implements Describable, Serializable {
 		return postalAddress;
 	}
 
-	public static org.soluvas.commons.PostalAddress toCommons(PostalAddress jpaPostalAddressUp) {
-		final org.soluvas.commons.PostalAddress emfPostalAddress = CommonsFactory.eINSTANCE.createPostalAddress();
+	public static org.soluvas.commons.PostalAddress toCommons(
+			PostalAddress jpaPostalAddressUp) {
+		final org.soluvas.commons.PostalAddress emfPostalAddress = CommonsFactory.eINSTANCE
+				.createPostalAddress();
 		Preconditions.checkNotNull(jpaPostalAddressUp,
 				"Postal Address must not be null");
-		emfPostalAddress.setId(jpaPostalAddressUp.getId() != null ? jpaPostalAddressUp.getId().toString() : UUID.randomUUID().toString());
+		emfPostalAddress
+				.setId(jpaPostalAddressUp.getId() != null ? jpaPostalAddressUp
+						.getId().toString() : UUID.randomUUID().toString());
 		emfPostalAddress.setCity(jpaPostalAddressUp.getCity());
 		emfPostalAddress.setCountry(jpaPostalAddressUp.getCountry());
 		emfPostalAddress.setCountryCode(jpaPostalAddressUp.getCountryCode());
 		emfPostalAddress.setDescription(jpaPostalAddressUp.getDescription());
-		if (jpaPostalAddressUp.getEmails() != null && !jpaPostalAddressUp.getEmails().isEmpty()) {
+		if (jpaPostalAddressUp.getEmails() != null
+				&& !jpaPostalAddressUp.getEmails().isEmpty()) {
 			emfPostalAddress.getEmails().addAll(jpaPostalAddressUp.getEmails());
 		}
-		if (jpaPostalAddressUp.getHomePhones() != null && !jpaPostalAddressUp.getHomePhones().isEmpty()) {
-			emfPostalAddress.getHomePhones().addAll(jpaPostalAddressUp.getHomePhones());
+		if (jpaPostalAddressUp.getHomePhones() != null
+				&& !jpaPostalAddressUp.getHomePhones().isEmpty()) {
+			emfPostalAddress.getHomePhones().addAll(
+					jpaPostalAddressUp.getHomePhones());
 		}
-		if (jpaPostalAddressUp.getMobiles() != null && !jpaPostalAddressUp.getMobiles().isEmpty()) {
-			emfPostalAddress.getMobiles().addAll(jpaPostalAddressUp.getMobiles());
+		if (jpaPostalAddressUp.getMobiles() != null
+				&& !jpaPostalAddressUp.getMobiles().isEmpty()) {
+			emfPostalAddress.getMobiles().addAll(
+					jpaPostalAddressUp.getMobiles());
 		}
 		emfPostalAddress.setName(jpaPostalAddressUp.getName());
 		emfPostalAddress.setOrganization(jpaPostalAddressUp.getOrganization());
-		if (jpaPostalAddressUp.getPhones() != null && !jpaPostalAddressUp.getPhones().isEmpty()) {
+		if (jpaPostalAddressUp.getPhones() != null
+				&& !jpaPostalAddressUp.getPhones().isEmpty()) {
 			emfPostalAddress.getPhones().addAll(jpaPostalAddressUp.getPhones());
 		}
 		emfPostalAddress.setPostalCode(jpaPostalAddressUp.getPostalCode());
 		emfPostalAddress.setPrimary(jpaPostalAddressUp.isPrimary());
-		emfPostalAddress.setPrimaryBilling(jpaPostalAddressUp.isPrimaryBilling());
+		emfPostalAddress.setPrimaryBilling(jpaPostalAddressUp
+				.isPrimaryBilling());
 		emfPostalAddress.setPrimaryEmail(jpaPostalAddressUp.getPrimaryEmail());
-		emfPostalAddress.setPrimaryHomePhone(jpaPostalAddressUp.getPrimaryHomePhone());
-		emfPostalAddress.setPrimaryMobile(jpaPostalAddressUp.getPrimaryMobile());
+		emfPostalAddress.setPrimaryHomePhone(jpaPostalAddressUp
+				.getPrimaryHomePhone());
+		emfPostalAddress
+				.setPrimaryMobile(jpaPostalAddressUp.getPrimaryMobile());
 		emfPostalAddress.setPrimaryPhone(jpaPostalAddressUp.getPrimaryPhone());
-		emfPostalAddress.setPrimaryShipping(jpaPostalAddressUp.isPrimaryShipping());
-		emfPostalAddress.setPrimaryWorkPhone(jpaPostalAddressUp.getPrimaryWorkPhone());
+		emfPostalAddress.setPrimaryShipping(jpaPostalAddressUp
+				.isPrimaryShipping());
+		emfPostalAddress.setPrimaryWorkPhone(jpaPostalAddressUp
+				.getPrimaryWorkPhone());
 		emfPostalAddress.setProvince(jpaPostalAddressUp.getProvince());
 		emfPostalAddress.setStreet(jpaPostalAddressUp.getStreet());
-		emfPostalAddress.setValidationTime(jpaPostalAddressUp.getValidationTime());
-		if (jpaPostalAddressUp.getWorkPhones() != null && !jpaPostalAddressUp.getWorkPhones().isEmpty()) {
-			emfPostalAddress.getWorkPhones().addAll(jpaPostalAddressUp.getWorkPhones());
+		emfPostalAddress.setValidationTime(jpaPostalAddressUp
+				.getValidationTime());
+		if (jpaPostalAddressUp.getWorkPhones() != null
+				&& !jpaPostalAddressUp.getWorkPhones().isEmpty()) {
+			emfPostalAddress.getWorkPhones().addAll(
+					jpaPostalAddressUp.getWorkPhones());
 		}
-		
+
 		return emfPostalAddress;
 	}
-	
-	public static PostalAddress fromCommons(org.soluvas.commons.PostalAddress commonsPostalAddressUp) {
+
+	public static PostalAddress fromCommons(
+			org.soluvas.commons.PostalAddress commonsPostalAddressUp) {
 		final PostalAddress jpaPostalAddress = new PostalAddress();
 		Preconditions.checkNotNull(commonsPostalAddressUp,
 				"Postal Address must not be null");
-		jpaPostalAddress.setId(commonsPostalAddressUp.getId() != null ? UUID.fromString(commonsPostalAddressUp.getId()) : UUID.randomUUID());
+		jpaPostalAddress
+				.setId(commonsPostalAddressUp.getId() != null ? UUID
+						.fromString(commonsPostalAddressUp.getId()) : UUID
+						.randomUUID());
 		jpaPostalAddress.setCity(commonsPostalAddressUp.getCity());
 		jpaPostalAddress.setCountry(commonsPostalAddressUp.getCountry());
-		jpaPostalAddress.setCountryCode(commonsPostalAddressUp.getCountryCode());
-		jpaPostalAddress.setDescription(commonsPostalAddressUp.getDescription());
-		if (commonsPostalAddressUp.getEmails() != null && !commonsPostalAddressUp.getEmails().isEmpty()) {
-			jpaPostalAddress.getEmails().addAll(commonsPostalAddressUp.getEmails());
+		jpaPostalAddress
+				.setCountryCode(commonsPostalAddressUp.getCountryCode());
+		jpaPostalAddress
+				.setDescription(commonsPostalAddressUp.getDescription());
+		if (commonsPostalAddressUp.getEmails() != null
+				&& !commonsPostalAddressUp.getEmails().isEmpty()) {
+			jpaPostalAddress.getEmails().addAll(
+					commonsPostalAddressUp.getEmails());
 		}
-		if (commonsPostalAddressUp.getHomePhones() != null && !commonsPostalAddressUp.getHomePhones().isEmpty()) {
-			jpaPostalAddress.getHomePhones().addAll(commonsPostalAddressUp.getHomePhones());
+		if (commonsPostalAddressUp.getHomePhones() != null
+				&& !commonsPostalAddressUp.getHomePhones().isEmpty()) {
+			jpaPostalAddress.getHomePhones().addAll(
+					commonsPostalAddressUp.getHomePhones());
 		}
-		if (commonsPostalAddressUp.getMobiles() != null && !commonsPostalAddressUp.getMobiles().isEmpty()) {
-			jpaPostalAddress.getMobiles().addAll(commonsPostalAddressUp.getMobiles());
+		if (commonsPostalAddressUp.getMobiles() != null
+				&& !commonsPostalAddressUp.getMobiles().isEmpty()) {
+			jpaPostalAddress.getMobiles().addAll(
+					commonsPostalAddressUp.getMobiles());
 		}
 		jpaPostalAddress.setName(commonsPostalAddressUp.getName());
-		jpaPostalAddress.setOrganization(commonsPostalAddressUp.getOrganization());
-		if (commonsPostalAddressUp.getPhones() != null && !commonsPostalAddressUp.getPhones().isEmpty()) {
-			jpaPostalAddress.getPhones().addAll(commonsPostalAddressUp.getPhones());
+		jpaPostalAddress.setOrganization(commonsPostalAddressUp
+				.getOrganization());
+		if (commonsPostalAddressUp.getPhones() != null
+				&& !commonsPostalAddressUp.getPhones().isEmpty()) {
+			jpaPostalAddress.getPhones().addAll(
+					commonsPostalAddressUp.getPhones());
 		}
 		jpaPostalAddress.setPostalCode(commonsPostalAddressUp.getPostalCode());
 		jpaPostalAddress.setPrimary(commonsPostalAddressUp.isPrimary());
-		jpaPostalAddress.setPrimaryBilling(commonsPostalAddressUp.isPrimaryBilling());
-		jpaPostalAddress.setPrimaryEmail(commonsPostalAddressUp.getPrimaryEmail());
-		jpaPostalAddress.setPrimaryHomePhone(commonsPostalAddressUp.getPrimaryHomePhone());
-		jpaPostalAddress.setPrimaryMobile(commonsPostalAddressUp.getPrimaryMobile());
-		jpaPostalAddress.setPrimaryPhone(commonsPostalAddressUp.getPrimaryPhone());
-		jpaPostalAddress.setPrimaryShipping(commonsPostalAddressUp.isPrimaryShipping());
-		jpaPostalAddress.setPrimaryWorkPhone(commonsPostalAddressUp.getPrimaryWorkPhone());
+		jpaPostalAddress.setPrimaryBilling(commonsPostalAddressUp
+				.isPrimaryBilling());
+		jpaPostalAddress.setPrimaryEmail(commonsPostalAddressUp
+				.getPrimaryEmail());
+		jpaPostalAddress.setPrimaryHomePhone(commonsPostalAddressUp
+				.getPrimaryHomePhone());
+		jpaPostalAddress.setPrimaryMobile(commonsPostalAddressUp
+				.getPrimaryMobile());
+		jpaPostalAddress.setPrimaryPhone(commonsPostalAddressUp
+				.getPrimaryPhone());
+		jpaPostalAddress.setPrimaryShipping(commonsPostalAddressUp
+				.isPrimaryShipping());
+		jpaPostalAddress.setPrimaryWorkPhone(commonsPostalAddressUp
+				.getPrimaryWorkPhone());
 		jpaPostalAddress.setProvince(commonsPostalAddressUp.getProvince());
 		jpaPostalAddress.setStreet(commonsPostalAddressUp.getStreet());
-		jpaPostalAddress.setValidationTime(commonsPostalAddressUp.getValidationTime());
-		if (commonsPostalAddressUp.getWorkPhones() != null && !commonsPostalAddressUp.getWorkPhones().isEmpty()) {
-			jpaPostalAddress.getWorkPhones().addAll(commonsPostalAddressUp.getWorkPhones());
+		jpaPostalAddress.setValidationTime(commonsPostalAddressUp
+				.getValidationTime());
+		if (commonsPostalAddressUp.getWorkPhones() != null
+				&& !commonsPostalAddressUp.getWorkPhones().isEmpty()) {
+			jpaPostalAddress.getWorkPhones().addAll(
+					commonsPostalAddressUp.getWorkPhones());
 		}
-		
+
 		return jpaPostalAddress;
 	}
 
@@ -405,6 +445,14 @@ public class PostalAddress implements Describable, Serializable {
 	private DateTime validationTime = null;
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Basic()
+	private String district = null;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * What this address represents, usually "Home", "Work", etc. <!--
 	 * end-model-doc -->
@@ -423,7 +471,7 @@ public class PostalAddress implements Describable, Serializable {
 	public PostalAddress() {
 		super();
 	}
-	
+
 	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
 		Preconditions.checkNotNull(postalAddressUp,
 				"Postal Address must not be null");
@@ -453,7 +501,7 @@ public class PostalAddress implements Describable, Serializable {
 		setValidationTime(postalAddressUp.getValidationTime());
 		setWorkPhones(new ArrayList<>(postalAddressUp.getWorkPhones()));
 	}
-	
+
 	/**
 	 * Returns the value of '<em><b>organization</b></em>' feature.
 	 * 
@@ -1076,6 +1124,32 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
+	 * Returns the value of '<em><b>district</b></em>' feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of '<em><b>district</b></em>' feature
+	 * @generated
+	 */
+	public String getDistrict() {
+		return district;
+	}
+
+	/**
+	 * Sets the '{@link PostalAddress#getDistrict() <em>district</em>}' feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param newDistrict
+	 *            the new value of the '{@link PostalAddress#getDistrict()
+	 *            district}' feature.
+	 * @generated
+	 */
+	public void setDistrict(String newDistrict) {
+		district = newDistrict;
+	}
+
+	/**
 	 * Returns the value of '<em><b>description</b></em>' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -1085,7 +1159,6 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>description</b></em>' feature
 	 * @generated
 	 */
-	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -1103,7 +1176,6 @@ public class PostalAddress implements Describable, Serializable {
 	 *            description}' feature.
 	 * @generated
 	 */
-	@Override
 	public void setDescription(String newDescription) {
 		description = newDescription;
 	}
@@ -1138,7 +1210,8 @@ public class PostalAddress implements Describable, Serializable {
 				+ isPrimary() + "]" + " [primaryBilling: " + isPrimaryBilling()
 				+ "]" + " [primaryShipping: " + isPrimaryShipping() + "]"
 				+ " [validationTime: " + getValidationTime() + "]"
-				+ " [description: " + getDescription() + "]";
+				+ " [district: " + getDistrict() + "]" + " [description: "
+				+ getDescription() + "]";
 	}
 
 }

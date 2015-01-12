@@ -1,11 +1,9 @@
 package org.soluvas.jpa.jpa;
 
 import java.io.Serializable;
-
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
-
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
@@ -18,20 +16,20 @@ import org.soluvas.commons.Person;
  * 
  */
 @Embeddable()
-public class PersonInfo  implements Serializable {
+public class PersonInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private static final String GUEST_ID = "guest";
-	
+
 	private static final String GUEST_NAME = "guest";
-	
+
 	private static final String GUEST_SLUG = "guest";
 
 	public PersonInfo() {
 		super();
 	}
-	
+
 	public static PersonInfo getDefaultGuest() {
 		final PersonInfo guest = new PersonInfo();
 		guest.setId(GUEST_ID);

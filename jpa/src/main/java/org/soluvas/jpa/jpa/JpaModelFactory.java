@@ -1,5 +1,6 @@
 package org.soluvas.jpa.jpa;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -20,6 +21,7 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.GenericStatus;
 
@@ -69,7 +71,7 @@ public class JpaModelFactory implements ModelFactory {
 	 * @generated
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public ModelObject createModelObject(EClass eClass, Object adaptee) {
+	public <T> ModelObject<T> createModelObject(EClass eClass, T adaptee) {
 		ModelObject<Object> modelObject = null;
 		switch (eClass.getClassifierID()) {
 		case JpaModelPackage.POSTALADDRESS_CLASSIFIER_ID:
@@ -98,12 +100,12 @@ public class JpaModelFactory implements ModelFactory {
 					+ "' is not defined in this EPackage");
 		}
 		modelObject.setTarget(adaptee);
-		return modelObject;
+		return (ModelObject<T>) modelObject;
 	}
 
 	/**
 	 * Creates a feature map entry instance for a certain EStructuralFeature.
-	 * 
+	 *
 	 * @param eFeature
 	 *            the feature map feature
 	 * @return the pojo feature map entry
@@ -118,7 +120,7 @@ public class JpaModelFactory implements ModelFactory {
 	 * Wraps a feature map entry pojo in a {@link AbstractModelFeatureMapEntry}.
 	 * If the feature map entry is null then a new one is created and <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @param eFeature
 	 *            the feature map feature of the object
 	 * @param adaptee
@@ -202,6 +204,10 @@ public class JpaModelFactory implements ModelFactory {
 			return createDateTimeZoneFromString(value);
 		case JpaModelPackage.LOCALE_CLASSIFIER_ID:
 			return createLocaleFromString(value);
+		case JpaModelPackage.DAYOFWEEK_CLASSIFIER_ID:
+			return createDayOfWeekFromString(value);
+		case JpaModelPackage.LOCALTIME_CLASSIFIER_ID:
+			return createLocalTimeFromString(value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage");
@@ -244,6 +250,10 @@ public class JpaModelFactory implements ModelFactory {
 			return convertDateTimeZoneToString((DateTimeZone) value);
 		case JpaModelPackage.LOCALE_CLASSIFIER_ID:
 			return convertLocaleToString((Locale) value);
+		case JpaModelPackage.DAYOFWEEK_CLASSIFIER_ID:
+			return convertDayOfWeekToString((DayOfWeek) value);
+		case JpaModelPackage.LOCALTIME_CLASSIFIER_ID:
+			return convertLocalTimeToString((LocalTime) value);
 		default:
 			throw new IllegalArgumentException("The EDatatype '" + eDataType
 					+ "' is not defined in this EPackage.");
@@ -285,6 +295,86 @@ public class JpaModelFactory implements ModelFactory {
 			return null;
 		}
 		EDataType eDataType = JpaModelPackage.INSTANCE.getDateTimeEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: UUID to a String. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertUUIDToString(UUID value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getUUIDEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: UUID from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public UUID createUUIDFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getUUIDEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: Gender to a String. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertGenderToString(Gender value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getGenderEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: Gender from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public Gender createGenderFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getGenderEDataType();
 		throw new UnsupportedOperationException(
 				"Operation not support for EDataType " + eDataType.getName()
 						+ " converting from value " + value);
@@ -533,46 +623,6 @@ public class JpaModelFactory implements ModelFactory {
 	}
 
 	/**
-	 * Converts the EDataType: UUID to a String. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @param value
-	 *            the object to convert
-	 * @return the String representing the value, if value == null then null is
-	 *         returned
-	 * @generated
-	 */
-	public String convertUUIDToString(UUID value) {
-		if (value == null) {
-			return null;
-		}
-		EDataType eDataType = JpaModelPackage.INSTANCE.getUUIDEDataType();
-		throw new UnsupportedOperationException(
-				"Operation not support for EDataType " + eDataType.getName()
-						+ " converting from value " + value);
-	}
-
-	/**
-	 * Creates an instance of the EDataType: UUID from a String. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *            the string value to convert to an object
-	 * @return the instance of the data type, if value == null then null is
-	 *         returned
-	 * @generated
-	 */
-	public UUID createUUIDFromString(String value) {
-		if (value == null) {
-			return null;
-		}
-		EDataType eDataType = JpaModelPackage.INSTANCE.getUUIDEDataType();
-		throw new UnsupportedOperationException(
-				"Operation not support for EDataType " + eDataType.getName()
-						+ " converting from value " + value);
-	}
-
-	/**
 	 * Converts the EDataType: GenericStatus to a String. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
@@ -691,8 +741,8 @@ public class JpaModelFactory implements ModelFactory {
 	}
 
 	/**
-	 * Converts the EDataType: Gender to a String. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * Converts the EDataType: DayOfWeek to a String. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @param value
 	 *            the object to convert
@@ -700,18 +750,18 @@ public class JpaModelFactory implements ModelFactory {
 	 *         returned
 	 * @generated
 	 */
-	public String convertGenderToString(Gender value) {
+	public String convertDayOfWeekToString(DayOfWeek value) {
 		if (value == null) {
 			return null;
 		}
-		EDataType eDataType = JpaModelPackage.INSTANCE.getGenderEDataType();
+		EDataType eDataType = JpaModelPackage.INSTANCE.getDayOfWeekEDataType();
 		throw new UnsupportedOperationException(
 				"Operation not support for EDataType " + eDataType.getName()
 						+ " converting from value " + value);
 	}
 
 	/**
-	 * Creates an instance of the EDataType: Gender from a String. <!--
+	 * Creates an instance of the EDataType: DayOfWeek from a String. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param value
@@ -720,11 +770,51 @@ public class JpaModelFactory implements ModelFactory {
 	 *         returned
 	 * @generated
 	 */
-	public Gender createGenderFromString(String value) {
+	public DayOfWeek createDayOfWeekFromString(String value) {
 		if (value == null) {
 			return null;
 		}
-		EDataType eDataType = JpaModelPackage.INSTANCE.getGenderEDataType();
+		EDataType eDataType = JpaModelPackage.INSTANCE.getDayOfWeekEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Converts the EDataType: LocalTime to a String. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the object to convert
+	 * @return the String representing the value, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public String convertLocalTimeToString(LocalTime value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getLocalTimeEDataType();
+		throw new UnsupportedOperationException(
+				"Operation not support for EDataType " + eDataType.getName()
+						+ " converting from value " + value);
+	}
+
+	/**
+	 * Creates an instance of the EDataType: LocalTime from a String. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *            the string value to convert to an object
+	 * @return the instance of the data type, if value == null then null is
+	 *         returned
+	 * @generated
+	 */
+	public LocalTime createLocalTimeFromString(String value) {
+		if (value == null) {
+			return null;
+		}
+		EDataType eDataType = JpaModelPackage.INSTANCE.getLocalTimeEDataType();
 		throw new UnsupportedOperationException(
 				"Operation not support for EDataType " + eDataType.getName()
 						+ " converting from value " + value);
@@ -754,6 +844,14 @@ public class JpaModelFactory implements ModelFactory {
 		 */
 		public ModelPackage getModelPackage() {
 			return JpaModelPackage.INSTANCE;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public Class<?> getTargetClass() {
+			return PostalAddress.class;
 		}
 
 		/**
@@ -809,6 +907,8 @@ public class JpaModelFactory implements ModelFactory {
 				return getTarget().isPrimaryShipping();
 			case JpaModelPackage.POSTALADDRESS_VALIDATIONTIME_FEATURE_ID:
 				return getTarget().getValidationTime();
+			case JpaModelPackage.POSTALADDRESS_DISTRICT_FEATURE_ID:
+				return getTarget().getDistrict();
 			case JpaModelPackage.POSTALADDRESS_DESCRIPTION_FEATURE_ID:
 				return getTarget().getDescription();
 			default:
@@ -892,6 +992,9 @@ public class JpaModelFactory implements ModelFactory {
 				return;
 			case JpaModelPackage.POSTALADDRESS_VALIDATIONTIME_FEATURE_ID:
 				getTarget().setValidationTime((DateTime) value);
+				return;
+			case JpaModelPackage.POSTALADDRESS_DISTRICT_FEATURE_ID:
+				getTarget().setDistrict((String) value);
 				return;
 			case JpaModelPackage.POSTALADDRESS_DESCRIPTION_FEATURE_ID:
 				getTarget().setDescription((String) value);
@@ -990,6 +1093,14 @@ public class JpaModelFactory implements ModelFactory {
 		 * @generated
 		 */
 		@Override
+		public Class<?> getTargetClass() {
+			return Describable.class;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
 		public Object eGet(EStructuralFeature eStructuralFeature) {
 			final int featureID = eClass().getFeatureID(eStructuralFeature);
 			switch (featureID) {
@@ -1068,6 +1179,14 @@ public class JpaModelFactory implements ModelFactory {
 		 */
 		public ModelPackage getModelPackage() {
 			return JpaModelPackage.INSTANCE;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public Class<?> getTargetClass() {
+			return Geolocation.class;
 		}
 
 		/**
@@ -1162,6 +1281,14 @@ public class JpaModelFactory implements ModelFactory {
 		 */
 		public ModelPackage getModelPackage() {
 			return JpaModelPackage.INSTANCE;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public Class<?> getTargetClass() {
+			return PersonInfo.class;
 		}
 
 		/**
@@ -1282,6 +1409,14 @@ public class JpaModelFactory implements ModelFactory {
 		 * @generated
 		 */
 		@Override
+		public Class<?> getTargetClass() {
+			return Positionable.class;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
 		public Object eGet(EStructuralFeature eStructuralFeature) {
 			final int featureID = eClass().getFeatureID(eStructuralFeature);
 			switch (featureID) {
@@ -1366,6 +1501,14 @@ public class JpaModelFactory implements ModelFactory {
 		 * @generated
 		 */
 		@Override
+		public Class<?> getTargetClass() {
+			return NameContainer.class;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
 		public Object eGet(EStructuralFeature eStructuralFeature) {
 			final int featureID = eClass().getFeatureID(eStructuralFeature);
 			switch (featureID) {
@@ -1444,6 +1587,14 @@ public class JpaModelFactory implements ModelFactory {
 		 */
 		public ModelPackage getModelPackage() {
 			return JpaModelPackage.INSTANCE;
+		}
+
+		/**
+		 * @generated
+		 */
+		@Override
+		public Class<?> getTargetClass() {
+			return Timestamped.class;
 		}
 
 		/**

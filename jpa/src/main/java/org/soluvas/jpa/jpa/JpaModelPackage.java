@@ -1,5 +1,6 @@
 package org.soluvas.jpa.jpa;
 
+import java.time.DayOfWeek;
 import java.util.Locale;
 import java.util.UUID;
 import javax.measure.quantity.Length;
@@ -20,6 +21,7 @@ import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.GenericStatus;
 
@@ -68,6 +70,20 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
+	public static final int UUID_CLASSIFIER_ID = 14;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int GENDER_CLASSIFIER_ID = 16;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public static final int CURRENCYUNIT_CLASSIFIER_ID = 7;
 
 	/**
@@ -110,13 +126,6 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int UUID_CLASSIFIER_ID = 14;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	public static final int GENERICSTATUS_CLASSIFIER_ID = 15;
 
 	/**
@@ -138,7 +147,14 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int GENDER_CLASSIFIER_ID = 16;
+	public static final int DAYOFWEEK_CLASSIFIER_ID = 19;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int LOCALTIME_CLASSIFIER_ID = 20;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -285,20 +301,6 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
-	public static final int DESCRIBABLE_CLASSIFIER_ID = 4;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public static final int DESCRIBABLE_DESCRIPTION_FEATURE_ID = 0;
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	public static final int POSTALADDRESS_PRIMARY_FEATURE_ID = 20;
 
 	/**
@@ -327,7 +329,28 @@ public class JpaModelPackage extends ModelPackage {
 	 * 
 	 * @generated
 	 */
+	public static final int POSTALADDRESS_DISTRICT_FEATURE_ID = 24;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public static final int POSTALADDRESS_DESCRIPTION_FEATURE_ID = 0;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int DESCRIBABLE_CLASSIFIER_ID = 4;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public static final int DESCRIBABLE_DESCRIPTION_FEATURE_ID = 0;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -528,7 +551,7 @@ public class JpaModelPackage extends ModelPackage {
 	/**
 	 * Returns the {@link ModelFactory} of this ModelPackage. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @return the {@link JpaModelFactory} instance.
 	 * @generated
 	 */
@@ -553,7 +576,7 @@ public class JpaModelPackage extends ModelPackage {
 	 * Returns the name of the ecore file containing the ecore model of the
 	 * {@link EPackage} managed here. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
-	 * 
+	 *
 	 * @return the name of the ecore file
 	 * @generated
 	 */
@@ -856,32 +879,6 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
-	 * Returns the {@link EClass} '<em><b>Describable</b></em>'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EClass} '<em><b>Describable</b></em>'
-	 * @generated
-	 */
-	public EClass getDescribableEClass() {
-		return (EClass) getEPackage().getEClassifiers().get(
-				DESCRIBABLE_CLASSIFIER_ID);
-	}
-
-	/**
-	 * Returns the {@link EStructuralFeature} '
-	 * <em><b>Describable.description</b></em>'. <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EStructuralFeature}: '
-	 *         <em><b>Describable.description</b></em>'.
-	 * @generated
-	 */
-	public EAttribute getDescribable_Description() {
-		return (EAttribute) getDescribableEClass().getEAllStructuralFeatures()
-				.get(DESCRIBABLE_DESCRIPTION_FEATURE_ID);
-	}
-
-	/**
 	 * Returns the {@link EStructuralFeature} '
 	 * <em><b>PostalAddress.primary</b></em>'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
@@ -943,6 +940,21 @@ public class JpaModelPackage extends ModelPackage {
 
 	/**
 	 * Returns the {@link EStructuralFeature} '
+	 * <em><b>PostalAddress.district</b></em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>PostalAddress.district</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getPostalAddress_District() {
+		return (EAttribute) getPostalAddressEClass()
+				.getEAllStructuralFeatures().get(
+						POSTALADDRESS_DISTRICT_FEATURE_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '
 	 * <em><b>PostalAddress.description</b></em>'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -954,6 +966,32 @@ public class JpaModelPackage extends ModelPackage {
 		return (EAttribute) getPostalAddressEClass()
 				.getEAllStructuralFeatures().get(
 						POSTALADDRESS_DESCRIPTION_FEATURE_ID);
+	}
+
+	/**
+	 * Returns the {@link EClass} '<em><b>Describable</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EClass} '<em><b>Describable</b></em>'
+	 * @generated
+	 */
+	public EClass getDescribableEClass() {
+		return (EClass) getEPackage().getEClassifiers().get(
+				DESCRIBABLE_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EStructuralFeature} '
+	 * <em><b>Describable.description</b></em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EStructuralFeature}: '
+	 *         <em><b>Describable.description</b></em>'.
+	 * @generated
+	 */
+	public EAttribute getDescribable_Description() {
+		return (EAttribute) getDescribableEClass().getEAllStructuralFeatures()
+				.get(DESCRIBABLE_DESCRIPTION_FEATURE_ID);
 	}
 
 	/**
@@ -1220,6 +1258,32 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
+	 * Returns the {@link EDataType} '<em><b>UUID</b></em>'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>UUID</b></em>'
+	 * @generated
+	 */
+	public EDataType getUUIDEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				UUID_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EDataType} '<em><b>Gender</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>Gender</b></em>'
+	 * @generated
+	 */
+	public EDataType getGenderEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				GENDER_CLASSIFIER_ID);
+	}
+
+	/**
 	 * Returns the {@link EDataType} '<em><b>CurrencyUnit</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1298,19 +1362,6 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
-	 * Returns the {@link EDataType} '<em><b>UUID</b></em>'. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @return an instance of the {@link EDataType} representing '
-	 *         <em><b>UUID</b></em>'
-	 * @generated
-	 */
-	public EDataType getUUIDEDataType() {
-		return (EDataType) getEPackage().getEClassifiers().get(
-				UUID_CLASSIFIER_ID);
-	}
-
-	/**
 	 * Returns the {@link EDataType} '<em><b>GenericStatus</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1350,16 +1401,29 @@ public class JpaModelPackage extends ModelPackage {
 	}
 
 	/**
-	 * Returns the {@link EDataType} '<em><b>Gender</b></em>'. <!--
+	 * Returns the {@link EDataType} '<em><b>DayOfWeek</b></em>'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @return an instance of the {@link EDataType} representing '
-	 *         <em><b>Gender</b></em>'
+	 *         <em><b>DayOfWeek</b></em>'
 	 * @generated
 	 */
-	public EDataType getGenderEDataType() {
+	public EDataType getDayOfWeekEDataType() {
 		return (EDataType) getEPackage().getEClassifiers().get(
-				GENDER_CLASSIFIER_ID);
+				DAYOFWEEK_CLASSIFIER_ID);
+	}
+
+	/**
+	 * Returns the {@link EDataType} '<em><b>LocalTime</b></em>'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return an instance of the {@link EDataType} representing '
+	 *         <em><b>LocalTime</b></em>'
+	 * @generated
+	 */
+	public EDataType getLocalTimeEDataType() {
+		return (EDataType) getEPackage().getEClassifiers().get(
+				LOCALTIME_CLASSIFIER_ID);
 	}
 
 	/**
@@ -1411,6 +1475,10 @@ public class JpaModelPackage extends ModelPackage {
 			return DateTimeZone.class;
 		case LOCALE_CLASSIFIER_ID:
 			return Locale.class;
+		case DAYOFWEEK_CLASSIFIER_ID:
+			return DayOfWeek.class;
+		case LOCALTIME_CLASSIFIER_ID:
+			return LocalTime.class;
 		default:
 			throw new IllegalArgumentException("The EClassifier '"
 					+ eClassifier + "' is not defined in this EPackage");
