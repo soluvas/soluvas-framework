@@ -8,65 +8,31 @@ import java.io.Serializable;
  */
 public class District implements Serializable {
 	
-	private final String name;
-	private final String normalizedName;
-	private final String province;
-	private final Country country;
-	private final City city;
+	private static final long serialVersionUID = 1L;
 	
-	public District(String name, String normalizedName, String province, Country country, City city) {
+	private final String name;
+	private final Country country;
+	
+	public District(String name, Country country) {
 		super();
 		this.name = name;
-		this.normalizedName = normalizedName;
-		this.province = province;
 		this.country = country;
-		this.city = city;
-	}
-
-	public City getCity() {
-		return city;
-	}
-
-	public District() {
-		super();
-		this.name = null;
-		this.normalizedName = null;
-		this.province = null;
-		this.country = null;
-		this.city = null;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @todo Should we actually store this?
-	 * @return
-	 */
-	public String getNormalizedName() {
-		return normalizedName;
-	}
-	
-	public String getProvince() {
-		return province;
-	}
-	
 	public Country getCountry() {
 		return country;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((normalizedName == null) ? 0 : normalizedName.hashCode());
-		result = prime * result
-				+ ((province == null) ? 0 : province.hashCode());
 		return result;
 	}
 
@@ -79,11 +45,6 @@ public class District implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		District other = (District) obj;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
 		if (country == null) {
 			if (other.country != null)
 				return false;
@@ -94,30 +55,13 @@ public class District implements Serializable {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (normalizedName == null) {
-			if (other.normalizedName != null)
-				return false;
-		} else if (!normalizedName.equals(other.normalizedName))
-			return false;
-		if (province == null) {
-			if (other.province != null)
-				return false;
-		} else if (!province.equals(other.province))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "District ["
-				+ (name != null ? "name=" + name + ", " : "")
-				+ (normalizedName != null ? "normalizedName=" + normalizedName
-						+ ", " : "")
-				+ (province != null ? "province=" + province + ", " : "")
-				+ (country != null ? "country=" + country + ", " : "")
-				+ (city != null ? "city=" + city : "") + "]";
+		return "District [" + (name != null ? "name=" + name + ", " : "")
+				+ (country != null ? "country=" + country : "") + "]";
 	}
-	
-	
 	
 }
