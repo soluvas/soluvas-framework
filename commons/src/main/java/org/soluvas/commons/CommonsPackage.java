@@ -4520,13 +4520,22 @@ public interface CommonsPackage extends EPackage {
 	int POSTAL_ADDRESS__VALIDATION_TIME = NAME_CONTAINER_FEATURE_COUNT + 23;
 
 	/**
+	 * The feature id for the '<em><b>District</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__DISTRICT = NAME_CONTAINER_FEATURE_COUNT + 24;
+
+	/**
 	 * The number of structural features of the '<em>Postal Address</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POSTAL_ADDRESS_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 24;
+	int POSTAL_ADDRESS_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 25;
 
 	/**
 	 * The operation id for the '<em>Get Name</em>' operation.
@@ -8809,6 +8818,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPostalAddress_ValidationTime();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getDistrict <em>District</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>District</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getDistrict()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_District();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonCatalog <em>Person Catalog</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12112,6 +12132,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute POSTAL_ADDRESS__VALIDATION_TIME = eINSTANCE.getPostalAddress_ValidationTime();
+
+		/**
+		 * The meta object literal for the '<em><b>District</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__DISTRICT = eINSTANCE.getPostalAddress_District();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonCatalogImpl <em>Person Catalog</em>}' class.

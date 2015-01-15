@@ -1371,6 +1371,7 @@
         <details key="documentation" value="When this postal address was validated by the user."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="district" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="LocalDate" instanceClassName="org.joda.time.LocalDate"/>
   <eClassifiers xsi:type="ecore:EEnum" name="SignupSourceType">

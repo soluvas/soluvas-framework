@@ -52,6 +52,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#isPrimaryBilling <em>Primary Billing</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#isPrimaryShipping <em>Primary Shipping</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#getValidationTime <em>Validation Time</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#getDistrict <em>District</em>}</li>
  * </ul>
  * </p>
  *
@@ -512,6 +513,26 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * @ordered
 	 */
 	protected DateTime validationTime = VALIDATION_TIME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDistrict() <em>District</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDistrict()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DISTRICT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDistrict() <em>District</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDistrict()
+	 * @generated
+	 * @ordered
+	 */
+	protected String district = DISTRICT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1074,6 +1095,27 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDistrict() {
+		return district;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDistrict(String newDistrict) {
+		String oldDistrict = district;
+		district = newDistrict;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.POSTAL_ADDRESS__DISTRICT, oldDistrict, district));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -1127,6 +1169,8 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 				return isPrimaryShipping();
 			case CommonsPackage.POSTAL_ADDRESS__VALIDATION_TIME:
 				return getValidationTime();
+			case CommonsPackage.POSTAL_ADDRESS__DISTRICT:
+				return getDistrict();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1217,6 +1261,9 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 			case CommonsPackage.POSTAL_ADDRESS__VALIDATION_TIME:
 				setValidationTime((DateTime)newValue);
 				return;
+			case CommonsPackage.POSTAL_ADDRESS__DISTRICT:
+				setDistrict((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1301,6 +1348,9 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 			case CommonsPackage.POSTAL_ADDRESS__VALIDATION_TIME:
 				setValidationTime(VALIDATION_TIME_EDEFAULT);
 				return;
+			case CommonsPackage.POSTAL_ADDRESS__DISTRICT:
+				setDistrict(DISTRICT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1363,6 +1413,8 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 				return primaryShipping != PRIMARY_SHIPPING_EDEFAULT;
 			case CommonsPackage.POSTAL_ADDRESS__VALIDATION_TIME:
 				return VALIDATION_TIME_EDEFAULT == null ? validationTime != null : !VALIDATION_TIME_EDEFAULT.equals(validationTime);
+			case CommonsPackage.POSTAL_ADDRESS__DISTRICT:
+				return DISTRICT_EDEFAULT == null ? district != null : !DISTRICT_EDEFAULT.equals(district);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1469,6 +1521,8 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 		result.append(primaryShipping);
 		result.append(", validationTime: ");
 		result.append(validationTime);
+		result.append(", district: ");
+		result.append(district);
 		result.append(')');
 		return result.toString();
 	}

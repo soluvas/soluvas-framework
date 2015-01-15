@@ -1118,6 +1118,9 @@
               <children xmi:type="notation:Node" xmi:id="_Uy9trCnJEeS_v590s3-tNw" type="3010" element="_Uv814CnJEeS_v590s3-tNw">
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_Uy9trSnJEeS_v590s3-tNw"/>
               </children>
+              <children xmi:type="notation:Node" xmi:id="_k7KqoJxkEeS-TdodhPdikA" type="3010" element="_k4yFAJxkEeS-TdodhPdikA">
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_k7KqoZxkEeS-TdodhPdikA"/>
+              </children>
               <styles xmi:type="notation:SortingStyle" xmi:id="_UyAEUinJEeS_v590s3-tNw"/>
               <styles xmi:type="notation:FilteringStyle" xmi:id="_UyAEUynJEeS_v590s3-tNw"/>
             </children>
@@ -5519,12 +5522,12 @@
       <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_UubL5SnJEeS_v590s3-tNw" name="PostalAddress" tooltipText="" outgoingEdges="_UxJvwCnJEeS_v590s3-tNw _UxKW0CnJEeS_v590s3-tNw _UxK94CnJEeS_v590s3-tNw" incomingEdges="_UweaXCnJEeS_v590s3-tNw" width="12" height="10">
         <target xmi:type="ecore:EClass" href="commons.ecore#//PostalAddress"/>
         <semanticElements xmi:type="ecore:EClass" href="commons.ecore#//PostalAddress"/>
-        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_Uuby8CnJEeS_v590s3-tNw" backgroundStyle="Liquid">
-          <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_Uuby8SnJEeS_v590s3-tNw"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_oNpIAJxkEeS-TdodhPdikA" backgroundStyle="Liquid">
+          <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_oNpIAZxkEeS-TdodhPdikA"/>
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
-          <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_Uuby8inJEeS_v590s3-tNw"/>
-          <backgroundColor xmi:type="viewpoint:RGBValues" xmi:id="_Uuby8ynJEeS_v590s3-tNw" red="255" green="255" blue="255"/>
-          <foregroundColor xmi:type="viewpoint:RGBValues" xmi:id="_Uuby9CnJEeS_v590s3-tNw" red="255" green="252" blue="216"/>
+          <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_oNpIApxkEeS-TdodhPdikA"/>
+          <backgroundColor xmi:type="viewpoint:RGBValues" xmi:id="_oNpIA5xkEeS-TdodhPdikA" red="255" green="255" blue="255"/>
+          <foregroundColor xmi:type="viewpoint:RGBValues" xmi:id="_oNpIBJxkEeS-TdodhPdikA" red="255" green="252" blue="216"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_Uv3WUCnJEeS_v590s3-tNw" name="schemaVersion : ELong = 3" tooltipText="">
@@ -5777,6 +5780,17 @@
             <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
             <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_Uv814ynJEeS_v590s3-tNw"/>
             <color xmi:type="viewpoint:RGBValues" xmi:id="_Uv815CnJEeS_v590s3-tNw"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_k4yFAJxkEeS-TdodhPdikA" name="district : EString" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@188268ce{platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//PostalAddress/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+          <target xmi:type="ecore:EAttribute" href="commons.ecore#//PostalAddress/district"/>
+          <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//PostalAddress/district"/>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_oOT2YJxkEeS-TdodhPdikA" labelAlignment="LEFT">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_oOT2YZxkEeS-TdodhPdikA"/>
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>
+            <borderColor xmi:type="viewpoint:RGBValues" xmi:id="_oOT2YpxkEeS-TdodhPdikA"/>
+            <color xmi:type="viewpoint:RGBValues" xmi:id="_oOT2Y5xkEeS-TdodhPdikA"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
@@ -7624,14 +7638,14 @@
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//PostalAddress/@eGenericSuperTypes.0"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//PostalAddress/@eGenericSuperTypes.1"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//PostalAddress/@eGenericSuperTypes.2"/>
-        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_UxJvwSnJEeS_v590s3-tNw" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
+        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_oPBoEJxkEeS-TdodhPdikA" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
           <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@conditionnalStyles.0/@style"/>
-          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_UxJvwinJEeS_v590s3-tNw" red="136" green="136" blue="136"/>
-          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_UxJvwynJEeS_v590s3-tNw" labelFormat="italic" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UxJvxCnJEeS_v590s3-tNw"/>
+          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_oPBoEZxkEeS-TdodhPdikA" red="136" green="136" blue="136"/>
+          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_oPBoEpxkEeS-TdodhPdikA" labelFormat="italic" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_oPBoE5xkEeS-TdodhPdikA"/>
           </beginLabelStyle>
-          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_UxJvxSnJEeS_v590s3-tNw" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UxJvxinJEeS_v590s3-tNw"/>
+          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_oPBoFJxkEeS-TdodhPdikA" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_oPBoFZxkEeS-TdodhPdikA"/>
           </centerLabelStyle>
         </ownedStyle>
         <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>
@@ -7641,14 +7655,14 @@
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//PostalAddress/@eGenericSuperTypes.0"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//PostalAddress/@eGenericSuperTypes.1"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//PostalAddress/@eGenericSuperTypes.2"/>
-        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_UxKW0SnJEeS_v590s3-tNw" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
+        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_oPC2MJxkEeS-TdodhPdikA" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
           <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@conditionnalStyles.0/@style"/>
-          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_UxKW0inJEeS_v590s3-tNw" red="136" green="136" blue="136"/>
-          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_UxKW0ynJEeS_v590s3-tNw" labelFormat="italic" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UxKW1CnJEeS_v590s3-tNw"/>
+          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_oPC2MZxkEeS-TdodhPdikA" red="136" green="136" blue="136"/>
+          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_oPC2MpxkEeS-TdodhPdikA" labelFormat="italic" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_oPC2M5xkEeS-TdodhPdikA"/>
           </beginLabelStyle>
-          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_UxKW1SnJEeS_v590s3-tNw" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UxKW1inJEeS_v590s3-tNw"/>
+          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_oPC2NJxkEeS-TdodhPdikA" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_oPC2NZxkEeS-TdodhPdikA"/>
           </centerLabelStyle>
         </ownedStyle>
         <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>
@@ -7658,14 +7672,14 @@
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//PostalAddress/@eGenericSuperTypes.0"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//PostalAddress/@eGenericSuperTypes.1"/>
         <semanticElements xmi:type="ecore:EGenericType" href="commons.ecore#//PostalAddress/@eGenericSuperTypes.2"/>
-        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_UxK94SnJEeS_v590s3-tNw" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
+        <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_oPDdQJxkEeS-TdodhPdikA" lineStyle="dash" targetArrow="InputClosedArrow" routingStyle="tree">
           <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']/@conditionnalStyles.0/@style"/>
-          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_UxK94inJEeS_v590s3-tNw" red="136" green="136" blue="136"/>
-          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_UxK94ynJEeS_v590s3-tNw" labelFormat="italic" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UxK95CnJEeS_v590s3-tNw"/>
+          <strokeColor xmi:type="viewpoint:RGBValues" xmi:id="_oPDdQZxkEeS-TdodhPdikA" red="136" green="136" blue="136"/>
+          <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_oPDdQpxkEeS-TdodhPdikA" labelFormat="italic" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_oPDdQ5xkEeS-TdodhPdikA"/>
           </beginLabelStyle>
-          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_UxK95SnJEeS_v590s3-tNw" showIcon="false">
-            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_UxK95inJEeS_v590s3-tNw"/>
+          <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_oPDdRJxkEeS-TdodhPdikA" showIcon="false">
+            <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_oPDdRZxkEeS-TdodhPdikA"/>
           </centerLabelStyle>
         </ownedStyle>
         <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC%20ESupertypes']"/>

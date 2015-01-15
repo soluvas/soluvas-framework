@@ -60,6 +60,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.commons.PostalAddress#isPrimaryBilling <em>Primary Billing</em>}</li>
  *   <li>{@link org.soluvas.commons.PostalAddress#isPrimaryShipping <em>Primary Shipping</em>}</li>
  *   <li>{@link org.soluvas.commons.PostalAddress#getValidationTime <em>Validation Time</em>}</li>
+ *   <li>{@link org.soluvas.commons.PostalAddress#getDistrict <em>District</em>}</li>
  * </ul>
  * </p>
  *
@@ -610,5 +611,31 @@ public interface PostalAddress extends NameContainer, Identifiable, SchemaVersio
 	 * @generated
 	 */
 	void setValidationTime(DateTime value);
+
+	/**
+	 * Returns the value of the '<em><b>District</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>District</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>District</em>' attribute.
+	 * @see #setDistrict(String)
+	 * @see org.soluvas.commons.CommonsPackage#getPostalAddress_District()
+	 * @model
+	 * @generated
+	 */
+	String getDistrict();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.PostalAddress#getDistrict <em>District</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>District</em>' attribute.
+	 * @see #getDistrict()
+	 * @generated
+	 */
+	void setDistrict(String value);
 
 } // PostalAddress
