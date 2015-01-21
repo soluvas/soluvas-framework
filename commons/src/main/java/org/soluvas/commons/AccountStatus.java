@@ -81,7 +81,15 @@ public enum AccountStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	VOID(5, "void", "void");
+	VOID(5, "void", "void"), /**
+	 * The '<em><b>Unregister</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #UNREGISTER_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	UNREGISTER(6, "unregister", "unregister");
 
 	/**
 	 * The '<em><b>Draft</b></em>' literal value.
@@ -172,6 +180,20 @@ public enum AccountStatus implements Enumerator {
 	public static final int VOID_VALUE = 5;
 
 	/**
+	 * The '<em><b>Unregister</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Unregister member, (person data with this status, is get from shipping address) when customer quick checkout. can become active status if manual register.
+	 * <!-- end-model-doc -->
+	 * @see #UNREGISTER
+	 * @model name="unregister"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNREGISTER_VALUE = 6;
+
+	/**
 	 * An array of all the '<em><b>Account Status</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -185,6 +207,7 @@ public enum AccountStatus implements Enumerator {
 			VERIFIED,
 			INACTIVE,
 			VOID,
+			UNREGISTER,
 		};
 
 	/**
@@ -241,6 +264,7 @@ public enum AccountStatus implements Enumerator {
 			case VERIFIED_VALUE: return VERIFIED;
 			case INACTIVE_VALUE: return INACTIVE;
 			case VOID_VALUE: return VOID;
+			case UNREGISTER_VALUE: return UNREGISTER;
 		}
 		return null;
 	}

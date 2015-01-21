@@ -5786,6 +5786,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		addEEnumLiteral(accountStatusEEnum, AccountStatus.VERIFIED);
 		addEEnumLiteral(accountStatusEEnum, AccountStatus.INACTIVE);
 		addEEnumLiteral(accountStatusEEnum, AccountStatus.VOID);
+		addEEnumLiteral(accountStatusEEnum, AccountStatus.UNREGISTER);
 
 		initEEnum(publicationStatusEEnum, PublicationStatus.class, "PublicationStatus");
 		addEEnumLiteral(publicationStatusEEnum, PublicationStatus.DRAFT);
@@ -6594,6 +6595,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Member dihapus."
+		   });	
+		addAnnotation
+		  (accountStatusEEnum.getELiterals().get(6), 
+		   source, 
+		   new String[] {
+			 "documentation", "Unregister member, (person data with this status, is get from shipping address) when customer quick checkout. can become active status if manual register."
 		   });	
 		addAnnotation
 		  (publicationStatusEEnum, 

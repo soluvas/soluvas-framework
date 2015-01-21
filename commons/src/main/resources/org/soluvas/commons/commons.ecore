@@ -849,6 +849,11 @@
         <details key="documentation" value="Member dihapus."/>
       </eAnnotations>
     </eLiterals>
+    <eLiterals name="unregister" value="6">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Unregister member, (person data with this status, is get from shipping address) when customer quick checkout. can become active status if manual register."/>
+      </eAnnotations>
+    </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="PublicationStatus">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
