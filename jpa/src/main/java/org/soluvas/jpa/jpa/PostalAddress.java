@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import org.hibernate.annotations.Type;
@@ -975,6 +976,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>emails</b></em>' feature
 	 * @generated
 	 */
+	@Nullable
 	public List<String> getEmails() {
 		return emails;
 	}
