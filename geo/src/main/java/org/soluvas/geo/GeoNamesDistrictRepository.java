@@ -32,13 +32,13 @@ import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFa
  * How to prepare data:
  * 
  * <ol>
- * 	<li>Download GeoNames cities1000.txt from http://www.geonames.org/export/</li>
+ * 	<li>Download from http://www.geonames.org/export/</li>
  * 	<li>Open the file using LibreOffice Calc</li>
- * 	<li>Delete the unneded columns, so that columns become: name, normalized name, country code</li>
- * 	<li>Save as {@code cities1000lite.csv}</li>
+ * 	<li>Delete the unneeded columns</li>
+ * 	<li>Save as {@code districts_ID.csv}</li>
  * </ol>
  * 
- * @author rudi
+ * @author anton
  */
 public class GeoNamesDistrictRepository implements DistrictRepository {
 	
@@ -101,7 +101,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 		}).toList();
 		final int total = Iterables.size(keys);
 		final PageImpl<District> page = new PageImpl<>(districts, pageable, total);
-		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) cities: {}",
+		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) districts: {}",
 				term, normalizedTerm, pageable, districts.size(), total, Iterables.limit(districts, 10));
 		return page;
 	}
