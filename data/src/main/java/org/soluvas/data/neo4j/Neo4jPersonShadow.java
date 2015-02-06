@@ -44,6 +44,7 @@ public class Neo4jPersonShadow extends EntityShadowBase<PersonInfo, String, Node
 			personInfo.setSlug((String) node.getProperty("slug", null));
 			personInfo.setName((String) node.getProperty("name", null));
 			personInfo.setPhotoId((String) node.getProperty("photoId", null));
+			personInfo.setEmail((String) node.getProperty("email", null));
 			final String genderLiteral = (String) node.getProperty("gender", null);
 			if (genderLiteral != null)
 				personInfo.setGender(Gender.get(genderLiteral.toLowerCase()));
@@ -96,6 +97,7 @@ public class Neo4jPersonShadow extends EntityShadowBase<PersonInfo, String, Node
 			Neo4jUtils.safeSetProperty(node, "slug", personInfo.getSlug());
 			Neo4jUtils.safeSetProperty(node, "name", personInfo.getName());
 			Neo4jUtils.safeSetProperty(node, "photoId", personInfo.getPhotoId());
+			Neo4jUtils.safeSetProperty(node, "email", personInfo.getEmail());
 			Neo4jUtils.safeSetProperty(node, "gender", 
 					personInfo.getGender() != null ? personInfo.getGender().getLiteral() : null);
 			return node;
