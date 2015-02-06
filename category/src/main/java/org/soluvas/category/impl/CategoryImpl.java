@@ -95,6 +95,7 @@ import com.google.common.collect.Iterables;
  *
  * @generated
  */
+//@JsonIgnoreProperties(ignoreUnknown=true)
 public class CategoryImpl extends EObjectImpl implements Category {
 	private static final Logger log = LoggerFactory
 			.getLogger(CategoryImpl.class);

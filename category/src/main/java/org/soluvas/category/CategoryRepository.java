@@ -36,7 +36,14 @@ public interface CategoryRepository extends
 	
 	Page<Category> findAllOriginalByStatus(Collection<CategoryStatus> statuses, Pageable pageable);
 	
-	Page<Category> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, boolean notForHasChildren, Pageable pageable);
+	/**
+	 * @param statuses
+	 * @param level The "implicit root category" has level 0. So a Category without a parent has level 1. Automatically updated on save.
+	 * @param excludeLeaves If {@code true}, excludes {@link Category}s which don't have children.
+	 * @param pageable
+	 * @return
+	 */
+	Page<Category> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, boolean excludeLeaves, Pageable pageable);
 
 	/**
 	 * Return the first {@link CategoryStatus#ACTIVE} leaf {@link Category}.
