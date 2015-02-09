@@ -21,6 +21,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#isTransactionHistoryEnabled <em>Transaction History Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isBookingEnabled <em>Booking Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}</li>
  * </ul>
  * </p>
  *
@@ -300,5 +301,32 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @generated
 	 */
 	void setPaymentGatewayEnabled(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Booking Expiry Time In Minutes</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Booking Expiry Time In Minutes</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Booking Expiry Time In Minutes</em>' attribute.
+	 * @see #setBookingExpiryTimeInMinutes(int)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_BookingExpiryTimeInMinutes()
+	 * @model default="0"
+	 * @generated
+	 */
+	int getBookingExpiryTimeInMinutes();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Booking Expiry Time In Minutes</em>' attribute.
+	 * @see #getBookingExpiryTimeInMinutes()
+	 * @generated
+	 */
+	void setBookingExpiryTimeInMinutes(int value);
 
 } // CustomerRole

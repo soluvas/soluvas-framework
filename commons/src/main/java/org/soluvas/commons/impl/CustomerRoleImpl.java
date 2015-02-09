@@ -42,6 +42,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isTransactionHistoryEnabled <em>Transaction History Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isBookingEnabled <em>Booking Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}</li>
  * </ul>
  * </p>
  *
@@ -348,6 +349,26 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected boolean paymentGatewayEnabled = PAYMENT_GATEWAY_ENABLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getBookingExpiryTimeInMinutes() <em>Booking Expiry Time In Minutes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBookingExpiryTimeInMinutes()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int BOOKING_EXPIRY_TIME_IN_MINUTES_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getBookingExpiryTimeInMinutes() <em>Booking Expiry Time In Minutes</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBookingExpiryTimeInMinutes()
+	 * @generated
+	 * @ordered
+	 */
+	protected int bookingExpiryTimeInMinutes = BOOKING_EXPIRY_TIME_IN_MINUTES_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -689,6 +710,27 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getBookingExpiryTimeInMinutes() {
+		return bookingExpiryTimeInMinutes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBookingExpiryTimeInMinutes(int newBookingExpiryTimeInMinutes) {
+		int oldBookingExpiryTimeInMinutes = bookingExpiryTimeInMinutes;
+		bookingExpiryTimeInMinutes = newBookingExpiryTimeInMinutes;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES, oldBookingExpiryTimeInMinutes, bookingExpiryTimeInMinutes));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -722,6 +764,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return isBookingEnabled();
 			case CommonsPackage.CUSTOMER_ROLE__PAYMENT_GATEWAY_ENABLED:
 				return isPaymentGatewayEnabled();
+			case CommonsPackage.CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES:
+				return getBookingExpiryTimeInMinutes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -775,6 +819,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__PAYMENT_GATEWAY_ENABLED:
 				setPaymentGatewayEnabled((Boolean)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES:
+				setBookingExpiryTimeInMinutes((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -830,6 +877,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__PAYMENT_GATEWAY_ENABLED:
 				setPaymentGatewayEnabled(PAYMENT_GATEWAY_ENABLED_EDEFAULT);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES:
+				setBookingExpiryTimeInMinutes(BOOKING_EXPIRY_TIME_IN_MINUTES_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -872,6 +922,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return bookingEnabled != BOOKING_ENABLED_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__PAYMENT_GATEWAY_ENABLED:
 				return paymentGatewayEnabled != PAYMENT_GATEWAY_ENABLED_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES:
+				return bookingExpiryTimeInMinutes != BOOKING_EXPIRY_TIME_IN_MINUTES_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -994,6 +1046,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(bookingEnabled);
 		result.append(", paymentGatewayEnabled: ");
 		result.append(paymentGatewayEnabled);
+		result.append(", bookingExpiryTimeInMinutes: ");
+		result.append(bookingExpiryTimeInMinutes);
 		result.append(')');
 		return result.toString();
 	}
