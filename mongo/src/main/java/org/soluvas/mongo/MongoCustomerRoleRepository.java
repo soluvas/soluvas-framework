@@ -238,5 +238,17 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final List<DBObject> objs = findSecondaryAsDBObjects(query, new BasicDBObject("_id", true), null, 0, 0, "findAllIdsByPaymentGatewayEnabled", statusMask);
 		return FluentIterable.from(objs).transform(new DBObjectToId()).toSet();
 	}
+
+	@Override
+	public int getBookingExpiryTime(String id) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", id);
+		
+		final DBObject objBookingExpiryTimeInMinutes = findOnePrimary(query, new BasicDBObject("bookingExpiryTimeInMinutes", true), "getBookingExpiryTime", id);
+		if (objBookingExpiryTimeInMinutes != null) {
+			return Integer.valueOf(String.valueOf(objBookingExpiryTimeInMinutes.get("bookingExpiryTimeInMinutes"))).intValue();
+		}
+		return 0;
+	}
 }
 	
