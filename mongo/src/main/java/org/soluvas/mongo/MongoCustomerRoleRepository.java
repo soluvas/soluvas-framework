@@ -244,9 +244,14 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject();
 		query.put("_id", id);
 		
-		final DBObject objBookingExpiryTimeInMinutes = findOnePrimary(query, new BasicDBObject("bookingExpiryTimeInMinutes", true), "getBookingExpiryTime", id);
-		if (objBookingExpiryTimeInMinutes != null) {
-			return Integer.valueOf(String.valueOf(objBookingExpiryTimeInMinutes.get("bookingExpiryTimeInMinutes"))).intValue();
+		final DBObject obj = findOnePrimary(query, new BasicDBObject("bookingExpiryTimeInMinutes", true), "getBookingExpiryTime", id);
+//		log.debug("obj: {}", obj);
+		if (obj != null && !"null".equals(obj)) {
+			final Object objBookingExpiryTime = obj.get("bookingExpiryTimeInMinutes");
+			if (objBookingExpiryTime != null && !"null".equals(objBookingExpiryTime)) {
+				return Integer.valueOf(String.valueOf(objBookingExpiryTime)).intValue();
+			}
+			return 0;
 		}
 		return 0;
 	}
