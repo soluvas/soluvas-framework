@@ -613,4 +613,16 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public Page<Person> findAllByCustomerRoleIds(StatusMask statusMask,
+			Collection<String> customerRoleIds, Pageable pageable) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public long countAllByCustomerRolesIds(StatusMask statusMask,
+			Collection<String> customerRoleIds) {
+		throw new UnsupportedOperationException();
+	}
+
 }
