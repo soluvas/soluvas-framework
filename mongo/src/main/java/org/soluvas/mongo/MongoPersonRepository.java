@@ -414,6 +414,23 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		augmentQueryForStatusMask(query, statusMask);
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
+	
+	@Override
+	public Page<Person> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
+		augmentQueryForStatusMask(query, statusMask);
+		
+		return findAllByQuery(query, pageable);
+	}
+	
+	@Override
+	public long countAllByCustomerRolesIds(StatusMask statusMask, Collection<String> customerRoleIds) {
+		log.debug("customerRoleIds {}", customerRoleIds);
+		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
+		augmentQueryForStatusMask(query, statusMask);
+		
+		return countByQuery(query);
+	}
 
 	@Override
 	public Page<Person> findAllByKeywordAndStatus(
@@ -598,9 +615,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final BasicDBObject query = new BasicDBObject("_id", personId);
 		final BasicDBObject field = new BasicDBObject("customerRole", true);
 		final DBObject object = findOnePrimary(query, field, "findCustomerRoleByPersonId", personId);
-		final String customerRole = (String) object.get("customerRole");
-		log.debug("Person {}'s customerRole is {}", personId, customerRole);
-		return customerRole;
+		if (object != null) {
+			final String customerRole = (String) object.get("customerRole");
+			log.debug("Person {}'s customerRole is {}", personId, customerRole);
+			return customerRole;
+		} else {
+			return null;
+		}
 	}
 
 	@Override

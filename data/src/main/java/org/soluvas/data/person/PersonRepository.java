@@ -121,6 +121,12 @@ public interface PersonRepository extends
 			CustomerRole customerRole, Collection<String> securityRoles,
 			Pageable pageable);
 
+	Page<Person> findAllByCustomerRoleIds(StatusMask statusMask,
+			Collection<String> customerRoleIds, Pageable pageable);
+
+	long countAllByCustomerRolesIds(StatusMask statusMask,
+			Collection<String> customerRoleIds);
+
 	/**
 	 * @param statusMask
 	 * @param slug
