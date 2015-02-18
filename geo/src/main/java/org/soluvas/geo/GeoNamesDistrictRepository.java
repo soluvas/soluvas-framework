@@ -58,14 +58,15 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 		});
 		
 		// Districts
-		try (final InputStreamReader reader = new InputStreamReader(GeoNamesCityRepository.class.getResourceAsStream("districts_ID.csv"))) {
+		try (final InputStreamReader reader = new InputStreamReader(GeoNamesDistrictRepository.class.getResourceAsStream("districts_ID_jne.csv"))) {
 			try (final CSVReader csv = new CSVReader(reader, '\t', '"')) {
 				while (true) {
-					@Nullable final String[] line = csv.readNext();
+					@Nullable 
+					final String[] line = csv.readNext();
 					if (line == null) {
 						break;
 					}
-					final String name = line[0];
+					final String name = line[4];
 					if (name.startsWith("#")) {
 						continue;
 					}
