@@ -12,11 +12,17 @@ public class District implements Serializable {
 	
 	private final String name;
 	private final Country country;
+	private final City city;
 	
-	public District(String name, Country country) {
+	public District(String name, Country country, City city) {
 		super();
 		this.name = name;
 		this.country = country;
+		this.city = city;
+	}
+
+	public City getCity() {
+		return city;
 	}
 
 	public String getName() {
@@ -32,6 +38,7 @@ public class District implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -50,6 +57,11 @@ public class District implements Serializable {
 				return false;
 		} else if (!country.equals(other.country))
 			return false;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -61,7 +73,8 @@ public class District implements Serializable {
 	@Override
 	public String toString() {
 		return "District [" + (name != null ? "name=" + name + ", " : "")
-				+ (country != null ? "country=" + country : "") + "]";
+				+ (country != null ? "country=" + country + ", " : "")
+				+ (city != null ? "city=" + city : "") + "]";
 	}
 	
 }

@@ -40,17 +40,23 @@ import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFa
  * 
  * @author anton
  */
+
+
 public class GeoNamesDistrictRepository implements DistrictRepository {
+	
+	
+	private CityRepository cityRepo;
 	
 	private static final Logger log = LoggerFactory.getLogger(GeoNamesDistrictRepository.class);
 	
 	final RadixTree<District> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
 	final Map<String, District> districtMap = new HashMap<>();
 	
-	public GeoNamesDistrictRepository(Collection<Country> countries) throws IOException {
+	public GeoNamesDistrictRepository(CityRepository cityRepo,Collection<Country> countries) throws IOException {
 		super();
+		this.cityRepo = cityRepo;
 		
-		final Country idCountry = Iterables.find(countries, new Predicate<Country>() {
+		final Country country = Iterables.find(countries, new Predicate<Country>() {
 			@Override
 			public boolean apply(Country input) {
 				return input.getIso().equals("ID");
@@ -70,12 +76,21 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 					if (name.startsWith("#")) {
 						continue;
 					}
+					final String city = line[2];
+					if (city.startsWith("#")) {
+						continue;
+					}
 					
 					/*handle for same district name*/
 					if (!districtMap.containsKey(name)){
-						final District district = new District(name, idCountry);
-						districtMap.put(name, district);
-						tree.put(name.toLowerCase() + ", " + idCountry.getIso(), district);
+						try {
+							final District district = new District(name, country, cityRepo.getCity(city, country.getIso()));
+							districtMap.put(name, district);
+							tree.put(name.toLowerCase() + ", " + country.getIso(), district);
+						} catch (Exception e) {
+							log.error("Not found for city: " + city + ": " + e, e);
+						}
+				//		final District district = new District(name, country);
 					}
 				}
 			}
