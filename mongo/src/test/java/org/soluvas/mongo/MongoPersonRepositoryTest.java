@@ -6,6 +6,7 @@ package org.soluvas.mongo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -82,7 +83,7 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void findByPhoneNumberOrMobileNumber() {
 		final String mobileNumber = "+6285286185328";
-		final Person person = personRepo.findOneByPhoneNumber(StatusMask.INCLUDE_INACTIVE, mobileNumber);
+		final Person person = personRepo.findOneByMobileOrPhoneNumber(StatusMask.INCLUDE_INACTIVE, mobileNumber);
 		assertNotNull(person);
 		log.debug("we found person {} with mobileNumber {}", person, mobileNumber);
 	}
@@ -118,6 +119,13 @@ public class MongoPersonRepositoryTest {
 	public void findCustomerRole() {
 		final String personId = "listriana_suherman";
 		final String customerRole = personRepo.getCustomerRoleByPersonId(personId);
+	}
+	
+	@Test
+	public void existsByPhoneNumberOrMobileNumber() {
+		final String mobileOrPhoneNumber = "081655649654";
+		final boolean existsByMobileOrPhoneNumber = personRepo.isExistsByMobileOrPhoneNumber(StatusMask.RAW, mobileOrPhoneNumber);
+		assertTrue(existsByMobileOrPhoneNumber);
 	}
 	
 }

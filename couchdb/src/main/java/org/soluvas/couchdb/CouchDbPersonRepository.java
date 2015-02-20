@@ -514,7 +514,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	@Nullable
-	public Person findOneByPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber) {
+	public Person findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -623,6 +623,20 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	public long countAllByCustomerRolesIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask,
+			String mobileNumber) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public java.util.Optional<String> getIdByMobileOrPhoneNumber(
+			StatusMask statusMask, String mobileOrPhoneNumber) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

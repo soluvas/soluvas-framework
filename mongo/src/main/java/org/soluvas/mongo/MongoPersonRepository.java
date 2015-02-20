@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
@@ -139,7 +140,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override @Nullable
-	public Person findOneByPhoneNumber(StatusMask statusMask, @Nullable String phoneNumber) {
+	public Person findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String phoneNumber) {
 		if (phoneNumber == null) {
 			return null;
 		}
@@ -149,6 +150,29 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		query.put("$or", new BasicDBObject[] {qMobileNumber, qPhoneNumber});
 		augmentQueryForStatusMask(query, statusMask);
 		return findOneByQuery(query);
+	}
+	
+	@Override
+	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask, String phoneNumber) {
+		final Optional<String> optExists = getIdByMobileOrPhoneNumber(statusMask, phoneNumber);
+		return optExists.isPresent();
+	}
+	
+	@Override
+	public Optional<String> getIdByMobileOrPhoneNumber(StatusMask statusMask,
+			String phoneNumber) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(phoneNumber), "Phone number must not be null or empty");
+		final BasicDBObject query = new BasicDBObject();
+		final BasicDBObject qMobileNumber = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
+		final BasicDBObject qPhoneNumber = new BasicDBObject("phoneNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
+		query.put("$or", new BasicDBObject[] {qMobileNumber, qPhoneNumber});
+		augmentQueryForStatusMask(query, statusMask);
+		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByPhoneNumber", statusMask, phoneNumber);
+		if (dbObject == null) {
+			return Optional.empty();
+		} else {
+			return Optional.of(String.valueOf(dbObject.get("_id")));
+		}
 	}
 
 	@Override @Nullable

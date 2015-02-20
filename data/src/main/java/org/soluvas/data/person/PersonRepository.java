@@ -2,6 +2,7 @@ package org.soluvas.data.person;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Nullable;
 
@@ -53,7 +54,11 @@ public interface PersonRepository extends
 	public Person findOneById(StatusMask statusMask, @Nullable String id);
 	
 	@Nullable
-	public Person findOneByPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber);
+	public Person findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileOrPhoneNumber);
+	
+	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask, String mobileOrPhoneNumber);
+	
+	Optional<String> getIdByMobileOrPhoneNumber(StatusMask statusMask, String mobileOrPhoneNumber);
 
 	/**
 	 * Find a {@link Person} by Twitter ID or screen name (at least one must be specified).
