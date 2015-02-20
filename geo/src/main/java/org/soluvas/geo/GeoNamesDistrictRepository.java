@@ -86,7 +86,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 						try {
 							final District district = new District(name, country, cityRepo.getCity(city, country.getIso()));
 							districtMap.put(name, district);
-							tree.put(name.toLowerCase() + ", " + country.getIso(), district);
+							tree.put(city.toLowerCase() + ", " + name.toLowerCase(), district);
 						} catch (Exception e) {
 							log.error("Not found for city: " + city + ": " + e, e);
 						}
@@ -115,23 +115,54 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 				return tree.getValueForExactKey(key);
 			}
 		}).toList();
+		
+		/*List<District> districtsFilterByCity = new ArrayList<District>();
+		for (District district : districts) {
+			if (district.getCity().getName().equals("Banjarmasin")){
+				districtsFilterByCity.add(district);
+			}
+		}*/
+		
 		final int total = Iterables.size(keys);
 		final PageImpl<District> page = new PageImpl<>(districts, pageable, total);
 		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) districts: {}",
 				term, normalizedTerm, pageable, districts.size(), total, Iterables.limit(districts, 10));
 		return page;
 	}
-
+	
 	@Override
-	public String getKeyForDistrict(District district) {
-		return district.getName().toLowerCase() + ", " + district.getCountry().getIso();
+	public Page<District> searchDistrictByCity(String term, final String city, Pageable pageable) {
+		Preconditions.checkNotNull("City must not be null");
+		final String normalizedTerm = Normalizer.normalize(city + ", " + term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
+		final ImmutableList<District> districts = FluentIterable.from(keys)
+				.skip((int) pageable.getOffset())
+				.limit((int) pageable.getPageSize())
+				.transform(new Function<CharSequence, District>() {
+			@Override @Nullable
+			public District apply(@Nullable CharSequence key) {
+//				log.debug("Querying: {}", key);
+				return tree.getValueForExactKey(key);
+			}
+		}).toList();
+		
+		final int total = Iterables.size(keys);
+		final PageImpl<District> page = new PageImpl<>(districts, pageable, total);
+		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) districts: {}",
+				city, normalizedTerm, pageable, districts.size(), total, Iterables.limit(districts, 10));
+		return page;
 	}
 
 	@Override
-	public District getDistrict(String normalizedNameAndCountryCode) throws IllegalArgumentException {
-		final District district = tree.getValueForExactKey(normalizedNameAndCountryCode);
+	public String getKeyForDistrict(District district) {
+		return district.getCity().getName().toLowerCase() + ", " + district.getName().toLowerCase();
+	}
+
+	@Override
+	public District getDistrict(String cityAndMormalizedDistrict) throws IllegalArgumentException {
+		final District district = tree.getValueForExactKey(cityAndMormalizedDistrict);
 		Preconditions.checkArgument(district != null,
-				"Invalid city for '%s'.", normalizedNameAndCountryCode);
+				"Invalid disctrict for '%s'.", cityAndMormalizedDistrict);
 		return district;
 	}
 	
