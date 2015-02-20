@@ -436,28 +436,24 @@ public class EmfPersonRepository extends
 	@Override
 	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask,
 			String mobileNumber) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public java.util.Optional<String> getIdByMobileOrPhoneNumber(
+	public Optional<String> getIdByMobileOrPhoneNumber(
 			StatusMask statusMask, String mobileOrPhoneNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean isExistsByEmail(StatusMask statusMask, String email) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public java.util.Optional<String> getIdByEmail(StatusMask statusMask,
+	public Optional<String> getIdByEmail(StatusMask statusMask,
 			String email) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 }

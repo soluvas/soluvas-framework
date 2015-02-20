@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
@@ -36,6 +35,7 @@ import org.soluvas.data.person.PersonRepository;
 import scala.util.Try;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
@@ -142,7 +142,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		augmentQueryForStatusMask(query, statusMask);
 		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByEmail", statusMask, email);
 		if (dbObject == null) {
-			return Optional.empty();
+			return Optional.absent();
 		} else {
 			return Optional.of(String.valueOf(dbObject.get("_id")));
 		}
@@ -188,7 +188,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		augmentQueryForStatusMask(query, statusMask);
 		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByPhoneNumber", statusMask, phoneNumber);
 		if (dbObject == null) {
-			return Optional.empty();
+			return Optional.absent();
 		} else {
 			return Optional.of(String.valueOf(dbObject.get("_id")));
 		}

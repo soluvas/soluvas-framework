@@ -2,7 +2,6 @@ package org.soluvas.data.person;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Nullable;
 
@@ -19,6 +18,7 @@ import org.soluvas.data.domain.Projection;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.Trashable;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 
 /**
