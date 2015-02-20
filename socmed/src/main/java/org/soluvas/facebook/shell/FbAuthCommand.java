@@ -38,7 +38,7 @@ public class FbAuthCommand extends ExtCommandSupport {
 	private String appSecret;
 	@Option(name="-r", description="Redirect URI. Default is '{webAddress.baseUri}fb_recipient/'.")
 	private String redirectUri;
-	@Argument(name="code", required=true, description="Verification code after login.")
+	@Argument(name="code", required=false, description="Verification code after login.")
 	private String code;
 
 	@Override
@@ -62,7 +62,7 @@ public class FbAuthCommand extends ExtCommandSupport {
 			accessTokenUri.addParameter("client_id", realAppId);
 			accessTokenUri.addParameter("client_secret", realAppSecret);
 			accessTokenUri.addParameter("redirect_uri", redirectUri);
-			accessTokenUri.addParameter("code", code);
+//			accessTokenUri.addParameter("code", code);
 			accessTokenUriStr = accessTokenUri.build().toString();
 		} catch (final Exception ex) {
 			throw new FacebookException("Error when building Facebook URI for appId " + 

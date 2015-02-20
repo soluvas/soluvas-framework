@@ -18,6 +18,7 @@ import org.soluvas.data.domain.Projection;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.Trashable;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -49,11 +50,19 @@ public interface PersonRepository extends
 	@Nullable
 	public Person findOneByEmail(StatusMask statusMask, @Nullable String email);
 	
+	public boolean isExistsByEmail(StatusMask statusMask, String email);
+	
+	Optional<String> getIdByEmail(StatusMask statusMask, String email);
+	
 	@Nullable
 	public Person findOneById(StatusMask statusMask, @Nullable String id);
 	
 	@Nullable
-	public Person findOneByPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber);
+	public Person findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileOrPhoneNumber);
+	
+	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask, String mobileOrPhoneNumber);
+	
+	Optional<String> getIdByMobileOrPhoneNumber(StatusMask statusMask, String mobileOrPhoneNumber);
 
 	/**
 	 * Find a {@link Person} by Twitter ID or screen name (at least one must be specified).

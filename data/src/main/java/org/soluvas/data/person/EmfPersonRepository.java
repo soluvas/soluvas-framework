@@ -240,7 +240,7 @@ public class EmfPersonRepository extends
 
 	@Override
 	@Nullable
-	public Person findOneByPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber) {
+	public Person findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -430,6 +430,29 @@ public class EmfPersonRepository extends
 	@Override
 	public long countAllByCustomerRolesIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask,
+			String mobileNumber) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Optional<String> getIdByMobileOrPhoneNumber(
+			StatusMask statusMask, String mobileOrPhoneNumber) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isExistsByEmail(StatusMask statusMask, String email) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Optional<String> getIdByEmail(StatusMask statusMask,
+			String email) {
 		throw new UnsupportedOperationException();
 	}
 
