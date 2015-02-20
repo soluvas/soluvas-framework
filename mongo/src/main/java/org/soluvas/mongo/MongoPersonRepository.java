@@ -129,6 +129,25 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		return findOneByQuery(query);
 	}
 	
+	@Override
+	public boolean isExistsByEmail(StatusMask statusMask, String email) {
+		final Optional<String> optExists = getIdByEmail(statusMask, email);
+		return optExists.isPresent();
+	}
+
+	@Override
+	public Optional<String> getIdByEmail(StatusMask statusMask, String email) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
+		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		augmentQueryForStatusMask(query, statusMask);
+		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByEmail", statusMask, email);
+		if (dbObject == null) {
+			return Optional.empty();
+		} else {
+			return Optional.of(String.valueOf(dbObject.get("_id")));
+		}
+	}
+	
 	@Override @Nullable
 	public Person findOneById(StatusMask statusMask, @Nullable String id) {
 		if (Strings.isNullOrEmpty(id))  {

@@ -50,6 +50,10 @@ public interface PersonRepository extends
 	@Nullable
 	public Person findOneByEmail(StatusMask statusMask, @Nullable String email);
 	
+	public boolean isExistsByEmail(StatusMask statusMask, String email);
+	
+	Optional<String> getIdByEmail(StatusMask statusMask, String email);
+	
 	@Nullable
 	public Person findOneById(StatusMask statusMask, @Nullable String id);
 	

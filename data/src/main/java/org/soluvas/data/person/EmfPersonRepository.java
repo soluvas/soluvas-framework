@@ -447,4 +447,17 @@ public class EmfPersonRepository extends
 		return null;
 	}
 
+	@Override
+	public boolean isExistsByEmail(StatusMask statusMask, String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public java.util.Optional<String> getIdByEmail(StatusMask statusMask,
+			String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
