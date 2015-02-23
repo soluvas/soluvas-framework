@@ -86,7 +86,9 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 						try {
 							final District district = new District(name, country, cityRepo.getCity(city, country.getIso()));
 							districtMap.put(name, district);
+							/* FIXME: put two times for find based on city and not*/
 							tree.put(city.toLowerCase() + ", " + name.toLowerCase(), district);
+							tree.put(name.toLowerCase() + ", " + country.getIso(), district);
 						} catch (Exception e) {
 							log.error("Not found for city: " + city + ": " + e, e);
 						}
@@ -125,6 +127,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 		
 		final int total = Iterables.size(keys);
 		final PageImpl<District> page = new PageImpl<>(districts, pageable, total);
+		
 		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) districts: {}",
 				term, normalizedTerm, pageable, districts.size(), total, Iterables.limit(districts, 10));
 		return page;
@@ -159,10 +162,10 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 	}
 
 	@Override
-	public District getDistrict(String cityAndMormalizedDistrict) throws IllegalArgumentException {
-		final District district = tree.getValueForExactKey(cityAndMormalizedDistrict);
+	public District getDistrict(String cityAndNormalizedDistrictOrNormalizedDistrictAndCountry) throws IllegalArgumentException {
+		final District district = tree.getValueForExactKey(cityAndNormalizedDistrictOrNormalizedDistrictAndCountry);
 		Preconditions.checkArgument(district != null,
-				"Invalid disctrict for '%s'.", cityAndMormalizedDistrict);
+				"Invalid disctrict for '%s'.", cityAndNormalizedDistrictOrNormalizedDistrictAndCountry);
 		return district;
 	}
 	
