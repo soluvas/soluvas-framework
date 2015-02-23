@@ -349,7 +349,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public List<Person> findAllCustomerRoleIds(StatusMask statusMask,
+	public List<Person> findAllByCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
 		throw new UnsupportedOperationException();
 	}
@@ -453,6 +453,12 @@ public class EmfPersonRepository extends
 	@Override
 	public Optional<String> getIdByEmail(StatusMask statusMask,
 			String email) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Page<Person> findAll(StatusMask statusMask, Collection<String> ids,
+			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -544,7 +544,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public List<Person> findAllCustomerRoleIds(StatusMask statusMask,
+	public List<Person> findAllByCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
@@ -646,6 +646,12 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	@Override
 	public Optional<String> getIdByEmail(StatusMask statusMask,
 			String email) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Page<Person> findAll(StatusMask statusMask, Collection<String> ids,
+			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
 

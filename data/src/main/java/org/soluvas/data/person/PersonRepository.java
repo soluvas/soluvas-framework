@@ -100,7 +100,7 @@ public interface PersonRepository extends
 	
 	List<Person> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds);
 	
-	List<Person> findAllCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
+	List<Person> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
 	
 	boolean existByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
 	
@@ -135,6 +135,9 @@ public interface PersonRepository extends
 
 	long countAllByCustomerRolesIds(StatusMask statusMask,
 			Collection<String> customerRoleIds);
+
+	Page<Person> findAll(StatusMask statusMask, Collection<String> ids,
+			Pageable pageable);
 
 	/**
 	 * @param statusMask
