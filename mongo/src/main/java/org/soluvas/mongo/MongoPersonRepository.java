@@ -432,6 +432,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		augmentQueryForStatusMask(query, statusMask);
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
+	
+	@Override
+	public Page<Person> findAll(StatusMask statusMask, Collection<String> ids, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$in", ids));
+		augmentQueryForStatusMask(query, statusMask);
+		return findAllByQuery(query, pageable);
+	}
 
 	@Override
 	public List<Person> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds) {
@@ -452,9 +459,10 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public List<Person> findAllCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds) {
+	public List<Person> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds) {
 		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
+		
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
 	
