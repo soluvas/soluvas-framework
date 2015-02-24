@@ -1186,6 +1186,24 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getWatermarkLike_WatermarkOpacity() {
+		return (EAttribute)watermarkLikeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWatermarkLike_WatermarkGravity() {
+		return (EAttribute)watermarkLikeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMedia() {
 		return mediaEClass;
 	}
@@ -1525,6 +1543,8 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		watermarkLikeEClass = createEClass(WATERMARK_LIKE);
 		createEAttribute(watermarkLikeEClass, WATERMARK_LIKE__WATERMARK_FILE);
+		createEAttribute(watermarkLikeEClass, WATERMARK_LIKE__WATERMARK_OPACITY);
+		createEAttribute(watermarkLikeEClass, WATERMARK_LIKE__WATERMARK_GRAVITY);
 
 		mediaEClass = createEClass(MEDIA);
 		createEAttribute(mediaEClass, MEDIA__TYPE);
@@ -1895,6 +1915,8 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		initEClass(watermarkLikeEClass, WatermarkLike.class, "WatermarkLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getWatermarkLike_WatermarkFile(), theCommonsPackage.getFile(), "watermarkFile", null, 0, 1, WatermarkLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWatermarkLike_WatermarkOpacity(), ecorePackage.getEInt(), "watermarkOpacity", "15", 0, 1, WatermarkLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWatermarkLike_WatermarkGravity(), this.getTransformGravity(), "watermarkGravity", "center", 0, 1, WatermarkLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mediaEClass, Media.class, "Media", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMedia_Type(), ecorePackage.getEString(), "type", "Media", 1, 1, Media.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

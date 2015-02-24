@@ -585,13 +585,31 @@ public interface ImagePackage extends EPackage {
 	int RESIZE_TO_FIT__WATERMARK_FILE = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Watermark Opacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT__WATERMARK_OPACITY = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Watermark Gravity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT__WATERMARK_GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Only Shrink Larger</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FIT__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
+	int RESIZE_TO_FIT__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Resize To Fit</em>' class.
@@ -600,7 +618,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
+	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ResizeToFillImpl <em>Resize To Fill</em>}' class.
@@ -640,13 +658,31 @@ public interface ImagePackage extends EPackage {
 	int RESIZE_TO_FILL__WATERMARK_FILE = IMAGE_TRANSFORM_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Watermark Opacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL__WATERMARK_OPACITY = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Watermark Gravity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL__WATERMARK_GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Gravity</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL__GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 3;
+	int RESIZE_TO_FILL__GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Only Shrink Larger</b></em>' attribute.
@@ -655,7 +691,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
+	int RESIZE_TO_FILL__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Resize To Fill</em>' class.
@@ -664,7 +700,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 5;
+	int RESIZE_TO_FILL_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}' class.
@@ -1307,13 +1343,31 @@ public interface ImagePackage extends EPackage {
 	int WATERMARK_LIKE__WATERMARK_FILE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Watermark Opacity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WATERMARK_LIKE__WATERMARK_OPACITY = 1;
+
+	/**
+	 * The feature id for the '<em><b>Watermark Gravity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WATERMARK_LIKE__WATERMARK_GRAVITY = 2;
+
+	/**
 	 * The number of structural features of the '<em>Watermark Like</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WATERMARK_LIKE_FEATURE_COUNT = 1;
+	int WATERMARK_LIKE_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.MediaImpl <em>Media</em>}' class.
@@ -2567,6 +2621,28 @@ public interface ImagePackage extends EPackage {
 	EAttribute getWatermarkLike_WatermarkFile();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.WatermarkLike#getWatermarkOpacity <em>Watermark Opacity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Watermark Opacity</em>'.
+	 * @see org.soluvas.image.WatermarkLike#getWatermarkOpacity()
+	 * @see #getWatermarkLike()
+	 * @generated
+	 */
+	EAttribute getWatermarkLike_WatermarkOpacity();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.WatermarkLike#getWatermarkGravity <em>Watermark Gravity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Watermark Gravity</em>'.
+	 * @see org.soluvas.image.WatermarkLike#getWatermarkGravity()
+	 * @see #getWatermarkLike()
+	 * @generated
+	 */
+	EAttribute getWatermarkLike_WatermarkGravity();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.Media <em>Media</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3570,6 +3646,22 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute WATERMARK_LIKE__WATERMARK_FILE = eINSTANCE.getWatermarkLike_WatermarkFile();
+
+		/**
+		 * The meta object literal for the '<em><b>Watermark Opacity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WATERMARK_LIKE__WATERMARK_OPACITY = eINSTANCE.getWatermarkLike_WatermarkOpacity();
+
+		/**
+		 * The meta object literal for the '<em><b>Watermark Gravity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WATERMARK_LIKE__WATERMARK_GRAVITY = eINSTANCE.getWatermarkLike_WatermarkGravity();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.MediaImpl <em>Media</em>}' class.

@@ -177,10 +177,44 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 						//Watermarking enabled?
 						File resizedFile = styledFile;
 						File watermarkFile = null;
+						String watermarkOpacity = "15%";
+						String watermarkGravity = null;
 						if (transform instanceof WatermarkLike) {
 							watermarkFile = ((WatermarkLike) transform).getWatermarkFile();
 							if (watermarkFile != null) {
 								resizedFile = File.createTempFile("watermark_", ".miff");
+							}
+							watermarkOpacity = ((WatermarkLike) transform).getWatermarkOpacity() + "%";
+							switch (((WatermarkLike) transform).getWatermarkGravity()) {
+							case CENTER:
+								watermarkGravity = "Center";
+								break;
+							case BOTTOM_CENTER:
+								watermarkGravity = "South";
+								break;
+							case BOTTOM_LEFT:
+								watermarkGravity = "SouthWest";
+								break;
+							case BOTTOM_RIGHT:
+								watermarkGravity = "SouthEast";
+								break;
+							case TOP_LEFT:
+								watermarkGravity = "NorthWest";
+								break;
+							case TOP_RIGHT:
+								watermarkGravity = "NorthEast";
+								break;
+							case TOP_CENTER:
+								watermarkGravity = "North";
+								break;
+							case CENTER_LEFT:
+								watermarkGravity = "West";
+								break;
+							case CENTER_RIGHT:
+								watermarkGravity = "East";
+								break;
+							default:
+								throw new ImageException("Unknown gravity: "  + ((WatermarkLike) transform).getWatermarkGravity());
 							}
 						}
 						cmd.addArgument(resizedFile.getPath(), false);
@@ -197,9 +231,9 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 							if (watermarkFile != null) {
 								final CommandLine watermarkCmd = new CommandLine("composite");
 								watermarkCmd.addArgument("-watermark");
-								watermarkCmd.addArgument("15%");
+								watermarkCmd.addArgument(watermarkOpacity);
 								watermarkCmd.addArgument("-gravity");
-								watermarkCmd.addArgument("center");
+								watermarkCmd.addArgument(watermarkGravity);
 								watermarkCmd.addArgument(watermarkFile.getPath(), false); // watermark.png
 								watermarkCmd.addArgument(resizedFile.getPath(), false); // miff
 								

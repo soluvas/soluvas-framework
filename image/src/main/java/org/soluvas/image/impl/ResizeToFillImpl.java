@@ -23,6 +23,8 @@ import org.soluvas.image.WatermarkLike;
  *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getHeight <em>Height</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getWatermarkFile <em>Watermark File</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getWatermarkOpacity <em>Watermark Opacity</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getWatermarkGravity <em>Watermark Gravity</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getGravity <em>Gravity</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFillImpl#getOnlyShrinkLarger <em>Only Shrink Larger</em>}</li>
  * </ul>
@@ -90,6 +92,46 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * @ordered
 	 */
 	protected File watermarkFile = WATERMARK_FILE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getWatermarkOpacity() <em>Watermark Opacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWatermarkOpacity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int WATERMARK_OPACITY_EDEFAULT = 15;
+
+	/**
+	 * The cached value of the '{@link #getWatermarkOpacity() <em>Watermark Opacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWatermarkOpacity()
+	 * @generated
+	 * @ordered
+	 */
+	protected int watermarkOpacity = WATERMARK_OPACITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getWatermarkGravity() <em>Watermark Gravity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWatermarkGravity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final TransformGravity WATERMARK_GRAVITY_EDEFAULT = TransformGravity.CENTER;
+
+	/**
+	 * The cached value of the '{@link #getWatermarkGravity() <em>Watermark Gravity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWatermarkGravity()
+	 * @generated
+	 * @ordered
+	 */
+	protected TransformGravity watermarkGravity = WATERMARK_GRAVITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getGravity() <em>Gravity</em>}' attribute.
@@ -230,6 +272,48 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getWatermarkOpacity() {
+		return watermarkOpacity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWatermarkOpacity(int newWatermarkOpacity) {
+		int oldWatermarkOpacity = watermarkOpacity;
+		watermarkOpacity = newWatermarkOpacity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FILL__WATERMARK_OPACITY, oldWatermarkOpacity, watermarkOpacity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TransformGravity getWatermarkGravity() {
+		return watermarkGravity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWatermarkGravity(TransformGravity newWatermarkGravity) {
+		TransformGravity oldWatermarkGravity = watermarkGravity;
+		watermarkGravity = newWatermarkGravity == null ? WATERMARK_GRAVITY_EDEFAULT : newWatermarkGravity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FILL__WATERMARK_GRAVITY, oldWatermarkGravity, watermarkGravity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public TransformGravity getGravity() {
 		return gravity;
@@ -285,6 +369,10 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 				return getHeight();
 			case ImagePackage.RESIZE_TO_FILL__WATERMARK_FILE:
 				return getWatermarkFile();
+			case ImagePackage.RESIZE_TO_FILL__WATERMARK_OPACITY:
+				return getWatermarkOpacity();
+			case ImagePackage.RESIZE_TO_FILL__WATERMARK_GRAVITY:
+				return getWatermarkGravity();
 			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
 				return getGravity();
 			case ImagePackage.RESIZE_TO_FILL__ONLY_SHRINK_LARGER:
@@ -309,6 +397,12 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 				return;
 			case ImagePackage.RESIZE_TO_FILL__WATERMARK_FILE:
 				setWatermarkFile((File)newValue);
+				return;
+			case ImagePackage.RESIZE_TO_FILL__WATERMARK_OPACITY:
+				setWatermarkOpacity((Integer)newValue);
+				return;
+			case ImagePackage.RESIZE_TO_FILL__WATERMARK_GRAVITY:
+				setWatermarkGravity((TransformGravity)newValue);
 				return;
 			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
 				setGravity((TransformGravity)newValue);
@@ -337,6 +431,12 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 			case ImagePackage.RESIZE_TO_FILL__WATERMARK_FILE:
 				setWatermarkFile(WATERMARK_FILE_EDEFAULT);
 				return;
+			case ImagePackage.RESIZE_TO_FILL__WATERMARK_OPACITY:
+				setWatermarkOpacity(WATERMARK_OPACITY_EDEFAULT);
+				return;
+			case ImagePackage.RESIZE_TO_FILL__WATERMARK_GRAVITY:
+				setWatermarkGravity(WATERMARK_GRAVITY_EDEFAULT);
+				return;
 			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
 				setGravity(GRAVITY_EDEFAULT);
 				return;
@@ -361,6 +461,10 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 				return HEIGHT_EDEFAULT == null ? height != null : !HEIGHT_EDEFAULT.equals(height);
 			case ImagePackage.RESIZE_TO_FILL__WATERMARK_FILE:
 				return WATERMARK_FILE_EDEFAULT == null ? watermarkFile != null : !WATERMARK_FILE_EDEFAULT.equals(watermarkFile);
+			case ImagePackage.RESIZE_TO_FILL__WATERMARK_OPACITY:
+				return watermarkOpacity != WATERMARK_OPACITY_EDEFAULT;
+			case ImagePackage.RESIZE_TO_FILL__WATERMARK_GRAVITY:
+				return watermarkGravity != WATERMARK_GRAVITY_EDEFAULT;
 			case ImagePackage.RESIZE_TO_FILL__GRAVITY:
 				return gravity != GRAVITY_EDEFAULT;
 			case ImagePackage.RESIZE_TO_FILL__ONLY_SHRINK_LARGER:
@@ -386,6 +490,8 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 		if (baseClass == WatermarkLike.class) {
 			switch (derivedFeatureID) {
 				case ImagePackage.RESIZE_TO_FILL__WATERMARK_FILE: return ImagePackage.WATERMARK_LIKE__WATERMARK_FILE;
+				case ImagePackage.RESIZE_TO_FILL__WATERMARK_OPACITY: return ImagePackage.WATERMARK_LIKE__WATERMARK_OPACITY;
+				case ImagePackage.RESIZE_TO_FILL__WATERMARK_GRAVITY: return ImagePackage.WATERMARK_LIKE__WATERMARK_GRAVITY;
 				default: return -1;
 			}
 		}
@@ -409,6 +515,8 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 		if (baseClass == WatermarkLike.class) {
 			switch (baseFeatureID) {
 				case ImagePackage.WATERMARK_LIKE__WATERMARK_FILE: return ImagePackage.RESIZE_TO_FILL__WATERMARK_FILE;
+				case ImagePackage.WATERMARK_LIKE__WATERMARK_OPACITY: return ImagePackage.RESIZE_TO_FILL__WATERMARK_OPACITY;
+				case ImagePackage.WATERMARK_LIKE__WATERMARK_GRAVITY: return ImagePackage.RESIZE_TO_FILL__WATERMARK_GRAVITY;
 				default: return -1;
 			}
 		}
@@ -431,6 +539,10 @@ public class ResizeToFillImpl extends EObjectImpl implements ResizeToFill {
 		result.append(height);
 		result.append(", watermarkFile: ");
 		result.append(watermarkFile);
+		result.append(", watermarkOpacity: ");
+		result.append(watermarkOpacity);
+		result.append(", watermarkGravity: ");
+		result.append(watermarkGravity);
 		result.append(", gravity: ");
 		result.append(gravity);
 		result.append(", onlyShrinkLarger: ");

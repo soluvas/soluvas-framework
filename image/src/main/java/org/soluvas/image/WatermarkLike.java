@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.soluvas.image.WatermarkLike#getWatermarkFile <em>Watermark File</em>}</li>
+ *   <li>{@link org.soluvas.image.WatermarkLike#getWatermarkOpacity <em>Watermark Opacity</em>}</li>
+ *   <li>{@link org.soluvas.image.WatermarkLike#getWatermarkGravity <em>Watermark Gravity</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,5 +53,62 @@ public interface WatermarkLike extends EObject {
 	 * @generated
 	 */
 	void setWatermarkFile(File value);
+
+	/**
+	 * Returns the value of the '<em><b>Watermark Opacity</b></em>' attribute.
+	 * The default value is <code>"15"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Watermark Opacity</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Watermark Opacity</em>' attribute.
+	 * @see #setWatermarkOpacity(int)
+	 * @see org.soluvas.image.ImagePackage#getWatermarkLike_WatermarkOpacity()
+	 * @model default="15"
+	 * @generated
+	 */
+	int getWatermarkOpacity();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.image.WatermarkLike#getWatermarkOpacity <em>Watermark Opacity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Watermark Opacity</em>' attribute.
+	 * @see #getWatermarkOpacity()
+	 * @generated
+	 */
+	void setWatermarkOpacity(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Watermark Gravity</b></em>' attribute.
+	 * The default value is <code>"center"</code>.
+	 * The literals are from the enumeration {@link org.soluvas.image.TransformGravity}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Watermark Gravity</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Watermark Gravity</em>' attribute.
+	 * @see org.soluvas.image.TransformGravity
+	 * @see #setWatermarkGravity(TransformGravity)
+	 * @see org.soluvas.image.ImagePackage#getWatermarkLike_WatermarkGravity()
+	 * @model default="center"
+	 * @generated
+	 */
+	TransformGravity getWatermarkGravity();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.image.WatermarkLike#getWatermarkGravity <em>Watermark Gravity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Watermark Gravity</em>' attribute.
+	 * @see org.soluvas.image.TransformGravity
+	 * @see #getWatermarkGravity()
+	 * @generated
+	 */
+	void setWatermarkGravity(TransformGravity value);
 
 } // WatermarkLike
