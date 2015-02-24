@@ -121,7 +121,7 @@ public class FacebookUtilsImpl implements FacebookUtils {
 			final HttpGet httpGet = new HttpGet(photoUrl);
 			log.debug("Photo URL for Facebook user {} ({}) is {}", facebookId, personName, photoUrl);
 			try (final CloseableHttpResponse response = httpClient.execute(httpGet)) {
-				final File tmpFile = File.createTempFile("fb_", ".tmp");
+				final File tmpFile = File.createTempFile("fb_", ".jpg");
 				try {
 					FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
 					log.debug("Photo Status Line {}",  response.getStatusLine());
