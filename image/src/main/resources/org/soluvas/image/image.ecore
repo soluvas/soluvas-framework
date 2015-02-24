@@ -543,6 +543,7 @@
     <eLiterals name="task" value="4"/>
     <eLiterals name="article" value="5"/>
     <eLiterals name="banner_shop" value="6"/>
+    <eLiterals name="gallery" value="7"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ImageStyles">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -608,7 +609,7 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MediaAttachmentEntry" instanceClassName="java.util.Map$Entry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//MediaAttachment"
         containment="true"/>
   </eClassifiers>
