@@ -366,7 +366,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 					boolean deleted = delete(alreadyAdded);
 					log.debug("Rolled back {} image '{}'", getNamespace(), alreadyAdded.getId());
 				} catch (Exception e) {
-					log.error(String.format("Error while trying to rollback/delete %s image '%s': %s", getNamespace(), alreadyAdded.getId(), e), e);
+					log.error(String.format("Error while trying to rollback/delete %s image '%s': %s", getNamespace(), alreadyAdded != null ? alreadyAdded.getId() : null, e), e);
 				}
 			}
 		} catch (Exception e) {
@@ -467,7 +467,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 					} catch (Exception e) {
 						log.error("Error adding original image " + newImage, e);
 						monitor.worked(1, ProgressStatus.ERROR);
-						throw new ImageException(e, "Cannot upload %s image '%s' from '%s' file '%s' type '%s' size '%s': %s", getNamespace(), newImage.getId(), 
+						throw new ImageException(e, "Cannot upload %s image '%s' file '%s' type '%s' size '%s': %s", getNamespace(), newImage.getId(), 
 								newImage.getOriginalFile(), newImage.getContentType(), newImage.getOriginalFile().length(), e);
 					}
 				}
