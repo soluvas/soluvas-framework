@@ -13,6 +13,12 @@ import org.soluvas.commons.Person;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.User;
+import twitter4j.conf.ConfigurationBuilder;
+
 import com.google.common.base.Preconditions;
 
 /**
@@ -25,15 +31,34 @@ public class TwitterUtils {
 	
 	/**
 	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link Person}.
-	 * @param twitterScreenName twitter User ID.
-	 * @param personName Person name, used for the image name and for logging purposes.
+	 * @param person Person name, used for the image name and for logging purposes.
+	 * @param consumerKey TODO
+	 * @param consumerSecret TODO
 	 * @return ImageID from the ImageRepository.
+	 * @throws TwitterException 
 	 */
-	public static String refreshPhotoFromTwitter(final String twitterScreenName, final String personName,
-			ImageRepository imageRepo) {
-		Preconditions.checkNotNull(twitterScreenName, "Twitter screen name must be specified");
-		final String photoUrl = "https://api.twitter.com/1/users/profile_image?screen_name=" + twitterScreenName + "&size=bigger";
-		return refreshPhotoFromTwitter(photoUrl, twitterScreenName, personName, imageRepo);
+	public static String refreshPhotoFromTwitter(final Person person, String consumerKey,
+			String consumerSecret, ImageRepository imageRepo) throws TwitterException {
+		Preconditions.checkNotNull(person, "Person must not be null.");
+		final String personTwitterAt = Preconditions.checkNotNull(person.getTwitterAccessToken(),
+				"Person %s must has twitter access token.", person.getId());
+		final String personTwitterAts = Preconditions.checkNotNull(person.getTwitterAccessTokenSecret(),
+				"Person %s must has twitter access token.", person.getId());
+		final String personTwitterSn = Preconditions.checkNotNull(person.getTwitterScreenName(),
+				"Person %s must has twitter access token.", person.getId());
+		
+		final ConfigurationBuilder cb = new ConfigurationBuilder();
+		cb.setOAuthConsumerKey(consumerKey)
+        .setOAuthConsumerSecret(consumerSecret)
+        .setOAuthAccessToken(personTwitterAt)
+        .setOAuthAccessTokenSecret(personTwitterAts);
+		final Twitter twitter = new TwitterFactory(cb.build()).getInstance();
+		
+		final User user = twitter.showUser(personTwitterSn);
+		
+		final String originalProfileImageURL = user.getOriginalProfileImageURL();
+		log.debug("User {} ({}) original photo profile url: {}", user.getId(), user.getName(), originalProfileImageURL);
+		return refreshPhotoFromTwitter(originalProfileImageURL, personTwitterSn, person.getName(), imageRepo);
 	}
 
 	public static String refreshPhotoFromTwitter(
@@ -41,8 +66,8 @@ public class TwitterUtils {
 			final String personName, ImageRepository imageRepo) {
 		Preconditions.checkNotNull(twitterScreenName, "Twitter screen name must be specified");
 		try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
-			final HttpGet httpGet = new HttpGet(photoUrl);
 			log.debug("Photo URL for twitter user {} ({}) is {}", twitterScreenName, personName, photoUrl);
+			final HttpGet httpGet = new HttpGet(photoUrl);
 			try (final CloseableHttpResponse response = httpClient.execute(httpGet)) {
 				final File tmpFile = File.createTempFile("twitter_", ".jpg");
 				try {
