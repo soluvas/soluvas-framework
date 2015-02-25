@@ -8,7 +8,7 @@ public interface DistrictRepository {
 
 	District getByName(String name);
 	
-	District getDistrict(String cityAndMormalizedDistrict) throws IllegalArgumentException;
+	District getDistrict(String cityAndNormalizedDistrict) throws IllegalArgumentException;
 	
 	public abstract Page<District> searchDistrict(String term, Pageable pageable);
 	
