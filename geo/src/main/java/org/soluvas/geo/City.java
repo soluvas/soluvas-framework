@@ -2,6 +2,8 @@ package org.soluvas.geo;
 
 import java.io.Serializable;
 
+import javax.annotation.Nullable;
+
 /**
  * @author rudi
  *
@@ -13,7 +15,7 @@ public class City implements Serializable {
 	private final String province;
 	private final Country country;
 	
-	public City(String name, String normalizedName, String province, Country country) {
+	public City(String name, String normalizedName, @Nullable String province, Country country) {
 		super();
 		this.name = name;
 		this.normalizedName = normalizedName;
@@ -21,34 +23,22 @@ public class City implements Serializable {
 		this.country = country;
 	}
 
-	public City() {
-		super();
-		this.name = null;
-		this.normalizedName = null;
-		this.province = null;
-		this.country = null;
-	}
-
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @todo Should we actually store this?
-	 * @return
-	 */
 	public String getNormalizedName() {
 		return normalizedName;
 	}
-	
+
 	public String getProvince() {
 		return province;
 	}
-	
+
 	public Country getCountry() {
 		return country;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -68,7 +58,7 @@ public class City implements Serializable {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof City))
+		if (getClass() != obj.getClass())
 			return false;
 		City other = (City) obj;
 		if (country == null) {
@@ -100,10 +90,8 @@ public class City implements Serializable {
 				+ (name != null ? "name=" + name + ", " : "")
 				+ (normalizedName != null ? "normalizedName=" + normalizedName
 						+ ", " : "")
-				+ (province != null ? "province=" + province
-						+ ", " : "")
-				+ (country != null ? "country=" + country.getIso() : "")
-				+ "]";
+				+ (province != null ? "province=" + province + ", " : "")
+				+ (country != null ? "country=" + country : "") + "]";
 	}
-	
+
 }

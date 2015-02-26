@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +19,7 @@ import au.com.bytecode.opencsv.CSVReader;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -45,23 +44,16 @@ import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFa
 public class GeoNamesDistrictRepository implements DistrictRepository {
 	
 	
-	private CityRepository cityRepo;
+	private final CityRepository cityRepo;
 	
 	private static final Logger log = LoggerFactory.getLogger(GeoNamesDistrictRepository.class);
 	
 	final RadixTree<District> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
 	final Map<String, District> districtMap = new HashMap<>();
 	
-	public GeoNamesDistrictRepository(CityRepository cityRepo,Collection<Country> countries) throws IOException {
+	public GeoNamesDistrictRepository(CityRepository cityRepo) throws IOException {
 		super();
 		this.cityRepo = cityRepo;
-		
-		final Country country = Iterables.find(countries, new Predicate<Country>() {
-			@Override
-			public boolean apply(Country input) {
-				return input.getIso().equals("ID");
-			}
-		});
 		
 		// Districts
 		try (final InputStreamReader reader = new InputStreamReader(GeoNamesDistrictRepository.class.getResourceAsStream("districts_ID_jne.csv"))) {
@@ -73,24 +65,33 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 						break;
 					}
 					final String name = line[4];
-					if (name.startsWith("#")) {
+					if (Strings.isNullOrEmpty(name)) {
 						continue;
 					}
-					final String city = line[2];
-					if (city.startsWith("#")) {
+					final String cityStr = line[2];
+					if (Strings.isNullOrEmpty(cityStr)) {
+						continue;
+					}
+					final String provinceStr = line[1];
+					if (Strings.isNullOrEmpty(provinceStr)) {
 						continue;
 					}
 					
 					/*handle for same district name*/
 					if (!districtMap.containsKey(name)){
 						try {
-							final District district = new District(name, country, cityRepo.getCity(city, country.getIso()));
+							final City city = cityRepo.getCity(cityStr, provinceStr, "ID");
+							final Country country = city.getCountry();
+							final String province = city.getProvince();
+							final District district = new District(name, country, province, city.getName());
 							districtMap.put(name, district);
-							/* FIXME: put two times for find based on city and not*/
-							tree.put(city.toLowerCase() + ", " + name.toLowerCase(), district);
-							tree.put(name.toLowerCase() + ", " + country.getIso(), district);
+							tree.put(name.toLowerCase() + ", " +
+										city.getName().toLowerCase() + ", " +
+										province.toLowerCase() + ", " +
+										country.getIso(),
+									district);
 						} catch (Exception e) {
-							log.error("Not found for city: " + city + ": " + e, e);
+							log.error("Not found for city: " + cityStr + ": " + e, e);
 						}
 				//		final District district = new District(name, country);
 					}
@@ -158,7 +159,8 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 
 	@Override
 	public String getKeyForDistrict(District district) {
-		return district.getCity().getName().toLowerCase() + ", " + district.getName().toLowerCase();
+		return district.getName().toLowerCase() + ", " + district.getCity().toLowerCase() + ", " +
+				district.getProvince().toLowerCase() + ", " + district.getCountry().getIso();
 	}
 
 	@Override

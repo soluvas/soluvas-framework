@@ -9,6 +9,6 @@ public interface ProvinceRepository {
 	
 	public String getKeyForProvince(Province province); 
 	
-	Province getProvince(String countryAndNormalizedProvince) throws IllegalArgumentException;
+	Province getProvinceByCountryAndName(String countryAndName) throws IllegalArgumentException;
 	
 }

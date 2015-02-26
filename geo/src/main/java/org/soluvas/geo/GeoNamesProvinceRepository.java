@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Page;
@@ -18,7 +18,6 @@ import org.soluvas.data.domain.Pageable;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
@@ -36,16 +35,9 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 	final RadixTree<Province> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
 	final Map<String, Province> provinceMap = new HashMap<>();
 	
-	public GeoNamesProvinceRepository(Collection<Country> countries) throws IOException{
+	public GeoNamesProvinceRepository(CountryRepository countryRepo) throws IOException{
 		super();
-		
-		final Country country = Iterables.find(countries, new Predicate<Country>() {
-			@Override
-			public boolean apply(Country input) {
-				return input.getIso().equals("ID");
-			}
-		});
-		
+		final Country indonesia = countryRepo.getCountry("ID");
 		// Provinces
 		try (final InputStreamReader reader = new InputStreamReader(GeoNamesDistrictRepository.class.getResourceAsStream("provinces_ID.csv"))) {
 			try (final CSVReader csv = new CSVReader(reader, '\t', '"')) {
@@ -62,10 +54,10 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 					
 					/*handle for same province name*/
 					if (!provinceMap.containsKey(name)){
-						final Province province = new Province(name, country);
+						final Province province = new Province(name, indonesia);
 						log.debug("province -> {}", province);
 						provinceMap.put(name, province);
-						tree.put(province.getName().toLowerCase(), province);
+						tree.put(province.getName().toLowerCase() + ", " + indonesia.getIso(), province);
 					}
 				}
 			}
@@ -77,37 +69,50 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 	@Override
 	public Page<Province> searchProvince(String term, Pageable pageable) {
 		final String normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
-		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
-		final ImmutableList<Province> provinces = FluentIterable.from(keys)
+//		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
+//		final ImmutableList<Province> provinces = FluentIterable.from(keys)
+//				.skip((int) pageable.getOffset())
+//				.limit((int) pageable.getPageSize())
+//				.transform(new Function<CharSequence, Province>() {
+//			@Override @Nullable
+//			public Province apply(@Nullable CharSequence key) {
+//				return tree.getValueForExactKey(key);
+//			}
+//		}).toList();
+		final FluentIterable<Province> matching = FluentIterable.from(provinceMap.values())
+				.filter(new Predicate<Province>() {
+					@Override
+					public boolean apply(@Nullable Province province) {
+						return StringUtils.containsIgnoreCase(province.getName(), normalizedTerm);
+					}
+				});
+		
+		
+		final int total = Iterables.size(matching);
+		final ImmutableList<Province> paged = matching
 				.skip((int) pageable.getOffset())
 				.limit((int) pageable.getPageSize())
-				.transform(new Function<CharSequence, Province>() {
-			@Override @Nullable
-			public Province apply(@Nullable CharSequence key) {
-				return tree.getValueForExactKey(key);
-			}
-		}).toList();
-		
-		final int total = Iterables.size(keys);
-		final PageImpl<Province> page = new PageImpl<>(provinces, pageable, total);
+				.toList();
+		final PageImpl<Province> page = new PageImpl<>(paged, pageable, total);
 		
 		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) provinces: {}",
-				term, normalizedTerm, pageable, provinces.size(), total, Iterables.limit(provinces, 10));
+				term, normalizedTerm, pageable, paged.size(), total, Iterables.limit(paged, 10));
 		return page;
 	}
 
 	@Override
 	public String getKeyForProvince(Province province) {
-		return province.getCountry().getName().toLowerCase()+", "+province.getName().toLowerCase();
+		return province.getCountry().getName().toLowerCase() + ", " + province.getCountry().getIso();
 	}
 
 	@Override
-	public Province getProvince(String countryAndNormalizedProvince)
+	public Province getProvinceByCountryAndName(String countryAndName)
 			throws IllegalArgumentException {
-		final Province province = tree.getValueForExactKey(countryAndNormalizedProvince);
+		final Province province = tree.getValueForExactKey(countryAndName);
 		Preconditions.checkArgument(province != null,
-				"Invalid disctrict for '%s'.", countryAndNormalizedProvince);
+				"Invalid disctrict for '%s'.", countryAndName);
 		return province;
 	}
+
 
 }
