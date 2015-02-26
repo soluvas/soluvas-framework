@@ -9,7 +9,6 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Page;
@@ -18,8 +17,9 @@ import org.soluvas.data.domain.Pageable;
 
 import au.com.bytecode.opencsv.CSVReader;
 
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -57,7 +57,8 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 						final Province province = new Province(name, indonesia);
 						log.debug("province -> {}", province);
 						provinceMap.put(name, province);
-						tree.put(province.getName().toLowerCase() + ", " + indonesia.getIso(), province);
+						tree.put(indonesia.getIso() + ", " + province.getName().toLowerCase(), province);
+						tree.put(province.getName().toLowerCase(), province);
 					}
 				}
 			}
@@ -65,44 +66,40 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 		
 	}
 	
-	
 	@Override
 	public Page<Province> searchProvince(String term, Pageable pageable) {
-		final String normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
-//		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
-//		final ImmutableList<Province> provinces = FluentIterable.from(keys)
-//				.skip((int) pageable.getOffset())
-//				.limit((int) pageable.getPageSize())
-//				.transform(new Function<CharSequence, Province>() {
-//			@Override @Nullable
-//			public Province apply(@Nullable CharSequence key) {
-//				return tree.getValueForExactKey(key);
-//			}
-//		}).toList();
-		final FluentIterable<Province> matching = FluentIterable.from(provinceMap.values())
-				.filter(new Predicate<Province>() {
-					@Override
-					public boolean apply(@Nullable Province province) {
-						return StringUtils.containsIgnoreCase(province.getName(), normalizedTerm);
-					}
-				});
-		
-		
-		final int total = Iterables.size(matching);
-		final ImmutableList<Province> paged = matching
+		return searchProvince(term, null, pageable);
+	}
+	
+	
+	@Override
+	public Page<Province> searchProvince(String term, @Nullable String countryIso, Pageable pageable) {
+		final String normalizedTerm;
+		if (Strings.isNullOrEmpty(countryIso)) {
+			normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		} else {
+			normalizedTerm = Normalizer.normalize(countryIso + ", " + term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		}
+		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
+		final ImmutableList<Province> provinces = FluentIterable.from(keys)
 				.skip((int) pageable.getOffset())
 				.limit((int) pageable.getPageSize())
-				.toList();
-		final PageImpl<Province> page = new PageImpl<>(paged, pageable, total);
-		
+				.transform(new Function<CharSequence, Province>() {
+			@Override @Nullable
+			public Province apply(@Nullable CharSequence key) {
+				return tree.getValueForExactKey(key);
+			}
+		}).toList();
+		final int total = Iterables.size(keys);
+		final PageImpl<Province> page = new PageImpl<>(provinces, pageable, total);
 		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) provinces: {}",
-				term, normalizedTerm, pageable, paged.size(), total, Iterables.limit(paged, 10));
+				term, normalizedTerm, pageable, provinces.size(), total, Iterables.limit(provinces, 10));
 		return page;
 	}
 
 	@Override
 	public String getKeyForProvince(Province province) {
-		return province.getCountry().getName().toLowerCase() + ", " + province.getCountry().getIso();
+		return province.getCountry().getIso() + ", " + province.getName();
 	}
 
 	@Override

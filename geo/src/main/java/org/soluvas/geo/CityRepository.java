@@ -23,6 +23,8 @@ public interface CityRepository {
 
 	String getKeyForCity(City city);
 
-	Page<City> searchCityByProvince(String term, Pageable pageable, Province province);
+	Page<City> searchCity(String term, String province, Pageable pageable);
+
+	Page<City> searchCity(String term, @Nullable String province, @Nullable String countryIso, Pageable pageable);
 
 }
