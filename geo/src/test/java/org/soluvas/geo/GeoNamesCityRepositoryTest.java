@@ -22,7 +22,7 @@ public class GeoNamesCityRepositoryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		cityRepo = new GeoNamesCityRepository(ImmutableSet.<String>of(), null, null);
+		cityRepo = new GeoNamesCityRepository(ImmutableSet.<String>of(), null);
 	}
 
 	@After
@@ -62,7 +62,7 @@ public class GeoNamesCityRepositoryTest {
 
 	@Test
 	public void searchCityIndrExcluded() throws IOException {
-		final CityRepository cityRepo = new GeoNamesCityRepository(ImmutableSet.of("ID"), null, null);
+		final CityRepository cityRepo = new GeoNamesCityRepository(ImmutableSet.of("ID"), null);
 		final String term = "iNdR";
 		final Page<City> cities1 = cityRepo.searchCity(term, new PageRequest(0, 5));
 		log.info("Search {}: {}", term, cities1);

@@ -78,7 +78,7 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 		if (Strings.isNullOrEmpty(countryIso)) {
 			normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		} else {
-			normalizedTerm = Normalizer.normalize(countryIso + ", " + term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+			normalizedTerm = countryIso + ", " + Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		}
 		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
 		final ImmutableList<Province> provinces = FluentIterable.from(keys)
@@ -107,7 +107,7 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 			throws IllegalArgumentException {
 		final Province province = tree.getValueForExactKey(countryAndName);
 		Preconditions.checkArgument(province != null,
-				"Invalid disctrict for '%s'.", countryAndName);
+				"Invalid province for '%s'.", countryAndName);
 		return province;
 	}
 

@@ -88,6 +88,10 @@ public class GeoNamesCityRepository implements CityRepository {
 						skippedCities.add(line[0]);
 						continue;
 					}
+					if (line[1].isEmpty()) {
+						skippedCities.add(line[0]);
+						continue;
+					}
 					if (excludedCountryCodes.contains(line[2])) {
 						excludedCities.add(line[2]);
 						continue;
@@ -179,20 +183,18 @@ public class GeoNamesCityRepository implements CityRepository {
 	public Page<City> searchCity(String term, @Nullable String province, @Nullable String countryIso, Pageable pageable) {
 		final String normalizedTerm;
 		if (!Strings.isNullOrEmpty(countryIso) && !Strings.isNullOrEmpty(province)) {
-			normalizedTerm = Normalizer.normalize(countryIso + ", " + province.toLowerCase() + ", " + term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase(); 
+			normalizedTerm = countryIso + ", " + Normalizer.normalize(province.toLowerCase() + ", " + term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase(); 
 		} else if (Strings.isNullOrEmpty(countryIso) && !Strings.isNullOrEmpty(province)) {
 			normalizedTerm = Normalizer.normalize(province.toLowerCase() + ", " + term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		} else if (!Strings.isNullOrEmpty(countryIso) && Strings.isNullOrEmpty(province)) {
-			normalizedTerm = Normalizer.normalize(countryIso + ", " + term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+			normalizedTerm = countryIso + ", " + Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		} else {
 			normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		}
 		
-		final Iterable<CharSequence> keys = tree.getKeysStartingWith(
-					normalizedTerm +
-					(!Strings.isNullOrEmpty(province) ? (", " + province) : "") +
-					(!Strings.isNullOrEmpty(countryIso) ? (", " + countryIso) : "")
-				);
+//		log.debug("Nommalized term: {}", normalizedTerm);
+		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
+//		final Iterable<CharSequence> keys = tree.getClosestKeys(normalizedTerm);
 		final ImmutableList<City> cities = FluentIterable.from(keys)
 				.skip((int) pageable.getOffset())
 				.limit((int) pageable.getPageSize())
@@ -214,6 +216,7 @@ public class GeoNamesCityRepository implements CityRepository {
 	 */
 	@Override
 	public City putCity(String name, String normalizedName, String countryCode, @Nullable String provinceName) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(normalizedName), "Normalized name city %s must not be null or empty.", name);
 		final Country country = countryRepo.getCountry(countryCode);
 		Preconditions.checkNotNull(country, "Invalid country code '%s' for city '%s'",
 				countryCode, name);
@@ -230,7 +233,10 @@ public class GeoNamesCityRepository implements CityRepository {
 		tree.put( city.getCountry().getIso() + ", " + 
 					city.getNormalizedName().toLowerCase(),
 				city);
+//		log.debug(city.getCountry().getIso() + ", " + 
+//					city.getNormalizedName().toLowerCase());
 		tree.put( city.getNormalizedName().toLowerCase(), city);
+		
 		entryCount++;
 		// below are full text search entries, so tree entries are "duplicates", but still refer to safe City object above
 		String fullTextName = city.getNormalizedName().toLowerCase();
@@ -238,6 +244,18 @@ public class GeoNamesCityRepository implements CityRepository {
 		while (spacePos >= 0) {
 			fullTextName = fullTextName.substring(spacePos + 1);
 //			log.debug("fullTextName {} {}", spacePos, fullTextName);
+			if (provinceName != null) {
+				tree.put( city.getCountry().getIso() + ", " + 
+							provinceName.toLowerCase() + ", " +
+							fullTextName + " " + entryCount,
+						city);
+				tree.put( provinceName.toLowerCase() + ", " + 
+							fullTextName + " " + entryCount,
+						city);
+			}
+			tree.put( city.getCountry().getIso() + ", " + 
+						fullTextName + " " + entryCount,
+					city);
 			tree.put(fullTextName + " " + entryCount, city);
 			entryCount++;
 			spacePos = fullTextName.indexOf(' ');
