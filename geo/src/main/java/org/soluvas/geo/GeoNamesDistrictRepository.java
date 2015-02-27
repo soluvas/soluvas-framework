@@ -85,10 +85,10 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 							final String province = city.getProvince();
 							final District district = new District(name, country, province, city.getName());
 							districtMap.put(name, district);
-							tree.put(name.toLowerCase() + ", " +
-										city.getName().toLowerCase() + ", " +
+							tree.put(country.getIso() + ", " +
 										province.toLowerCase() + ", " +
-										country.getIso(),
+										city.getName().toLowerCase()+ ", " +
+										name.toLowerCase(),
 									district);
 						} catch (Exception e) {
 							log.error("Not found for city: " + cityStr + ": " + e, e);
@@ -106,8 +106,33 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 	}
 
 	@Override
-	public Page<District> searchDistrict(String term, Pageable pageable) {
-		final String normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+	public Page<District> searchDistrict(String term, Pageable pageable, @Nullable String city, @Nullable String province, 
+			@Nullable String countryIso) {
+		final String normalizedTerm;
+		
+		if (!Strings.isNullOrEmpty(city) && !Strings.isNullOrEmpty(province) && !Strings.isNullOrEmpty(countryIso)){
+			normalizedTerm = countryIso + ", " + Normalizer.normalize(province + ", " + city + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+
+		} else if (!Strings.isNullOrEmpty(city) && Strings.isNullOrEmpty(province) && Strings.isNullOrEmpty(countryIso)){
+			normalizedTerm = Normalizer.normalize(city + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		} else if (!Strings.isNullOrEmpty(city) && !Strings.isNullOrEmpty(province) && Strings.isNullOrEmpty(countryIso)){
+			normalizedTerm = Normalizer.normalize(province + ", " + city + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		} else if (!Strings.isNullOrEmpty(city) && Strings.isNullOrEmpty(province) && !Strings.isNullOrEmpty(countryIso)){
+			normalizedTerm = countryIso + ", " + Normalizer.normalize(city + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		
+		} else if (Strings.isNullOrEmpty(city) && !Strings.isNullOrEmpty(province) && Strings.isNullOrEmpty(countryIso)){
+			normalizedTerm = Normalizer.normalize(province + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		} else if (Strings.isNullOrEmpty(city) && !Strings.isNullOrEmpty(province) && !Strings.isNullOrEmpty(countryIso)){
+			normalizedTerm = countryIso + ", " + Normalizer.normalize(province + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		
+		} else if (Strings.isNullOrEmpty(city) && Strings.isNullOrEmpty(province) && !Strings.isNullOrEmpty(countryIso)){
+			normalizedTerm = countryIso + ", " + Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		
+		} else {
+			normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+		}
+		
+		
 		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
 		final ImmutableList<District> districts = FluentIterable.from(keys)
 				.skip((int) pageable.getOffset())

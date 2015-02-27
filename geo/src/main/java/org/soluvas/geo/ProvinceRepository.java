@@ -11,7 +11,7 @@ public interface ProvinceRepository {
 	
 	public String getKeyForProvince(Province province); 
 	
-	Province getProvinceByCountryAndName(String countryAndName) throws IllegalArgumentException;
+	Province getProvinceByCountryIsoAndName(String countryIsoAndName) throws IllegalArgumentException;
 
 	Page<Province> searchProvince(String term, Pageable pageable);
 	

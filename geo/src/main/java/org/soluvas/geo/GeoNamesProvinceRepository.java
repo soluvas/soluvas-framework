@@ -44,7 +44,8 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 				while (true) {
 					@Nullable 
 					final String[] line = csv.readNext();
-					if (line == null) {
+//					log.debug("line -> {}", line);
+					if (line == null || line.length == 0) {
 						break;
 					}
 					final String name = line[0];
@@ -55,7 +56,7 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 					/*handle for same province name*/
 					if (!provinceMap.containsKey(name)){
 						final Province province = new Province(name, indonesia);
-						log.debug("province -> {}", province);
+//						log.debug("Putting province -> {}", province);
 						provinceMap.put(name, province);
 						tree.put(indonesia.getIso() + ", " + province.getName().toLowerCase(), province);
 						tree.put(province.getName().toLowerCase(), province);
@@ -99,11 +100,18 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 
 	@Override
 	public String getKeyForProvince(Province province) {
-		return province.getCountry().getIso() + ", " + province.getName();
+//		log.debug("province -> {}", province);
+		final String key;
+	//	if (!Strings.isNullOrEmpty(province.getName())){
+			key = province.getCountry().getIso() + ", " + province.getName().toLowerCase();
+	//	} else{
+	//		key = province.getCountry().getIso();
+	//	}
+		return key;
 	}
 
-	@Override
-	public Province getProvinceByCountryAndName(String countryAndName)
+	@Override 
+	public Province getProvinceByCountryIsoAndName(String countryAndName)
 			throws IllegalArgumentException {
 		final Province province = tree.getValueForExactKey(countryAndName);
 		Preconditions.checkArgument(province != null,

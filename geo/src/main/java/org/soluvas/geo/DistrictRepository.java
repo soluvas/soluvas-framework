@@ -10,7 +10,7 @@ public interface DistrictRepository {
 	
 	District getDistrict(String cityAndNormalizedDistrict) throws IllegalArgumentException;
 	
-	public abstract Page<District> searchDistrict(String term, Pageable pageable);
+	public abstract Page<District> searchDistrict(String term, Pageable pageable, String city, String province, String country);
 	
 	String getKeyForDistrict(District district);
 
