@@ -128,4 +128,16 @@ public class MongoPersonRepositoryTest {
 		assertTrue(existsByMobileOrPhoneNumber);
 	}
 	
+	@Test
+	public void nameTest() {
+		final String newName = " rudi wijaya";
+		final String[] nameArray = newName.split(" ", 2);
+		final String firstName = nameArray[0];
+		log.debug("firstName '{}'", firstName);
+		if (nameArray.length > 1) {
+			final String lastName = nameArray[1];
+			log.debug("lastName '{}'", lastName);
+		}
+	}
+	
 }

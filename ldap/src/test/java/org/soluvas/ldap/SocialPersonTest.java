@@ -14,7 +14,7 @@ import org.junit.Test;
  *
  */
 public class SocialPersonTest {
-
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -37,5 +37,5 @@ public class SocialPersonTest {
 		assertNotNull(person.getEmails());
 		assertThat(person.getEmails(), empty());
 	}
-
+	
 }
