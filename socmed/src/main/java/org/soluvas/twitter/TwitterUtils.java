@@ -49,9 +49,9 @@ public class TwitterUtils {
 		
 		final ConfigurationBuilder cb = new ConfigurationBuilder();
 		cb.setOAuthConsumerKey(consumerKey)
-        .setOAuthConsumerSecret(consumerSecret)
-        .setOAuthAccessToken(personTwitterAt)
-        .setOAuthAccessTokenSecret(personTwitterAts);
+			.setOAuthConsumerSecret(consumerSecret)
+			.setOAuthAccessToken(personTwitterAt)
+			.setOAuthAccessTokenSecret(personTwitterAts);
 		final Twitter twitter = new TwitterFactory(cb.build()).getInstance();
 		
 		final User user = twitter.showUser(personTwitterSn);
@@ -59,6 +59,21 @@ public class TwitterUtils {
 		final String originalProfileImageURL = user.getOriginalProfileImageURL();
 		log.debug("User {} ({}) original photo profile url: {}", user.getId(), user.getName(), originalProfileImageURL);
 		return refreshPhotoFromTwitter(originalProfileImageURL, personTwitterSn, person.getName(), imageRepo);
+	}
+
+	/**
+	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link Person}.
+	 * @param twitterScreenName twitter User ID.
+	 * @param personName Person name, used for the image name and for logging purposes.
+	 * @return ImageID from the ImageRepository.
+	 * @deprecated Use {@link #refreshPhotoFromTwitter(org.soluvas.commons.Person, String, String, org.soluvas.image.store.ImageRepository)}
+	 */
+	@Deprecated
+	public static String refreshPhotoFromTwitter(final String twitterScreenName, final String personName,
+												 ImageRepository imageRepo) {
+		Preconditions.checkNotNull(twitterScreenName, "Twitter screen name must be specified");
+		final String photoUrl = "https://api.twitter.com/1/users/profile_image?screen_name=" + twitterScreenName + "&size=bigger";
+		return refreshPhotoFromTwitter(photoUrl, twitterScreenName, personName, imageRepo);
 	}
 
 	public static String refreshPhotoFromTwitter(
