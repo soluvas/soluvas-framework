@@ -34,6 +34,7 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 	
 	final RadixTree<Province> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
 	final Map<String, Province> provinceMap = new HashMap<>();
+	private int entryCount = 0;
 	
 	public GeoNamesProvinceRepository(CountryRepository countryRepo) throws IOException{
 		super();
@@ -53,14 +54,30 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 						continue;
 					}
 					
+					final Province province = new Province(name, indonesia);
 					/*handle for same province name*/
 					if (!provinceMap.containsKey(name)){
-						final Province province = new Province(name, indonesia);
 //						log.debug("Putting province -> {}", province);
 						provinceMap.put(name, province);
 						tree.put(indonesia.getIso() + ", " + province.getName().toLowerCase(), province);
 						tree.put(province.getName().toLowerCase(), province);
 					}
+					
+					/*below is for search the province based word 
+					 * e.g. Province Maluku Utara
+					 * we can find with type utara 
+					 * */
+					entryCount++;
+					String fullTextName = province.getName().toLowerCase();
+					int spacePos = fullTextName.indexOf(' ');
+					while (spacePos >= 0) {
+						fullTextName = fullTextName.substring(spacePos + 1);
+						tree.put(indonesia.getIso() + ", " + fullTextName + " " + entryCount, province);
+						tree.put(fullTextName + " " + entryCount, province);
+						entryCount++;
+						spacePos = fullTextName.indexOf(' ');
+					}
+					
 				}
 			}
 		}
