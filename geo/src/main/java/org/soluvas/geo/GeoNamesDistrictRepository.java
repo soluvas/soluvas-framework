@@ -45,6 +45,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 	
 	
 	private final CityRepository cityRepo;
+	private int entryCount = 0;
 	
 	private static final Logger log = LoggerFactory.getLogger(GeoNamesDistrictRepository.class);
 	
@@ -90,6 +91,36 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 										city.getName().toLowerCase()+ ", " +
 										name.toLowerCase(),
 									district);
+							
+							tree.put(country.getIso() + ", " +
+									province.toLowerCase() + ", " +
+									name.toLowerCase(),
+									district);
+							
+							tree.put(country.getIso() + ", " +
+									city.getName().toLowerCase()+ ", " +
+									name.toLowerCase(),
+									district);
+							
+							tree.put(province.toLowerCase() + ", " +
+									city.getName().toLowerCase()+ ", " +
+									name.toLowerCase(),
+								district);
+							
+							tree.put(country.getIso() + ", " +
+									name.toLowerCase(),
+								district);
+							
+							tree.put(province.toLowerCase() + ", " +
+									name.toLowerCase(),
+								district);
+							
+							tree.put(city.getName().toLowerCase()+ ", " +
+									name.toLowerCase(),
+								district);
+							
+							entryCount++;
+							
 						} catch (Exception e) {
 							log.error("Not found for city: " + cityStr + ": " + e, e);
 						}
