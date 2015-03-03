@@ -111,15 +111,39 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 									name.toLowerCase(),
 								district);
 							
-							tree.put(province.toLowerCase() + ", " +
-									name.toLowerCase(),
-								district);
 							
-							tree.put(city.getName().toLowerCase()+ ", " +
-									name.toLowerCase(),
-								district);
+							String fullTextName = name.toLowerCase();
+							int spacePos =  fullTextName.indexOf(' ');
+							while (spacePos >= 0){
+								fullTextName = fullTextName.substring(spacePos + 1);
+								
+								tree.put(country.getIso() + ", " +
+										province.toLowerCase() + ", " +
+										city.getName().toLowerCase()+ ", " +
+										fullTextName + " " + entryCount,
+										district);
+								tree.put(country.getIso() + ", " +
+										province.toLowerCase() + ", " +
+										fullTextName + " " + entryCount,
+										district);
+								
+								tree.put(country.getIso() + ", " +
+										city.getName().toLowerCase()+ ", " +
+										fullTextName + " " + entryCount,
+										district);
+								
+								tree.put(province.toLowerCase() + ", " +
+										city.getName().toLowerCase()+ ", " +
+										fullTextName + " " + entryCount,
+									district);
+								
+								tree.put(country.getIso() + ", " +
+										fullTextName + " " + entryCount,
+										district);
+								entryCount++;
+								spacePos =  fullTextName.indexOf(' ');
+							}
 							
-							entryCount++;
 							
 						} catch (Exception e) {
 							log.error("Not found for city: " + cityStr + ": " + e, e);
@@ -215,8 +239,8 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 
 	@Override
 	public String getKeyForDistrict(District district) {
-		return district.getName().toLowerCase() + ", " + district.getCity().toLowerCase() + ", " +
-				district.getProvince().toLowerCase() + ", " + district.getCountry().getIso();
+		return district.getCountry().getIso() + ", " + district.getProvince().toLowerCase() + ", " +
+				district.getCity().toLowerCase() + ", " + district.getName().toLowerCase();
 	}
 
 	@Override
