@@ -172,6 +172,10 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 				return createMediaAttachmentEntryAdapter();
 			}
 			@Override
+			public Adapter caseOverlayLike(OverlayLike object) {
+				return createOverlayLikeAdapter();
+			}
+			@Override
 			public Adapter caseIdentifiable(Identifiable object) {
 				return createIdentifiableAdapter();
 			}
@@ -552,6 +556,20 @@ public class ImageAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMediaAttachmentEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.image.OverlayLike <em>Overlay Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.image.OverlayLike
+	 * @generated
+	 */
+	public Adapter createOverlayLikeAdapter() {
 		return null;
 	}
 

@@ -358,7 +358,7 @@
     </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ImageTransform" abstract="true" interface="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ResizeToFit" eSuperTypes="#//ImageTransform #//DimensionLike #//WatermarkLike">
+  <eClassifiers xsi:type="ecore:EClass" name="ResizeToFit" eSuperTypes="#//ImageTransform #//DimensionLike #//WatermarkLike #//OverlayLike">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="At least width or height must be present.&#xA;&#xA;If both width and height are present, the image will be constrained to specified dimensions.&#xA;If only width or height are present, the image will be resized proportionally to conform to the specified width/height."/>
     </eAnnotations>
@@ -368,7 +368,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ResizeToFill" eSuperTypes="#//ImageTransform #//DimensionLike #//WatermarkLike">
+  <eClassifiers xsi:type="ecore:EClass" name="ResizeToFill" eSuperTypes="#//ImageTransform #//DimensionLike #//WatermarkLike #//OverlayLike">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Resize the image to fit within the specified dimensions while retaining the aspect ratio of the original image. If necessary, crop the image in the larger dimension&#xA;&#xA;Common English Translation: This is probably the crop you want if you want to cut a center piece out of a photo and use it as a thumbnail. This wont do any scaling, only cut out the center (by default) to your defined size.&#xA;&#xA;&quot;name&quot;: &quot;resize_to_fill&quot;,&#xA;&quot;params&quot; : { &quot;width&quot; : 40, &quot;height&quot; : 40 }"/>
     </eAnnotations>
@@ -616,5 +616,17 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="#//MediaAttachment"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OverlayLike" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Watermark information if the transform supports watermark operation."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="overlayFile" eType="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//File">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Watermark file to be used. If null, no watermark will be overlaid."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="overlayGravity" eType="#//TransformGravity"
+        defaultValueLiteral="center"/>
   </eClassifiers>
 </ecore:EPackage>

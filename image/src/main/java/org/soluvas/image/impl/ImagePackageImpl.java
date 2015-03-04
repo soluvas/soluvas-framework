@@ -39,6 +39,7 @@ import org.soluvas.image.ImageVariant;
 import org.soluvas.image.Media;
 import org.soluvas.image.MediaAttachment;
 import org.soluvas.image.MediaStatus;
+import org.soluvas.image.OverlayLike;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.S3Connector;
@@ -215,6 +216,12 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * @generated
 	 */
 	private EClass mediaAttachmentEntryEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass overlayLikeEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1321,6 +1328,33 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getOverlayLike() {
+		return overlayLikeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOverlayLike_OverlayFile() {
+		return (EAttribute)overlayLikeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOverlayLike_OverlayGravity() {
+		return (EAttribute)overlayLikeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getImageTransformType() {
 		return imageTransformTypeEEnum;
@@ -1562,6 +1596,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		createEAttribute(mediaAttachmentEntryEClass, MEDIA_ATTACHMENT_ENTRY__KEY);
 		createEReference(mediaAttachmentEntryEClass, MEDIA_ATTACHMENT_ENTRY__VALUE);
 
+		overlayLikeEClass = createEClass(OVERLAY_LIKE);
+		createEAttribute(overlayLikeEClass, OVERLAY_LIKE__OVERLAY_FILE);
+		createEAttribute(overlayLikeEClass, OVERLAY_LIKE__OVERLAY_GRAVITY);
+
 		// Create enums
 		imageTransformTypeEEnum = createEEnum(IMAGE_TRANSFORM_TYPE);
 		fileExportEEnum = createEEnum(FILE_EXPORT);
@@ -1615,9 +1653,11 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		resizeToFitEClass.getESuperTypes().add(this.getImageTransform());
 		resizeToFitEClass.getESuperTypes().add(this.getDimensionLike());
 		resizeToFitEClass.getESuperTypes().add(this.getWatermarkLike());
+		resizeToFitEClass.getESuperTypes().add(this.getOverlayLike());
 		resizeToFillEClass.getESuperTypes().add(this.getImageTransform());
 		resizeToFillEClass.getESuperTypes().add(this.getDimensionLike());
 		resizeToFillEClass.getESuperTypes().add(this.getWatermarkLike());
+		resizeToFillEClass.getESuperTypes().add(this.getOverlayLike());
 		imageEClass.getESuperTypes().add(theCommonsPackage.getIdentifiable());
 		imageEClass.getESuperTypes().add(theCommonsPackage.getNameContainer());
 		imageEClass.getESuperTypes().add(theCommonsPackage.getSchemaVersionable());
@@ -1933,6 +1973,10 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		initEClass(mediaAttachmentEntryEClass, Map.Entry.class, "MediaAttachmentEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMediaAttachmentEntry_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMediaAttachmentEntry_Value(), this.getMediaAttachment(), null, "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(overlayLikeEClass, OverlayLike.class, "OverlayLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOverlayLike_OverlayFile(), theCommonsPackage.getFile(), "overlayFile", null, 0, 1, OverlayLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOverlayLike_OverlayGravity(), this.getTransformGravity(), "overlayGravity", "center", 0, 1, OverlayLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(imageTransformTypeEEnum, ImageTransformType.class, "ImageTransformType");
@@ -2405,6 +2449,18 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Usually true, meaning the attachment content is not included in this object."
+		   });	
+		addAnnotation
+		  (overlayLikeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Watermark information if the transform supports watermark operation."
+		   });	
+		addAnnotation
+		  (getOverlayLike_OverlayFile(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Watermark file to be used. If null, no watermark will be overlaid."
 		   });
 	}
 

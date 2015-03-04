@@ -26,7 +26,7 @@ package org.soluvas.image;
  * @model
  * @generated
  */
-public interface ResizeToFit extends ImageTransform, DimensionLike, WatermarkLike {
+public interface ResizeToFit extends ImageTransform, DimensionLike, WatermarkLike, OverlayLike {
 
 	/**
 	 * Returns the value of the '<em><b>Only Shrink Larger</b></em>' attribute.

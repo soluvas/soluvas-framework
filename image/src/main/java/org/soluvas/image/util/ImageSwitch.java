@@ -138,6 +138,7 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = caseImageTransform(resizeToFit);
 				if (result == null) result = caseDimensionLike(resizeToFit);
 				if (result == null) result = caseWatermarkLike(resizeToFit);
+				if (result == null) result = caseOverlayLike(resizeToFit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -147,6 +148,7 @@ public class ImageSwitch<T> extends Switch<T> {
 				if (result == null) result = caseImageTransform(resizeToFill);
 				if (result == null) result = caseDimensionLike(resizeToFill);
 				if (result == null) result = caseWatermarkLike(resizeToFill);
+				if (result == null) result = caseOverlayLike(resizeToFill);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -244,6 +246,12 @@ public class ImageSwitch<T> extends Switch<T> {
 			case ImagePackage.MEDIA_ATTACHMENT_ENTRY: {
 				@SuppressWarnings("unchecked") Map.Entry<String, MediaAttachment> mediaAttachmentEntry = (Map.Entry<String, MediaAttachment>)theEObject;
 				T result = caseMediaAttachmentEntry(mediaAttachmentEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImagePackage.OVERLAY_LIKE: {
+				OverlayLike overlayLike = (OverlayLike)theEObject;
+				T result = caseOverlayLike(overlayLike);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -608,6 +616,21 @@ public class ImageSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMediaAttachmentEntry(Map.Entry<String, MediaAttachment> object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Overlay Like</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Overlay Like</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOverlayLike(OverlayLike object) {
 		return null;
 	}
 

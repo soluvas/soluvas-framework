@@ -603,13 +603,31 @@ public interface ImagePackage extends EPackage {
 	int RESIZE_TO_FIT__WATERMARK_GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Overlay File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT__OVERLAY_FILE = IMAGE_TRANSFORM_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Overlay Gravity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT__OVERLAY_GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Only Shrink Larger</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FIT__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 5;
+	int RESIZE_TO_FIT__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Resize To Fit</em>' class.
@@ -618,7 +636,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 6;
+	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ResizeToFillImpl <em>Resize To Fill</em>}' class.
@@ -676,13 +694,31 @@ public interface ImagePackage extends EPackage {
 	int RESIZE_TO_FILL__WATERMARK_GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Overlay File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL__OVERLAY_FILE = IMAGE_TRANSFORM_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Overlay Gravity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FILL__OVERLAY_GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Gravity</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL__GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 5;
+	int RESIZE_TO_FILL__GRAVITY = IMAGE_TRANSFORM_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Only Shrink Larger</b></em>' attribute.
@@ -691,7 +727,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 6;
+	int RESIZE_TO_FILL__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Resize To Fill</em>' class.
@@ -700,7 +736,7 @@ public interface ImagePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FILL_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 7;
+	int RESIZE_TO_FILL_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DimensionLike <em>Dimension Like</em>}' class.
@@ -1580,6 +1616,43 @@ public interface ImagePackage extends EPackage {
 	int MEDIA_ATTACHMENT_ENTRY_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.image.OverlayLike <em>Overlay Like</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.image.OverlayLike
+	 * @see org.soluvas.image.impl.ImagePackageImpl#getOverlayLike()
+	 * @generated
+	 */
+	int OVERLAY_LIKE = 24;
+
+	/**
+	 * The feature id for the '<em><b>Overlay File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVERLAY_LIKE__OVERLAY_FILE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Overlay Gravity</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVERLAY_LIKE__OVERLAY_GRAVITY = 1;
+
+	/**
+	 * The number of structural features of the '<em>Overlay Like</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OVERLAY_LIKE_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1587,7 +1660,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTransformType()
 	 * @generated
 	 */
-	int IMAGE_TRANSFORM_TYPE = 24;
+	int IMAGE_TRANSFORM_TYPE = 25;
 
 
 	/**
@@ -1598,7 +1671,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getFileExport()
 	 * @generated
 	 */
-	int FILE_EXPORT = 25;
+	int FILE_EXPORT = 26;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.DuplicateIdHandling <em>Duplicate Id Handling</em>}' enum.
@@ -1608,7 +1681,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getDuplicateIdHandling()
 	 * @generated
 	 */
-	int DUPLICATE_ID_HANDLING = 26;
+	int DUPLICATE_ID_HANDLING = 27;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.TransformGravity <em>Transform Gravity</em>}' enum.
@@ -1618,7 +1691,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getTransformGravity()
 	 * @generated
 	 */
-	int TRANSFORM_GRAVITY = 27;
+	int TRANSFORM_GRAVITY = 28;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageTypes <em>Types</em>}' enum.
@@ -1628,7 +1701,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageTypes()
 	 * @generated
 	 */
-	int IMAGE_TYPES = 28;
+	int IMAGE_TYPES = 29;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.ImageStyles <em>Styles</em>}' enum.
@@ -1638,7 +1711,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyles()
 	 * @generated
 	 */
-	int IMAGE_STYLES = 29;
+	int IMAGE_STYLES = 30;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.MediaStatus <em>Media Status</em>}' enum.
@@ -1648,7 +1721,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getMediaStatus()
 	 * @generated
 	 */
-	int MEDIA_STATUS = 30;
+	int MEDIA_STATUS = 31;
 
 	/**
 	 * The meta object id for the '<em>Repository</em>' data type.
@@ -1658,7 +1731,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageRepository()
 	 * @generated
 	 */
-	int IMAGE_REPOSITORY = 31;
+	int IMAGE_REPOSITORY = 32;
 
 
 	/**
@@ -1669,7 +1742,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageType()
 	 * @generated
 	 */
-	int IMAGE_TYPE = 32;
+	int IMAGE_TYPE = 33;
 
 	/**
 	 * The meta object id for the '<em>Style</em>' data type.
@@ -1679,7 +1752,7 @@ public interface ImagePackage extends EPackage {
 	 * @see org.soluvas.image.impl.ImagePackageImpl#getImageStyle()
 	 * @generated
 	 */
-	int IMAGE_STYLE = 33;
+	int IMAGE_STYLE = 34;
 
 
 	/**
@@ -2785,6 +2858,38 @@ public interface ImagePackage extends EPackage {
 	EReference getMediaAttachmentEntry_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.image.OverlayLike <em>Overlay Like</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Overlay Like</em>'.
+	 * @see org.soluvas.image.OverlayLike
+	 * @generated
+	 */
+	EClass getOverlayLike();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.OverlayLike#getOverlayFile <em>Overlay File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Overlay File</em>'.
+	 * @see org.soluvas.image.OverlayLike#getOverlayFile()
+	 * @see #getOverlayLike()
+	 * @generated
+	 */
+	EAttribute getOverlayLike_OverlayFile();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.OverlayLike#getOverlayGravity <em>Overlay Gravity</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Overlay Gravity</em>'.
+	 * @see org.soluvas.image.OverlayLike#getOverlayGravity()
+	 * @see #getOverlayLike()
+	 * @generated
+	 */
+	EAttribute getOverlayLike_OverlayGravity();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3772,6 +3877,32 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MEDIA_ATTACHMENT_ENTRY__VALUE = eINSTANCE.getMediaAttachmentEntry_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.image.OverlayLike <em>Overlay Like</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.image.OverlayLike
+		 * @see org.soluvas.image.impl.ImagePackageImpl#getOverlayLike()
+		 * @generated
+		 */
+		EClass OVERLAY_LIKE = eINSTANCE.getOverlayLike();
+
+		/**
+		 * The meta object literal for the '<em><b>Overlay File</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OVERLAY_LIKE__OVERLAY_FILE = eINSTANCE.getOverlayLike_OverlayFile();
+
+		/**
+		 * The meta object literal for the '<em><b>Overlay Gravity</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OVERLAY_LIKE__OVERLAY_GRAVITY = eINSTANCE.getOverlayLike_OverlayGravity();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.ImageTransformType <em>Transform Type</em>}' enum.

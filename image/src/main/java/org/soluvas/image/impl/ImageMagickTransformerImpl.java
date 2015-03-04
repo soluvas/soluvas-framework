@@ -30,6 +30,7 @@ import org.soluvas.image.ImageMagickTransformer;
 import org.soluvas.image.ImagePackage;
 import org.soluvas.image.ImageTransform;
 import org.soluvas.image.ImageVariant;
+import org.soluvas.image.OverlayLike;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.TransformGravity;
@@ -94,11 +95,14 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 					
 					try {
 						/*To Resize + Watermarking:
-						 * rudi@rudi ~/tmp/test_image $ convert image2.jpg -verbose -gravity center -resize 800x700^ -extent 800x700 -quality 0.85f*100f miff:- | composite -watermark 15% -gravity center watermark.png - new.jpg*/
+						 * rudi@rudi ~/tmp/test_image $ convert image2.jpg -verbose -gravity center -resize 800x700^ -extent 800x700 -quality 0.85f*100f miff:- | composite -watermark 15% -gravity center watermark.png - new.jpg
+						 * To Resize + Watermaking + Overlaying:
+						 * convert IMG00178-20141215-1005.jpg -verbose -gravity center -resize 800x700^ -extent 800x700 -quality 0.85f*100f miff:- | composite -watermark 15% -gravity center download.jpg - miff:- | composite -gravity south Signature_Rhupa.png - new.jpg
+						 * */
 
 						final CommandLine cmd = new CommandLine("convert");
-						cmd.addArgument("-verbose");
 						cmd.addArgument(originalFile.getPath(), false);
+						cmd.addArgument("-verbose");
 						
 						if (transform instanceof ResizeToFill) {
 							final ResizeToFill fx = (ResizeToFill) transform;
@@ -184,7 +188,9 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 							if (watermarkFile != null) {
 								resizedFile = File.createTempFile("watermark_", ".miff");
 							}
-							watermarkOpacity = ((WatermarkLike) transform).getWatermarkOpacity() + "%";
+							if (((WatermarkLike) transform).getWatermarkOpacity() > 0) {
+								watermarkOpacity = ((WatermarkLike) transform).getWatermarkOpacity() + "%";
+							}
 							switch (((WatermarkLike) transform).getWatermarkGravity()) {
 							case CENTER:
 								watermarkGravity = "Center";
@@ -218,6 +224,44 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 							}
 						}
 						cmd.addArgument(resizedFile.getPath(), false);
+						
+						//Overlaying enabled?
+						File overlayFile = null;
+						String overlayGravity = null;
+						if (transform instanceof OverlayLike) {
+							overlayFile = ((OverlayLike) transform).getOverlayFile();
+							switch (((OverlayLike) transform).getOverlayGravity()) {
+							case CENTER:
+								overlayGravity = "Center";
+								break;
+							case BOTTOM_CENTER:
+								overlayGravity = "South";
+								break;
+							case BOTTOM_LEFT:
+								overlayGravity = "SouthWest";
+								break;
+							case BOTTOM_RIGHT:
+								overlayGravity = "SouthEast";
+								break;
+							case TOP_LEFT:
+								overlayGravity = "NorthWest";
+								break;
+							case TOP_RIGHT:
+								overlayGravity = "NorthEast";
+								break;
+							case TOP_CENTER:
+								overlayGravity = "North";
+								break;
+							case CENTER_LEFT:
+								overlayGravity = "West";
+								break;
+							case CENTER_RIGHT:
+								overlayGravity = "East";
+								break;
+							default:
+								throw new ImageException("Unknown gravity: "  + ((OverlayLike) transform).getOverlayGravity());
+							}
+						}
 						
 						try {
 							// Execute the cmd
@@ -258,6 +302,30 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 //								}
 //								log.info("{} {} returned {}: {}", environment, watermarkCmd, executionResult, buffer);
 								executeCmd(watermarkCmd, executor, environment);
+							}
+							
+//							return styledFile;
+							
+							// overlaying
+							if (overlayFile != null) {
+								final CommandLine overlayCmd = new CommandLine("composite");
+								overlayCmd.addArgument("-gravity");
+								overlayCmd.addArgument(overlayGravity);
+								overlayCmd.addArgument(overlayFile.getPath(), false); // overlay.png
+								overlayCmd.addArgument(styledFile.getPath(), false); // miff
+								
+								// output arguments
+								overlayCmd.addArgument("-quality");
+								overlayCmd.addArgument(String.valueOf((int)(quality * 100f)));
+								// Progressive JPEG: http://calendar.perfplanet.com/2012/progressive-jpegs-a-new-best-practice/
+								overlayCmd.addArgument("-interlace");
+								overlayCmd.addArgument("line");
+								overlayCmd.addArgument(styledFile.getPath(), false); // result
+								
+								// Execute the cmd
+								log.debug("Overlaying: {}", overlayCmd);
+								
+								executeCmd(overlayCmd, executor, environment);
 							}
 							
 							return styledFile;

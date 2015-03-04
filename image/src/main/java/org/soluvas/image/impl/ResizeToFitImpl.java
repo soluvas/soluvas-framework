@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.soluvas.image.DimensionLike;
 import org.soluvas.image.ImagePackage;
+import org.soluvas.image.OverlayLike;
 import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.TransformGravity;
 import org.soluvas.image.WatermarkLike;
@@ -25,6 +26,8 @@ import org.soluvas.image.WatermarkLike;
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getWatermarkFile <em>Watermark File</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getWatermarkOpacity <em>Watermark Opacity</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getWatermarkGravity <em>Watermark Gravity</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOverlayFile <em>Overlay File</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOverlayGravity <em>Overlay Gravity</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOnlyShrinkLarger <em>Only Shrink Larger</em>}</li>
  * </ul>
  * </p>
@@ -131,6 +134,46 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * @ordered
 	 */
 	protected TransformGravity watermarkGravity = WATERMARK_GRAVITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOverlayFile() <em>Overlay File</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOverlayFile()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final File OVERLAY_FILE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOverlayFile() <em>Overlay File</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOverlayFile()
+	 * @generated
+	 * @ordered
+	 */
+	protected File overlayFile = OVERLAY_FILE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOverlayGravity() <em>Overlay Gravity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOverlayGravity()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final TransformGravity OVERLAY_GRAVITY_EDEFAULT = TransformGravity.CENTER;
+
+	/**
+	 * The cached value of the '{@link #getOverlayGravity() <em>Overlay Gravity</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOverlayGravity()
+	 * @generated
+	 * @ordered
+	 */
+	protected TransformGravity overlayGravity = OVERLAY_GRAVITY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getOnlyShrinkLarger() <em>Only Shrink Larger</em>}' attribute.
@@ -292,6 +335,48 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public File getOverlayFile() {
+		return overlayFile;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverlayFile(File newOverlayFile) {
+		File oldOverlayFile = overlayFile;
+		overlayFile = newOverlayFile;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FIT__OVERLAY_FILE, oldOverlayFile, overlayFile));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TransformGravity getOverlayGravity() {
+		return overlayGravity;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverlayGravity(TransformGravity newOverlayGravity) {
+		TransformGravity oldOverlayGravity = overlayGravity;
+		overlayGravity = newOverlayGravity == null ? OVERLAY_GRAVITY_EDEFAULT : newOverlayGravity;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FIT__OVERLAY_GRAVITY, oldOverlayGravity, overlayGravity));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Boolean getOnlyShrinkLarger() {
 		return onlyShrinkLarger;
@@ -328,6 +413,10 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return getWatermarkOpacity();
 			case ImagePackage.RESIZE_TO_FIT__WATERMARK_GRAVITY:
 				return getWatermarkGravity();
+			case ImagePackage.RESIZE_TO_FIT__OVERLAY_FILE:
+				return getOverlayFile();
+			case ImagePackage.RESIZE_TO_FIT__OVERLAY_GRAVITY:
+				return getOverlayGravity();
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				return getOnlyShrinkLarger();
 		}
@@ -356,6 +445,12 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return;
 			case ImagePackage.RESIZE_TO_FIT__WATERMARK_GRAVITY:
 				setWatermarkGravity((TransformGravity)newValue);
+				return;
+			case ImagePackage.RESIZE_TO_FIT__OVERLAY_FILE:
+				setOverlayFile((File)newValue);
+				return;
+			case ImagePackage.RESIZE_TO_FIT__OVERLAY_GRAVITY:
+				setOverlayGravity((TransformGravity)newValue);
 				return;
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				setOnlyShrinkLarger((Boolean)newValue);
@@ -387,6 +482,12 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 			case ImagePackage.RESIZE_TO_FIT__WATERMARK_GRAVITY:
 				setWatermarkGravity(WATERMARK_GRAVITY_EDEFAULT);
 				return;
+			case ImagePackage.RESIZE_TO_FIT__OVERLAY_FILE:
+				setOverlayFile(OVERLAY_FILE_EDEFAULT);
+				return;
+			case ImagePackage.RESIZE_TO_FIT__OVERLAY_GRAVITY:
+				setOverlayGravity(OVERLAY_GRAVITY_EDEFAULT);
+				return;
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				setOnlyShrinkLarger(ONLY_SHRINK_LARGER_EDEFAULT);
 				return;
@@ -412,6 +513,10 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return watermarkOpacity != WATERMARK_OPACITY_EDEFAULT;
 			case ImagePackage.RESIZE_TO_FIT__WATERMARK_GRAVITY:
 				return watermarkGravity != WATERMARK_GRAVITY_EDEFAULT;
+			case ImagePackage.RESIZE_TO_FIT__OVERLAY_FILE:
+				return OVERLAY_FILE_EDEFAULT == null ? overlayFile != null : !OVERLAY_FILE_EDEFAULT.equals(overlayFile);
+			case ImagePackage.RESIZE_TO_FIT__OVERLAY_GRAVITY:
+				return overlayGravity != OVERLAY_GRAVITY_EDEFAULT;
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				return ONLY_SHRINK_LARGER_EDEFAULT == null ? onlyShrinkLarger != null : !ONLY_SHRINK_LARGER_EDEFAULT.equals(onlyShrinkLarger);
 		}
@@ -440,6 +545,13 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				default: return -1;
 			}
 		}
+		if (baseClass == OverlayLike.class) {
+			switch (derivedFeatureID) {
+				case ImagePackage.RESIZE_TO_FIT__OVERLAY_FILE: return ImagePackage.OVERLAY_LIKE__OVERLAY_FILE;
+				case ImagePackage.RESIZE_TO_FIT__OVERLAY_GRAVITY: return ImagePackage.OVERLAY_LIKE__OVERLAY_GRAVITY;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -462,6 +574,13 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				case ImagePackage.WATERMARK_LIKE__WATERMARK_FILE: return ImagePackage.RESIZE_TO_FIT__WATERMARK_FILE;
 				case ImagePackage.WATERMARK_LIKE__WATERMARK_OPACITY: return ImagePackage.RESIZE_TO_FIT__WATERMARK_OPACITY;
 				case ImagePackage.WATERMARK_LIKE__WATERMARK_GRAVITY: return ImagePackage.RESIZE_TO_FIT__WATERMARK_GRAVITY;
+				default: return -1;
+			}
+		}
+		if (baseClass == OverlayLike.class) {
+			switch (baseFeatureID) {
+				case ImagePackage.OVERLAY_LIKE__OVERLAY_FILE: return ImagePackage.RESIZE_TO_FIT__OVERLAY_FILE;
+				case ImagePackage.OVERLAY_LIKE__OVERLAY_GRAVITY: return ImagePackage.RESIZE_TO_FIT__OVERLAY_GRAVITY;
 				default: return -1;
 			}
 		}
@@ -488,6 +607,10 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 		result.append(watermarkOpacity);
 		result.append(", watermarkGravity: ");
 		result.append(watermarkGravity);
+		result.append(", overlayFile: ");
+		result.append(overlayFile);
+		result.append(", overlayGravity: ");
+		result.append(overlayGravity);
 		result.append(", onlyShrinkLarger: ");
 		result.append(onlyShrinkLarger);
 		result.append(')');
