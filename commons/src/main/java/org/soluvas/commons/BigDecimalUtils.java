@@ -26,5 +26,8 @@ public class BigDecimalUtils {
 		return fixed;
 	}
 
+	public static boolean isNegative(java.math.BigDecimal b) {
+		return b.signum() == -1;
+	}
 
 }
