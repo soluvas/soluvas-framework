@@ -228,7 +228,7 @@
 				<!-- Spring AMQP uses rabbitmq's client, Camel uses Qpid -->
 				<groupId>com.rabbitmq</groupId>
 				<artifactId>amqp-client</artifactId>
-				<version>3.4.3</version>
+				<version>3.4.4</version>
 			</dependency>
 
 			<dependency>
