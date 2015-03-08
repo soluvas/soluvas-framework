@@ -85,7 +85,7 @@
 		<hibernate.version>4.3.8.Final</hibernate.version>
 
 		<shiro.version>1.2.3</shiro.version>
-		<akka.version>2.3.8</akka.version>
+		<akka.version>2.3.9</akka.version>
 		<scala.version>2.11.4</scala.version>
 		
 		<metrics.version>3.1.0</metrics.version>
