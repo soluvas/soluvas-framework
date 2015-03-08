@@ -91,7 +91,7 @@
 		<metrics.version>3.1.1</metrics.version>
 		<jackson.version>2.5.1</jackson.version>
 
-		<slf4j.version>1.7.7</slf4j.version>
+		<slf4j.version>1.7.10</slf4j.version>
 		<logback.version>1.1.2</logback.version>
 		<junit.version>4.12</junit.version>
 	</properties>
