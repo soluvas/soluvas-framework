@@ -234,7 +234,7 @@
 			<dependency>
 			    <groupId>org.drools</groupId>
 			    <artifactId>drools-bom</artifactId>
-			    <version>6.2.0.CR2</version>
+			    <version>6.2.0.Final</version>
 			    <type>pom</type>
 			    <scope>import</scope>
 			</dependency>
