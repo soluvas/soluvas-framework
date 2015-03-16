@@ -250,7 +250,7 @@ public class SlugUtils {
 	}
 	
 	/**
-	 * Retries 99 times (using suffix 2 to 99) to get a valid segment, otherwise throw Exception.
+	 * Retries 99 times (using suffix 2 to 99) to get a valid screen name (for {@link Person}), otherwise throw Exception.
 	 * @param name
 	 * @param validator
 	 * @return Guaranteed to conform to {@link #SCREEN_NAME_PATTERN}.
