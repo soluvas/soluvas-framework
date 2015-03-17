@@ -22,6 +22,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#isBookingEnabled <em>Booking Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#isDropshipEnabled <em>Dropship Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -278,6 +279,7 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 
 	/**
 	 * Returns the value of the '<em><b>Payment Gateway Enabled</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Payment Gateway Enabled</em>' attribute isn't clear,
@@ -287,7 +289,7 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @return the value of the '<em>Payment Gateway Enabled</em>' attribute.
 	 * @see #setPaymentGatewayEnabled(boolean)
 	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_PaymentGatewayEnabled()
-	 * @model
+	 * @model default="false"
 	 * @generated
 	 */
 	boolean isPaymentGatewayEnabled();
@@ -328,5 +330,32 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @generated
 	 */
 	void setBookingExpiryTimeInMinutes(int value);
+
+	/**
+	 * Returns the value of the '<em><b>Dropship Enabled</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dropship Enabled</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dropship Enabled</em>' attribute.
+	 * @see #setDropshipEnabled(boolean)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_DropshipEnabled()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isDropshipEnabled();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#isDropshipEnabled <em>Dropship Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dropship Enabled</em>' attribute.
+	 * @see #isDropshipEnabled()
+	 * @generated
+	 */
+	void setDropshipEnabled(boolean value);
 
 } // CustomerRole

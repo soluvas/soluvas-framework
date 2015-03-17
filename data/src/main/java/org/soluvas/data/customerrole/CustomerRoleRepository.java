@@ -40,4 +40,6 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole, Str
 	
 	int getBookingExpiryTime(String id);
 	
+	boolean isDropShipEnabled(String customerRole);
+	
 }
