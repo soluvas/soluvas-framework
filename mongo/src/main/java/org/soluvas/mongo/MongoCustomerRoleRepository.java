@@ -22,6 +22,7 @@ import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.domain.Sort.Order;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -254,6 +255,27 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			return 0;
 		}
 		return 0;
+	}
+
+	@Override
+	public boolean isDropShipEnabled(String customerRole) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(customerRole), "Customer Role must not be null or empty.");
+		final BasicDBObject query = new BasicDBObject("_id", customerRole);
+		final BasicDBObject fields = new BasicDBObject("dropshipEnabled", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "isDropShipEnabled", customerRole);
+		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object isDropShipEnabledObj = dbObj.get("dropshipEnabled");
+			if (isDropShipEnabledObj != null && !"null".equals(isDropShipEnabledObj)) {
+				final boolean dropShipEnabled = Boolean.valueOf(String.valueOf(isDropShipEnabledObj)).booleanValue();
+//				log.debug("dropshipEnabled for customerRole {}: {}", customerRole, dropShipEnabled);
+				return dropShipEnabled;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 }
 	

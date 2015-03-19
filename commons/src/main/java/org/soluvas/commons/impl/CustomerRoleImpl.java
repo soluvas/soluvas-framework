@@ -43,6 +43,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isBookingEnabled <em>Booking Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isDropshipEnabled <em>Dropship Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -369,6 +370,26 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected int bookingExpiryTimeInMinutes = BOOKING_EXPIRY_TIME_IN_MINUTES_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isDropshipEnabled() <em>Dropship Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDropshipEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DROPSHIP_ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDropshipEnabled() <em>Dropship Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDropshipEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean dropshipEnabled = DROPSHIP_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -731,6 +752,27 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isDropshipEnabled() {
+		return dropshipEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDropshipEnabled(boolean newDropshipEnabled) {
+		boolean oldDropshipEnabled = dropshipEnabled;
+		dropshipEnabled = newDropshipEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED, oldDropshipEnabled, dropshipEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -766,6 +808,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return isPaymentGatewayEnabled();
 			case CommonsPackage.CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES:
 				return getBookingExpiryTimeInMinutes();
+			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
+				return isDropshipEnabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -822,6 +866,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES:
 				setBookingExpiryTimeInMinutes((Integer)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
+				setDropshipEnabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -880,6 +927,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES:
 				setBookingExpiryTimeInMinutes(BOOKING_EXPIRY_TIME_IN_MINUTES_EDEFAULT);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
+				setDropshipEnabled(DROPSHIP_ENABLED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -924,6 +974,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return paymentGatewayEnabled != PAYMENT_GATEWAY_ENABLED_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES:
 				return bookingExpiryTimeInMinutes != BOOKING_EXPIRY_TIME_IN_MINUTES_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
+				return dropshipEnabled != DROPSHIP_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1048,6 +1100,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(paymentGatewayEnabled);
 		result.append(", bookingExpiryTimeInMinutes: ");
 		result.append(bookingExpiryTimeInMinutes);
+		result.append(", dropshipEnabled: ");
+		result.append(dropshipEnabled);
 		result.append(')');
 		return result.toString();
 	}

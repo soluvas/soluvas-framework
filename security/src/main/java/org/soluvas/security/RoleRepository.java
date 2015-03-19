@@ -11,5 +11,5 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 public interface RoleRepository extends PagingAndSortingRepository<Role, String> {
 
 	public Page<String> findAllIds(Pageable pageable);
-
+	
 }
