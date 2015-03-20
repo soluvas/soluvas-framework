@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import javax.ws.rs.core.Response;
-
 import org.soluvas.couchdb.CouchDbRepository;
 import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
@@ -14,6 +12,7 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.Repository;
 import org.soluvas.data.repository.StatusAwareRepository;
 import org.soluvas.data.repository.Trashable;
+import org.springframework.http.ResponseEntity;
 
 /**
  * {@link Media} {@link Repository}.
@@ -74,13 +73,13 @@ public interface MediaRepository extends
 	String getOriginUri(Media media);
 
 	/**
-	 * Returns the {@link Media}'s binary content as a JAX-RS {@link Response}.
+	 * Returns the {@link Media}'s binary content as a Spring MVC {@link ResponseEntity}.
 	 * It uses byte array so it's safe even if not consumed.
 	 * It returns proper {@code Content-Type} and also with {@code Content-Disposition: inline} header. 
 	 * @param media
 	 * @return
 	 * @throws IOException
 	 */
-	Response getContent(Media media) throws IOException;
+	ResponseEntity<byte[]> getContent(Media media) throws IOException;
 	
 }

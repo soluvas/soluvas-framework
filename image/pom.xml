@@ -20,6 +20,7 @@
 		<dependency>
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.jaxrs</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.soluvas</groupId>
@@ -90,6 +91,7 @@
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>jsr311-api</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>net.coobird</groupId>
