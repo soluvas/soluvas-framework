@@ -72,8 +72,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	protected void beforeSave(Person entity) {
-		super.beforeSave(entity);
+	protected void beforeSave(Person entity, ModificationTimePolicy mtimePolicy) {
+		super.beforeSave(entity, mtimePolicy);
 		entity.setCanonicalSlug(SlugUtils.canonicalize(entity.getSlug()));
 	}
 	

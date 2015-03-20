@@ -1,11 +1,15 @@
 package org.soluvas.mongo;
 
+import java.util.Collection;
+import java.util.Map;
+
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.Identifiable;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Projection;
+import org.soluvas.data.repository.CrudRepository.ModificationTimePolicy;
 import org.soluvas.data.repository.Repository;
 
 import com.mongodb.DBObject;
@@ -30,5 +34,9 @@ public interface MongoRepository<T extends Identifiable> extends Repository<T, S
 	 * @return
 	 */
 	Page<T> findAllFields(@Nullable Projection projection, Pageable pageable);
+
+	<S extends T> Collection<S> modify(Map<String, S> entities, ModificationTimePolicy mtimePolicy);
+
+	<S extends T> S modify(String id, S entity, ModificationTimePolicy mtimePolicy);
 
 }
