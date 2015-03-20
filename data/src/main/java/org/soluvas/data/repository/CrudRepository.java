@@ -22,6 +22,7 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import org.soluvas.commons.Timestamped;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.data.Existence;
 
@@ -49,6 +50,17 @@ import org.soluvas.data.Existence;
  */
 //@NoRepositoryBean
 public interface CrudRepository<T, ID extends Serializable> extends Repository<T, ID>, BasicRepository, EntityLookup<T, ID> {
+	
+	public static enum ModificationTimePolicy {
+		/**
+		 * Only update the {@link Timestamped#setModificationTime(org.joda.time.DateTime)} if not yet set.
+		 */
+		IF_UNSET,
+		/**
+		 * Always update the {@link Timestamped#setModificationTime(org.joda.time.DateTime)}.
+		 */
+		UPDATE
+	}
 
 	/**
 	 * Adds a given entity. Use the returned instance for further operations as the save operation might have changed the

@@ -43,6 +43,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.mongodb.BasicDBObject;
@@ -163,7 +164,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 */
 	protected static final long SLOW_QUERY_THRESHOLD = 500;
 	/**
-	 * Usually used by {@link #beforeSave(Identifiable)} to set creationTime and modificationTime
+	 * Usually used by {@link #beforeSave(Identifiable, org.soluvas.data.repository.CrudRepository.ModificationTimePolicy)} to set creationTime and modificationTime
 	 * based on default time zone.
 	 * TODO: Should use user's time zone (i.e. audit system).  
 	 */
@@ -457,7 +458,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			log.debug("Not adding empty list of {} documents", collName);
 			return ImmutableList.of();
 		}
-		beforeSave(entities);
+		beforeSave(entities, ModificationTimePolicy.UPDATE);
 		final Collection<String> transformedAsIds = Collections2.transform(entities, new IdFunction());
 		final List<String> ids;
 		try {
@@ -470,7 +471,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		try (Profiled p = new Profiled(log, "Added " + entities.size() + " " + collName + " documents: " + ids)) {
 			final List<DBObject> dbObjs = ImmutableList.copyOf(Collections2
 					.transform(entities, new EntityToDBObject()));
-			beforeSaveDBObjects(dbObjs);
+			beforeSaveDBObjects(dbObjs, ModificationTimePolicy.UPDATE);
 			dbObjsStr = dbObjs.toString();
 			final WriteResult writeResult = primary.insert(dbObjs);
 //			log.debug("writeResult: {}", writeResult);
@@ -493,20 +494,23 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * setCreationTime and setModificationTime is already handled if entity implements
 	 * {@link Timestamped}.
 	 * @param entity
+	 * @param mtimePolicy TODO
 	 */
-	protected void beforeSave(T entity) {
+	protected void beforeSave(T entity, org.soluvas.data.repository.CrudRepository.ModificationTimePolicy mtimePolicy) {
 		if (entity instanceof Timestamped) {
 			final Timestamped timestamped = (Timestamped) entity;
 			if (timestamped.getCreationTime() == null) {
 				timestamped.setCreationTime(new DateTime(timeZone));
 			}
-			timestamped.setModificationTime(new DateTime(timeZone));
+			if (mtimePolicy == ModificationTimePolicy.UPDATE || timestamped.getModificationTime() == null) {
+				timestamped.setModificationTime(new DateTime(timeZone));
+			}
 		}
 	}
 
-	protected final void beforeSave(Collection<? extends T> entities) {
+	protected final void beforeSave(Collection<? extends T> entities, org.soluvas.data.repository.CrudRepository.ModificationTimePolicy mtimePolicy) {
 		for (T entity : entities) {
-			beforeSave(entity);
+			beforeSave(entity, mtimePolicy);
 		}
 	}
 
@@ -515,30 +519,30 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * after it's been converted to {@link DBObject}.
 	 * @param obj
 	 */
-	protected void beforeSaveDBObject(DBObject obj) {
+	protected void beforeSaveDBObject(DBObject obj, ModificationTimePolicy mtimePolicy) {
 	}
 
-	protected final void beforeSaveDBObjects(Collection<DBObject> objs) {
+	protected final void beforeSaveDBObjects(Collection<DBObject> objs, ModificationTimePolicy mtimePolicy) {
 		for (final DBObject obj : objs) {
-			beforeSaveDBObject(obj);
+			beforeSaveDBObject(obj, mtimePolicy);
 		}
 	}
 
 	@Override
-	public <S extends T> Collection<S> modify(Map<String, S> entities) {
+	public <S extends T> Collection<S> modify(Map<String, S> entities, ModificationTimePolicy mtimePolicy) {
 		if (entities.isEmpty()) {
 			log.debug("Not modifying empty list of {} documents", collName);
 			return ImmutableList.of();
 		}
 		log.debug("Modifying {} {} documents: {}", entities.size(), collName, entities.keySet());
-		beforeSave(entities.values());
+		beforeSave(entities.values(), mtimePolicy);
 		
 		if (entities.size() <= 1) {
 			// use normal update
 			final String entityId = Iterables.getOnlyElement(entities.keySet());
 			final S entity = Iterables.getOnlyElement(entities.values());
 			final DBObject dbo = new EntityToDBObject().apply(entity);
-			beforeSaveDBObject(dbo);
+			beforeSaveDBObject(dbo, mtimePolicy);
 			final WriteResult writeResult = primary.update(new BasicDBObject("_id", entityId), dbo);
 			if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
 				throw new MongoRepositoryException(writeResult.getLastError().getException(),
@@ -553,7 +557,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			for (final Map.Entry<String, S> entry : entities.entrySet()) {
 				final S entity = entry.getValue();
 				final DBObject dbo = new EntityToDBObject().apply(entity);
-				beforeSaveDBObject(dbo);
+				beforeSaveDBObject(dbo, mtimePolicy);
 				bulk.find(new BasicDBObject("_id", entry.getKey())).replaceOne(dbo);
 				modifiedb.add(entity);
 			}
@@ -562,6 +566,20 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 					writeResult.getMatchedCount(), writeResult.getModifiedCount(), entities.size(), collName, entities.keySet());
 			return modifiedb.build();
 		}
+	}
+
+	/**
+	 * @deprecated Use {@link #modify(Map, org.soluvas.data.repository.CrudRepository.ModificationTimePolicy)}
+	 */
+	@Deprecated
+	@Override
+	public <S extends T> Collection<S> modify(Map<String, S> entities) {
+		return modify(entities, ModificationTimePolicy.UPDATE);
+	}
+	
+	@Override
+	public final <S extends T> S modify(String id, S entity, ModificationTimePolicy mtimePolicy) {
+		return modify(ImmutableMap.of(id, entity), mtimePolicy).iterator().next();
 	}
 
 	@Override

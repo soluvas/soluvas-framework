@@ -26,8 +26,8 @@ public class MongoSecurityRoleRepository extends MongoRepositoryBase<Role>
 	}
 	
 	@Override
-	protected void beforeSave(Role entity) {
-		super.beforeSave(entity);
+	protected void beforeSave(Role entity, org.soluvas.data.repository.CrudRepository.ModificationTimePolicy mtimePolicy) {
+		super.beforeSave(entity, mtimePolicy);
 		if (entity.getCreationTime() == null) {
 			entity.setCreationTime(new DateTime());
 		}
