@@ -2,8 +2,6 @@ package org.soluvas.image.rs;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
-
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
@@ -26,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MediaResource {
 	
-	@Inject
+//	@Inject
 	private MediaRepository mediaRepo;
 
 	@RequestMapping(value = "/media/{mediaId}", method = RequestMethod.GET)
