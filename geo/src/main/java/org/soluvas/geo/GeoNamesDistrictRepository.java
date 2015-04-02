@@ -163,8 +163,8 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 	@Override
 	public Page<District> searchDistrict(String term, Pageable pageable, @Nullable String city, @Nullable String province, 
 			@Nullable String countryIso) {
-		final String normalizedTerm;
 		
+		final String normalizedTerm;
 		if (!Strings.isNullOrEmpty(city) && !Strings.isNullOrEmpty(province) && !Strings.isNullOrEmpty(countryIso)){
 			normalizedTerm = countryIso + ", " + Normalizer.normalize(province + ", " + city + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 
@@ -186,7 +186,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 		} else {
 			normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		}
-		
+		log.debug("Querying districts by term: {}", normalizedTerm);
 		
 		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
 		final ImmutableList<District> districts = FluentIterable.from(keys)
