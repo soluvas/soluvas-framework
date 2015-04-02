@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @todo FIXME: Migrate to Spring {@link RestController}, see {@link ProductPubResource} for example.
  * @author ceefour
  */
-//@Path("org.soluvas.image")
 @Service @Scope("request")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)

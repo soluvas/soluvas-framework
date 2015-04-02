@@ -10,11 +10,12 @@ import org.springframework.context.annotation.Scope;
  * Configures {@link MediaResource}.
  * @author ceefour
  */
-@Configuration @Lazy
+@Configuration
 public class MediaTenantConfig {
 
 	@Bean @Scope("request")
 	public MediaResource mediaResource() {
 		return new MediaResource();
 	}
+
 }
