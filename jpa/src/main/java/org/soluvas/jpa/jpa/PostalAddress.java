@@ -50,6 +50,12 @@ public class PostalAddress implements Describable, Serializable {
 		postalAddress.setPrimaryShipping(true);
 		return postalAddress;
 	}
+	
+	public static PostalAddress getDefaultAddress() {
+		final PostalAddress postalAddress = new PostalAddress();
+		postalAddress.setId(UUID.randomUUID());
+		return postalAddress;
+	}
 
 	public static org.soluvas.commons.PostalAddress toCommons(
 			PostalAddress jpaPostalAddressUp) {
