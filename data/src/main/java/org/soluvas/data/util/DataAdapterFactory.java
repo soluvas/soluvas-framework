@@ -189,6 +189,10 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 				return createPositionableAdapter();
 			}
 			@Override
+			public Adapter caseTranslatable(Translatable object) {
+				return createTranslatableAdapter();
+			}
+			@Override
 			public Adapter caseResourceAware(ResourceAware object) {
 				return createResourceAwareAdapter();
 			}
@@ -207,10 +211,6 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseColorable(Colorable object) {
 				return createColorableAdapter();
-			}
-			@Override
-			public Adapter caseTranslatable(Translatable object) {
-				return createTranslatableAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {

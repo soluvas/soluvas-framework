@@ -268,13 +268,49 @@ public interface DataPackage extends EPackage {
 	int VALUE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE__TRANSLATION_STATE = CommonsPackage.TRANSLATABLE__TRANSLATION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE__ORIGINAL_LANGUAGE = CommonsPackage.TRANSLATABLE__ORIGINAL_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE__LANGUAGE = CommonsPackage.TRANSLATABLE__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VALUE__TRANSLATIONS = CommonsPackage.TRANSLATABLE__TRANSLATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE__SEMANTIC = 0;
+	int VALUE__SEMANTIC = CommonsPackage.TRANSLATABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Display Value</b></em>' attribute.
@@ -283,7 +319,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE__DISPLAY_VALUE = 1;
+	int VALUE__DISPLAY_VALUE = CommonsPackage.TRANSLATABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Value</em>' class.
@@ -292,7 +328,7 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_FEATURE_COUNT = 2;
+	int VALUE_FEATURE_COUNT = CommonsPackage.TRANSLATABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.impl.StringValueImpl <em>String Value</em>}' class.
@@ -303,6 +339,42 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	int STRING_VALUE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_VALUE__TRANSLATION_STATE = VALUE__TRANSLATION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_VALUE__ORIGINAL_LANGUAGE = VALUE__ORIGINAL_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_VALUE__LANGUAGE = VALUE__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_VALUE__TRANSLATIONS = VALUE__TRANSLATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
@@ -349,6 +421,42 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	int MEASURE_VALUE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEASURE_VALUE__TRANSLATION_STATE = VALUE__TRANSLATION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEASURE_VALUE__ORIGINAL_LANGUAGE = VALUE__ORIGINAL_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEASURE_VALUE__LANGUAGE = VALUE__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEASURE_VALUE__TRANSLATIONS = VALUE__TRANSLATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
@@ -404,6 +512,42 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	int CURRENCY_VALUE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CURRENCY_VALUE__TRANSLATION_STATE = VALUE__TRANSLATION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CURRENCY_VALUE__ORIGINAL_LANGUAGE = VALUE__ORIGINAL_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CURRENCY_VALUE__LANGUAGE = VALUE__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CURRENCY_VALUE__TRANSLATIONS = VALUE__TRANSLATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
@@ -552,6 +696,42 @@ public interface DataPackage extends EPackage {
 	int RANGE_VALUE = 6;
 
 	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_VALUE__TRANSLATION_STATE = VALUE__TRANSLATION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_VALUE__ORIGINAL_LANGUAGE = VALUE__ORIGINAL_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_VALUE__LANGUAGE = VALUE__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_VALUE__TRANSLATIONS = VALUE__TRANSLATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -605,6 +785,42 @@ public interface DataPackage extends EPackage {
 	 * @generated
 	 */
 	int TERM_VALUE = 7;
+
+	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_VALUE__TRANSLATION_STATE = VALUE__TRANSLATION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_VALUE__ORIGINAL_LANGUAGE = VALUE__ORIGINAL_LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_VALUE__LANGUAGE = VALUE__LANGUAGE;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_VALUE__TRANSLATIONS = VALUE__TRANSLATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Semantic</b></em>' attribute.

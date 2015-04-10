@@ -20,6 +20,7 @@ package org.soluvas.data;
  * @generated
  */
 public interface StringValue extends Value<String> {
+	
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -34,6 +35,7 @@ public interface StringValue extends Value<String> {
 	 * @model
 	 * @generated
 	 */
+	@Override
 	String getValue();
 
 	/**
@@ -47,3 +49,4 @@ public interface StringValue extends Value<String> {
 	void setValue(String value);
 
 } // StringValue
+

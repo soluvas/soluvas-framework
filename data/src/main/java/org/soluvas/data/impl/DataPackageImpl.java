@@ -1282,6 +1282,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getImageable());
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getDescribable());
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getPositionable());
+		valueEClass.getESuperTypes().add(theCommonsPackage.getTranslatable());
 		g1 = createEGenericType(this.getValue());
 		EGenericType g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);

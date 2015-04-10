@@ -2,7 +2,7 @@
  */
 package org.soluvas.data;
 
-import org.eclipse.emf.ecore.EObject;
+import org.soluvas.commons.Translatable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -60,7 +60,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  * @generated
  */
 @JsonTypeInfo(use=Id.CLASS)
-public interface Value<T> extends EObject {
+public interface Value<T> extends Translatable {
+	
+	public static String VALUE_ATTR = "value";
+	
+	public static String DISPLAY_VALUE_ATTR = "displayValue";
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

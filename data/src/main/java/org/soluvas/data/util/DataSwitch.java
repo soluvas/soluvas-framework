@@ -107,6 +107,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 			case DataPackage.VALUE: {
 				Value<?> value = (Value<?>)theEObject;
 				T1 result = caseValue(value);
+				if (result == null) result = caseTranslatable(value);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -114,6 +115,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 				StringValue stringValue = (StringValue)theEObject;
 				T1 result = caseStringValue(stringValue);
 				if (result == null) result = caseValue(stringValue);
+				if (result == null) result = caseTranslatable(stringValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -121,6 +123,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 				MeasureValue measureValue = (MeasureValue)theEObject;
 				T1 result = caseMeasureValue(measureValue);
 				if (result == null) result = caseValue(measureValue);
+				if (result == null) result = caseTranslatable(measureValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -128,6 +131,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 				CurrencyValue currencyValue = (CurrencyValue)theEObject;
 				T1 result = caseCurrencyValue(currencyValue);
 				if (result == null) result = caseValue(currencyValue);
+				if (result == null) result = caseTranslatable(currencyValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -147,6 +151,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 				RangeValue<?> rangeValue = (RangeValue<?>)theEObject;
 				T1 result = caseRangeValue(rangeValue);
 				if (result == null) result = caseValue(rangeValue);
+				if (result == null) result = caseTranslatable(rangeValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -156,6 +161,7 @@ public class DataSwitch<T1> extends Switch<T1> {
 				if (result == null) result = caseValue(termValue);
 				if (result == null) result = caseIdentifiable(termValue);
 				if (result == null) result = caseSluggable(termValue);
+				if (result == null) result = caseTranslatable(termValue);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
