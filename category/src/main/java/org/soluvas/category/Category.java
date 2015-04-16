@@ -18,6 +18,7 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.ResourceAware;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.Translatable;
 import org.soluvas.data.EntityLookup;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -55,7 +56,7 @@ import com.google.common.collect.Iterables;
  * @model
  * @generated
  */
-public interface Category extends CategoryLike, NsPrefixable, Parentable<Category>, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo>, Timestamped {
+public interface Category extends CategoryLike, NsPrefixable, Parentable<Category>, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo>, Timestamped, Translatable {
 	
 	public class ToCategoryInfo implements Function<Category, CategoryInfo> {
 		

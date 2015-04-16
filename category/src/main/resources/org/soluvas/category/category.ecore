@@ -77,6 +77,7 @@
       <eTypeArguments eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//CategoryInfo"/>
     </eGenericSuperTypes>
     <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Timestamped"/>
+    <eGenericSuperTypes eClassifier="ecore:EClass ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Translatable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CategoryContainer" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="categories" upperBound="-1"

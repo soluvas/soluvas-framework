@@ -8,13 +8,16 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.joda.time.DateTime;
@@ -42,6 +45,10 @@ import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.Translatable;
+import org.soluvas.commons.Translation;
+import org.soluvas.commons.TranslationState;
+import org.soluvas.commons.impl.TranslationEntryImpl;
 import org.soluvas.data.EntityLookup;
 
 import com.google.common.base.Joiner;
@@ -75,6 +82,10 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getCreationTime <em>Creation Time</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getModificationTime <em>Modification Time</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getTranslationState <em>Translation State</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getOriginalLanguage <em>Original Language</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getTranslations <em>Translations</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getMetaDescription <em>Meta Description</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getMetaKeywords <em>Meta Keywords</em>}</li>
@@ -459,6 +470,76 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected DateTime modificationTime = MODIFICATION_TIME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTranslationState() <em>Translation State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslationState()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final TranslationState TRANSLATION_STATE_EDEFAULT = TranslationState.ORIGINAL;
+
+	/**
+	 * The cached value of the '{@link #getTranslationState() <em>Translation State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslationState()
+	 * @generated
+	 * @ordered
+	 */
+	protected TranslationState translationState = TRANSLATION_STATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOriginalLanguage() <em>Original Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginalLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ORIGINAL_LANGUAGE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOriginalLanguage() <em>Original Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginalLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String originalLanguage = ORIGINAL_LANGUAGE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LANGUAGE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String language = LANGUAGE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTranslations() <em>Translations</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, Translation> translations;
 
 	/**
 	 * The default value of the '{@link #getStatus() <em>Status</em>}' attribute.
@@ -1192,6 +1273,81 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TranslationState getTranslationState() {
+		return translationState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTranslationState(TranslationState newTranslationState) {
+		TranslationState oldTranslationState = translationState;
+		translationState = newTranslationState == null ? TRANSLATION_STATE_EDEFAULT : newTranslationState;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__TRANSLATION_STATE, oldTranslationState, translationState));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getOriginalLanguage() {
+		return originalLanguage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOriginalLanguage(String newOriginalLanguage) {
+		String oldOriginalLanguage = originalLanguage;
+		originalLanguage = newOriginalLanguage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__ORIGINAL_LANGUAGE, oldOriginalLanguage, originalLanguage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getLanguage() {
+		return language;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLanguage(String newLanguage) {
+		String oldLanguage = language;
+		language = newLanguage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__LANGUAGE, oldLanguage, language));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMap<String, Translation> getTranslations() {
+		if (translations == null) {
+			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, CategoryPackage.CATEGORY__TRANSLATIONS);
+		}
+		return translations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getNsPrefix() {
 		return nsPrefix;
@@ -1582,6 +1738,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		switch (featureID) {
 			case CategoryPackage.CATEGORY__CATEGORIES:
 				return ((InternalEList<?>)getCategories()).basicRemove(otherEnd, msgs);
+			case CategoryPackage.CATEGORY__TRANSLATIONS:
+				return ((InternalEList<?>)getTranslations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -1633,6 +1791,15 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getCreationTime();
 			case CategoryPackage.CATEGORY__MODIFICATION_TIME:
 				return getModificationTime();
+			case CategoryPackage.CATEGORY__TRANSLATION_STATE:
+				return getTranslationState();
+			case CategoryPackage.CATEGORY__ORIGINAL_LANGUAGE:
+				return getOriginalLanguage();
+			case CategoryPackage.CATEGORY__LANGUAGE:
+				return getLanguage();
+			case CategoryPackage.CATEGORY__TRANSLATIONS:
+				if (coreType) return getTranslations();
+				else return getTranslations().map();
 			case CategoryPackage.CATEGORY__STATUS:
 				return getStatus();
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
@@ -1733,6 +1900,18 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return;
 			case CategoryPackage.CATEGORY__MODIFICATION_TIME:
 				setModificationTime((DateTime)newValue);
+				return;
+			case CategoryPackage.CATEGORY__TRANSLATION_STATE:
+				setTranslationState((TranslationState)newValue);
+				return;
+			case CategoryPackage.CATEGORY__ORIGINAL_LANGUAGE:
+				setOriginalLanguage((String)newValue);
+				return;
+			case CategoryPackage.CATEGORY__LANGUAGE:
+				setLanguage((String)newValue);
+				return;
+			case CategoryPackage.CATEGORY__TRANSLATIONS:
+				((EStructuralFeature.Setting)getTranslations()).set(newValue);
 				return;
 			case CategoryPackage.CATEGORY__STATUS:
 				setStatus((CategoryStatus)newValue);
@@ -1847,6 +2026,18 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__MODIFICATION_TIME:
 				setModificationTime(MODIFICATION_TIME_EDEFAULT);
 				return;
+			case CategoryPackage.CATEGORY__TRANSLATION_STATE:
+				setTranslationState(TRANSLATION_STATE_EDEFAULT);
+				return;
+			case CategoryPackage.CATEGORY__ORIGINAL_LANGUAGE:
+				setOriginalLanguage(ORIGINAL_LANGUAGE_EDEFAULT);
+				return;
+			case CategoryPackage.CATEGORY__LANGUAGE:
+				setLanguage(LANGUAGE_EDEFAULT);
+				return;
+			case CategoryPackage.CATEGORY__TRANSLATIONS:
+				getTranslations().clear();
+				return;
 			case CategoryPackage.CATEGORY__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
@@ -1939,6 +2130,14 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return CREATION_TIME_EDEFAULT == null ? creationTime != null : !CREATION_TIME_EDEFAULT.equals(creationTime);
 			case CategoryPackage.CATEGORY__MODIFICATION_TIME:
 				return MODIFICATION_TIME_EDEFAULT == null ? modificationTime != null : !MODIFICATION_TIME_EDEFAULT.equals(modificationTime);
+			case CategoryPackage.CATEGORY__TRANSLATION_STATE:
+				return translationState != TRANSLATION_STATE_EDEFAULT;
+			case CategoryPackage.CATEGORY__ORIGINAL_LANGUAGE:
+				return ORIGINAL_LANGUAGE_EDEFAULT == null ? originalLanguage != null : !ORIGINAL_LANGUAGE_EDEFAULT.equals(originalLanguage);
+			case CategoryPackage.CATEGORY__LANGUAGE:
+				return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT.equals(language);
+			case CategoryPackage.CATEGORY__TRANSLATIONS:
+				return translations != null && !translations.isEmpty();
 			case CategoryPackage.CATEGORY__STATUS:
 				return status != STATUS_EDEFAULT;
 			case CategoryPackage.CATEGORY__META_DESCRIPTION:
@@ -2058,6 +2257,15 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				default: return -1;
 			}
 		}
+		if (baseClass == Translatable.class) {
+			switch (derivedFeatureID) {
+				case CategoryPackage.CATEGORY__TRANSLATION_STATE: return CommonsPackage.TRANSLATABLE__TRANSLATION_STATE;
+				case CategoryPackage.CATEGORY__ORIGINAL_LANGUAGE: return CommonsPackage.TRANSLATABLE__ORIGINAL_LANGUAGE;
+				case CategoryPackage.CATEGORY__LANGUAGE: return CommonsPackage.TRANSLATABLE__LANGUAGE;
+				case CategoryPackage.CATEGORY__TRANSLATIONS: return CommonsPackage.TRANSLATABLE__TRANSLATIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -2146,6 +2354,15 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				default: return -1;
 			}
 		}
+		if (baseClass == Translatable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.TRANSLATABLE__TRANSLATION_STATE: return CategoryPackage.CATEGORY__TRANSLATION_STATE;
+				case CommonsPackage.TRANSLATABLE__ORIGINAL_LANGUAGE: return CategoryPackage.CATEGORY__ORIGINAL_LANGUAGE;
+				case CommonsPackage.TRANSLATABLE__LANGUAGE: return CategoryPackage.CATEGORY__LANGUAGE;
+				case CommonsPackage.TRANSLATABLE__TRANSLATIONS: return CategoryPackage.CATEGORY__TRANSLATIONS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -2193,6 +2410,12 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(creationTime);
 		result.append(", modificationTime: ");
 		result.append(modificationTime);
+		result.append(", translationState: ");
+		result.append(translationState);
+		result.append(", originalLanguage: ");
+		result.append(originalLanguage);
+		result.append(", language: ");
+		result.append(language);
 		result.append(", status: ");
 		result.append(status);
 		result.append(", metaDescription: ");
