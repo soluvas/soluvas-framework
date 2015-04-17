@@ -58,6 +58,9 @@ import com.google.common.collect.Iterables;
  */
 public interface Category extends CategoryLike, NsPrefixable, Parentable<Category>, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo>, Timestamped, Translatable {
 	
+	public final static String NAME_ATTR = "name";
+	public final static String DESCRIPTION_ATTR = "description";
+	
 	public class ToCategoryInfo implements Function<Category, CategoryInfo> {
 		
 		private Iterable<Category> getParents(Category child) {
