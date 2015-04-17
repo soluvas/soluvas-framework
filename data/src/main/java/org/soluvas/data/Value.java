@@ -66,6 +66,8 @@ public interface Value<T> extends Translatable {
 	
 	public static String DISPLAY_VALUE_ATTR = "displayValue";
 	
+	public static String DISPLAY_NAME_ATTR = "displayName";
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
