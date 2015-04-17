@@ -63,6 +63,18 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 	
 	public class ToCategoryInfo implements Function<Category, CategoryInfo> {
 		
+		private final String curLanguageTag;
+
+		public ToCategoryInfo() {
+			super();
+			this.curLanguageTag = "id-ID";//as default, may be come from appManifest
+		}
+		
+		public ToCategoryInfo(final String curLanguageTag) {
+			super();
+			this.curLanguageTag = curLanguageTag;
+		}
+		
 		private Iterable<Category> getParents(Category child) {
 			if (child.getParent() != null) {
 				return Iterables.concat(getParents(child.getParent()), ImmutableList.of(child.getParent()));
@@ -80,7 +92,7 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 			catInfo.setId(cat.getId());
 			catInfo.setImageId(cat.getImageId());
 			catInfo.setLevel(cat.getLevel());
-			catInfo.setName(cat.getName());
+			catInfo.setName(cat.getEffectiveName(curLanguageTag));
 			catInfo.setPositioner(cat.getPositioner());
 			catInfo.setSlug(cat.getSlug());
 			catInfo.setSlugPath(cat.getSlugPath());
@@ -475,5 +487,29 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 	 * @generated
 	 */
 	void resolve(EntityLookup<Category, String> categoryLookup);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getEffectiveName(String curLanguageTag);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getEffectiveDescription(String curLanguageTag);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	CategoryInfo toInfo(String curLanguageTag);
 
 } // Category

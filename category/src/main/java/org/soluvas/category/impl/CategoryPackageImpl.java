@@ -505,6 +505,15 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "categoryLookup", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(categoryEClass, ecorePackage.getEString(), "getEffectiveName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "curLanguageTag", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(categoryEClass, ecorePackage.getEString(), "getEffectiveDescription", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "curLanguageTag", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(categoryEClass, theCommonsPackage.getCategoryInfo(), "toInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "curLanguageTag", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(categoryContainerEClass, CategoryContainer.class, "CategoryContainer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCategoryContainer_Categories(), this.getCategory(), null, "categories", null, 0, -1, CategoryContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

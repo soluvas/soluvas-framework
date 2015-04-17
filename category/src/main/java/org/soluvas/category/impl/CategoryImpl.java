@@ -51,7 +51,9 @@ import org.soluvas.commons.TranslationState;
 import org.soluvas.commons.impl.TranslationEntryImpl;
 import org.soluvas.data.EntityLookup;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Joiner;
+import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -1273,6 +1275,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TranslationState getTranslationState() {
 		return translationState;
 	}
@@ -1282,6 +1285,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTranslationState(TranslationState newTranslationState) {
 		TranslationState oldTranslationState = translationState;
 		translationState = newTranslationState == null ? TRANSLATION_STATE_EDEFAULT : newTranslationState;
@@ -1294,6 +1298,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOriginalLanguage() {
 		return originalLanguage;
 	}
@@ -1303,6 +1308,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOriginalLanguage(String newOriginalLanguage) {
 		String oldOriginalLanguage = originalLanguage;
 		originalLanguage = newOriginalLanguage;
@@ -1315,6 +1321,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLanguage() {
 		return language;
 	}
@@ -1324,6 +1331,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLanguage(String newLanguage) {
 		String oldLanguage = language;
 		language = newLanguage;
@@ -1336,6 +1344,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EMap<String, Translation> getTranslations() {
 		if (translations == null) {
 			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, CategoryPackage.CATEGORY__TRANSLATIONS);
@@ -1699,6 +1708,87 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		for (final Category child : getCategories()) {
 			child.setParent(this);
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	@JsonIgnore
+	public String getEffectiveName(String curLanguageTag) {
+		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
+			return getName();
+		} else {
+			final EMap<String, Translation> translations = getTranslations();
+			if (translations.isEmpty()) {
+				return getName();
+			} else {
+				if (!translations.containsKey(curLanguageTag)) {
+					return getName();
+				} else {
+					final Translation translation = translations.get(curLanguageTag);
+//					log.debug("Got translation by {}: {}", languageTag, translation.getMessages());
+					if (!translation.getMessages().containsKey(Category.NAME_ATTR)) {
+						log.debug("Got translation by {}, but not value by attribute {}",
+								curLanguageTag, Category.NAME_ATTR);
+						return getName();
+					} else {
+						final String translatedValue = translation.getMessages().get(Category.NAME_ATTR);
+						log.debug("Got translation by {} with value by attribute {}: {}",
+								curLanguageTag, Category.NAME_ATTR, translatedValue);
+						return translatedValue;
+					}
+				}
+			}
+		}
+	}
+	
+	@JsonIgnore
+	public void setEffectiveName() {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	@JsonIgnore
+	public String getEffectiveDescription(String curLanguageTag) {
+		if (curLanguageTag.equals(Optional.fromNullable(getLanguage()).or("id-ID"))) {
+			return getDescription();
+		} else {
+			if (getTranslations().isEmpty()) {
+				return getDescription();
+			} else {
+				if (!getTranslations().containsKey(curLanguageTag)) {
+					return getDescription();
+				} else {
+					final Translation translation = getTranslations().get(curLanguageTag);
+					if (!translation.getMessages().containsKey(Category.DESCRIPTION_ATTR)) {
+						return getDescription();
+					} else {
+						return translation.getMessages().get(Category.DESCRIPTION_ATTR);
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CategoryInfo toInfo(String curLanguageTag) {
+		return new ToCategoryInfo(curLanguageTag).apply(this);
+	}
+
+	@JsonIgnore
+	public void setEffectiveDescription() {
+		throw new UnsupportedOperationException();
 	}
 
 	protected List<String> getNameSegments(Category category) {
