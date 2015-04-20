@@ -318,4 +318,12 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	 */
 	String getEffectiveDisplayName(String curLanguageTag);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	TermValue toValue(String curLanguageTag);
+
 } // Term

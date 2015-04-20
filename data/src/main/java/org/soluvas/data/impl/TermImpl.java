@@ -4,6 +4,7 @@ package org.soluvas.data.impl;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Nullable;
 
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.Colorable;
+import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
@@ -1031,7 +1033,6 @@ public class TermImpl extends EObjectImpl implements Term {
 	@Override
 	public TermValue toValue() {
 		final TermValue value = new TermValueImpl(getQName(), getDisplayName(), getPrimaryUri());
-		value.getTranslations().putAll(getTranslations());
 		return value;
 	}
 
@@ -1086,6 +1087,38 @@ public class TermImpl extends EObjectImpl implements Term {
 		}
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public TermValue toValue(String curLanguageTag) {
+		final TermValue value = new TermValueImpl(getQName(), getEffectiveDisplayName(curLanguageTag), getPrimaryUri());
+		
+		final String oldLanguageTag = Optional.fromNullable(getLanguage()).or("id-ID");
+		if (!oldLanguageTag.equals(curLanguageTag)) {
+			//create translation for old language
+			final Translation newTranslation = CommonsFactory.eINSTANCE.createTranslation();
+			newTranslation.setLanguage(oldLanguageTag);
+			newTranslation.getMessages().put(Value.DISPLAY_VALUE_ATTR, String.valueOf(getDisplayName()));
+			value.getTranslations().put(oldLanguageTag, newTranslation);
+		}
+		
+		value.setLanguage(curLanguageTag);
+		
+		for (final Entry<String, Translation> entry : getTranslations()) {
+			if (entry.getKey().equals(curLanguageTag)) {
+				continue;
+			}
+			final Translation newTranslation = CommonsFactory.eINSTANCE.createTranslation();
+			final Translation translation = entry.getValue();
+			newTranslation.setLanguage(translation.getLanguage());
+			newTranslation.getMessages().put(Value.DISPLAY_VALUE_ATTR, translation.getMessages().get(Value.DISPLAY_NAME_ATTR));
+			value.getTranslations().put(entry.getKey(), newTranslation);
+		}
+		return value;
+	}
+
 	@JsonIgnore
 	public void setEffectiveDisplayName() {
 		throw new UnsupportedOperationException();
