@@ -310,4 +310,12 @@ public interface Term extends TermContainer, BundleAware, NameContainer, Resourc
 	@Nullable
 	String getImageUri(String imagesUri);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getEffectiveDisplayName(String curLanguageTag);
+
 } // Term

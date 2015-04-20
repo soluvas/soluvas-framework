@@ -39,10 +39,12 @@ import org.soluvas.commons.impl.TranslationEntryImpl;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermValue;
+import org.soluvas.data.Value;
 import org.soluvas.data.Vocab;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 
 /**
@@ -1029,6 +1031,7 @@ public class TermImpl extends EObjectImpl implements Term {
 	@Override
 	public TermValue toValue() {
 		final TermValue value = new TermValueImpl(getQName(), getDisplayName(), getPrimaryUri());
+		value.getTranslations().putAll(getTranslations());
 		return value;
 	}
 
@@ -1051,6 +1054,41 @@ public class TermImpl extends EObjectImpl implements Term {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	@JsonIgnore
+	public String getEffectiveDisplayName(String curLanguageTag) {
+		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
+			return getDisplayName();
+		} else {
+			final EMap<String, Translation> translations = getTranslations();
+			if (translations.isEmpty()) {
+				return getDisplayName();
+			} else {
+				if (!translations.containsKey(curLanguageTag)) {
+					return getDisplayName();
+				} else {
+					final Translation translation = translations.get(curLanguageTag);
+//					log.debug("Got translation by {}: {}", languageTag, translation.getMessages());
+					if (!translation.getMessages().containsKey(Value.DISPLAY_NAME_ATTR)) {
+						return getDisplayName();
+					} else {
+						final String translatedValue = translation.getMessages().get(Value.DISPLAY_NAME_ATTR);
+						return translatedValue;
+					}
+				}
+			}
+		}
+	}
+	
+	@JsonIgnore
+	public void setEffectiveDisplayName() {
+		throw new UnsupportedOperationException();
 	}
 
 	/**
