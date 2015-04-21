@@ -110,6 +110,14 @@ public class PersonInfo implements Serializable {
 	private String domain = null;
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Basic()
+	private String mobileNumber = null;
+
+	/**
 	 * Returns the value of '<em><b>id</b></em>' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -303,6 +311,33 @@ public class PersonInfo implements Serializable {
 	}
 
 	/**
+	 * Returns the value of '<em><b>mobileNumber</b></em>' feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the value of '<em><b>mobileNumber</b></em>' feature
+	 * @generated
+	 */
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	/**
+	 * Sets the '{@link PersonInfo#getMobileNumber() <em>mobileNumber</em>}'
+	 * feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param newMobileNumber
+	 *            the new value of the '{@link PersonInfo#getMobileNumber()
+	 *            mobileNumber}' feature.
+	 * @generated
+	 */
+	public void setMobileNumber(String newMobileNumber) {
+		mobileNumber = newMobileNumber;
+	}
+
+	/**
 	 * A toString method which prints the values of all EAttributes of this
 	 * instance. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -314,7 +349,8 @@ public class PersonInfo implements Serializable {
 				+ getName() + "]" + " [gender: " + getGender() + "]"
 				+ " [slug: " + getSlug() + "]" + " [email: " + getEmail() + "]"
 				+ " [photoId: " + getPhotoId() + "]" + " [domain: "
-				+ getDomain() + "]";
+				+ getDomain() + "]" + " [mobileNumber: " + getMobileNumber()
+				+ "]";
 	}
 
 	public static PersonInfo fromPerson(Person person) {

@@ -262,6 +262,7 @@
         <details key="documentation" value="Domain where this person is a registered user. Usually used by embedding this PersonInfo in a document which is then signed using the domain owner's certificate, which in turn is signed by either a trusted party or a Certificate Authority."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mobileNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTimeZone" instanceClassName="org.joda.time.DateTimeZone"/>
   <eClassifiers xsi:type="ecore:EClass" name="Timestamped" abstract="true" interface="true">
