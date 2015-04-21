@@ -1449,6 +1449,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		op = addEOperation(termEClass, ecorePackage.getEString(), "getImageUri", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "imagesUri", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(termEClass, ecorePackage.getEString(), "getEffectiveDisplayName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "curLanguageTag", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(termEClass, this.getTermValue(), "toValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "curLanguageTag", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(listVocabEClass, ListVocab.class, "ListVocab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(treeVocabEClass, TreeVocab.class, "TreeVocab", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
