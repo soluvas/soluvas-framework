@@ -78,6 +78,7 @@ import com.google.common.collect.ImmutableSet;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getHeadTitle <em>Head Title</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultStyle <em>Default Style</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultVariation <em>Default Variation</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getKursDollar <em>Kurs Dollar</em>}</li>
  * </ul>
  * </p>
  *
@@ -760,6 +761,25 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected String defaultVariation = DEFAULT_VARIATION_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getKursDollar() <em>Kurs Dollar</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKursDollar()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String KURS_DOLLAR_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getKursDollar() <em>Kurs Dollar</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKursDollar()
+	 * @generated
+	 * @ordered
+	 */
+	protected String kursDollar = KURS_DOLLAR_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1408,6 +1428,27 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getKursDollar() {
+		return kursDollar;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKursDollar(String newKursDollar) {
+		String oldKursDollar = kursDollar;
+		kursDollar = newKursDollar;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__KURS_DOLLAR, oldKursDollar, kursDollar));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getDefaultTimeZoneId() {
 		return defaultTimeZoneId;
@@ -1821,6 +1862,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getDefaultStyle();
 			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
 				return getDefaultVariation();
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
+				return getKursDollar();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1934,6 +1977,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
 				setDefaultVariation((String)newValue);
 				return;
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
+				setKursDollar((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2045,6 +2091,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
 				setDefaultVariation(DEFAULT_VARIATION_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
+				setKursDollar(KURS_DOLLAR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2129,6 +2178,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return DEFAULT_STYLE_EDEFAULT == null ? defaultStyle != null : !DEFAULT_STYLE_EDEFAULT.equals(defaultStyle);
 			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
 				return DEFAULT_VARIATION_EDEFAULT == null ? defaultVariation != null : !DEFAULT_VARIATION_EDEFAULT.equals(defaultVariation);
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
+				return KURS_DOLLAR_EDEFAULT == null ? kursDollar != null : !KURS_DOLLAR_EDEFAULT.equals(kursDollar);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2322,6 +2373,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(defaultStyle);
 		result.append(", defaultVariation: ");
 		result.append(defaultVariation);
+		result.append(", kursDollar: ");
+		result.append(kursDollar);
 		result.append(')');
 		return result.toString();
 	}

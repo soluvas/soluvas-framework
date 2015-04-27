@@ -60,6 +60,7 @@ import org.soluvas.commons.util.AppUtils;
  *   <li>{@link org.soluvas.commons.AppManifest#getHeadTitle <em>Head Title</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultStyle <em>Default Style</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultVariation <em>Default Variation</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getKursDollar <em>Kurs Dollar</em>}</li>
  * </ul>
  * </p>
  *
@@ -670,6 +671,32 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setDefaultVariation(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Kurs Dollar</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Kurs Dollar</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Kurs Dollar</em>' attribute.
+	 * @see #setKursDollar(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_KursDollar()
+	 * @model
+	 * @generated
+	 */
+	String getKursDollar();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getKursDollar <em>Kurs Dollar</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kurs Dollar</em>' attribute.
+	 * @see #getKursDollar()
+	 * @generated
+	 */
+	void setKursDollar(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.
