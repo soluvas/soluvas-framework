@@ -34,19 +34,20 @@ public class TermSubscriber {
 	}
 	
 	@Subscribe
-	public void reloadDataCatalogForTermManager(final AddedTermEvent ev) {
+	public void addNewTermToDataCatalogForTermManager(final AddedTermEvent ev) {
 		final Term addedTerm = ev.getTerm();
 		
-		log.debug("Adding to TermManager's dataCatalog after added term: {}", addedTerm);
+		log.debug("{} --> Adding to TermManager's dataCatalog ({} rows) for term: {}", ev.getTenantId(), termManager.getDataCatalog().getTerms().size(), addedTerm);
 		termManager.getDataCatalog().getTerms().add(addedTerm);
+//		log.debug("Now terms on dataCatalog is {} rows", termManager.getDataCatalog().getTerms().size());
 	}
 	
 	@Subscribe
-	public void reloadDataCatalogForTermManager(final ModifiedTermEvent ev) {
+	public void modifyTermOnDataCatalogForTermManager(final ModifiedTermEvent ev) {
 		final Term modifiedTerm = ev.getTerm();
 		final String oldUName = ev.getOldUName();
 		
-		log.debug("Modifying {} on TermManager's dataCatalog to modified term: {}", oldUName, modifiedTerm);
+		log.debug("{} --> Modifying {} on TermManager's dataCatalog to modified term: {}", ev.getTenantId(), oldUName, modifiedTerm);
 		final Term curTerm = Iterables.find(termManager.getDataCatalog().getTerms(), new Predicate<Term>() {
 			@Override
 			public boolean apply(Term input) {
@@ -58,10 +59,10 @@ public class TermSubscriber {
 	}
 	
 	@Subscribe
-	public void reloadDataCatalogForTermManager(final RemovedTermEvent ev) {
+	public void removeTermOnDataCatalogForTermManager(final RemovedTermEvent ev) {
 		final Term removedTerm = ev.getTerm();
 		
-		log.debug("Removing TermManager's dataCatalog after removed term: {}", removedTerm);
+		log.debug("{} --> Removing TermManager's dataCatalog for term: {}", ev.getTenantId(), removedTerm);
 		termManager.getDataCatalog().getTerms().remove(removedTerm);
 	}
 
