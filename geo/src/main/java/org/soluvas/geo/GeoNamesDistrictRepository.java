@@ -57,7 +57,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 		this.cityRepo = cityRepo;
 		
 		// Districts
-		try (final InputStreamReader reader = new InputStreamReader(GeoNamesDistrictRepository.class.getResourceAsStream("districts_ID_jne.csv"))) {
+		try (final InputStreamReader reader = new InputStreamReader(GeoNamesDistrictRepository.class.getResourceAsStream("districts_ID_jne_2015-04.csv"))) {
 			try (final CSVReader csv = new CSVReader(reader, '\t', '"')) {
 				while (true) {
 					@Nullable 
