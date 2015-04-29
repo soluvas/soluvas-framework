@@ -44,6 +44,7 @@ import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFa
 public class GeoNamesDistrictRepository implements DistrictRepository {
 	
 	
+	private static final String DISTRICTS_ID_JNE_2015_04_CSV = "districts_ID_jne_2015-04.csv";
 	private final CityRepository cityRepo;
 	private int entryCount = 0;
 	
@@ -57,7 +58,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 		this.cityRepo = cityRepo;
 		
 		// Districts
-		try (final InputStreamReader reader = new InputStreamReader(GeoNamesDistrictRepository.class.getResourceAsStream("districts_ID_jne_2015-04.csv"))) {
+		try (final InputStreamReader reader = new InputStreamReader(GeoNamesDistrictRepository.class.getResourceAsStream(DISTRICTS_ID_JNE_2015_04_CSV))) {
 			try (final CSVReader csv = new CSVReader(reader, '\t', '"')) {
 				while (true) {
 					@Nullable 
@@ -78,39 +79,41 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 						continue;
 					}
 					
-					/*handle for same district name*/
-					if (!districtMap.containsKey(name)){
+					final City city = cityRepo.getCity(cityStr, provinceStr, "ID");
+					final Country country = city.getCountry();
+					final String province = city.getProvince();
+					
+					final String keyOfDistrict = country.getIso() + ", " +
+							province.toLowerCase() + ", " +
+							city.getName().toLowerCase()+ ", " +
+							name.toLowerCase();
+					if (!districtMap.containsKey(keyOfDistrict)){
 						try {
-							final City city = cityRepo.getCity(cityStr, provinceStr, "ID");
-							final Country country = city.getCountry();
-							final String province = city.getProvince();
 							final District district = new District(name, country, province, city.getName());
-							districtMap.put(name, district);
-							tree.put(country.getIso() + ", " +
-										province.toLowerCase() + ", " +
-										city.getName().toLowerCase()+ ", " +
-										name.toLowerCase(),
+							//data map sebenarnya
+							districtMap.put(keyOfDistrict, district);
+							//dipake untuk query by "country, province, city, district"
+							tree.put(keyOfDistrict,
 									district);
-							
+							//dipake untuk query by "country, province, district"
 							tree.put(country.getIso() + ", " +
 									province.toLowerCase() + ", " +
 									name.toLowerCase(),
 									district);
-							
+							//dipake untuk query by "country, city, district"
 							tree.put(country.getIso() + ", " +
 									city.getName().toLowerCase()+ ", " +
 									name.toLowerCase(),
 									district);
-							
+							//dipake untuk query by "province, city, district"
 							tree.put(province.toLowerCase() + ", " +
 									city.getName().toLowerCase()+ ", " +
 									name.toLowerCase(),
 								district);
-							
+							//dipake untuk query by "country, district"
 							tree.put(country.getIso() + ", " +
 									name.toLowerCase(),
 								district);
-							
 							
 							String fullTextName = name.toLowerCase();
 							int spacePos =  fullTextName.indexOf(' ');
@@ -148,16 +151,18 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 						} catch (Exception e) {
 							log.error("Not found for city: " + cityStr + ": " + e, e);
 						}
-				//		final District district = new District(name, country);
 					}
 				}
 			}
 		}
 	}
 
+	/* The name contains: "province, city, district". Ex: "Jawa Barat, Bandung, Cidadap", "Jawa Barat, Sumedang, Cidadap"
+	 * @see org.soluvas.geo.DistrictRepository#getByName(java.lang.String)
+	 */
 	@Override
-	public District getByName(String name) {
-		return districtMap.get(name);
+	public District getByCountryProvinceCityName(String countryProvinceCityName) {
+		return districtMap.get(countryProvinceCityName);
 	}
 
 	@Override
@@ -174,15 +179,12 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 			normalizedTerm = Normalizer.normalize(province + ", " + city + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		} else if (!Strings.isNullOrEmpty(city) && Strings.isNullOrEmpty(province) && !Strings.isNullOrEmpty(countryIso)){
 			normalizedTerm = countryIso + ", " + Normalizer.normalize(city + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
-		
 		} else if (Strings.isNullOrEmpty(city) && !Strings.isNullOrEmpty(province) && Strings.isNullOrEmpty(countryIso)){
 			normalizedTerm = Normalizer.normalize(province + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		} else if (Strings.isNullOrEmpty(city) && !Strings.isNullOrEmpty(province) && !Strings.isNullOrEmpty(countryIso)){
 			normalizedTerm = countryIso + ", " + Normalizer.normalize(province + ", " +term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
-		
 		} else if (Strings.isNullOrEmpty(city) && Strings.isNullOrEmpty(province) && !Strings.isNullOrEmpty(countryIso)){
 			normalizedTerm = countryIso + ", " + Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
-		
 		} else {
 			normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		}
@@ -210,7 +212,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 		final PageImpl<District> page = new PageImpl<>(districts, pageable, total);
 		
 		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) districts: {}",
-				term, normalizedTerm, pageable, districts.size(), total, Iterables.limit(districts, 10));
+				term, normalizedTerm, pageable, districts.size(), total, Iterables.limit(districts, 5));
 		return page;
 	}
 	

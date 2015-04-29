@@ -6,7 +6,11 @@ import org.soluvas.data.domain.Pageable;
 
 public interface DistrictRepository {
 
-	District getByName(String name);
+	/**
+	 * @param name: "province, city, district". Ex: "Jawa Barat, Bandung, Cidadap", "Jawa Barat, Sumedang, Cidadap"
+	 * @return
+	 */
+	District getByCountryProvinceCityName(String countryProvinceCityName);
 	
 	District getDistrict(String cityAndNormalizedDistrict) throws IllegalArgumentException;
 	

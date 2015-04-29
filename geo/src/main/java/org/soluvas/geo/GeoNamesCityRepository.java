@@ -76,7 +76,7 @@ public class GeoNamesCityRepository implements CityRepository {
 		// Cities
 		final List<String> skippedCities = new ArrayList<>();
 		final List<String> excludedCities = new ArrayList<>();
-		try (final InputStreamReader reader = new InputStreamReader(GeoNamesCityRepository.class.getResourceAsStream("cities1000lite.csv"))) {
+		try (final InputStreamReader reader = new InputStreamReader(GeoNamesCityRepository.class.getResourceAsStream("cities1000lite_-id.csv"))) {
 			try (final CSVReader csv = new CSVReader(reader, '\t', '"')) {
 				while (true) {
 					@Nullable
