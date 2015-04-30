@@ -4,6 +4,7 @@ package org.soluvas.category.impl;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -1350,6 +1351,11 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, CategoryPackage.CATEGORY__TRANSLATIONS);
 		}
 		return translations;
+	}
+	
+	protected void setTranslations(Map<String, Translation> translations) {
+		getTranslations().clear();
+		getTranslations().putAll(translations);
 	}
 
 	/**
