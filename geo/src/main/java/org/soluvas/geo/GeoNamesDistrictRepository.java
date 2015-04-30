@@ -79,7 +79,13 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 						continue;
 					}
 					
-					final City city = cityRepo.getCity(cityStr, provinceStr, "ID");
+					final City city;
+					try {
+						city = cityRepo.getCity(cityStr, provinceStr, "ID");
+					} catch (IllegalArgumentException e) {
+						log.warn(String.format("City not found for city '%s' - province '%s' - country '%s'", cityStr, provinceStr, "ID"));
+						continue;
+					}
 					final Country country = city.getCountry();
 					final String province = city.getProvince();
 					
