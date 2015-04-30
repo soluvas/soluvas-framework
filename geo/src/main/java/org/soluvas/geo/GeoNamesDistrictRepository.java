@@ -120,6 +120,9 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 							tree.put(country.getIso() + ", " +
 									name.toLowerCase(),
 								district);
+							//dipake untuk query by "district"
+							tree.put(name.toLowerCase(),
+									district);
 							
 							String fullTextName = name.toLowerCase();
 							int spacePos =  fullTextName.indexOf(' ');
@@ -148,6 +151,9 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 								
 								tree.put(country.getIso() + ", " +
 										fullTextName + " " + entryCount,
+										district);
+								
+								tree.put(fullTextName + " " + entryCount,
 										district);
 								entryCount++;
 								spacePos =  fullTextName.indexOf(' ');
