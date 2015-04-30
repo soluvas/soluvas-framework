@@ -27,6 +27,12 @@ import com.googlecode.concurrenttrees.radix.ConcurrentRadixTree;
 import com.googlecode.concurrenttrees.radix.RadixTree;
 import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFactory;
 
+/**
+ * See http://www.kemendagri.go.id/pages/profil-daerah/provinsi
+ * 
+ * @author anton
+ *
+ */
 public class GeoNamesProvinceRepository implements ProvinceRepository{
 
 	private static final Logger log = LoggerFactory
