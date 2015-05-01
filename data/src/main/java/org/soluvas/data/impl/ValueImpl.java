@@ -2,6 +2,8 @@
  */
 package org.soluvas.data.impl;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EMap;
@@ -179,6 +181,7 @@ public abstract class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TranslationState getTranslationState() {
 		return translationState;
 	}
@@ -188,6 +191,7 @@ public abstract class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTranslationState(TranslationState newTranslationState) {
 		TranslationState oldTranslationState = translationState;
 		translationState = newTranslationState == null ? TRANSLATION_STATE_EDEFAULT : newTranslationState;
@@ -200,6 +204,7 @@ public abstract class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOriginalLanguage() {
 		return originalLanguage;
 	}
@@ -209,6 +214,7 @@ public abstract class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOriginalLanguage(String newOriginalLanguage) {
 		String oldOriginalLanguage = originalLanguage;
 		originalLanguage = newOriginalLanguage;
@@ -221,6 +227,7 @@ public abstract class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLanguage() {
 		return language;
 	}
@@ -230,6 +237,7 @@ public abstract class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLanguage(String newLanguage) {
 		String oldLanguage = language;
 		language = newLanguage;
@@ -242,11 +250,17 @@ public abstract class ValueImpl<T> extends EObjectImpl implements Value<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EMap<String, Translation> getTranslations() {
 		if (translations == null) {
 			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, DataPackage.VALUE__TRANSLATIONS);
 		}
 		return translations;
+	}
+	
+	protected void setTranslations(Map<String, Translation> translations) {
+		getTranslations().clear();
+		getTranslations().putAll(translations);
 	}
 
 	/**
