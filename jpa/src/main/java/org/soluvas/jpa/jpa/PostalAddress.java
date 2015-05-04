@@ -4,14 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CommonsFactory;
+
 import com.google.common.base.Preconditions;
 
 /**
@@ -66,6 +69,7 @@ public class PostalAddress implements Describable, Serializable {
 		emfPostalAddress.setCountry(jpaPostalAddressUp.getCountry());
 		emfPostalAddress.setCountryCode(jpaPostalAddressUp.getCountryCode());
 		emfPostalAddress.setDescription(jpaPostalAddressUp.getDescription());
+		emfPostalAddress.setDistrict(jpaPostalAddressUp.getDistrict());
 		if (jpaPostalAddressUp.getEmails() != null
 				&& !jpaPostalAddressUp.getEmails().isEmpty()) {
 			emfPostalAddress.getEmails().addAll(jpaPostalAddressUp.getEmails());
@@ -128,6 +132,7 @@ public class PostalAddress implements Describable, Serializable {
 				.setCountryCode(commonsPostalAddressUp.getCountryCode());
 		jpaPostalAddress
 				.setDescription(commonsPostalAddressUp.getDescription());
+		jpaPostalAddress.setDistrict(commonsPostalAddressUp.getDistrict());
 		if (commonsPostalAddressUp.getEmails() != null
 				&& !commonsPostalAddressUp.getEmails().isEmpty()) {
 			jpaPostalAddress.getEmails().addAll(
@@ -1166,6 +1171,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * @return the value of '<em><b>description</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -1183,6 +1189,7 @@ public class PostalAddress implements Describable, Serializable {
 	 *            description}' feature.
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		description = newDescription;
 	}
