@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.data.EntityLookup;
+import org.soluvas.data.person.PersonRepository;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailException;
 import org.soluvas.email.EmailFactory;
@@ -234,6 +235,25 @@ public class EmailUtils {
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
 				final Person socialPerson = personLookup.findOne(personInfo.getId());
+				recipients.addAll(new PersonToRecipients("registered customer", false).apply(socialPerson));
+			}
+		}
+		
+		return recipients;
+	}
+	
+	public static Set<Recipient> getRecipients(@Nullable PersonInfo personInfo, @Nullable PersonRepository personRepo) {
+		final Set<Recipient> recipients = Sets.newHashSet();
+		
+		if (personInfo != null) {
+			if (!Strings.isNullOrEmpty(personInfo.getEmail())) {
+				final String name = Optional.fromNullable(personInfo.getName()).or(personInfo.getEmail());
+				recipients.add(EmailFactory.eINSTANCE.createRecipient(
+						name, personInfo.getEmail(), "customer"));
+			}
+			//find person by customerId
+			if (!Strings.isNullOrEmpty(personInfo.getId()) && personRepo != null) {
+				final Person socialPerson = personRepo.findOne(personInfo.getId());
 				recipients.addAll(new PersonToRecipients("registered customer", false).apply(socialPerson));
 			}
 		}
