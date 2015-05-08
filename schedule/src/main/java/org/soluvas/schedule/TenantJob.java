@@ -108,6 +108,15 @@ public abstract class TenantJob implements Job {
 	}
 	
 	/**
+	 * Get Spring bean by name.
+	 * @param name
+	 * @return
+	 */
+	protected <T> T getBean(String name) {
+		return (T) appCtx.getBean(name);
+	}
+	
+	/**
 	 * Sets up the thread using {@link CommandRequestAttributes#withTenant(String)}, then calls {@link #doExecute(JobExecutionContext)}.
 	 * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
 	 */

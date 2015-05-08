@@ -48,6 +48,9 @@ import com.google.common.collect.Sets;
  * @author ceefour
  */
 public class EmailUtils {
+	
+	public static final String REGISTERED_CUSTOMER = "registered customer";
+	
 	private static final Logger log = LoggerFactory.getLogger(EmailUtils.class);
 
 	/**
@@ -235,7 +238,7 @@ public class EmailUtils {
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
 				final Person socialPerson = personLookup.findOne(personInfo.getId());
-				recipients.addAll(new PersonToRecipients("registered customer", false).apply(socialPerson));
+				recipients.addAll(new PersonToRecipients(REGISTERED_CUSTOMER, false).apply(socialPerson));
 			}
 		}
 		
@@ -254,7 +257,7 @@ public class EmailUtils {
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personRepo != null) {
 				final Person socialPerson = personRepo.findOne(personInfo.getId());
-				recipients.addAll(new PersonToRecipients("registered customer", false).apply(socialPerson));
+				recipients.addAll(new PersonToRecipients(REGISTERED_CUSTOMER, false).apply(socialPerson));
 			}
 		}
 		
