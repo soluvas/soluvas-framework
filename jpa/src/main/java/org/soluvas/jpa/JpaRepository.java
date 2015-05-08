@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import org.joda.time.DateTime;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.tenant.CommandRequestAttributes;
 import org.soluvas.data.EntityLookupException;
@@ -31,5 +32,6 @@ public interface JpaRepository<T extends JpaEntity<ID>, ID extends Serializable>
 	
 	public <S extends T> S lookupOneById(StatusMask statusMask, @Nullable ID id) throws EntityLookupException;
 	public <S extends T> Map<ID, Try<S>> lookupAllById(StatusMask statusMask, Collection<ID> ids);
+	public <S extends T> S modify(ID id, S entity, DateTime lastModificationTime);
 	
 }

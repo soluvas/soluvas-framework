@@ -489,6 +489,18 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 				FluentIterable.from(mergedEntities).transform(new IdFunction()).limit(10));
 		return mergedEntities;
 	}
+	
+	@Override @Transactional
+	public <S extends T> S modify(ID id, S entity, DateTime lastModificationTime) {
+		log.debug("Modifying {} '{}' require modificationTime {}", entityClass.getSimpleName(), id, lastModificationTime);
+		final T existing = em.find(entityClass, id);
+		Preconditions.checkState(lastModificationTime.equals(existing.getModificationTime()));
+		beforeSave(entity);
+		final S mergedEntity = em.merge(entity);
+		log.debug("{} '{}' have been modified from {} to {}", entityClass.getSimpleName(), id,
+				lastModificationTime, entity.getModificationTime());
+		return mergedEntity;
+	}
 
 	@Override @Transactional(readOnly=true)
 	public Set<ID> exists(Collection<ID> ids) {
