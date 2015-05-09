@@ -15,7 +15,7 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 
-import au.com.bytecode.opencsv.CSVReader;
+import com.opencsv.CSVReader;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
