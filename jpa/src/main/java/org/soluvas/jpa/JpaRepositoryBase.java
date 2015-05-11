@@ -494,7 +494,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	public <S extends T> S modify(ID id, S entity, DateTime lastModificationTime) {
 		log.debug("Modifying {} '{}' require modificationTime {}", entityClass.getSimpleName(), id, lastModificationTime);
 		final T existing = em.find(entityClass, id);
-		Preconditions.checkState(lastModificationTime.equals(existing.getModificationTime()));
+		Preconditions.checkState(lastModificationTime.equals(existing.getModificationTime()), "%s %s on database has already modified by different modification time with %s on memory.",
+				entityClass.getSimpleName(), id, entityClass.getSimpleName());
 		beforeSave(entity);
 		final S mergedEntity = em.merge(entity);
 		log.debug("{} '{}' have been modified from {} to {}", entityClass.getSimpleName(), id,
