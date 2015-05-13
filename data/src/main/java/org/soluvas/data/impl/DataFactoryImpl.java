@@ -2,6 +2,7 @@
  */
 package org.soluvas.data.impl;
 
+import java.util.Map;
 import javax.measure.DecimalMeasure;
 import javax.measure.Measure;
 
@@ -91,6 +92,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 			case DataPackage.KIND: return createKind();
 			case DataPackage.MIXIN_CATALOG: return createMixinCatalog();
 			case DataPackage.MIXIN_MANAGER: return createMixinManager();
+			case DataPackage.TERM_ENTRY: return (EObject)createTermEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -338,6 +340,16 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	public MixinManager createMixinManager() {
 		MixinManagerImpl mixinManager = new MixinManagerImpl();
 		return mixinManager;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map.Entry<String, Term> createTermEntry() {
+		TermEntryImpl termEntry = new TermEntryImpl();
+		return termEntry;
 	}
 
 	/**

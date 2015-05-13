@@ -2,6 +2,7 @@
  */
 package org.soluvas.data.impl;
 
+import java.util.Map;
 import javax.measure.DecimalMeasure;
 import javax.measure.Measure;
 
@@ -180,6 +181,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EClass mixinManagerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass termEntryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -989,6 +997,33 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTermEntry() {
+		return termEntryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTermEntry_Key() {
+		return (EAttribute)termEntryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTermEntry_Value() {
+		return (EReference)termEntryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EEnum getAttributeSemantic() {
 		return attributeSemanticEEnum;
@@ -1207,6 +1242,10 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		mixinManagerEClass = createEClass(MIXIN_MANAGER);
 		createEReference(mixinManagerEClass, MIXIN_MANAGER__MIXIN_CATALOG);
 		createEAttribute(mixinManagerEClass, MIXIN_MANAGER__MIXINS);
+
+		termEntryEClass = createEClass(TERM_ENTRY);
+		createEAttribute(termEntryEClass, TERM_ENTRY__KEY);
+		createEReference(termEntryEClass, TERM_ENTRY__VALUE);
 
 		// Create enums
 		attributeSemanticEEnum = createEEnum(ATTRIBUTE_SEMANTIC);
@@ -1494,6 +1533,10 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		g2 = createEGenericType(this.getMixin());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
+
+		initEClass(termEntryEClass, Map.Entry.class, "TermEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTermEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTermEntry_Value(), this.getTerm(), null, "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(attributeSemanticEEnum, AttributeSemantic.class, "AttributeSemantic");

@@ -2,6 +2,7 @@
  */
 package org.soluvas.data.util;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -268,6 +269,12 @@ public class DataSwitch<T1> extends Switch<T1> {
 			case DataPackage.MIXIN_MANAGER: {
 				MixinManager mixinManager = (MixinManager)theEObject;
 				T1 result = caseMixinManager(mixinManager);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case DataPackage.TERM_ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<String, Term> termEntry = (Map.Entry<String, Term>)theEObject;
+				T1 result = caseTermEntry(termEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -542,6 +549,21 @@ public class DataSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseMixinManager(MixinManager object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Term Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Term Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T1 caseTermEntry(Map.Entry<String, Term> object) {
 		return null;
 	}
 

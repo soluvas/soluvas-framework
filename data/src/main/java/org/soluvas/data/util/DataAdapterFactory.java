@@ -2,6 +2,7 @@
  */
 package org.soluvas.data.util;
 
+import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -163,6 +164,10 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMixinManager(MixinManager object) {
 				return createMixinManagerAdapter();
+			}
+			@Override
+			public Adapter caseTermEntry(Map.Entry<String, Term> object) {
+				return createTermEntryAdapter();
 			}
 			@Override
 			public Adapter caseNsPrefixable(NsPrefixable object) {
@@ -481,6 +486,20 @@ public class DataAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMixinManagerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Term Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createTermEntryAdapter() {
 		return null;
 	}
 

@@ -1751,6 +1751,43 @@ public interface DataPackage extends EPackage {
 	int MIXIN_MANAGER_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.data.impl.TermEntryImpl <em>Term Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.data.impl.TermEntryImpl
+	 * @see org.soluvas.data.impl.DataPackageImpl#getTermEntry()
+	 * @generated
+	 */
+	int TERM_ENTRY = 18;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Term Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_ENTRY_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1758,7 +1795,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getAttributeSemantic()
 	 * @generated
 	 */
-	int ATTRIBUTE_SEMANTIC = 18;
+	int ATTRIBUTE_SEMANTIC = 19;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.InputMethod <em>Input Method</em>}' enum.
@@ -1768,7 +1805,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getInputMethod()
 	 * @generated
 	 */
-	int INPUT_METHOD = 19;
+	int INPUT_METHOD = 20;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.StatusMask <em>Status Mask</em>}' enum.
@@ -1778,7 +1815,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getStatusMask()
 	 * @generated
 	 */
-	int STATUS_MASK = 20;
+	int STATUS_MASK = 21;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.LookupKey <em>Lookup Key</em>}' enum.
@@ -1788,7 +1825,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getLookupKey()
 	 * @generated
 	 */
-	int LOOKUP_KEY = 21;
+	int LOOKUP_KEY = 22;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
@@ -1798,7 +1835,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepository()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY = 22;
+	int CRUD_REPOSITORY = 23;
 
 	/**
 	 * The meta object id for the '<em>Paging And Sorting Repository</em>' data type.
@@ -1808,7 +1845,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPagingAndSortingRepository()
 	 * @generated
 	 */
-	int PAGING_AND_SORTING_REPOSITORY = 23;
+	int PAGING_AND_SORTING_REPOSITORY = 24;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository Base</em>' data type.
@@ -1818,7 +1855,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepositoryBase()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY_BASE = 24;
+	int CRUD_REPOSITORY_BASE = 25;
 
 
 	/**
@@ -1829,7 +1866,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 25;
+	int MEASURE = 26;
 
 	/**
 	 * The meta object id for the '<em>Decimal Measure</em>' data type.
@@ -1839,7 +1876,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
 	 * @generated
 	 */
-	int DECIMAL_MEASURE = 26;
+	int DECIMAL_MEASURE = 27;
 
 
 	/**
@@ -1850,7 +1887,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPageable()
 	 * @generated
 	 */
-	int PAGEABLE = 27;
+	int PAGEABLE = 28;
 
 	/**
 	 * The meta object id for the '<em>Page</em>' data type.
@@ -1860,7 +1897,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPage()
 	 * @generated
 	 */
-	int PAGE = 28;
+	int PAGE = 29;
 
 
 	/**
@@ -2583,6 +2620,40 @@ public interface DataPackage extends EPackage {
 	EAttribute getMixinManager_Mixins();
 
 	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Term Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Term Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
+	 *        valueType="org.soluvas.data.Term"
+	 * @generated
+	 */
+	EClass getTermEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTermEntry()
+	 * @generated
+	 */
+	EAttribute getTermEntry_Key();
+
+	/**
+	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getTermEntry()
+	 * @generated
+	 */
+	EReference getTermEntry_Value();
+
+	/**
 	 * Returns the meta object for enum '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3292,6 +3363,32 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MIXIN_MANAGER__MIXINS = eINSTANCE.getMixinManager_Mixins();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.data.impl.TermEntryImpl <em>Term Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.data.impl.TermEntryImpl
+		 * @see org.soluvas.data.impl.DataPackageImpl#getTermEntry()
+		 * @generated
+		 */
+		EClass TERM_ENTRY = eINSTANCE.getTermEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM_ENTRY__KEY = eINSTANCE.getTermEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TERM_ENTRY__VALUE = eINSTANCE.getTermEntry_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.AttributeSemantic <em>Attribute Semantic</em>}' enum.
