@@ -501,6 +501,11 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	}
 
 	@Override
+	public synchronized void disable(Set<String> tenantIds) {
+		throw new UnsupportedOperationException("Belom di isi logic-nya boss..");
+	}
+	
+	@Override
 	public ImmutableMap<String, TenantState> getStates() {
 		return ImmutableMap.copyOf(tenantStateMap);
 	}
@@ -599,5 +604,5 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
     		file.delete();
     	}
     }
-	
+
 }
