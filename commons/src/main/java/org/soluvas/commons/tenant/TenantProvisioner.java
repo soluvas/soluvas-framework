@@ -1,8 +1,11 @@
 package org.soluvas.commons.tenant;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 
+import org.joda.time.DateTime;
 import org.soluvas.commons.AppManifest;
 
 /**
@@ -28,5 +31,13 @@ public interface TenantProvisioner<T> {
 	void removeDatabases(Set<String> tenantIds);
 
 	void removeSchemas(Set<String> tenantIds);
-
+	
+	/**
+	 * key: tenantId
+	 * value: creationTime of tenant's shop
+	 * @param tenantIds TODO
+	 * @return
+	 */
+	public Map<String, DateTime> getTenantCreationTimes(Collection<String> tenantIds);
+	
 }

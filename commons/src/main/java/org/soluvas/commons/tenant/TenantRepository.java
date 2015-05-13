@@ -86,6 +86,12 @@ public interface TenantRepository<T extends ProvisionData> {
 	 */
 	void stop(Set<String> tenantIds);
 	
+	/**
+	 * Unsymlink operation here
+	 * @param tenantIds
+	 */
+	void disable(Set<String> tenantIds);
+	
 	void addListener(TenantRepositoryListener listener);
 
 	ImmutableMap<String, TenantState> getStates();
@@ -117,5 +123,5 @@ public interface TenantRepository<T extends ProvisionData> {
 	 */
 	public abstract AppManifest getOriginal(String tenantId)
 			throws IllegalArgumentException;
-
+	
 }
