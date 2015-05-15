@@ -36,7 +36,7 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole, Str
 	
 	ImmutableSet<String> findAllIdsByBookingEnabled(StatusMask statusMask);
 	
-	ImmutableSet<String> findAllIdsByPaymentGatewayEnabled(StatusMask statusMask);
+	ImmutableSet<String> findAllCustRoleByPaymentGatewayEnabled(StatusMask statusMask);
 	
 	int getBookingExpiryTime(String id);
 	

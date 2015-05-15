@@ -232,7 +232,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 	
 	@Override
-	public ImmutableSet<String> findAllIdsByPaymentGatewayEnabled(StatusMask statusMask) {
+	public ImmutableSet<String> findAllCustRoleByPaymentGatewayEnabled(StatusMask statusMask) {
 		final BasicDBObject query = new BasicDBObject("paymentGatewayEnabled", true);
 		augmentQueryForStatusMask(query, statusMask);
 		
