@@ -87,7 +87,7 @@ public interface TenantRepository<T extends ProvisionData> {
 	void stop(Set<String> tenantIds);
 	
 	/**
-	 * Unsymlink operation here
+	 * Stop and then unsymlink operation here
 	 * @param tenantIds
 	 */
 	void disable(Set<String> tenantIds);

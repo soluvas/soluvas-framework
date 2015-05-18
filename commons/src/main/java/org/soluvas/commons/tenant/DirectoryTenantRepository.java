@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.nio.file.Files;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -502,7 +503,27 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 
 	@Override
 	public synchronized void disable(Set<String> tenantIds) {
-		throw new UnsupportedOperationException("Belom di isi logic-nya boss..");
+		stop(tenantIds);
+		unsymlink(tenantIds);
+		for (final String tenantId : tenantIds) {
+			tenantMap.remove(tenantId);
+			log.info("Tenant {} has been removed on memory", tenantId);
+		}
+	}
+	
+	private synchronized void unsymlink(Set<String> tenantIds) {
+		for (final String tenantId : tenantIds) {
+			final File tenantLink = new File(getRootDir(), tenantId);
+			if (Files.isSymbolicLink(tenantLink.toPath())) {
+				try {
+					Files.delete(tenantLink.toPath());
+					log.info("Done to unsymlink for {}", tenantLink);
+				} catch (IOException e) {
+					log.error(String.format("Failed to remove symbolic link for '%s': %s", tenantLink, e), e);
+					throw new TenantException(String.format("Failed to remove symbolic link for '%s': %s", tenantLink, e), e);
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -567,7 +588,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		provisioner.removeDatabases(tenantIds);
 		provisioner.removeSchemas(tenantIds);
 		
-		return false;
+		return true;
 	}
 	
 	 /**
