@@ -1,6 +1,6 @@
 package org.soluvas.geo;
 
-import java.util.Optional;
+import com.google.common.base.Optional;
 
 /**
  * 

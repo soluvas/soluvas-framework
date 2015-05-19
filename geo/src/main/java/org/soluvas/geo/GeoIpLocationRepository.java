@@ -6,7 +6,6 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map.Entry;
-import java.util.Optional;
 
 import javax.annotation.Nullable;
 
@@ -15,6 +14,7 @@ import jline.internal.InputStreamReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
@@ -158,11 +158,11 @@ public class GeoIpLocationRepository implements IpLocationRepository {
 			if (geoIpLocation != null) {
 				return Optional.of(geoIpLocation.getCountry());
 			} else {
-				return Optional.empty();  
+				return Optional.absent();  
 			}
 		} catch (UnknownHostException e) {
 			log.error(String.format("Can not get inetAddress by ip '%s': %s", ip, e), e);
-			return Optional.empty();
+			return Optional.absent();
 		}
 	}
 
