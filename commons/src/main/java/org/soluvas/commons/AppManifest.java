@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import java.math.BigDecimal;
 import java.util.Locale;
 
 import javax.annotation.Nullable;
@@ -61,6 +62,7 @@ import org.soluvas.commons.util.AppUtils;
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultStyle <em>Default Style</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultVariation <em>Default Variation</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getKursDollar <em>Kurs Dollar</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getKursDollarDpex <em>Kurs Dollar Dpex</em>}</li>
  * </ul>
  * </p>
  *
@@ -697,6 +699,31 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setKursDollar(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Kurs Dollar Dpex</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Kurs used by DPEX courier only
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Kurs Dollar Dpex</em>' attribute.
+	 * @see #setKursDollarDpex(BigDecimal)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_KursDollarDpex()
+	 * @model
+	 * @generated
+	 */
+	BigDecimal getKursDollarDpex();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getKursDollarDpex <em>Kurs Dollar Dpex</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Kurs Dollar Dpex</em>' attribute.
+	 * @see #getKursDollarDpex()
+	 * @generated
+	 */
+	void setKursDollarDpex(BigDecimal value);
 
 	/**
 	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.

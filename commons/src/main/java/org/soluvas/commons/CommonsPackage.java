@@ -494,13 +494,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__KURS_DOLLAR = POSITIONABLE_FEATURE_COUNT + 35;
 
 	/**
+	 * The feature id for the '<em><b>Kurs Dollar Dpex</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__KURS_DOLLAR_DPEX = POSITIONABLE_FEATURE_COUNT + 36;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 36;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 37;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -6420,6 +6429,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_KursDollar();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getKursDollarDpex <em>Kurs Dollar Dpex</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Kurs Dollar Dpex</em>'.
+	 * @see org.soluvas.commons.AppManifest#getKursDollarDpex()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_KursDollarDpex();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10280,6 +10300,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__KURS_DOLLAR = eINSTANCE.getAppManifest_KursDollar();
+
+		/**
+		 * The meta object literal for the '<em><b>Kurs Dollar Dpex</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__KURS_DOLLAR_DPEX = eINSTANCE.getAppManifest_KursDollarDpex();
 
 		/**
 		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.

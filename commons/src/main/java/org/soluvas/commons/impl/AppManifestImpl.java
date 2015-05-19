@@ -1,6 +1,7 @@
 package org.soluvas.commons.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
@@ -79,6 +80,7 @@ import com.google.common.collect.ImmutableSet;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultStyle <em>Default Style</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultVariation <em>Default Variation</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getKursDollar <em>Kurs Dollar</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getKursDollarDpex <em>Kurs Dollar Dpex</em>}</li>
  * </ul>
  * </p>
  *
@@ -780,6 +782,25 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected String kursDollar = KURS_DOLLAR_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getKursDollarDpex() <em>Kurs Dollar Dpex</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKursDollarDpex()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final BigDecimal KURS_DOLLAR_DPEX_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getKursDollarDpex() <em>Kurs Dollar Dpex</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKursDollarDpex()
+	 * @generated
+	 * @ordered
+	 */
+	protected BigDecimal kursDollarDpex = KURS_DOLLAR_DPEX_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1449,6 +1470,27 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BigDecimal getKursDollarDpex() {
+		return kursDollarDpex;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKursDollarDpex(BigDecimal newKursDollarDpex) {
+		BigDecimal oldKursDollarDpex = kursDollarDpex;
+		kursDollarDpex = newKursDollarDpex;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX, oldKursDollarDpex, kursDollarDpex));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getDefaultTimeZoneId() {
 		return defaultTimeZoneId;
@@ -1864,6 +1906,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getDefaultVariation();
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
 				return getKursDollar();
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
+				return getKursDollarDpex();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1980,6 +2024,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
 				setKursDollar((String)newValue);
 				return;
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
+				setKursDollarDpex((BigDecimal)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2094,6 +2141,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
 				setKursDollar(KURS_DOLLAR_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
+				setKursDollarDpex(KURS_DOLLAR_DPEX_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2180,6 +2230,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return DEFAULT_VARIATION_EDEFAULT == null ? defaultVariation != null : !DEFAULT_VARIATION_EDEFAULT.equals(defaultVariation);
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
 				return KURS_DOLLAR_EDEFAULT == null ? kursDollar != null : !KURS_DOLLAR_EDEFAULT.equals(kursDollar);
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
+				return KURS_DOLLAR_DPEX_EDEFAULT == null ? kursDollarDpex != null : !KURS_DOLLAR_DPEX_EDEFAULT.equals(kursDollarDpex);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2375,6 +2427,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(defaultVariation);
 		result.append(", kursDollar: ");
 		result.append(kursDollar);
+		result.append(", kursDollarDpex: ");
+		result.append(kursDollarDpex);
 		result.append(')');
 		return result.toString();
 	}
