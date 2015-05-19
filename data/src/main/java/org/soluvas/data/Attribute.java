@@ -2,6 +2,8 @@
  */
 package org.soluvas.data;
 
+import java.io.Serializable;
+
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -75,7 +77,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=AttributeImpl.class)
-public interface Attribute extends NsPrefixable, NameContainer, Imageable, Describable, Positionable {
+public interface Attribute extends NsPrefixable, NameContainer, Imageable, Describable, Positionable, Serializable {
 	/**
 	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

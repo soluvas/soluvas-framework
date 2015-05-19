@@ -58,6 +58,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @generated
  */
 public class AttributeImpl extends EObjectImpl implements Attribute {
+	
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The default value of the '{@link #getNsPrefix() <em>Ns Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
