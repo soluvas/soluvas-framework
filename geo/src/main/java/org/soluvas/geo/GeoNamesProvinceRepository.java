@@ -50,7 +50,7 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 				while (true) {
 					@Nullable 
 					final String[] line = csv.readNext();
-					log.debug("line -> {}", line);
+			//		log.debug("line -> {}", line);
 					if (line == null || line.length == 0) {
 						break;
 					}
