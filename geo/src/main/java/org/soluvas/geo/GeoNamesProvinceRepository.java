@@ -15,8 +15,6 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 
-import com.opencsv.CSVReader;
-
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -26,6 +24,7 @@ import com.google.common.collect.Iterables;
 import com.googlecode.concurrenttrees.radix.ConcurrentRadixTree;
 import com.googlecode.concurrenttrees.radix.RadixTree;
 import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFactory;
+import com.opencsv.CSVReader;
 
 /**
  * See http://www.kemendagri.go.id/pages/profil-daerah/provinsi
@@ -44,28 +43,30 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 	
 	public GeoNamesProvinceRepository(CountryRepository countryRepo) throws IOException{
 		super();
-		final Country indonesia = countryRepo.getCountry("ID");
-		// Provinces
-		try (final InputStreamReader reader = new InputStreamReader(GeoNamesDistrictRepository.class.getResourceAsStream("provinces_ID.csv"))) {
+//		final Country indonesia = countryRepo.getCountry("ID");
+		// Provinces for ID
+		try (final InputStreamReader reader = new InputStreamReader(GeoNamesDistrictRepository.class.getResourceAsStream("provinces.csv"))) {
 			try (final CSVReader csv = new CSVReader(reader, '\t', '"')) {
 				while (true) {
 					@Nullable 
 					final String[] line = csv.readNext();
-//					log.debug("line -> {}", line);
+					log.debug("line -> {}", line);
 					if (line == null || line.length == 0) {
 						break;
 					}
-					final String name = line[0];
+					final String name = line[1];
 					if (name.startsWith("#")) {
 						continue;
 					}
 					
-					final Province province = new Province(name, indonesia);
+					final Country country = countryRepo.getCountry(line[0]);
+					
+					final Province province = new Province(name, country);
 					/*handle for same province name*/
 					if (!provinceMap.containsKey(name)){
 //						log.debug("Putting province -> {}", province);
 						provinceMap.put(name, province);
-						tree.put(indonesia.getIso() + ", " + province.getName().toLowerCase(), province);
+						tree.put(country.getIso() + ", " + province.getName().toLowerCase(), province);
 						tree.put(province.getName().toLowerCase(), province);
 					}
 					
@@ -78,7 +79,7 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 					int spacePos = fullTextName.indexOf(' ');
 					while (spacePos >= 0) {
 						fullTextName = fullTextName.substring(spacePos + 1);
-						tree.put(indonesia.getIso() + ", " + fullTextName + " " + entryCount, province);
+						tree.put(country.getIso() + ", " + fullTextName + " " + entryCount, province);
 						tree.put(fullTextName + " " + entryCount, province);
 						entryCount++;
 						spacePos = fullTextName.indexOf(' ');
