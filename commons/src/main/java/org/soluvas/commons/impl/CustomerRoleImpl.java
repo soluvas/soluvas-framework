@@ -44,6 +44,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isDropshipEnabled <em>Dropship Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isReviewEmailEnabled <em>Review Email Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -390,6 +391,26 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected boolean dropshipEnabled = DROPSHIP_ENABLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isReviewEmailEnabled() <em>Review Email Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isReviewEmailEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean REVIEW_EMAIL_ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isReviewEmailEnabled() <em>Review Email Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isReviewEmailEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean reviewEmailEnabled = REVIEW_EMAIL_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -773,6 +794,27 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isReviewEmailEnabled() {
+		return reviewEmailEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReviewEmailEnabled(boolean newReviewEmailEnabled) {
+		boolean oldReviewEmailEnabled = reviewEmailEnabled;
+		reviewEmailEnabled = newReviewEmailEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED, oldReviewEmailEnabled, reviewEmailEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -810,6 +852,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return getBookingExpiryTimeInMinutes();
 			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
 				return isDropshipEnabled();
+			case CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED:
+				return isReviewEmailEnabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -869,6 +913,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
 				setDropshipEnabled((Boolean)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED:
+				setReviewEmailEnabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -930,6 +977,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
 				setDropshipEnabled(DROPSHIP_ENABLED_EDEFAULT);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED:
+				setReviewEmailEnabled(REVIEW_EMAIL_ENABLED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -976,6 +1026,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return bookingExpiryTimeInMinutes != BOOKING_EXPIRY_TIME_IN_MINUTES_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
 				return dropshipEnabled != DROPSHIP_ENABLED_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED:
+				return reviewEmailEnabled != REVIEW_EMAIL_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1102,6 +1154,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(bookingExpiryTimeInMinutes);
 		result.append(", dropshipEnabled: ");
 		result.append(dropshipEnabled);
+		result.append(", reviewEmailEnabled: ");
+		result.append(reviewEmailEnabled);
 		result.append(')');
 		return result.toString();
 	}

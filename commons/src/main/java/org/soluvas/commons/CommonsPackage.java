@@ -5487,13 +5487,22 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE__DROPSHIP_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 15;
 
 	/**
+	 * The feature id for the '<em><b>Review Email Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 16;
+
+	/**
 	 * The number of structural features of the '<em>Customer Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 16;
+	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 17;
 
 	/**
 	 * The operation id for the '<em>Get Schema Version</em>' operation.
@@ -9457,6 +9466,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCustomerRole_DropshipEnabled();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#isReviewEmailEnabled <em>Review Email Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Review Email Enabled</em>'.
+	 * @see org.soluvas.commons.CustomerRole#isReviewEmailEnabled()
+	 * @see #getCustomerRole()
+	 * @generated
+	 */
+	EAttribute getCustomerRole_ReviewEmailEnabled();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.CustomerRoleCatalog <em>Customer Role Catalog</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12686,6 +12706,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOMER_ROLE__DROPSHIP_ENABLED = eINSTANCE.getCustomerRole_DropshipEnabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Review Email Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED = eINSTANCE.getCustomerRole_ReviewEmailEnabled();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.CustomerRoleCatalogImpl <em>Customer Role Catalog</em>}' class.
