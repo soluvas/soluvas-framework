@@ -79,7 +79,7 @@ import com.google.common.collect.ImmutableSet;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getHeadTitle <em>Head Title</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultStyle <em>Default Style</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultVariation <em>Default Variation</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getKursDollar <em>Kurs Dollar</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getKursDollarPaypal <em>Kurs Dollar Paypal</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getKursDollarDpex <em>Kurs Dollar Dpex</em>}</li>
  * </ul>
  * </p>
@@ -763,24 +763,23 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected String defaultVariation = DEFAULT_VARIATION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getKursDollar() <em>Kurs Dollar</em>}' attribute.
+	 * The default value of the '{@link #getKursDollarPaypal() <em>Kurs Dollar Paypal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKursDollar()
+	 * @see #getKursDollarPaypal()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String KURS_DOLLAR_EDEFAULT = null;
+	protected static final BigDecimal KURS_DOLLAR_PAYPAL_EDEFAULT = new BigDecimal("0");
 	/**
-	 * The cached value of the '{@link #getKursDollar() <em>Kurs Dollar</em>}' attribute.
+	 * The cached value of the '{@link #getKursDollarPaypal() <em>Kurs Dollar Paypal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKursDollar()
+	 * @see #getKursDollarPaypal()
 	 * @generated
 	 * @ordered
 	 */
-	protected String kursDollar = KURS_DOLLAR_EDEFAULT;
-
+	protected BigDecimal kursDollarPaypal = KURS_DOLLAR_PAYPAL_EDEFAULT;
 	/**
 	 * The default value of the '{@link #getKursDollarDpex() <em>Kurs Dollar Dpex</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -789,7 +788,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BigDecimal KURS_DOLLAR_DPEX_EDEFAULT = null;
+	protected static final BigDecimal KURS_DOLLAR_DPEX_EDEFAULT = new BigDecimal("0");
 	/**
 	 * The cached value of the '{@link #getKursDollarDpex() <em>Kurs Dollar Dpex</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -1449,8 +1448,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getKursDollar() {
-		return kursDollar;
+	public BigDecimal getKursDollarPaypal() {
+		return kursDollarPaypal;
 	}
 
 	/**
@@ -1458,11 +1457,11 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKursDollar(String newKursDollar) {
-		String oldKursDollar = kursDollar;
-		kursDollar = newKursDollar;
+	public void setKursDollarPaypal(BigDecimal newKursDollarPaypal) {
+		BigDecimal oldKursDollarPaypal = kursDollarPaypal;
+		kursDollarPaypal = newKursDollarPaypal;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__KURS_DOLLAR, oldKursDollar, kursDollar));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__KURS_DOLLAR_PAYPAL, oldKursDollarPaypal, kursDollarPaypal));
 	}
 
 	/**
@@ -1904,8 +1903,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getDefaultStyle();
 			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
 				return getDefaultVariation();
-			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
-				return getKursDollar();
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_PAYPAL:
+				return getKursDollarPaypal();
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
 				return getKursDollarDpex();
 		}
@@ -2021,8 +2020,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
 				setDefaultVariation((String)newValue);
 				return;
-			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
-				setKursDollar((String)newValue);
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_PAYPAL:
+				setKursDollarPaypal((BigDecimal)newValue);
 				return;
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
 				setKursDollarDpex((BigDecimal)newValue);
@@ -2138,8 +2137,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
 				setDefaultVariation(DEFAULT_VARIATION_EDEFAULT);
 				return;
-			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
-				setKursDollar(KURS_DOLLAR_EDEFAULT);
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_PAYPAL:
+				setKursDollarPaypal(KURS_DOLLAR_PAYPAL_EDEFAULT);
 				return;
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
 				setKursDollarDpex(KURS_DOLLAR_DPEX_EDEFAULT);
@@ -2228,8 +2227,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return DEFAULT_STYLE_EDEFAULT == null ? defaultStyle != null : !DEFAULT_STYLE_EDEFAULT.equals(defaultStyle);
 			case CommonsPackage.APP_MANIFEST__DEFAULT_VARIATION:
 				return DEFAULT_VARIATION_EDEFAULT == null ? defaultVariation != null : !DEFAULT_VARIATION_EDEFAULT.equals(defaultVariation);
-			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR:
-				return KURS_DOLLAR_EDEFAULT == null ? kursDollar != null : !KURS_DOLLAR_EDEFAULT.equals(kursDollar);
+			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_PAYPAL:
+				return KURS_DOLLAR_PAYPAL_EDEFAULT == null ? kursDollarPaypal != null : !KURS_DOLLAR_PAYPAL_EDEFAULT.equals(kursDollarPaypal);
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
 				return KURS_DOLLAR_DPEX_EDEFAULT == null ? kursDollarDpex != null : !KURS_DOLLAR_DPEX_EDEFAULT.equals(kursDollarDpex);
 		}
@@ -2425,8 +2424,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(defaultStyle);
 		result.append(", defaultVariation: ");
 		result.append(defaultVariation);
-		result.append(", kursDollar: ");
-		result.append(kursDollar);
+		result.append(", kursDollarPaypal: ");
+		result.append(kursDollarPaypal);
 		result.append(", kursDollarDpex: ");
 		result.append(kursDollarDpex);
 		result.append(')');

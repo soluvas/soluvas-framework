@@ -485,13 +485,13 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__DEFAULT_VARIATION = POSITIONABLE_FEATURE_COUNT + 34;
 
 	/**
-	 * The feature id for the '<em><b>Kurs Dollar</b></em>' attribute.
+	 * The feature id for the '<em><b>Kurs Dollar Paypal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST__KURS_DOLLAR = POSITIONABLE_FEATURE_COUNT + 35;
+	int APP_MANIFEST__KURS_DOLLAR_PAYPAL = POSITIONABLE_FEATURE_COUNT + 35;
 
 	/**
 	 * The feature id for the '<em><b>Kurs Dollar Dpex</b></em>' attribute.
@@ -6427,15 +6427,15 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_DefaultVariation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getKursDollar <em>Kurs Dollar</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getKursDollarPaypal <em>Kurs Dollar Paypal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Kurs Dollar</em>'.
-	 * @see org.soluvas.commons.AppManifest#getKursDollar()
+	 * @return the meta object for the attribute '<em>Kurs Dollar Paypal</em>'.
+	 * @see org.soluvas.commons.AppManifest#getKursDollarPaypal()
 	 * @see #getAppManifest()
 	 * @generated
 	 */
-	EAttribute getAppManifest_KursDollar();
+	EAttribute getAppManifest_KursDollarPaypal();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getKursDollarDpex <em>Kurs Dollar Dpex</em>}'.
@@ -10314,12 +10314,12 @@ public interface CommonsPackage extends EPackage {
 		EAttribute APP_MANIFEST__DEFAULT_VARIATION = eINSTANCE.getAppManifest_DefaultVariation();
 
 		/**
-		 * The meta object literal for the '<em><b>Kurs Dollar</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Kurs Dollar Paypal</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute APP_MANIFEST__KURS_DOLLAR = eINSTANCE.getAppManifest_KursDollar();
+		EAttribute APP_MANIFEST__KURS_DOLLAR_PAYPAL = eINSTANCE.getAppManifest_KursDollarPaypal();
 
 		/**
 		 * The meta object literal for the '<em><b>Kurs Dollar Dpex</b></em>' attribute feature.

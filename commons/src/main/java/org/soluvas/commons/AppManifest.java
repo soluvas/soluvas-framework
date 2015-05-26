@@ -61,7 +61,7 @@ import org.soluvas.commons.util.AppUtils;
  *   <li>{@link org.soluvas.commons.AppManifest#getHeadTitle <em>Head Title</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultStyle <em>Default Style</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultVariation <em>Default Variation</em>}</li>
- *   <li>{@link org.soluvas.commons.AppManifest#getKursDollar <em>Kurs Dollar</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getKursDollarPaypal <em>Kurs Dollar Paypal</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getKursDollarDpex <em>Kurs Dollar Dpex</em>}</li>
  * </ul>
  * </p>
@@ -675,33 +675,35 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	void setDefaultVariation(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Kurs Dollar</b></em>' attribute.
+	 * Returns the value of the '<em><b>Kurs Dollar Paypal</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Kurs Dollar</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Kurs Dollar Paypal</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Kurs Dollar</em>' attribute.
-	 * @see #setKursDollar(String)
-	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_KursDollar()
-	 * @model
+	 * @return the value of the '<em>Kurs Dollar Paypal</em>' attribute.
+	 * @see #setKursDollarPaypal(BigDecimal)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_KursDollarPaypal()
+	 * @model default="0"
 	 * @generated
 	 */
-	String getKursDollar();
+	BigDecimal getKursDollarPaypal();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getKursDollar <em>Kurs Dollar</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getKursDollarPaypal <em>Kurs Dollar Paypal</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Kurs Dollar</em>' attribute.
-	 * @see #getKursDollar()
+	 * @param value the new value of the '<em>Kurs Dollar Paypal</em>' attribute.
+	 * @see #getKursDollarPaypal()
 	 * @generated
 	 */
-	void setKursDollar(String value);
+	void setKursDollarPaypal(BigDecimal value);
 
 	/**
 	 * Returns the value of the '<em><b>Kurs Dollar Dpex</b></em>' attribute.
+	 * The default value is <code>"0"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -710,7 +712,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @return the value of the '<em>Kurs Dollar Dpex</em>' attribute.
 	 * @see #setKursDollarDpex(BigDecimal)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_KursDollarDpex()
-	 * @model
+	 * @model default="0"
 	 * @generated
 	 */
 	BigDecimal getKursDollarDpex();
