@@ -50,6 +50,7 @@ public class NamedEntity implements Serializable {
 	 */
 	public ResponseEntity<byte[]> toInlineResponseEntity(HttpStatus statusCode) {
 		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(contentType);
 		headers.set("Content-Disposition", "inline; filename=\"" + UrlEscapers.urlFragmentEscaper().escape(name) + "\"");
 		return new ResponseEntity<>(body, headers, statusCode);
 	}
@@ -64,6 +65,7 @@ public class NamedEntity implements Serializable {
 	
 	public ResponseEntity<byte[]> toAttachmentResponseEntity(HttpStatus statusCode) {
 		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(contentType);
 		headers.set("Content-Disposition", "attachment; filename=\"" + UrlEscapers.urlFragmentEscaper().escape(name) + "\"");
 		return new ResponseEntity<>(body, headers, statusCode);
 	}
