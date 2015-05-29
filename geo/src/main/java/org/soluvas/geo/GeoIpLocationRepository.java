@@ -135,7 +135,7 @@ public class GeoIpLocationRepository implements IpLocationRepository {
 				final byte[] address = Inet4Address.getByName(ip).getAddress();
 				final String ipBinary = BinaryCodec.toAsciiString(new byte[] { address[3], address[2], address[1], address[0] });
 				
-				for (int mask = 7; mask <= 32; mask++) {
+				for (int mask = 32; mask <=7 ; mask--) {
 					geoIpLocation = geoIp4LocationMap.get(ipBinary.substring(0, mask));
 				}
 			}
