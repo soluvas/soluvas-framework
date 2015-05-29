@@ -91,5 +91,12 @@ public class GeoIpLocaltionRepositoryTest {
 		log.info("ipBin: {}", ipBinByConts);
 		
 	}
+	
+	@Test
+	public void test() {
+		for (int mask = 32; mask >=7 ; mask--) {
+			log.info("index ke {}", mask);
+		}
+	}
 
 }
