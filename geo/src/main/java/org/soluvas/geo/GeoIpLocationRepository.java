@@ -2,24 +2,21 @@ package org.soluvas.geo;
 
 import java.io.IOException;
 import java.net.Inet4Address;
-import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Map.Entry;
 
 import javax.annotation.Nullable;
 
 import jline.internal.InputStreamReader;
 
+import org.apache.commons.codec.binary.BinaryCodec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
-import com.google.common.collect.Iterables;
 import com.opencsv.CSVReader;
 
 /**
@@ -79,8 +76,17 @@ public class GeoIpLocationRepository implements IpLocationRepository {
 						continue;
 					}
 					final Country country = countryRepo.getCountry(geoCountryLocation.getCountryIsoCode());
-					final GeoIpLocation geoIpLocation = new GeoIpLocation(line[0], line[1], country);
-					geoIp4LocationMab.put(line[0], geoIpLocation);
+					
+					final String ipNetMask = line[0];
+					
+					final int constIp = new Integer(ipNetMask.substring(ipNetMask.indexOf("/") + 1, ipNetMask.length())).intValue();
+					final String ipAdd = ipNetMask.substring(0, ipNetMask.indexOf("/"));
+					final byte[] address = Inet4Address.getByName(ipAdd).getAddress();
+					final String ipBinary = BinaryCodec.toAsciiString(new byte[] { address[3], address[2], address[1], address[0] });
+					final String ipBinByConts = ipBinary.substring(0, constIp);
+					
+					final GeoIpLocation geoIpLocation = new GeoIpLocation(ipNetMask, line[1], country);
+					geoIp4LocationMab.put(ipBinByConts, geoIpLocation);
 				}
 			}
 		}
@@ -88,29 +94,29 @@ public class GeoIpLocationRepository implements IpLocationRepository {
 		
 		//loading for ip6
 		final Builder<String, GeoIpLocation> geoIp6LocationMab = ImmutableMap.builder();
-		try (final InputStreamReader reader = new InputStreamReader(GeoIpLocationRepository.class.getResourceAsStream("GeoLite2-Country-Blocks-IPv6.csv"))) {
-			try (final CSVReader csv = new CSVReader(reader)) {
-				while (true) {
-					@Nullable String[] line = csv.readNext();
-					if (line == null) {
-						break;
-					}
-					if (line[0].startsWith("#")) {
-						continue;
-					}
-					if (Strings.isNullOrEmpty(line[1])) {
-						continue;
-					}
-					final GeoCountryLocation geoCountryLocation = geoCountryLocationMap.get(line[1]);
-					if (Strings.isNullOrEmpty(geoCountryLocation.getCountryIsoCode())) {
-						continue;
-					}
-					final Country country = countryRepo.getCountry(geoCountryLocation.getCountryIsoCode());
-					final GeoIpLocation geoIpLocation = new GeoIpLocation(line[0], line[1], country);
-					geoIp6LocationMab.put(line[0], geoIpLocation);
-				}
-			}
-		}
+//		try (final InputStreamReader reader = new InputStreamReader(GeoIpLocationRepository.class.getResourceAsStream("GeoLite2-Country-Blocks-IPv6.csv"))) {
+//			try (final CSVReader csv = new CSVReader(reader)) {
+//				while (true) {
+//					@Nullable String[] line = csv.readNext();
+//					if (line == null) {
+//						break;
+//					}
+//					if (line[0].startsWith("#")) {
+//						continue;
+//					}
+//					if (Strings.isNullOrEmpty(line[1])) {
+//						continue;
+//					}
+//					final GeoCountryLocation geoCountryLocation = geoCountryLocationMap.get(line[1]);
+//					if (Strings.isNullOrEmpty(geoCountryLocation.getCountryIsoCode())) {
+//						continue;
+//					}
+//					final Country country = countryRepo.getCountry(geoCountryLocation.getCountryIsoCode());
+//					final GeoIpLocation geoIpLocation = new GeoIpLocation(line[0], line[1], country);
+//					geoIp6LocationMab.put(line[0], geoIpLocation);
+//				}
+//			}
+//		}
 		geoIp6LocationMap = geoIp6LocationMab.build();
 		
 	}
@@ -126,39 +132,31 @@ public class GeoIpLocationRepository implements IpLocationRepository {
 			final InetAddress inetAddress = InetAddress.getByName(ip);
 			@Nullable GeoIpLocation geoIpLocation = null;
 			if (inetAddress instanceof Inet4Address) {
-				final com.google.common.base.Optional<Entry<String, GeoIpLocation>> optGeoIpLocation = Iterables.tryFind(geoIp4LocationMap.entrySet(), new Predicate<Entry<String, GeoIpLocation>>() {
-					@Override
-					public boolean apply(Entry<String, GeoIpLocation> input) {
-						final String ipRange = input.getKey();
-						final String ipStart = ipRange.substring(0, ipRange.indexOf("/") - 2);
-						
-						final String ipQuery = ip.substring(0, ip.lastIndexOf("."));
-						
-						return ipStart.equals(ipQuery);
-					}
-				});
-				if (optGeoIpLocation.isPresent()) {
-					geoIpLocation = optGeoIpLocation.get().getValue();
+				final byte[] address = Inet4Address.getByName(ip).getAddress();
+				final String ipBinary = BinaryCodec.toAsciiString(new byte[] { address[3], address[2], address[1], address[0] });
+				
+				for (int mask = 32; mask >=7 ; mask--) {
+					geoIpLocation = geoIp4LocationMap.get(ipBinary.substring(0, mask));
 				}
 			}
 			// Hendy's edit: ipv6 dataset not loaded?
-			if (inetAddress instanceof Inet6Address) {
-				final com.google.common.base.Optional<Entry<String, GeoIpLocation>> optGeoIpLocation = Iterables.tryFind(geoIp6LocationMap.entrySet(), new Predicate<Entry<String, GeoIpLocation>>() {
-					
-					@Override
-					public boolean apply(Entry<String, GeoIpLocation> input) {
-						final String ipRange = input.getKey();
-						final String ipStart = ipRange.substring(0, ipRange.indexOf("/") - 2);
-						
-						final String ipQuery = ip.substring(0, ip.lastIndexOf("::"));
-						
-						return ipStart.equals(ipQuery);
-					}
-				});
-				if (optGeoIpLocation.isPresent()) {
-					geoIpLocation = optGeoIpLocation.get().getValue();
-				}
-			}
+//			if (inetAddress instanceof Inet6Address) {
+//				final com.google.common.base.Optional<Entry<String, GeoIpLocation>> optGeoIpLocation = Iterables.tryFind(geoIp6LocationMap.entrySet(), new Predicate<Entry<String, GeoIpLocation>>() {
+//					
+//					@Override
+//					public boolean apply(Entry<String, GeoIpLocation> input) {
+//						final String ipRange = input.getKey();
+//						final String ipStart = ipRange.substring(0, ipRange.indexOf("/") - 2);
+//						
+//						final String ipQuery = ip.substring(0, ip.lastIndexOf("::"));
+//						
+//						return ipStart.equals(ipQuery);
+//					}
+//				});
+//				if (optGeoIpLocation.isPresent()) {
+//					geoIpLocation = optGeoIpLocation.get().getValue();
+//				}
+//			}
 			
 			final long duration = System.currentTimeMillis() - startTime;
 			if (geoIpLocation != null) {
