@@ -1,11 +1,10 @@
 package org.soluvas.jaxrs;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author atang
  */
-@XmlRootElement
+//@XmlRootElement
 public class Status<T> {
 
 	private String status;
