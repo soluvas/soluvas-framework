@@ -233,7 +233,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reminderScheduleStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When the reminder will be sent in that day, using the timezone of server."/>
+        <details key="documentation" value="When the reminder will be sent in that day, using the timezone of mall."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
