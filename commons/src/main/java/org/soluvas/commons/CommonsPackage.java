@@ -503,13 +503,49 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__KURS_DOLLAR_DPEX = POSITIONABLE_FEATURE_COUNT + 36;
 
 	/**
+	 * The feature id for the '<em><b>Reminder Schedule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__REMINDER_SCHEDULE = POSITIONABLE_FEATURE_COUNT + 37;
+
+	/**
+	 * The feature id for the '<em><b>Reminder Period Str</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__REMINDER_PERIOD_STR = POSITIONABLE_FEATURE_COUNT + 38;
+
+	/**
+	 * The feature id for the '<em><b>Reminder Period</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__REMINDER_PERIOD = POSITIONABLE_FEATURE_COUNT + 39;
+
+	/**
+	 * The feature id for the '<em><b>Reminder Schedule Str</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__REMINDER_SCHEDULE_STR = POSITIONABLE_FEATURE_COUNT + 40;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 37;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 41;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -6111,6 +6147,16 @@ public interface CommonsPackage extends EPackage {
 	int UUID = 115;
 
 	/**
+	 * The meta object id for the '<em>Period</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.joda.time.Period
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPeriod()
+	 * @generated
+	 */
+	int PERIOD = 116;
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6447,6 +6493,50 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAppManifest_KursDollarDpex();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getReminderSchedule <em>Reminder Schedule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reminder Schedule</em>'.
+	 * @see org.soluvas.commons.AppManifest#getReminderSchedule()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_ReminderSchedule();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getReminderPeriodStr <em>Reminder Period Str</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reminder Period Str</em>'.
+	 * @see org.soluvas.commons.AppManifest#getReminderPeriodStr()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_ReminderPeriodStr();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getReminderPeriod <em>Reminder Period</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reminder Period</em>'.
+	 * @see org.soluvas.commons.AppManifest#getReminderPeriod()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_ReminderPeriod();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getReminderScheduleStr <em>Reminder Schedule Str</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Reminder Schedule Str</em>'.
+	 * @see org.soluvas.commons.AppManifest#getReminderScheduleStr()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_ReminderScheduleStr();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
@@ -10054,6 +10144,17 @@ public interface CommonsPackage extends EPackage {
 	EDataType getUUID();
 
 	/**
+	 * Returns the meta object for data type '{@link org.joda.time.Period <em>Period</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Period</em>'.
+	 * @see org.joda.time.Period
+	 * @model instanceClass="org.joda.time.Period"
+	 * @generated
+	 */
+	EDataType getPeriod();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10328,6 +10429,38 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__KURS_DOLLAR_DPEX = eINSTANCE.getAppManifest_KursDollarDpex();
+
+		/**
+		 * The meta object literal for the '<em><b>Reminder Schedule</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__REMINDER_SCHEDULE = eINSTANCE.getAppManifest_ReminderSchedule();
+
+		/**
+		 * The meta object literal for the '<em><b>Reminder Period Str</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__REMINDER_PERIOD_STR = eINSTANCE.getAppManifest_ReminderPeriodStr();
+
+		/**
+		 * The meta object literal for the '<em><b>Reminder Period</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__REMINDER_PERIOD = eINSTANCE.getAppManifest_ReminderPeriod();
+
+		/**
+		 * The meta object literal for the '<em><b>Reminder Schedule Str</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__REMINDER_SCHEDULE_STR = eINSTANCE.getAppManifest_ReminderScheduleStr();
 
 		/**
 		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.
@@ -13250,6 +13383,16 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType UUID = eINSTANCE.getUUID();
+
+		/**
+		 * The meta object literal for the '<em>Period</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.joda.time.Period
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getPeriod()
+		 * @generated
+		 */
+		EDataType PERIOD = eINSTANCE.getPeriod();
 
 	}
 

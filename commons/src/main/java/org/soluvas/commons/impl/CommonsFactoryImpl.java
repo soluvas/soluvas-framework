@@ -32,6 +32,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.joda.time.Period;
 import org.soluvas.commons.*;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
@@ -248,6 +249,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createListMultimapFromString(eDataType, initialValue);
 			case CommonsPackage.UUID:
 				return createUUIDFromString(eDataType, initialValue);
+			case CommonsPackage.PERIOD:
+				return createPeriodFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -343,6 +346,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertListMultimapToString(eDataType, instanceValue);
 			case CommonsPackage.UUID:
 				return convertUUIDToString(eDataType, instanceValue);
+			case CommonsPackage.PERIOD:
+				return convertPeriodToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -1459,6 +1464,24 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * @generated
 	 */
 	public String convertUUIDToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Period createPeriodFromString(EDataType eDataType, String initialValue) {
+		return (Period)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPeriodToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

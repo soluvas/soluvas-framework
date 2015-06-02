@@ -214,6 +214,28 @@
         <details key="documentation" value="Kurs used by DPEX courier only"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reminderSchedule" eType="#//LocalTime"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="When the reminder will be sent in that day, using the timezone of server."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reminderPeriodStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Period for general reminder, for example if reminderPeriod is &quot;7D&quot;, when a product has been shipped the customer will be reminded after 7 days.&#xA;The ready Period object can be fetched using {@link #getReminderPeriod()}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reminderPeriod" eType="#//Period"
+        changeable="false" volatile="true" transient="true" derived="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Period for general reminder, for example if reminderPeriod is &quot;7D&quot;, when a product has been shipped the customer will be reminded after 7 days.&#xA;The Period can be set in XMI using {@link #setReminderPeriodStr()}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reminderScheduleStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="When the reminder will be sent in that day, using the timezone of server."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PersonInfo" eSuperTypes="#//Identifiable #//PhotoIdContainer #//Sluggable #//NameContainer #//PersonLike">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1668,4 +1690,5 @@
     <eTypeParameters name="V"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="UUID" instanceClassName="java.util.UUID"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Period" instanceClassName="org.joda.time.Period"/>
 </ecore:EPackage>

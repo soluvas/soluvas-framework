@@ -10,6 +10,8 @@ import javax.annotation.Nullable;
 import org.eclipse.emf.common.util.EList;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalTime;
+import org.joda.time.Period;
 import org.soluvas.commons.util.AppUtils;
 
 
@@ -63,6 +65,10 @@ import org.soluvas.commons.util.AppUtils;
  *   <li>{@link org.soluvas.commons.AppManifest#getDefaultVariation <em>Default Variation</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getKursDollarPaypal <em>Kurs Dollar Paypal</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getKursDollarDpex <em>Kurs Dollar Dpex</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getReminderSchedule <em>Reminder Schedule</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getReminderPeriodStr <em>Reminder Period Str</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getReminderPeriod <em>Reminder Period</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getReminderScheduleStr <em>Reminder Schedule Str</em>}</li>
  * </ul>
  * </p>
  *
@@ -726,6 +732,90 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setKursDollarDpex(BigDecimal value);
+
+	/**
+	 * Returns the value of the '<em><b>Reminder Schedule</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reminder Schedule</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * When the reminder will be sent in that day, using the timezone of server.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Reminder Schedule</em>' attribute.
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_ReminderSchedule()
+	 * @model dataType="org.soluvas.commons.LocalTime" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	LocalTime getReminderSchedule();
+
+	/**
+	 * Returns the value of the '<em><b>Reminder Period Str</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Period for general reminder, for example if reminderPeriod is "7D", when a product has been shipped the customer will be reminded after 7 days.
+	 * The ready Period object can be fetched using {@link #getReminderPeriod()}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Reminder Period Str</em>' attribute.
+	 * @see #setReminderPeriodStr(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_ReminderPeriodStr()
+	 * @model
+	 * @generated
+	 */
+	String getReminderPeriodStr();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getReminderPeriodStr <em>Reminder Period Str</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Reminder Period Str</em>' attribute.
+	 * @see #getReminderPeriodStr()
+	 * @generated
+	 */
+	void setReminderPeriodStr(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Reminder Period</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Period for general reminder, for example if reminderPeriod is "7D", when a product has been shipped the customer will be reminded after 7 days.
+	 * The Period can be set in XMI using {@link #setReminderPeriodStr()}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Reminder Period</em>' attribute.
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_ReminderPeriod()
+	 * @model dataType="org.soluvas.commons.Period" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Period getReminderPeriod();
+
+	/**
+	 * Returns the value of the '<em><b>Reminder Schedule Str</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * When the reminder will be sent in that day, using the timezone of server.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Reminder Schedule Str</em>' attribute.
+	 * @see #setReminderScheduleStr(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_ReminderScheduleStr()
+	 * @model
+	 * @generated
+	 */
+	String getReminderScheduleStr();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getReminderScheduleStr <em>Reminder Schedule Str</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Reminder Schedule Str</em>' attribute.
+	 * @see #getReminderScheduleStr()
+	 * @generated
+	 */
+	void setReminderScheduleStr(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.

@@ -38,6 +38,7 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.joda.time.Period;
 import org.osgi.framework.Bundle;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
@@ -947,6 +948,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	private EDataType uuidEDataType = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType periodEDataType = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -1309,6 +1317,42 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EAttribute getAppManifest_KursDollarDpex() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(31);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_ReminderSchedule() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(32);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_ReminderPeriodStr() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(33);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_ReminderPeriod() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(34);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAppManifest_ReminderScheduleStr() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(35);
 	}
 
 	/**
@@ -4671,6 +4715,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getPeriod() {
+		return periodEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public CommonsFactory getCommonsFactory() {
 		return (CommonsFactory)getEFactoryInstance();
@@ -4736,6 +4789,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__DEFAULT_VARIATION);
 		createEAttribute(appManifestEClass, APP_MANIFEST__KURS_DOLLAR_PAYPAL);
 		createEAttribute(appManifestEClass, APP_MANIFEST__KURS_DOLLAR_DPEX);
+		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_SCHEDULE);
+		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_PERIOD_STR);
+		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_PERIOD);
+		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_SCHEDULE_STR);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_WEB_HOST);
 
@@ -5132,6 +5189,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		lengthEDataType = createEDataType(LENGTH);
 		listMultimapEDataType = createEDataType(LIST_MULTIMAP);
 		uuidEDataType = createEDataType(UUID);
+		periodEDataType = createEDataType(PERIOD);
 	}
 
 	/**
@@ -5396,6 +5454,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_DefaultVariation(), ecorePackage.getEString(), "defaultVariation", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_KursDollarPaypal(), ecorePackage.getEBigDecimal(), "kursDollarPaypal", "0", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_KursDollarDpex(), ecorePackage.getEBigDecimal(), "kursDollarDpex", "0", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_ReminderSchedule(), this.getLocalTime(), "reminderSchedule", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_ReminderPeriodStr(), ecorePackage.getEString(), "reminderPeriodStr", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_ReminderPeriod(), this.getPeriod(), "reminderPeriod", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_ReminderScheduleStr(), ecorePackage.getEString(), "reminderScheduleStr", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -5932,6 +5994,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(lengthEDataType, Length.class, "Length", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(listMultimapEDataType, ListMultimap.class, "ListMultimap", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(uuidEDataType, java.util.UUID.class, "UUID", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(periodEDataType, Period.class, "Period", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -6176,6 +6239,30 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Kurs used by DPEX courier only"
+		   });	
+		addAnnotation
+		  (getAppManifest_ReminderSchedule(), 
+		   source, 
+		   new String[] {
+			 "documentation", "When the reminder will be sent in that day, using the timezone of server."
+		   });	
+		addAnnotation
+		  (getAppManifest_ReminderPeriodStr(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Period for general reminder, for example if reminderPeriod is \"7D\", when a product has been shipped the customer will be reminded after 7 days.\nThe ready Period object can be fetched using {@link #getReminderPeriod()}."
+		   });	
+		addAnnotation
+		  (getAppManifest_ReminderPeriod(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Period for general reminder, for example if reminderPeriod is \"7D\", when a product has been shipped the customer will be reminded after 7 days.\nThe Period can be set in XMI using {@link #setReminderPeriodStr()}."
+		   });	
+		addAnnotation
+		  (getAppManifest_ReminderScheduleStr(), 
+		   source, 
+		   new String[] {
+			 "documentation", "When the reminder will be sent in that day, using the timezone of server."
 		   });	
 		addAnnotation
 		  (personInfoEClass, 

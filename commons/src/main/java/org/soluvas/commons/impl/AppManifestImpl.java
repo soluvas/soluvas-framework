@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
+import org.joda.time.LocalTime;
+import org.joda.time.Period;
 import org.osgi.framework.Bundle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +83,10 @@ import com.google.common.collect.ImmutableSet;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getDefaultVariation <em>Default Variation</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getKursDollarPaypal <em>Kurs Dollar Paypal</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getKursDollarDpex <em>Kurs Dollar Dpex</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderSchedule <em>Reminder Schedule</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderPeriodStr <em>Reminder Period Str</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderPeriod <em>Reminder Period</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderScheduleStr <em>Reminder Schedule Str</em>}</li>
  * </ul>
  * </p>
  *
@@ -800,6 +806,62 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected BigDecimal kursDollarDpex = KURS_DOLLAR_DPEX_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getReminderSchedule() <em>Reminder Schedule</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReminderSchedule()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final LocalTime REMINDER_SCHEDULE_EDEFAULT = null;
+	/**
+	 * The default value of the '{@link #getReminderPeriodStr() <em>Reminder Period Str</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReminderPeriodStr()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REMINDER_PERIOD_STR_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getReminderPeriodStr() <em>Reminder Period Str</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReminderPeriodStr()
+	 * @generated
+	 * @ordered
+	 */
+	protected String reminderPeriodStr = REMINDER_PERIOD_STR_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getReminderPeriod() <em>Reminder Period</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReminderPeriod()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Period REMINDER_PERIOD_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getReminderScheduleStr() <em>Reminder Schedule Str</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReminderScheduleStr()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REMINDER_SCHEDULE_STR_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getReminderScheduleStr() <em>Reminder Schedule Str</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReminderScheduleStr()
+	 * @generated
+	 * @ordered
+	 */
+	protected String reminderScheduleStr = REMINDER_SCHEDULE_STR_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1448,6 +1510,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigDecimal getKursDollarPaypal() {
 		return kursDollarPaypal;
 	}
@@ -1457,6 +1520,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKursDollarPaypal(BigDecimal newKursDollarPaypal) {
 		BigDecimal oldKursDollarPaypal = kursDollarPaypal;
 		kursDollarPaypal = newKursDollarPaypal;
@@ -1469,6 +1533,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigDecimal getKursDollarDpex() {
 		return kursDollarDpex;
 	}
@@ -1478,11 +1543,76 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKursDollarDpex(BigDecimal newKursDollarDpex) {
 		BigDecimal oldKursDollarDpex = kursDollarDpex;
 		kursDollarDpex = newKursDollarDpex;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX, oldKursDollarDpex, kursDollarDpex));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public LocalTime getReminderSchedule() {
+		return getReminderScheduleStr() != null ? new LocalTime(getReminderScheduleStr()) : null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getReminderPeriodStr() {
+		return reminderPeriodStr;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReminderPeriodStr(String newReminderPeriodStr) {
+		String oldReminderPeriodStr = reminderPeriodStr;
+		reminderPeriodStr = newReminderPeriodStr;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__REMINDER_PERIOD_STR, oldReminderPeriodStr, reminderPeriodStr));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@Override
+	public Period getReminderPeriod() {
+		return getReminderPeriodStr() != null ? Period.parse(getReminderPeriodStr()) : null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getReminderScheduleStr() {
+		return reminderScheduleStr;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setReminderScheduleStr(String newReminderScheduleStr) {
+		String oldReminderScheduleStr = reminderScheduleStr;
+		reminderScheduleStr = newReminderScheduleStr;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE_STR, oldReminderScheduleStr, reminderScheduleStr));
 	}
 
 	/**
@@ -1907,6 +2037,14 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getKursDollarPaypal();
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
 				return getKursDollarDpex();
+			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE:
+				return getReminderSchedule();
+			case CommonsPackage.APP_MANIFEST__REMINDER_PERIOD_STR:
+				return getReminderPeriodStr();
+			case CommonsPackage.APP_MANIFEST__REMINDER_PERIOD:
+				return getReminderPeriod();
+			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE_STR:
+				return getReminderScheduleStr();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2026,6 +2164,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
 				setKursDollarDpex((BigDecimal)newValue);
 				return;
+			case CommonsPackage.APP_MANIFEST__REMINDER_PERIOD_STR:
+				setReminderPeriodStr((String)newValue);
+				return;
+			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE_STR:
+				setReminderScheduleStr((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2143,6 +2287,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
 				setKursDollarDpex(KURS_DOLLAR_DPEX_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__REMINDER_PERIOD_STR:
+				setReminderPeriodStr(REMINDER_PERIOD_STR_EDEFAULT);
+				return;
+			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE_STR:
+				setReminderScheduleStr(REMINDER_SCHEDULE_STR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2231,6 +2381,14 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return KURS_DOLLAR_PAYPAL_EDEFAULT == null ? kursDollarPaypal != null : !KURS_DOLLAR_PAYPAL_EDEFAULT.equals(kursDollarPaypal);
 			case CommonsPackage.APP_MANIFEST__KURS_DOLLAR_DPEX:
 				return KURS_DOLLAR_DPEX_EDEFAULT == null ? kursDollarDpex != null : !KURS_DOLLAR_DPEX_EDEFAULT.equals(kursDollarDpex);
+			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE:
+				return REMINDER_SCHEDULE_EDEFAULT == null ? getReminderSchedule() != null : !REMINDER_SCHEDULE_EDEFAULT.equals(getReminderSchedule());
+			case CommonsPackage.APP_MANIFEST__REMINDER_PERIOD_STR:
+				return REMINDER_PERIOD_STR_EDEFAULT == null ? reminderPeriodStr != null : !REMINDER_PERIOD_STR_EDEFAULT.equals(reminderPeriodStr);
+			case CommonsPackage.APP_MANIFEST__REMINDER_PERIOD:
+				return REMINDER_PERIOD_EDEFAULT == null ? getReminderPeriod() != null : !REMINDER_PERIOD_EDEFAULT.equals(getReminderPeriod());
+			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE_STR:
+				return REMINDER_SCHEDULE_STR_EDEFAULT == null ? reminderScheduleStr != null : !REMINDER_SCHEDULE_STR_EDEFAULT.equals(reminderScheduleStr);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2428,6 +2586,10 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(kursDollarPaypal);
 		result.append(", kursDollarDpex: ");
 		result.append(kursDollarDpex);
+		result.append(", reminderPeriodStr: ");
+		result.append(reminderPeriodStr);
+		result.append(", reminderScheduleStr: ");
+		result.append(reminderScheduleStr);
 		result.append(')');
 		return result.toString();
 	}
