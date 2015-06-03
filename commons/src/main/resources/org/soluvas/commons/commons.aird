@@ -3644,7 +3644,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_dw9sEAj0EeWbX-qyHG_aqw" name="/reminderSchedule : LocalTime" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@157a738f{platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//AppManifest/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_dw9sEAj0EeWbX-qyHG_aqw" name="/reminderSchedule : LocalTime" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderSchedule"/>
           <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderSchedule"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_qNcwAwj2EeWbX-qyHG_aqw" labelAlignment="LEFT" description="_qNcwAQj2EeWbX-qyHG_aqw">
@@ -3654,7 +3654,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_CQ5z4Aj1EeWbX-qyHG_aqw" name="reminderPeriodStr : EString" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@ec11235{platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//AppManifest/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_CQ5z4Aj1EeWbX-qyHG_aqw" name="reminderPeriodStr : EString" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderPeriodStr"/>
           <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderPeriodStr"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_TbXUwAj1EeWbX-qyHG_aqw" labelAlignment="LEFT">
@@ -3665,7 +3665,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_V0xcIAj1EeWbX-qyHG_aqw" name="/reminderPeriod : Period" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@601f4012{platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//AppManifest/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_V0xcIAj1EeWbX-qyHG_aqw" name="/reminderPeriod : Period" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderPeriod"/>
           <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderPeriod"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_dFuhRAj1EeWbX-qyHG_aqw" labelAlignment="LEFT" description="_dFuhQgj1EeWbX-qyHG_aqw">
@@ -3675,7 +3675,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_q6IP0Aj2EeWbX-qyHG_aqw" name="reminderScheduleStr : EString" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@7bcd6338{platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//AppManifest/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_q6IP0Aj2EeWbX-qyHG_aqw" name="reminderScheduleStr : EString" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderScheduleStr"/>
           <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderScheduleStr"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_ruHRgAj2EeWbX-qyHG_aqw" labelAlignment="LEFT">
