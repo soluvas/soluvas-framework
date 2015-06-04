@@ -1,9 +1,11 @@
 package org.soluvas.jpa.jpa;
 
 import java.io.Serializable;
+
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
@@ -45,6 +47,7 @@ public class PersonInfo implements Serializable {
 		setName(personInfoUp.getName());
 		setPhotoId(personInfoUp.getPhotoId());
 		setSlug(personInfoUp.getSlug());
+		setMobileNumber(personInfoUp.getMobileNumber());
 	}
 
 	/**

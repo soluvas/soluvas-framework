@@ -797,7 +797,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * When the reminder will be sent in that day, using the timezone of server.
+	 * When the reminder will be sent in that day, using the timezone of mall.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Reminder Schedule Str</em>' attribute.
 	 * @see #setReminderScheduleStr(String)

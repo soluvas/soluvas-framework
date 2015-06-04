@@ -1490,6 +1490,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPersonInfo_MobileNumber() {
+		return (EAttribute)personInfoEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getTimestamped() {
 		return timestampedEClass;
@@ -4799,6 +4808,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
 		createEAttribute(personInfoEClass, PERSON_INFO__EMAIL);
+		createEAttribute(personInfoEClass, PERSON_INFO__MOBILE_NUMBER);
 
 		timestampedEClass = createEClass(TIMESTAMPED);
 		createEAttribute(timestampedEClass, TIMESTAMPED__CREATION_TIME);
@@ -5466,6 +5476,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPersonInfo_Gender(), this.getGender(), "gender", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPersonInfo_Email(), ecorePackage.getEString(), "email", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPersonInfo_MobileNumber(), ecorePackage.getEString(), "mobileNumber", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(timestampedEClass, Timestamped.class, "Timestamped", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTimestamped_CreationTime(), this.getDateTime(), "creationTime", null, 0, 1, Timestamped.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -6262,7 +6273,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (getAppManifest_ReminderScheduleStr(), 
 		   source, 
 		   new String[] {
-			 "documentation", "When the reminder will be sent in that day, using the timezone of server."
+			 "documentation", "When the reminder will be sent in that day, using the timezone of mall."
 		   });	
 		addAnnotation
 		  (personInfoEClass, 

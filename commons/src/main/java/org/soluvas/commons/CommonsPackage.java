@@ -685,13 +685,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON_INFO__EMAIL = IDENTIFIABLE_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Mobile Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON_INFO__MOBILE_NUMBER = IDENTIFIABLE_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Person Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_INFO_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 5;
+	int PERSON_INFO_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Get Image Id</em>' operation.
@@ -6679,6 +6688,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPersonInfo_Email();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PersonInfo#getMobileNumber <em>Mobile Number</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mobile Number</em>'.
+	 * @see org.soluvas.commons.PersonInfo#getMobileNumber()
+	 * @see #getPersonInfo()
+	 * @generated
+	 */
+	EAttribute getPersonInfo_MobileNumber();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10567,6 +10587,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON_INFO__EMAIL = eINSTANCE.getPersonInfo_Email();
+
+		/**
+		 * The meta object literal for the '<em><b>Mobile Number</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON_INFO__MOBILE_NUMBER = eINSTANCE.getPersonInfo_MobileNumber();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}' class.

@@ -33,6 +33,7 @@ import java.lang.reflect.InvocationTargetException;
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getGender <em>Gender</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getEmail <em>Email</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getMobileNumber <em>Mobile Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -158,6 +159,26 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 	 * @ordered
 	 */
 	protected String email = EMAIL_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getMobileNumber() <em>Mobile Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMobileNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String MOBILE_NUMBER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getMobileNumber() <em>Mobile Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMobileNumber()
+	 * @generated
+	 * @ordered
+	 */
+	protected String mobileNumber = MOBILE_NUMBER_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -343,6 +364,27 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMobileNumber(String newMobileNumber) {
+		String oldMobileNumber = mobileNumber;
+		mobileNumber = newMobileNumber;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON_INFO__MOBILE_NUMBER, oldMobileNumber, mobileNumber));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -358,6 +400,8 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 				return getGender();
 			case CommonsPackage.PERSON_INFO__EMAIL:
 				return getEmail();
+			case CommonsPackage.PERSON_INFO__MOBILE_NUMBER:
+				return getMobileNumber();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -387,6 +431,9 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 				return;
 			case CommonsPackage.PERSON_INFO__EMAIL:
 				setEmail((String)newValue);
+				return;
+			case CommonsPackage.PERSON_INFO__MOBILE_NUMBER:
+				setMobileNumber((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -418,6 +465,9 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 			case CommonsPackage.PERSON_INFO__EMAIL:
 				setEmail(EMAIL_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON_INFO__MOBILE_NUMBER:
+				setMobileNumber(MOBILE_NUMBER_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -442,6 +492,8 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 				return gender != GENDER_EDEFAULT;
 			case CommonsPackage.PERSON_INFO__EMAIL:
 				return EMAIL_EDEFAULT == null ? email != null : !EMAIL_EDEFAULT.equals(email);
+			case CommonsPackage.PERSON_INFO__MOBILE_NUMBER:
+				return MOBILE_NUMBER_EDEFAULT == null ? mobileNumber != null : !MOBILE_NUMBER_EDEFAULT.equals(mobileNumber);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -616,6 +668,8 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 		result.append(gender);
 		result.append(", email: ");
 		result.append(email);
+		result.append(", mobileNumber: ");
+		result.append(mobileNumber);
 		result.append(')');
 		return result.toString();
 	}

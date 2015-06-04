@@ -243,6 +243,7 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="gender" eType="#//Gender"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="email" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mobileNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Gender">
     <eLiterals name="unknown" literal="unknown">

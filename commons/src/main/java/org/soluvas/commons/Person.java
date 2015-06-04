@@ -101,6 +101,7 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 			personInfo.setPhotoId(input.getPhotoId());
 			personInfo.setGender(input.getGender());
 			personInfo.setEmail(input.getEmail());
+			personInfo.setMobileNumber(input.getMobileNumber());
 			return personInfo;
 		}
 	}

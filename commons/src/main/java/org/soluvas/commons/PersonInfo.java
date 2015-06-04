@@ -20,6 +20,7 @@ package org.soluvas.commons;
  * <ul>
  *   <li>{@link org.soluvas.commons.PersonInfo#getGender <em>Gender</em>}</li>
  *   <li>{@link org.soluvas.commons.PersonInfo#getEmail <em>Email</em>}</li>
+ *   <li>{@link org.soluvas.commons.PersonInfo#getMobileNumber <em>Mobile Number</em>}</li>
  * </ul>
  * </p>
  *
@@ -82,5 +83,31 @@ public interface PersonInfo extends Identifiable, PhotoIdContainer, Sluggable, N
 	 * @generated
 	 */
 	void setEmail(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Mobile Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mobile Number</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mobile Number</em>' attribute.
+	 * @see #setMobileNumber(String)
+	 * @see org.soluvas.commons.CommonsPackage#getPersonInfo_MobileNumber()
+	 * @model
+	 * @generated
+	 */
+	String getMobileNumber();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.PersonInfo#getMobileNumber <em>Mobile Number</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Mobile Number</em>' attribute.
+	 * @see #getMobileNumber()
+	 * @generated
+	 */
+	void setMobileNumber(String value);
 
 } // PersonInfo
