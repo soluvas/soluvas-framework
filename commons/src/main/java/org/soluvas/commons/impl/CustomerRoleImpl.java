@@ -44,7 +44,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isDropshipEnabled <em>Dropship Enabled</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isReviewEmailEnabled <em>Review Email Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isReviewReminderEnabled <em>Review Reminder Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -393,24 +393,24 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	protected boolean dropshipEnabled = DROPSHIP_ENABLED_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isReviewEmailEnabled() <em>Review Email Enabled</em>}' attribute.
+	 * The default value of the '{@link #isReviewReminderEnabled() <em>Review Reminder Enabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isReviewEmailEnabled()
+	 * @see #isReviewReminderEnabled()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean REVIEW_EMAIL_ENABLED_EDEFAULT = false;
+	protected static final boolean REVIEW_REMINDER_ENABLED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isReviewEmailEnabled() <em>Review Email Enabled</em>}' attribute.
+	 * The cached value of the '{@link #isReviewReminderEnabled() <em>Review Reminder Enabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isReviewEmailEnabled()
+	 * @see #isReviewReminderEnabled()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean reviewEmailEnabled = REVIEW_EMAIL_ENABLED_EDEFAULT;
+	protected boolean reviewReminderEnabled = REVIEW_REMINDER_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -794,8 +794,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isReviewEmailEnabled() {
-		return reviewEmailEnabled;
+	public boolean isReviewReminderEnabled() {
+		return reviewReminderEnabled;
 	}
 
 	/**
@@ -803,11 +803,11 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReviewEmailEnabled(boolean newReviewEmailEnabled) {
-		boolean oldReviewEmailEnabled = reviewEmailEnabled;
-		reviewEmailEnabled = newReviewEmailEnabled;
+	public void setReviewReminderEnabled(boolean newReviewReminderEnabled) {
+		boolean oldReviewReminderEnabled = reviewReminderEnabled;
+		reviewReminderEnabled = newReviewReminderEnabled;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED, oldReviewEmailEnabled, reviewEmailEnabled));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED, oldReviewReminderEnabled, reviewReminderEnabled));
 	}
 
 	/**
@@ -852,8 +852,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return getBookingExpiryTimeInMinutes();
 			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
 				return isDropshipEnabled();
-			case CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED:
-				return isReviewEmailEnabled();
+			case CommonsPackage.CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED:
+				return isReviewReminderEnabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -914,8 +914,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
 				setDropshipEnabled((Boolean)newValue);
 				return;
-			case CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED:
-				setReviewEmailEnabled((Boolean)newValue);
+			case CommonsPackage.CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED:
+				setReviewReminderEnabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -977,8 +977,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
 				setDropshipEnabled(DROPSHIP_ENABLED_EDEFAULT);
 				return;
-			case CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED:
-				setReviewEmailEnabled(REVIEW_EMAIL_ENABLED_EDEFAULT);
+			case CommonsPackage.CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED:
+				setReviewReminderEnabled(REVIEW_REMINDER_ENABLED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -1026,8 +1026,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return bookingExpiryTimeInMinutes != BOOKING_EXPIRY_TIME_IN_MINUTES_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__DROPSHIP_ENABLED:
 				return dropshipEnabled != DROPSHIP_ENABLED_EDEFAULT;
-			case CommonsPackage.CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED:
-				return reviewEmailEnabled != REVIEW_EMAIL_ENABLED_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED:
+				return reviewReminderEnabled != REVIEW_REMINDER_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1154,8 +1154,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(bookingExpiryTimeInMinutes);
 		result.append(", dropshipEnabled: ");
 		result.append(dropshipEnabled);
-		result.append(", reviewEmailEnabled: ");
-		result.append(reviewEmailEnabled);
+		result.append(", reviewReminderEnabled: ");
+		result.append(reviewReminderEnabled);
 		result.append(')');
 		return result.toString();
 	}

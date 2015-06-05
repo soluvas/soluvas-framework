@@ -23,7 +23,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#isPaymentGatewayEnabled <em>Payment Gateway Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isDropshipEnabled <em>Dropship Enabled</em>}</li>
- *   <li>{@link org.soluvas.commons.CustomerRole#isReviewEmailEnabled <em>Review Email Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#isReviewReminderEnabled <em>Review Reminder Enabled</em>}</li>
  * </ul>
  * </p>
  *
@@ -360,30 +360,30 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	void setDropshipEnabled(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Review Email Enabled</b></em>' attribute.
+	 * Returns the value of the '<em><b>Review Reminder Enabled</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Review Email Enabled</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Review Reminder Enabled</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Review Email Enabled</em>' attribute.
-	 * @see #setReviewEmailEnabled(boolean)
-	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_ReviewEmailEnabled()
+	 * @return the value of the '<em>Review Reminder Enabled</em>' attribute.
+	 * @see #setReviewReminderEnabled(boolean)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_ReviewReminderEnabled()
 	 * @model default="false"
 	 * @generated
 	 */
-	boolean isReviewEmailEnabled();
+	boolean isReviewReminderEnabled();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#isReviewEmailEnabled <em>Review Email Enabled</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#isReviewReminderEnabled <em>Review Reminder Enabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Review Email Enabled</em>' attribute.
-	 * @see #isReviewEmailEnabled()
+	 * @param value the new value of the '<em>Review Reminder Enabled</em>' attribute.
+	 * @see #isReviewReminderEnabled()
 	 * @generated
 	 */
-	void setReviewEmailEnabled(boolean value);
+	void setReviewReminderEnabled(boolean value);
 
 } // CustomerRole
