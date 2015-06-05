@@ -3745,7 +3745,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_A2AasAqLEeWk2pSLMKb5UQ" name="mobileNumber : EString" tooltipText="&#xA;ERROR : The required feature 'eAttributeType' of 'org.eclipse.emf.ecore.impl.EAttributeImpl@641841e4{platform:/resource/org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//PersonInfo/newAttribute}' must be set&#xA;ERROR : The typed element must have a type">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_A2AasAqLEeWk2pSLMKb5UQ" name="mobileNumber : EString" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="commons.ecore#//PersonInfo/mobileNumber"/>
           <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//PersonInfo/mobileNumber"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_ESmdYAqLEeWk2pSLMKb5UQ" labelAlignment="LEFT">
@@ -6504,9 +6504,9 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_M-GcEABSEeWUZpXk3D1EBA" name="reviewEmailEnabled : EBoolean = false" tooltipText="">
-          <target xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/reviewEmailEnabled"/>
-          <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/reviewEmailEnabled"/>
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_M-GcEABSEeWUZpXk3D1EBA" name="reviewReminderEnabled : EBoolean = false" tooltipText="">
+          <target xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/reviewReminderEnabled"/>
+          <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//CustomerRole/reviewReminderEnabled"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_XIfzgABSEeWUZpXk3D1EBA" labelAlignment="LEFT">
             <labelColor xmi:type="viewpoint:RGBValues" xmi:id="_XIfzgQBSEeWUZpXk3D1EBA"/>
             <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']/@style"/>

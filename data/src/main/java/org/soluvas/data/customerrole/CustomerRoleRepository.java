@@ -38,6 +38,8 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole, Str
 	
 	ImmutableSet<String> findAllCustRoleByPaymentGatewayEnabled(StatusMask statusMask);
 	
+	ImmutableSet<String> findAllCustRoleByReviewReminderEnabled(StatusMask statusMask);
+	
 	int getBookingExpiryTime(String id);
 	
 	boolean isDropShipEnabled(String customerRole);

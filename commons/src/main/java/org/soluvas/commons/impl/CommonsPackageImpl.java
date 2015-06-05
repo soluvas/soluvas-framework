@@ -4180,7 +4180,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCustomerRole_ReviewEmailEnabled() {
+	public EAttribute getCustomerRole_ReviewReminderEnabled() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(12);
 	}
 
@@ -5138,7 +5138,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__PAYMENT_GATEWAY_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__BOOKING_EXPIRY_TIME_IN_MINUTES);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__DROPSHIP_ENABLED);
-		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED);
 
 		customerRoleCatalogEClass = createEClass(CUSTOMER_ROLE_CATALOG);
 		createEReference(customerRoleCatalogEClass, CUSTOMER_ROLE_CATALOG__CUSTOMER_ROLES);
@@ -5872,7 +5872,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getCustomerRole_PaymentGatewayEnabled(), ecorePackage.getEBoolean(), "paymentGatewayEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_BookingExpiryTimeInMinutes(), ecorePackage.getEInt(), "bookingExpiryTimeInMinutes", "0", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_DropshipEnabled(), ecorePackage.getEBoolean(), "dropshipEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCustomerRole_ReviewEmailEnabled(), ecorePackage.getEBoolean(), "reviewEmailEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_ReviewReminderEnabled(), ecorePackage.getEBoolean(), "reviewReminderEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(customerRoleCatalogEClass, CustomerRoleCatalog.class, "CustomerRoleCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCustomerRoleCatalog_CustomerRoles(), this.getCustomerRole(), null, "customerRoles", null, 0, -1, CustomerRoleCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

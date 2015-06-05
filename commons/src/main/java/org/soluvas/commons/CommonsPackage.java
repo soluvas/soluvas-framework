@@ -5532,13 +5532,13 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE__DROPSHIP_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 15;
 
 	/**
-	 * The feature id for the '<em><b>Review Email Enabled</b></em>' attribute.
+	 * The feature id for the '<em><b>Review Reminder Enabled</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 16;
+	int CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED = IDENTIFIABLE_FEATURE_COUNT + 16;
 
 	/**
 	 * The number of structural features of the '<em>Customer Role</em>' class.
@@ -9576,15 +9576,15 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCustomerRole_DropshipEnabled();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#isReviewEmailEnabled <em>Review Email Enabled</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#isReviewReminderEnabled <em>Review Reminder Enabled</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Review Email Enabled</em>'.
-	 * @see org.soluvas.commons.CustomerRole#isReviewEmailEnabled()
+	 * @return the meta object for the attribute '<em>Review Reminder Enabled</em>'.
+	 * @see org.soluvas.commons.CustomerRole#isReviewReminderEnabled()
 	 * @see #getCustomerRole()
 	 * @generated
 	 */
-	EAttribute getCustomerRole_ReviewEmailEnabled();
+	EAttribute getCustomerRole_ReviewReminderEnabled();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.CustomerRoleCatalog <em>Customer Role Catalog</em>}'.
@@ -12869,12 +12869,12 @@ public interface CommonsPackage extends EPackage {
 		EAttribute CUSTOMER_ROLE__DROPSHIP_ENABLED = eINSTANCE.getCustomerRole_DropshipEnabled();
 
 		/**
-		 * The meta object literal for the '<em><b>Review Email Enabled</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Review Reminder Enabled</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CUSTOMER_ROLE__REVIEW_EMAIL_ENABLED = eINSTANCE.getCustomerRole_ReviewEmailEnabled();
+		EAttribute CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED = eINSTANCE.getCustomerRole_ReviewReminderEnabled();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.CustomerRoleCatalogImpl <em>Customer Role Catalog</em>}' class.
