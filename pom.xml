@@ -340,9 +340,16 @@
 				OpenJDK Runtime Environment (IcedTea7 2.3.4) (7u9-2.3.4-0ubuntu1.12.10.1)
 				OpenJDK 64-Bit Server VM (build 23.2-b09, mixed mode)
 				please add manually to your webapp's POM -->
+			    <groupId>org.bouncycastle</groupId>
+			    <artifactId>bcprov-ext-jdk15on</artifactId>
+			    <version>1.52</version>
+			</dependency>		
+			<dependency>
+				<!-- replaced by org.bouncycastle:bcprov-ext-jdk15on -->
 				<groupId>org.bouncycastle</groupId>
 				<artifactId>bcprov-jdk16</artifactId>
 				<version>1.46</version>
+				<scope>provided</scope>
 			</dependency>
 
 			<dependency>
@@ -606,7 +613,7 @@
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
-				<version>4.4.1</version>
+				<version>4.5</version>
 				<exclusions>
 					<exclusion>
 						<artifactId>commons-logging</artifactId>
@@ -617,7 +624,7 @@
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient-cache</artifactId>
-				<version>4.4.1</version>
+				<version>4.5</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.servlet</groupId>
