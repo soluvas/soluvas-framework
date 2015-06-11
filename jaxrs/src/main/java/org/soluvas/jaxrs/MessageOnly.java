@@ -4,7 +4,7 @@ package org.soluvas.jaxrs;
  * @author rudi
  *
  */
-public class StatusOnly {
+public class MessageOnly {
 	
 	public static final String INFO_STATUS = "INFO";
 	public static final String WARN_STATUS = "WARN";
@@ -13,7 +13,7 @@ public class StatusOnly {
 	private String status;
 	private String message;
 	
-	public StatusOnly() {
+	public MessageOnly() {
 		super();
 	}
 
@@ -35,8 +35,7 @@ public class StatusOnly {
 
 	@Override
 	public String toString() {
-		return "StatusOnly [status=" + status + ", message=" + message + "]";
+		return "MessageOnly [status=" + status + ", message=" + message + "]";
 	}
 	
-
 }
