@@ -2,9 +2,11 @@ package org.soluvas.schedule;
 
 import java.util.Properties;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import com.google.common.base.Preconditions;
 import org.quartz.ListenerManager;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -13,9 +15,13 @@ import org.quartz.impl.jdbcjobstore.PostgreSQLDelegate;
 import org.quartz.plugins.history.LoggingJobHistoryPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
@@ -25,16 +31,35 @@ import org.springframework.scheduling.quartz.SpringBeanJobFactory;
  * @author rudi
  */
 @Configuration
+@Order(Ordered.LOWEST_PRECEDENCE)
 public class ScheduleConfig {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduleConfig.class);
 	
 	@Inject
 	private ApplicationContext appCtx;
+	/**
+	 * @see org.soluvas.jpa.PostgresConfig
+	 */
 	@Inject
 	private DataSource dataSource;
+	/**
+	 * @see org.soluvas.jpa.PostgresConfig
+	 */
 	@Inject
 	private DataSourceTransactionManager dsTxMgr;
+	@Autowired(required = false)
+	private ScheduleLiquibaseConfig scheduleLiquibaseConfig;
+	@Inject
+	private Environment env;
+
+	@PostConstruct
+	public void init() {
+		if (env.getProperty("quartz.migrate", Boolean.class, false)) {
+			Preconditions.checkNotNull(scheduleLiquibaseConfig, "With quartz.migrate=true, ScheduleLiquibaseConfig must be @Import-ed");
+			scheduleLiquibaseConfig.migrate();
+		}
+	}
 
 	@Bean
 	public SchedulerFactoryBean scheduler() {
