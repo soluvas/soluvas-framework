@@ -39,6 +39,7 @@ import org.soluvas.data.StatusMask;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermContainer;
+import org.soluvas.data.TermType;
 import org.soluvas.data.TermValue;
 import org.soluvas.data.TreeVocab;
 import org.soluvas.data.Value;
@@ -216,6 +217,13 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EEnum lookupKeyEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum termTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1064,6 +1072,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getTermType() {
+		return termTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EDataType getCrudRepository() {
 		return crudRepositoryEDataType;
@@ -1252,6 +1269,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		inputMethodEEnum = createEEnum(INPUT_METHOD);
 		statusMaskEEnum = createEEnum(STATUS_MASK);
 		lookupKeyEEnum = createEEnum(LOOKUP_KEY);
+		termTypeEEnum = createEEnum(TERM_TYPE);
 
 		// Create data types
 		crudRepositoryEDataType = createEDataType(CRUD_REPOSITORY);
@@ -1571,6 +1589,11 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.TWITTER_SCREENNAME);
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.MOBILE_NUMBER);
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.URI);
+
+		initEEnum(termTypeEEnum, TermType.class, "TermType");
+		addEEnumLiteral(termTypeEEnum, TermType.COLOR);
+		addEEnumLiteral(termTypeEEnum, TermType.CLOTH_SIZE);
+		addEEnumLiteral(termTypeEEnum, TermType.SHOE_SIZE);
 
 		// Initialize data types
 		initEDataType(crudRepositoryEDataType, CrudRepository.class, "CrudRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

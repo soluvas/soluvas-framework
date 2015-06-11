@@ -492,4 +492,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Term"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TermType">
+    <eLiterals name="color"/>
+    <eLiterals name="cloth_size" value="1"/>
+    <eLiterals name="shoe_size" value="2"/>
+  </eClassifiers>
 </ecore:EPackage>
