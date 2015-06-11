@@ -11,10 +11,6 @@ import java.util.Map;
  */
 public class CatalogMessageOnly {
 	
-	public static final String INFO_STATUS = "INFO";
-	public static final String WARN_STATUS = "WARN";
-	public static final String ERROR_STATUS = "ERROR";
-	
 	private Map<String, List<MessageOnly>> messageMap;
 
 	public CatalogMessageOnly() {
@@ -26,9 +22,9 @@ public class CatalogMessageOnly {
 	 */
 	public CatalogMessageOnly byDefault() {
 		this.messageMap = new HashMap<>();
-		this.messageMap.put(CatalogMessageOnly.INFO_STATUS, new ArrayList<MessageOnly>());
-		this.messageMap.put(CatalogMessageOnly.WARN_STATUS, new ArrayList<MessageOnly>());
-		this.messageMap.put(CatalogMessageOnly.ERROR_STATUS, new ArrayList<MessageOnly>());
+		this.messageMap.put(MessageOnly.INFO_STATUS, new ArrayList<MessageOnly>());
+		this.messageMap.put(MessageOnly.WARN_STATUS, new ArrayList<MessageOnly>());
+		this.messageMap.put(MessageOnly.ERROR_STATUS, new ArrayList<MessageOnly>());
 		return this;
 	}
 
