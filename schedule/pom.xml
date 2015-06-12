@@ -37,6 +37,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
 			<groupId>org.jscience</groupId>
 			<artifactId>jscience</artifactId>
 		</dependency>

@@ -17,6 +17,8 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.PumpStreamHandler;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -61,7 +63,136 @@ import com.google.common.util.concurrent.MoreExecutors;
  * @generated
  */
 public class ImageMagickTransformerImpl extends ImageTransformerImpl implements ImageMagickTransformer {
-	
+
+	public static byte[] quickTransform(byte[] originalImage, ImageTransform transform) {
+		final File originalFile;
+		final File styledFile;
+		try {
+			originalFile = File.createTempFile("original_", ".jpg");
+			styledFile = File.createTempFile("transformed_", ".jpg");
+		} catch (IOException e1) {
+			throw new ImageException(e1, "Cannot create temporary file for original or styled");
+		}
+
+		try {
+			FileUtils.writeByteArrayToFile(originalFile, originalImage);
+			quickTransform(originalFile, styledFile, transform);
+			return FileUtils.readFileToByteArray(styledFile);
+		} catch (IOException e) {
+			throw new ImageException(e, "Cannot transform '%s' to '%s'", originalFile, styledFile);
+		} finally {
+			styledFile.delete();
+			originalFile.delete();
+		}
+	}
+
+	public static void quickTransform(File originalFile, File styledFile, ImageTransform transform) {
+		/*To Resize + Watermarking:
+		 * rudi@rudi ~/tmp/test_image $ convert image2.jpg -verbose -gravity center -resize 800x700^ -extent 800x700 -quality 0.85f*100f miff:- | composite -watermark 15% -gravity center watermark.png - new.jpg
+		 * To Resize + Watermaking + Overlaying:
+		 * convert IMG00178-20141215-1005.jpg -verbose -gravity center -resize 800x700^ -extent 800x700 -quality 0.85f*100f miff:- | composite -watermark 15% -gravity center download.jpg - miff:- | composite -gravity south Signature_Rhupa.png - new.jpg
+		 * */
+		// TODO: do not hardcode quality
+		final float quality = 0.85f;
+
+		final CommandLine cmd = new CommandLine("convert");
+		cmd.addArgument(originalFile.getPath(), false);
+		cmd.addArgument("-verbose");
+
+		if (transform instanceof ResizeToFill) {
+			final ResizeToFill fx = (ResizeToFill) transform;
+			final boolean progressive = fx.getWidth() >= 512;
+			Preconditions.checkNotNull(fx.getWidth(), "ResizeToFill.width must not be null");
+			Preconditions.checkNotNull(fx.getHeight(), "ResizeToFill.height must not be null");
+			final String gravity;
+			switch (Optional.fromNullable(fx.getGravity()).or(TransformGravity.CENTER)) {
+				case CENTER:
+					gravity = "Center";
+					break;
+				case BOTTOM_CENTER:
+					gravity = "South";
+					break;
+				case BOTTOM_LEFT:
+					gravity = "SouthWest";
+					break;
+				case BOTTOM_RIGHT:
+					gravity = "SouthEast";
+					break;
+				case TOP_LEFT:
+					gravity = "NorthWest";
+					break;
+				case TOP_RIGHT:
+					gravity = "NorthEast";
+					break;
+				case TOP_CENTER:
+					gravity = "North";
+					break;
+				case CENTER_LEFT:
+					gravity = "West";
+					break;
+				case CENTER_RIGHT:
+					gravity = "East";
+					break;
+				default:
+					throw new ImageException("Unknown gravity: "  + fx.getGravity());
+			}
+
+			cmd.addArgument("-gravity");
+			cmd.addArgument(gravity);
+			cmd.addArgument("-resize");
+			cmd.addArgument(fx.getWidth() + "x" + fx.getHeight() + "^");
+			cmd.addArgument("-extent");
+			cmd.addArgument(fx.getWidth() + "x" + fx.getHeight());
+
+			log.debug("ResizeToFill {} to {}, {}x{} gravity={} quality={} progressive={} using: {}",
+					originalFile, styledFile, fx.getWidth(), fx.getHeight(),
+					gravity, quality, progressive, cmd );
+		} else if (transform instanceof ResizeToFit) {
+			final ResizeToFit fx = (ResizeToFit) transform;
+			Preconditions.checkArgument(fx.getWidth() != null || fx.getHeight() != null,
+					"For ResizeToFit, at least one of height or width must be specified");
+			final boolean progressive = fx.getWidth() != null ? fx.getWidth() >= 512 : fx.getHeight() >= 512;
+
+			cmd.addArgument("-resize");
+			final String widthStr = fx.getWidth() != null ? fx.getWidth().toString() : "";
+			final String heightStr = fx.getHeight() != null ? fx.getHeight().toString() : "";
+			final String onlyShrinkLargerFlag = fx.getOnlyShrinkLarger() ? ">" : "";
+			cmd.addArgument(widthStr + "x" + heightStr + onlyShrinkLargerFlag);
+
+			log.debug("ResizeToFit {} to {}, {}x{} onlyShrinkLarger={} quality={} progressive={} using: {}",
+					originalFile, styledFile, fx.getWidth(), fx.getHeight(), fx.getOnlyShrinkLarger(),
+					quality, progressive, cmd );
+		} else {
+			throw new ImageException("Unsupported transform: " + transform);
+		}
+
+		// output arguments
+		cmd.addArgument("-quality");
+		cmd.addArgument(String.valueOf(Math.round(quality * 100f)));
+		// Progressive JPEG: http://calendar.perfplanet.com/2012/progressive-jpegs-a-new-best-practice/
+		cmd.addArgument("-interlace");
+		cmd.addArgument("line");
+
+		File resizedFile = styledFile;
+		cmd.addArgument(resizedFile.getPath(), false);
+
+		// Execute the cmd
+		final DefaultExecutor executor = new DefaultExecutor();
+		// limit ImageMagick to single-threaded if we use custom executor
+		final Map<String, String> environment = ImmutableMap.<String, String>of();
+
+		final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		executor.setStreamHandler(new PumpStreamHandler(buffer));
+		log.debug("Transforming using: {} {}", environment, cmd);
+		int executionResult;
+		try {
+			executionResult = executor.execute(cmd, environment);
+		} catch (Exception e) {
+			throw new ImageException(e, "Cannot execute %s %s: %s", environment, cmd, buffer);
+		}
+		log.info("{} {} returned {}: {}", environment, cmd, executionResult, buffer);
+	}
+
 	public final class TransformFunc implements AsyncFunction<Entry<ImageTransform, ImageVariant>, UploadedImage> {
 		private final String namespace;
 		private final File originalFile;
@@ -223,8 +354,9 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 								throw new ImageException("Unknown gravity: "  + ((WatermarkLike) transform).getWatermarkGravity());
 							}
 						}
+
 						cmd.addArgument(resizedFile.getPath(), false);
-						
+
 						//Overlaying enabled?
 						File overlayFile = null;
 						String overlayGravity = null;

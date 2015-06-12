@@ -1,10 +1,12 @@
 package org.soluvas.jpa;
 
 import java.beans.PropertyVetoException;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -21,9 +23,9 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
  * <p>Required properties:
  * 
  * <ul>
- * 	<li>{@code sqlUrl}: JDBC URL.</li>
- * 	<li>{@code sqlUser}: JDBC username.</li>
- * 	<li>{@code sqlPassword}: For compatibility reasons, it must exist. Some libraries don't work with empty JDBC password.</li>
+ * 	<li>{@code sqlUrl} or {@code spring.datasource.url}: JDBC URL.</li>
+ * 	<li>{@code sqlUser} or {@code spring.datasource.username}: JDBC username.</li>
+ * 	<li>{@code sqlPassword} or {@code spring.datasource.password}: For compatibility reasons, it must exist. Some libraries don't work with empty JDBC password.</li>
  * </ul>
  * @author atang
  */
@@ -39,9 +41,12 @@ public class PostgresConfig {
 	
 	@Bean(destroyMethod="close")
 	public ComboPooledDataSource dataSource() {
-		final String jdbcUrl = env.getRequiredProperty("sqlUrl");
-		final String jdbcUser = env.getRequiredProperty("sqlUser");
-		final String jdbcPassword = env.getRequiredProperty("sqlPassword");
+		final String jdbcUrl = Preconditions.checkNotNull(env.getProperty("sqlUrl", env.getProperty("spring.datasource.url")),
+				"spring.datasource.url configuration is required");
+		final String jdbcUser = Preconditions.checkNotNull(env.getProperty("sqlUser", env.getProperty("spring.datasource.username")),
+				"spring.datasource.username configuration is required");
+		final String jdbcPassword = Preconditions.checkNotNull(env.getProperty("sqlPassword", env.getProperty("spring.datasource.password")),
+				"spring.datasource.password configuration is required");
 		log.info("Initializing c3p0 Connection Pool to {} as '{}'", jdbcUrl, jdbcUser);
 		final ComboPooledDataSource cpds = new ComboPooledDataSource();
 		try {
