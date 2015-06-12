@@ -1592,7 +1592,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 
 		initEEnum(termTypeEEnum, TermType.class, "TermType");
 		addEEnumLiteral(termTypeEEnum, TermType.COLOR);
-		addEEnumLiteral(termTypeEEnum, TermType.CLOTH_SIZE);
+		addEEnumLiteral(termTypeEEnum, TermType.SIZE);
 		addEEnumLiteral(termTypeEEnum, TermType.SHOE_SIZE);
 
 		// Initialize data types
@@ -1987,6 +1987,12 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Linked Data URI."
+		   });	
+		addAnnotation
+		  (termTypeEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "size for cloth"
 		   });
 	}
 

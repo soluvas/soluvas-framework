@@ -29,16 +29,14 @@ public enum TermType implements Enumerator {
 	COLOR(0, "color", "color"),
 
 	/**
-	 * The '<em><b>Cloth size</b></em>' literal object.
+	 * The '<em><b>Size</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #CLOTH_SIZE_VALUE
+	 * @see #SIZE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	CLOTH_SIZE(1, "cloth_size", "cloth_size"),
-
-	/**
+	SIZE(1, "size", "size"), /**
 	 * The '<em><b>Shoe size</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,19 +62,18 @@ public enum TermType implements Enumerator {
 	public static final int COLOR_VALUE = 0;
 
 	/**
-	 * The '<em><b>Cloth size</b></em>' literal value.
+	 * The '<em><b>Size</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Cloth size</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #CLOTH_SIZE
-	 * @model name="cloth_size"
+	 * <!-- begin-model-doc -->
+	 * size for cloth
+	 * <!-- end-model-doc -->
+	 * @see #SIZE
+	 * @model name="size"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int CLOTH_SIZE_VALUE = 1;
+	public static final int SIZE_VALUE = 1;
 
 	/**
 	 * The '<em><b>Shoe size</b></em>' literal value.
@@ -102,7 +99,7 @@ public enum TermType implements Enumerator {
 	private static final TermType[] VALUES_ARRAY =
 		new TermType[] {
 			COLOR,
-			CLOTH_SIZE,
+			SIZE,
 			SHOE_SIZE,
 		};
 
@@ -155,7 +152,7 @@ public enum TermType implements Enumerator {
 	public static TermType get(int value) {
 		switch (value) {
 			case COLOR_VALUE: return COLOR;
-			case CLOTH_SIZE_VALUE: return CLOTH_SIZE;
+			case SIZE_VALUE: return SIZE;
 			case SHOE_SIZE_VALUE: return SHOE_SIZE;
 		}
 		return null;

@@ -494,7 +494,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TermType">
     <eLiterals name="color"/>
-    <eLiterals name="cloth_size" value="1"/>
+    <eLiterals name="size" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="size for cloth"/>
+      </eAnnotations>
+    </eLiterals>
     <eLiterals name="shoe_size" value="2"/>
   </eClassifiers>
 </ecore:EPackage>
