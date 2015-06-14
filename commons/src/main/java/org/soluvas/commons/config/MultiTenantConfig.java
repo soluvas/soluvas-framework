@@ -161,6 +161,10 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 		final String defaultAppDomain = appId + "." + getFqdn();
 		return env.getProperty("appDomain", defaultAppDomain);
 	}
+
+	public TenantSource getTenantSource() {
+		return tenantSource;
+	}
 	
 	/**
 	 * Loads {@link AppManifest}s for all tenants, depending on
@@ -175,6 +179,7 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 	public void init() throws IOException, MalformedUriTemplateException, VariableExpansionException {
 		final String appId = app.getId();
 		tenantEnv = env.getRequiredProperty("tenantEnv");
+		tenantSource = env.getProperty("tenantSource", TenantSource.class, TenantSource.CONFIG);
 		workspaceDir = internalGetWorkspaceDir(appId, env);
 		dataDirLayout = env.getProperty("dataDirLayout", DataDirLayout.class, DataDirLayout.DEFAULT);
 		
@@ -193,13 +198,19 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 		final String tenantWhitelistStr = env.getProperty("tenantWhitelist", String.class);
 		@Nullable
 		final List<String> tenantWhitelist = tenantWhitelistStr != null ? Splitter.on(',').trimResults().omitEmptyStrings().splitToList( tenantWhitelistStr ) : null;
-		tenantSource = env.getProperty("tenantSource", TenantSource.class, TenantSource.CONFIG);
-		log.info("App '{}' env={} domain={}. Workspace dir={} layout={}. Tenant source {} with {} whitelist: {}", 
+		log.info("App '{}' env={} domain={}. Workspace dir={} layout={}. Tenant source {} with {} whitelist: {}",
 				appId, tenantEnv, appDomain, workspaceDir, dataDirLayout, tenantSource, tenantWhitelist != null ? tenantWhitelist.size() : 0, tenantWhitelist);
-		if (tenantSource == TenantSource.CONFIG) {
-			final Resource[] resources = new PathMatchingResourcePatternResolver(MultiTenantConfig.class.getClassLoader())
-				.getResources("classpath*:/META-INF/*.AppManifest.xmi");
-			log.info("Loading {} AppManifest resources from classpath: {}", resources.length, resources);
+		if (tenantSource == TenantSource.CONFIG || tenantSource == TenantSource.CLASSPATH) {
+			final Resource[] resources;
+			if (tenantSource == TenantSource.CONFIG) {
+				resources = new PathMatchingResourcePatternResolver(MultiTenantConfig.class.getClassLoader())
+						.getResources("file:config/*.AppManifest.xmi");
+				log.info("Loading {} AppManifest resources from config dir: {}", resources.length, resources);
+			} else {
+				resources = new PathMatchingResourcePatternResolver(MultiTenantConfig.class.getClassLoader())
+						.getResources("classpath*:/META-INF/*.AppManifest.xmi");
+				log.info("Loading {} AppManifest resources from classpath: {}", resources.length, resources);
+			}
 			final Pattern tenantIdPattern = Pattern.compile("([^.]+).+");
 			final String fqdn = getFqdn();
 	
@@ -217,8 +228,14 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 				
 				final ImmutableMap<String, String> scope = ImmutableMap.of(
 						"fqdn", fqdn, "appDomain", appDomain, "tenantEnv", tenantEnv);
-				final AppManifest tenantManifest = new OnDemandXmiLoader<AppManifest>(
-						CommonsPackage.eINSTANCE, res.getURL(), ResourceType.CLASSPATH, scope).get();
+				final AppManifest tenantManifest;
+				if (tenantSource == TenantSource.CONFIG) {
+					tenantManifest = new OnDemandXmiLoader<AppManifest>(
+							CommonsPackage.eINSTANCE, res.getFile(), scope).get();
+				} else {
+					tenantManifest = new OnDemandXmiLoader<AppManifest>(
+							CommonsPackage.eINSTANCE, res.getURL(), ResourceType.CLASSPATH, scope).get();
+				}
 				builder.put(tenantId, tenantManifest);
 			}
 			staticTenantMap = builder.build();
@@ -243,6 +260,7 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 	public ImmutableMap<String, AppManifest> tenantMap() {
 		switch (tenantSource) {
 		case CONFIG:
+		case CLASSPATH:
 			return staticTenantMap;
 		case REPOSITORY:
 			Preconditions.checkNotNull(tenantRepo, "tenantRepo must provided for tenantSource=%s", tenantSource);

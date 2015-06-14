@@ -24,7 +24,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.eventbus.EventBus;
 
 /**
- * Please {@link Import} for {@link TenantSource#CONFIG}.
+ * Please {@link Import} for {@link TenantSource#CONFIG} or {@link TenantSource#CLASSPATH}.
  * @author ceefour
  */
 @Configuration

@@ -187,7 +187,7 @@ public class MultiTenantWebConfig implements TenantSelector {
 	
 	@Bean @DataFolder @Scope(value="request")
 	public String dataFolder() throws IOException {
-		return System.getProperty("user.home") + "/" + tenantRef().getTenantId() + "_" + tenantRef().getTenantEnv();
+		return getDataDir().getPath();
 	}
 	
 	@Bean @Scope(value="request", proxyMode=ScopedProxyMode.INTERFACES)
