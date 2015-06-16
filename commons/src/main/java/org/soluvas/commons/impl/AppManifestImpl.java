@@ -822,7 +822,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REMINDER_PERIOD_STR_EDEFAULT = null;
+	protected static final String REMINDER_PERIOD_STR_EDEFAULT = "P7D";
 	/**
 	 * The cached value of the '{@link #getReminderPeriodStr() <em>Reminder Period Str</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -850,7 +850,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String REMINDER_SCHEDULE_STR_EDEFAULT = null;
+	protected static final String REMINDER_SCHEDULE_STR_EDEFAULT = "18:00:00";
 	/**
 	 * The cached value of the '{@link #getReminderScheduleStr() <em>Reminder Schedule Str</em>}' attribute.
 	 * <!-- begin-user-doc -->

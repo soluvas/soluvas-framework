@@ -220,7 +220,8 @@
         <details key="documentation" value="When the reminder will be sent in that day, using the timezone of server."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reminderPeriodStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reminderPeriodStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="P7D">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Period for general reminder, for example if reminderPeriod is &quot;7D&quot;, when a product has been shipped the customer will be reminded after 7 days.&#xA;The ready Period object can be fetched using {@link #getReminderPeriod()}."/>
       </eAnnotations>
@@ -231,7 +232,8 @@
         <details key="documentation" value="Period for general reminder, for example if reminderPeriod is &quot;7D&quot;, when a product has been shipped the customer will be reminded after 7 days.&#xA;The Period can be set in XMI using {@link #setReminderPeriodStr()}."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reminderScheduleStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reminderScheduleStr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="18:00:00">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="When the reminder will be sent in that day, using the timezone of mall."/>
       </eAnnotations>

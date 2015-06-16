@@ -87,6 +87,10 @@ public class TenantDataConfig {
 					if (sizeFile.exists()) {
 						aggregator.addSupplier(new OnDemandXmiLoader<DataCatalog>(DataPackage.eINSTANCE, sizeFile));
 					}
+					final File shoeSizeFile = new File(dataDir, "common/base_ShoeSize-" + tenantId + ".DataCatalog.xmi");
+					if (shoeSizeFile.exists()) {
+						aggregator.addSupplier(new OnDemandXmiLoader<DataCatalog>(DataPackage.eINSTANCE, shoeSizeFile));
+					}
 					// filesystem scanning is slow
 //					new SupplierXmiClasspathScanner<>(DataPackage.eINSTANCE, DataCatalog.class,
 //							aggregator, TenantDataConfig.class.getClassLoader(), dataDir);

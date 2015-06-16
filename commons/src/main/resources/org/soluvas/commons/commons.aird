@@ -3657,7 +3657,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_CQ5z4Aj1EeWbX-qyHG_aqw" name="reminderPeriodStr : EString" tooltipText="">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_CQ5z4Aj1EeWbX-qyHG_aqw" name="reminderPeriodStr : EString = P7D" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderPeriodStr"/>
           <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderPeriodStr"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_TbXUwAj1EeWbX-qyHG_aqw" labelAlignment="LEFT">
@@ -3678,7 +3678,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_q6IP0Aj2EeWbX-qyHG_aqw" name="reminderScheduleStr : EString" tooltipText="">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_q6IP0Aj2EeWbX-qyHG_aqw" name="reminderScheduleStr : EString = 18:00:00" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderScheduleStr"/>
           <semanticElements xmi:type="ecore:EAttribute" href="commons.ecore#//AppManifest/reminderScheduleStr"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_ruHRgAj2EeWbX-qyHG_aqw" labelAlignment="LEFT">

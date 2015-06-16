@@ -753,6 +753,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>Reminder Period Str</b></em>' attribute.
+	 * The default value is <code>"P7D"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -762,7 +763,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @return the value of the '<em>Reminder Period Str</em>' attribute.
 	 * @see #setReminderPeriodStr(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_ReminderPeriodStr()
-	 * @model
+	 * @model default="P7D"
 	 * @generated
 	 */
 	String getReminderPeriodStr();
@@ -794,6 +795,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 
 	/**
 	 * Returns the value of the '<em><b>Reminder Schedule Str</b></em>' attribute.
+	 * The default value is <code>"18:00:00"</code>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
@@ -802,7 +804,7 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @return the value of the '<em>Reminder Schedule Str</em>' attribute.
 	 * @see #setReminderScheduleStr(String)
 	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_ReminderScheduleStr()
-	 * @model
+	 * @model default="18:00:00"
 	 * @generated
 	 */
 	String getReminderScheduleStr();
