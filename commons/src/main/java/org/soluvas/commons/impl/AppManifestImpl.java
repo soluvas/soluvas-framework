@@ -1786,8 +1786,12 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 */
 	@Override
 	public String getWebHost() {
+		Preconditions.checkNotNull(getDomain(),
+				"Internal error: AppManifestImpl.getDomain() should never be null, because AppManifest.domain is always set by expand(). appManifest=%s",
+				this);
 		Preconditions.checkNotNull(getWwwUsed(),
-				"Internal error: should never throw NPE, because AppManifest.wwwUsed is always set by expand()"); 
+				"Internal error: AppManifestImpl.getWwwUsed() should never be null, because AppManifest.wwwUsed is always set by expand(). appManifest=%s",
+				this);
 		return getWwwUsed() ?  "www." + getDomain() : getDomain();
 	}
 

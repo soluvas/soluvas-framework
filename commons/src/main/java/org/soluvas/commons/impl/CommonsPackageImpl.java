@@ -5944,6 +5944,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEEnum(tenantSourceEEnum, TenantSource.class, "TenantSource");
 		addEEnumLiteral(tenantSourceEEnum, TenantSource.CONFIG);
 		addEEnumLiteral(tenantSourceEEnum, TenantSource.REPOSITORY);
+		addEEnumLiteral(tenantSourceEEnum, TenantSource.CLASSPATH);
 
 		initEEnum(genericStatusEEnum, GenericStatus.class, "GenericStatus");
 		addEEnumLiteral(genericStatusEEnum, GenericStatus.BOOKED);
@@ -7329,13 +7330,19 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		  (tenantSourceEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
-			 "documentation", "Loads tenants from config folder, which is either META-INF or a $HOME-relative config folder.\nThis is practical for development or for production of single or few static tenants."
+			 "documentation", "Loads tenants from Spring Boot {@code config} directory relative to current directory.\nThis is practical for development or for production of single or few static tenants."
 		   });	
 		addAnnotation
 		  (tenantSourceEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Loads tenants from repository, which is preferred for production environment with dynamic tenants."
+		   });	
+		addAnnotation
+		  (tenantSourceEEnum.getELiterals().get(2), 
+		   source, 
+		   new String[] {
+			 "documentation", "(Deprecated) Loads tenants from META-INF in classpath.\nDeprecated because while convenient for development of single or few static tenants,\nit\'s not practical to exclude these files during packaging.\nSo please switch to {@link TenantSource#CONFIG} (for Spring Boot) or {@link TenantSource#REPOSITORY} (for webapp)."
 		   });	
 		addAnnotation
 		  (sysConfigEClass, 

@@ -36,14 +36,22 @@ public enum TenantSource implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	REPOSITORY(1, "repository", "repository");
+	REPOSITORY(1, "repository", "repository"), /**
+	 * The '<em><b>Classpath</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CLASSPATH_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	CLASSPATH(0, "classpath", "classpath");
 
 	/**
 	 * The '<em><b>Config</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * Loads tenants from config folder, which is either META-INF or a $HOME-relative config folder.
+	 * Loads tenants from Spring Boot {@code config} directory relative to current directory.
 	 * This is practical for development or for production of single or few static tenants.
 	 * <!-- end-model-doc -->
 	 * @see #CONFIG
@@ -68,6 +76,23 @@ public enum TenantSource implements Enumerator {
 	public static final int REPOSITORY_VALUE = 1;
 
 	/**
+	 * The '<em><b>Classpath</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * (Deprecated) Loads tenants from META-INF in classpath.
+	 * Deprecated because while convenient for development of single or few static tenants,
+	 * it's not practical to exclude these files during packaging.
+	 * So please switch to {@link TenantSource#CONFIG} (for Spring Boot) or {@link TenantSource#REPOSITORY} (for webapp).
+	 * <!-- end-model-doc -->
+	 * @see #CLASSPATH
+	 * @model name="classpath"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASSPATH_VALUE = 0;
+
+	/**
 	 * An array of all the '<em><b>Tenant Source</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,6 +102,7 @@ public enum TenantSource implements Enumerator {
 		new TenantSource[] {
 			CONFIG,
 			REPOSITORY,
+			CLASSPATH,
 		};
 
 	/**

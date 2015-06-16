@@ -15,12 +15,7 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.BooleanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.CommonsException;
-import org.soluvas.commons.CommonsPackage;
-import org.soluvas.commons.GeneralSysConfig;
-import org.soluvas.commons.OnDemandXmiLoader;
-import org.soluvas.commons.WebAddress;
+import org.soluvas.commons.*;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.commons.tenant.TenantRepositoryListener;
 import org.soluvas.commons.tenant.TenantsStarting;
@@ -37,6 +32,7 @@ import com.google.common.base.Strings;
  * Non-web tenant-related application configuration.
  * @author ceefour
  * @see MultiTenantWebConfig
+ * @see MultiTenantConfig
  */
 @Configuration
 @Import(MultiTenantConfig.class)
@@ -87,10 +83,16 @@ public class MultiTenantWebAddressConfig implements TenantRepositoryListener {
 		scope.put("domain", appManifest.getDomain());
 		scope.put("fqdn", MultiTenantConfig.getFqdn());
 		scope.put("webHost", appManifest.getWebHost());
-		scope.put("sslSupported", BooleanUtils.isTrue(sysConfigs.sysConfigMap().get(tenantId).getSslSupported()));
+		final GeneralSysConfig sysConfig = Preconditions.checkNotNull(sysConfigs.sysConfigMap().get(tenantId),
+				"Cannot get GeneralSysConfig for tenant '%s'. %s available tenants: %s",
+				tenantId, sysConfigs.sysConfigMap().size(), sysConfigs.sysConfigMap().keySet());
+		scope.put("sslSupported", BooleanUtils.isTrue(sysConfig.getSslSupported()));
 		final OnDemandXmiLoader<WebAddress> loader;
-		
-		final String webAddressRes = "/META-INF/template.WebAddress.xmi";
+
+		// TODO: due to impracticality of classpath resource packaging, hotel-specific files/templates should be put in either
+		// app config dir or workspace (hotel's config) dir
+		final String hotelWebAddressRes = "/META-INF/template.WebAddress.xmi";
+		final File hotelWebAddressFile = new File("config/hotel.WebAddress.xmi").getAbsoluteFile();
 		if (dataDir != null) {
 			final File webAddressFile = new File(dataDir, "model/" + tenantId + "_" + tenantConfig.getTenantEnv() + ".WebAddress.xmi");
 			if (webAddressFile.exists()) {
@@ -98,14 +100,26 @@ public class MultiTenantWebAddressConfig implements TenantRepositoryListener {
 						tenantId, webAddressFile);
 				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, webAddressFile, scope);
 			} else {
-				log.info("Tenant '{}' WebAddress file '{}' does not exist, loading generic WebAddress model from classpath: {}",
-						tenantId, webAddressFile, webAddressRes);
-				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantWebAddressConfig.class, webAddressRes, scope);
+				if (tenantConfig.getTenantSource() == TenantSource.CONFIG) {
+					log.info("Tenant '{}' WebAddress file '{}' does not exist, loading hotel WebAddress model from config dir: {}",
+							tenantId, webAddressFile, hotelWebAddressFile);
+					loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, hotelWebAddressFile, scope);
+				} else {
+					log.info("Tenant '{}' WebAddress file '{}' does not exist, loading hotel WebAddress model from classpath: {}",
+							tenantId, webAddressFile, hotelWebAddressRes);
+					loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantWebAddressConfig.class, hotelWebAddressRes, scope);
+				}
 			}
 		} else {
-			log.info("Tenant '{}' has no data dir mapping, loading generic WebAddress model from classpath: {}",
-					tenantId, dataDir, webAddressRes);
-			loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantWebAddressConfig.class, webAddressRes, scope);
+			if (tenantConfig.getTenantSource() == TenantSource.CONFIG) {
+				log.info("Tenant '{}' has no data dir mapping, loading hotel WebAddress model from config dir: {}",
+						tenantId, dataDir, hotelWebAddressFile);
+				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, hotelWebAddressFile, scope);
+			} else {
+				log.info("Tenant '{}' has no data dir mapping, loading hotel WebAddress model from classpath: {}",
+						tenantId, dataDir, hotelWebAddressRes);
+				loader = new OnDemandXmiLoader<>(CommonsPackage.eINSTANCE, MultiTenantWebAddressConfig.class, hotelWebAddressRes, scope);
+			}
 		}
 		
 //		final String tenantKey = tenant.getKey() + "_" + tenantEnv;

@@ -1,33 +1,24 @@
 package org.soluvas.commons.config;
 
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.soluvas.commons.*;
+import org.soluvas.commons.tenant.TenantRef;
+import org.soluvas.commons.tenant.TenantRefImpl;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.inject.Inject;
-import javax.servlet.ServletContext;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.soluvas.commons.AppManifest;
-import org.soluvas.commons.CommonsException;
-import org.soluvas.commons.CommonsPackage;
-import org.soluvas.commons.DataFolder;
-import org.soluvas.commons.OnDemandXmiLoader;
-import org.soluvas.commons.StaticXmiLoader;
-import org.soluvas.commons.WebAddress;
-import org.soluvas.commons.tenant.TenantRef;
-import org.soluvas.commons.tenant.TenantRefImpl;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
 
 /**
  * Reads the tenant information from {@link ServletContext#getContextPath()}.
@@ -37,7 +28,7 @@ import com.google.common.collect.ImmutableMap;
  * @author rudi
  * @see MultiTenantWebConfig
  */
-@Configuration @Lazy
+@Configuration
 public class SingleTenantWebConfig {
 	
 	private static final Logger log = LoggerFactory

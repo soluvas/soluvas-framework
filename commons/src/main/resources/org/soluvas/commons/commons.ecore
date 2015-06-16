@@ -1506,12 +1506,17 @@
   <eClassifiers xsi:type="ecore:EEnum" name="TenantSource">
     <eLiterals name="config">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Loads tenants from config folder, which is either META-INF or a $HOME-relative config folder.&#xA;This is practical for development or for production of single or few static tenants."/>
+        <details key="documentation" value="Loads tenants from Spring Boot {@code config} directory relative to current directory.&#xA;This is practical for development or for production of single or few static tenants."/>
       </eAnnotations>
     </eLiterals>
     <eLiterals name="repository" value="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Loads tenants from repository, which is preferred for production environment with dynamic tenants."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="classpath">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="(Deprecated) Loads tenants from META-INF in classpath.&#xA;Deprecated because while convenient for development of single or few static tenants,&#xA;it's not practical to exclude these files during packaging.&#xA;So please switch to {@link TenantSource#CONFIG} (for Spring Boot) or {@link TenantSource#REPOSITORY} (for webapp)."/>
       </eAnnotations>
     </eLiterals>
   </eClassifiers>
