@@ -275,6 +275,7 @@ public class XmiTermRepository
 				}
 			}
 		});
+		log.info("Found {} term(s) by ids: {}", filtered.size(), ids);
 		return ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(filtered)));
 	}
 
