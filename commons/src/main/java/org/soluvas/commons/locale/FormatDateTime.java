@@ -1,6 +1,7 @@
 package org.soluvas.commons.locale;
 
 import java.util.Locale;
+import java.util.function.Function;
 
 import javax.annotation.Nullable;
 
@@ -11,16 +12,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AppManifest;
 
-import com.google.common.base.Function;
 import com.google.common.base.Strings;
 
 /**
- * Function to format a {@link Datetime} value using {@link DateTimeFormat#forStyle("MS")}.
+ * Function to format a {@link DateTime} value using {@link DateTimeFormat#forStyle("MS")}.
  * Useful as Mustache function.
  * 
  * @author rudi
  */
-public final class FormatDateTime implements
+public class FormatDateTime implements
 		Function<String, String> {
 	
 	private static final Logger log = LoggerFactory

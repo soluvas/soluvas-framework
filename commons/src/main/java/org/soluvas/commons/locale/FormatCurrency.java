@@ -3,6 +3,7 @@ package org.soluvas.commons.locale;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Locale;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +16,6 @@ import org.joda.money.format.MoneyFormatterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
@@ -35,7 +35,7 @@ import com.google.common.base.Strings;
  * 
  * @author rudi
  */
-public final class FormatCurrency implements
+public class FormatCurrency implements
 		Function<String, String> {
 	
 	private static final Logger log = LoggerFactory

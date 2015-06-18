@@ -37,7 +37,7 @@
 			please add manually to your webapp's POM -->
 		    <groupId>org.bouncycastle</groupId>
 		    <artifactId>bcprov-ext-jdk15on</artifactId>
-		</dependency>		
+		</dependency>
 		
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
@@ -156,6 +156,11 @@
 		    <artifactId>javax.servlet-api</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.spullara.mustache.java</groupId>
+			<artifactId>compiler</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>

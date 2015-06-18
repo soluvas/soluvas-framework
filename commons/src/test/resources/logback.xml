@@ -9,6 +9,7 @@
 	</appender>
 
 	<logger name="org.apache.directory.shared" level="INFO" />
+	<logger name="com.github.mustachejava" level="TRACE" />
 
 	<root level="debug">
 		<appender-ref ref="STDOUT" />

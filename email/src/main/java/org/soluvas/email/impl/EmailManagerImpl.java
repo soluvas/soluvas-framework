@@ -30,6 +30,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.locale.FormatCurrency;
 import org.soluvas.commons.locale.FormatDateTime;
+import org.soluvas.commons.locale.FormatMeasure;
 import org.soluvas.commons.util.AppUtils;
 import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailCatalog;
@@ -388,7 +389,8 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 							.put("appManifest", appManifest)
 							.put("webAddress", webAddress)
 							.put("recipient", recipient)
-							.put("formatCurrency", new FormatCurrency())
+							.put("formatMeasure", new FormatMeasure(appManifest.getDefaultLocale()))
+							.put("formatCurrency", new FormatCurrency(appManifest.getDefaultLocale(), appManifest.getDefaultCurrency()))
 							.put("formatDateTime", new FormatDateTime(appManifest.getDefaultLocale()))
 							.put("emailLogoUri", AppUtils.getEmailLogoUri(appManifest, webAddress))
 							.put("pageHtml", pageHtml)
@@ -417,7 +419,8 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 					.put("appManifest", appManifest)
 					.put("webAddress", webAddress)
 					.put("recipient", recipient)
-					.put("formatCurrency", new FormatCurrency())
+					.put("formatMeasure", new FormatMeasure(appManifest.getDefaultLocale()))
+					.put("formatCurrency", new FormatCurrency(appManifest.getDefaultLocale(), appManifest.getDefaultCurrency()))
 					.put("formatDateTime", new FormatDateTime(appManifest.getDefaultLocale()))
 					.put("emailLogoUri", AppUtils.getEmailLogoUri(appManifest, webAddress))
 					.build();

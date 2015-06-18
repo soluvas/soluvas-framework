@@ -19,6 +19,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.WebAddress;
 import org.soluvas.commons.locale.FormatCurrency;
 import org.soluvas.commons.locale.FormatDateTime;
+import org.soluvas.commons.locale.FormatMeasure;
 import org.soluvas.commons.util.AppUtils;
 import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailException;
@@ -345,7 +346,8 @@ public abstract class TemplateImpl extends MinimalEObjectImpl.Container implemen
 			final Mustache mustache = MF.compile(new StringReader(template), "subject");
 			final StringWriter stringWriter = new StringWriter();
 			final Map<String, Object> extras = ImmutableMap.of("recipient", recipient,
-					"formatCurrency", new FormatCurrency(),
+					"formatMeasure", new FormatMeasure(appManifest.getDefaultLocale()),
+					"formatCurrency", new FormatCurrency(appManifest.getDefaultLocale(), appManifest.getDefaultCurrency()),
 					"formatDateTime", new FormatDateTime(appManifest.getDefaultLocale()),
 					"emailLogoUri", AppUtils.getEmailLogoUri(appManifest, webAddress));
 			mustache.execute(stringWriter, new Object[] { extras, this });
