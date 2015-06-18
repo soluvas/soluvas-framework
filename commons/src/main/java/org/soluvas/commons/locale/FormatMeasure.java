@@ -33,6 +33,7 @@ import com.google.common.base.Strings;
  * <li>both number (can be exponent) and unit, separated by space, e.g. "2.7645e+2 cm"</li>
  * </ol>
  * 
+ * https://github.com/spullara/mustache.java
  * @author rudi
  */
 public class FormatMeasure implements

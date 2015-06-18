@@ -33,6 +33,8 @@ import com.google.common.base.Strings;
  * <li>both currency code and number, separated by space, e.g. "IDR 275000"</li>
  * </ol>
  * 
+ * https://github.com/spullara/mustache.java
+ * 
  * @author rudi
  */
 public class FormatCurrency implements
