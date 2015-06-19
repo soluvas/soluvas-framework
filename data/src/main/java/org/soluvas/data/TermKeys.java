@@ -10,5 +10,4 @@ public class TermKeys {
 	
 	public static final String BASE_SIZE = "base_size";
 	
-
 }
