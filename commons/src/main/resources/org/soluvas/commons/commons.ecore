@@ -602,6 +602,8 @@
       <eBounds eClassifier="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eTypeParameters>
     <eTypeParameters name="V"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="principals" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eGenericSuperTypes eClassifier="#//AttributeNotification">
       <eTypeArguments eTypeParameter="#//AttributeSet/T"/>
       <eTypeArguments eTypeParameter="#//AttributeSet/V"/>
