@@ -175,8 +175,7 @@ public abstract class AssocRepositoryBase<L, R> implements AssocRepository<L, R>
 	@Override
 	public long putInverse(
 			Multimap<? extends R, ? extends L> inverseMultimap) {
-		@SuppressWarnings("unchecked")
-		final Multimap<L, R> normal = ImmutableMultimap.copyOf(inverseMultimap).inverse();
+		final Multimap<L, R> normal = ImmutableMultimap.<R, L>copyOf(inverseMultimap).inverse();
 		return put(normal);
 	}
 
