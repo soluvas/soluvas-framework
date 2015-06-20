@@ -50,7 +50,6 @@ import com.google.common.collect.Maps;
 @Deprecated
 public class EMapDeserializer extends StdDeserializer<EMap<Object, Object>> {
 
-	private static final long serialVersionUID = 1L;
 	private static final Logger log = LoggerFactory
 			.getLogger(EMapDeserializer.class);
 //	private final MapDeserializer mapDeserializer;
@@ -66,17 +65,13 @@ public class EMapDeserializer extends StdDeserializer<EMap<Object, Object>> {
 		final JsonDeserializer<Map<?, ?>> mapDeser = (JsonDeserializer) ctxt.findRootValueDeserializer(ctxt.getTypeFactory().constructType(Map.class));
 		final Map<?, ?> map = mapDeser.deserialize(jp, ctxt);
 		// convert List to EList
-		final Map<Object, Object> transformed = ImmutableMap.copyOf(Maps.transformValues(map, new Function<Object, Object>() {
-			@SuppressWarnings("unchecked")
-			@Override
-			public Object apply(Object input) {
-				if (input == null)
+		final Map<Object, Object> transformed = ImmutableMap.copyOf(Maps.transformValues(map, it -> {
+				if (it == null)
 					return null;
-				if (input instanceof List)
-					return new BasicEList<>((List) input);
-				return input;
-			}
-		}));
+				if (it instanceof List)
+					return new BasicEList<>((List) it);
+				return it;
+			}));
 		return new BasicEMap<>(transformed);
 	}
 
