@@ -538,12 +538,12 @@
 			<dependency>
 			    <groupId>com.restfb</groupId>
 			    <artifactId>restfb</artifactId>
-			    <version>1.7.0</version>
+			    <version>1.11.0</version>
 			</dependency>
 			<dependency>
 			    <groupId>org.twitter4j</groupId>
 			    <artifactId>twitter4j-core</artifactId>
-			    <version>4.0.2</version>
+			    <version>4.0.3</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.sachinhandiekar</groupId>
