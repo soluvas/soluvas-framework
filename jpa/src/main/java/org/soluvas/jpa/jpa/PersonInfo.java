@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
+import javax.persistence.MappedSuperclass;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Parameter;
@@ -19,6 +20,7 @@ import org.soluvas.commons.Person;
  * 
  */
 @Embeddable()
+@MappedSuperclass
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonInfo implements Serializable {
 
