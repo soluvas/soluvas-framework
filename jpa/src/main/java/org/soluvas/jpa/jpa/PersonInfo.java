@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
@@ -18,6 +19,7 @@ import org.soluvas.commons.Person;
  * 
  */
 @Embeddable()
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
