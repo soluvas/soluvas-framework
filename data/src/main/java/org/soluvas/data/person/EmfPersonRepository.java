@@ -31,6 +31,7 @@ import org.soluvas.data.domain.Projection;
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
+import org.springframework.cache.annotation.Cacheable;
 
 import scala.util.Try;
 
@@ -197,6 +198,13 @@ public class EmfPersonRepository extends
 			}
 		});
 		return found.isPresent() ? Existence.of(found.get().getSlug(), found.get().getId()) : Existence.<String>absent();
+	}
+	
+	@Cacheable
+	@Override
+	public Existence<String> existsBySlugCacheable(StatusMask statusMask,
+			String upSlug) {
+		return existsBySlug(statusMask, upSlug);
 	}
 
 	@Override @Nullable

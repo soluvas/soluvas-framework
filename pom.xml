@@ -507,6 +507,11 @@
 			    <version>${hibernate.version}</version>
 			</dependency>
 			<dependency>
+			    <groupId>org.hibernate</groupId>
+			    <artifactId>hibernate-ehcache</artifactId>
+			    <version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.texo</artifactId>
 				<version>0.9.0-v201412281911</version>

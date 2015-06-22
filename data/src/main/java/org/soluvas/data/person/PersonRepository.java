@@ -3,12 +3,14 @@ package org.soluvas.data.person;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
+import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
 import org.soluvas.data.SlugLookup;
 import org.soluvas.data.StatusMask;
@@ -29,7 +31,17 @@ public interface PersonRepository extends
 		PagingAndSortingRepository<Person, String>, SlugLookup<Person>,
 		GenericLookup<Person>,
 		Trashable<Person, String> {
-
+	
+	/**
+	 * 
+	 * @param statusMask
+	 * @param upSlug
+	 * @return
+	 * @see #existsBySlug(StatusMask, String)
+	 */
+	@Nonnull
+	public Existence<String> existsBySlugCacheable(StatusMask statusMask, String upSlug);
+	
 	/**
 	 * Find a {@link Person} by Facebook ID or Username (at least one must be specified).
 	 * @param facebookId

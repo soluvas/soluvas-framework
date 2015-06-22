@@ -1,5 +1,6 @@
 package org.soluvas.data;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.Person;
@@ -42,7 +43,7 @@ public interface SlugLookup<T> {
 	 * 		without processing the page nor getting the {@link Person} entity from {@link PersonRepository}.
 	 * @todo Support {@code upSlugPath} instead, see {@link org.soluvas.category.CategoryRepository} for reason
 	 */
-	@Nullable
+	@Nonnull
 	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug);
 
 }

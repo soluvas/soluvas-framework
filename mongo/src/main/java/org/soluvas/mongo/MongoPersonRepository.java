@@ -31,6 +31,7 @@ import org.soluvas.data.domain.Projection;
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.person.PersonRepository;
+import org.springframework.cache.annotation.Cacheable;
 
 import scala.util.Try;
 
@@ -98,6 +99,12 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		} else {
 			return Existence.<String>absent();
 		}
+	}
+	
+	@Cacheable @Override
+	public Existence<String> existsBySlugCacheable(StatusMask statusMask,
+			String upSlug) {
+		return existsBySlug(statusMask, upSlug);
 	}
 
 	@Override

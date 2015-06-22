@@ -37,6 +37,7 @@ import org.soluvas.data.domain.Sort;
 import org.soluvas.data.person.PersonRepository;
 import org.soluvas.data.push.RepositoryException;
 import org.soluvas.json.JsonUtils;
+import org.springframework.cache.annotation.Cacheable;
 
 import scala.util.Failure;
 import scala.util.Success;
@@ -161,6 +162,13 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 			log.trace("existsBySlug {} '{}' returned {}", statusMask, upSlug, e);
 			return Existence.<String>absent();
 		}
+	}
+
+	@Cacheable
+	@Override
+	public Existence<String> existsBySlugCacheable(StatusMask statusMask,
+			String upSlug) {
+		return existsBySlug(statusMask, upSlug);
 	}
 
 	/* (non-Javadoc)
