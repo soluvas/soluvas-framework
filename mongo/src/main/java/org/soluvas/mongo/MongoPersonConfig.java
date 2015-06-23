@@ -8,6 +8,7 @@ import org.soluvas.commons.PersonRelated;
 import org.soluvas.commons.config.SysConfigMapHolder;
 import org.soluvas.commons.tenant.TenantBeans;
 import org.soluvas.data.person.PersonRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,7 +27,7 @@ public class MongoPersonConfig implements PersonConfig {
 	private Environment env;
 	@Inject
 	private SysConfigMapHolder<? extends MongoSysConfig> sysConfigMapHolder;
-	@Inject
+	@Autowired(required = false)
 	private CacheManager cacheMgr;
 
 	@Override

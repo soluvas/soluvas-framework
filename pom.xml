@@ -474,7 +474,7 @@
 			    <!-- Required for createArrayOf() support: https://idbippo.atlassian.net/browse/BC-1686 -->
 			    <groupId>com.mchange</groupId>
 			    <artifactId>c3p0</artifactId>
-			    <version>0.9.5-pre10</version>
+			    <version>0.9.5.1</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -548,7 +548,7 @@
 			<dependency>
 			    <groupId>org.twitter4j</groupId>
 			    <artifactId>twitter4j-core</artifactId>
-			    <version>4.0.3</version>
+			    <version>4.0.4</version>
 			</dependency>
 			<dependency>
 			    <groupId>com.sachinhandiekar</groupId>

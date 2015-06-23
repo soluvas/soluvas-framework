@@ -56,9 +56,10 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		PersonRepository {
 	
 	private final String tenantId;
+	@Nullable
 	private final CacheManager cacheMgr;
 
-	public MongoPersonRepository(String tenantId, CacheManager cacheMgr, String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
+	public MongoPersonRepository(String tenantId, @Nullable CacheManager cacheMgr, String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "person",
 				ImmutableList.of("canonicalSlug"), migrationEnabled, autoExplainSlow,
 				Index.asc("name"), // for sorting in list
@@ -110,15 +111,19 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	@Override
 	public Existence<String> existsBySlugCacheable(StatusMask statusMask,
 			String upSlug) {
-		final Cache slugsCache = cacheMgr.getCache("slugs");
-		final String key = String.format("person:%s:%s", tenantId, upSlug);
-		@Nullable
-		Existence existence = slugsCache.get(key, Existence.class);
-		if (existence == null) {
-			existence = existsBySlug(statusMask, upSlug);
-			slugsCache.put(key, existence);
+		if (cacheMgr != null) {
+			final Cache slugsCache = cacheMgr.getCache("slugs");
+			final String key = String.format("person:%s:%s", tenantId, upSlug);
+			@Nullable
+			Existence existence = slugsCache.get(key, Existence.class);
+			if (existence == null) {
+				existence = existsBySlug(statusMask, upSlug);
+				slugsCache.put(key, existence);
+			}
+			return existence;
+		} else {
+			return existsBySlug(statusMask, upSlug);
 		}
-		return existence;
 	}
 
 	@Override
