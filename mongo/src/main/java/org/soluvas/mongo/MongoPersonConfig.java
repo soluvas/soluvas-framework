@@ -8,6 +8,7 @@ import org.soluvas.commons.PersonRelated;
 import org.soluvas.commons.config.SysConfigMapHolder;
 import org.soluvas.commons.tenant.TenantBeans;
 import org.soluvas.data.person.PersonRepository;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,8 @@ public class MongoPersonConfig implements PersonConfig {
 	private Environment env;
 	@Inject
 	private SysConfigMapHolder<? extends MongoSysConfig> sysConfigMapHolder;
+	@Inject
+	private CacheManager cacheMgr;
 
 	@Override
 	@Bean(destroyMethod="destroy")
@@ -36,7 +39,7 @@ public class MongoPersonConfig implements PersonConfig {
 			protected MongoPersonRepository create(String tenantId, AppManifest appManifest) throws Exception {
 				final MongoSysConfig sysConfig = sysConfigMapHolder.sysConfigMap().get(tenantId);
 				final String mongoUri = sysConfig.getMongoUri();
-				final MongoPersonRepository personRepo = new MongoPersonRepository(mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
+				final MongoPersonRepository personRepo = new MongoPersonRepository(tenantId, cacheMgr, mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
 				return personRepo;
 			}
 		};

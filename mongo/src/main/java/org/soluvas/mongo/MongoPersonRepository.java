@@ -31,7 +31,8 @@ import org.soluvas.data.domain.Projection;
 import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.person.PersonRepository;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 
 import scala.util.Try;
 
@@ -54,7 +55,10 @@ import com.mongodb.DBObject;
 public class MongoPersonRepository extends MongoRepositoryBase<Person> implements
 		PersonRepository {
 	
-	public MongoPersonRepository(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
+	private final String tenantId;
+	private final CacheManager cacheMgr;
+
+	public MongoPersonRepository(String tenantId, CacheManager cacheMgr, String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "person",
 				ImmutableList.of("canonicalSlug"), migrationEnabled, autoExplainSlow,
 				Index.asc("name"), // for sorting in list
@@ -70,6 +74,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 				Index.compound("canonicalSlug", Direction.ASC, "accountStatus", Direction.ASC),
 				Index.compound("emails.email", Direction.ASC, "accountStatus", Direction.ASC)
 			);
+		this.tenantId = tenantId;
+		this.cacheMgr = cacheMgr;
 	}
 
 	@Override
@@ -101,11 +107,18 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}
 	}
 	
-	@Cacheable(value="personSlugCache", key="{#statusMask, #upSlug}")
 	@Override
 	public Existence<String> existsBySlugCacheable(StatusMask statusMask,
 			String upSlug) {
-		return existsBySlug(statusMask, upSlug);
+		final Cache slugsCache = cacheMgr.getCache("slugs");
+		final String key = String.format("person:%s:%s", tenantId, upSlug);
+		@Nullable
+		Existence existence = slugsCache.get(key, Existence.class);
+		if (existence == null) {
+			existence = existsBySlug(statusMask, upSlug);
+			slugsCache.put(key, existence);
+		}
+		return existence;
 	}
 
 	@Override
