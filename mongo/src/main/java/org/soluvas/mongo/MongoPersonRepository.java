@@ -101,7 +101,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}
 	}
 	
-	@Cacheable @Override
+	@Cacheable(value="personSlugCache", key="{#statusMask, #upSlug}")
+	@Override
 	public Existence<String> existsBySlugCacheable(StatusMask statusMask,
 			String upSlug) {
 		return existsBySlug(statusMask, upSlug);
