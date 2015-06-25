@@ -17,6 +17,8 @@ import org.soluvas.data.DataFactory;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.MixinCatalog;
 import org.soluvas.data.MixinManager;
+import org.soluvas.data.PropertyDefinitionRepository;
+import org.soluvas.data.PropertyDefinitionRepositoryImpl;
 import org.soluvas.data.TermChanged;
 import org.soluvas.data.TermManager;
 import org.soluvas.data.impl.MixinManagerImpl;
@@ -24,7 +26,6 @@ import org.soluvas.data.impl.TermManagerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 
 import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
@@ -35,7 +36,7 @@ import com.google.common.eventbus.Subscribe;
  * <p><strong>Note:</strong> It's recommended to use multitenant {@link TenantDataConfig} to make your application future-proof.
  * @author rudi
  */
-@Configuration @Lazy
+@Configuration
 @ComponentScan("org.soluvas.data.shell")
 public class SingleTenantDataConfig {
 	
@@ -114,4 +115,9 @@ public class SingleTenantDataConfig {
 		dataCatalogSupplier().reload();
 	}
 	
+	
+	@Bean
+	public PropertyDefinitionRepository propertyDefinitionRepo() {
+		return new PropertyDefinitionRepositoryImpl();
+	}
 }

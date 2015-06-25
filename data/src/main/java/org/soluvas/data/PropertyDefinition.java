@@ -1,6 +1,9 @@
 package org.soluvas.data;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import javax.measure.quantity.Quantity;
@@ -14,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * 
  * @author rudi
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property="@type", defaultImpl=PropertyDefinition.class)
 @JsonSubTypes(@JsonSubTypes.Type(name="PropertyDefinition", value=PropertyDefinition.class))
 public class PropertyDefinition {
@@ -36,7 +39,9 @@ public class PropertyDefinition {
 	private String imageId;
 	private Integer fieldWidth;
 	private String primaryUri;
-	private final Set<String> sameAsUris = new HashSet<String>();
+	private Locale language;
+	private final Set<String> sameAsUris = new HashSet<>();
+	private final Map<String, Map<String, String>> translations = new HashMap<>();
 	
 	public String getId() {
 		return id;
@@ -144,5 +149,23 @@ public class PropertyDefinition {
 		return sameAsUris;
 	}
 	
+	/**
+	 * Key: {languageTag}, e.g. {@code en-US}, {@code id-ID}. 
+	 */
+	public Map<String, Map<String, String>> getTranslations() {
+		return translations;
+	}
+	
+	/**
+	 * Current language. When first loaded, this will be the original language.
+	 * After translation, this will be the translated language.
+	 * @return
+	 */
+	public Locale getLanguage() {
+		return language;
+	}
+	public void setLanguage(Locale language) {
+		this.language = language;
+	}
 	
 }

@@ -29,8 +29,12 @@ import com.google.common.base.Optional;
  * Note that a {@code Page} may lookup multiple entities, e.g. {@code ProductShowPage} you need to find the {@code product.shop}, so if the {@code shop} doesn't exist it's a
  * system inconsistency, not a 404 Not Found.
  * 
- * <p><b>Why not {@link Optional}?</b> Main reason is simple global exception handling in Wicket {@link org.apache.wicket.request.IExceptionMapper}
- * and JAX-RS / Spring MVC. Even with Java 8, consumers need to {@link java.util.Optional#orElseThrow()}. Actually {@link scala.util.Try}
+ * <p><b>Why not {@link Optional}?</b> <del>Main reason is simple global exception handling in Wicket {@link org.apache.wicket.request.IExceptionMapper}
+ * and JAX-RS / Spring MVC.</del> That wasn't valid reason, because in Product page it doesn't have to findOne a product, it can also
+ * findOne a Category, and in that case it's not accurate to just catch in Wicket to give "not found page".
+ * Second reason is, in most cases when you findOne you know that it should be there. In rare cases when you expect
+ * it to be not found, you can just catch this Exception then ignore. 
+ * Even with Java 8, consumers need to {@link java.util.Optional#orElseThrow()}. Actually {@link scala.util.Try}
  * is a better idea than Optional in this case, which unfortunately Java doesn't have. :(
  * 
  * @author ceefour
