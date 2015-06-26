@@ -6,9 +6,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import javax.annotation.Nullable;
 import javax.measure.quantity.Quantity;
 import javax.measure.unit.Unit;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -32,7 +34,7 @@ public class PropertyDefinition {
 	private String dataTypeName;
 	private PropertyKind defaultKind;
 	private String defaultEnum;
-	private Class<? extends Quantity> defaultQuantity;
+	private String defaultQuantity;
 	private Unit<?> defaultUnit;
 	private Boolean visibleInSimple;
 	private Boolean searchableInQuick;
@@ -103,12 +105,30 @@ public class PropertyDefinition {
 	public void setDefaultEnum(String defaultEnum) {
 		this.defaultEnum = defaultEnum;
 	}
-	public Class<? extends Quantity> getDefaultQuantity() {
+	
+	public String getDefaultQuantity() {
 		return defaultQuantity;
 	}
-	public void setDefaultQuantity(Class<? extends Quantity> defaultQuantity) {
+	public void setDefaultQuantity(String defaultQuantity) {
 		this.defaultQuantity = defaultQuantity;
 	}
+	
+	@Nullable
+	@JsonIgnore
+	public Class<? extends Quantity> getDefaultQuantityClass() {
+		if (getDefaultQuantity() != null) {
+			final String className = "javax.measure.quantity." + getDefaultQuantity();
+			try {
+				return (Class<? extends Quantity>) 
+					PropertyDefinition.class.getClassLoader().loadClass(className);
+			} catch (ClassNotFoundException e) {
+				throw new DataException("Cannot load quantity class " + className, e);
+			}
+		} else {
+			return null;
+		}
+	}
+	
 	public Unit<?> getDefaultUnit() {
 		return defaultUnit;
 	}

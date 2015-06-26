@@ -2,6 +2,11 @@ package org.soluvas.category;
 
 import java.io.Serializable;
 
+import org.soluvas.data.PropertyDefinition;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
@@ -9,6 +14,9 @@ import com.google.common.collect.ImmutableSet;
  * Category that is recognized by the <a href="https://support.google.com/merchants/answer/160081?hl=en">Google Product Taxonomy</a>.
  * @author rudi
  */
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property="@type", defaultImpl=FormalCategory.class)
+@JsonSubTypes(@JsonSubTypes.Type(name="FormalCategory", value=FormalCategory.class))
 public class FormalCategory implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,9 +31,10 @@ public class FormalCategory implements Serializable {
 	
 	private ImmutableSet<String> sameAsUris;
 	
-	private ImmutableSet<Option> options;
-	
-	private ImmutableSet<String> properties;
+	private ImmutableSet<String> defaultOptionTypes;
+	private ImmutableSet<String> defaultProperties;
+
+	private ImmutableSet<PropertyDefinition> propertyOverrides;
 
 	public long getGoogleId() {
 		return googleId;
@@ -67,22 +76,29 @@ public class FormalCategory implements Serializable {
 		this.sameAsUris = sameAsUris;
 	}
 
-	public ImmutableSet<Option> getOptions() {
-		return options;
+	public ImmutableSet<String> getDefaultOptionTypes() {
+		return defaultOptionTypes;
 	}
 
-	public void setOptions(ImmutableSet<Option> options) {
-		this.options = options;
+	public void setDefaultOptionTypes(ImmutableSet<String> defaultOptionTypes) {
+		this.defaultOptionTypes = defaultOptionTypes;
 	}
 
-	public ImmutableSet<String> getProperties() {
-		return properties;
+	public ImmutableSet<String> getDefaultProperties() {
+		return defaultProperties;
 	}
 
-	public void setProperties(ImmutableSet<String> properties) {
-		this.properties = properties;
+	public void setDefaultProperties(ImmutableSet<String> defaultProperties) {
+		this.defaultProperties = defaultProperties;
+	}
+
+	public ImmutableSet<PropertyDefinition> getPropertyOverrides() {
+		return propertyOverrides;
+	}
+
+	public void setPropertyOverrides(
+			ImmutableSet<PropertyDefinition> propertyOverrides) {
+		this.propertyOverrides = propertyOverrides;
 	}
 	
-	
-
 }
