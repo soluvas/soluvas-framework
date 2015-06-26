@@ -7,6 +7,19 @@ import java.sql.Connection;
 import javax.annotation.Nullable;
 import javax.sql.DataSource;
 
+import org.apache.felix.gogo.commands.Argument;
+import org.apache.felix.gogo.commands.Command;
+import org.apache.felix.gogo.commands.Option;
+import org.soluvas.commons.shell.ExtCommandSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
+
+import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.google.common.collect.FluentIterable;
+
 import liquibase.Contexts;
 import liquibase.Liquibase;
 import liquibase.change.Change;
@@ -26,19 +39,6 @@ import liquibase.exception.PreconditionFailedException;
 import liquibase.precondition.core.PreconditionContainer.ErrorOption;
 import liquibase.precondition.core.PreconditionContainer.FailOption;
 import liquibase.resource.ClassLoaderResourceAccessor;
-
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.Option;
-import org.soluvas.commons.shell.ExtCommandSupport;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
-
-import com.google.common.base.Function;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
-import com.google.common.collect.FluentIterable;
 
 /**
  * Runs {@link Liquibase#update(liquibase.Contexts)}. 
@@ -102,7 +102,7 @@ public class SchemaUpCommand extends ExtCommandSupport {
 					@Override
 					public void willRun(Change change, ChangeSet changeSet,
 							DatabaseChangeLog changeLog, Database database) {
-						System.out.println(ansi().render("@|blue %s|@ > @|bold %s|@",
+						System.err.println(ansi().render("@|blue %s|@ > @|bold %s|@",
 								changeSet, getChangeDescription(change)));
 					}
 					
@@ -110,43 +110,50 @@ public class SchemaUpCommand extends ExtCommandSupport {
 					public void willRun(ChangeSet changeSet,
 							DatabaseChangeLog databaseChangeLog, Database database,
 							RunStatus runStatus) {
-						System.out.println(ansi().render("@|bold %s|@ @|blue %s|@",
+						System.err.println(ansi().render("@|bold %s|@ @|blue %s|@",
 								runStatus, changeSet));
 					}
 					
 					@Override
 					public void rolledBack(ChangeSet changeSet,
 							DatabaseChangeLog databaseChangeLog, Database database) {
-						System.out.println(ansi().render("Rolled back: @|bold %s|@",
+						System.err.println(ansi().render("Rolled back: @|bold %s|@",
 								changeSet));
 					}
 					
 					@Override
 					public void ran(Change change, ChangeSet changeSet,
 							DatabaseChangeLog changeLog, Database database) {
-						System.out.println(ansi().render("Ran @|blue %s|@ > @|bold %s|@",
+						System.err.println(ansi().render("Ran @|blue %s|@ > @|bold %s|@",
 								changeSet, getChangeDescription(change)));
 					}
 					
 					@Override
 					public void ran(ChangeSet changeSet, DatabaseChangeLog databaseChangeLog,
 							Database database, ExecType execType) {
-						System.out.println(ansi().render("@|bold %s|@ @|blue %s|@",
+						System.err.println(ansi().render("@|bold %s|@ @|blue %s|@",
 								execType, changeSet));
 					}
 					
 					@Override
 					public void preconditionFailed(PreconditionFailedException error,
 							FailOption onFail) {
-						System.out.println(ansi().render("Precondition failed: @|bold %s|@ @|bold %s|@",
+						System.err.println(ansi().render("Precondition failed: @|bold %s|@ @|bold %s|@",
 								error, onFail));
 					}
 					
 					@Override
 					public void preconditionErrored(PreconditionErrorException error,
 							ErrorOption onError) {
-						System.out.println(ansi().render("Precondition errored: @|bold %s|@ @|bold %s|@",
+						System.err.println(ansi().render("Precondition errored: @|bold %s|@ @|bold %s|@",
 								error, onError));
+					}
+
+					@Override
+					public void runFailed(ChangeSet changeSet, DatabaseChangeLog databaseChangeLog, Database database,
+							Exception exception) {
+						System.err.println(ansi().render("Run failed: @|bold %s|@ @|blue %s|@",
+								changeSet, exception));
 					}
 				});
 				liquibase.update(contexts);
