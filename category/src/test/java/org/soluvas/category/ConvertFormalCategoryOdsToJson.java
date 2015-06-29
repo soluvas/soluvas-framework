@@ -74,12 +74,6 @@ public class ConvertFormalCategoryOdsToJson {
 			final FormalCategory newFormalCat = new FormalCategory();
 			final Builder<String> gooleBreadcrumbsBuilder = ImmutableList.builder();
 			final com.google.common.collect.ImmutableSet.Builder<String> sameAsUrisBuilder = ImmutableSet.builder();
-			/**
-			 * The new option will be created if there are (mandatory):
-			 * >> a string value option1(column 11);
-			 * >> a string value option1Enum(column 12);
-			 * >> a string value option1Name(column 15);
-			 */
 			final com.google.common.collect.ImmutableSet.Builder<PropertyDefinition> propertyOverrideb = ImmutableSet.builder();
 			final com.google.common.collect.ImmutableSet.Builder<String> optionTypeb = ImmutableSet.builder();
 			final com.google.common.collect.ImmutableSet.Builder<String> propertieb = ImmutableSet.builder();

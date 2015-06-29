@@ -50,4 +50,9 @@ public class MultiTenantCategoryConfig {
 		return categoryCatalogBeans().getCurrent();
 	}
 	
+	@Bean
+	public FormalCategoryRepository formalCategoryRepo() {
+		return new FormalCategoryRepositoryImpl();
+	}
+	
 }

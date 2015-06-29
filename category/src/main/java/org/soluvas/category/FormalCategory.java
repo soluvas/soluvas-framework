@@ -100,5 +100,15 @@ public class FormalCategory implements Serializable {
 			ImmutableSet<PropertyDefinition> propertyOverrides) {
 		this.propertyOverrides = propertyOverrides;
 	}
+
+	@Override
+	public String toString() {
+		return "FormalCategory [googleId=" + googleId + ", parentGoogleId="
+				+ parentGoogleId + ", googleBreadcrumbs=" + googleBreadcrumbs
+				+ ", primaryUri=" + primaryUri + ", sameAsUris=" + sameAsUris
+				+ ", defaultOptionTypes=" + defaultOptionTypes
+				+ ", defaultProperties=" + defaultProperties
+				+ ", propertyOverrides=" + propertyOverrides + "]";
+	}
 	
 }

@@ -32,5 +32,10 @@ public class SingleTenantCategoryConfig {
 		tracker.scan(SingleTenantCategoryConfig.class.getClassLoader(), dataFolder);
 		return categoryCatalog;
 	}
+	
+	@Bean
+	public FormalCategoryRepository formalCategoryRepo() {
+		return new FormalCategoryRepositoryImpl();
+	}
 
 }

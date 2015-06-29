@@ -187,7 +187,6 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 	/* (non-Javadoc)
 	 * @see org.soluvas.data.PropertyDefinitionRepository#init()
 	 */
-	@Override
 	@PostConstruct
 	public void init() throws JsonParseException, JsonMappingException, IOException {
 		basePropertyDefinitions = loadFromFiles(ImmutableList.of(PropertyDefinitionRepositoryImpl.class.getResource("soluvas.DataCatalog.jsonld")));

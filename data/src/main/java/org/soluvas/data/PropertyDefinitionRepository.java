@@ -1,12 +1,7 @@
 package org.soluvas.data;
 
-import java.io.IOException;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -30,8 +25,6 @@ public interface PropertyDefinitionRepository {
 	 */
 	ImmutableList<PropertyDefinition> findRecommendedByTenantIdAndCategories(
 			String tenantId, Set<String> categoryIds);
-
-	void init() throws JsonParseException, JsonMappingException, IOException;
 
 	ImmutableMap<String, PropertyDefinition> getTenantOverrides(String tenantId);
 
