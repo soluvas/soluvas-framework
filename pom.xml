@@ -966,7 +966,7 @@
 				<!-- lilith appender 0.9.43 requires at least v2.5.0 -->
 				<groupId>com.google.protobuf</groupId>
 				<artifactId>protobuf-java</artifactId>
-				<version>2.5.0</version>
+				<version>2.6.1</version>
 			</dependency>
 			<dependency>
 				<!-- for development -->
