@@ -13,6 +13,7 @@ import org.soluvas.data.repository.CrudRepository.ModificationTimePolicy;
 import org.soluvas.data.repository.Repository;
 
 import com.mongodb.DBObject;
+import com.mongodb.ReadPreference;
 
 /**
  * Mongo-specific {@link Repository} enhancements.
@@ -38,5 +39,8 @@ public interface MongoRepository<T extends Identifiable> extends Repository<T, S
 	<S extends T> Collection<S> modify(Map<String, S> entities, ModificationTimePolicy mtimePolicy);
 
 	<S extends T> S modify(String id, S entity, ModificationTimePolicy mtimePolicy);
+
+	long countByQuery(ReadPreference readPref, DBObject query, String method,
+			Object[] params);
 
 }

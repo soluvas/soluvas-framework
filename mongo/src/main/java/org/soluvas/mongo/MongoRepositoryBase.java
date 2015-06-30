@@ -660,10 +660,21 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		return new PageImpl<>(entityIds, pageable, total);
 	}
 	
+	/**
+	 * @deprecated Use {@link #countByQuery(DBObject)}
+	 */
+	@Deprecated
 	@Override
 	public long countByQuery(DBObject query) {
 		final long total = secondary.count(query);
 		log.debug("Got count {} by query {}", total, query);
+		return total;
+	}
+	
+	@Override
+	public long countByQuery(ReadPreference readPref, DBObject query, String method, Object... params) {
+		final long total = primary.count(query, readPref);
+		log.debug("Counted {} by query {} {} for {} {}", total, query, readPref, method, params);
 		return total;
 	}
 	
