@@ -299,6 +299,15 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCategory_GoogleFormalId() {
+		return (EAttribute)categoryEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getCategoryContainer() {
 		return categoryContainerEClass;
@@ -399,6 +408,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		createEAttribute(categoryEClass, CATEGORY__PRIMARY_URI);
 		createEAttribute(categoryEClass, CATEGORY__SAME_AS_URIS);
 		createEAttribute(categoryEClass, CATEGORY__TAGS);
+		createEAttribute(categoryEClass, CATEGORY__GOOGLE_FORMAL_ID);
 
 		categoryContainerEClass = createEClass(CATEGORY_CONTAINER);
 		createEReference(categoryContainerEClass, CATEGORY_CONTAINER__CATEGORIES);
@@ -496,6 +506,7 @@ public class CategoryPackageImpl extends EPackageImpl implements CategoryPackage
 		initEAttribute(getCategory_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_SameAsUris(), ecorePackage.getEString(), "sameAsUris", null, 0, -1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategory_Tags(), ecorePackage.getEString(), "tags", null, 0, -1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategory_GoogleFormalId(), ecorePackage.getELongObject(), "googleFormalId", null, 0, 1, Category.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(categoryEClass, null, "resolve", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getEntityLookup());

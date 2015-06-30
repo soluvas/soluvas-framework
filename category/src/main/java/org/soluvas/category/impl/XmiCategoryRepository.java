@@ -423,7 +423,6 @@ public class XmiCategoryRepository
 		return limited;
 	}
 	
-	@SuppressWarnings("null")
 	private List<Category> sortingCategories(@Nonnull final List<Category> categories, final Ordering<Category> ordering) {
 		final List<Category> sortedCategories = ordering.immutableSortedCopy(categories);
 		for (final Category category : sortedCategories) {

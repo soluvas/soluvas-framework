@@ -412,13 +412,22 @@ public interface CategoryPackage extends EPackage {
 	int CATEGORY__TAGS = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 27;
 
 	/**
+	 * The feature id for the '<em><b>Google Formal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY__GOOGLE_FORMAL_ID = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 28;
+
+	/**
 	 * The number of structural features of the '<em>Category</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_FEATURE_COUNT = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 28;
+	int CATEGORY_FEATURE_COUNT = CommonsPackage.CATEGORY_LIKE_FEATURE_COUNT + 29;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.
@@ -738,6 +747,17 @@ public interface CategoryPackage extends EPackage {
 	EAttribute getCategory_Tags();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.category.Category#getGoogleFormalId <em>Google Formal Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Google Formal Id</em>'.
+	 * @see org.soluvas.category.Category#getGoogleFormalId()
+	 * @see #getCategory()
+	 * @generated
+	 */
+	EAttribute getCategory_GoogleFormalId();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.category.CategoryContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -950,6 +970,14 @@ public interface CategoryPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY__TAGS = eINSTANCE.getCategory_Tags();
+
+		/**
+		 * The meta object literal for the '<em><b>Google Formal Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY__GOOGLE_FORMAL_ID = eINSTANCE.getCategory_GoogleFormalId();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.category.CategoryContainer <em>Container</em>}' class.

@@ -104,6 +104,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getSameAsUris <em>Same As Uris</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.soluvas.category.impl.CategoryImpl#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -803,6 +804,26 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * @ordered
 	 */
 	protected EList<String> tags;
+
+	/**
+	 * The default value of the '{@link #getGoogleFormalId() <em>Google Formal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGoogleFormalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long GOOGLE_FORMAL_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGoogleFormalId() <em>Google Formal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGoogleFormalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long googleFormalId = GOOGLE_FORMAL_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1674,6 +1695,27 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		return tags;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getGoogleFormalId() {
+		return googleFormalId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGoogleFormalId(Long newGoogleFormalId) {
+		Long oldGoogleFormalId = googleFormalId;
+		googleFormalId = newGoogleFormalId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CategoryPackage.CATEGORY__GOOGLE_FORMAL_ID, oldGoogleFormalId, googleFormalId));
+	}
+
 	protected void setTags(List<String> tags) {
 		getTags().clear();
 		getTags().addAll(tags);
@@ -1789,7 +1831,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 */
 	@Override
 	public CategoryInfo toInfo(String curLanguageTag) {
-		return new ToCategoryInfo(curLanguageTag).apply(this);
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	@JsonIgnore
@@ -1926,6 +1970,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return getSameAsUris();
 			case CategoryPackage.CATEGORY__TAGS:
 				return getTags();
+			case CategoryPackage.CATEGORY__GOOGLE_FORMAL_ID:
+				return getGoogleFormalId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2053,6 +2099,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				getTags().clear();
 				getTags().addAll((Collection<? extends String>)newValue);
 				return;
+			case CategoryPackage.CATEGORY__GOOGLE_FORMAL_ID:
+				setGoogleFormalId((Long)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2176,6 +2225,9 @@ public class CategoryImpl extends EObjectImpl implements Category {
 			case CategoryPackage.CATEGORY__TAGS:
 				getTags().clear();
 				return;
+			case CategoryPackage.CATEGORY__GOOGLE_FORMAL_ID:
+				setGoogleFormalId(GOOGLE_FORMAL_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2264,6 +2316,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 				return sameAsUris != null && !sameAsUris.isEmpty();
 			case CategoryPackage.CATEGORY__TAGS:
 				return tags != null && !tags.isEmpty();
+			case CategoryPackage.CATEGORY__GOOGLE_FORMAL_ID:
+				return GOOGLE_FORMAL_ID_EDEFAULT == null ? googleFormalId != null : !GOOGLE_FORMAL_ID_EDEFAULT.equals(googleFormalId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2540,6 +2594,8 @@ public class CategoryImpl extends EObjectImpl implements Category {
 		result.append(sameAsUris);
 		result.append(", tags: ");
 		result.append(tags);
+		result.append(", googleFormalId: ");
+		result.append(googleFormalId);
 		result.append(')');
 		return result.toString();
 	}

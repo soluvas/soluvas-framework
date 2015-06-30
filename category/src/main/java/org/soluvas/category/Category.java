@@ -49,6 +49,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.Category#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getSameAsUris <em>Same As Uris</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.soluvas.category.Category#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -473,6 +474,32 @@ public interface Category extends CategoryLike, NsPrefixable, Parentable<Categor
 	 * @generated
 	 */
 	EList<String> getTags();
+
+	/**
+	 * Returns the value of the '<em><b>Google Formal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Google Formal Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Google Formal Id</em>' attribute.
+	 * @see #setGoogleFormalId(Long)
+	 * @see org.soluvas.category.CategoryPackage#getCategory_GoogleFormalId()
+	 * @model
+	 * @generated
+	 */
+	Long getGoogleFormalId();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.category.Category#getGoogleFormalId <em>Google Formal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Google Formal Id</em>' attribute.
+	 * @see #getGoogleFormalId()
+	 * @generated
+	 */
+	void setGoogleFormalId(Long value);
 
 	/**
 	 * <!-- begin-user-doc -->
