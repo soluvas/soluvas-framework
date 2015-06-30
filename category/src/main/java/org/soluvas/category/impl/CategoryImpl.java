@@ -1700,6 +1700,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getGoogleFormalId() {
 		return googleFormalId;
 	}
@@ -1709,6 +1710,7 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGoogleFormalId(Long newGoogleFormalId) {
 		Long oldGoogleFormalId = googleFormalId;
 		googleFormalId = newGoogleFormalId;
@@ -1827,13 +1829,10 @@ public class CategoryImpl extends EObjectImpl implements Category {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public CategoryInfo toInfo(String curLanguageTag) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return new ToCategoryInfo(curLanguageTag).apply(this);
 	}
 
 	@JsonIgnore
