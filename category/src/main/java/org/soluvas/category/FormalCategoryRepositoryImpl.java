@@ -141,18 +141,36 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 	}
 	
 	private Set<Entry<Long, FormalCategory>> doFindAll(Pageable pageable, @Nullable String term) {
-		final Map<Long, FormalCategory> filtered = formalCategories.entrySet().stream()
-			.filter( entry -> Iterables.getLast(entry.getValue().getGoogleBreadcrumbs()).startsWith(Strings.nullToEmpty(term)) )
-			.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
-		final Map<Long, FormalCategory> limited = FluentIterable.from(filtered.entrySet())
-				.skip((int) pageable.getOffset()).limit((int) pageable.getPageSize())
-				.toList().stream().collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+//		log.debug("Try to findAll by term '{}' and page {} from {} formalCategories",
+//				term, pageable, formalCategories.size());
+		
+		final Map<Long, FormalCategory> paged; 
+		if (!Strings.isNullOrEmpty(term)) {
+			final Map<Long, FormalCategory> filtered = formalCategories.entrySet().stream()
+					.filter( entry -> Iterables.getLast(entry.getValue().getGoogleBreadcrumbs()).startsWith(term) )
+					.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+			paged = doPaging(filtered, pageable);
+		} else {
+			paged = doPaging(formalCategories, pageable);
+		}
 		if (pageable.getSort() != null) {
-			final TreeMap<Long, FormalCategory> sorted = new TreeMap<>(new ValueComparator(limited, pageable.getSort()));
+			final TreeMap<Long, FormalCategory> sorted = new TreeMap<>(new ValueComparator(paged, pageable.getSort()));
+			log.debug("Got {} sorted formalCategories by term '{}' and page {} from {} formalCategories: {}",
+					sorted.size(), term, pageable, formalCategories.size(), Iterables.limit(paged.entrySet(), 5));
+
 			return sorted.entrySet();
 		} else {
-			return limited.entrySet();
+			log.debug("Got {} paged formalCategories by term '{}' and page {} from {} formalCategories: {}",
+					paged.size(), term, pageable, formalCategories.size(), Iterables.limit(paged.entrySet(), 5));
+			return paged.entrySet();
 		}
+	}
+	
+	private Map<Long, FormalCategory> doPaging(final Map<Long, FormalCategory> unpagedFormalCategories, final Pageable pageable) {
+		final Map<Long, FormalCategory> paged = FluentIterable.from(unpagedFormalCategories.entrySet())
+				.skip((int) pageable.getOffset()).limit((int) pageable.getPageSize())
+				.toList().stream().collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+		return paged;
 	}
 	
 	/**
@@ -163,7 +181,7 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 	private class ValueComparator implements Comparator<Long> {
 		
 		private final Sort sort;
-		final Map<Long, FormalCategory> base;
+		private final Map<Long, FormalCategory> base;
 		
 	    public ValueComparator(Map<Long, FormalCategory> base, Sort sort) {
 	    	super();
@@ -199,7 +217,10 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 	@Override
 	public Page<FormalCategory> findAllBySearchText(String searchText, Pageable pageable) {
 		final Set<Entry<Long, FormalCategory>> found = doFindAll(pageable, searchText);
-		return new PageImpl<>(ImmutableList.copyOf( found.stream().map(entry -> entry.getValue()).collect(Collectors.toList()) ),
+		log.debug("Collecting {} formalCategories by term '{}' and page {}", found.size(), searchText, pageable);
+		final List<FormalCategory> collect = found.stream().map(entry -> entry.getValue()).collect(Collectors.toList());
+		log.debug("Collected {} formalCategories by term '{}' and page {}", collect.size(), searchText, pageable);
+		return new PageImpl<>(ImmutableList.copyOf( collect ),
 				pageable, count());
 	}
 
