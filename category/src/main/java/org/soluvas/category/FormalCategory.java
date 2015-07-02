@@ -110,5 +110,5 @@ public class FormalCategory implements Serializable {
 				+ ", defaultProperties=" + defaultProperties
 				+ ", propertyOverrides=" + propertyOverrides + "]";
 	}
-	
+
 }

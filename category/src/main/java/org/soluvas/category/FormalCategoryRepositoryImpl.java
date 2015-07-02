@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
@@ -109,8 +108,10 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 	public List<FormalCategory> findAll(Collection<Long> ids, @Nullable Sort sort) {
 		final Map<Long, FormalCategory> found = findAllByIds(ids);
 		if (sort != null) {
-			final TreeMap<Long, FormalCategory> sortedMap = new TreeMap<>(new ValueComparator(found, sort));
-			return ImmutableList.copyOf(sortedMap.values());
+//			final TreeMap<Long, FormalCategory> sortedMap = new TreeMap<>(new ValueComparator(found, sort));
+//			return ImmutableList.copyOf(sortedMap.values());
+			log.warn("Sorting is still not working!!");
+			return ImmutableList.copyOf(found.values()); 
 		} else {
 			return ImmutableList.copyOf(found.values());
 		}
@@ -147,18 +148,21 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 		final Map<Long, FormalCategory> paged; 
 		if (!Strings.isNullOrEmpty(term)) {
 			final Map<Long, FormalCategory> filtered = formalCategories.entrySet().stream()
-					.filter( entry -> Iterables.getLast(entry.getValue().getGoogleBreadcrumbs()).startsWith(term) )
+					.filter( entry -> Iterables.getLast(entry.getValue().getGoogleBreadcrumbs()).toLowerCase().startsWith(term.toLowerCase()) )
 					.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 			paged = doPaging(filtered, pageable);
 		} else {
 			paged = doPaging(formalCategories, pageable);
 		}
 		if (pageable.getSort() != null) {
-			final TreeMap<Long, FormalCategory> sorted = new TreeMap<>(new ValueComparator(paged, pageable.getSort()));
-			log.debug("Got {} sorted formalCategories by term '{}' and page {} from {} formalCategories: {}",
-					sorted.size(), term, pageable, formalCategories.size(), Iterables.limit(paged.entrySet(), 5));
-
-			return sorted.entrySet();
+//			log.debug("Sorting {} paged formalCategories use {}", paged.size(), pageable.getSort());
+//			final TreeMap<Long, FormalCategory> sorted = new TreeMap<>(new ValueComparator(paged, pageable.getSort()));
+//			log.debug("Got {} sorted formalCategories by term '{}' and page {} from {} formalCategories: {}",
+//					sorted.size(), term, pageable, formalCategories.size(), Iterables.limit(sorted.entrySet(), 5));
+//
+//			return sorted.entrySet();
+			log.warn("Sorting is still not working!!");
+			return paged.entrySet();
 		} else {
 			log.debug("Got {} paged formalCategories by term '{}' and page {} from {} formalCategories: {}",
 					paged.size(), term, pageable, formalCategories.size(), Iterables.limit(paged.entrySet(), 5));
@@ -174,11 +178,13 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 	}
 	
 	/**
+	 * FIXME: ga ke panggil T.T
+	 * 
 	 * Handle first order on the Sort!
 	 * @author rudi
 	 *
 	 */
-	private class ValueComparator implements Comparator<Long> {
+	public class ValueComparator implements Comparator<Long> {
 		
 		private final Sort sort;
 		private final Map<Long, FormalCategory> base;
@@ -192,10 +198,14 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 		@Override
 		public int compare(Long left, Long right) {
 			final Order order = Iterables.getFirst(sort, null);
+			log.debug("Comparte left {} - right {} use {}", base.get(left), base.get(right), order);
 			if (order != null) {
 				try {
+					log.debug("leftFormalCategory: {}", base.get(left));
 					final Object leftProp = com.google.common.base.Optional.fromNullable(PropertyUtils.getProperty(base.get(left), order.getProperty())).or("");
+					log.debug("leftProp: {}", leftProp);
 					final Object rightProp = com.google.common.base.Optional.fromNullable(PropertyUtils.getProperty(base.get(right), order.getProperty())).or("");
+					log.debug("rightProp: {}", rightProp);
 					final int sorted;
 					if (leftProp instanceof Comparable<?> && !(leftProp instanceof String)) {
 						sorted = ((Comparable<Object>) leftProp).compareTo(rightProp);
