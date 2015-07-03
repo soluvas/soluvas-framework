@@ -1,7 +1,10 @@
 package org.soluvas.data;
 
+import java.io.IOException;
 import java.util.Set;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -36,5 +39,9 @@ public interface PropertyDefinitionRepository {
 
 	void setCategoryOverrides(String tenantId, String categoryId,
 			ImmutableMap<String, PropertyDefinition> overrides);
+	
+	PropertyDefinition findOneBase(String id) throws EntityLookupException;
+
+	void init() throws JsonParseException, JsonMappingException, IOException;
 
 }

@@ -188,6 +188,7 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 	 * @see org.soluvas.data.PropertyDefinitionRepository#init()
 	 */
 	@PostConstruct
+	@Override
 	public void init() throws JsonParseException, JsonMappingException, IOException {
 		basePropertyDefinitions = loadFromFiles(ImmutableList.of(PropertyDefinitionRepositoryImpl.class.getResource("soluvas.DataCatalog.jsonld")));
 	}
@@ -222,6 +223,15 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 	@Override
 	public void setCategoryOverrides(String tenantId, String categoryId, ImmutableMap<String, PropertyDefinition> overrides) {
 		tenantPropertyDefinitions.put(tenantId + "/" + categoryId, overrides);
+	}
+
+	@Override
+	public PropertyDefinition findOneBase(String id) throws EntityLookupException {
+		if (!basePropertyDefinitions.containsKey(id)) {
+			throw new EntityLookupException(PropertyDefinitionRepositoryImpl.class,
+					StatusMask.RAW, LookupKey.ID, id);
+		}
+		return basePropertyDefinitions.get(id);
 	}
 	
 }

@@ -52,6 +52,7 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 	}
 	
 	@PostConstruct
+	@Override
 	public void init() throws JsonParseException, JsonMappingException, IOException {
 		formalCategories = loadFromFiles(ImmutableList.of(FormalCategoryRepositoryImpl.class.getResource("google.DataCatalog.jsonld")));
 	}

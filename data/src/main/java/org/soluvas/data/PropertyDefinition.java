@@ -36,6 +36,7 @@ public class PropertyDefinition {
 	private String defaultEnum;
 	private String defaultQuantity;
 	private Unit<?> defaultUnit;
+	private Boolean usableAsOption;
 	private Boolean visibleInSimple;
 	private Boolean searchableInQuick;
 	private String imageId;
@@ -135,6 +136,20 @@ public class PropertyDefinition {
 	public void setDefaultUnit(Unit<?> defaultUnit) {
 		this.defaultUnit = defaultUnit;
 	}
+	
+	/**
+	 * In root, tenant, {@link org.soluvas.category.FormalCategory}, and {@link org.soluvas.category.Category} layers,
+	 * this determines whether when creating a new Product, this property will be suggested as option.
+	 * Inside product, this marks the property as option, which means its value is mandatory.
+	 * @return
+	 */
+	public Boolean getUsableAsOption() {
+		return usableAsOption;
+	}
+	public void setUsableAsOption(Boolean usableAsOption) {
+		this.usableAsOption = usableAsOption;
+	}
+	
 	public Boolean getVisibleInSimple() {
 		return visibleInSimple;
 	}

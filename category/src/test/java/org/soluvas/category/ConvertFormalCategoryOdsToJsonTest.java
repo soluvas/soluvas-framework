@@ -1,12 +1,12 @@
 package org.soluvas.category;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.measure.unit.Unit;
 
@@ -21,10 +21,14 @@ import org.odftoolkit.simple.table.Table;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.PropertyDefinition;
+import org.soluvas.data.PropertyDefinitionRepository;
+import org.soluvas.data.PropertyDefinitionRepositoryImpl;
 import org.soluvas.data.PropertyKind;
 import org.soluvas.json.JsonUtils;
 import org.soluvas.json.LowerEnumSerializer;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
@@ -42,6 +46,13 @@ public class ConvertFormalCategoryOdsToJsonTest {
 			.getLogger(ConvertFormalCategoryOdsToJsonTest.class);
 
 	private static final int MAX_ROW = 5428;
+
+	private final PropertyDefinitionRepository proDefRepo;
+	
+	public ConvertFormalCategoryOdsToJsonTest() throws JsonParseException, JsonMappingException, IOException {
+		this.proDefRepo = new PropertyDefinitionRepositoryImpl();
+		this.proDefRepo.init();
+	}
 
 	/**
 	 * @throws java.lang.Exception
@@ -75,8 +86,6 @@ public class ConvertFormalCategoryOdsToJsonTest {
 			final Builder<String> gooleBreadcrumbsBuilder = ImmutableList.builder();
 			final com.google.common.collect.ImmutableSet.Builder<String> sameAsUrisBuilder = ImmutableSet.builder();
 			final com.google.common.collect.ImmutableSet.Builder<PropertyDefinition> propertyOverrideb = ImmutableSet.builder();
-			final com.google.common.collect.ImmutableSet.Builder<String> optionTypeb = ImmutableSet.builder();
-			final com.google.common.collect.ImmutableSet.Builder<String> propertieb = ImmutableSet.builder();
 			
 			final long googleId = Long.valueOf(row.getCellByIndex(0).getStringValue());
 			newFormalCat.setGoogleId(googleId);
@@ -97,29 +106,44 @@ public class ConvertFormalCategoryOdsToJsonTest {
 				newFormalCat.setParentGoogleId(parentGoogleId);
 			}
 			googleIdMap.put(Iterables.getLast(newFormalCat.getGoogleBreadcrumbs()), googleId);
+			//name
+			newFormalCat.setName(Iterables.getLast(newFormalCat.getGoogleBreadcrumbs()));
+			//description
+			newFormalCat.setDescription(Strings.emptyToNull(row.getCellByIndex(8).getStringValue()));
+			//name_id + description_id
+			final Map<String, String> translations = new HashMap<>();
+			final String nameId = Strings.emptyToNull(row.getCellByIndex(9).getStringValue());
+			if (nameId != null) {
+				translations.put("name", nameId);
+			}
+			final String descriptionId = Strings.emptyToNull(row.getCellByIndex(10).getStringValue());
+			if (descriptionId != null) {
+				translations.put("description", descriptionId);
+			}
+			if (!translations.isEmpty()) {
+				newFormalCat.getTranslations().put("id-ID", translations);
+			}
 			//primaryUri
-			newFormalCat.setPrimaryUri(Strings.emptyToNull(row.getCellByIndex(8).getStringValue()));
+			newFormalCat.setPrimaryUri(Strings.emptyToNull(row.getCellByIndex(11).getStringValue()));
 			//sameAsUri1, sameAsUri2
-			for (int j = 9; j <= 10; j++) {
+			for (int j = 12; j <= 13; j++) {
 				final String sameAsUri = Strings.emptyToNull(row.getCellByIndex(j).getStringValue());
 				if (sameAsUri != null) {
 					sameAsUrisBuilder.add(sameAsUri);
 				}
 			}
-			for (int optIndex = 0; optIndex < 5; optIndex++) { // from column 11
-				final String optId = Strings.emptyToNull(row.getCellByIndex(11 + (optIndex * 8)).getStringValue());
+			for (int optIndex = 0; optIndex < 5; optIndex++) { // from column 14
+				final String optId = Strings.emptyToNull(row.getCellByIndex(14 + (optIndex * 8)).getStringValue());
 				if (optId != null) {
-					optionTypeb.add(optId);
 					
-					final String optEnum = Strings.emptyToNull(row.getCellByIndex(11 + (optIndex * 8) + 1).getStringValue());
-					final String optQuantity = Strings.emptyToNull(row.getCellByIndex(11 + (optIndex * 8) + 2).getStringValue());
-					final String optUnit = Strings.emptyToNull(row.getCellByIndex(11 + (optIndex * 8) + 3).getStringValue());
-					final String optName_en = Strings.emptyToNull(row.getCellByIndex(11 + (optIndex * 8) + 4).getStringValue());
-					final String optDescription_en = Strings.emptyToNull(row.getCellByIndex(11 + (optIndex * 8) + 5).getStringValue());
-					final String optName_id = Strings.emptyToNull(row.getCellByIndex(11 + (optIndex * 8) + 6).getStringValue());
-					final String optDescription_id = Strings.emptyToNull(row.getCellByIndex(11 + (optIndex * 8) + 7).getStringValue());
+					final String optEnum = Strings.emptyToNull(row.getCellByIndex(14 + (optIndex * 8) + 1).getStringValue());
+					final String optQuantity = Strings.emptyToNull(row.getCellByIndex(14 + (optIndex * 8) + 2).getStringValue());
+					final String optUnit = Strings.emptyToNull(row.getCellByIndex(14 + (optIndex * 8) + 3).getStringValue());
+					final String optName_en = Strings.emptyToNull(row.getCellByIndex(14 + (optIndex * 8) + 4).getStringValue());
+					final String optDescription_en = Strings.emptyToNull(row.getCellByIndex(14 + (optIndex * 8) + 5).getStringValue());
+					final String optName_id = Strings.emptyToNull(row.getCellByIndex(14 + (optIndex * 8) + 6).getStringValue());
+					final String optDescription_id = Strings.emptyToNull(row.getCellByIndex(14 + (optIndex * 8) + 7).getStringValue());
 					
-					optionTypeb.add(optId);
 					if (optEnum != null || optQuantity != null || optUnit != null || optName_en != null || optDescription_en != null || optName_id != null || optDescription_id != null) {
 						final PropertyDefinition propertyOverride = new PropertyDefinition();
 						propertyOverride.setId(optId);
@@ -157,14 +181,15 @@ public class ConvertFormalCategoryOdsToJsonTest {
 				}
 			}
 			
-			// property: from column 51
+			// property: from column 54
 			for (int j = 0; j < 10; j++) {
-				Optional.ofNullable(Strings.emptyToNull(row.getCellByIndex(51 + j).getStringValue()))
-					.ifPresent(prop -> propertieb.add(prop));
+				final String property = Strings.emptyToNull(row.getCellByIndex(54 + j).getStringValue());
+				if (!Strings.isNullOrEmpty(property)) {
+					propertyOverrideb.add( Preconditions.checkNotNull(proDefRepo.findOneBase(property),
+							"Soluvas Property Definition must not be null by id '%s'", property) );
+				}
 			}
 			
-			newFormalCat.setDefaultOptionTypes(optionTypeb.build());
-			newFormalCat.setDefaultProperties(propertieb.build());
 			newFormalCat.setPropertyOverrides(propertyOverrideb.build());
 			
 			formalCategories.add(newFormalCat);
