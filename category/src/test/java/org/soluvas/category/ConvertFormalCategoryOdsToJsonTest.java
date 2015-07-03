@@ -36,10 +36,10 @@ import com.google.common.collect.Iterables;
  * @author rudi
  *
  */
-public class ConvertFormalCategoryOdsToJson {
+public class ConvertFormalCategoryOdsToJsonTest {
 	
 	private static final Logger log = LoggerFactory
-			.getLogger(ConvertFormalCategoryOdsToJson.class);
+			.getLogger(ConvertFormalCategoryOdsToJsonTest.class);
 
 	private static final int MAX_ROW = 5428;
 
@@ -60,7 +60,7 @@ public class ConvertFormalCategoryOdsToJson {
 
 	@Test
 	public void convert() throws Exception {
-		final InputStream resourceAsStream = ConvertFormalCategoryOdsToJson.class.getResourceAsStream("formal-category.ods");
+		final InputStream resourceAsStream = ConvertFormalCategoryOdsToJsonTest.class.getResourceAsStream("formal-category.ods");
 		final SpreadsheetDocument spreadSheetDoc = SpreadsheetDocument.loadDocument(resourceAsStream);
 		final Table sheet = spreadSheetDoc.getSheetByIndex(0);
 		
