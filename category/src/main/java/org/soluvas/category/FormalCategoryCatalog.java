@@ -13,9 +13,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  *
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property="@type", defaultImpl=CategoryCatalog.class)
-@JsonSubTypes(@JsonSubTypes.Type(name="CategoryCatalog", value=CategoryCatalog.class))
-public class CategoryCatalog2 implements Serializable {
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property="@type", defaultImpl=FormalCategoryCatalog.class)
+@JsonSubTypes(@JsonSubTypes.Type(name="FormalCategoryCatalog", value=FormalCategoryCatalog.class))
+public class FormalCategoryCatalog implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	

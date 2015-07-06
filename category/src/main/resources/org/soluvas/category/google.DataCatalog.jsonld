@@ -1,5 +1,5 @@
 {
-  "@type" : "CategoryCatalog2",
+  "@type" : "FormalCategoryCatalog",
   "formalCategories" : [ {
     "@type" : "FormalCategory",
     "googleId" : 1,

@@ -196,7 +196,7 @@ public class ConvertFormalCategoryOdsToJsonTest {
 			
 		}//end of loop rows
 		
-		final CategoryCatalog2 catalog = new CategoryCatalog2();
+		final FormalCategoryCatalog catalog = new FormalCategoryCatalog();
 		catalog.getFormalCategories().addAll(formalCategories);
 		
 		final String parentDir = System.getProperty("user.home") + "/git/soluvas-framework/category/src/main/resources/org/soluvas/category/";

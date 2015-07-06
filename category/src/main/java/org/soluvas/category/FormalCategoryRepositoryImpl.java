@@ -60,7 +60,7 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 	private ImmutableMap<Long, FormalCategory> loadFromFiles(List<URL> jsonldFiles) throws JsonParseException, JsonMappingException, IOException {
 		final Builder<Long, FormalCategory> mab = ImmutableMap.builder();
 		for (final URL jsonldFile : jsonldFiles) {
-			final CategoryCatalog2 dataCatalog = JsonUtils.mapper.readValue(jsonldFile, CategoryCatalog2.class);
+			final FormalCategoryCatalog dataCatalog = JsonUtils.mapper.readValue(jsonldFile, FormalCategoryCatalog.class);
 			dataCatalog.getFormalCategories().forEach(it -> mab.put(it.getGoogleId(), it));
 		}
 		final ImmutableMap<Long, FormalCategory> map = mab.build();
