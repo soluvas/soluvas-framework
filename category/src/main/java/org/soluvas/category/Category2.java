@@ -49,6 +49,9 @@ public class Category2 implements Serializable, Identifiable {
 	
 	private static final Logger log = LoggerFactory.getLogger(Category2.class);
 	
+	public final static String NAME_ATTR = "name";
+	public final static String DESCRIPTION_ATTR = "description";
+	
 	@Id private String id;
 	private String nsPrefix;
 	private String name;
@@ -70,6 +73,7 @@ public class Category2 implements Serializable, Identifiable {
 	private Long googleFormalId;
 	private final List<Category2> categories = new ArrayList<>();
 	private String primaryUri;
+	private String parentUName;
 	private Category2 parent;
 	private String language;
 	private final Set<PropertyDefinition> propertyOverrides = new HashSet<>();
@@ -323,6 +327,18 @@ public class Category2 implements Serializable, Identifiable {
 	 */
 	public void setPrimaryUri(String primaryUri) {
 		this.primaryUri = primaryUri;
+	}
+	/**
+	 * @return the parentUName
+	 */
+	public String getParentUName() {
+		return parentUName;
+	}
+	/**
+	 * @param parentUName the parentUName to set
+	 */
+	public void setParentUName(String parentUName) {
+		this.parentUName = parentUName;
 	}
 	/**
 	 * @return the parent
