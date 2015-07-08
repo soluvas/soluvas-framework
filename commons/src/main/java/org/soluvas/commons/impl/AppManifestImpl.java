@@ -1800,26 +1800,22 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @param tenantEnv
 	 */
 	private void setDomainByTenantEnv(String tenantEnv) {
-		switch (tenantEnv) {
-		case "prd":
+		if (ENV_PRD.equals(tenantEnv)) {
 			if (getDomainPrd() != null) {
 				log.trace("Set domain from prd: {}", getDomainPrd());
 				setDomain(getDomainPrd());
 			}
-			break;
-		case "dev":
-			if (getDomainDev() != null) {
-				log.trace("Set domain from dev: {}", getDomainDev());
-				setDomain(getDomainDev());
-			}
-			break;
-		case "stg":
+		} else if (tenantEnv.startsWith(ENV_STG_PREFIX)) {
 			if (getDomainStg() != null) {
 				log.trace("Set domain from stg: {}", getDomainStg());
 				setDomain(getDomainStg());
 			}
-			break;
-		default:
+		} else if (ENV_DEV.equals(tenantEnv)) {
+			if (getDomainDev() != null) {
+				log.trace("Set domain from dev: {}", getDomainDev());
+				setDomain(getDomainDev());
+			}
+		} else {
 			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'");
 		}
 	}
@@ -1829,26 +1825,22 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @param tenantEnv
 	 */
 	private void setGeneralEmailByTenantEnv(String tenantEnv) {
-		switch (tenantEnv) {
-		case "prd":
+		if (ENV_PRD.equals(tenantEnv)) {
 			if (getGeneralEmailPrd() != null) {
 				log.trace("Set generalEmail from prd: {}", getGeneralEmailPrd());
 				setGeneralEmail(getGeneralEmailPrd());
 			}
-			break;
-		case "dev":
-			if (getGeneralEmailDev() != null) {
-				log.trace("Set generalEmail from dev: {}", getGeneralEmailDev());
-				setGeneralEmail(getGeneralEmailDev());
-			}
-			break;
-		case "stg":
+		} else if (tenantEnv.startsWith(ENV_STG_PREFIX)) {
 			if (getGeneralEmailStg() != null) {
 				log.trace("Set generalEmail from stg: {}", getGeneralEmailStg());
 				setGeneralEmail(getGeneralEmailStg());
 			}
-			break;
-		default:
+		} else if (ENV_DEV.equals(tenantEnv)) {
+			if (getGeneralEmailDev() != null) {
+				log.trace("Set generalEmail from dev: {}", getGeneralEmailDev());
+				setGeneralEmail(getGeneralEmailDev());
+			}
+		} else {
 			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'");
 		}
 	}
