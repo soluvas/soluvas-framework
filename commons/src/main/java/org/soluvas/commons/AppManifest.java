@@ -77,6 +77,11 @@ import org.soluvas.commons.util.AppUtils;
  * @generated
  */
 public interface AppManifest extends Positionable, ResourceAware, BundleAware, Expandable {
+	
+	public static final String ENV_DEV = "dev";
+	public static final String ENV_STG_PREFIX = "st";
+	public static final String ENV_PRD = "prd";
+	
 	/**
 	 * Returns the value of the '<em><b>Title</b></em>' attribute.
 	 * <!-- begin-user-doc -->
