@@ -21,7 +21,12 @@
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.commons</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>org.soluvas</groupId>
+			<artifactId>org.soluvas.mongo</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
