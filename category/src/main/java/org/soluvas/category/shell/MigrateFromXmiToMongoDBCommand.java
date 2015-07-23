@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.apache.felix.gogo.commands.Command;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.soluvas.category.Category;
 import org.soluvas.category.Category2;
 import org.soluvas.category.CategoryRepository;
@@ -35,7 +34,7 @@ public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
 		final CategoryRepository xmiRepo = getBean(CategoryRepository.class);
 		final MongoCategoryRepository mongoRepo = getBean(MongoCategoryRepository.class);
 		
-		final List<Category> categories = xmiRepo.findAllByLevelAndStatus(ImmutableList.of(CategoryStatus.ACTIVE, CategoryStatus.VOID), 1, false, new CappedRequest(500)).getContent();
+		final List<Category> categories = xmiRepo.findAllByStatus(ImmutableList.of(CategoryStatus.ACTIVE, CategoryStatus.VOID), new CappedRequest(500)).getContent();
 		System.err.println(String.format("Migrate for %s categories", categories.size()));
 		for (final Category category : categories) {
 			final Category2 category2 = new CategoryXmiToMongo().apply(category);
@@ -52,9 +51,6 @@ public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
 		public Category2 apply(Category input) {
 			log.debug("Creating category2 from {}", input.getId());
 			final Category2 category2 = new Category2();
-			if ( !input.getCategories().isEmpty() ) {
-				category2.getCategories().addAll( EcoreUtil.copyAll(input.getCategories()).stream().map(c -> new CategoryXmiToMongo().apply(c)).collect(Collectors.toList()) );
-			}
 			category2.setCategoryCount(input.getCategoryCount());
 			category2.setColor( input.getColor() );
 			category2.setCreationTime( input.getCreationTime() );
@@ -71,12 +67,8 @@ public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
 			category2.setName( input.getName() );
 			category2.setNsPrefix( input.getNsPrefix() );
 			if (input.getParent() != null) {
-				final Category parentOnly = EcoreUtil.copy(input.getParent());
-				parentOnly.getCategories().clear();
-				
-				category2.setParent( new CategoryXmiToMongo().apply( parentOnly ) );
+				category2.setParentId( input.getParent().getId());
 			}
-			category2.setParentUName( input.getParentUName() );
 			category2.setPositioner( input.getPositioner() );
 			category2.setPrimaryUri( input.getPrimaryUri() );
 			category2.getSameAsUris().addAll( input.getSameAsUris() );
@@ -91,7 +83,6 @@ public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
 							entry.getValue().getMessages().entrySet().stream().collect(Collectors.toMap(msg -> msg.getKey(), msg -> msg.getValue())));
 				}
 				category2.setTranslations(newTranslation);
-//			category2.getTranslations().putAll( input.getTranslations().entrySet().stream().collect(Collectors.toMap(e -> e.getKey(), e -> (Map<String, String>) e.getValue().getMessages())) );
 			}
 			
 			return category2;

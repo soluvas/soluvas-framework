@@ -2,9 +2,7 @@ package org.soluvas.category;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,8 +31,6 @@ import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Id;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
 /**
  * @author rudi
@@ -71,10 +67,8 @@ public class Category2 implements Serializable, Identifiable {
 	private String metaKeywords;
 	private String metaTitle;
 	private Long googleFormalId;
-	private final List<Category2> categories = new ArrayList<>();
 	private String primaryUri;
-	private String parentUName;
-	private Category2 parent;
+	private String parentId;
 	private String language;
 	private final Set<PropertyDefinition> propertyOverrides = new HashSet<>();
 	private final Set<String> tags = new HashSet<String>();
@@ -311,12 +305,6 @@ public class Category2 implements Serializable, Identifiable {
 		this.googleFormalId = googleFormalId;
 	}
 	/**
-	 * @return the categories
-	 */
-	public List<Category2> getCategories() {
-		return categories;
-	}
-	/**
 	 * @return the primaryUri
 	 */
 	public String getPrimaryUri() {
@@ -329,28 +317,16 @@ public class Category2 implements Serializable, Identifiable {
 		this.primaryUri = primaryUri;
 	}
 	/**
-	 * @return the parentUName
+	 * @return the parentId
 	 */
-	public String getParentUName() {
-		return parentUName;
+	public String getParentId() {
+		return parentId;
 	}
 	/**
-	 * @param parentUName the parentUName to set
+	 * @param parentId the parentId to set
 	 */
-	public void setParentUName(String parentUName) {
-		this.parentUName = parentUName;
-	}
-	/**
-	 * @return the parent
-	 */
-	public Category2 getParent() {
-		return parent;
-	}
-	/**
-	 * @param parent the parent to set
-	 */
-	public void setParent(Category2 parent) {
-		this.parent = parent;
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 	/**
 	 * @return the language
@@ -454,6 +430,7 @@ public class Category2 implements Serializable, Identifiable {
 	public Set<String> getSameAsUris() {
 		return sameAsUris;
 	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -468,11 +445,12 @@ public class Category2 implements Serializable, Identifiable {
 				+ modificationTime + ", translations=" + translations
 				+ ", status=" + status + ", metaDescription=" + metaDescription
 				+ ", metaKeywords=" + metaKeywords + ", metaTitle=" + metaTitle
-				+ ", googleFormalId=" + googleFormalId + ", categories="
-				+ categories + ", primaryUri=" + primaryUri + ", parent="
-				+ parent + "]";
+				+ ", googleFormalId=" + googleFormalId + ", primaryUri="
+				+ primaryUri + ", parentId=" + parentId + ", language="
+				+ language + ", propertyOverrides=" + propertyOverrides
+				+ ", tags=" + tags + ", sameAsUris=" + sameAsUris + "]";
 	}
-	
+
 	public class ToCategoryInfo implements Function<Category2, CategoryInfo2> {
 		
 		private final String curLanguageTag;
@@ -485,14 +463,6 @@ public class Category2 implements Serializable, Identifiable {
 		public ToCategoryInfo(final String curLanguageTag) {
 			super();
 			this.curLanguageTag = curLanguageTag;
-		}
-		
-		private Iterable<Category2> getParents(Category2 child) {
-			if (child.getParent() != null) {
-				return Iterables.concat(getParents(child.getParent()), ImmutableList.of(child.getParent()));
-			} else {
-				return ImmutableList.of();
-			}
 		}
 		
 		@Override @Nullable
@@ -510,12 +480,9 @@ public class Category2 implements Serializable, Identifiable {
 			catInfo.setSlugPath(cat.getSlugPath());
 			catInfo.setPrimaryUri(cat.getPrimaryUri());
 			
-			if (cat.getParent() != null) {
-				catInfo.setParent(cat.getParent().toInfo(this.curLanguageTag));
+			if (cat.getParentId() != null) {
+				catInfo.setParentId(cat.getParentId());
 			}
-			final List<Category2> parentCats = ImmutableList.copyOf(getParents(cat));
-			final List<CategoryInfo2> parentInfos = ImmutableList.copyOf(Iterables.transform(parentCats, this));
-			catInfo.getParents().addAll(parentInfos);
 			
 			return catInfo;
 		}

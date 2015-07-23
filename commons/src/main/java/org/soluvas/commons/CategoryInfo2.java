@@ -1,8 +1,6 @@
 package org.soluvas.commons;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author rudi
@@ -24,8 +22,7 @@ public class CategoryInfo2 implements Serializable {
 	private Long categoryCount;
 	private Long googleFormalId;
 	private String primaryUri;
-	private CategoryInfo2 parent;
-	private final List<CategoryInfo2> parents = new ArrayList<>();
+	private String parentId;
 	/**
 	 * @return the id
 	 */
@@ -171,22 +168,16 @@ public class CategoryInfo2 implements Serializable {
 		this.primaryUri = primaryUri;
 	}
 	/**
-	 * @return the parent
+	 * @return the parentId
 	 */
-	public CategoryInfo2 getParent() {
-		return parent;
+	public String getParentId() {
+		return parentId;
 	}
 	/**
-	 * @param parent the parent to set
+	 * @param parentId the parentId to set
 	 */
-	public void setParent(CategoryInfo2 parent) {
-		this.parent = parent;
-	}
-	/**
-	 * @return the parents
-	 */
-	public List<CategoryInfo2> getParents() {
-		return parents;
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -198,8 +189,7 @@ public class CategoryInfo2 implements Serializable {
 				+ ", imageId=" + imageId + ", slugPath=" + slugPath
 				+ ", color=" + color + ", level=" + level + ", categoryCount="
 				+ categoryCount + ", googleFormalId=" + googleFormalId
-				+ ", primaryUri=" + primaryUri + ", parent=" + parent
-				+ ", parents=" + parents + "]";
+				+ ", primaryUri=" + primaryUri + ", parentId=" + parentId + "]";
 	}
 	
 }
