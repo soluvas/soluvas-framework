@@ -6,11 +6,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.soluvas.category.Category;
 import org.soluvas.category.Category2;
 import org.soluvas.category.CategoryRepository;
 import org.soluvas.category.CategoryStatus;
+import org.soluvas.category.FormalCategory;
+import org.soluvas.category.FormalCategoryRepository;
 import org.soluvas.category.MongoCategoryRepository;
 import org.soluvas.commons.Translation;
 import org.soluvas.commons.shell.ExtCommandSupport;
@@ -19,6 +22,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Function;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 
 /**
@@ -28,16 +32,23 @@ import com.google.common.collect.ImmutableList;
 @Service @Lazy
 @Command(scope="cat", name="migrate", description="Migrate categories from xmi file to mongoDB.")
 public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
+	
+	@Argument(index = 0, name = "formalcategoryid", required = true, description = "Formal category from Google.")
+	private Long googleFormalId;
 
 	@Override
 	protected Object doExecute() throws Exception {
 		final CategoryRepository xmiRepo = getBean(CategoryRepository.class);
 		final MongoCategoryRepository mongoRepo = getBean(MongoCategoryRepository.class);
+		final FormalCategoryRepository formalCategoryRepo = getBean(FormalCategoryRepository.class);
+		
+		final FormalCategory formalCategory = Preconditions.checkNotNull(formalCategoryRepo.findOne(googleFormalId),
+				"Formal Category for '%s' must not be null", googleFormalId);
 		
 		final List<Category> categories = xmiRepo.findAllByStatus(ImmutableList.of(CategoryStatus.ACTIVE, CategoryStatus.VOID), new CappedRequest(500)).getContent();
 		System.err.println(String.format("Migrate for %s categories", categories.size()));
 		for (final Category category : categories) {
-			final Category2 category2 = new CategoryXmiToMongo().apply(category);
+			final Category2 category2 = new CategoryXmiToMongo(formalCategory).apply(category);
 			mongoRepo.add(category2);
 		}
 		System.err.println(String.format("Migrated for %s categories", categories.size()));
@@ -47,6 +58,12 @@ public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
 	
 	private class CategoryXmiToMongo implements Function<Category, Category2> {
 		
+		private final FormalCategory formalCategory;
+
+		public CategoryXmiToMongo(FormalCategory formalCategory) {
+			this.formalCategory = formalCategory;
+		}
+
 		@Override
 		public Category2 apply(Category input) {
 			log.debug("Creating category2 from {}", input.getId());
@@ -55,7 +72,8 @@ public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
 			category2.setColor( input.getColor() );
 			category2.setCreationTime( input.getCreationTime() );
 			category2.setDescription( input.getDescription() );
-			category2.setGoogleFormalId( input.getGoogleFormalId() );
+			category2.setGoogleFormalId( 
+					input.getGoogleFormalId() != null ? input.getGoogleFormalId() : formalCategory.getGoogleId() );
 			category2.setId( input.getId() );
 			category2.setImageId( input.getImageId() );
 			category2.setLanguage( input.getLanguage() );
@@ -84,6 +102,7 @@ public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
 				}
 				category2.setTranslations(newTranslation);
 			}
+			category2.getPropertyOverrides().addAll(formalCategory.getPropertyOverrides());
 			
 			return category2;
 		}

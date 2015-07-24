@@ -23,11 +23,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CategoryInfo2;
 import org.soluvas.commons.Identifiable;
-import org.soluvas.commons.mongo.DateTimeConverter;
 import org.soluvas.data.PropertyDefinition;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Id;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -36,7 +34,7 @@ import com.google.common.base.Optional;
  * @author rudi
  *
  */
-@Converters(DateTimeConverter.class)
+//@Converters({DateTimeConverter.class, UnitConverter.class})
 public class Category2 implements Serializable, Identifiable {
 	
 	private static final long serialVersionUID = 1L;
@@ -71,7 +69,7 @@ public class Category2 implements Serializable, Identifiable {
 	private String parentId;
 	private String language;
 	private final Set<PropertyDefinition> propertyOverrides = new HashSet<>();
-	private final Set<String> tags = new HashSet<String>();
+	private final Set<String> tags = new HashSet<>();
 	private final Set<String> sameAsUris = new HashSet<>();
 	
 	/**
