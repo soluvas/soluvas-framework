@@ -1,5 +1,6 @@
 package org.soluvas.data;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
@@ -22,8 +23,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property="@type", defaultImpl=PropertyDefinition.class)
 @JsonSubTypes(@JsonSubTypes.Type(name="PropertyDefinition", value=PropertyDefinition.class))
-public class PropertyDefinition {
+public class PropertyDefinition implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
 	private String description;
 	private Integer positioner;
