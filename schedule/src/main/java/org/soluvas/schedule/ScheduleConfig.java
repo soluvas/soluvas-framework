@@ -6,7 +6,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
-import com.google.common.base.Preconditions;
 import org.quartz.ListenerManager;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -25,6 +24,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
+
+import com.google.common.base.Preconditions;
 
 /**
  * One global {@link Scheduler} in {@code PUBLIC} schema for all tenants, including the app itself.
@@ -85,6 +86,10 @@ public class ScheduleConfig {
 		schedulerFactoryBean.setDataSource(dataSource);
 		schedulerFactoryBean.setTransactionManager(dsTxMgr);
 		final Properties props = new Properties();
+		//http://stackoverflow.com/questions/8473863/how-to-avoid-two-jobs-running-at-the-same-time-in-quartz
+		props.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
+		props.put("org.quartz.threadPool.threadCount", String.valueOf(1));
+		
 		props.put("org.quartz.jobStore.driverDelegateClass", PostgreSQLDelegate.class.getName());
 		props.put(StdSchedulerFactory.PROP_SCHED_SKIP_UPDATE_CHECK, "true");
 		props.put(StdSchedulerFactory.PROP_JOB_STORE_PREFIX + "." + StdSchedulerFactory.PROP_TABLE_PREFIX, "public.qrtz_");
