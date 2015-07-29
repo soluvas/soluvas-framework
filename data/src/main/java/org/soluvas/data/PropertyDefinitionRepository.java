@@ -1,6 +1,7 @@
 package org.soluvas.data;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -43,5 +44,9 @@ public interface PropertyDefinitionRepository {
 	PropertyDefinition findOneBase(String id) throws EntityLookupException;
 
 	void init() throws JsonParseException, JsonMappingException, IOException;
+	
+	Map<String, PropertyDefinition> findAllBaseAsMap();
+	
+	Set<String> getDefaultEnums();
 
 }

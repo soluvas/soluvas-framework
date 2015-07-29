@@ -78,6 +78,8 @@ public class ConvertFormalCategoryOdsToJsonTest {
 		final List<FormalCategory> formalCategories = new ArrayList<>();
 		final Map<String, Long> googleIdMap = new HashMap<>();
 		
+		final Map<String, PropertyDefinition> propDefMap = proDefRepo.findAllBaseAsMap();
+		
 		for (int i = 1; i < MAX_ROW; i++) {
 			//start to loop rows
 			final Row row = sheet.getRowByIndex(i);
@@ -146,6 +148,7 @@ public class ConvertFormalCategoryOdsToJsonTest {
 					
 					if (optEnum != null || optQuantity != null || optUnit != null || optName_en != null || optDescription_en != null || optName_id != null || optDescription_id != null) {
 						final PropertyDefinition propertyOverride = new PropertyDefinition();
+						propertyOverride.setEnabled(true);
 						propertyOverride.setId(optId);
 						if (optEnum != null) {
 							propertyOverride.setDefaultKind(PropertyKind.ENUMERATION);
@@ -185,7 +188,7 @@ public class ConvertFormalCategoryOdsToJsonTest {
 			for (int j = 0; j < 10; j++) {
 				final String property = Strings.emptyToNull(row.getCellByIndex(54 + j).getStringValue());
 				if (!Strings.isNullOrEmpty(property)) {
-					propertyOverrideb.add( Preconditions.checkNotNull(proDefRepo.findOneBase(property),
+					propertyOverrideb.add( Preconditions.checkNotNull(propDefMap.get(property),
 							"Soluvas Property Definition must not be null by id '%s'", property) );
 				}
 			}

@@ -734,6 +734,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -745,6 +746,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -841,6 +843,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -852,6 +855,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -948,6 +952,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -959,6 +964,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -1055,6 +1061,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -1066,6 +1073,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -1162,6 +1170,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -1173,6 +1182,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -1269,6 +1279,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -1280,6 +1291,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -1376,6 +1388,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -1387,6 +1400,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -1483,6 +1497,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -1494,6 +1509,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -1590,6 +1606,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -1601,6 +1618,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -1697,6 +1715,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -1708,6 +1727,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -1804,6 +1824,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -1815,6 +1836,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -1911,6 +1933,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -1922,6 +1945,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2018,6 +2042,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2029,6 +2054,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2125,6 +2151,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2136,6 +2163,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2232,6 +2260,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2243,6 +2272,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2339,6 +2369,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2350,6 +2381,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2446,6 +2478,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2457,6 +2490,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2553,6 +2587,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2564,6 +2599,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2660,6 +2696,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2671,6 +2708,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2767,6 +2805,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2778,6 +2817,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2874,6 +2914,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2885,6 +2926,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -2981,6 +3023,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -2992,6 +3035,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -3088,6 +3132,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -3099,6 +3144,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -3195,6 +3241,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -3206,6 +3253,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -3302,6 +3350,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -3313,6 +3362,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -3409,6 +3459,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -3420,6 +3471,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -3516,6 +3568,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -3527,6 +3580,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -3623,6 +3677,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -3634,6 +3689,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -3730,6 +3786,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -3741,6 +3798,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -3837,6 +3895,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -3848,6 +3907,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -3944,6 +4004,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -3955,6 +4016,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -4051,6 +4113,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -4062,6 +4125,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -4158,6 +4222,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -4169,6 +4234,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -4265,6 +4331,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -4276,6 +4343,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -4373,6 +4441,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -4384,6 +4453,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -4480,6 +4550,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -4491,6 +4562,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -4587,6 +4659,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -4598,6 +4671,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -4694,6 +4768,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -4705,6 +4780,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -4801,6 +4877,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -4812,6 +4889,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -4908,6 +4986,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -4919,6 +4998,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5015,6 +5095,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5026,6 +5107,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5123,6 +5205,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5134,6 +5217,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5230,6 +5314,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5241,6 +5326,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5337,6 +5423,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5348,6 +5435,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5444,6 +5532,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5455,6 +5544,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5552,6 +5642,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5563,6 +5654,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5659,6 +5751,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5670,6 +5763,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5767,6 +5861,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5778,6 +5873,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5875,6 +5971,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5886,6 +5983,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -5982,6 +6080,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -5993,6 +6092,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -6090,6 +6190,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -6101,6 +6202,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -6197,6 +6299,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -6208,6 +6311,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -6304,6 +6408,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -6315,6 +6420,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -6411,6 +6517,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -6422,6 +6529,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -6518,6 +6626,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -6529,6 +6638,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -6625,6 +6735,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -6636,6 +6747,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -6732,6 +6844,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -6743,6 +6856,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -6839,6 +6953,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -6850,6 +6965,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -6946,6 +7062,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -6957,6 +7074,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -7053,6 +7171,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -7064,6 +7183,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -7160,6 +7280,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -7171,6 +7292,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -7267,6 +7389,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -7278,6 +7401,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -7374,6 +7498,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -7385,6 +7510,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -7481,6 +7607,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -7492,6 +7619,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -7588,6 +7716,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -7599,6 +7728,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -7695,6 +7825,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -7706,6 +7837,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -7802,6 +7934,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -7813,6 +7946,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -7909,6 +8043,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -7920,6 +8055,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8016,6 +8152,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8027,6 +8164,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8123,6 +8261,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8134,6 +8273,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8230,6 +8370,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8241,6 +8382,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8337,6 +8479,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8348,6 +8491,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8444,6 +8588,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8455,6 +8600,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8551,6 +8697,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8562,6 +8709,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8658,6 +8806,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8669,6 +8818,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8765,6 +8915,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8776,6 +8927,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8872,6 +9024,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8883,6 +9036,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -8979,6 +9133,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -8990,6 +9145,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -9086,6 +9242,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -9097,6 +9254,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -9193,6 +9351,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -9204,6 +9363,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -9300,6 +9460,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -9311,6 +9472,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -9407,6 +9569,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -9418,6 +9581,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -9514,6 +9678,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -9525,6 +9690,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -9621,6 +9787,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -9632,6 +9799,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -9728,6 +9896,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -9739,6 +9908,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -9835,6 +10005,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -9846,6 +10017,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -9942,6 +10114,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -9953,6 +10126,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -10049,6 +10223,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -10060,6 +10235,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -10156,6 +10332,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -10167,6 +10344,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -10263,6 +10441,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -10274,6 +10453,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -10370,6 +10550,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -10381,6 +10562,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -10477,6 +10659,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -10488,6 +10671,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -10584,6 +10768,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -10595,6 +10780,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -10691,6 +10877,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -10702,6 +10889,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -10798,6 +10986,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -10809,6 +10998,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -10905,6 +11095,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -10916,6 +11107,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11012,6 +11204,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11023,6 +11216,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11119,6 +11313,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11130,6 +11325,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11226,6 +11422,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11237,6 +11434,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11333,6 +11531,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11344,6 +11543,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11440,6 +11640,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11451,6 +11652,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11547,6 +11749,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11558,6 +11761,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11654,6 +11858,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11665,6 +11870,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11761,6 +11967,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11772,6 +11979,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11868,6 +12076,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11879,6 +12088,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -11975,6 +12185,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -11986,6 +12197,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -12082,6 +12294,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -12093,6 +12306,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -12189,6 +12403,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -12200,6 +12415,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -12296,6 +12512,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -12307,6 +12524,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -12403,6 +12621,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -12414,6 +12633,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -12510,6 +12730,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -12521,6 +12742,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -12617,6 +12839,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -12628,6 +12851,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -12724,6 +12948,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -12735,6 +12960,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -12831,6 +13057,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -12842,6 +13069,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -12938,6 +13166,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -12949,6 +13178,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -13045,6 +13275,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -13056,6 +13287,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -13152,6 +13384,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -13163,6 +13396,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -13259,6 +13493,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -13270,6 +13505,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -13366,6 +13602,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -13377,6 +13614,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -13473,6 +13711,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -13484,6 +13723,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -13580,6 +13820,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -13591,6 +13832,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -13687,6 +13929,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -13698,6 +13941,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -13794,6 +14038,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -13805,6 +14050,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -13901,6 +14147,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -13912,6 +14159,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14008,6 +14256,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14019,6 +14268,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14115,6 +14365,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14126,6 +14377,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14222,6 +14474,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14233,6 +14486,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14329,6 +14583,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14340,6 +14595,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14436,6 +14692,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14447,6 +14704,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14543,6 +14801,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14554,6 +14813,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14650,6 +14910,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14661,6 +14922,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14757,6 +15019,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14768,6 +15031,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14864,6 +15128,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14875,6 +15140,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -14971,6 +15237,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -14982,6 +15249,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -15078,6 +15346,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -15089,6 +15358,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -15185,6 +15455,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -15196,6 +15467,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -15292,6 +15564,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -15303,6 +15576,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -15399,6 +15673,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -15410,6 +15685,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -15506,6 +15782,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -15517,6 +15794,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -15613,6 +15891,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -15624,6 +15903,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -15720,6 +16000,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -15731,6 +16012,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -15827,6 +16109,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -15838,6 +16121,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -15934,6 +16218,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -15945,6 +16230,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -16041,6 +16327,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -16052,6 +16339,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -16148,6 +16436,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -16159,6 +16448,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -16255,6 +16545,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -16266,6 +16557,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -16362,6 +16654,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -16373,6 +16666,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -16469,6 +16763,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -16480,6 +16775,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -16576,6 +16872,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -16587,6 +16884,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -16683,6 +16981,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -16694,6 +16993,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -16790,6 +17090,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -16801,6 +17102,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -16897,6 +17199,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -16908,6 +17211,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17004,6 +17308,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17015,6 +17320,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17111,6 +17417,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17122,6 +17429,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17218,6 +17526,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17229,6 +17538,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17325,6 +17635,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17336,6 +17647,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17432,6 +17744,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17443,6 +17756,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17539,6 +17853,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17550,6 +17865,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17646,6 +17962,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17657,6 +17974,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17753,6 +18071,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17764,6 +18083,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17860,6 +18180,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17871,6 +18192,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -17967,6 +18289,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -17978,6 +18301,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -18074,6 +18398,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -18085,6 +18410,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -18181,6 +18507,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -18192,6 +18519,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -18288,6 +18616,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -18299,6 +18628,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -18395,6 +18725,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -18406,6 +18737,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -18502,6 +18834,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -18513,6 +18846,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -18609,6 +18943,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -18620,6 +18955,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -18716,6 +19052,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -18727,6 +19064,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -18823,6 +19161,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -18834,6 +19173,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -18930,6 +19270,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -18941,6 +19282,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -19037,6 +19379,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -19048,6 +19391,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -19144,6 +19488,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -19155,6 +19500,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -19251,6 +19597,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -19262,6 +19609,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -19358,6 +19706,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -19369,6 +19718,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -19465,6 +19815,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -19476,6 +19827,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -19572,6 +19924,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -19583,6 +19936,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -19679,6 +20033,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -19690,6 +20045,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -19786,6 +20142,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -19797,6 +20154,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -19893,6 +20251,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -19904,6 +20263,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20000,6 +20360,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20011,6 +20372,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20107,6 +20469,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20118,6 +20481,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20214,6 +20578,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20225,6 +20590,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20321,6 +20687,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20332,6 +20699,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20428,6 +20796,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20439,6 +20808,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20535,6 +20905,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20546,6 +20917,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20642,6 +21014,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20653,6 +21026,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20749,6 +21123,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20760,6 +21135,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20856,6 +21232,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20867,6 +21244,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -20963,6 +21341,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -20974,6 +21353,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -21070,6 +21450,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -21081,6 +21462,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -21177,6 +21559,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -21188,6 +21571,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -21284,6 +21668,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -21295,6 +21680,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -21391,6 +21777,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -21402,6 +21789,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -21498,6 +21886,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -21509,6 +21898,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -21605,6 +21995,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -21616,6 +22007,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -21712,6 +22104,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -21723,6 +22116,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -21819,6 +22213,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -21830,6 +22225,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -21926,6 +22322,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -21937,6 +22334,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22033,6 +22431,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -22044,6 +22443,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22140,6 +22540,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -22151,6 +22552,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22247,6 +22649,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -22258,6 +22661,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22354,6 +22758,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -22365,6 +22770,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22461,6 +22867,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -22472,6 +22879,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22568,6 +22976,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -22579,6 +22988,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22675,6 +23085,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -22686,6 +23097,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22782,6 +23194,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -22793,6 +23206,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22889,6 +23303,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -22900,6 +23315,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -22996,6 +23412,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23007,6 +23424,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -23103,6 +23521,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23114,6 +23533,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -23210,6 +23630,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23221,6 +23642,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -23317,6 +23739,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23328,6 +23751,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -23424,6 +23848,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23435,6 +23860,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Apparel Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "apparelSize",
       "translations" : {
@@ -23531,6 +23957,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23542,6 +23969,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Shoes Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "shoesSize",
       "translations" : {
@@ -23606,6 +24034,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23617,6 +24046,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Shoes Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "shoesSize",
       "translations" : {
@@ -23681,6 +24111,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23692,6 +24123,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Shoes Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "shoesSize",
       "translations" : {
@@ -23756,6 +24188,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23767,6 +24200,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Shoes Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "shoesSize",
       "translations" : {
@@ -23831,6 +24265,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23842,6 +24277,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Shoes Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "shoesSize",
       "translations" : {
@@ -23906,6 +24342,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23917,6 +24354,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Shoes Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "shoesSize",
       "translations" : {
@@ -23981,6 +24419,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "Color",
       "translations" : {
@@ -23992,6 +24431,7 @@
       "@type" : "PropertyDefinition",
       "id" : "size",
       "name" : "Shoes Size",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "shoesSize",
       "translations" : {
@@ -31606,6 +32046,7 @@
       "id" : "size",
       "description" : "There is a direct correlation between recommended screen size and seating distance. The farther away you sit, obviously, the smaller your TV appears. The ideal is to have a screen that fills a certain amount of your field of view, though how much is \"ideal\" is up for debate.",
       "name" : "Screen Size",
+      "enabled" : true,
       "defaultKind" : "MEASUREMENT",
       "defaultQuantity" : "Length",
       "defaultUnit" : "in",
@@ -31619,6 +32060,7 @@
       "@type" : "PropertyDefinition",
       "id" : "color",
       "name" : "Color",
+      "enabled" : true,
       "defaultKind" : "ENUMERATION",
       "defaultEnum" : "color",
       "translations" : {

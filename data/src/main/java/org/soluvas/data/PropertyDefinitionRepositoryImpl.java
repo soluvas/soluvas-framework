@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
@@ -232,6 +233,16 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 					StatusMask.RAW, LookupKey.ID, id);
 		}
 		return basePropertyDefinitions.get(id);
+	}
+
+	@Override
+	public Map<String, PropertyDefinition> findAllBaseAsMap() {
+		return basePropertyDefinitions;
+	}
+
+	@Override
+	public Set<String> getDefaultEnums() {
+		return basePropertyDefinitions.entrySet().stream().filter(e -> e.getValue().getDefaultKind() == PropertyKind.ENUMERATION).map(e -> e.getValue().getDefaultEnum()).collect(Collectors.toSet());
 	}
 	
 }
