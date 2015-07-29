@@ -86,9 +86,10 @@ public class ScheduleConfig {
 		schedulerFactoryBean.setDataSource(dataSource);
 		schedulerFactoryBean.setTransactionManager(dsTxMgr);
 		final Properties props = new Properties();
+		//GA EFFECT T.T untuk: https://idbippo.atlassian.net/browse/BC-3222
 		//http://stackoverflow.com/questions/8473863/how-to-avoid-two-jobs-running-at-the-same-time-in-quartz
-		props.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
-		props.put("org.quartz.threadPool.threadCount", String.valueOf(1));
+//		props.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
+//		props.put("org.quartz.threadPool.threadCount", String.valueOf(1));
 		
 		props.put("org.quartz.jobStore.driverDelegateClass", PostgreSQLDelegate.class.getName());
 		props.put(StdSchedulerFactory.PROP_SCHED_SKIP_UPDATE_CHECK, "true");
