@@ -27,6 +27,9 @@ public class PropertyDefinition implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	public final static String NAME_ATTR = "name";
+	public final static String DESCRIPTION_ATTR = "description";
+	
 	private String id;
 	private String description;
 	private Integer positioner;

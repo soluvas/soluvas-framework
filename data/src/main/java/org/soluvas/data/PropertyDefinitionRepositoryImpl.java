@@ -3,10 +3,12 @@ package org.soluvas.data;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,13 +19,19 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.Pageable;
 import org.soluvas.json.JsonUtils;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.google.common.base.Strings;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
+import com.google.common.collect.Iterables;
 
 /**
  * Read {@link PropertyDefinition} objects from/to JSON-LD files.
@@ -243,6 +251,63 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 	@Override
 	public Set<String> getDefaultEnums() {
 		return basePropertyDefinitions.entrySet().stream().filter(e -> e.getValue().getDefaultKind() == PropertyKind.ENUMERATION).map(e -> e.getValue().getDefaultEnum()).collect(Collectors.toSet());
+	}
+
+	@Override
+	public Page<PropertyDefinition> findAllBaseBySearchText(String searchText, Pageable pageable) {
+		final Set<Entry<String, PropertyDefinition>> found = doFindAll(pageable, searchText);
+		log.debug("Collecting {} PropertyDefinitions by term '{}' and page {}", found.size(), searchText, pageable);
+		final List<PropertyDefinition> collect = found.stream().map(entry -> entry.getValue()).collect(Collectors.toList());
+		log.debug("Collected {} PropertyDefinitions by term '{}' and page {}", collect.size(), searchText, pageable);
+		return new PageImpl<>(ImmutableList.copyOf( collect ),
+				pageable, countBase());
+	}
+	
+	private Set<Entry<String, PropertyDefinition>> doFindAll(Pageable pageable, @Nullable String term) {
+//		log.debug("Try to findAll by term '{}' and page {} from {} formalCategories",
+//				term, pageable, formalCategories.size());
+		
+		final Map<String, PropertyDefinition> paged; 
+		if (!Strings.isNullOrEmpty(term)) {
+			final Map<String, PropertyDefinition> filtered = basePropertyDefinitions.entrySet().stream()
+					.filter( entry -> entry.getValue().getName().startsWith(term.toLowerCase()) )
+					.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+			paged = doPaging(filtered, pageable);
+		} else {
+			paged = doPaging(basePropertyDefinitions, pageable);
+		}
+		if (pageable.getSort() != null) {
+//			log.debug("Sorting {} paged formalCategories use {}", paged.size(), pageable.getSort());
+//			final TreeMap<Long, FormalCategory> sorted = new TreeMap<>(new ValueComparator(paged, pageable.getSort()));
+//			log.debug("Got {} sorted formalCategories by term '{}' and page {} from {} formalCategories: {}",
+//					sorted.size(), term, pageable, formalCategories.size(), Iterables.limit(sorted.entrySet(), 5));
+//
+//			return sorted.entrySet();
+			log.warn("Sorting is still not working!!");
+			return paged.entrySet();
+		} else {
+			log.debug("Got {} paged formalCategories by term '{}' and page {} from {} formalCategories: {}",
+					paged.size(), term, pageable, basePropertyDefinitions.size(), Iterables.limit(paged.entrySet(), 5));
+			return paged.entrySet();
+		}
+	}
+	
+	private Map<String, PropertyDefinition> doPaging(final Map<String, PropertyDefinition> unpagedPropertyDefinitions, final Pageable pageable) {
+		final Map<String, PropertyDefinition> paged = FluentIterable.from(unpagedPropertyDefinitions.entrySet())
+				.skip((int) pageable.getOffset()).limit((int) pageable.getPageSize())
+				.toList().stream().collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+		return paged;
+	}
+	
+	@Override
+	public long countBase() {
+		return basePropertyDefinitions.size();
+	}
+
+	@Override
+	public ImmutableList<PropertyDefinition> findAllBase(Collection<String> ids) {
+		return ImmutableList.copyOf(basePropertyDefinitions.entrySet().stream().filter(e -> ids.contains(e.getKey()))
+				.map(it -> it.getValue()).collect(Collectors.toList()));
 	}
 	
 }

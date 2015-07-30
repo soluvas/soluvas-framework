@@ -1,8 +1,12 @@
 package org.soluvas.data;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.Pageable;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -48,5 +52,11 @@ public interface PropertyDefinitionRepository {
 	Map<String, PropertyDefinition> findAllBaseAsMap();
 	
 	Set<String> getDefaultEnums();
+	
+	Page<PropertyDefinition> findAllBaseBySearchText(String searchText, Pageable pageable);
+	
+	ImmutableList<PropertyDefinition> findAllBase(Collection<String> ids);
+
+	long countBase();
 
 }
