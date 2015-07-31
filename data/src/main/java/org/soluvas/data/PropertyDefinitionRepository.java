@@ -53,7 +53,7 @@ public interface PropertyDefinitionRepository {
 	
 	Set<String> getDefaultEnums();
 	
-	Page<PropertyDefinition> findAllBaseBySearchText(String searchText, Pageable pageable);
+	Page<PropertyDefinition> findAllBaseBySearchText(String searchText, Set<String> excludedIds, Pageable pageable);
 	
 	ImmutableList<PropertyDefinition> findAllBase(Collection<String> ids);
 

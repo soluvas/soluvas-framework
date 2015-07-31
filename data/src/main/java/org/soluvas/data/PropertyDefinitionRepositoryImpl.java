@@ -254,8 +254,8 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 	}
 
 	@Override
-	public Page<PropertyDefinition> findAllBaseBySearchText(String searchText, Pageable pageable) {
-		final Set<Entry<String, PropertyDefinition>> found = doFindAll(pageable, searchText);
+	public Page<PropertyDefinition> findAllBaseBySearchText(String searchText, Set<String> excludedIds, Pageable pageable) {
+		final Set<Entry<String, PropertyDefinition>> found = doFindAll(searchText, excludedIds, pageable);
 		log.debug("Collecting {} PropertyDefinitions by term '{}' and page {}", found.size(), searchText, pageable);
 		final List<PropertyDefinition> collect = found.stream().map(entry -> entry.getValue()).collect(Collectors.toList());
 		log.debug("Collected {} PropertyDefinitions by term '{}' and page {}", collect.size(), searchText, pageable);
@@ -263,18 +263,27 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 				pageable, countBase());
 	}
 	
-	private Set<Entry<String, PropertyDefinition>> doFindAll(Pageable pageable, @Nullable String term) {
+	private Set<Entry<String, PropertyDefinition>> doFindAll(@Nullable String term, Set<String> excludedIds, Pageable pageable) {
 //		log.debug("Try to findAll by term '{}' and page {} from {} formalCategories",
 //				term, pageable, formalCategories.size());
 		
+		final Map<String, PropertyDefinition> tmpBasePropertyDefinitionMap;
+		if (!excludedIds.isEmpty()) {
+			tmpBasePropertyDefinitionMap = basePropertyDefinitions.entrySet().stream()
+					.filter( entry -> !excludedIds.contains(entry.getValue().getId()) )
+					.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+		} else {
+			tmpBasePropertyDefinitionMap = basePropertyDefinitions;
+		}
+		
 		final Map<String, PropertyDefinition> paged; 
 		if (!Strings.isNullOrEmpty(term)) {
-			final Map<String, PropertyDefinition> filtered = basePropertyDefinitions.entrySet().stream()
+			final Map<String, PropertyDefinition> filtered = tmpBasePropertyDefinitionMap.entrySet().stream()
 					.filter( entry -> entry.getValue().getName().startsWith(term.toLowerCase()) )
 					.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 			paged = doPaging(filtered, pageable);
 		} else {
-			paged = doPaging(basePropertyDefinitions, pageable);
+			paged = doPaging(tmpBasePropertyDefinitionMap, pageable);
 		}
 		if (pageable.getSort() != null) {
 //			log.debug("Sorting {} paged formalCategories use {}", paged.size(), pageable.getSort());
@@ -286,8 +295,8 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 			log.warn("Sorting is still not working!!");
 			return paged.entrySet();
 		} else {
-			log.debug("Got {} paged formalCategories by term '{}' and page {} from {} formalCategories: {}",
-					paged.size(), term, pageable, basePropertyDefinitions.size(), Iterables.limit(paged.entrySet(), 5));
+			log.debug("Got {} paged propertyDefinitions by term '{}' and page {} from {} tmpPropertyDefinitions: {}",
+					paged.size(), term, pageable, tmpBasePropertyDefinitionMap.size(), Iterables.limit(paged.entrySet(), 5));
 			return paged.entrySet();
 		}
 	}
