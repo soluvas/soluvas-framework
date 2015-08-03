@@ -234,12 +234,27 @@
     "language" : "en-US"
   }, {
     "@type" : "PropertyDefinition",
-    "id" : "size",
-    "name" : "Size",
+    "id" : "shoeSize",
+    "name" : "Show Size",
     "description" : "Size affects the dimensions of the product, can be width, length, and height, or the overral weight.",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
     "defaultEnum" : "ShoeSize",
+    "translations" : {
+    	"id-ID": {
+    		"name" : "Ukuran",
+    		"description" : "Ukuran produk tergantung dari panjang, lebar, dan ketinggian produk, dan dapat mempengaruhi berat produk."
+    	}
+    },
+    "language" : "en-US"
+  }, {
+    "@type" : "PropertyDefinition",
+    "id" : "apparelSize",
+    "name" : "Apparel Size",
+    "description" : "Size affects the dimensions of the product, can be width, length, and height, or the overral weight.",
+    "enabled" : true,
+    "defaultKind" : "ENUMERATION",
+    "defaultEnum" : "ApparelSize",
     "translations" : {
     	"id-ID": {
     		"name" : "Ukuran",

@@ -279,7 +279,7 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 		final Map<String, PropertyDefinition> paged; 
 		if (!Strings.isNullOrEmpty(term)) {
 			final Map<String, PropertyDefinition> filtered = tmpBasePropertyDefinitionMap.entrySet().stream()
-					.filter( entry -> entry.getValue().getName().startsWith(term.toLowerCase()) )
+					.filter( entry -> entry.getValue().getName().toLowerCase().startsWith(term.toLowerCase()) )
 					.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 			paged = doPaging(filtered, pageable);
 		} else {
