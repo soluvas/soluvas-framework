@@ -248,7 +248,6 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		return findOneByQuery(query);
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public Page<Person> findBySearchText(StatusMask statusMask, @Nullable String searchText, Pageable pageable) {
 		final BasicDBObject queryBySearchText = getQueryByKeyword(searchText);
@@ -274,7 +273,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final BasicDBObject emailQuery = new BasicDBObject("email", regex);
 		final BasicDBObject emailsQuery = new BasicDBObject("emails", new BasicDBObject("$elemMatch", emailQuery));
 		
-		final BasicDBObject phoneNumberQuery = new BasicDBObject("phoneNumber", searchText);
+		final BasicDBObject phoneNumberQuery = new BasicDBObject("phoneNumber", regex);
 		final BasicDBObject mobileNumbersQuery = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", phoneNumberQuery));
 		final BasicDBObject phoneNumbersQuery = new BasicDBObject("phoneNumbers", new BasicDBObject("$elemMatch", phoneNumberQuery));
 		
