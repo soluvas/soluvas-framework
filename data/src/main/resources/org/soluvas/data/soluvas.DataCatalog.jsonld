@@ -235,7 +235,7 @@
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shoeSize",
-    "name" : "Show Size",
+    "name" : "Shoe Size",
     "description" : "Size affects the dimensions of the product, can be width, length, and height, or the overral weight.",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",

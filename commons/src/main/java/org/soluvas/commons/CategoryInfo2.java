@@ -19,7 +19,6 @@ public class CategoryInfo2 implements Serializable {
 	private String slugPath;
 	private String color;
 	private Integer level;
-	private Long categoryCount;
 	private Long googleFormalId;
 	private String primaryUri;
 	private String parentId;
@@ -132,18 +131,6 @@ public class CategoryInfo2 implements Serializable {
 		this.level = level;
 	}
 	/**
-	 * @return the categoryCount
-	 */
-	public Long getCategoryCount() {
-		return categoryCount;
-	}
-	/**
-	 * @param categoryCount the categoryCount to set
-	 */
-	public void setCategoryCount(Long categoryCount) {
-		this.categoryCount = categoryCount;
-	}
-	/**
 	 * @return the googleFormalId
 	 */
 	public Long getGoogleFormalId() {
@@ -187,8 +174,7 @@ public class CategoryInfo2 implements Serializable {
 		return "CategoryInfo2 [id=" + id + ", nsPrefix=" + nsPrefix + ", name="
 				+ name + ", positioner=" + positioner + ", slug=" + slug
 				+ ", imageId=" + imageId + ", slugPath=" + slugPath
-				+ ", color=" + color + ", level=" + level + ", categoryCount="
-				+ categoryCount + ", googleFormalId=" + googleFormalId
+				+ ", color=" + color + ", level=" + level + ", googleFormalId=" + googleFormalId
 				+ ", primaryUri=" + primaryUri + ", parentId=" + parentId + "]";
 	}
 	

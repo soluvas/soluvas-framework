@@ -3,6 +3,7 @@ package org.soluvas.category;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,15 +24,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.CategoryInfo2;
 import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.mongo.DateTimeConverter;
 import org.soluvas.commons.mongo.UnitConverter;
+import org.soluvas.data.EntityLookup;
 import org.soluvas.data.PropertyDefinition;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Id;
 import com.google.common.base.Function;
+import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 
 /**
  * @author rudi
@@ -58,7 +64,6 @@ public class Category2 implements Serializable, Identifiable {
 	private String slugPath;
 	private String color;
 	private Integer level;
-	private Long categoryCount;
 	private String description;
 	private DateTime creationTime;
 	private DateTime modificationTime;
@@ -184,18 +189,6 @@ public class Category2 implements Serializable, Identifiable {
 	 */
 	public void setLevel(Integer level) {
 		this.level = level;
-	}
-	/**
-	 * @return the categoryCount
-	 */
-	public Long getCategoryCount() {
-		return categoryCount;
-	}
-	/**
-	 * @param categoryCount the categoryCount to set
-	 */
-	public void setCategoryCount(Long categoryCount) {
-		this.categoryCount = categoryCount;
 	}
 	/**
 	 * @return the description
@@ -440,8 +433,7 @@ public class Category2 implements Serializable, Identifiable {
 		return "Category2 [id=" + id + ", nsPrefix=" + nsPrefix + ", name="
 				+ name + ", positioner=" + positioner + ", slug=" + slug
 				+ ", imageId=" + imageId + ", slugPath=" + slugPath
-				+ ", color=" + color + ", level=" + level + ", categoryCount="
-				+ categoryCount + ", description=" + description
+				+ ", color=" + color + ", level=" + level + ", description=" + description
 				+ ", creationTime=" + creationTime + ", modificationTime="
 				+ modificationTime + ", translations=" + translations
 				+ ", status=" + status + ", metaDescription=" + metaDescription
@@ -469,7 +461,6 @@ public class Category2 implements Serializable, Identifiable {
 		@Override @Nullable
 		public CategoryInfo2 apply(@Nullable Category2 cat) {
 			final CategoryInfo2 catInfo = new CategoryInfo2();
-			catInfo.setCategoryCount(cat.getCategoryCount());
 			catInfo.setColor(cat.getColor());
 			catInfo.setNsPrefix(cat.getNsPrefix());
 			catInfo.setId(cat.getId());
@@ -585,5 +576,28 @@ public class Category2 implements Serializable, Identifiable {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public void resolve(EntityLookup<Category2, String> categoryLookup) {
+		if (getSlug() == null) {
+			setSlug(SlugUtils.generateSegment(getName()));
+		}
+		setSlugPath(Joiner.on('/').join(getSlugSegments(this, categoryLookup)));
+		setLevel(getLevel(this, categoryLookup));
+	}
+	
+	protected List<String> getSlugSegments(Category2 category,
+			EntityLookup<Category2, String> categoryLookup) {
+		final Category2 parent = categoryLookup.findOne(category.getParentId());
+		return category.getParentId() != null
+				? ImmutableList.copyOf(Iterables.concat(getSlugSegments(parent, categoryLookup), ImmutableList.of(category.getSlug())))
+				: ImmutableList.<String>of(category.getSlug());
+	}
+	
+	protected int getLevel(Category2 category, EntityLookup<Category2, String> categoryLookup) {
+		final Category2 parent = categoryLookup.findOne(category.getParentId());
+		return category.getParentId() != null
+				? getLevel(parent, categoryLookup) + 1
+				: 1;
+	}
+	
 }

@@ -31,7 +31,7 @@ import com.google.common.collect.ImmutableList;
  */
 @Service @Lazy
 @Command(scope="cat", name="migrate", description="Migrate categories from xmi file to mongoDB.")
-public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
+public class MigrateCategoryFromXmiToMongoDBCommand extends ExtCommandSupport {
 	
 	@Argument(index = 0, name = "formalcategoryid", required = true, description = "Formal category from Google.")
 	private Long googleFormalId;
@@ -68,7 +68,6 @@ public class MigrateFromXmiToMongoDBCommand extends ExtCommandSupport {
 		public Category2 apply(Category input) {
 			log.debug("Creating category2 from {}", input.getId());
 			final Category2 category2 = new Category2();
-			category2.setCategoryCount(input.getCategoryCount());
 			category2.setColor( input.getColor() );
 			category2.setCreationTime( input.getCreationTime() );
 			category2.setDescription( input.getDescription() );
