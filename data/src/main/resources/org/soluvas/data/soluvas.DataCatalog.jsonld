@@ -6,8 +6,7 @@
     "name" : "Age",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Age",
-    "language" : "en-US"
+    "defaultEnum" : "Age"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "author",
@@ -15,174 +14,145 @@
     "name" : "Author",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Person",
-    "language" : "en-US"
+    "defaultEnum" : "Person"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "bustSize",
     "name" : "Bust Size",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "careInstructions",
     "name" : "Care Instructions",
     "enabled" : true,
-    "defaultKind" : "STRING",
-    "language" : "en-US"
+    "defaultKind" : "STRING"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "color",
     "name" : "Color",
-    "description" : "Artists and designers have long understood how color can dramatically affect moods, feelings, and emotions. While perceptions of color are somewhat subjective, there are some color effects that have universal meaning. Colors in the red area of the color spectrum are known as warm colors and include red, orange and yellow. These warm colors evoke emotions ranging from feelings of warmth and comfort to feelings of anger and hostility. Colors on the blue side of the spectrum are known as cool colors and include blue, purple and green. These colors are often described as calm, but can also call to mind feelings of sadness or indifference.",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Color",
-    "translations" : {
-    	"id-ID": {
-    		"name" : "Warna",
-    		"description" : "Pemilihan warna adalah merupakan salah satu hal yang sangat penting dalam menentukan respon seseorang. Warna adalah hal yang pertama dilihat oleh seseorang (terutama warna background). Warna akan membuat kesan atau mood untuk keseluruhan produk, merupakan unsur penting karena dapat memberikan rasa senang kepada orang yang melihat."
-    	}
-    },
-    "language" : "en-US",
-    "primaryUri" : "http://schema.org/color"
+    "defaultEnum" : "Color"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "condition",
     "name" : "Condition",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Condition",
-    "language" : "en-US"
+    "defaultEnum" : "Condition"
   }, {
     "@type" : "PropertyDefinition",
-    "id" : "detailSize",
+    "id" : "detailsize",
     "name" : "Detail Size",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "dressLength",
     "name" : "Dress Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "fabric",
     "name" : "Fabric",
     "enabled" : true,
-    "defaultKind" : "STRING",
-    "language" : "en-US"
+    "defaultKind" : "STRING"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "heelsHeight",
     "name" : "Heels Height",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "height",
     "name" : "Height",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "leather",
     "name" : "Leather",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Leather",
-    "language" : "en-US"
+    "defaultEnum" : "Leather"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "length",
     "name" : "Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "lining",
     "name" : "Lining",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Lining",
-    "language" : "en-US"
+    "defaultEnum" : "Lining"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "material",
     "name" : "Material",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Material",
-    "language" : "en-US"
+    "defaultEnum" : "Material"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "motif",
     "name" : "Motif",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Motif",
-    "language" : "en-US"
+    "defaultEnum" : "Motif"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netHeight",
     "name" : "Net Height",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netLength",
     "name" : "Net Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netVolume",
     "name" : "Net Volume",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "mL",
-    "language" : "en-US"
+    "defaultUnit" : "mL"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netWeight",
     "name" : "Net Weight",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "g",
-    "language" : "en-US"
+    "defaultUnit" : "g"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netWidth",
     "name" : "Net Width",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "origin",
     "name" : "Origin",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Origin",
-    "language" : "en-US"
+    "defaultEnum" : "Origin"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "publisher",
@@ -190,125 +160,90 @@
     "name" : "Publisher",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Organization",
-    "language" : "en-US"
+    "defaultEnum" : "Organization"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shawlLength",
     "name" : "Shawl Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shawlWidth",
     "name" : "Shawl Width",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shippingPolicy",
     "name" : "Shipping Policy",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "ShippingPolicy",
-    "language" : "en-US"
+    "defaultEnum" : "ShippingPolicy"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shoeMeasurement",
     "name" : "Shoe Measurement",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "signature",
     "name" : "Signature",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Signature",
-    "language" : "en-US"
+    "defaultEnum" : "Signature"
   }, {
     "@type" : "PropertyDefinition",
-    "id" : "shoeSize",
-    "name" : "Shoe Size",
-    "description" : "Size affects the dimensions of the product, can be width, length, and height, or the overral weight.",
+    "id" : "size",
+    "name" : "Size",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "ShoeSize",
-    "translations" : {
-    	"id-ID": {
-    		"name" : "Ukuran",
-    		"description" : "Ukuran produk tergantung dari panjang, lebar, dan ketinggian produk, dan dapat mempengaruhi berat produk."
-    	}
-    },
-    "language" : "en-US"
-  }, {
-    "@type" : "PropertyDefinition",
-    "id" : "apparelSize",
-    "name" : "Apparel Size",
-    "description" : "Size affects the dimensions of the product, can be width, length, and height, or the overral weight.",
-    "enabled" : true,
-    "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "ApparelSize",
-    "translations" : {
-    	"id-ID": {
-    		"name" : "Ukuran",
-    		"description" : "Ukuran produk tergantung dari panjang, lebar, dan ketinggian produk, dan dapat mempengaruhi berat produk."
-    	}
-    },
-    "language" : "en-US"
+    "defaultEnum" : "ShoeSize"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "sleeveLength",
     "name" : "Sleeve Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "technique",
     "name" : "Technique",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Technique",
-    "language" : "en-US"
+    "defaultEnum" : "Technique"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "volume",
     "name" : "Volume",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "mL",
-    "language" : "en-US"
+    "defaultUnit" : "mL"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "waistSize",
     "name" : "Waist Size",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "weight",
     "name" : "Weight",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "g",
-    "language" : "en-US"
+    "defaultUnit" : "g"
   }, {
     "@type" : "PropertyDefinition",
     "id" : "width",
     "name" : "Width",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm",
-    "language" : "en-US"
+    "defaultUnit" : "cm"
   } ]
 }
