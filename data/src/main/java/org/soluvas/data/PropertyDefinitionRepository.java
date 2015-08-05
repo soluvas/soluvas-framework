@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 
 public interface PropertyDefinitionRepository {
 
@@ -51,7 +52,7 @@ public interface PropertyDefinitionRepository {
 	
 	Map<String, PropertyDefinition> findAllBaseAsMap();
 	
-	Set<String> getDefaultEnums();
+	ImmutableSet<String> getDefaultEnums();
 	
 	Page<PropertyDefinition> findAllBaseBySearchText(String searchText, Set<String> excludedIds, Pageable pageable);
 	

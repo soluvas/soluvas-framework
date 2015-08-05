@@ -31,6 +31,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 
 /**
@@ -249,8 +250,11 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 	}
 
 	@Override
-	public Set<String> getDefaultEnums() {
-		return basePropertyDefinitions.entrySet().stream().filter(e -> e.getValue().getDefaultKind() == PropertyKind.ENUMERATION).map(e -> e.getValue().getDefaultEnum()).collect(Collectors.toSet());
+	public ImmutableSet<String> getDefaultEnums() {
+		final Set<String> defaultEnums = basePropertyDefinitions.entrySet().stream().filter(e -> e.getValue().getDefaultKind() == PropertyKind.ENUMERATION).map(e -> e.getValue().getDefaultEnum()).collect(Collectors.toSet());
+		defaultEnums.add("ApparelSize");
+		return ImmutableSet.copyOf(defaultEnums);
+		
 	}
 
 	@Override
