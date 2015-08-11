@@ -31,6 +31,8 @@ public class Term2 implements Serializable, Identifiable {
 	
 	public static final long CURRENT_SCHEMA_VERSION = 2l;
 	
+	public static String NAME_ATTR = "name";
+	
 	@Id private String id;
 	private String name;
 	private String nsPrefix;
@@ -61,7 +63,7 @@ public class Term2 implements Serializable, Identifiable {
 		this.setPrimaryUri(xmiTerm.getPrimaryUri());
 		this.setSameAsUris(ImmutableSet.copyOf(xmiTerm.getSameAsUris()));
 	}
-	
+
 	/**
 	 * @return the id
 	 */

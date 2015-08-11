@@ -1828,14 +1828,14 @@ public interface DataPackage extends EPackage {
 	int LOOKUP_KEY = 22;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.data.TermType <em>Term Type</em>}' enum.
+	 * The meta object id for the '{@link org.soluvas.data.TermKind <em>Term Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.soluvas.data.TermType
-	 * @see org.soluvas.data.impl.DataPackageImpl#getTermType()
+	 * @see org.soluvas.data.TermKind
+	 * @see org.soluvas.data.impl.DataPackageImpl#getTermKind()
 	 * @generated
 	 */
-	int TERM_TYPE = 23;
+	int TERM_KIND = 23;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
@@ -2704,14 +2704,14 @@ public interface DataPackage extends EPackage {
 	EEnum getLookupKey();
 
 	/**
-	 * Returns the meta object for enum '{@link org.soluvas.data.TermType <em>Term Type</em>}'.
+	 * Returns the meta object for enum '{@link org.soluvas.data.TermKind <em>Term Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Term Type</em>'.
-	 * @see org.soluvas.data.TermType
+	 * @return the meta object for enum '<em>Term Kind</em>'.
+	 * @see org.soluvas.data.TermKind
 	 * @generated
 	 */
-	EEnum getTermType();
+	EEnum getTermKind();
 
 	/**
 	 * Returns the meta object for data type '{@link org.soluvas.data.repository.CrudRepository <em>Crud Repository</em>}'.
@@ -3451,14 +3451,14 @@ public interface DataPackage extends EPackage {
 		EEnum LOOKUP_KEY = eINSTANCE.getLookupKey();
 
 		/**
-		 * The meta object literal for the '{@link org.soluvas.data.TermType <em>Term Type</em>}' enum.
+		 * The meta object literal for the '{@link org.soluvas.data.TermKind <em>Term Kind</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.soluvas.data.TermType
-		 * @see org.soluvas.data.impl.DataPackageImpl#getTermType()
+		 * @see org.soluvas.data.TermKind
+		 * @see org.soluvas.data.impl.DataPackageImpl#getTermKind()
 		 * @generated
 		 */
-		EEnum TERM_TYPE = eINSTANCE.getTermType();
+		EEnum TERM_KIND = eINSTANCE.getTermKind();
 
 		/**
 		 * The meta object literal for the '<em>Crud Repository</em>' data type.

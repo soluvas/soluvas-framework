@@ -10,14 +10,14 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Term Type</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Term Kind</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
- * @see org.soluvas.data.DataPackage#getTermType()
+ * @see org.soluvas.data.DataPackage#getTermKind()
  * @model
  * @generated
  */
-public enum TermType implements Enumerator {
+public enum TermKind implements Enumerator {
 	/**
 	 * The '<em><b>Color</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -29,14 +29,16 @@ public enum TermType implements Enumerator {
 	COLOR(0, "color", "color"),
 
 	/**
-	 * The '<em><b>Size</b></em>' literal object.
+	 * The '<em><b>Apparel size</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #SIZE_VALUE
+	 * @see #APPAREL_SIZE_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	SIZE(1, "size", "size"), /**
+	APPAREL_SIZE(1, "apparel_size", "apparel_size"),
+
+	/**
 	 * The '<em><b>Shoe size</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,18 +64,18 @@ public enum TermType implements Enumerator {
 	public static final int COLOR_VALUE = 0;
 
 	/**
-	 * The '<em><b>Size</b></em>' literal value.
+	 * The '<em><b>Apparel size</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * size for cloth
 	 * <!-- end-model-doc -->
-	 * @see #SIZE
-	 * @model name="size"
+	 * @see #APPAREL_SIZE
+	 * @model name="apparel_size"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SIZE_VALUE = 1;
+	public static final int APPAREL_SIZE_VALUE = 1;
 
 	/**
 	 * The '<em><b>Shoe size</b></em>' literal value.
@@ -91,35 +93,35 @@ public enum TermType implements Enumerator {
 	public static final int SHOE_SIZE_VALUE = 2;
 
 	/**
-	 * An array of all the '<em><b>Term Type</b></em>' enumerators.
+	 * An array of all the '<em><b>Term Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final TermType[] VALUES_ARRAY =
-		new TermType[] {
+	private static final TermKind[] VALUES_ARRAY =
+		new TermKind[] {
 			COLOR,
-			SIZE,
+			APPAREL_SIZE,
 			SHOE_SIZE,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Term Type</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Term Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<TermType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<TermKind> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Term Type</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Term Kind</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static TermType get(String literal) {
+	public static TermKind get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			TermType result = VALUES_ARRAY[i];
+			TermKind result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -128,14 +130,14 @@ public enum TermType implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Term Type</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Term Kind</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static TermType getByName(String name) {
+	public static TermKind getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			TermType result = VALUES_ARRAY[i];
+			TermKind result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -144,15 +146,15 @@ public enum TermType implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Term Type</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Term Kind</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static TermType get(int value) {
+	public static TermKind get(int value) {
 		switch (value) {
 			case COLOR_VALUE: return COLOR;
-			case SIZE_VALUE: return SIZE;
+			case APPAREL_SIZE_VALUE: return APPAREL_SIZE;
 			case SHOE_SIZE_VALUE: return SHOE_SIZE;
 		}
 		return null;
@@ -185,7 +187,7 @@ public enum TermType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private TermType(int value, String name, String literal) {
+	private TermKind(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -229,4 +231,4 @@ public enum TermType implements Enumerator {
 		return literal;
 	}
 	
-} //TermType
+} //TermKind

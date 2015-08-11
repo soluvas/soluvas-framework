@@ -3,6 +3,7 @@
 package org.soluvas.data.impl;
 
 import java.util.Map;
+
 import javax.measure.DecimalMeasure;
 import javax.measure.Measure;
 
@@ -15,7 +16,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.soluvas.commons.CommonsPackage;
@@ -39,7 +39,7 @@ import org.soluvas.data.StatusMask;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermContainer;
-import org.soluvas.data.TermType;
+import org.soluvas.data.TermKind;
 import org.soluvas.data.TermValue;
 import org.soluvas.data.TreeVocab;
 import org.soluvas.data.Value;
@@ -223,7 +223,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum termTypeEEnum = null;
+	private EEnum termKindEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -493,6 +493,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_PrimaryUri() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(14);
 	}
@@ -502,6 +503,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_SameAsUris() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(15);
 	}
@@ -711,6 +713,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTermValue_PrimaryUri() {
 		return (EAttribute)termValueEClass.getEStructuralFeatures().get(3);
 	}
@@ -800,6 +803,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_ImageUri() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(6);
 	}
@@ -809,6 +813,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_PrimaryUri() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(7);
 	}
@@ -818,6 +823,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTerm_SameAsUris() {
 		return (EAttribute)termEClass.getEStructuralFeatures().get(8);
 	}
@@ -937,6 +943,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getKind_PrimaryUri() {
 		return (EAttribute)kindEClass.getEStructuralFeatures().get(1);
 	}
@@ -946,6 +953,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getKind_SameAsUris() {
 		return (EAttribute)kindEClass.getEStructuralFeatures().get(2);
 	}
@@ -1005,6 +1013,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTermEntry() {
 		return termEntryEClass;
 	}
@@ -1014,6 +1023,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTermEntry_Key() {
 		return (EAttribute)termEntryEClass.getEStructuralFeatures().get(0);
 	}
@@ -1023,6 +1033,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTermEntry_Value() {
 		return (EReference)termEntryEClass.getEStructuralFeatures().get(1);
 	}
@@ -1072,8 +1083,9 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getTermType() {
-		return termTypeEEnum;
+	@Override
+	public EEnum getTermKind() {
+		return termKindEEnum;
 	}
 
 	/**
@@ -1269,7 +1281,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		inputMethodEEnum = createEEnum(INPUT_METHOD);
 		statusMaskEEnum = createEEnum(STATUS_MASK);
 		lookupKeyEEnum = createEEnum(LOOKUP_KEY);
-		termTypeEEnum = createEEnum(TERM_TYPE);
+		termKindEEnum = createEEnum(TERM_KIND);
 
 		// Create data types
 		crudRepositoryEDataType = createEDataType(CRUD_REPOSITORY);
@@ -1590,10 +1602,10 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.MOBILE_NUMBER);
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.URI);
 
-		initEEnum(termTypeEEnum, TermType.class, "TermType");
-		addEEnumLiteral(termTypeEEnum, TermType.COLOR);
-		addEEnumLiteral(termTypeEEnum, TermType.SIZE);
-		addEEnumLiteral(termTypeEEnum, TermType.SHOE_SIZE);
+		initEEnum(termKindEEnum, TermKind.class, "TermKind");
+		addEEnumLiteral(termKindEEnum, TermKind.COLOR);
+		addEEnumLiteral(termKindEEnum, TermKind.APPAREL_SIZE);
+		addEEnumLiteral(termKindEEnum, TermKind.SHOE_SIZE);
 
 		// Initialize data types
 		initEDataType(crudRepositoryEDataType, CrudRepository.class, "CrudRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1989,7 +2001,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 			 "documentation", "Linked Data URI."
 		   });	
 		addAnnotation
-		  (termTypeEEnum.getELiterals().get(1), 
+		  (termKindEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "size for cloth"
