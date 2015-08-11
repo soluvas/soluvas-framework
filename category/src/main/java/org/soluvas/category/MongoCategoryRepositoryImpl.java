@@ -37,8 +37,6 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 				"category", migrationEnabled, autoExplainSlow,
 				Index.asc("name"),
 				Index.asc("status"),
-//				Index.desc("creationTime"),
-//				Index.desc("modificationTime"),
 				Index.asc("level"),
 				Index.asc("slug"),
 				Index.asc("slugPath"),
