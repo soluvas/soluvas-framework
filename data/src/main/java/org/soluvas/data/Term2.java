@@ -50,7 +50,7 @@ public class Term2 implements Serializable, Identifiable {
 	
 	public Term2(Term xmiTerm) {
 		this.setColor(xmiTerm.getColor());
-		this.setId(xmiTerm.getName());
+		this.setId(xmiTerm.getNsPrefix() + "_" + xmiTerm.getName());
 		this.setImageId(xmiTerm.getImageId());
 		this.setKindName(xmiTerm.getKindName());
 		this.setKindNsPrefix(xmiTerm.getKindNsPrefix());
@@ -60,6 +60,22 @@ public class Term2 implements Serializable, Identifiable {
 		this.setPositioner(xmiTerm.getPositioner());
 		this.setPrimaryUri(xmiTerm.getPrimaryUri());
 		this.setSameAsUris(ImmutableSet.copyOf(xmiTerm.getSameAsUris()));
+	}
+	
+	/**
+	 * @return the id
+	 */
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	@Override
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	/**
@@ -333,18 +349,6 @@ public class Term2 implements Serializable, Identifiable {
 
 	@Override
 	public void eNotify(Notification notification) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setId(String value) {
 		// TODO Auto-generated method stub
 		
 	}
