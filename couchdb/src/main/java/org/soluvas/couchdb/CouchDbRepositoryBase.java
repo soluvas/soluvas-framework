@@ -16,6 +16,7 @@ import javax.annotation.PreDestroy;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ektorp.ComplexKey;
 import org.ektorp.CouchDbConnector;
@@ -761,7 +762,9 @@ public class CouchDbRepositoryBase<T extends Identifiable, E extends Enum<E>> ex
 		try (Profiled p = new Profiled(log, "Added " + entities.size() + " " + collName + " documents: " + ids)) {
 			final List<S> results = new ArrayList<>();
 			for (final S entity : entities) {
-				final S addedEntity = EcoreUtil.copy(entity);
+				Preconditions.checkArgument(entity instanceof EObject,
+						"%s must implement EObject", entity);
+				final S addedEntity = (S) EcoreUtil.copy((EObject) entity);
 				dbConn.create(addedEntity);
 				results.add(addedEntity);
 			}

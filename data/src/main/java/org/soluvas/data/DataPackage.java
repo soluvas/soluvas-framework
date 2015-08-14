@@ -1828,16 +1828,6 @@ public interface DataPackage extends EPackage {
 	int LOOKUP_KEY = 22;
 
 	/**
-	 * The meta object id for the '{@link org.soluvas.data.TermKind <em>Term Kind</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.soluvas.data.TermKind
-	 * @see org.soluvas.data.impl.DataPackageImpl#getTermKind()
-	 * @generated
-	 */
-	int TERM_KIND = 23;
-
-	/**
 	 * The meta object id for the '<em>Crud Repository</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1845,7 +1835,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepository()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY = 24;
+	int CRUD_REPOSITORY = 23;
 
 	/**
 	 * The meta object id for the '<em>Paging And Sorting Repository</em>' data type.
@@ -1855,7 +1845,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPagingAndSortingRepository()
 	 * @generated
 	 */
-	int PAGING_AND_SORTING_REPOSITORY = 25;
+	int PAGING_AND_SORTING_REPOSITORY = 24;
 
 	/**
 	 * The meta object id for the '<em>Crud Repository Base</em>' data type.
@@ -1865,7 +1855,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getCrudRepositoryBase()
 	 * @generated
 	 */
-	int CRUD_REPOSITORY_BASE = 26;
+	int CRUD_REPOSITORY_BASE = 25;
 
 
 	/**
@@ -1876,7 +1866,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 27;
+	int MEASURE = 26;
 
 	/**
 	 * The meta object id for the '<em>Decimal Measure</em>' data type.
@@ -1886,7 +1876,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
 	 * @generated
 	 */
-	int DECIMAL_MEASURE = 28;
+	int DECIMAL_MEASURE = 27;
 
 
 	/**
@@ -1897,7 +1887,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPageable()
 	 * @generated
 	 */
-	int PAGEABLE = 29;
+	int PAGEABLE = 28;
 
 	/**
 	 * The meta object id for the '<em>Page</em>' data type.
@@ -1907,7 +1897,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPage()
 	 * @generated
 	 */
-	int PAGE = 30;
+	int PAGE = 29;
 
 
 	/**
@@ -2704,16 +2694,6 @@ public interface DataPackage extends EPackage {
 	EEnum getLookupKey();
 
 	/**
-	 * Returns the meta object for enum '{@link org.soluvas.data.TermKind <em>Term Kind</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Term Kind</em>'.
-	 * @see org.soluvas.data.TermKind
-	 * @generated
-	 */
-	EEnum getTermKind();
-
-	/**
 	 * Returns the meta object for data type '{@link org.soluvas.data.repository.CrudRepository <em>Crud Repository</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3449,16 +3429,6 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum LOOKUP_KEY = eINSTANCE.getLookupKey();
-
-		/**
-		 * The meta object literal for the '{@link org.soluvas.data.TermKind <em>Term Kind</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.soluvas.data.TermKind
-		 * @see org.soluvas.data.impl.DataPackageImpl#getTermKind()
-		 * @generated
-		 */
-		EEnum TERM_KIND = eINSTANCE.getTermKind();
 
 		/**
 		 * The meta object literal for the '<em>Crud Repository</em>' data type.

@@ -2,7 +2,6 @@
  */
 package org.soluvas.commons;
 
-import org.eclipse.emf.ecore.EObject;
 
 
 /**
@@ -23,9 +22,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getIdentifiable()
  * @model interface="true" abstract="true"
- * @generated
+ * @generated NOT
  */
-public interface Identifiable extends EObject {
+public interface Identifiable /*extends EObject*/ {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

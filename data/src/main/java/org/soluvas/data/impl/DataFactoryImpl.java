@@ -114,8 +114,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return createStatusMaskFromString(eDataType, initialValue);
 			case DataPackage.LOOKUP_KEY:
 				return createLookupKeyFromString(eDataType, initialValue);
-			case DataPackage.TERM_KIND:
-				return createTermKindFromString(eDataType, initialValue);
 			case DataPackage.CRUD_REPOSITORY:
 				return createCrudRepositoryFromString(eDataType, initialValue);
 			case DataPackage.PAGING_AND_SORTING_REPOSITORY:
@@ -149,8 +147,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return convertStatusMaskToString(eDataType, instanceValue);
 			case DataPackage.LOOKUP_KEY:
 				return convertLookupKeyToString(eDataType, instanceValue);
-			case DataPackage.TERM_KIND:
-				return convertTermKindToString(eDataType, instanceValue);
 			case DataPackage.CRUD_REPOSITORY:
 				return convertCrudRepositoryToString(eDataType, instanceValue);
 			case DataPackage.PAGING_AND_SORTING_REPOSITORY:
@@ -433,26 +429,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * @generated
 	 */
 	public String convertLookupKeyToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public TermKind createTermKindFromString(EDataType eDataType, String initialValue) {
-		TermKind result = TermKind.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertTermKindToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

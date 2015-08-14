@@ -223,13 +223,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum termKindEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType crudRepositoryEDataType = null;
 
 	/**
@@ -1084,16 +1077,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EEnum getTermKind() {
-		return termKindEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EDataType getCrudRepository() {
 		return crudRepositoryEDataType;
 	}
@@ -1281,7 +1264,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		inputMethodEEnum = createEEnum(INPUT_METHOD);
 		statusMaskEEnum = createEEnum(STATUS_MASK);
 		lookupKeyEEnum = createEEnum(LOOKUP_KEY);
-		termKindEEnum = createEEnum(TERM_KIND);
 
 		// Create data types
 		crudRepositoryEDataType = createEDataType(CRUD_REPOSITORY);
@@ -1601,11 +1583,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.TWITTER_SCREENNAME);
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.MOBILE_NUMBER);
 		addEEnumLiteral(lookupKeyEEnum, LookupKey.URI);
-
-		initEEnum(termKindEEnum, TermKind.class, "TermKind");
-		addEEnumLiteral(termKindEEnum, TermKind.COLOR);
-		addEEnumLiteral(termKindEEnum, TermKind.APPAREL_SIZE);
-		addEEnumLiteral(termKindEEnum, TermKind.SHOE_SIZE);
 
 		// Initialize data types
 		initEDataType(crudRepositoryEDataType, CrudRepository.class, "CrudRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1999,12 +1976,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Linked Data URI."
-		   });	
-		addAnnotation
-		  (termKindEEnum.getELiterals().get(1), 
-		   source, 
-		   new String[] {
-			 "documentation", "size for cloth"
 		   });
 	}
 

@@ -515,11 +515,10 @@ public class StoryImpl extends EObjectImpl implements Story {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	@Override
 	public Identifiable getOwner() {
-		if (owner != null && owner.eIsProxy()) {
+		if (owner != null && owner instanceof EObject && ((EObject) owner).eIsProxy()) {
 			InternalEObject oldOwner = (InternalEObject)owner;
 			owner = (Identifiable)eResolveProxy(oldOwner);
 			if (owner != oldOwner) {
