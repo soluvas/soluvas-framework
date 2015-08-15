@@ -348,7 +348,7 @@
 				OpenJDK 64-Bit Server VM (build 23.2-b09, mixed mode)
 				please add manually to your webapp's POM -->
 			    <groupId>org.bouncycastle</groupId>
-			    <artifactId>bcprov-ext-jdk15on</artifactId>
+			    <artifactId>bcprov-jdk15on</artifactId>
 			    <version>1.52</version>
 			</dependency>		
 			<dependency>
