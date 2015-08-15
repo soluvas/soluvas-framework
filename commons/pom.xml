@@ -34,9 +34,12 @@
 			java version "1.7.0_09"
 			OpenJDK Runtime Environment (IcedTea7 2.3.4) (7u9-2.3.4-0ubuntu1.12.10.1)
 			OpenJDK 64-Bit Server VM (build 23.2-b09, mixed mode)
-			please add manually to your webapp's POM -->
+			please add manually to your webapp's POM
+			note: we don't use bcprov-ext-jdk15on because both spring-boot-starter-remote-shell
+			and tika-parsers use the regular bcprov-jdk15on
+			-->
 		    <groupId>org.bouncycastle</groupId>
-		    <artifactId>bcprov-ext-jdk15on</artifactId>
+		    <artifactId>bcprov-jdk15on</artifactId>
 		</dependency>
 		
 		<dependency>
