@@ -21,6 +21,7 @@ public class Term2 implements Serializable, Identifiable {
 	public static final long CURRENT_SCHEMA_VERSION = 2l;
 	
 	public static String NAME_ATTR = "name";
+	public static String DESCRIPTION_ATTR = "description";
 	
 	@Id private String id;
 	private String formalId;
