@@ -451,19 +451,19 @@ public class Category2 implements Serializable, Identifiable {
 		public CategoryInfo2 apply(@Nullable Category2 cat) {
 			final CategoryInfo2 catInfo = new CategoryInfo2();
 			catInfo.setColor(cat.getColor());
-			catInfo.setNsPrefix(cat.getNsPrefix());
+			catInfo.setGoogleFormalId(cat.getGoogleFormalId());
 			catInfo.setId(cat.getId());
 			catInfo.setImageId(cat.getImageId());
 			catInfo.setLevel(cat.getLevel());
 			catInfo.setName(cat.getEffectiveName(curLanguageTag));
-			catInfo.setPositioner(cat.getPositioner());
-			catInfo.setSlug(cat.getSlug());
-			catInfo.setSlugPath(cat.getSlugPath());
-			catInfo.setPrimaryUri(cat.getPrimaryUri());
-			
+			catInfo.setNsPrefix(cat.getNsPrefix());
 			if (cat.getParentId() != null) {
 				catInfo.setParentId(cat.getParentId());
 			}
+			catInfo.setPositioner(cat.getPositioner());
+			catInfo.setPrimaryUri(cat.getPrimaryUri());
+			catInfo.setSlug(cat.getSlug());
+			catInfo.setSlugPath(cat.getSlugPath());
 			
 			return catInfo;
 		}
