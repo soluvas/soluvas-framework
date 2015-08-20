@@ -29,7 +29,7 @@
 			<version>0.13</version>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
+<!-- 		<dependency> -->
 			<!-- required to run apache sshd, and not available in
 			java version "1.7.0_09"
 			OpenJDK Runtime Environment (IcedTea7 2.3.4) (7u9-2.3.4-0ubuntu1.12.10.1)
@@ -38,9 +38,9 @@
 			note: we don't use bcprov-ext-jdk15on because both spring-boot-starter-remote-shell
 			and tika-parsers use the regular bcprov-jdk15on
 			-->
-		    <groupId>org.bouncycastle</groupId>
-		    <artifactId>bcprov-jdk15on</artifactId>
-		</dependency>
+<!-- 		    <groupId>org.bouncycastle</groupId> -->
+<!-- 		    <artifactId>bcprov-jdk15on</artifactId> -->
+<!-- 		</dependency> -->
 		
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
