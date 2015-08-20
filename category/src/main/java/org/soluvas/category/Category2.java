@@ -329,7 +329,7 @@ public class Category2 implements Serializable, Identifiable {
 			return getName();
 		} else {
 			final Map<String, Map<String, String>> translations = getTranslations();
-			if (translations.isEmpty()) {
+			if (translations == null || translations.isEmpty()) {
 				return getName();
 			} else {
 				if (!translations.containsKey(curLanguageTag)) {

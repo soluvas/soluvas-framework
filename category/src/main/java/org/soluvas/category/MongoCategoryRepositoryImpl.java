@@ -17,7 +17,6 @@ import org.soluvas.data.domain.Pageable;
 import org.soluvas.mongo.Index;
 import org.soluvas.mongo.MongoRepositoryBase;
 
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableMap;
@@ -40,6 +39,7 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 				Index.asc("level"),
 				Index.asc("slug"),
 				Index.asc("slugPath"),
+				Index.asc("parentId"),
 				Index.uniqueAsc("slug"),
 				Index.uniqueAsc("slugPath"));
 	}
@@ -68,28 +68,20 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 	}
 
 	@Override
-	public Page<Category2> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level,
-			boolean excludeLeaves, Pageable pageable) {
+	public Page<Category2> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
 		query.put("level", level);
-		if (excludeLeaves) {
-			query.put("categories", new BasicDBObject("$exists", false));
-		}
 		return findAllByQuery(query, pageable);
 	}
-
+	
 	@Override
-	public Optional<Category2> getFirstActiveLeaf() {
+	public Page<Category2> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, String parentId, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
-		query.put("status", CategoryStatus.ACTIVE.name());
-		query.put("categories", new BasicDBObject("$exists", false));
-		final Category2 found = findOneByQuery(query);
-		if (found != null) {
-			return Optional.of(found);
-		} else {
-			return Optional.absent();
-		}
+		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
+		query.put("level", level);
+		query.put("parentId", parentId);
+		return findAllByQuery(query, pageable);
 	}
 
 	@Override

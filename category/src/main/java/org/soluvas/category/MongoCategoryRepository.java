@@ -12,8 +12,6 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.PagingAndSortingRepository;
 
-import com.google.common.base.Optional;
-
 /**
  * {@link PagingAndSortingRepository} for {@link Category}.
  * @author ceefour
@@ -22,7 +20,7 @@ public interface MongoCategoryRepository extends
 		PagingAndSortingRepository<Category2, String> {
 
 	Page<Category2> findAllByStatus(Collection<CategoryStatus> statuses, Pageable pageable);
-
+	
 	@Nullable
 	Category2 findOneBySlugPath(String slugPath, Collection<CategoryStatus> statuses);
 	
@@ -34,21 +32,9 @@ public interface MongoCategoryRepository extends
 	 */
 	Category2 lookupOneByUri(Set<CategoryStatus> statuses, String uri) throws EntityLookupException;
 	
-	/**
-	 * @param statuses
-	 * @param level The "implicit root category" has level 0. So a Category without a parent has level 1. Automatically updated on save.
-	 * @param excludeLeaves If {@code true}, excludes {@link Category}s which don't have children.
-	 * @param pageable
-	 * @return
-	 */
-	Page<Category2> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, boolean excludeLeaves, Pageable pageable);
-
-	/**
-	 * Return the first {@link CategoryStatus#ACTIVE} leaf {@link Category}.
-	 * @return
-	 * @see id.co.bippo.product.hand.ProductCreator
-	 */
-	Optional<Category2> getFirstActiveLeaf();
+	Page<Category2> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, Pageable pageable);
+	
+	Page<Category2> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, String parentId, Pageable pageable);
 
 	Existence<String> existsBySlugPath(StatusMask statusMask, String upSlugPath);
 	
