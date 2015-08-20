@@ -15,9 +15,12 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 import com.google.common.base.Optional;
 
 /**
+ * Replaced by {@link MongoCategoryRepository}
+ * 
  * {@link PagingAndSortingRepository} for {@link Category}.
  * @author ceefour
  */
+@Deprecated
 public interface CategoryRepository extends
 		PagingAndSortingRepository<Category, String> {
 
