@@ -527,7 +527,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			beforeSaveDBObject(obj, mtimePolicy);
 		}
 	}
-
+	
 	@Override
 	public <S extends T> Collection<S> modify(Map<String, S> entities, ModificationTimePolicy mtimePolicy) {
 		if (entities.isEmpty()) {
@@ -1140,6 +1140,24 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public <S extends T> S modifyByModificationTime(String id, DateTime prevModificationTime, S entity) {
+		log.debug("Modifying {} : {}", collName, id);
+		// use normal update
+		final DBObject dbo = new EntityToDBObject().apply(entity);
+		beforeSaveDBObject(dbo, ModificationTimePolicy.UPDATE);
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", id);
+		query.put("modificationTime", prevModificationTime.toDate());
+		final WriteResult writeResult = primary.update(query, dbo);
+		if (writeResult.getN() != 1) {
+			throw new MongoRepositoryException(writeResult.getLastError().getException(),
+					"%s: Cannot modify %s documents '%s'", db.getName(), collName, id);
+		}
+		log.info("Modified {} document '{}'", collName, id);
+		return entity;
 	}
 
 }

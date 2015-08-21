@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import org.joda.time.DateTime;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
@@ -42,5 +43,7 @@ public interface MongoRepository<T extends Identifiable> extends Repository<T, S
 
 	long countByQuery(ReadPreference readPref, DBObject query, String method,
 			Object[] params);
+	
+	<S extends T> S modifyByModificationTime(String id, DateTime prevModificationTime, S entity);
 
 }
