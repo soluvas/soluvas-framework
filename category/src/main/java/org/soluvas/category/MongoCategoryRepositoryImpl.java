@@ -72,7 +72,9 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 		final BasicDBObject query = new BasicDBObject();
 		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
 		query.put("level", level);
-		return findAllByQuery(query, pageable);
+		final Page<Category2> result = findAllByQuery(query, pageable);
+		log.debug("Got {} categories by status '{}' and level '{}'", result.getSize(), statuses, level);
+		return result;
 	}
 	
 	@Override
