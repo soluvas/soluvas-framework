@@ -1,6 +1,3 @@
-/**r
- * 
- */
 package org.soluvas.category;
 
 import java.util.Collection;
@@ -73,7 +70,7 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
 		query.put("level", level);
 		final Page<Category2> result = findAllByQuery(query, pageable);
-		log.debug("Got {} categories by status '{}' and level '{}'", result.getSize(), statuses, level);
+		log.debug("Got {} categories by status '{}' and level '{}'", result.getContent().size(), statuses, level);
 		return result;
 	}
 	
