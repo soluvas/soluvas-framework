@@ -742,6 +742,7 @@
         <details key="documentation" value="Linked Data URI for &lt;tt>@id&lt;/tt> in JSON-LD."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="googleFormalId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
     <eGenericSuperTypes eClassifier="#//CategoryLike"/>
     <eGenericSuperTypes eClassifier="#//Parentable">
       <eTypeArguments eClassifier="#//CategoryInfo"/>

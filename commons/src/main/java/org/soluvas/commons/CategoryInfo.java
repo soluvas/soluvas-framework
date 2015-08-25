@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * <ul>
  *   <li>{@link org.soluvas.commons.CategoryInfo#getParents <em>Parents</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryInfo#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.CategoryInfo#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +79,32 @@ public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
 	 * @generated
 	 */
 	void setPrimaryUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Google Formal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Google Formal Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Google Formal Id</em>' attribute.
+	 * @see #setGoogleFormalId(Long)
+	 * @see org.soluvas.commons.CommonsPackage#getCategoryInfo_GoogleFormalId()
+	 * @model
+	 * @generated
+	 */
+	Long getGoogleFormalId();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CategoryInfo#getGoogleFormalId <em>Google Formal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Google Formal Id</em>' attribute.
+	 * @see #getGoogleFormalId()
+	 * @generated
+	 */
+	void setGoogleFormalId(Long value);
 
 	String getFullName();
 

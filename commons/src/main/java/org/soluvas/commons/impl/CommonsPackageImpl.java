@@ -2059,6 +2059,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAttributeSet_Principals() {
+		return (EAttribute)attributeSetEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getAttributeUnset() {
 		return attributeUnsetEClass;
@@ -2311,6 +2320,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EAttribute getCategoryInfo_PrimaryUri() {
 		return (EAttribute)categoryInfoEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCategoryInfo_GoogleFormalId() {
+		return (EAttribute)categoryInfoEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -4884,6 +4902,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEReference(modelNotificationEClass, MODEL_NOTIFICATION__CONTAINER);
 
 		attributeSetEClass = createEClass(ATTRIBUTE_SET);
+		createEAttribute(attributeSetEClass, ATTRIBUTE_SET__PRINCIPALS);
 
 		attributeUnsetEClass = createEClass(ATTRIBUTE_UNSET);
 
@@ -4921,6 +4940,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		categoryInfoEClass = createEClass(CATEGORY_INFO);
 		createEReference(categoryInfoEClass, CATEGORY_INFO__PARENTS);
 		createEAttribute(categoryInfoEClass, CATEGORY_INFO__PRIMARY_URI);
+		createEAttribute(categoryInfoEClass, CATEGORY_INFO__GOOGLE_FORMAL_ID);
 
 		progressMonitorEClass = createEClass(PROGRESS_MONITOR);
 		createEAttribute(progressMonitorEClass, PROGRESS_MONITOR__CANCELED);
@@ -5572,6 +5592,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEReference(getModelNotification_Container(), ecorePackage.getEObject(), null, "container", null, 0, 1, ModelNotification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(attributeSetEClass, AttributeSet.class, "AttributeSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAttributeSet_Principals(), ecorePackage.getEString(), "principals", null, 0, -1, AttributeSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(attributeUnsetEClass, AttributeUnset.class, "AttributeUnset", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -5618,6 +5639,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEClass(categoryInfoEClass, CategoryInfo.class, "CategoryInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCategoryInfo_Parents(), this.getCategoryInfo(), null, "parents", null, 0, -1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategoryInfo_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCategoryInfo_GoogleFormalId(), ecorePackage.getELongObject(), "googleFormalId", null, 0, 1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(progressMonitorEClass, ProgressMonitor.class, "ProgressMonitor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProgressMonitor_Canceled(), ecorePackage.getEBoolean(), "canceled", null, 0, 1, ProgressMonitor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

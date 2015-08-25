@@ -47,6 +47,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getParents <em>Parents</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -293,6 +294,26 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * @ordered
 	 */
 	protected String primaryUri = PRIMARY_URI_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getGoogleFormalId() <em>Google Formal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGoogleFormalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long GOOGLE_FORMAL_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getGoogleFormalId() <em>Google Formal Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGoogleFormalId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long googleFormalId = GOOGLE_FORMAL_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -619,6 +640,27 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CATEGORY_INFO__PRIMARY_URI, oldPrimaryUri, primaryUri));
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getGoogleFormalId() {
+		return googleFormalId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setGoogleFormalId(Long newGoogleFormalId) {
+		Long oldGoogleFormalId = googleFormalId;
+		googleFormalId = newGoogleFormalId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CATEGORY_INFO__GOOGLE_FORMAL_ID, oldGoogleFormalId, googleFormalId));
+	}
+
 	protected void setParents(List<CategoryInfo> parents) {
 		getParents().clear();
 		getParents().addAll(parents);
@@ -673,6 +715,8 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 				return getParents();
 			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
 				return getPrimaryUri();
+			case CommonsPackage.CATEGORY_INFO__GOOGLE_FORMAL_ID:
+				return getGoogleFormalId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -726,6 +770,9 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
 				setPrimaryUri((String)newValue);
 				return;
+			case CommonsPackage.CATEGORY_INFO__GOOGLE_FORMAL_ID:
+				setGoogleFormalId((Long)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -777,6 +824,9 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
 				setPrimaryUri(PRIMARY_URI_EDEFAULT);
 				return;
+			case CommonsPackage.CATEGORY_INFO__GOOGLE_FORMAL_ID:
+				setGoogleFormalId(GOOGLE_FORMAL_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -815,6 +865,8 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 				return parents != null && !parents.isEmpty();
 			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
 				return PRIMARY_URI_EDEFAULT == null ? primaryUri != null : !PRIMARY_URI_EDEFAULT.equals(primaryUri);
+			case CommonsPackage.CATEGORY_INFO__GOOGLE_FORMAL_ID:
+				return GOOGLE_FORMAL_ID_EDEFAULT == null ? googleFormalId != null : !GOOGLE_FORMAL_ID_EDEFAULT.equals(googleFormalId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -951,6 +1003,8 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 		result.append(categoryCount);
 		result.append(", primaryUri: ");
 		result.append(primaryUri);
+		result.append(", googleFormalId: ");
+		result.append(googleFormalId);
 		result.append(')');
 		return result.toString();
 	}

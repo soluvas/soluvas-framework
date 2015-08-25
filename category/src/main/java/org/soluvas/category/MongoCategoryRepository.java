@@ -40,8 +40,9 @@ public interface MongoCategoryRepository extends
 	
 	Set<String> findAllSlugPathsByStatus(Collection<CategoryStatus> statuses);
 
-	Page<Category2> findAllLeavesByStatus(Collection<CategoryStatus> statuses,
-			Pageable pageable);
+	Page<Category2> findAllLeavesByStatus(Collection<CategoryStatus> statuses, Pageable pageable);
+	
+	Page<Category2> findAll(String searchText, Collection<CategoryStatus> statuses, Pageable pageable);
 	
 
 }

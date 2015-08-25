@@ -11,7 +11,9 @@ import javax.annotation.Nullable;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CategoryInfo2;
+import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.mongo.DateTimeConverter;
@@ -390,6 +392,10 @@ public class Category2 implements Serializable, Identifiable {
 	public CategoryInfo2 toInfo(String curLanguageTag) {
 		return new ToCategoryInfo(curLanguageTag).apply(this);
 	}
+	
+	public CategoryInfo toInfoXmi(String curLanguageTag) {
+		return new ToCategoryInfoXmi(curLanguageTag).apply(this);
+	}
 
 	@JsonIgnore
 	public void setEffectiveDescription() {
@@ -459,6 +465,42 @@ public class Category2 implements Serializable, Identifiable {
 			catInfo.setNsPrefix(cat.getNsPrefix());
 			if (cat.getParentId() != null) {
 				catInfo.setParentId(cat.getParentId());
+			}
+			catInfo.setPositioner(cat.getPositioner());
+			catInfo.setPrimaryUri(cat.getPrimaryUri());
+			catInfo.setSlug(cat.getSlug());
+			catInfo.setSlugPath(cat.getSlugPath());
+			
+			return catInfo;
+		}
+	}
+	
+	public class ToCategoryInfoXmi implements Function<Category2, CategoryInfo> {
+		
+		private final String curLanguageTag;
+
+		public ToCategoryInfoXmi() {
+			super();
+			this.curLanguageTag = "id-ID";//as default, may be come from appManifest
+		}
+		
+		public ToCategoryInfoXmi(final String curLanguageTag) {
+			super();
+			this.curLanguageTag = curLanguageTag;
+		}
+		
+		@Override @Nullable
+		public CategoryInfo apply(@Nullable Category2 cat) {
+			final CategoryInfo catInfo = CommonsFactory.eINSTANCE.createCategoryInfo();
+			catInfo.setColor(cat.getColor());
+			catInfo.setGoogleFormalId(cat.getGoogleFormalId());
+			catInfo.setId(cat.getId());
+			catInfo.setImageId(cat.getImageId());
+			catInfo.setLevel(cat.getLevel());
+			catInfo.setName(cat.getEffectiveName(curLanguageTag));
+			catInfo.setNsPrefix(cat.getNsPrefix());
+			if (cat.getParentId() != null) {
+//				catInfo.setParent(value);
 			}
 			catInfo.setPositioner(cat.getPositioner());
 			catInfo.setPrimaryUri(cat.getPrimaryUri());

@@ -3,6 +3,7 @@ package org.soluvas.category;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.EnumNameFunction;
@@ -138,6 +139,18 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 		final BasicDBObject query = new BasicDBObject();
 		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
 		query.put("categories", new BasicDBObject("$exists", false));
+		return findAllByQuery(query, pageable);
+	}
+
+	@Override
+	public Page<Category2> findAll(String searchText, Collection<CategoryStatus> statuses, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
+		
+		final String quotedSearchText = Pattern.quote(searchText);
+		final Pattern pattern = Pattern.compile(".*" + quotedSearchText + ".*", Pattern.CASE_INSENSITIVE);
+		query.put("name", pattern);
+		
 		return findAllByQuery(query, pageable);
 	}
 

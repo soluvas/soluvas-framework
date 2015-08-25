@@ -1921,13 +1921,22 @@ public interface CommonsPackage extends EPackage {
 	int ATTRIBUTE_SET__NEW_VALUE = ATTRIBUTE_NOTIFICATION__NEW_VALUE;
 
 	/**
+	 * The feature id for the '<em><b>Principals</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE_SET__PRINCIPALS = ATTRIBUTE_NOTIFICATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Attribute Set</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_SET_FEATURE_COUNT = ATTRIBUTE_NOTIFICATION_FEATURE_COUNT + 0;
+	int ATTRIBUTE_SET_FEATURE_COUNT = ATTRIBUTE_NOTIFICATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Get Object</em>' operation.
@@ -2550,13 +2559,22 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO__PRIMARY_URI = CATEGORY_LIKE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Google Formal Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__GOOGLE_FORMAL_ID = CATEGORY_LIKE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Category Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 3;
+	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Get Name</em>' operation.
@@ -7288,6 +7306,17 @@ public interface CommonsPackage extends EPackage {
 	EClass getAttributeSet();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.soluvas.commons.AttributeSet#getPrincipals <em>Principals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Principals</em>'.
+	 * @see org.soluvas.commons.AttributeSet#getPrincipals()
+	 * @see #getAttributeSet()
+	 * @generated
+	 */
+	EAttribute getAttributeSet_Principals();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.AttributeUnset <em>Attribute Unset</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7560,6 +7589,17 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCategoryInfo_PrimaryUri();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CategoryInfo#getGoogleFormalId <em>Google Formal Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Google Formal Id</em>'.
+	 * @see org.soluvas.commons.CategoryInfo#getGoogleFormalId()
+	 * @see #getCategoryInfo()
+	 * @generated
+	 */
+	EAttribute getCategoryInfo_GoogleFormalId();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ProgressMonitor <em>Progress Monitor</em>}'.
@@ -11083,6 +11123,14 @@ public interface CommonsPackage extends EPackage {
 		EClass ATTRIBUTE_SET = eINSTANCE.getAttributeSet();
 
 		/**
+		 * The meta object literal for the '<em><b>Principals</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ATTRIBUTE_SET__PRINCIPALS = eINSTANCE.getAttributeSet_Principals();
+
+		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.AttributeUnsetImpl <em>Attribute Unset</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11311,6 +11359,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY_INFO__PRIMARY_URI = eINSTANCE.getCategoryInfo_PrimaryUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Google Formal Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CATEGORY_INFO__GOOGLE_FORMAL_ID = eINSTANCE.getCategoryInfo_GoogleFormalId();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.
