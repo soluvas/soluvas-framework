@@ -2,6 +2,8 @@
  */
 package org.soluvas.data;
 
+import java.io.Serializable;
+
 import org.soluvas.commons.Translatable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -60,7 +62,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  * @generated
  */
 @JsonTypeInfo(use=Id.CLASS)
-public interface Value<T> extends Translatable {
+public interface Value<T> extends Translatable, Serializable {
 	
 	public static String VALUE_ATTR = "value";
 	

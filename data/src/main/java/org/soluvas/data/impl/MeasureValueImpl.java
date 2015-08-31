@@ -3,6 +3,7 @@
 package org.soluvas.data.impl;
 
 import java.math.BigDecimal;
+import java.util.Locale;
 
 import javax.measure.DecimalMeasure;
 import javax.measure.unit.Unit;
@@ -10,6 +11,7 @@ import javax.measure.unit.Unit;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.soluvas.commons.TranslationState;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.MeasureValue;
 
@@ -243,6 +245,14 @@ public class MeasureValueImpl extends ValueImpl<BigDecimal> implements MeasureVa
 	@Override
 	public String getString() {
 		return (getValue() != null ? getValue().toString() : "") + getValueUnit();
+	}
+
+	@Override
+	public void fillAsNewDefault(Locale locale, Unit<?> unit) {
+		setLanguage(locale.toLanguageTag());
+		setOriginalLanguage(locale.toLanguageTag());
+		setTranslationState(TranslationState.ORIGINAL);
+		setValueUnit(unit);
 	}
 	
 } //MeasureValueImpl

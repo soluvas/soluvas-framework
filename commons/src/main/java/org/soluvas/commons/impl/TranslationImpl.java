@@ -32,6 +32,8 @@ import org.soluvas.commons.Translation;
  * @generated
  */
 public class TranslationImpl extends MinimalEObjectImpl.Container implements Translation {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
 	 * <!-- begin-user-doc -->
