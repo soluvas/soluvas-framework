@@ -154,5 +154,12 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 		return findAllByQuery(query, pageable);
 	}
 
+	@Override
+	public Category2 getFirstActive() {
+		final BasicDBObject query = new BasicDBObject();
+		augmentQueryForStatusMask(query, StatusMask.ACTIVE_ONLY);
+		return findOneByQuery(query);
+	}
+
 		
 }

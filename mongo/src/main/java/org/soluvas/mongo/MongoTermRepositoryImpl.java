@@ -1,5 +1,7 @@
 package org.soluvas.mongo;
 
+import java.util.regex.Pattern;
+
 import org.soluvas.data.Existence;
 import org.soluvas.data.Term2;
 import org.soluvas.data.TermKind;
@@ -55,5 +57,17 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 		final BasicDBObject query = new BasicDBObject("formalId", formalId);
 		return findOnePrimaryAsEntity(query, null, "findOneByFormalId", formalId);
 	}
+
+	@Override
+	public Page<Term2> findAll(String enumerationId, String searchText, Pageable pageable) {
+		final String quotedSearchText = Pattern.quote(searchText);
+		final Pattern pattern = Pattern.compile(".*" + quotedSearchText + ".*", Pattern.CASE_INSENSITIVE);
+		final BasicDBObject query = new BasicDBObject();
+		query.put("enumerationId", enumerationId);
+		query.put("name", pattern);
+		
+		return findAllByQuery(query, pageable);
+	}
 	
 }
+

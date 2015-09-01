@@ -2,6 +2,8 @@
  */
 package org.soluvas.data;
 
+import java.util.Locale;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -20,6 +22,8 @@ package org.soluvas.data;
  * @generated
  */
 public interface StringValue extends Value<String> {
+	
+	public void fillAsNewDefault(Locale locale);
 	
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.

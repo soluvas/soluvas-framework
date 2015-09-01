@@ -44,7 +44,7 @@ public class Term2 implements Serializable, Identifiable {
 		this.overridden = true;
 	}
 	
-	public Term2(Term xmiTerm) {
+	public void copyFromXmi(Term xmiTerm) {
 		this.setColor(xmiTerm.getColor());
 		this.setId(xmiTerm.getNsPrefix() + "_" + xmiTerm.getName());
 		this.setFormalId(getId());

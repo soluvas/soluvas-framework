@@ -3,6 +3,7 @@
 package org.soluvas.data;
 
 import java.math.BigDecimal;
+import java.util.Locale;
 
 import javax.measure.DecimalMeasure;
 import javax.measure.unit.Unit;
@@ -29,6 +30,9 @@ import javax.measure.unit.Unit;
  * @generated
  */
 public interface MeasureValue extends Value<BigDecimal> {
+	
+	public void fillAsNewDefault(Locale locale, Unit<?> unit);
+	
 	/**
 	 * Returns the value of the '<em><b>Value Unit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
