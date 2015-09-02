@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -16,6 +17,8 @@ import org.soluvas.commons.CategoryInfo2;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.Translation;
+import org.soluvas.commons.TranslationState;
 import org.soluvas.commons.mongo.DateTimeConverter;
 import org.soluvas.commons.mongo.UnitConverter;
 import org.soluvas.data.EntityLookup;
@@ -506,6 +509,20 @@ public class Category2 implements Serializable, Identifiable {
 			catInfo.setPrimaryUri(cat.getPrimaryUri());
 			catInfo.setSlug(cat.getSlug());
 			catInfo.setSlugPath(cat.getSlugPath());
+			catInfo.setTranslationState(TranslationState.ORIGINAL);
+			catInfo.setOriginalLanguage(cat.getLanguage());
+			catInfo.setLanguage(cat.getLanguage());
+			if (cat.getTranslations() != null && !cat.getTranslations().isEmpty()) {
+				for (final Entry<String, Map<String, String>> entry : cat.getTranslations().entrySet()) {
+					final String key = entry.getKey();
+					final Translation translation = CommonsFactory.eINSTANCE.createTranslation();
+					translation.setLanguage(key);
+					for (final Entry<String, String> entryTrans : entry.getValue().entrySet()) {
+						translation.getMessages().put(entryTrans.getKey(), entryTrans.getValue());
+					}
+					catInfo.getTranslations().put(key, translation);
+				}
+			}
 			
 			return catInfo;
 		}
