@@ -28,7 +28,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=CategoryInfoImpl.class)
-public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
+public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo>, Translatable {
 
 	/**
 	 * Single right guillemet surrounded by space.

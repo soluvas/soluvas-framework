@@ -5387,6 +5387,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g2 = createEGenericType(this.getCategoryInfo());
 		g1.getETypeArguments().add(g2);
 		categoryInfoEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTranslatable());
+		categoryInfoEClass.getEGenericSuperTypes().add(g1);
 		shellProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
 		eventBusProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
 		progressMonitorWrapperEClass.getESuperTypes().add(this.getProgressMonitor());

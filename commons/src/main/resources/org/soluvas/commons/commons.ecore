@@ -747,6 +747,7 @@
     <eGenericSuperTypes eClassifier="#//Parentable">
       <eTypeArguments eClassifier="#//CategoryInfo"/>
     </eGenericSuperTypes>
+    <eGenericSuperTypes eClassifier="#//Translatable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="BigMoneyProvider" instanceClassName="org.joda.money.BigMoneyProvider"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Measurable" instanceClassName="javax.measure.Measurable">

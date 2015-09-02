@@ -319,6 +319,7 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				T1 result = caseCategoryInfo(categoryInfo);
 				if (result == null) result = caseCategoryLike(categoryInfo);
 				if (result == null) result = caseParentable(categoryInfo);
+				if (result == null) result = caseTranslatable(categoryInfo);
 				if (result == null) result = caseIdentifiable(categoryInfo);
 				if (result == null) result = caseNsPrefixable(categoryInfo);
 				if (result == null) result = caseNameContainer(categoryInfo);
