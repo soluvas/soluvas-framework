@@ -2631,13 +2631,22 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO___GET_IMAGE_ID = CATEGORY_LIKE___GET_IMAGE_ID;
 
 	/**
+	 * The operation id for the '<em>Get Effective Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING = CATEGORY_LIKE_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Category Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO_OPERATION_COUNT = CATEGORY_LIKE_OPERATION_COUNT + 0;
+	int CATEGORY_INFO_OPERATION_COUNT = CATEGORY_LIKE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.
@@ -7638,6 +7647,16 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCategoryInfo_GoogleFormalId();
 
 	/**
+	 * Returns the meta object for the '{@link org.soluvas.commons.CategoryInfo#getEffectiveName(java.lang.String) <em>Get Effective Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Effective Name</em>' operation.
+	 * @see org.soluvas.commons.CategoryInfo#getEffectiveName(java.lang.String)
+	 * @generated
+	 */
+	EOperation getCategoryInfo__GetEffectiveName__String();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ProgressMonitor <em>Progress Monitor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11403,6 +11422,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY_INFO__GOOGLE_FORMAL_ID = eINSTANCE.getCategoryInfo_GoogleFormalId();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Effective Name</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING = eINSTANCE.getCategoryInfo__GetEffectiveName__String();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.

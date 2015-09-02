@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,11 +28,12 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.Sluggable;
-
 import org.soluvas.commons.Translatable;
 import org.soluvas.commons.Translation;
 import org.soluvas.commons.TranslationState;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Optional;
 
 /**
  * <!-- begin-user-doc -->
@@ -689,6 +691,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TranslationState getTranslationState() {
 		return translationState;
 	}
@@ -698,6 +701,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTranslationState(TranslationState newTranslationState) {
 		TranslationState oldTranslationState = translationState;
 		translationState = newTranslationState == null ? TRANSLATION_STATE_EDEFAULT : newTranslationState;
@@ -710,6 +714,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getOriginalLanguage() {
 		return originalLanguage;
 	}
@@ -719,6 +724,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOriginalLanguage(String newOriginalLanguage) {
 		String oldOriginalLanguage = originalLanguage;
 		originalLanguage = newOriginalLanguage;
@@ -731,6 +737,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLanguage() {
 		return language;
 	}
@@ -740,6 +747,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLanguage(String newLanguage) {
 		String oldLanguage = language;
 		language = newLanguage;
@@ -752,6 +760,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EMap<String, Translation> getTranslations() {
 		if (translations == null) {
 			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, CommonsPackage.CATEGORY_INFO__TRANSLATIONS);
@@ -800,6 +809,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getGoogleFormalId() {
 		return googleFormalId;
 	}
@@ -809,11 +819,47 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGoogleFormalId(Long newGoogleFormalId) {
 		Long oldGoogleFormalId = googleFormalId;
 		googleFormalId = newGoogleFormalId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CATEGORY_INFO__GOOGLE_FORMAL_ID, oldGoogleFormalId, googleFormalId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	@JsonIgnore
+	public String getEffectiveName(String curLanguageTag) {
+		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
+			return getName();
+		} else {
+			final EMap<String, Translation> translations = getTranslations();
+			if (translations.isEmpty()) {
+				return getName();
+			} else {
+				if (!translations.containsKey(curLanguageTag)) {
+					return getName();
+				} else {
+					final Translation translation = translations.get(curLanguageTag);
+					if (!translation.getMessages().containsKey(CategoryInfo.NAME_ATTR)) {
+						return getName();
+					} else {
+						final String translatedValue = translation.getMessages().get(CategoryInfo.NAME_ATTR);
+						return translatedValue;
+					}
+				}
+			}
+		}
+	}
+	
+	@JsonIgnore
+	public void setEffectiveName() {
+		throw new UnsupportedOperationException();
 	}
 
 	protected void setParents(List<CategoryInfo> parents) {
@@ -1185,6 +1231,20 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case CommonsPackage.CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING:
+				return getEffectiveName((String)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
