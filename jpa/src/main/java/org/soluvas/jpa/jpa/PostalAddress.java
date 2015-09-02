@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import org.hibernate.annotations.Type;
@@ -33,7 +34,7 @@ import com.google.common.base.Preconditions;
  * SalesQuote/SalesOrder 3. Origin Address in SalesQuote/SalesOrder 4. Person
  * (Customer) Address 5. Shop Address 6. Mall Address <!-- end-model-doc -->
  * 
- * @generated
+ * @todo lat Latitude, lon Longitude, ele Elevation
  */
 @Embeddable()
 public class PostalAddress implements Describable, Serializable {
@@ -195,6 +196,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * 
 	 */
 	@Basic()
+	@Column(columnDefinition = "uuid")
 	@Type(type = "org.hibernate.type.PostgresUUIDType")
 	private UUID id = null;
 
@@ -285,6 +287,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * end-model-doc -->
 	 * 
 	 */
+	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> mobiles = new ArrayList<String>();
 
@@ -304,6 +307,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 */
+	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> phones = new ArrayList<String>();
 
@@ -321,6 +325,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- end-model-doc -->
 	 * 
 	 */
+	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> homePhones = new ArrayList<String>();
 
@@ -337,6 +342,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * RFC2256: Telephone Number. LDAP: (not yet mapped) <!-- end-model-doc -->
 	 * 
 	 */
+	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> workPhones = new ArrayList<String>();
 
@@ -353,6 +359,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * LDAP: mail. <!-- end-model-doc -->
 	 * 
 	 */
+	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
 	private List<String> emails = new ArrayList<String>();
 
@@ -451,7 +458,7 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Basic()
 	// @Columns(columns = { @Column(name = "validationtime"),
-	// @Column(name = "validationtime_zone") })
+	@Column(columnDefinition = "timestamp with time zone")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime validationTime = null;
 
@@ -475,7 +482,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	@Basic()
 	// @Columns(columns = { @Column(name = "validationtime"),
-	// @Column(name = "validationtime_zone") })
+	@Column(columnDefinition = "varchar(255)")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTimeZoneAsString")
 	private DateTimeZone validationTime_zone = null;
 
