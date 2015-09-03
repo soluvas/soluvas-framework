@@ -2336,6 +2336,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getCategoryInfo__GetEffectiveName__String() {
+		return categoryInfoEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getProgressMonitor() {
 		return progressMonitorEClass;
@@ -4941,6 +4950,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEReference(categoryInfoEClass, CATEGORY_INFO__PARENTS);
 		createEAttribute(categoryInfoEClass, CATEGORY_INFO__PRIMARY_URI);
 		createEAttribute(categoryInfoEClass, CATEGORY_INFO__GOOGLE_FORMAL_ID);
+		createEOperation(categoryInfoEClass, CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING);
 
 		progressMonitorEClass = createEClass(PROGRESS_MONITOR);
 		createEAttribute(progressMonitorEClass, PROGRESS_MONITOR__CANCELED);
@@ -5387,6 +5397,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g2 = createEGenericType(this.getCategoryInfo());
 		g1.getETypeArguments().add(g2);
 		categoryInfoEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTranslatable());
+		categoryInfoEClass.getEGenericSuperTypes().add(g1);
 		shellProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
 		eventBusProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
 		progressMonitorWrapperEClass.getESuperTypes().add(this.getProgressMonitor());
@@ -5640,6 +5652,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEReference(getCategoryInfo_Parents(), this.getCategoryInfo(), null, "parents", null, 0, -1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategoryInfo_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategoryInfo_GoogleFormalId(), ecorePackage.getELongObject(), "googleFormalId", null, 0, 1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = initEOperation(getCategoryInfo__GetEffectiveName__String(), ecorePackage.getEString(), "getEffectiveName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "curLanguageTag", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(progressMonitorEClass, ProgressMonitor.class, "ProgressMonitor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProgressMonitor_Canceled(), ecorePackage.getEBoolean(), "canceled", null, 0, 1, ProgressMonitor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

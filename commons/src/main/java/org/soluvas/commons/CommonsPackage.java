@@ -2541,13 +2541,49 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO__PARENT = CATEGORY_LIKE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__TRANSLATION_STATE = CATEGORY_LIKE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__ORIGINAL_LANGUAGE = CATEGORY_LIKE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__LANGUAGE = CATEGORY_LIKE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__TRANSLATIONS = CATEGORY_LIKE_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Parents</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO__PARENTS = CATEGORY_LIKE_FEATURE_COUNT + 1;
+	int CATEGORY_INFO__PARENTS = CATEGORY_LIKE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Primary Uri</b></em>' attribute.
@@ -2556,7 +2592,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO__PRIMARY_URI = CATEGORY_LIKE_FEATURE_COUNT + 2;
+	int CATEGORY_INFO__PRIMARY_URI = CATEGORY_LIKE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Google Formal Id</b></em>' attribute.
@@ -2565,7 +2601,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO__GOOGLE_FORMAL_ID = CATEGORY_LIKE_FEATURE_COUNT + 3;
+	int CATEGORY_INFO__GOOGLE_FORMAL_ID = CATEGORY_LIKE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Category Info</em>' class.
@@ -2574,7 +2610,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 4;
+	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Get Name</em>' operation.
@@ -2595,13 +2631,22 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO___GET_IMAGE_ID = CATEGORY_LIKE___GET_IMAGE_ID;
 
 	/**
+	 * The operation id for the '<em>Get Effective Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING = CATEGORY_LIKE_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Category Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO_OPERATION_COUNT = CATEGORY_LIKE_OPERATION_COUNT + 0;
+	int CATEGORY_INFO_OPERATION_COUNT = CATEGORY_LIKE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.
@@ -7602,6 +7647,16 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCategoryInfo_GoogleFormalId();
 
 	/**
+	 * Returns the meta object for the '{@link org.soluvas.commons.CategoryInfo#getEffectiveName(java.lang.String) <em>Get Effective Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Effective Name</em>' operation.
+	 * @see org.soluvas.commons.CategoryInfo#getEffectiveName(java.lang.String)
+	 * @generated
+	 */
+	EOperation getCategoryInfo__GetEffectiveName__String();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ProgressMonitor <em>Progress Monitor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11367,6 +11422,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY_INFO__GOOGLE_FORMAL_ID = eINSTANCE.getCategoryInfo_GoogleFormalId();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Effective Name</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING = eINSTANCE.getCategoryInfo__GetEffectiveName__String();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.

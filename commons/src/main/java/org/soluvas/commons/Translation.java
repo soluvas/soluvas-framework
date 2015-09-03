@@ -2,12 +2,9 @@
  */
 package org.soluvas.commons;
 
-import java.io.Serializable;
-
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.impl.TranslationImpl;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
@@ -32,7 +29,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=TranslationImpl.class)
-public interface Translation extends EObject, Serializable {
+public interface Translation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Language</b></em>' attribute.
 	 * <!-- begin-user-doc -->
