@@ -50,6 +50,8 @@ import com.google.common.eventbus.EventBus;
  * to determine the {@link TenantRefImpl} hence, {@code dataDir}.
  * 
  * @author rudi
+ * @see MultiTenantConfig
+ * @see MultiTenantWebAddressConfig
  * @see SingleTenantWebConfig
  */
 @Configuration
