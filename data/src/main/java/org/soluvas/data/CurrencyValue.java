@@ -52,5 +52,5 @@ public interface CurrencyValue extends Value<BigDecimal> {
 	 * @generated
 	 */
 	void setCurrencyUnit(CurrencyUnit value);
-
+	
 } // CurrencyValue
