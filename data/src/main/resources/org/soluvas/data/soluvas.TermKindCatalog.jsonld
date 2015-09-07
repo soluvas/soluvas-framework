@@ -1,0 +1,22 @@
+{
+  "@type" : "TermKindCatalog",
+  "termKinds" : [ {
+    "id" : "Color",
+    "name" : "Color",
+    "description" : "Color",
+    "expandable" : null,
+    "translation" : { }
+  }, {
+    "id" : "ApparelSize",
+    "name" : "Apparel Size",
+    "description" : "Apparel Size",
+    "expandable" : null,
+    "translation" : { }
+  }, {
+    "id" : "ShoeSize",
+    "name" : "Shoe Size",
+    "description" : "Shoe Size",
+    "expandable" : null,
+    "translation" : { }
+  } ]
+}

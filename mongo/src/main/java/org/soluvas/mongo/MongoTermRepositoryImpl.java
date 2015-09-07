@@ -4,11 +4,9 @@ import java.util.regex.Pattern;
 
 import org.soluvas.data.Existence;
 import org.soluvas.data.Term2;
-import org.soluvas.data.TermKind;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 
-import com.google.common.collect.ImmutableBiMap;
 import com.mongodb.BasicDBObject;
 import com.mongodb.ReadPreference;
 
@@ -17,9 +15,6 @@ import com.mongodb.ReadPreference;
  *
  */
 public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implements MongoTermRepository {
-	
-	public static final ImmutableBiMap<TermKind, String> TERM_STRING_VALUE = ImmutableBiMap.of(
-			TermKind.APPAREL_SIZE, "ApparelSize", TermKind.COLOR, "Color", TermKind.SHOE_SIZE, "ShoeSize");
 	
 	public MongoTermRepositoryImpl(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(Term2.class, Term2.class, Term2.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL,
@@ -31,19 +26,19 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 	}
 	
 	@Override
-	public Page<Term2> findAll(TermKind termKind, Pageable pageable) {
+	public Page<Term2> findAll(String enumerationId, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
-		query.put("enumerationId", termKind.getEnumerationId());
+		query.put("enumerationId", enumerationId);
 		
 		return findAllByQuery(query, pageable);
 	}
 
 	@Override
-	public long count(TermKind termKind) {
+	public long count(String enumerationId) {
 		final BasicDBObject query = new BasicDBObject();
-		query.put("enumerationId", termKind.getEnumerationId());
+		query.put("enumerationId", enumerationId);
 		
-		return countByQuery(ReadPreference.secondaryPreferred(), query, "count", termKind);
+		return countByQuery(ReadPreference.secondaryPreferred(), query, "count", enumerationId);
 	}
 
 	@Override

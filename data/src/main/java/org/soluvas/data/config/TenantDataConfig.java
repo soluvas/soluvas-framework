@@ -21,6 +21,8 @@ import org.soluvas.data.MixinCatalog;
 import org.soluvas.data.MixinManager;
 import org.soluvas.data.PropertyDefinitionRepository;
 import org.soluvas.data.PropertyDefinitionRepositoryImpl;
+import org.soluvas.data.TermKindRepository;
+import org.soluvas.data.TermKindRepositoryImpl;
 import org.soluvas.data.TermManager;
 import org.soluvas.data.impl.DataCatalogImpl;
 import org.soluvas.data.impl.MixinManagerImpl;
@@ -225,6 +227,11 @@ public class TenantDataConfig {
 	@Bean
 	public PropertyDefinitionRepository propertyDefinitionRepo() {
 		return new PropertyDefinitionRepositoryImpl();
+	}
+	
+	@Bean
+	public TermKindRepository termKindRepo() {
+		return new TermKindRepositoryImpl();
 	}
 	
 //	@Bean @Lazy(false)
