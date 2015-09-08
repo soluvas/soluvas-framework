@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import jline.internal.Preconditions;
+
 import org.soluvas.commons.Identifiable;
 
 import com.google.code.morphia.annotations.Id;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -248,6 +251,34 @@ public class Term2 implements Serializable, Identifiable {
 	 */
 	public Map<String, Map<String, String>> getTranslations() {
 		return translations;
+	}
+	
+	public String getImageUri(String imagesUri) {
+		if (!Strings.isNullOrEmpty(getImageId())) {
+			final String bundleName = getId().startsWith("base") ? "org.soluvas.data" : "tenant_common";
+			final String uri = imagesUri + bundleName + "/" + "base_" + getEnumerationId() +"/" + getImageId() + ".png";
+			return uri;
+		} else {
+			return null;
+		}
+	}
+	
+	public String getEffectiveName(String curLanguageTag) {
+		Preconditions.checkNotNull("For getting effective display name, the curLanguageTag must not be null.");
+		if (getTranslations() != null && !getTranslations().isEmpty()) {
+			if (curLanguageTag.equals(getLanguage())) {
+				return getName();
+			} else {
+				final Map<String, String> msg = getTranslations().get(curLanguageTag);
+				if (msg != null && msg.containsKey(Term2.NAME_ATTR)) {
+					return msg.get(Term2.NAME_ATTR);
+				} else {
+					return getName();
+				}
+			}
+		} else {
+			return getName();
+		}
 	}
 	
 	/* (non-Javadoc)

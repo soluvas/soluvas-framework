@@ -3,20 +3,26 @@
   "termKinds" : [ {
     "id" : "Color",
     "name" : "Color",
+    "idPropertyDefinition" : "color",
     "description" : "Color",
     "expandable" : null,
-    "translation" : { }
+    "language" : "en_US",
+    "translations" : { }
   }, {
     "id" : "ApparelSize",
     "name" : "Apparel Size",
+    "idPropertyDefinition" : "size",
     "description" : "Apparel Size",
     "expandable" : null,
-    "translation" : { }
+    "language" : "en_US",
+    "translations" : { }
   }, {
     "id" : "ShoeSize",
     "name" : "Shoe Size",
+    "idPropertyDefinition" : "size",
     "description" : "Shoe Size",
     "expandable" : null,
-    "translation" : { }
+    "language" : "en_US",
+    "translations" : { }
   } ]
 }

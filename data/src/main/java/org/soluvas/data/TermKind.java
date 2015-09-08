@@ -2,6 +2,7 @@ package org.soluvas.data;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -14,9 +15,11 @@ public class TermKind implements Serializable {
 	
 	private String id;
 	private String name;
+	private String idPropertyDefinition;
 	private String description;
 	private Boolean expandable;
-	private final Map<String, Map<String, String>> translation = new HashMap<>();
+	private Locale language;
+	private final Map<String, Map<String, String>> translations = new HashMap<>();
 	/**
 	 * @return the id
 	 */
@@ -40,6 +43,18 @@ public class TermKind implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	/**
+	 * @return the idPropertyDefinition
+	 */
+	public String getIdPropertyDefinition() {
+		return idPropertyDefinition;
+	}
+	/**
+	 * @param idPropertyDefinition the idPropertyDefinition to set
+	 */
+	public void setIdPropertyDefinition(String idPropertyDefinition) {
+		this.idPropertyDefinition = idPropertyDefinition;
 	}
 	/**
 	 * @return the description
@@ -66,10 +81,22 @@ public class TermKind implements Serializable {
 		this.expandable = expandable;
 	}
 	/**
+	 * @return the language
+	 */
+	public Locale getLanguage() {
+		return language;
+	}
+	/**
+	 * @param language the language to set
+	 */
+	public void setLanguage(Locale language) {
+		this.language = language;
+	}
+	/**
 	 * @return the translation
 	 */
-	public Map<String, Map<String, String>> getTranslation() {
-		return translation;
+	public Map<String, Map<String, String>> getTranslations() {
+		return translations;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -78,7 +105,7 @@ public class TermKind implements Serializable {
 	public String toString() {
 		return "TermKind2 [id=" + id + ", name=" + name + ", description="
 				+ description + ", expandable=" + expandable + ", translation="
-				+ translation + "]";
+				+ translations + "]";
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
