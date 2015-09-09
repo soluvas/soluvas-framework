@@ -60,10 +60,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.jscience</groupId>
-			<artifactId>jscience</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.joda</groupId>
 			<artifactId>joda-money</artifactId>
 		</dependency>

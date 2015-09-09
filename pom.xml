@@ -850,9 +850,9 @@
 				<version>0.10.0</version>
 			</dependency>
 			<dependency>
-				<groupId>org.jscience</groupId>
-				<artifactId>jscience</artifactId>
-				<version>4.3.1</version>
+				<groupId>org.opengis</groupId>
+				<artifactId>geoapi</artifactId>
+				<version>3.0.0</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-beanutils</groupId>

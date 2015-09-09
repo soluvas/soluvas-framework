@@ -104,8 +104,8 @@
 			<artifactId>guava</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jscience</groupId>
-			<artifactId>jscience</artifactId>
+			<groupId>org.opengis</groupId>
+			<artifactId>geoapi</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.joda</groupId>
