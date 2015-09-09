@@ -516,7 +516,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
 	public DecimalMeasure<?> createDecimalMeasureFromString(EDataType eDataType, String initialValue) {
 		return (DecimalMeasure<?>)super.createFromString(initialValue);
