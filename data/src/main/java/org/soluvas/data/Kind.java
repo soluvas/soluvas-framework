@@ -35,12 +35,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.Kind#getImageId <em>Image Id</em>}</li>
  *   <li>{@link org.soluvas.data.Kind#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.data.Kind#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getKind()
  * @model

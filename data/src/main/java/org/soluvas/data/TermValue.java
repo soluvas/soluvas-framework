@@ -19,13 +19,13 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.TermValue#getTerm <em>Term</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getValue <em>Value</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getPrimaryUri <em>Primary Uri</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getTermValue()
  * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EString> org.soluvas.commons.Identifiable org.soluvas.commons.Sluggable"

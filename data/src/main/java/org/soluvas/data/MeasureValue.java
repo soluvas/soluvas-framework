@@ -5,7 +5,7 @@ package org.soluvas.data;
 import java.math.BigDecimal;
 import java.util.Locale;
 
-import javax.measure.DecimalMeasure;
+import javax.measure.Measure;
 import javax.measure.unit.Unit;
 
 /**
@@ -19,11 +19,11 @@ import javax.measure.unit.Unit;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.MeasureValue#getValueUnit <em>Value Unit</em>}</li>
  *   <li>{@link org.soluvas.data.MeasureValue#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getMeasureValue()
  * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EBigDecimal>"
@@ -89,9 +89,9 @@ public interface MeasureValue extends Value<BigDecimal> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" dataType="org.soluvas.data.DecimalMeasure<?>"
+	 * @model kind="operation" dataType="org.soluvas.data.Measure"
 	 * @generated
 	 */
-	DecimalMeasure<?> getMeasure();
+	Measure getMeasure();
 
 } // MeasureValue

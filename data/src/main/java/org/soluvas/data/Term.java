@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.Term#getVocab <em>Vocab</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getDisplayName <em>Display Name</em>}</li>
@@ -36,7 +37,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.data.Term#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.data.Term#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getTerm()
  * @model

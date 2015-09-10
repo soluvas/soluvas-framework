@@ -21,10 +21,10 @@ import org.soluvas.data.DataPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.CurrencyValueImpl#getCurrencyUnit <em>Currency Unit</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

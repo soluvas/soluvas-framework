@@ -17,10 +17,10 @@ import org.joda.money.CurrencyUnit;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.CurrencyValue#getCurrencyUnit <em>Currency Unit</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getCurrencyValue()
  * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EBigDecimal>"

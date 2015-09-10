@@ -1,8 +1,11 @@
 package org.soluvas.commons;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 import javax.annotation.Nullable;
+import javax.measure.Measure;
+import javax.measure.unit.Unit;
 
 /**
  * @author anton
@@ -28,6 +31,11 @@ public class BigDecimalUtils {
 
 	public static boolean isNegative(java.math.BigDecimal b) {
 		return b.signum() == -1;
+	}
+	
+	@SuppressWarnings({ "null", "rawtypes", "unchecked" })
+	public static BigDecimal getValue(Measure<?> measure) {
+		return measure.decimalValue((Unit) measure.getUnit(), MathContext.UNLIMITED);
 	}
 
 }

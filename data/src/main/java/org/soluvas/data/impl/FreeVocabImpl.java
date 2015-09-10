@@ -11,8 +11,6 @@ import org.soluvas.data.FreeVocab;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Free Vocab</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

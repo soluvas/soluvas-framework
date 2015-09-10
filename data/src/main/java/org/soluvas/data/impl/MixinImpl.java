@@ -37,6 +37,7 @@ import com.google.common.base.Strings;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getResourceType <em>Resource Type</em>}</li>
@@ -48,7 +49,6 @@ import com.google.common.base.Strings;
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MixinImpl#getDisplayName <em>Display Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

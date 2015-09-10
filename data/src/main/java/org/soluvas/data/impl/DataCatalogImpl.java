@@ -31,6 +31,7 @@ import org.soluvas.data.Vocab;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getBundle <em>Bundle</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getResourceType <em>Resource Type</em>}</li>
@@ -41,7 +42,6 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getTerms <em>Terms</em>}</li>
  *   <li>{@link org.soluvas.data.impl.DataCatalogImpl#getKinds <em>Kinds</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

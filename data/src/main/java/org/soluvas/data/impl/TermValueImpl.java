@@ -27,6 +27,7 @@ import org.soluvas.data.TermValue;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getSlug <em>Slug</em>}</li>
@@ -35,7 +36,6 @@ import org.soluvas.data.TermValue;
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

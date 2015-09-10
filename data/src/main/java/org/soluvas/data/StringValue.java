@@ -12,10 +12,10 @@ import java.util.Locale;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.StringValue#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getStringValue()
  * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EString>"

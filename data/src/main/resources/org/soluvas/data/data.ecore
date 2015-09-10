@@ -149,12 +149,6 @@
     </eGenericSuperTypes>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Measure" instanceClassName="javax.measure.Measure">
-    <eTypeParameters name="V"/>
-    <eTypeParameters name="Q">
-      <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Quantity"/>
-    </eTypeParameters>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="DecimalMeasure" instanceClassName="javax.measure.DecimalMeasure">
     <eTypeParameters name="Q">
       <eBounds eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Quantity"/>
     </eTypeParameters>
@@ -163,11 +157,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Mixin with measured unit."/>
     </eAnnotations>
-    <eOperations name="getMeasure">
-      <eGenericType eClassifier="#//DecimalMeasure">
-        <eTypeArguments/>
-      </eGenericType>
-    </eOperations>
+    <eOperations name="getMeasure" eType="#//Measure"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueUnit">
       <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Unit">
         <eTypeArguments/>

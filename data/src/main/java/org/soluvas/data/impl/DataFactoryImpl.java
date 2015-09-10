@@ -127,8 +127,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return createCrudRepositoryBaseFromString(eDataType, initialValue);
 			case DataPackage.MEASURE:
 				return createMeasureFromString(eDataType, initialValue);
-			case DataPackage.DECIMAL_MEASURE:
-				return createDecimalMeasureFromString(eDataType, initialValue);
 			case DataPackage.PAGEABLE:
 				return createPageableFromString(eDataType, initialValue);
 			default:
@@ -160,8 +158,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return convertCrudRepositoryBaseToString(eDataType, instanceValue);
 			case DataPackage.MEASURE:
 				return convertMeasureToString(eDataType, instanceValue);
-			case DataPackage.DECIMAL_MEASURE:
-				return convertDecimalMeasureToString(eDataType, instanceValue);
 			case DataPackage.PAGEABLE:
 				return convertPageableToString(eDataType, instanceValue);
 			default:
@@ -500,8 +496,8 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Measure<?, ?> createMeasureFromString(EDataType eDataType, String initialValue) {
-		return (Measure<?, ?>)super.createFromString(initialValue);
+	public Measure<?> createMeasureFromString(EDataType eDataType, String initialValue) {
+		return (Measure<?>)super.createFromString(initialValue);
 	}
 
 	/**
@@ -510,23 +506,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * @generated
 	 */
 	public String convertMeasureToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 */
-	public DecimalMeasure<?> createDecimalMeasureFromString(EDataType eDataType, String initialValue) {
-		return (DecimalMeasure<?>)super.createFromString(initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertDecimalMeasureToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 

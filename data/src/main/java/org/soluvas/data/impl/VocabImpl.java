@@ -34,6 +34,7 @@ import org.soluvas.data.Vocab;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.VocabImpl#getTerms <em>Terms</em>}</li>
  *   <li>{@link org.soluvas.data.impl.VocabImpl#getBundle <em>Bundle</em>}</li>
@@ -43,7 +44,6 @@ import org.soluvas.data.Vocab;
  *   <li>{@link org.soluvas.data.impl.VocabImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.VocabImpl#getDescription <em>Description</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

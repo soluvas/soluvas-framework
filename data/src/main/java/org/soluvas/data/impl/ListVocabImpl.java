@@ -11,8 +11,6 @@ import org.soluvas.data.ListVocab;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>List Vocab</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
