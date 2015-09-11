@@ -1,10 +1,14 @@
 package org.soluvas.data;
 
 /**
+ * Use for {@link ProductVariant#getOptionProperties()}
+ * 
  * @author rudi
  *
  */
-public class TermKeys {
+public class OptionPropertyKeys {
+	
+	public static final String PREFIX = "base_";
 	
 	public static final String BASE_COLOR = "base_color";
 	
