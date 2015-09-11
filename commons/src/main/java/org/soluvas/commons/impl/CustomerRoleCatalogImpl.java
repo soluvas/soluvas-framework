@@ -26,10 +26,10 @@ import org.soluvas.commons.CustomerRoleCatalog;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleCatalogImpl#getCustomerRoles <em>Customer Roles</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

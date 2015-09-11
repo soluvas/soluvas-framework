@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import javax.annotation.Nullable;
 
 import org.eclipse.emf.common.util.EList;
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -27,6 +27,7 @@ import com.google.common.base.Function;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.Person#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getFirstName <em>First Name</em>}</li>
@@ -81,7 +82,6 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getVerifyCode <em>Verify Code</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getOrganizations <em>Organizations</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getPerson()
  * @model

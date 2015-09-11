@@ -51,11 +51,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.ProgressMonitor#isCanceled <em>Canceled</em>}</li>
  *   <li>{@link org.soluvas.commons.ProgressMonitor#getTaskName <em>Task Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getProgressMonitor()
  * @model abstract="true"

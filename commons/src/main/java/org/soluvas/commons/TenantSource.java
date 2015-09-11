@@ -117,6 +117,8 @@ public enum TenantSource implements Enumerator {
 	 * Returns the '<em><b>Tenant Source</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static TenantSource get(String literal) {
@@ -133,6 +135,8 @@ public enum TenantSource implements Enumerator {
 	 * Returns the '<em><b>Tenant Source</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static TenantSource getByName(String name) {
@@ -149,6 +153,8 @@ public enum TenantSource implements Enumerator {
 	 * Returns the '<em><b>Tenant Source</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static TenantSource get(int value) {

@@ -13,12 +13,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.ResourceAware#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.commons.ResourceAware#getResourceUri <em>Resource Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.ResourceAware#getResourceName <em>Resource Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getResourceAware()
  * @model interface="true" abstract="true"

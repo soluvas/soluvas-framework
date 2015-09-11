@@ -14,10 +14,10 @@ package org.soluvas.commons;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.NameContainer#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getNameContainer()
  * @model interface="true" abstract="true"

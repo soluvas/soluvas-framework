@@ -8,7 +8,7 @@ import java.util.Locale;
 import javax.annotation.Nullable;
 
 import org.eclipse.emf.common.util.EList;
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
@@ -32,6 +32,7 @@ import org.soluvas.commons.util.AppUtils;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.AppManifest#getTitle <em>Title</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getSummary <em>Summary</em>}</li>
@@ -70,7 +71,6 @@ import org.soluvas.commons.util.AppUtils;
  *   <li>{@link org.soluvas.commons.AppManifest#getReminderPeriod <em>Reminder Period</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getReminderScheduleStr <em>Reminder Schedule Str</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getAppManifest()
  * @model

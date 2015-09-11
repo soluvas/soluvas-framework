@@ -23,11 +23,11 @@ import org.soluvas.commons.Translation;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.TranslationImpl#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.TranslationImpl#getMessages <em>Messages</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

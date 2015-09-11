@@ -125,6 +125,8 @@ public enum Gender implements Enumerator {
 	 * Returns the '<em><b>Gender</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Gender get(String literal) {
@@ -141,6 +143,8 @@ public enum Gender implements Enumerator {
 	 * Returns the '<em><b>Gender</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Gender getByName(String name) {
@@ -157,6 +161,8 @@ public enum Gender implements Enumerator {
 	 * Returns the '<em><b>Gender</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static Gender get(int value) {

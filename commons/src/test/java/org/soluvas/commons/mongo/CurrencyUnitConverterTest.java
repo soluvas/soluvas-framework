@@ -5,7 +5,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.UUID;
 
-import org.joda.money.CurrencyUnit;
+import javax.money.Monetary;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class CurrencyUnitConverterTest {
 	@Test
 	public void fromProduct() {
 		CurrencyUnitProduct product = new CurrencyUnitProduct(UUID.randomUUID().toString(),
-				CurrencyUnit.of("IDR"));
+				Monetary.getCurrency("IDR"));
 		DBObject dbo = morphia.toDBObject(product);
 		assertNotNull(dbo);
 		assertEquals("IDR", dbo.get("currency"));
@@ -43,7 +44,7 @@ public class CurrencyUnitConverterTest {
 		final BasicDBObject dbo = new BasicDBObject(ImmutableMap.of("_id", "1", "currency", "IDR"));
 		CurrencyUnitProduct product = morphia.fromDBObject(CurrencyUnitProduct.class, dbo);
 		assertNotNull(product);
-		assertEquals("IDR", product.getCurrency().getCode());
+		assertEquals("IDR", product.getCurrency().getCurrencyCode());
 	}
 
 }

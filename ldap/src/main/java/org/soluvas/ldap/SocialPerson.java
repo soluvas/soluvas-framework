@@ -3,7 +3,7 @@ package org.soluvas.ldap;
 import java.math.BigDecimal;
 import java.util.Set;
 
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.ArchivalStatus;

@@ -18,11 +18,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.Translation#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.soluvas.commons.Translation#getMessages <em>Messages</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getTranslation()
  * @model

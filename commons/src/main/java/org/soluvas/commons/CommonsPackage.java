@@ -5877,7 +5877,7 @@ public interface CommonsPackage extends EPackage {
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.joda.money.CurrencyUnit
+	 * @see javax.money.CurrencyUnit
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
@@ -6004,14 +6004,14 @@ public interface CommonsPackage extends EPackage {
 	int BUNDLE = 94;
 
 	/**
-	 * The meta object id for the '<em>Big Money Provider</em>' data type.
+	 * The meta object id for the '<em>Money</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.joda.money.BigMoneyProvider
-	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
+	 * @see org.javamoney.moneta.Money
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMoney()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 95;
+	int MONEY = 95;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -9885,12 +9885,12 @@ public interface CommonsPackage extends EPackage {
 	EDataType getDateTime();
 
 	/**
-	 * Returns the meta object for data type '{@link org.joda.money.CurrencyUnit <em>Currency Unit</em>}'.
+	 * Returns the meta object for data type '{@link javax.money.CurrencyUnit <em>Currency Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Currency Unit</em>'.
-	 * @see org.joda.money.CurrencyUnit
-	 * @model instanceClass="org.joda.money.CurrencyUnit"
+	 * @see javax.money.CurrencyUnit
+	 * @model instanceClass="javax.money.CurrencyUnit"
 	 * @generated
 	 */
 	EDataType getCurrencyUnit();
@@ -10028,15 +10028,15 @@ public interface CommonsPackage extends EPackage {
 	EDataType getBundle();
 
 	/**
-	 * Returns the meta object for data type '{@link org.joda.money.BigMoneyProvider <em>Big Money Provider</em>}'.
+	 * Returns the meta object for data type '{@link org.javamoney.moneta.Money <em>Money</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Big Money Provider</em>'.
-	 * @see org.joda.money.BigMoneyProvider
-	 * @model instanceClass="org.joda.money.BigMoneyProvider"
+	 * @return the meta object for data type '<em>Money</em>'.
+	 * @see org.javamoney.moneta.Money
+	 * @model instanceClass="org.javamoney.moneta.Money"
 	 * @generated
 	 */
-	EDataType getBigMoneyProvider();
+	EDataType getMoney();
 
 	/**
 	 * Returns the meta object for data type '{@link javax.measure.Measurable <em>Measurable</em>}'.
@@ -13195,7 +13195,7 @@ public interface CommonsPackage extends EPackage {
 		 * The meta object literal for the '<em>Currency Unit</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.joda.money.CurrencyUnit
+		 * @see javax.money.CurrencyUnit
 		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 		 * @generated
 		 */
@@ -13322,14 +13322,14 @@ public interface CommonsPackage extends EPackage {
 		EDataType BUNDLE = eINSTANCE.getBundle();
 
 		/**
-		 * The meta object literal for the '<em>Big Money Provider</em>' data type.
+		 * The meta object literal for the '<em>Money</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.joda.money.BigMoneyProvider
-		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
+		 * @see org.javamoney.moneta.Money
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMoney()
 		 * @generated
 		 */
-		EDataType BIG_MONEY_PROVIDER = eINSTANCE.getBigMoneyProvider();
+		EDataType MONEY = eINSTANCE.getMoney();
 
 		/**
 		 * The meta object literal for the '<em>Measurable</em>' data type.

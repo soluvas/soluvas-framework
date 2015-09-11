@@ -845,9 +845,9 @@
 				<version>1.3</version>
 			</dependency>
 			<dependency>
-				<groupId>org.joda</groupId>
-				<artifactId>joda-money</artifactId>
-				<version>0.10.0</version>
+				<groupId>org.javamoney</groupId>
+				<artifactId>moneta</artifactId>
+				<version>1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.opengis</groupId>

@@ -4,7 +4,7 @@ package org.soluvas.data;
 
 import java.math.BigDecimal;
 
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
 
 /**
  * <!-- begin-user-doc -->

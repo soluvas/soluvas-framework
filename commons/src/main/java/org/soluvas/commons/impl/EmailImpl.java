@@ -16,12 +16,12 @@ import org.soluvas.commons.Email;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.EmailImpl#getEmail <em>Email</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.EmailImpl#isPrimary <em>Primary</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.EmailImpl#getValidationTime <em>Validation Time</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -17,10 +17,10 @@ import org.soluvas.commons.CommonsPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.AttributeSetImpl#getPrincipals <em>Principals</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

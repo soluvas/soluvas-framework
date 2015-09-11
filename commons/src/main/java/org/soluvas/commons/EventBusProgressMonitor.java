@@ -16,11 +16,11 @@ import com.google.common.eventbus.EventBus;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.EventBusProgressMonitor#getEventBus <em>Event Bus</em>}</li>
  *   <li>{@link org.soluvas.commons.EventBusProgressMonitor#getTrackingId <em>Tracking Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getEventBusProgressMonitor()
  * @model

@@ -22,10 +22,10 @@ package org.soluvas.commons;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.ProgressMonitorWrapper#getDelegate <em>Delegate</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getProgressMonitorWrapper()
  * @model

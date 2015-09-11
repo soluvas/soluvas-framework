@@ -1,8 +1,8 @@
 package org.soluvas.commons.mongo;
 
 import javax.annotation.Nullable;
-
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 
 import com.google.code.morphia.converters.SimpleValueConverter;
 import com.google.code.morphia.converters.TypeConverter;
@@ -30,7 +30,7 @@ public class CurrencyUnitConverter extends TypeConverter implements SimpleValueC
 		if (fromDBObject == null)
 			return null;
 		else
-			return CurrencyUnit.of((String) fromDBObject);
+			return Monetary.getCurrency((String) fromDBObject);
 	}
 
 	@Override

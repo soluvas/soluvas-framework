@@ -41,6 +41,7 @@ import com.google.common.base.Optional;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getNsPrefix <em>Ns Prefix</em>}</li>
@@ -61,7 +62,6 @@ import com.google.common.base.Optional;
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

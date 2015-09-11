@@ -26,6 +26,7 @@ import java.lang.reflect.InvocationTargetException;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getPhotoId <em>Photo Id</em>}</li>
@@ -35,7 +36,6 @@ import java.lang.reflect.InvocationTargetException;
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getEmail <em>Email</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonInfoImpl#getMobileNumber <em>Mobile Number</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

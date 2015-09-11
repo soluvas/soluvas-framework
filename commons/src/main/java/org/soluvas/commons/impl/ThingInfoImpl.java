@@ -26,13 +26,13 @@ import com.google.code.morphia.annotations.Converters;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.ThingInfoImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.ThingInfoImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.ThingInfoImpl#getSlug <em>Slug</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.ThingInfoImpl#getImageId <em>Image Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

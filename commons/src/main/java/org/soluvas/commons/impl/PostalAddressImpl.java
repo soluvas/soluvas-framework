@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#getId <em>Id</em>}</li>
@@ -54,7 +55,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#getValidationTime <em>Validation Time</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#getDistrict <em>District</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

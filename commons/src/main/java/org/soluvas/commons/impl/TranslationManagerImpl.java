@@ -14,8 +14,6 @@ import org.soluvas.commons.TranslationManager;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Translation Manager</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

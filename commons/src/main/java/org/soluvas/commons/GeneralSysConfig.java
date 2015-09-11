@@ -10,10 +10,10 @@ package org.soluvas.commons;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.GeneralSysConfig#getSslSupported <em>Ssl Supported</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getGeneralSysConfig()
  * @model abstract="true"

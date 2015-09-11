@@ -16,12 +16,12 @@ import org.soluvas.commons.PhoneNumber;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.PhoneNumberImpl#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PhoneNumberImpl#isPrimary <em>Primary</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PhoneNumberImpl#getValidationTime <em>Validation Time</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

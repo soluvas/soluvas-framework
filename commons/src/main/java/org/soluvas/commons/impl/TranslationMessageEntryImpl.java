@@ -17,11 +17,11 @@ import org.soluvas.commons.CommonsPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.TranslationMessageEntryImpl#getTypedKey <em>Key</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.TranslationMessageEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

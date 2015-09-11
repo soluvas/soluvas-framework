@@ -32,8 +32,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.joda.money.BigMoneyProvider;
-import org.joda.money.CurrencyUnit;
+import org.javamoney.moneta.Money;
+import javax.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -798,7 +798,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType bigMoneyProviderEDataType = null;
+	private EDataType moneyEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -4533,9 +4533,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EDataType getBigMoneyProvider() {
-		return bigMoneyProviderEDataType;
+	public EDataType getMoney() {
+		return moneyEDataType;
 	}
 
 	/**
@@ -5208,7 +5207,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		multisetEDataType = createEDataType(MULTISET);
 		serializableEDataType = createEDataType(SERIALIZABLE);
 		bundleEDataType = createEDataType(BUNDLE);
-		bigMoneyProviderEDataType = createEDataType(BIG_MONEY_PROVIDER);
+		moneyEDataType = createEDataType(MONEY);
 		measurableEDataType = createEDataType(MEASURABLE);
 		dateTimeZoneEDataType = createEDataType(DATE_TIME_ZONE);
 		localeEDataType = createEDataType(LOCALE);
@@ -6022,7 +6021,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(multisetEDataType, Multiset.class, "Multiset", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(serializableEDataType, Serializable.class, "Serializable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(bundleEDataType, Bundle.class, "Bundle", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(bigMoneyProviderEDataType, BigMoneyProvider.class, "BigMoneyProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(moneyEDataType, Money.class, "Money", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(measurableEDataType, Measurable.class, "Measurable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(dateTimeZoneEDataType, DateTimeZone.class, "DateTimeZone", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(localeEDataType, Locale.class, "Locale", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.TwitterAccessible#getTwitterAccessToken <em>Twitter Access Token</em>}</li>
  *   <li>{@link org.soluvas.commons.TwitterAccessible#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getTwitterAccessible()
  * @model interface="true" abstract="true"

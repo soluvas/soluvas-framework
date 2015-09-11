@@ -20,11 +20,11 @@ import org.soluvas.commons.ProgressStatus;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.ProgressMonitorImpl#isCanceled <em>Canceled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.ProgressMonitorImpl#getTaskName <em>Task Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -15,10 +15,10 @@ import org.soluvas.commons.FacebookAccessible;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.FacebookAccessibleImpl#getFacebookAccessToken <em>Facebook Access Token</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -265,7 +265,7 @@
     </eLiterals>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="org.joda.time.DateTime"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="CurrencyUnit" instanceClassName="org.joda.money.CurrencyUnit"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CurrencyUnit" instanceClassName="javax.money.CurrencyUnit"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Quantity" instanceClassName="javax.measure.quantity.Quantity"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Unit" instanceClassName="javax.measure.unit.Unit">
     <eTypeParameters name="Q">
@@ -752,7 +752,7 @@
     </eGenericSuperTypes>
     <eGenericSuperTypes eClassifier="#//Translatable"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="BigMoneyProvider" instanceClassName="org.joda.money.BigMoneyProvider"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Money" instanceClassName="org.javamoney.moneta.Money"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Measurable" instanceClassName="javax.measure.Measurable">
     <eTypeParameters name="Q">
       <eBounds eClassifier="#//Quantity"/>

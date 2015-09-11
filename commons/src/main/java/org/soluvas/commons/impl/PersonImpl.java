@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Collection;
 
 import javax.annotation.Nullable;
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -18,7 +20,6 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -74,6 +75,7 @@ import com.google.common.collect.Iterables;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getPhotoId <em>Photo Id</em>}</li>
@@ -145,7 +147,6 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getVerifyCode <em>Verify Code</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getOrganizations <em>Organizations</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -2065,7 +2066,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 */
 	@Override
 	public CurrencyUnit getCurrency() {
-		return currencyCode != null ? CurrencyUnit.of(currencyCode) : null;
+		return currencyCode != null ? Monetary.getCurrency(currencyCode) : null;
 	}
 
 	/**
@@ -2074,7 +2075,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 */
 	@Override
 	public void setCurrency(CurrencyUnit newCurrency) {
-		setCurrencyCode(newCurrency != null ? newCurrency.getCode() : null);
+		setCurrencyCode(newCurrency != null ? newCurrency.getCurrencyCode() : null);
 	}
 
 	/**

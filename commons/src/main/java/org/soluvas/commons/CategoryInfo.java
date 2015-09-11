@@ -16,12 +16,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.CategoryInfo#getParents <em>Parents</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryInfo#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryInfo#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getCategoryInfo()
  * @model

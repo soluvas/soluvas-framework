@@ -36,6 +36,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.PostalAddress#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.PostalAddress#getOrganization <em>Organization</em>}</li>
@@ -62,7 +63,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.commons.PostalAddress#getValidationTime <em>Validation Time</em>}</li>
  *   <li>{@link org.soluvas.commons.PostalAddress#getDistrict <em>District</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getPostalAddress()
  * @model

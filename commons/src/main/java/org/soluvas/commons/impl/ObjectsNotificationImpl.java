@@ -20,10 +20,10 @@ import org.soluvas.commons.ObjectsNotification;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.ObjectsNotificationImpl#getObjects <em>Objects</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

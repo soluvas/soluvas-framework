@@ -19,10 +19,10 @@ import org.soluvas.commons.ModelNotification;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.ModelNotificationImpl#getContainer <em>Container</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

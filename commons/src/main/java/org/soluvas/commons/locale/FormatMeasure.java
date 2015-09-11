@@ -13,7 +13,7 @@ import javax.measure.MeasureFormat;
 import javax.measure.unit.Unit;
 import javax.measure.unit.UnitFormat;
 
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.BigDecimalUtils;

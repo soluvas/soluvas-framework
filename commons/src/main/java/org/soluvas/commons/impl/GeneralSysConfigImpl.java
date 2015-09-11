@@ -23,6 +23,7 @@ import org.soluvas.commons.Timestamped;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.GeneralSysConfigImpl#getExpansionState <em>Expansion State</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.GeneralSysConfigImpl#getCreationTime <em>Creation Time</em>}</li>
@@ -30,7 +31,6 @@ import org.soluvas.commons.Timestamped;
  *   <li>{@link org.soluvas.commons.impl.GeneralSysConfigImpl#getTenantId <em>Tenant Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.GeneralSysConfigImpl#getSslSupported <em>Ssl Supported</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

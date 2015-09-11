@@ -11,7 +11,8 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Locale;
 
-import org.joda.money.CurrencyUnit;
+import javax.money.Monetary;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,8 +35,8 @@ public class FormatCurrencyTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		formatCurrencyId = new FormatCurrency(Locale.forLanguageTag("id-ID"), CurrencyUnit.of("IDR"));
-		formatCurrencyEn = new FormatCurrency(Locale.forLanguageTag("en-US"), CurrencyUnit.of("USD"));
+		formatCurrencyId = new FormatCurrency(Locale.forLanguageTag("id-ID"), Monetary.getCurrency("IDR"));
+		formatCurrencyEn = new FormatCurrency(Locale.forLanguageTag("en-US"), Monetary.getCurrency("USD"));
 	}
 
 	/**
