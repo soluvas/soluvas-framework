@@ -29877,7 +29877,7 @@
       "enabled" : true,
       "defaultKind" : "MEASUREMENT",
       "defaultQuantity" : "Length",
-      "defaultUnit" : "in",
+      "defaultUnit" : "[in_i]",
       "translations" : {
         "id-ID" : {
           "name" : "Ukuran Layar",
