@@ -13,11 +13,11 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
  */
 public interface MongoTermRepository extends PagingAndSortingRepository<Term2, String> {
 	
-	Page<Term2> findAll(String enumerationId, Pageable pageable);
+	Page<Term2> findAllByEnumId(String enumerationId, Pageable pageable);
 	
 	Page<Term2> findAll(String enumerationId, String searchText, Pageable pageable);
 	
-	long count(String enumerationId);
+	long countByEnumId(String enumerationId);
 	
 	Existence<String> existsByEnumerationId(String enumerationId, String termId);
 	

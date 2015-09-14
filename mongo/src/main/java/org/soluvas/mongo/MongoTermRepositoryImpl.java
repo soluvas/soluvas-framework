@@ -26,7 +26,7 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 	}
 	
 	@Override
-	public Page<Term2> findAll(String enumerationId, Pageable pageable) {
+	public Page<Term2> findAllByEnumId(String enumerationId, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		query.put("enumerationId", enumerationId);
 		
@@ -34,7 +34,7 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 	}
 
 	@Override
-	public long count(String enumerationId) {
+	public long countByEnumId(String enumerationId) {
 		final BasicDBObject query = new BasicDBObject();
 		query.put("enumerationId", enumerationId);
 		
