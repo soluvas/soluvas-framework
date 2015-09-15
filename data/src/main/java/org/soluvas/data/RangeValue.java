@@ -14,11 +14,11 @@ package org.soluvas.data;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.RangeValue#getStartValue <em>Start Value</em>}</li>
  *   <li>{@link org.soluvas.data.RangeValue#getEndValue <em>End Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getRangeValue()
  * @model

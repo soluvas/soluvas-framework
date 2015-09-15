@@ -165,6 +165,8 @@ public enum ProgressStatus implements Enumerator {
 	 * Returns the '<em><b>Progress Status</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ProgressStatus get(String literal) {
@@ -181,6 +183,8 @@ public enum ProgressStatus implements Enumerator {
 	 * Returns the '<em><b>Progress Status</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ProgressStatus getByName(String name) {
@@ -197,6 +201,8 @@ public enum ProgressStatus implements Enumerator {
 	 * Returns the '<em><b>Progress Status</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ProgressStatus get(int value) {

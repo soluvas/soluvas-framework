@@ -67,7 +67,7 @@ public class FormatMeasureTest {
 //		assertThat(formatMeasureEn.apply("7511.2375 cm"), equalTo("7,511.2375 cm"));
 		//log.info("{}", SI.CELSIUS.times(SI.KILOMETER));
 		assertThat(formatMeasureId.apply("7511.234 cm/h"), equalTo("7.511,234 cm/h"));
-		assertThat(formatMeasureEn.apply("7511.234 " + SI.KILO(SI.WATT).times(NonSI.HOUR)), equalTo("7,511.234 kW·h"));
+		assertThat(formatMeasureEn.apply("7511.234 " + SI.WATT.times(1000).times(NonSI.HOUR)), equalTo("7,511.234 kW·h"));
 	}
 
 	@Test

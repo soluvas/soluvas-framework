@@ -13,12 +13,12 @@ import org.joda.time.DateTime;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.PhoneNumber#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link org.soluvas.commons.PhoneNumber#isPrimary <em>Primary</em>}</li>
  *   <li>{@link org.soluvas.commons.PhoneNumber#getValidationTime <em>Validation Time</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getPhoneNumber()
  * @model

@@ -2,18 +2,22 @@
  */
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CommonsPackage;
@@ -24,8 +28,12 @@ import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.commons.Translatable;
+import org.soluvas.commons.Translation;
+import org.soluvas.commons.TranslationState;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Optional;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,6 +41,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getNsPrefix <em>Ns Prefix</em>}</li>
@@ -45,11 +54,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getLevel <em>Level</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getCategoryCount <em>Category Count</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getParent <em>Parent</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getTranslationState <em>Translation State</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getOriginalLanguage <em>Original Language</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getLanguage <em>Language</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getTranslations <em>Translations</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getParents <em>Parents</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CategoryInfoImpl#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -264,6 +276,76 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * @ordered
 	 */
 	protected CategoryInfo parent;
+
+	/**
+	 * The default value of the '{@link #getTranslationState() <em>Translation State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslationState()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final TranslationState TRANSLATION_STATE_EDEFAULT = TranslationState.ORIGINAL;
+
+	/**
+	 * The cached value of the '{@link #getTranslationState() <em>Translation State</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslationState()
+	 * @generated
+	 * @ordered
+	 */
+	protected TranslationState translationState = TRANSLATION_STATE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getOriginalLanguage() <em>Original Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginalLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ORIGINAL_LANGUAGE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getOriginalLanguage() <em>Original Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOriginalLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String originalLanguage = ORIGINAL_LANGUAGE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String LANGUAGE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLanguage() <em>Language</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLanguage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String language = LANGUAGE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTranslations() <em>Translations</em>}' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMap<String, Translation> translations;
 
 	/**
 	 * The cached value of the '{@link #getParents() <em>Parents</em>}' containment reference list.
@@ -610,6 +692,88 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * @generated
 	 */
 	@Override
+	public TranslationState getTranslationState() {
+		return translationState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setTranslationState(TranslationState newTranslationState) {
+		TranslationState oldTranslationState = translationState;
+		translationState = newTranslationState == null ? TRANSLATION_STATE_EDEFAULT : newTranslationState;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CATEGORY_INFO__TRANSLATION_STATE, oldTranslationState, translationState));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getOriginalLanguage() {
+		return originalLanguage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOriginalLanguage(String newOriginalLanguage) {
+		String oldOriginalLanguage = originalLanguage;
+		originalLanguage = newOriginalLanguage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CATEGORY_INFO__ORIGINAL_LANGUAGE, oldOriginalLanguage, originalLanguage));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getLanguage() {
+		return language;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setLanguage(String newLanguage) {
+		String oldLanguage = language;
+		language = newLanguage;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CATEGORY_INFO__LANGUAGE, oldLanguage, language));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EMap<String, Translation> getTranslations() {
+		if (translations == null) {
+			translations = new EcoreEMap<String,Translation>(CommonsPackage.Literals.TRANSLATION_ENTRY, TranslationEntryImpl.class, this, CommonsPackage.CATEGORY_INFO__TRANSLATIONS);
+		}
+		return translations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<CategoryInfo> getParents() {
 		if (parents == null) {
 			parents = new EObjectContainmentEList<CategoryInfo>(CategoryInfo.class, this, CommonsPackage.CATEGORY_INFO__PARENTS);
@@ -645,6 +809,7 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getGoogleFormalId() {
 		return googleFormalId;
 	}
@@ -654,11 +819,47 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGoogleFormalId(Long newGoogleFormalId) {
 		Long oldGoogleFormalId = googleFormalId;
 		googleFormalId = newGoogleFormalId;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CATEGORY_INFO__GOOGLE_FORMAL_ID, oldGoogleFormalId, googleFormalId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	@JsonIgnore
+	public String getEffectiveName(String curLanguageTag) {
+		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
+			return getName();
+		} else {
+			final EMap<String, Translation> translations = getTranslations();
+			if (translations.isEmpty()) {
+				return getName();
+			} else {
+				if (!translations.containsKey(curLanguageTag)) {
+					return getName();
+				} else {
+					final Translation translation = translations.get(curLanguageTag);
+					if (!translation.getMessages().containsKey(CategoryInfo.NAME_ATTR)) {
+						return getName();
+					} else {
+						final String translatedValue = translation.getMessages().get(CategoryInfo.NAME_ATTR);
+						return translatedValue;
+					}
+				}
+			}
+		}
+	}
+	
+	@JsonIgnore
+	public void setEffectiveName() {
+		throw new UnsupportedOperationException();
 	}
 
 	protected void setParents(List<CategoryInfo> parents) {
@@ -674,6 +875,8 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case CommonsPackage.CATEGORY_INFO__TRANSLATIONS:
+				return ((InternalEList<?>)getTranslations()).basicRemove(otherEnd, msgs);
 			case CommonsPackage.CATEGORY_INFO__PARENTS:
 				return ((InternalEList<?>)getParents()).basicRemove(otherEnd, msgs);
 		}
@@ -711,6 +914,15 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			case CommonsPackage.CATEGORY_INFO__PARENT:
 				if (resolve) return getParent();
 				return basicGetParent();
+			case CommonsPackage.CATEGORY_INFO__TRANSLATION_STATE:
+				return getTranslationState();
+			case CommonsPackage.CATEGORY_INFO__ORIGINAL_LANGUAGE:
+				return getOriginalLanguage();
+			case CommonsPackage.CATEGORY_INFO__LANGUAGE:
+				return getLanguage();
+			case CommonsPackage.CATEGORY_INFO__TRANSLATIONS:
+				if (coreType) return getTranslations();
+				else return getTranslations().map();
 			case CommonsPackage.CATEGORY_INFO__PARENTS:
 				return getParents();
 			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
@@ -762,6 +974,18 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 				return;
 			case CommonsPackage.CATEGORY_INFO__PARENT:
 				setParent((CategoryInfo)newValue);
+				return;
+			case CommonsPackage.CATEGORY_INFO__TRANSLATION_STATE:
+				setTranslationState((TranslationState)newValue);
+				return;
+			case CommonsPackage.CATEGORY_INFO__ORIGINAL_LANGUAGE:
+				setOriginalLanguage((String)newValue);
+				return;
+			case CommonsPackage.CATEGORY_INFO__LANGUAGE:
+				setLanguage((String)newValue);
+				return;
+			case CommonsPackage.CATEGORY_INFO__TRANSLATIONS:
+				((EStructuralFeature.Setting)getTranslations()).set(newValue);
 				return;
 			case CommonsPackage.CATEGORY_INFO__PARENTS:
 				getParents().clear();
@@ -818,6 +1042,18 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			case CommonsPackage.CATEGORY_INFO__PARENT:
 				setParent((CategoryInfo)null);
 				return;
+			case CommonsPackage.CATEGORY_INFO__TRANSLATION_STATE:
+				setTranslationState(TRANSLATION_STATE_EDEFAULT);
+				return;
+			case CommonsPackage.CATEGORY_INFO__ORIGINAL_LANGUAGE:
+				setOriginalLanguage(ORIGINAL_LANGUAGE_EDEFAULT);
+				return;
+			case CommonsPackage.CATEGORY_INFO__LANGUAGE:
+				setLanguage(LANGUAGE_EDEFAULT);
+				return;
+			case CommonsPackage.CATEGORY_INFO__TRANSLATIONS:
+				getTranslations().clear();
+				return;
 			case CommonsPackage.CATEGORY_INFO__PARENTS:
 				getParents().clear();
 				return;
@@ -861,6 +1097,14 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 				return CATEGORY_COUNT_EDEFAULT == null ? categoryCount != null : !CATEGORY_COUNT_EDEFAULT.equals(categoryCount);
 			case CommonsPackage.CATEGORY_INFO__PARENT:
 				return parent != null;
+			case CommonsPackage.CATEGORY_INFO__TRANSLATION_STATE:
+				return translationState != TRANSLATION_STATE_EDEFAULT;
+			case CommonsPackage.CATEGORY_INFO__ORIGINAL_LANGUAGE:
+				return ORIGINAL_LANGUAGE_EDEFAULT == null ? originalLanguage != null : !ORIGINAL_LANGUAGE_EDEFAULT.equals(originalLanguage);
+			case CommonsPackage.CATEGORY_INFO__LANGUAGE:
+				return LANGUAGE_EDEFAULT == null ? language != null : !LANGUAGE_EDEFAULT.equals(language);
+			case CommonsPackage.CATEGORY_INFO__TRANSLATIONS:
+				return translations != null && !translations.isEmpty();
 			case CommonsPackage.CATEGORY_INFO__PARENTS:
 				return parents != null && !parents.isEmpty();
 			case CommonsPackage.CATEGORY_INFO__PRIMARY_URI:
@@ -918,6 +1162,15 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 				default: return -1;
 			}
 		}
+		if (baseClass == Translatable.class) {
+			switch (derivedFeatureID) {
+				case CommonsPackage.CATEGORY_INFO__TRANSLATION_STATE: return CommonsPackage.TRANSLATABLE__TRANSLATION_STATE;
+				case CommonsPackage.CATEGORY_INFO__ORIGINAL_LANGUAGE: return CommonsPackage.TRANSLATABLE__ORIGINAL_LANGUAGE;
+				case CommonsPackage.CATEGORY_INFO__LANGUAGE: return CommonsPackage.TRANSLATABLE__LANGUAGE;
+				case CommonsPackage.CATEGORY_INFO__TRANSLATIONS: return CommonsPackage.TRANSLATABLE__TRANSLATIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -968,7 +1221,30 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 				default: return -1;
 			}
 		}
+		if (baseClass == Translatable.class) {
+			switch (baseFeatureID) {
+				case CommonsPackage.TRANSLATABLE__TRANSLATION_STATE: return CommonsPackage.CATEGORY_INFO__TRANSLATION_STATE;
+				case CommonsPackage.TRANSLATABLE__ORIGINAL_LANGUAGE: return CommonsPackage.CATEGORY_INFO__ORIGINAL_LANGUAGE;
+				case CommonsPackage.TRANSLATABLE__LANGUAGE: return CommonsPackage.CATEGORY_INFO__LANGUAGE;
+				case CommonsPackage.TRANSLATABLE__TRANSLATIONS: return CommonsPackage.CATEGORY_INFO__TRANSLATIONS;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case CommonsPackage.CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING:
+				return getEffectiveName((String)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -1001,6 +1277,12 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 		result.append(level);
 		result.append(", categoryCount: ");
 		result.append(categoryCount);
+		result.append(", translationState: ");
+		result.append(translationState);
+		result.append(", originalLanguage: ");
+		result.append(originalLanguage);
+		result.append(", language: ");
+		result.append(language);
 		result.append(", primaryUri: ");
 		result.append(primaryUri);
 		result.append(", googleFormalId: ");

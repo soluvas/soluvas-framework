@@ -18,13 +18,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.Translatable#getTranslationState <em>Translation State</em>}</li>
  *   <li>{@link org.soluvas.commons.Translatable#getOriginalLanguage <em>Original Language</em>}</li>
  *   <li>{@link org.soluvas.commons.Translatable#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.soluvas.commons.Translatable#getTranslations <em>Translations</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getTranslatable()
  * @model interface="true" abstract="true"

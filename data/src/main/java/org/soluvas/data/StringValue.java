@@ -2,6 +2,8 @@
  */
 package org.soluvas.data;
 
+import java.util.Locale;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -10,16 +12,18 @@ package org.soluvas.data;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.StringValue#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getStringValue()
  * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EString>"
  * @generated
  */
 public interface StringValue extends Value<String> {
+	
+	public void fillAsNewDefault(Locale locale);
 	
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.

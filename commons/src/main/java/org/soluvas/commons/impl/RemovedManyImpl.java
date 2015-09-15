@@ -14,8 +14,6 @@ import org.soluvas.commons.RemovedMany;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Removed Many</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

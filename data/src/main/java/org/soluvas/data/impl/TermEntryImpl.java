@@ -23,11 +23,11 @@ import org.soluvas.data.Term;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.TermEntryImpl#getTypedKey <em>Key</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

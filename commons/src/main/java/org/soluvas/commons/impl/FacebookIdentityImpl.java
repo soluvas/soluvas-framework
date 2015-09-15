@@ -15,11 +15,11 @@ import org.soluvas.commons.FacebookIdentity;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.FacebookIdentityImpl#getFacebookId <em>Facebook Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.FacebookIdentityImpl#getFacebookUsername <em>Facebook Username</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -10,6 +10,7 @@ package org.soluvas.commons;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.Organization#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.Organization#getBlackBerryPin <em>Black Berry Pin</em>}</li>
@@ -23,7 +24,6 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.Organization#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}</li>
  *   <li>{@link org.soluvas.commons.Organization#getTwitterId <em>Twitter Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getOrganization()
  * @model

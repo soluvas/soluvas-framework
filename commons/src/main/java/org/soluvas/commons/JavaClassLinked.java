@@ -20,12 +20,12 @@ import com.google.common.base.Strings;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.JavaClassLinked#getJavaClassName <em>Java Class Name</em>}</li>
  *   <li>{@link org.soluvas.commons.JavaClassLinked#getJavaClass <em>Java Class</em>}</li>
  *   <li>{@link org.soluvas.commons.JavaClassLinked#getJavaClassStatus <em>Java Class Status</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getJavaClassLinked()
  * @model interface="true" abstract="true"

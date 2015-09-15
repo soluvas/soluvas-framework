@@ -7,12 +7,17 @@ import java.util.Locale;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
+import javax.money.MonetaryAmount;
+import javax.money.format.AmountFormatQuery;
+import javax.money.format.AmountFormatQueryBuilder;
+import javax.money.format.MonetaryAmountFormat;
+import javax.money.format.MonetaryFormats;
 
-import org.joda.money.BigMoney;
-import org.joda.money.BigMoneyProvider;
-import org.joda.money.CurrencyUnit;
-import org.joda.money.format.MoneyFormatter;
-import org.joda.money.format.MoneyFormatterBuilder;
+import org.javamoney.moneta.Money;
+import org.javamoney.moneta.format.AmountFormatParams;
+import org.javamoney.moneta.format.CurrencyStyle;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.ReadableInstant;
@@ -180,7 +185,7 @@ public class LocaleContext {
 //		format.setCurrency(currency);
 //		format.setMaximumFractionDigits(0);
 //		return format.format(amount);
-		return formatMoney(BigMoney.of(CurrencyUnit.of(currency), amount));
+		return formatMoney(Money.of(amount, Monetary.getCurrency(currency.getCurrencyCode())));
 	}
 
 	@Nullable
@@ -191,7 +196,7 @@ public class LocaleContext {
 //		format.setCurrency(currency);
 //		format.setMaximumFractionDigits(0);
 //		return format.format(amount);
-		return formatMoney(BigMoney.of(currency, amount));
+		return formatMoney(Money.of(amount, currency));
 	}
 
 	@Nullable
@@ -202,40 +207,38 @@ public class LocaleContext {
 //		format.setCurrency(currency);
 //		format.setMaximumFractionDigits(0);
 //		return format.format(amount);
-		return formatMoneyHtml(BigMoney.of(currency, amount));
+		return formatMoneyHtml(Money.of(amount, currency));
 	}
 
 	@Nullable
 	public String formatMoney(BigDecimal amount, String currency) {
 		if (amount == null || currency == null)
 			return null;
-		return formatMoney(amount, CurrencyUnit.of(currency));
+		return formatMoney(amount, Monetary.getCurrency(currency));
 	}
 
 	@Nullable
 	public String formatMoneyHtml(BigDecimal amount, String currency) {
 		if (amount == null || currency == null)
 			return null;
-		return formatMoneyHtml(amount, CurrencyUnit.of(currency));
+		return formatMoneyHtml(amount, Monetary.getCurrency(currency));
 	}
 
 	@Nullable
-	public String formatMoney(BigMoneyProvider total) {
+	public String formatMoney(MonetaryAmount total) {
 		if (total == null)
 			return null;
-		MoneyFormatter formatter = new MoneyFormatterBuilder().appendCurrencySymbolLocalized().appendLiteral("").appendAmountLocalized()
-				.toFormatter(getLocale());
-		return formatter.print(total);
+		final MonetaryAmountFormat formatter = MonetaryFormats.getAmountFormat(getLocale());
+		return formatter.format(total);
 	}
 
 	@Nullable
-	public String formatMoneyHtml(BigMoneyProvider total) {
+	public String formatMoneyHtml(MonetaryAmount total) {
 		if (total == null)
 			return null;
-		MoneyFormatter formatter = new MoneyFormatterBuilder()
-			.appendLiteral("<small class=\"text-muted\">").appendCurrencySymbolLocalized().appendLiteral("</small>").appendAmountLocalized()
-			.toFormatter(getLocale());
-		return formatter.print(total);
+		final AmountFormatQuery query = AmountFormatQueryBuilder.of(getLocale()).set(CurrencyStyle.SYMBOL)
+				.set(AmountFormatParams.PATTERN, "<small class=\"text-muted\">¤</small>#,##0.#####").build();
+		return MonetaryFormats.getAmountFormat(query).format(total);
 	}
 
 }

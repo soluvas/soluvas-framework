@@ -43,6 +43,8 @@ public interface MongoCategoryRepository extends
 	Page<Category2> findAllLeavesByStatus(Collection<CategoryStatus> statuses, Pageable pageable);
 	
 	Page<Category2> findAll(String searchText, Collection<CategoryStatus> statuses, Pageable pageable);
+
+	Category2 getFirstActive();
 	
 
 }

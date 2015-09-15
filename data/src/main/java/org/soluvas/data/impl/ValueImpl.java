@@ -28,6 +28,7 @@ import org.soluvas.data.Value;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.ValueImpl#getTranslationState <em>Translation State</em>}</li>
  *   <li>{@link org.soluvas.data.impl.ValueImpl#getOriginalLanguage <em>Original Language</em>}</li>
@@ -36,7 +37,6 @@ import org.soluvas.data.Value;
  *   <li>{@link org.soluvas.data.impl.ValueImpl#getSemantic <em>Semantic</em>}</li>
  *   <li>{@link org.soluvas.data.impl.ValueImpl#getDisplayValue <em>Display Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

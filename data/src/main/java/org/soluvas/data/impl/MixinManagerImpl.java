@@ -46,11 +46,11 @@ import com.google.common.collect.Iterables;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.MixinManagerImpl#getMixinCatalog <em>Mixin Catalog</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MixinManagerImpl#getMixins <em>Mixins</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

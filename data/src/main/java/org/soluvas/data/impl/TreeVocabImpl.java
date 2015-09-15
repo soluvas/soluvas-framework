@@ -11,8 +11,6 @@ import org.soluvas.data.TreeVocab;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Tree Vocab</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

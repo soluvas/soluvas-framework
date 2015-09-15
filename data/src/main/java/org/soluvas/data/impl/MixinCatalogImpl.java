@@ -23,11 +23,11 @@ import org.soluvas.data.MixinCatalog;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.MixinCatalogImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MixinCatalogImpl#getMixins <em>Mixins</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

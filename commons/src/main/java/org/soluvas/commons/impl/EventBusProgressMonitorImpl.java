@@ -19,11 +19,11 @@ import com.google.common.eventbus.EventBus;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.EventBusProgressMonitorImpl#getEventBus <em>Event Bus</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.EventBusProgressMonitorImpl#getTrackingId <em>Tracking Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -7,7 +7,6 @@ import org.soluvas.commons.Sluggable;
 import org.soluvas.data.impl.TermValueImpl;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,13 +19,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.TermValue#getTerm <em>Term</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getValue <em>Value</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getPrimaryUri <em>Primary Uri</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getTermValue()
  * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EString> org.soluvas.commons.Identifiable org.soluvas.commons.Sluggable"
@@ -34,6 +33,8 @@ import org.eclipse.emf.common.util.EList;
  */
 @JsonDeserialize(as=TermValueImpl.class)
 public interface TermValue extends Value<String>, Identifiable, Sluggable {
+	
+	public void copyFromMongo(Term2 term2);
 	
 	/**
 	 * Returns the value of the '<em><b>Term</b></em>' reference.

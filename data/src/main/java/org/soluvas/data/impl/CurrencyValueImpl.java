@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
 
 import org.soluvas.data.CurrencyValue;
 import org.soluvas.data.DataPackage;
@@ -21,10 +21,10 @@ import org.soluvas.data.DataPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.CurrencyValueImpl#getCurrencyUnit <em>Currency Unit</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

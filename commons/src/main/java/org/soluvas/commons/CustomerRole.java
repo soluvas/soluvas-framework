@@ -10,6 +10,7 @@ package org.soluvas.commons;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.CustomerRole#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#getStatus <em>Status</em>}</li>
@@ -25,7 +26,6 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#isDropshipEnabled <em>Dropship Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isReviewReminderEnabled <em>Review Reminder Enabled</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getCustomerRole()
  * @model

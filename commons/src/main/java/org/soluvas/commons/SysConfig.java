@@ -14,10 +14,10 @@ package org.soluvas.commons;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.SysConfig#getTenantId <em>Tenant Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getSysConfig()
  * @model interface="true" abstract="true"

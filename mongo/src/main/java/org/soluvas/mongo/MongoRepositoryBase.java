@@ -691,9 +691,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 
 	protected DBObject findDBObjectByQuery(DBObject query, DBObject fields) {
-		log.trace("findOneByQuery {} {}", collName, query, fields);
+		log.trace("findDBObjectByQuery {} {}", collName, query, fields);
 		final DBObject dbo = secondary.findOne(query, fields);
-		log.debug("findAllByQuery {} {} {} returned {}",
+		log.debug("findDBObjectByQuery {} {} {} returned {}",
 				collName, query, fields, dbo != null ? dbo.get("_id") : null);
 		return dbo;
 	}

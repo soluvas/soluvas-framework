@@ -8,11 +8,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
+import javax.money.format.MonetaryAmountFormat;
+import javax.money.format.MonetaryFormats;
 
-import org.joda.money.BigMoney;
-import org.joda.money.CurrencyUnit;
-import org.joda.money.format.MoneyFormatter;
-import org.joda.money.format.MoneyFormatterBuilder;
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +45,7 @@ public class FormatCurrency implements
 			.getLogger(FormatCurrency.class);
 	private static final Pattern embeddedPattern = Pattern.compile("(.+) (.+)");
 	private final CurrencyUnit defaultCurrency;
-	private final MoneyFormatter formatter;
+	private final MonetaryAmountFormat formatter;
 
 	@Deprecated
 	public FormatCurrency() {
@@ -63,8 +64,7 @@ public class FormatCurrency implements
 	public FormatCurrency(Locale locale, @Nullable CurrencyUnit defaultCurrency) {
 		super();
 		this.defaultCurrency = defaultCurrency;
-		formatter = new MoneyFormatterBuilder()
-			.appendCurrencySymbolLocalized().appendAmountLocalized().toFormatter(locale);
+		formatter = MonetaryFormats.getAmountFormat(locale);
 	}
 
 	@Override @Nullable
@@ -76,16 +76,16 @@ public class FormatCurrency implements
 				final BigDecimal scaled;
 				if (matcher.matches()) {
 					final String currencyCode = matcher.group(1);
-					currency = CurrencyUnit.of(currencyCode);
-					scaled = new BigDecimal(matcher.group(2)).setScale(currency.getDecimalPlaces(), RoundingMode.HALF_EVEN);
+					currency = Monetary.getCurrency(currencyCode);
+					scaled = new BigDecimal(matcher.group(2)).setScale(currency.getDefaultFractionDigits(), RoundingMode.HALF_EVEN);
 				} else {
 					currency = Preconditions.checkNotNull(defaultCurrency,
 							"input string '%s' does not embed currency code, either defaultCurrency must be specified or fix your input",
 							input);
 					scaled = new BigDecimal(input);
 				}
-				final BigMoney money = BigMoney.of(currency, scaled);
-				return formatter.print(money);
+				final Money money = Money.of(scaled, currency);
+				return formatter.format(money);
 			} catch (Exception e) {
 				log.error("Cannot formatCurrency from " + input, e);
 				return input;

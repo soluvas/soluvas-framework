@@ -28,6 +28,7 @@ import org.soluvas.data.Kind;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.KindImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.KindImpl#getBundle <em>Bundle</em>}</li>
@@ -40,7 +41,6 @@ import org.soluvas.data.Kind;
  *   <li>{@link org.soluvas.data.impl.KindImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.data.impl.KindImpl#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

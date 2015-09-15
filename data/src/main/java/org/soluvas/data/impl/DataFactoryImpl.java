@@ -3,7 +3,7 @@
 package org.soluvas.data.impl;
 
 import java.util.Map;
-import javax.measure.DecimalMeasure;
+
 import javax.measure.Measure;
 
 import org.eclipse.emf.ecore.EClass;
@@ -12,23 +12,28 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.soluvas.data.*;
-import org.soluvas.data.domain.Page;
-import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.Attribute;
 import org.soluvas.data.AttributeSemantic;
 import org.soluvas.data.CurrencyValue;
 import org.soluvas.data.DataCatalog;
 import org.soluvas.data.DataFactory;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.FreeVocab;
+import org.soluvas.data.InputMethod;
+import org.soluvas.data.Kind;
 import org.soluvas.data.ListVocab;
+import org.soluvas.data.LookupKey;
 import org.soluvas.data.MeasureValue;
 import org.soluvas.data.Mixin;
+import org.soluvas.data.MixinCatalog;
+import org.soluvas.data.MixinManager;
 import org.soluvas.data.RangeValue;
+import org.soluvas.data.StatusMask;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermValue;
 import org.soluvas.data.TreeVocab;
+import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.CrudRepository;
 import org.soluvas.data.repository.CrudRepositoryBase;
 import org.soluvas.data.repository.PagingAndSortingRepository;
@@ -122,8 +127,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return createCrudRepositoryBaseFromString(eDataType, initialValue);
 			case DataPackage.MEASURE:
 				return createMeasureFromString(eDataType, initialValue);
-			case DataPackage.DECIMAL_MEASURE:
-				return createDecimalMeasureFromString(eDataType, initialValue);
 			case DataPackage.PAGEABLE:
 				return createPageableFromString(eDataType, initialValue);
 			default:
@@ -155,8 +158,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 				return convertCrudRepositoryBaseToString(eDataType, instanceValue);
 			case DataPackage.MEASURE:
 				return convertMeasureToString(eDataType, instanceValue);
-			case DataPackage.DECIMAL_MEASURE:
-				return convertDecimalMeasureToString(eDataType, instanceValue);
 			case DataPackage.PAGEABLE:
 				return convertPageableToString(eDataType, instanceValue);
 			default:
@@ -169,6 +170,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Attribute createAttribute() {
 		AttributeImpl attribute = new AttributeImpl();
 		return attribute;
@@ -317,6 +319,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Kind createKind() {
 		KindImpl kind = new KindImpl();
 		return kind;
@@ -327,6 +330,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MixinCatalog createMixinCatalog() {
 		MixinCatalogImpl mixinCatalog = new MixinCatalogImpl();
 		return mixinCatalog;
@@ -337,6 +341,7 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MixinManager createMixinManager() {
 		MixinManagerImpl mixinManager = new MixinManagerImpl();
 		return mixinManager;
@@ -491,8 +496,8 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Measure<?, ?> createMeasureFromString(EDataType eDataType, String initialValue) {
-		return (Measure<?, ?>)super.createFromString(initialValue);
+	public Measure<?> createMeasureFromString(EDataType eDataType, String initialValue) {
+		return (Measure<?>)super.createFromString(initialValue);
 	}
 
 	/**
@@ -501,24 +506,6 @@ public class DataFactoryImpl extends EFactoryImpl implements DataFactory {
 	 * @generated
 	 */
 	public String convertMeasureToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(instanceValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DecimalMeasure<?> createDecimalMeasureFromString(EDataType eDataType, String initialValue) {
-		return (DecimalMeasure<?>)super.createFromString(initialValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertDecimalMeasureToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 

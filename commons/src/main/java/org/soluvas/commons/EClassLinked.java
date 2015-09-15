@@ -19,6 +19,7 @@ import com.google.common.base.Strings;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.EClassLinked#getEClass <em>EClass</em>}</li>
  *   <li>{@link org.soluvas.commons.EClassLinked#getEClassStatus <em>EClass Status</em>}</li>
@@ -26,7 +27,6 @@ import com.google.common.base.Strings;
  *   <li>{@link org.soluvas.commons.EClassLinked#getEClassName <em>EClass Name</em>}</li>
  *   <li>{@link org.soluvas.commons.EClassLinked#getEPackageName <em>EPackage Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getEClassLinked()
  * @model interface="true" abstract="true"

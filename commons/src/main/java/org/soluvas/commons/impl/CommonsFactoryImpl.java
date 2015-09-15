@@ -2,7 +2,6 @@
  */
 package org.soluvas.commons.impl;
 
-import com.google.common.collect.ListMultimap;
 import java.io.File;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,24 +15,26 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Set;
 import java.util.UUID;
+
 import javax.measure.Measurable;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.joda.money.BigMoneyProvider;
-import org.joda.money.CurrencyUnit;
+import org.javamoney.moneta.Money;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
-import org.soluvas.commons.*;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
@@ -46,9 +47,11 @@ import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
+import org.soluvas.commons.CustomerRoleCatalog;
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.Email;
+import org.soluvas.commons.EntityKind;
 import org.soluvas.commons.EventBusProgressMonitor;
 import org.soluvas.commons.ExpansionState;
 import org.soluvas.commons.FacebookAccessible;
@@ -77,6 +80,8 @@ import org.soluvas.commons.Translation;
 import org.soluvas.commons.TranslationManager;
 import org.soluvas.commons.TranslationState;
 import org.soluvas.commons.WebAddress;
+
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
@@ -223,8 +228,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return createMultisetFromString(eDataType, initialValue);
 			case CommonsPackage.SERIALIZABLE:
 				return createSerializableFromString(eDataType, initialValue);
-			case CommonsPackage.BIG_MONEY_PROVIDER:
-				return createBigMoneyProviderFromString(eDataType, initialValue);
+			case CommonsPackage.MONEY:
+				return createMoneyFromString(eDataType, initialValue);
 			case CommonsPackage.MEASURABLE:
 				return createMeasurableFromString(eDataType, initialValue);
 			case CommonsPackage.DATE_TIME_ZONE:
@@ -320,8 +325,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 				return convertMultisetToString(eDataType, instanceValue);
 			case CommonsPackage.SERIALIZABLE:
 				return convertSerializableToString(eDataType, instanceValue);
-			case CommonsPackage.BIG_MONEY_PROVIDER:
-				return convertBigMoneyProviderToString(eDataType, instanceValue);
+			case CommonsPackage.MONEY:
+				return convertMoneyToString(eDataType, instanceValue);
 			case CommonsPackage.MEASURABLE:
 				return convertMeasurableToString(eDataType, instanceValue);
 			case CommonsPackage.DATE_TIME_ZONE:
@@ -681,6 +686,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CustomerRoleCatalog createCustomerRoleCatalog() {
 		CustomerRoleCatalogImpl customerRoleCatalog = new CustomerRoleCatalogImpl();
 		return customerRoleCatalog;
@@ -1008,7 +1014,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 */
 	public CurrencyUnit createCurrencyUnitFromString(EDataType eDataType, String initialValue) {
-		return CurrencyUnit.of(initialValue);
+		return Monetary.getCurrency(initialValue);
 	}
 
 	/**
@@ -1205,10 +1211,9 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
-	public BigMoneyProvider createBigMoneyProviderFromString(EDataType eDataType, String initialValue) {
-		return (BigMoneyProvider)super.createFromString(eDataType, initialValue);
+	public Money createMoneyFromString(EDataType eDataType, String initialValue) {
+		return Money.parse(initialValue);
 	}
 
 	/**
@@ -1216,7 +1221,7 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertBigMoneyProviderToString(EDataType eDataType, Object instanceValue) {
+	public String convertMoneyToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 

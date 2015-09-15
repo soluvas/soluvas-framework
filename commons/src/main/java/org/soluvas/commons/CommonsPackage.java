@@ -2541,13 +2541,49 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO__PARENT = CATEGORY_LIKE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Translation State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__TRANSLATION_STATE = CATEGORY_LIKE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Original Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__ORIGINAL_LANGUAGE = CATEGORY_LIKE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Language</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__LANGUAGE = CATEGORY_LIKE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO__TRANSLATIONS = CATEGORY_LIKE_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Parents</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO__PARENTS = CATEGORY_LIKE_FEATURE_COUNT + 1;
+	int CATEGORY_INFO__PARENTS = CATEGORY_LIKE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Primary Uri</b></em>' attribute.
@@ -2556,7 +2592,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO__PRIMARY_URI = CATEGORY_LIKE_FEATURE_COUNT + 2;
+	int CATEGORY_INFO__PRIMARY_URI = CATEGORY_LIKE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Google Formal Id</b></em>' attribute.
@@ -2565,7 +2601,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO__GOOGLE_FORMAL_ID = CATEGORY_LIKE_FEATURE_COUNT + 3;
+	int CATEGORY_INFO__GOOGLE_FORMAL_ID = CATEGORY_LIKE_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Category Info</em>' class.
@@ -2574,7 +2610,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 4;
+	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Get Name</em>' operation.
@@ -2595,13 +2631,22 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO___GET_IMAGE_ID = CATEGORY_LIKE___GET_IMAGE_ID;
 
 	/**
+	 * The operation id for the '<em>Get Effective Name</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING = CATEGORY_LIKE_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Category Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATEGORY_INFO_OPERATION_COUNT = CATEGORY_LIKE_OPERATION_COUNT + 0;
+	int CATEGORY_INFO_OPERATION_COUNT = CATEGORY_LIKE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.
@@ -5832,7 +5877,7 @@ public interface CommonsPackage extends EPackage {
 	 * The meta object id for the '<em>Currency Unit</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.joda.money.CurrencyUnit
+	 * @see javax.money.CurrencyUnit
 	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 	 * @generated
 	 */
@@ -5959,14 +6004,14 @@ public interface CommonsPackage extends EPackage {
 	int BUNDLE = 94;
 
 	/**
-	 * The meta object id for the '<em>Big Money Provider</em>' data type.
+	 * The meta object id for the '<em>Money</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.joda.money.BigMoneyProvider
-	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
+	 * @see org.javamoney.moneta.Money
+	 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMoney()
 	 * @generated
 	 */
-	int BIG_MONEY_PROVIDER = 95;
+	int MONEY = 95;
 
 	/**
 	 * The meta object id for the '<em>Measurable</em>' data type.
@@ -7600,6 +7645,16 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCategoryInfo_GoogleFormalId();
+
+	/**
+	 * Returns the meta object for the '{@link org.soluvas.commons.CategoryInfo#getEffectiveName(java.lang.String) <em>Get Effective Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Effective Name</em>' operation.
+	 * @see org.soluvas.commons.CategoryInfo#getEffectiveName(java.lang.String)
+	 * @generated
+	 */
+	EOperation getCategoryInfo__GetEffectiveName__String();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ProgressMonitor <em>Progress Monitor</em>}'.
@@ -9830,12 +9885,12 @@ public interface CommonsPackage extends EPackage {
 	EDataType getDateTime();
 
 	/**
-	 * Returns the meta object for data type '{@link org.joda.money.CurrencyUnit <em>Currency Unit</em>}'.
+	 * Returns the meta object for data type '{@link javax.money.CurrencyUnit <em>Currency Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Currency Unit</em>'.
-	 * @see org.joda.money.CurrencyUnit
-	 * @model instanceClass="org.joda.money.CurrencyUnit"
+	 * @see javax.money.CurrencyUnit
+	 * @model instanceClass="javax.money.CurrencyUnit"
 	 * @generated
 	 */
 	EDataType getCurrencyUnit();
@@ -9973,15 +10028,15 @@ public interface CommonsPackage extends EPackage {
 	EDataType getBundle();
 
 	/**
-	 * Returns the meta object for data type '{@link org.joda.money.BigMoneyProvider <em>Big Money Provider</em>}'.
+	 * Returns the meta object for data type '{@link org.javamoney.moneta.Money <em>Money</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Big Money Provider</em>'.
-	 * @see org.joda.money.BigMoneyProvider
-	 * @model instanceClass="org.joda.money.BigMoneyProvider"
+	 * @return the meta object for data type '<em>Money</em>'.
+	 * @see org.javamoney.moneta.Money
+	 * @model instanceClass="org.javamoney.moneta.Money"
 	 * @generated
 	 */
-	EDataType getBigMoneyProvider();
+	EDataType getMoney();
 
 	/**
 	 * Returns the meta object for data type '{@link javax.measure.Measurable <em>Measurable</em>}'.
@@ -11367,6 +11422,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CATEGORY_INFO__GOOGLE_FORMAL_ID = eINSTANCE.getCategoryInfo_GoogleFormalId();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Effective Name</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING = eINSTANCE.getCategoryInfo__GetEffectiveName__String();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.
@@ -13132,7 +13195,7 @@ public interface CommonsPackage extends EPackage {
 		 * The meta object literal for the '<em>Currency Unit</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.joda.money.CurrencyUnit
+		 * @see javax.money.CurrencyUnit
 		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getCurrencyUnit()
 		 * @generated
 		 */
@@ -13259,14 +13322,14 @@ public interface CommonsPackage extends EPackage {
 		EDataType BUNDLE = eINSTANCE.getBundle();
 
 		/**
-		 * The meta object literal for the '<em>Big Money Provider</em>' data type.
+		 * The meta object literal for the '<em>Money</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.joda.money.BigMoneyProvider
-		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getBigMoneyProvider()
+		 * @see org.javamoney.moneta.Money
+		 * @see org.soluvas.commons.impl.CommonsPackageImpl#getMoney()
 		 * @generated
 		 */
-		EDataType BIG_MONEY_PROVIDER = eINSTANCE.getBigMoneyProvider();
+		EDataType MONEY = eINSTANCE.getMoney();
 
 		/**
 		 * The meta object literal for the '<em>Measurable</em>' data type.

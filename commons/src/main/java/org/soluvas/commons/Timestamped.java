@@ -16,11 +16,11 @@ import org.joda.time.DateTime;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.Timestamped#getCreationTime <em>Creation Time</em>}</li>
  *   <li>{@link org.soluvas.commons.Timestamped#getModificationTime <em>Modification Time</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getTimestamped()
  * @model interface="true" abstract="true"

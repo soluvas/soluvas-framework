@@ -2,9 +2,12 @@
  */
 package org.soluvas.data.impl;
 
+import java.util.Locale;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.soluvas.commons.TranslationState;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.StringValue;
 
@@ -14,10 +17,10 @@ import org.soluvas.data.StringValue;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.StringValueImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -156,6 +159,13 @@ public class StringValueImpl extends ValueImpl<String> implements StringValue {
 		result.append(value);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public void fillAsNewDefault(Locale locale) {
+		setLanguage(locale.toLanguageTag());
+		setOriginalLanguage(locale.toLanguageTag());
+		setTranslationState(TranslationState.ORIGINAL);
 	}
 	
 } //StringValueImpl

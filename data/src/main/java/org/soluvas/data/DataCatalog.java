@@ -19,12 +19,12 @@ import org.soluvas.commons.ResourceAware;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.DataCatalog#getVocabs <em>Vocabs</em>}</li>
  *   <li>{@link org.soluvas.data.DataCatalog#getTerms <em>Terms</em>}</li>
  *   <li>{@link org.soluvas.data.DataCatalog#getKinds <em>Kinds</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getDataCatalog()
  * @model extendedMetaData="name='DataCatalog'"

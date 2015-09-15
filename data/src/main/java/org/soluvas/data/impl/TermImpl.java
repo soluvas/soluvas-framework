@@ -55,6 +55,7 @@ import com.google.common.base.Strings;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getTerms <em>Terms</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getBundle <em>Bundle</em>}</li>
@@ -79,7 +80,6 @@ import com.google.common.base.Strings;
  *   <li>{@link org.soluvas.data.impl.TermImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermImpl#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

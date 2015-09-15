@@ -30,8 +30,10 @@ public class BankNames {
 	
 	public static final String BANK_MANDIRI = "BANK_MANDIRI";
 	
+	public static final String BANK_PERMATA = "BANK_PERMATA";
+	
 	public static final List<String> ALL = ImmutableList.copyOf(new String[] { 
-			BCA, BNI, BRI, BTN, DANAMON, BANK_JABAR, BANK_MANDIRI});
+			BCA, BNI, BRI, BTN, DANAMON, BANK_JABAR, BANK_MANDIRI, BANK_PERMATA});
 	
 	public static final Map<String, String> DISPLAY_NAMES;
 	
@@ -44,5 +46,6 @@ public class BankNames {
 		DISPLAY_NAMES.put(DANAMON, "DANAMON");
 		DISPLAY_NAMES.put(BANK_JABAR, "BANK JABAR");
 		DISPLAY_NAMES.put(BANK_MANDIRI, "BANK MANDIRI");
+		DISPLAY_NAMES.put(BANK_PERMATA,"BANK PERMATA");
 	}
 }

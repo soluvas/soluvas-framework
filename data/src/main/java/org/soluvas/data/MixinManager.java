@@ -15,11 +15,11 @@ import org.soluvas.data.domain.Pageable;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.MixinManager#getMixinCatalog <em>Mixin Catalog</em>}</li>
  *   <li>{@link org.soluvas.data.MixinManager#getMixins <em>Mixins</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getMixinManager()
  * @model

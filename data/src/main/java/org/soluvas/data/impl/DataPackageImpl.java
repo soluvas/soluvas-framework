@@ -4,7 +4,6 @@ package org.soluvas.data.impl;
 
 import java.util.Map;
 
-import javax.measure.DecimalMeasure;
 import javax.measure.Measure;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -39,7 +38,6 @@ import org.soluvas.data.StatusMask;
 import org.soluvas.data.StringValue;
 import org.soluvas.data.Term;
 import org.soluvas.data.TermContainer;
-import org.soluvas.data.TermKind;
 import org.soluvas.data.TermValue;
 import org.soluvas.data.TreeVocab;
 import org.soluvas.data.Value;
@@ -245,13 +243,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	private EDataType measureEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType decimalMeasureEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1117,16 +1108,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * @generated
 	 */
 	@Override
-	public EDataType getDecimalMeasure() {
-		return decimalMeasureEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EDataType getPageable() {
 		return pageableEDataType;
 	}
@@ -1270,7 +1251,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		pagingAndSortingRepositoryEDataType = createEDataType(PAGING_AND_SORTING_REPOSITORY);
 		crudRepositoryBaseEDataType = createEDataType(CRUD_REPOSITORY_BASE);
 		measureEDataType = createEDataType(MEASURE);
-		decimalMeasureEDataType = createEDataType(DECIMAL_MEASURE);
 		pageableEDataType = createEDataType(PAGEABLE);
 		pageEDataType = createEDataType(PAGE);
 	}
@@ -1310,9 +1290,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		ETypeParameter pagingAndSortingRepositoryEDataType_ID = addETypeParameter(pagingAndSortingRepositoryEDataType, "ID");
 		addETypeParameter(crudRepositoryBaseEDataType, "T");
 		ETypeParameter crudRepositoryBaseEDataType_ID = addETypeParameter(crudRepositoryBaseEDataType, "ID");
-		addETypeParameter(measureEDataType, "V");
 		ETypeParameter measureEDataType_Q = addETypeParameter(measureEDataType, "Q");
-		ETypeParameter decimalMeasureEDataType_Q = addETypeParameter(decimalMeasureEDataType, "Q");
 		addETypeParameter(pageEDataType, "T");
 
 		// Set bounds for type parameters
@@ -1324,8 +1302,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		crudRepositoryBaseEDataType_ID.getEBounds().add(g1);
 		g1 = createEGenericType(theCommonsPackage.getQuantity());
 		measureEDataType_Q.getEBounds().add(g1);
-		g1 = createEGenericType(theCommonsPackage.getQuantity());
-		decimalMeasureEDataType_Q.getEBounds().add(g1);
 
 		// Add supertypes to classes
 		attributeEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
@@ -1453,11 +1429,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getMeasureValue_ValueUnit(), g1, "valueUnit", null, 0, 1, MeasureValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMeasureValue_Value(), ecorePackage.getEBigDecimal(), "value", null, 0, 1, MeasureValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(measureValueEClass, null, "getMeasure", 0, 1, IS_UNIQUE, IS_ORDERED);
-		g1 = createEGenericType(this.getDecimalMeasure());
-		g2 = createEGenericType();
-		g1.getETypeArguments().add(g2);
-		initEOperation(op, g1);
+		addEOperation(measureValueEClass, this.getMeasure(), "getMeasure", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(currencyValueEClass, CurrencyValue.class, "CurrencyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCurrencyValue_CurrencyUnit(), theCommonsPackage.getCurrencyUnit(), "currencyUnit", null, 0, 1, CurrencyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1589,7 +1561,6 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEDataType(pagingAndSortingRepositoryEDataType, PagingAndSortingRepository.class, "PagingAndSortingRepository", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(crudRepositoryBaseEDataType, CrudRepositoryBase.class, "CrudRepositoryBase", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(measureEDataType, Measure.class, "Measure", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(decimalMeasureEDataType, DecimalMeasure.class, "DecimalMeasure", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(pageableEDataType, Pageable.class, "Pageable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(pageEDataType, Page.class, "Page", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 

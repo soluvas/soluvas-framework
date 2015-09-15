@@ -1869,17 +1869,6 @@ public interface DataPackage extends EPackage {
 	int MEASURE = 26;
 
 	/**
-	 * The meta object id for the '<em>Decimal Measure</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see javax.measure.DecimalMeasure
-	 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
-	 * @generated
-	 */
-	int DECIMAL_MEASURE = 27;
-
-
-	/**
 	 * The meta object id for the '<em>Pageable</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1887,7 +1876,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPageable()
 	 * @generated
 	 */
-	int PAGEABLE = 28;
+	int PAGEABLE = 27;
 
 	/**
 	 * The meta object id for the '<em>Page</em>' data type.
@@ -1897,7 +1886,7 @@ public interface DataPackage extends EPackage {
 	 * @see org.soluvas.data.impl.DataPackageImpl#getPage()
 	 * @generated
 	 */
-	int PAGE = 29;
+	int PAGE = 28;
 
 
 	/**
@@ -2732,21 +2721,10 @@ public interface DataPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Measure</em>'.
 	 * @see javax.measure.Measure
-	 * @model instanceClass="javax.measure.Measure" typeParameters="V Q" QBounds="org.soluvas.commons.Quantity"
+	 * @model instanceClass="javax.measure.Measure" typeParameters="Q" QBounds="org.soluvas.commons.Quantity"
 	 * @generated
 	 */
 	EDataType getMeasure();
-
-	/**
-	 * Returns the meta object for data type '{@link javax.measure.DecimalMeasure <em>Decimal Measure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Decimal Measure</em>'.
-	 * @see javax.measure.DecimalMeasure
-	 * @model instanceClass="javax.measure.DecimalMeasure" typeParameters="Q" QBounds="org.soluvas.commons.Quantity"
-	 * @generated
-	 */
-	EDataType getDecimalMeasure();
 
 	/**
 	 * Returns the meta object for data type '{@link org.soluvas.data.domain.Pageable <em>Pageable</em>}'.
@@ -3469,16 +3447,6 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType MEASURE = eINSTANCE.getMeasure();
-
-		/**
-		 * The meta object literal for the '<em>Decimal Measure</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see javax.measure.DecimalMeasure
-		 * @see org.soluvas.data.impl.DataPackageImpl#getDecimalMeasure()
-		 * @generated
-		 */
-		EDataType DECIMAL_MEASURE = eINSTANCE.getDecimalMeasure();
 
 		/**
 		 * The meta object literal for the '<em>Pageable</em>' data type.

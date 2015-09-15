@@ -33,6 +33,7 @@ import com.google.common.base.Strings;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getBundle <em>Bundle</em>}</li>
@@ -51,7 +52,6 @@ import com.google.common.base.Strings;
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getSecureSkinUri <em>Secure Skin Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.WebAddressImpl#getSecureJsUri <em>Secure Js Uri</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

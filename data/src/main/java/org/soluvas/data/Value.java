@@ -2,6 +2,8 @@
  */
 package org.soluvas.data;
 
+import java.io.Serializable;
+
 import org.soluvas.commons.Translatable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -49,11 +51,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.Value#getSemantic <em>Semantic</em>}</li>
  *   <li>{@link org.soluvas.data.Value#getDisplayValue <em>Display Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getValue()
  * @model abstract="true"

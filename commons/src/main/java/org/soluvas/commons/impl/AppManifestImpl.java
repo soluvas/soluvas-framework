@@ -8,6 +8,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Nullable;
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -15,7 +17,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
@@ -44,6 +45,7 @@ import com.google.common.collect.ImmutableSet;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getPositioner <em>Positioner</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getResourceType <em>Resource Type</em>}</li>
@@ -88,7 +90,6 @@ import com.google.common.collect.ImmutableSet;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderPeriod <em>Reminder Period</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderScheduleStr <em>Reminder Schedule Str</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -1676,7 +1677,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 */
 	@Override @Nullable
 	public CurrencyUnit getDefaultCurrency() {
-		return getDefaultCurrencyCode() != null ? CurrencyUnit.of(getDefaultCurrencyCode()) : null;
+		return getDefaultCurrencyCode() != null ? Monetary.getCurrency(getDefaultCurrencyCode()) : null;
 	}
 
 	/**

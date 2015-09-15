@@ -5,7 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.json.jscience.JscienceModule;
-import org.soluvas.json.money.JodaMoneyModule;
+import org.zalando.jackson.datatype.money.MoneyModule;
 
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +28,7 @@ public class JsonUtils {
 		Suppliers.ofInstance(new JodaModule()),
 		Suppliers.ofInstance(new GuavaModule()),
 		Suppliers.ofInstance(new LowerEnumModule()),
-		Suppliers.ofInstance(new JodaMoneyModule()),
+		Suppliers.ofInstance(new MoneyModule()),
 		Suppliers.ofInstance(new EmfModule()),
 		Suppliers.ofInstance(new JscienceModule())
 	});

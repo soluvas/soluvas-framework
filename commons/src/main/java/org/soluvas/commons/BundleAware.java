@@ -19,10 +19,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.BundleAware#getBundle <em>Bundle</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getBundleAware()
  * @model interface="true" abstract="true"

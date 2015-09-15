@@ -16,19 +16,21 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.CategoryInfo#getParents <em>Parents</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryInfo#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryInfo#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getCategoryInfo()
  * @model
  * @generated
  */
 @JsonDeserialize(as=CategoryInfoImpl.class)
-public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
+public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo>, Translatable {
+	
+	public final static String NAME_ATTR = "name";
 
 	/**
 	 * Single right guillemet surrounded by space.
@@ -105,6 +107,14 @@ public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo> {
 	 * @generated
 	 */
 	void setGoogleFormalId(Long value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getEffectiveName(String curLanguageTag);
 
 	String getFullName();
 

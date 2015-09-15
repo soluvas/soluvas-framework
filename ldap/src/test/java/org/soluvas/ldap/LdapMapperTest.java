@@ -21,7 +21,9 @@ import org.apache.directory.api.ldap.model.exception.LdapInvalidAttributeValueEx
 import org.apache.directory.api.ldap.model.exception.LdapInvalidDnException;
 import org.apache.directory.api.ldap.model.message.ModifyRequest;
 import org.hamcrest.Matchers;
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.After;
@@ -775,7 +777,7 @@ public class LdapMapperTest {
 		log.info("Input Entry: {}", existing);
 		
 		final SocialPerson person = mapper.fromEntry(existing, SocialPerson.class);
-		final CurrencyUnit idr = CurrencyUnit.of("IDR");
+		final CurrencyUnit idr = Monetary.getCurrency("IDR");
 		assertEquals(idr, person.getCurrency());
 	}
 	
@@ -784,7 +786,7 @@ public class LdapMapperTest {
 		final LdapMapper<SocialPerson> mapper = new LdapMapper<>();
 		
 		final SocialPerson hendy = new SocialPerson("hendy", "hendy", "Hendy", "Irawan");
-		hendy.setCurrency(CurrencyUnit.of("IDR"));
+		hendy.setCurrency(Monetary.getCurrency("IDR"));
 		log.info("Input Person: {}", hendy);
 		
 		final Entry personEntry = mapper.toEntry(hendy, "ou=users");
@@ -881,7 +883,7 @@ public class LdapMapperTest {
 		
 		final SocialPerson person = new SocialPerson("hendy", "hendy", "Hendy", "Irawan");
 		person.setDebitBalance(new BigDecimal(5000000));
-		person.setDebitCurrency(CurrencyUnit.ofCountry("ID"));
+		person.setDebitCurrency(Monetary.getCurrency("IDR"));
 		log.info("Input Person: {}", person);
 		
 		final Entry personEntry = ldapMapper.toEntry(person, "ou=users");

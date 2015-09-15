@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.FacebookIdentity#getFacebookId <em>Facebook Id</em>}</li>
  *   <li>{@link org.soluvas.commons.FacebookIdentity#getFacebookUsername <em>Facebook Username</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getFacebookIdentity()
  * @model

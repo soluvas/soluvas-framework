@@ -32,8 +32,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.joda.money.BigMoneyProvider;
-import org.joda.money.CurrencyUnit;
+import org.javamoney.moneta.Money;
+import javax.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -798,7 +798,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType bigMoneyProviderEDataType = null;
+	private EDataType moneyEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2329,6 +2329,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 */
 	public EAttribute getCategoryInfo_GoogleFormalId() {
 		return (EAttribute)categoryInfoEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getCategoryInfo__GetEffectiveName__String() {
+		return categoryInfoEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -4524,9 +4533,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EDataType getBigMoneyProvider() {
-		return bigMoneyProviderEDataType;
+	public EDataType getMoney() {
+		return moneyEDataType;
 	}
 
 	/**
@@ -4941,6 +4949,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEReference(categoryInfoEClass, CATEGORY_INFO__PARENTS);
 		createEAttribute(categoryInfoEClass, CATEGORY_INFO__PRIMARY_URI);
 		createEAttribute(categoryInfoEClass, CATEGORY_INFO__GOOGLE_FORMAL_ID);
+		createEOperation(categoryInfoEClass, CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING);
 
 		progressMonitorEClass = createEClass(PROGRESS_MONITOR);
 		createEAttribute(progressMonitorEClass, PROGRESS_MONITOR__CANCELED);
@@ -5198,7 +5207,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		multisetEDataType = createEDataType(MULTISET);
 		serializableEDataType = createEDataType(SERIALIZABLE);
 		bundleEDataType = createEDataType(BUNDLE);
-		bigMoneyProviderEDataType = createEDataType(BIG_MONEY_PROVIDER);
+		moneyEDataType = createEDataType(MONEY);
 		measurableEDataType = createEDataType(MEASURABLE);
 		dateTimeZoneEDataType = createEDataType(DATE_TIME_ZONE);
 		localeEDataType = createEDataType(LOCALE);
@@ -5386,6 +5395,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		g1 = createEGenericType(this.getParentable());
 		g2 = createEGenericType(this.getCategoryInfo());
 		g1.getETypeArguments().add(g2);
+		categoryInfoEClass.getEGenericSuperTypes().add(g1);
+		g1 = createEGenericType(this.getTranslatable());
 		categoryInfoEClass.getEGenericSuperTypes().add(g1);
 		shellProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
 		eventBusProgressMonitorEClass.getESuperTypes().add(this.getProgressMonitor());
@@ -5640,6 +5651,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEReference(getCategoryInfo_Parents(), this.getCategoryInfo(), null, "parents", null, 0, -1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategoryInfo_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategoryInfo_GoogleFormalId(), ecorePackage.getELongObject(), "googleFormalId", null, 0, 1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = initEOperation(getCategoryInfo__GetEffectiveName__String(), ecorePackage.getEString(), "getEffectiveName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "curLanguageTag", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(progressMonitorEClass, ProgressMonitor.class, "ProgressMonitor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProgressMonitor_Canceled(), ecorePackage.getEBoolean(), "canceled", null, 0, 1, ProgressMonitor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -6007,7 +6021,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEDataType(multisetEDataType, Multiset.class, "Multiset", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(serializableEDataType, Serializable.class, "Serializable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(bundleEDataType, Bundle.class, "Bundle", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(bigMoneyProviderEDataType, BigMoneyProvider.class, "BigMoneyProvider", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(moneyEDataType, Money.class, "Money", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(measurableEDataType, Measurable.class, "Measurable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(dateTimeZoneEDataType, DateTimeZone.class, "DateTimeZone", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(localeEDataType, Locale.class, "Locale", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

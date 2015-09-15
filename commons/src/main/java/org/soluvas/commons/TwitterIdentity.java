@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.TwitterIdentity#getTwitterId <em>Twitter Id</em>}</li>
  *   <li>{@link org.soluvas.commons.TwitterIdentity#getTwitterScreenName <em>Twitter Screen Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getTwitterIdentity()
  * @model interface="true" abstract="true"

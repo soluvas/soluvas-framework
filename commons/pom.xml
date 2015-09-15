@@ -104,12 +104,17 @@
 			<artifactId>guava</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jscience</groupId>
-			<artifactId>jscience</artifactId>
+			<groupId>org.opengis</groupId>
+			<artifactId>geoapi</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.joda</groupId>
-			<artifactId>joda-money</artifactId>
+			<groupId>org.javamoney</groupId>
+			<artifactId>moneta</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>jackson-datatype-money</artifactId>
+			<version>0.3.0</version>
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>

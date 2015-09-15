@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -23,7 +25,6 @@ import org.apache.directory.api.ldap.model.message.ModifyRequestImpl;
 import org.apache.directory.api.ldap.model.name.Rdn;
 import org.apache.directory.api.util.GeneralizedTime;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.joda.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -484,7 +485,7 @@ public class LdapMapper<T> {
 				return (R) new DateTime(value);
 			}
 		} else if (CurrencyUnit.class.isAssignableFrom(fieldType)) {
-			return (R) CurrencyUnit.of((String) value);
+			return (R) Monetary.getCurrency((String) value);
 		} else {
 			return (R) value;
 		}

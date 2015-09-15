@@ -21,10 +21,10 @@ import org.soluvas.commons.PersonCatalog;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.PersonCatalogImpl#getPeople <em>People</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

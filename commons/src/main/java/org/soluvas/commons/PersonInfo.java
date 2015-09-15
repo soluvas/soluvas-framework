@@ -17,12 +17,12 @@ package org.soluvas.commons;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.PersonInfo#getGender <em>Gender</em>}</li>
  *   <li>{@link org.soluvas.commons.PersonInfo#getEmail <em>Email</em>}</li>
  *   <li>{@link org.soluvas.commons.PersonInfo#getMobileNumber <em>Mobile Number</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getPersonInfo()
  * @model

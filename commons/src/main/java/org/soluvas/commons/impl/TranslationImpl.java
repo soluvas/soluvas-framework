@@ -23,15 +23,17 @@ import org.soluvas.commons.Translation;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.TranslationImpl#getLanguage <em>Language</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.TranslationImpl#getMessages <em>Messages</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class TranslationImpl extends MinimalEObjectImpl.Container implements Translation {
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * The default value of the '{@link #getLanguage() <em>Language</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -17,10 +17,10 @@ import org.soluvas.commons.PhotoIdContainer;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.PhotoIdContainerImpl#getPhotoId <em>Photo Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -4,7 +4,7 @@ package org.soluvas.data;
 
 import java.math.BigDecimal;
 
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,10 +17,10 @@ import org.joda.money.CurrencyUnit;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.CurrencyValue#getCurrencyUnit <em>Currency Unit</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.data.DataPackage#getCurrencyValue()
  * @model superTypes="org.soluvas.data.Value<org.eclipse.emf.ecore.EBigDecimal>"
@@ -52,5 +52,5 @@ public interface CurrencyValue extends Value<BigDecimal> {
 	 * @generated
 	 */
 	void setCurrencyUnit(CurrencyUnit value);
-
+	
 } // CurrencyValue

@@ -3,13 +3,16 @@
 package org.soluvas.data.impl;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.Locale;
 
-import javax.measure.DecimalMeasure;
+import javax.measure.Measure;
 import javax.measure.unit.Unit;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.soluvas.commons.TranslationState;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.MeasureValue;
 
@@ -21,11 +24,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.MeasureValueImpl#getValueUnit <em>Value Unit</em>}</li>
  *   <li>{@link org.soluvas.data.impl.MeasureValueImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -69,9 +72,9 @@ public class MeasureValueImpl extends ValueImpl<BigDecimal> implements MeasureVa
 		super();
 	}
 	
-	public MeasureValueImpl(DecimalMeasure<?> measure) {
+	public MeasureValueImpl(Measure<?> measure) {
 		super();
-		setValue(measure.getValue());
+		setValue(measure.decimalValue((Unit) measure.getUnit(), MathContext.UNLIMITED));
 		setValueUnit(measure.getUnit());
 	}
 
@@ -149,8 +152,8 @@ public class MeasureValueImpl extends ValueImpl<BigDecimal> implements MeasureVa
 	 */
 	@JsonIgnore
 	@Override
-	public DecimalMeasure<?> getMeasure() {
-		return DecimalMeasure.valueOf(getValue(), getValueUnit());
+	public Measure<?> getMeasure() {
+		return Measure.valueOf(getValue(), getValueUnit());
 	}
 
 	/**
@@ -243,6 +246,14 @@ public class MeasureValueImpl extends ValueImpl<BigDecimal> implements MeasureVa
 	@Override
 	public String getString() {
 		return (getValue() != null ? getValue().toString() : "") + getValueUnit();
+	}
+
+	@Override
+	public void fillAsNewDefault(Locale locale, Unit<?> unit) {
+		setLanguage(locale.toLanguageTag());
+		setOriginalLanguage(locale.toLanguageTag());
+		setTranslationState(TranslationState.ORIGINAL);
+		setValueUnit(unit);
 	}
 	
 } //MeasureValueImpl

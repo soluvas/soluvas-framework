@@ -26,6 +26,7 @@ import com.google.code.morphia.annotations.Id;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getName <em>Name</em>}</li>
@@ -46,7 +47,6 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isDropshipEnabled <em>Dropship Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isReviewReminderEnabled <em>Review Reminder Enabled</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

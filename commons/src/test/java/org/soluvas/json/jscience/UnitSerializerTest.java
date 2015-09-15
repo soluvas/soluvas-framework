@@ -51,7 +51,7 @@ public class UnitSerializerTest {
 
 	@Test
 	public void canSerializeUnit() throws JsonParseException, JsonMappingException, IOException {
-		final Unit<Length> cm = SI.CENTIMETER;
+		final Unit<Length> cm = SI.CENTIMETRE;
 		final String expected = "\"cm\"";
 		final String actual = objectMapper.writeValueAsString(cm);
 		log.info("JSON: {}", actual);
@@ -60,7 +60,7 @@ public class UnitSerializerTest {
 	
 	@Test
 	public void canSerializeTypedUnit() throws JsonParseException, JsonMappingException, IOException {
-		final Unit<Length> cm = SI.CENTIMETER;
+		final Unit<Length> cm = SI.CENTIMETRE;
 		final String expected = "{\"unit\":\"cm\"}";
 		final HasUnit hasUnit = new HasUnit();
 		hasUnit.unit = cm;

@@ -18,6 +18,7 @@ import org.soluvas.commons.SchemaVersionable;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.OrganizationImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.OrganizationImpl#getName <em>Name</em>}</li>
@@ -33,7 +34,6 @@ import org.soluvas.commons.SchemaVersionable;
  *   <li>{@link org.soluvas.commons.impl.OrganizationImpl#getTwitterAccessTokenSecret <em>Twitter Access Token Secret</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.OrganizationImpl#getTwitterId <em>Twitter Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

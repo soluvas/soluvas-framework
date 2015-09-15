@@ -15,12 +15,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.Email#getEmail <em>Email</em>}</li>
  *   <li>{@link org.soluvas.commons.Email#isPrimary <em>Primary</em>}</li>
  *   <li>{@link org.soluvas.commons.Email#getValidationTime <em>Validation Time</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getEmail()
  * @model

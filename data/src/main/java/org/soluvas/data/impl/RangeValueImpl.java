@@ -17,11 +17,11 @@ import org.soluvas.data.RangeValue;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.RangeValueImpl#getStartValue <em>Start Value</em>}</li>
  *   <li>{@link org.soluvas.data.impl.RangeValueImpl#getEndValue <em>End Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

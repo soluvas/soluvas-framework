@@ -8,13 +8,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
-import javax.measure.DecimalMeasure;
 import javax.measure.Measure;
 import javax.measure.MeasureFormat;
 import javax.measure.unit.Unit;
 import javax.measure.unit.UnitFormat;
 
-import org.joda.money.CurrencyUnit;
+import javax.money.CurrencyUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.BigDecimalUtils;
@@ -61,7 +60,7 @@ public class FormatMeasure implements
 				if (matcher.matches()) {
 					final BigDecimal scaled = BigDecimalUtils.stripFractionZeros(new BigDecimal(matcher.group(1)));
 					final String unitCode = matcher.group(2);
-					return measureFormat.format(new DecimalMeasure<>(scaled, Unit.valueOf(unitCode)));
+					return measureFormat.format(Measure.valueOf(scaled, Unit.valueOf(unitCode)));
 				} else {
 					return numberFormat.format(new Double(input));
 				}

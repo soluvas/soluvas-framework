@@ -18,12 +18,12 @@ import org.soluvas.commons.Geolocation;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.GeolocationImpl#getLatitude <em>Latitude</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.GeolocationImpl#getLongitude <em>Longitude</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.GeolocationImpl#getElevation <em>Elevation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

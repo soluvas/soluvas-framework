@@ -22,12 +22,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.Geolocation#getLatitude <em>Latitude</em>}</li>
  *   <li>{@link org.soluvas.commons.Geolocation#getLongitude <em>Longitude</em>}</li>
  *   <li>{@link org.soluvas.commons.Geolocation#getElevation <em>Elevation</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getGeolocation()
  * @model

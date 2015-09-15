@@ -12,8 +12,6 @@ import org.soluvas.commons.Removed;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Removed</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

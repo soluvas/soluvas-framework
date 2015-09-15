@@ -137,6 +137,7 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 	@Override 
 	public Province getProvinceByCountryIsoAndName(String countryAndName)
 			throws IllegalArgumentException {
+//		log.debug("Get ONE province by '{}'..", countryAndName);
 		final Province province = tree.getValueForExactKey(countryAndName);
 		Preconditions.checkArgument(province != null,
 				"Invalid province for '%s'.", countryAndName);

@@ -20,13 +20,13 @@ import org.soluvas.commons.CommonsPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.AttributeNotificationImpl#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AttributeNotificationImpl#getObject <em>Object</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AttributeNotificationImpl#getOldValue <em>Old Value</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AttributeNotificationImpl#getNewValue <em>New Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

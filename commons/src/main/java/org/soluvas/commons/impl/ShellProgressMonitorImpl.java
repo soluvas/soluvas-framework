@@ -21,8 +21,6 @@ import com.google.common.base.Strings;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Shell Progress Monitor</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

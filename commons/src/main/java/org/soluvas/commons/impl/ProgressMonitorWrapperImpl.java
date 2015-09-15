@@ -17,10 +17,10 @@ import org.soluvas.commons.ProgressStatus;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.impl.ProgressMonitorWrapperImpl#getDelegate <em>Delegate</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

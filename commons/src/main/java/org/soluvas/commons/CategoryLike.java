@@ -18,6 +18,7 @@ package org.soluvas.commons;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.CategoryLike#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryLike#getColor <em>Color</em>}</li>
@@ -25,7 +26,6 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CategoryLike#getLevel <em>Level</em>}</li>
  *   <li>{@link org.soluvas.commons.CategoryLike#getCategoryCount <em>Category Count</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getCategoryLike()
  * @model interface="true" abstract="true"

@@ -13,6 +13,7 @@ package org.soluvas.commons;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.commons.WebAddress#getBaseUri <em>Base Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.WebAddress#getBasePath <em>Base Path</em>}</li>
@@ -25,7 +26,6 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.WebAddress#getSecureSkinUri <em>Secure Skin Uri</em>}</li>
  *   <li>{@link org.soluvas.commons.WebAddress#getSecureJsUri <em>Secure Js Uri</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.commons.CommonsPackage#getWebAddress()
  * @model

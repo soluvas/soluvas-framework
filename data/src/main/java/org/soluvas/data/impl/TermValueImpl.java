@@ -2,19 +2,23 @@
  */
 package org.soluvas.data.impl;
 
-import java.util.Collection;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Sluggable;
+import org.soluvas.commons.Translation;
+import org.soluvas.commons.TranslationState;
+import org.soluvas.data.AttributeSemantic;
 import org.soluvas.data.DataPackage;
 import org.soluvas.data.Term;
+import org.soluvas.data.Term2;
 import org.soluvas.data.TermValue;
 
 /**
@@ -23,6 +27,7 @@ import org.soluvas.data.TermValue;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getSlug <em>Slug</em>}</li>
@@ -31,7 +36,6 @@ import org.soluvas.data.TermValue;
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -559,6 +563,29 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 		} else if (!value.equals(other.value))
 			return false;
 		return true;
+	}
+
+	@Override
+	public void copyFromMongo(Term2 term2) {
+		setDisplayValue(term2.getName());
+		setId(term2.getId());
+		setLanguage(term2.getLanguage());
+		setOriginalLanguage(term2.getLanguage());
+		setPrimaryUri(term2.getPrimaryUri());
+		setSemantic(AttributeSemantic.EQUAL);
+		setSlug(null);
+		setSlugPath(null);
+		setTranslationState(TranslationState.ORIGINAL);
+		setValue(term2.getId());
+		for ( final Entry<String, Map<String, String>> entry : term2.getTranslations().entrySet()) {
+			final String key = entry.getKey();
+			final Translation translation = CommonsFactory.eINSTANCE.createTranslation();
+			for (Entry<String, String> transEntry : entry.getValue().entrySet()) {
+				translation.setLanguage(key);
+				translation.getMessages().put(transEntry.getKey(), transEntry.getValue());
+			}
+			getTranslations().put(key, translation);
+		}
 	}
 	
 } //TermValueImpl

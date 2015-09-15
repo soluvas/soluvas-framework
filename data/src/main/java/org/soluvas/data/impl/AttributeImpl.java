@@ -31,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getName <em>Name</em>}</li>
@@ -53,7 +54,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getPrimaryUri <em>Primary Uri</em>}</li>
  *   <li>{@link org.soluvas.data.impl.AttributeImpl#getSameAsUris <em>Same As Uris</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
