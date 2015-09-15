@@ -8,6 +8,8 @@ import org.joda.time.DateTime;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Authorization by a specific Facebook user granted to a specific {@link FacebookApp}.
@@ -19,27 +21,42 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class FacebookAuthorization implements Serializable {
 
-	private Long userId;
+	private Long entityId;
+	private String name;
 	private String screenName;
+	private String category;
+	private Set<FacebookPagePermission> pagePermissions = new HashSet<>();
 	private DateTime creationTime;
 	private String accessToken;
 	private DateTime expiryTime;
 
 	/**
-	 * Facebook User's ID, if known.
+	 * Facebook User or Page ID, if known. Can be app-specific or global ID.
 	 * @return
 	 */
 	@Nullable
-	public Long getUserId() {
-		return userId;
+	public Long getEntityId() {
+		return entityId;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
 	}
 
 	/**
-	 * Facebook User's screen name, if known.
+	 * Facebook User or Page's name, if known.
+	 * @return
+	 */
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Facebook User's or Page's screen name, if known.
 	 * @return
 	 */
 	public String getScreenName() {
@@ -48,6 +65,30 @@ public class FacebookAuthorization implements Serializable {
 
 	public void setScreenName(String screenName) {
 		this.screenName = screenName;
+	}
+
+	/**
+	 * Facebook Page's category.
+	 * @return
+	 */
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	/**
+	 * Facebook Pages have five levels of permissions to access settings, publish content as a page, or perform operations with the Pages API.
+	 * @return
+	 */
+	public Set<FacebookPagePermission> getPagePermissions() {
+		return pagePermissions;
+	}
+
+	public void setPagePermissions(Set<FacebookPagePermission> pagePermissions) {
+		this.pagePermissions = pagePermissions;
 	}
 
 	/**
