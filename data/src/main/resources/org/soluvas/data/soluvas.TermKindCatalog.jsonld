@@ -17,6 +17,14 @@
     "language" : "en_US",
     "translations" : { }
   }, {
+  	"id" : "Flavor",
+    "name" : "Flavor",
+    "idPropertyDefinition" : "flavor",
+    "description" : "Flavor",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
     "id" : "ShoeSize",
     "name" : "Shoe Size",
     "idPropertyDefinition" : "size",
