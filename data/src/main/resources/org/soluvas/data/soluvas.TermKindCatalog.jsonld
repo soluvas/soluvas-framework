@@ -25,6 +25,14 @@
     "language" : "en_US",
     "translations" : { }
   }, {
+  "id" : "ScreenSize",
+    "name" : "Screen Size",
+    "idPropertyDefinition" : "size",
+    "description" : "Screen Size",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
     "id" : "ShoeSize",
     "name" : "Shoe Size",
     "idPropertyDefinition" : "size",
