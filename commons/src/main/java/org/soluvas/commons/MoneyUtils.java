@@ -11,8 +11,6 @@ import javax.money.format.MonetaryFormats;
 import org.javamoney.moneta.Money;
 import org.javamoney.moneta.format.AmountFormatParams;
 import org.javamoney.moneta.format.CurrencyStyle;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author ceefour
@@ -20,14 +18,14 @@ import org.slf4j.LoggerFactory;
  */
 public class MoneyUtils {
 	
-	private static final Logger log = LoggerFactory.getLogger(MoneyUtils.class);
+//	private static final Logger log = LoggerFactory.getLogger(MoneyUtils.class);
 
 	public static String getSymbol(Locale locale, CurrencyUnit currency) {
 		final AmountFormatQuery symbolQuery = AmountFormatQueryBuilder.of(locale).set(CurrencyStyle.SYMBOL)
 				.set(AmountFormatParams.PATTERN, "¤").build();
 		final String symbol = MonetaryFormats.getAmountFormat(symbolQuery).format(Money.of(BigDecimal.ZERO, currency)).replace("0", "");
 		
-		log.debug("Got symbol for locale '{}' - currency '{}': {}", locale.toLanguageTag(), currency, symbol);
+//		log.debug("Got symbol for locale '{}' - currency '{}': {}", locale.toLanguageTag(), currency, symbol);
 		
 		return symbol;
 	}
