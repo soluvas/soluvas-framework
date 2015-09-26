@@ -30,12 +30,7 @@ import org.soluvas.commons.IdAsyncEventBus;
 import org.soluvas.commons.Network;
 import org.soluvas.commons.util.AppUtils;
 import org.soluvas.json.JsonUtils;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -223,8 +218,23 @@ public class CommonsWebConfig {
 //		modules.add(Suppliers.<Module>ofInstance(new JscienceModule()));
 //		return new JacksonMapperFactoryImpl(modules);
 //	}
-	
+
+	/**
+	 * Workaround "useSpringJackson" for https://github.com/spring-projects/spring-boot/issues/4029 :
+	 *
+	 * <pre>
+	 * public static void main(String[] args) {
+	 * final SpringApplicationBuilder builder = new SpringApplicationBuilder()
+	 * .sources(DaemonApp.class)
+	 * .profiles("daemon", "useSpringJackson");
+	 * builder.run(args);
+	 * }
+	 * </pre>
+	 *
+	 * @return
+	 */
 	@Bean
+	@Profile("!useSpringJackson")
 	public ObjectMapper jacksonMapper() {
 		return JsonUtils.mapper;
 //		return jacksonMapperFactory().get();
