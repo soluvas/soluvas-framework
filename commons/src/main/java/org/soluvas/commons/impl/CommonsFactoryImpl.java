@@ -86,35 +86,39 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model <b>Factory</b>.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
+ * end-user-doc -->
+ * 
  * @generated
  */
 public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
+
+//	private static final Logger log = LoggerFactory
+//			.getLogger(CommonsFactoryImpl.class);
+
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static CommonsFactory init() {
 		try {
-			CommonsFactory theCommonsFactory = (CommonsFactory)EPackage.Registry.INSTANCE.getEFactory(CommonsPackage.eNS_URI);
+			CommonsFactory theCommonsFactory = (CommonsFactory) EPackage.Registry.INSTANCE
+					.getEFactory(CommonsPackage.eNS_URI);
 			if (theCommonsFactory != null) {
 				return theCommonsFactory;
 			}
-		}
-		catch (Exception exception) {
+		} catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
 		return new CommonsFactoryImpl();
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public CommonsFactoryImpl() {
@@ -122,245 +126,280 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CommonsPackage.APP_MANIFEST: return createAppManifest();
-			case CommonsPackage.PERSON_INFO: return createPersonInfo();
-			case CommonsPackage.WEB_ADDRESS: return createWebAddress();
-			case CommonsPackage.ADDED: return createAdded();
-			case CommonsPackage.ATTRIBUTE_SET: return createAttributeSet();
-			case CommonsPackage.ATTRIBUTE_UNSET: return createAttributeUnset();
-			case CommonsPackage.REMOVED: return createRemoved();
-			case CommonsPackage.ATTRIBUTE_NOTIFICATION: return createAttributeNotification();
-			case CommonsPackage.ADDED_MANY: return createAddedMany();
-			case CommonsPackage.REMOVED_MANY: return createRemovedMany();
-			case CommonsPackage.CATEGORY_INFO: return createCategoryInfo();
-			case CommonsPackage.SHELL_PROGRESS_MONITOR: return createShellProgressMonitor();
-			case CommonsPackage.EVENT_BUS_PROGRESS_MONITOR: return createEventBusProgressMonitor();
-			case CommonsPackage.PROGRESS_MONITOR_WRAPPER: return createProgressMonitorWrapper();
-			case CommonsPackage.TRANSLATION: return createTranslation();
-			case CommonsPackage.TRANSLATION_MESSAGE_ENTRY: return (EObject)createTranslationMessageEntry();
-			case CommonsPackage.TRANSLATION_MANAGER: return createTranslationManager();
-			case CommonsPackage.TRANSLATION_ENTRY: return (EObject)createTranslationEntry();
-			case CommonsPackage.PERSON: return createPerson();
-			case CommonsPackage.PHONE_NUMBER: return createPhoneNumber();
-			case CommonsPackage.EMAIL: return createEmail();
-			case CommonsPackage.POSTAL_ADDRESS: return createPostalAddress();
-			case CommonsPackage.PERSON_CATALOG: return createPersonCatalog();
-			case CommonsPackage.FACEBOOK_IDENTITY: return createFacebookIdentity();
-			case CommonsPackage.FACEBOOK_ACCESSIBLE: return createFacebookAccessible();
-			case CommonsPackage.GEOLOCATION: return createGeolocation();
-			case CommonsPackage.THING_INFO: return createThingInfo();
-			case CommonsPackage.ORGANIZATION: return createOrganization();
-			case CommonsPackage.CUSTOMER_ROLE: return createCustomerRole();
-			case CommonsPackage.CUSTOMER_ROLE_CATALOG: return createCustomerRoleCatalog();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		case CommonsPackage.APP_MANIFEST:
+			return createAppManifest();
+		case CommonsPackage.PERSON_INFO:
+			return createPersonInfo();
+		case CommonsPackage.WEB_ADDRESS:
+			return createWebAddress();
+		case CommonsPackage.ADDED:
+			return createAdded();
+		case CommonsPackage.ATTRIBUTE_SET:
+			return createAttributeSet();
+		case CommonsPackage.ATTRIBUTE_UNSET:
+			return createAttributeUnset();
+		case CommonsPackage.REMOVED:
+			return createRemoved();
+		case CommonsPackage.ATTRIBUTE_NOTIFICATION:
+			return createAttributeNotification();
+		case CommonsPackage.ADDED_MANY:
+			return createAddedMany();
+		case CommonsPackage.REMOVED_MANY:
+			return createRemovedMany();
+		case CommonsPackage.CATEGORY_INFO:
+			return createCategoryInfo();
+		case CommonsPackage.SHELL_PROGRESS_MONITOR:
+			return createShellProgressMonitor();
+		case CommonsPackage.EVENT_BUS_PROGRESS_MONITOR:
+			return createEventBusProgressMonitor();
+		case CommonsPackage.PROGRESS_MONITOR_WRAPPER:
+			return createProgressMonitorWrapper();
+		case CommonsPackage.TRANSLATION:
+			return createTranslation();
+		case CommonsPackage.TRANSLATION_MESSAGE_ENTRY:
+			return (EObject) createTranslationMessageEntry();
+		case CommonsPackage.TRANSLATION_MANAGER:
+			return createTranslationManager();
+		case CommonsPackage.TRANSLATION_ENTRY:
+			return (EObject) createTranslationEntry();
+		case CommonsPackage.PERSON:
+			return createPerson();
+		case CommonsPackage.PHONE_NUMBER:
+			return createPhoneNumber();
+		case CommonsPackage.EMAIL:
+			return createEmail();
+		case CommonsPackage.POSTAL_ADDRESS:
+			return createPostalAddress();
+		case CommonsPackage.PERSON_CATALOG:
+			return createPersonCatalog();
+		case CommonsPackage.FACEBOOK_IDENTITY:
+			return createFacebookIdentity();
+		case CommonsPackage.FACEBOOK_ACCESSIBLE:
+			return createFacebookAccessible();
+		case CommonsPackage.GEOLOCATION:
+			return createGeolocation();
+		case CommonsPackage.THING_INFO:
+			return createThingInfo();
+		case CommonsPackage.ORGANIZATION:
+			return createOrganization();
+		case CommonsPackage.CUSTOMER_ROLE:
+			return createCustomerRole();
+		case CommonsPackage.CUSTOMER_ROLE_CATALOG:
+			return createCustomerRoleCatalog();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName()
+					+ "' is not a valid classifier");
 		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case CommonsPackage.RESOURCE_TYPE:
-				return createResourceTypeFromString(eDataType, initialValue);
-			case CommonsPackage.GENDER:
-				return createGenderFromString(eDataType, initialValue);
-			case CommonsPackage.ECLASS_STATUS:
-				return createEClassStatusFromString(eDataType, initialValue);
-			case CommonsPackage.JAVA_CLASS_STATUS:
-				return createJavaClassStatusFromString(eDataType, initialValue);
-			case CommonsPackage.PROGRESS_STATUS:
-				return createProgressStatusFromString(eDataType, initialValue);
-			case CommonsPackage.ACCOUNT_STATUS:
-				return createAccountStatusFromString(eDataType, initialValue);
-			case CommonsPackage.PUBLICATION_STATUS:
-				return createPublicationStatusFromString(eDataType, initialValue);
-			case CommonsPackage.ARCHIVAL_STATUS:
-				return createArchivalStatusFromString(eDataType, initialValue);
-			case CommonsPackage.TRANSLATION_STATE:
-				return createTranslationStateFromString(eDataType, initialValue);
-			case CommonsPackage.EXPANSION_STATE:
-				return createExpansionStateFromString(eDataType, initialValue);
-			case CommonsPackage.SIGNUP_SOURCE_TYPE:
-				return createSignupSourceTypeFromString(eDataType, initialValue);
-			case CommonsPackage.TENANT_SOURCE:
-				return createTenantSourceFromString(eDataType, initialValue);
-			case CommonsPackage.GENERIC_STATUS:
-				return createGenericStatusFromString(eDataType, initialValue);
-			case CommonsPackage.CUSTOMER_ROLE_STATUS:
-				return createCustomerRoleStatusFromString(eDataType, initialValue);
-			case CommonsPackage.ENTITY_KIND:
-				return createEntityKindFromString(eDataType, initialValue);
-			case CommonsPackage.DATE_TIME:
-				return createDateTimeFromString(eDataType, initialValue);
-			case CommonsPackage.CURRENCY_UNIT:
-				return createCurrencyUnitFromString(eDataType, initialValue);
-			case CommonsPackage.QUANTITY:
-				return createQuantityFromString(eDataType, initialValue);
-			case CommonsPackage.UNIT:
-				return createUnitFromString(eDataType, initialValue);
-			case CommonsPackage.LIST:
-				return createListFromString(eDataType, initialValue);
-			case CommonsPackage.MAP:
-				return createMapFromString(eDataType, initialValue);
-			case CommonsPackage.SET:
-				return createSetFromString(eDataType, initialValue);
-			case CommonsPackage.COLLECTION:
-				return createCollectionFromString(eDataType, initialValue);
-			case CommonsPackage.MULTIMAP:
-				return createMultimapFromString(eDataType, initialValue);
-			case CommonsPackage.NAVIGABLE_MAP:
-				return createNavigableMapFromString(eDataType, initialValue);
-			case CommonsPackage.QUEUE:
-				return createQueueFromString(eDataType, initialValue);
-			case CommonsPackage.MULTISET:
-				return createMultisetFromString(eDataType, initialValue);
-			case CommonsPackage.SERIALIZABLE:
-				return createSerializableFromString(eDataType, initialValue);
-			case CommonsPackage.MONEY:
-				return createMoneyFromString(eDataType, initialValue);
-			case CommonsPackage.MEASURABLE:
-				return createMeasurableFromString(eDataType, initialValue);
-			case CommonsPackage.DATE_TIME_ZONE:
-				return createDateTimeZoneFromString(eDataType, initialValue);
-			case CommonsPackage.LOCALE:
-				return createLocaleFromString(eDataType, initialValue);
-			case CommonsPackage.FILE:
-				return createFileFromString(eDataType, initialValue);
-			case CommonsPackage.LOCAL_DATE:
-				return createLocalDateFromString(eDataType, initialValue);
-			case CommonsPackage.NO_SUCH_ELEMENT_EXCEPTION:
-				return createNoSuchElementExceptionFromString(eDataType, initialValue);
-			case CommonsPackage.DEQUE:
-				return createDequeFromString(eDataType, initialValue);
-			case CommonsPackage.TEMPERATURE:
-				return createTemperatureFromString(eDataType, initialValue);
-			case CommonsPackage.LOCAL_TIME:
-				return createLocalTimeFromString(eDataType, initialValue);
-			case CommonsPackage.EXCEPTION:
-				return createExceptionFromString(eDataType, initialValue);
-			case CommonsPackage.LIST_MULTIMAP:
-				return createListMultimapFromString(eDataType, initialValue);
-			case CommonsPackage.UUID:
-				return createUUIDFromString(eDataType, initialValue);
-			case CommonsPackage.PERIOD:
-				return createPeriodFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		case CommonsPackage.RESOURCE_TYPE:
+			return createResourceTypeFromString(eDataType, initialValue);
+		case CommonsPackage.GENDER:
+			return createGenderFromString(eDataType, initialValue);
+		case CommonsPackage.ECLASS_STATUS:
+			return createEClassStatusFromString(eDataType, initialValue);
+		case CommonsPackage.JAVA_CLASS_STATUS:
+			return createJavaClassStatusFromString(eDataType, initialValue);
+		case CommonsPackage.PROGRESS_STATUS:
+			return createProgressStatusFromString(eDataType, initialValue);
+		case CommonsPackage.ACCOUNT_STATUS:
+			return createAccountStatusFromString(eDataType, initialValue);
+		case CommonsPackage.PUBLICATION_STATUS:
+			return createPublicationStatusFromString(eDataType, initialValue);
+		case CommonsPackage.ARCHIVAL_STATUS:
+			return createArchivalStatusFromString(eDataType, initialValue);
+		case CommonsPackage.TRANSLATION_STATE:
+			return createTranslationStateFromString(eDataType, initialValue);
+		case CommonsPackage.EXPANSION_STATE:
+			return createExpansionStateFromString(eDataType, initialValue);
+		case CommonsPackage.SIGNUP_SOURCE_TYPE:
+			return createSignupSourceTypeFromString(eDataType, initialValue);
+		case CommonsPackage.TENANT_SOURCE:
+			return createTenantSourceFromString(eDataType, initialValue);
+		case CommonsPackage.GENERIC_STATUS:
+			return createGenericStatusFromString(eDataType, initialValue);
+		case CommonsPackage.CUSTOMER_ROLE_STATUS:
+			return createCustomerRoleStatusFromString(eDataType, initialValue);
+		case CommonsPackage.ENTITY_KIND:
+			return createEntityKindFromString(eDataType, initialValue);
+		case CommonsPackage.DATE_TIME:
+			return createDateTimeFromString(eDataType, initialValue);
+		case CommonsPackage.CURRENCY_UNIT:
+			return createCurrencyUnitFromString(eDataType, initialValue);
+		case CommonsPackage.QUANTITY:
+			return createQuantityFromString(eDataType, initialValue);
+		case CommonsPackage.UNIT:
+			return createUnitFromString(eDataType, initialValue);
+		case CommonsPackage.LIST:
+			return createListFromString(eDataType, initialValue);
+		case CommonsPackage.MAP:
+			return createMapFromString(eDataType, initialValue);
+		case CommonsPackage.SET:
+			return createSetFromString(eDataType, initialValue);
+		case CommonsPackage.COLLECTION:
+			return createCollectionFromString(eDataType, initialValue);
+		case CommonsPackage.MULTIMAP:
+			return createMultimapFromString(eDataType, initialValue);
+		case CommonsPackage.NAVIGABLE_MAP:
+			return createNavigableMapFromString(eDataType, initialValue);
+		case CommonsPackage.QUEUE:
+			return createQueueFromString(eDataType, initialValue);
+		case CommonsPackage.MULTISET:
+			return createMultisetFromString(eDataType, initialValue);
+		case CommonsPackage.SERIALIZABLE:
+			return createSerializableFromString(eDataType, initialValue);
+		case CommonsPackage.MONEY:
+			return createMoneyFromString(eDataType, initialValue);
+		case CommonsPackage.MEASURABLE:
+			return createMeasurableFromString(eDataType, initialValue);
+		case CommonsPackage.DATE_TIME_ZONE:
+			return createDateTimeZoneFromString(eDataType, initialValue);
+		case CommonsPackage.LOCALE:
+			return createLocaleFromString(eDataType, initialValue);
+		case CommonsPackage.FILE:
+			return createFileFromString(eDataType, initialValue);
+		case CommonsPackage.LOCAL_DATE:
+			return createLocalDateFromString(eDataType, initialValue);
+		case CommonsPackage.NO_SUCH_ELEMENT_EXCEPTION:
+			return createNoSuchElementExceptionFromString(eDataType,
+					initialValue);
+		case CommonsPackage.DEQUE:
+			return createDequeFromString(eDataType, initialValue);
+		case CommonsPackage.TEMPERATURE:
+			return createTemperatureFromString(eDataType, initialValue);
+		case CommonsPackage.LOCAL_TIME:
+			return createLocalTimeFromString(eDataType, initialValue);
+		case CommonsPackage.EXCEPTION:
+			return createExceptionFromString(eDataType, initialValue);
+		case CommonsPackage.LIST_MULTIMAP:
+			return createListMultimapFromString(eDataType, initialValue);
+		case CommonsPackage.UUID:
+			return createUUIDFromString(eDataType, initialValue);
+		case CommonsPackage.PERIOD:
+			return createPeriodFromString(eDataType, initialValue);
+		default:
+			throw new IllegalArgumentException("The datatype '"
+					+ eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case CommonsPackage.RESOURCE_TYPE:
-				return convertResourceTypeToString(eDataType, instanceValue);
-			case CommonsPackage.GENDER:
-				return convertGenderToString(eDataType, instanceValue);
-			case CommonsPackage.ECLASS_STATUS:
-				return convertEClassStatusToString(eDataType, instanceValue);
-			case CommonsPackage.JAVA_CLASS_STATUS:
-				return convertJavaClassStatusToString(eDataType, instanceValue);
-			case CommonsPackage.PROGRESS_STATUS:
-				return convertProgressStatusToString(eDataType, instanceValue);
-			case CommonsPackage.ACCOUNT_STATUS:
-				return convertAccountStatusToString(eDataType, instanceValue);
-			case CommonsPackage.PUBLICATION_STATUS:
-				return convertPublicationStatusToString(eDataType, instanceValue);
-			case CommonsPackage.ARCHIVAL_STATUS:
-				return convertArchivalStatusToString(eDataType, instanceValue);
-			case CommonsPackage.TRANSLATION_STATE:
-				return convertTranslationStateToString(eDataType, instanceValue);
-			case CommonsPackage.EXPANSION_STATE:
-				return convertExpansionStateToString(eDataType, instanceValue);
-			case CommonsPackage.SIGNUP_SOURCE_TYPE:
-				return convertSignupSourceTypeToString(eDataType, instanceValue);
-			case CommonsPackage.TENANT_SOURCE:
-				return convertTenantSourceToString(eDataType, instanceValue);
-			case CommonsPackage.GENERIC_STATUS:
-				return convertGenericStatusToString(eDataType, instanceValue);
-			case CommonsPackage.CUSTOMER_ROLE_STATUS:
-				return convertCustomerRoleStatusToString(eDataType, instanceValue);
-			case CommonsPackage.ENTITY_KIND:
-				return convertEntityKindToString(eDataType, instanceValue);
-			case CommonsPackage.DATE_TIME:
-				return convertDateTimeToString(eDataType, instanceValue);
-			case CommonsPackage.CURRENCY_UNIT:
-				return convertCurrencyUnitToString(eDataType, instanceValue);
-			case CommonsPackage.QUANTITY:
-				return convertQuantityToString(eDataType, instanceValue);
-			case CommonsPackage.UNIT:
-				return convertUnitToString(eDataType, instanceValue);
-			case CommonsPackage.LIST:
-				return convertListToString(eDataType, instanceValue);
-			case CommonsPackage.MAP:
-				return convertMapToString(eDataType, instanceValue);
-			case CommonsPackage.SET:
-				return convertSetToString(eDataType, instanceValue);
-			case CommonsPackage.COLLECTION:
-				return convertCollectionToString(eDataType, instanceValue);
-			case CommonsPackage.MULTIMAP:
-				return convertMultimapToString(eDataType, instanceValue);
-			case CommonsPackage.NAVIGABLE_MAP:
-				return convertNavigableMapToString(eDataType, instanceValue);
-			case CommonsPackage.QUEUE:
-				return convertQueueToString(eDataType, instanceValue);
-			case CommonsPackage.MULTISET:
-				return convertMultisetToString(eDataType, instanceValue);
-			case CommonsPackage.SERIALIZABLE:
-				return convertSerializableToString(eDataType, instanceValue);
-			case CommonsPackage.MONEY:
-				return convertMoneyToString(eDataType, instanceValue);
-			case CommonsPackage.MEASURABLE:
-				return convertMeasurableToString(eDataType, instanceValue);
-			case CommonsPackage.DATE_TIME_ZONE:
-				return convertDateTimeZoneToString(eDataType, instanceValue);
-			case CommonsPackage.LOCALE:
-				return convertLocaleToString(eDataType, instanceValue);
-			case CommonsPackage.FILE:
-				return convertFileToString(eDataType, instanceValue);
-			case CommonsPackage.LOCAL_DATE:
-				return convertLocalDateToString(eDataType, instanceValue);
-			case CommonsPackage.NO_SUCH_ELEMENT_EXCEPTION:
-				return convertNoSuchElementExceptionToString(eDataType, instanceValue);
-			case CommonsPackage.DEQUE:
-				return convertDequeToString(eDataType, instanceValue);
-			case CommonsPackage.TEMPERATURE:
-				return convertTemperatureToString(eDataType, instanceValue);
-			case CommonsPackage.LOCAL_TIME:
-				return convertLocalTimeToString(eDataType, instanceValue);
-			case CommonsPackage.EXCEPTION:
-				return convertExceptionToString(eDataType, instanceValue);
-			case CommonsPackage.LIST_MULTIMAP:
-				return convertListMultimapToString(eDataType, instanceValue);
-			case CommonsPackage.UUID:
-				return convertUUIDToString(eDataType, instanceValue);
-			case CommonsPackage.PERIOD:
-				return convertPeriodToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		case CommonsPackage.RESOURCE_TYPE:
+			return convertResourceTypeToString(eDataType, instanceValue);
+		case CommonsPackage.GENDER:
+			return convertGenderToString(eDataType, instanceValue);
+		case CommonsPackage.ECLASS_STATUS:
+			return convertEClassStatusToString(eDataType, instanceValue);
+		case CommonsPackage.JAVA_CLASS_STATUS:
+			return convertJavaClassStatusToString(eDataType, instanceValue);
+		case CommonsPackage.PROGRESS_STATUS:
+			return convertProgressStatusToString(eDataType, instanceValue);
+		case CommonsPackage.ACCOUNT_STATUS:
+			return convertAccountStatusToString(eDataType, instanceValue);
+		case CommonsPackage.PUBLICATION_STATUS:
+			return convertPublicationStatusToString(eDataType, instanceValue);
+		case CommonsPackage.ARCHIVAL_STATUS:
+			return convertArchivalStatusToString(eDataType, instanceValue);
+		case CommonsPackage.TRANSLATION_STATE:
+			return convertTranslationStateToString(eDataType, instanceValue);
+		case CommonsPackage.EXPANSION_STATE:
+			return convertExpansionStateToString(eDataType, instanceValue);
+		case CommonsPackage.SIGNUP_SOURCE_TYPE:
+			return convertSignupSourceTypeToString(eDataType, instanceValue);
+		case CommonsPackage.TENANT_SOURCE:
+			return convertTenantSourceToString(eDataType, instanceValue);
+		case CommonsPackage.GENERIC_STATUS:
+			return convertGenericStatusToString(eDataType, instanceValue);
+		case CommonsPackage.CUSTOMER_ROLE_STATUS:
+			return convertCustomerRoleStatusToString(eDataType, instanceValue);
+		case CommonsPackage.ENTITY_KIND:
+			return convertEntityKindToString(eDataType, instanceValue);
+		case CommonsPackage.DATE_TIME:
+			return convertDateTimeToString(eDataType, instanceValue);
+		case CommonsPackage.CURRENCY_UNIT:
+			return convertCurrencyUnitToString(eDataType, instanceValue);
+		case CommonsPackage.QUANTITY:
+			return convertQuantityToString(eDataType, instanceValue);
+		case CommonsPackage.UNIT:
+			return convertUnitToString(eDataType, instanceValue);
+		case CommonsPackage.LIST:
+			return convertListToString(eDataType, instanceValue);
+		case CommonsPackage.MAP:
+			return convertMapToString(eDataType, instanceValue);
+		case CommonsPackage.SET:
+			return convertSetToString(eDataType, instanceValue);
+		case CommonsPackage.COLLECTION:
+			return convertCollectionToString(eDataType, instanceValue);
+		case CommonsPackage.MULTIMAP:
+			return convertMultimapToString(eDataType, instanceValue);
+		case CommonsPackage.NAVIGABLE_MAP:
+			return convertNavigableMapToString(eDataType, instanceValue);
+		case CommonsPackage.QUEUE:
+			return convertQueueToString(eDataType, instanceValue);
+		case CommonsPackage.MULTISET:
+			return convertMultisetToString(eDataType, instanceValue);
+		case CommonsPackage.SERIALIZABLE:
+			return convertSerializableToString(eDataType, instanceValue);
+		case CommonsPackage.MONEY:
+			return convertMoneyToString(eDataType, instanceValue);
+		case CommonsPackage.MEASURABLE:
+			return convertMeasurableToString(eDataType, instanceValue);
+		case CommonsPackage.DATE_TIME_ZONE:
+			return convertDateTimeZoneToString(eDataType, instanceValue);
+		case CommonsPackage.LOCALE:
+			return convertLocaleToString(eDataType, instanceValue);
+		case CommonsPackage.FILE:
+			return convertFileToString(eDataType, instanceValue);
+		case CommonsPackage.LOCAL_DATE:
+			return convertLocalDateToString(eDataType, instanceValue);
+		case CommonsPackage.NO_SUCH_ELEMENT_EXCEPTION:
+			return convertNoSuchElementExceptionToString(eDataType,
+					instanceValue);
+		case CommonsPackage.DEQUE:
+			return convertDequeToString(eDataType, instanceValue);
+		case CommonsPackage.TEMPERATURE:
+			return convertTemperatureToString(eDataType, instanceValue);
+		case CommonsPackage.LOCAL_TIME:
+			return convertLocalTimeToString(eDataType, instanceValue);
+		case CommonsPackage.EXCEPTION:
+			return convertExceptionToString(eDataType, instanceValue);
+		case CommonsPackage.LIST_MULTIMAP:
+			return convertListMultimapToString(eDataType, instanceValue);
+		case CommonsPackage.UUID:
+			return convertUUIDToString(eDataType, instanceValue);
+		case CommonsPackage.PERIOD:
+			return convertPeriodToString(eDataType, instanceValue);
+		default:
+			throw new IllegalArgumentException("The datatype '"
+					+ eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -370,8 +409,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -381,8 +420,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -392,8 +431,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -409,8 +448,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -420,8 +459,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -431,8 +470,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -442,8 +481,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -453,8 +492,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -464,8 +503,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -475,8 +514,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -486,8 +525,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -497,8 +536,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -508,8 +547,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -519,8 +558,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -530,8 +569,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Map.Entry<String, String> createTranslationMessageEntry() {
@@ -540,8 +579,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -551,8 +590,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Map.Entry<String, Translation> createTranslationEntry() {
@@ -561,8 +600,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -572,8 +611,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -583,8 +622,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -594,8 +633,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -605,8 +644,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -616,8 +655,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -627,8 +666,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -638,8 +677,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -649,8 +688,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -660,8 +699,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -671,8 +710,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -682,8 +721,8 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -693,371 +732,449 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public ResourceType createResourceTypeFromString(EDataType eDataType, String initialValue) {
+	public ResourceType createResourceTypeFromString(EDataType eDataType,
+			String initialValue) {
 		ResourceType result = ResourceType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertResourceTypeToString(EDataType eDataType, Object instanceValue) {
+	public String convertResourceTypeToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Gender createGenderFromString(EDataType eDataType, String initialValue) {
+	public Gender createGenderFromString(EDataType eDataType,
+			String initialValue) {
 		Gender result = Gender.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertGenderToString(EDataType eDataType, Object instanceValue) {
+	public String convertGenderToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public EClassStatus createEClassStatusFromString(EDataType eDataType, String initialValue) {
+	public EClassStatus createEClassStatusFromString(EDataType eDataType,
+			String initialValue) {
 		EClassStatus result = EClassStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertEClassStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertEClassStatusToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public JavaClassStatus createJavaClassStatusFromString(EDataType eDataType, String initialValue) {
+	public JavaClassStatus createJavaClassStatusFromString(EDataType eDataType,
+			String initialValue) {
 		JavaClassStatus result = JavaClassStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertJavaClassStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertJavaClassStatusToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public ProgressStatus createProgressStatusFromString(EDataType eDataType, String initialValue) {
+	public ProgressStatus createProgressStatusFromString(EDataType eDataType,
+			String initialValue) {
 		ProgressStatus result = ProgressStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertProgressStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertProgressStatusToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public AccountStatus createAccountStatusFromString(EDataType eDataType, String initialValue) {
+	public AccountStatus createAccountStatusFromString(EDataType eDataType,
+			String initialValue) {
 		AccountStatus result = AccountStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertAccountStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertAccountStatusToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public PublicationStatus createPublicationStatusFromString(EDataType eDataType, String initialValue) {
+	public PublicationStatus createPublicationStatusFromString(
+			EDataType eDataType, String initialValue) {
 		PublicationStatus result = PublicationStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertPublicationStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertPublicationStatusToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public ArchivalStatus createArchivalStatusFromString(EDataType eDataType, String initialValue) {
+	public ArchivalStatus createArchivalStatusFromString(EDataType eDataType,
+			String initialValue) {
 		ArchivalStatus result = ArchivalStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertArchivalStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertArchivalStatusToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public TranslationState createTranslationStateFromString(EDataType eDataType, String initialValue) {
+	public TranslationState createTranslationStateFromString(
+			EDataType eDataType, String initialValue) {
 		TranslationState result = TranslationState.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertTranslationStateToString(EDataType eDataType, Object instanceValue) {
+	public String convertTranslationStateToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public ExpansionState createExpansionStateFromString(EDataType eDataType, String initialValue) {
+	public ExpansionState createExpansionStateFromString(EDataType eDataType,
+			String initialValue) {
 		ExpansionState result = ExpansionState.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertExpansionStateToString(EDataType eDataType, Object instanceValue) {
+	public String convertExpansionStateToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public SignupSourceType createSignupSourceTypeFromString(EDataType eDataType, String initialValue) {
+	public SignupSourceType createSignupSourceTypeFromString(
+			EDataType eDataType, String initialValue) {
 		SignupSourceType result = SignupSourceType.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertSignupSourceTypeToString(EDataType eDataType, Object instanceValue) {
+	public String convertSignupSourceTypeToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public TenantSource createTenantSourceFromString(EDataType eDataType, String initialValue) {
+	public TenantSource createTenantSourceFromString(EDataType eDataType,
+			String initialValue) {
 		TenantSource result = TenantSource.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertTenantSourceToString(EDataType eDataType, Object instanceValue) {
+	public String convertTenantSourceToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public GenericStatus createGenericStatusFromString(EDataType eDataType, String initialValue) {
+	public GenericStatus createGenericStatusFromString(EDataType eDataType,
+			String initialValue) {
 		GenericStatus result = GenericStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertGenericStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertGenericStatusToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public CustomerRoleStatus createCustomerRoleStatusFromString(EDataType eDataType, String initialValue) {
+	public CustomerRoleStatus createCustomerRoleStatusFromString(
+			EDataType eDataType, String initialValue) {
 		CustomerRoleStatus result = CustomerRoleStatus.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertCustomerRoleStatusToString(EDataType eDataType, Object instanceValue) {
+	public String convertCustomerRoleStatusToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public EntityKind createEntityKindFromString(EDataType eDataType, String initialValue) {
+	public EntityKind createEntityKindFromString(EDataType eDataType,
+			String initialValue) {
 		EntityKind result = EntityKind.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		if (result == null)
+			throw new IllegalArgumentException("The value '" + initialValue
+					+ "' is not a valid enumerator of '" + eDataType.getName()
+					+ "'");
 		return result;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertEntityKindToString(EDataType eDataType, Object instanceValue) {
+	public String convertEntityKindToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
-	public DateTime createDateTimeFromString(EDataType eDataType, String initialValue) {
+	public DateTime createDateTimeFromString(EDataType eDataType,
+			String initialValue) {
 		return initialValue != null ? new DateTime(initialValue) : null;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertDateTimeToString(EDataType eDataType, Object instanceValue) {
+	public String convertDateTimeToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
-	public CurrencyUnit createCurrencyUnitFromString(EDataType eDataType, String initialValue) {
+	public CurrencyUnit createCurrencyUnitFromString(EDataType eDataType,
+			String initialValue) {
+//		log.debug("currency: {}", initialValue);
 		return Monetary.getCurrency(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
-	public String convertCurrencyUnitToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
+	public String convertCurrencyUnitToString(EDataType eDataType,
+			Object instanceValue) {
+//		return super.convertToString(eDataType, instanceValue);
+		return ((CurrencyUnit) instanceValue).getCurrencyCode();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
 	public Unit<?> createUnitFromString(EDataType eDataType, String initialValue) {
 		if (initialValue != null) {
-			return "".equals(initialValue) ? Unit.ONE : (Unit<?>)Unit.valueOf(initialValue); 
+			return "".equals(initialValue) ? Unit.ONE : (Unit<?>) Unit
+					.valueOf(initialValue);
 		} else {
 			return null;
 		}
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
 	public String convertUnitToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue != null ? instanceValue.toString() : null;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public List<?> createListFromString(EDataType eDataType, String initialValue) {
-		return (List<?>)super.createFromString(initialValue);
+		return (List<?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertListToString(EDataType eDataType, Object instanceValue) {
@@ -1065,17 +1182,18 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Map<?, ?> createMapFromString(EDataType eDataType, String initialValue) {
-		return (Map<?, ?>)super.createFromString(initialValue);
+	public Map<?, ?> createMapFromString(EDataType eDataType,
+			String initialValue) {
+		return (Map<?, ?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertMapToString(EDataType eDataType, Object instanceValue) {
@@ -1083,17 +1201,17 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public Set<?> createSetFromString(EDataType eDataType, String initialValue) {
-		return (Set<?>)super.createFromString(initialValue);
+		return (Set<?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertSetToString(EDataType eDataType, Object instanceValue) {
@@ -1101,71 +1219,78 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Collection<?> createCollectionFromString(EDataType eDataType, String initialValue) {
-		return (Collection<?>)super.createFromString(initialValue);
+	public Collection<?> createCollectionFromString(EDataType eDataType,
+			String initialValue) {
+		return (Collection<?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertCollectionToString(EDataType eDataType, Object instanceValue) {
+	public String convertCollectionToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Multimap<?, ?> createMultimapFromString(EDataType eDataType, String initialValue) {
-		return (Multimap<?, ?>)super.createFromString(initialValue);
+	public Multimap<?, ?> createMultimapFromString(EDataType eDataType,
+			String initialValue) {
+		return (Multimap<?, ?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertMultimapToString(EDataType eDataType, Object instanceValue) {
+	public String convertMultimapToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public NavigableMap<?, ?> createNavigableMapFromString(EDataType eDataType, String initialValue) {
-		return (NavigableMap<?, ?>)super.createFromString(initialValue);
+	public NavigableMap<?, ?> createNavigableMapFromString(EDataType eDataType,
+			String initialValue) {
+		return (NavigableMap<?, ?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertNavigableMapToString(EDataType eDataType, Object instanceValue) {
+	public String convertNavigableMapToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Queue<?> createQueueFromString(EDataType eDataType, String initialValue) {
-		return (Queue<?>)super.createFromString(initialValue);
+	public Queue<?> createQueueFromString(EDataType eDataType,
+			String initialValue) {
+		return (Queue<?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertQueueToString(EDataType eDataType, Object instanceValue) {
@@ -1173,52 +1298,55 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Multiset<?> createMultisetFromString(EDataType eDataType, String initialValue) {
-		return (Multiset<?>)super.createFromString(initialValue);
+	public Multiset<?> createMultisetFromString(EDataType eDataType,
+			String initialValue) {
+		return (Multiset<?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertMultisetToString(EDataType eDataType, Object instanceValue) {
+	public String convertMultisetToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Serializable createSerializableFromString(EDataType eDataType, String initialValue) {
-		return (Serializable)super.createFromString(eDataType, initialValue);
+	public Serializable createSerializableFromString(EDataType eDataType,
+			String initialValue) {
+		return (Serializable) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertSerializableToString(EDataType eDataType, Object instanceValue) {
+	public String convertSerializableToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
 	public Money createMoneyFromString(EDataType eDataType, String initialValue) {
 		return Money.parse(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertMoneyToString(EDataType eDataType, Object instanceValue) {
@@ -1226,104 +1354,111 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Quantity createQuantityFromString(EDataType eDataType, String initialValue) {
-		return (Quantity)super.createFromString(eDataType, initialValue);
+	public Quantity createQuantityFromString(EDataType eDataType,
+			String initialValue) {
+		return (Quantity) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertQuantityToString(EDataType eDataType, Object instanceValue) {
+	public String convertQuantityToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Measurable<?> createMeasurableFromString(EDataType eDataType, String initialValue) {
-		return (Measurable<?>)super.createFromString(initialValue);
+	public Measurable<?> createMeasurableFromString(EDataType eDataType,
+			String initialValue) {
+		return (Measurable<?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertMeasurableToString(EDataType eDataType, Object instanceValue) {
+	public String convertMeasurableToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
-	public BigDecimal createBigDecimalFromString(EDataType eDataType, String initialValue) {
+	public BigDecimal createBigDecimalFromString(EDataType eDataType,
+			String initialValue) {
 		return initialValue != null ? new BigDecimal(initialValue) : null;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
-	public String convertBigDecimalToString(EDataType eDataType, Object instanceValue) {
+	public String convertBigDecimalToString(EDataType eDataType,
+			Object instanceValue) {
 		return instanceValue != null ? instanceValue.toString() : null;
 	}
-	
+
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
-	public DateTimeZone createDateTimeZoneFromString(EDataType eDataType, String initialValue) {
+	public DateTimeZone createDateTimeZoneFromString(EDataType eDataType,
+			String initialValue) {
 		return DateTimeZone.forID(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertDateTimeZoneToString(EDataType eDataType, Object instanceValue) {
+	public String convertDateTimeZoneToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Locale createLocaleFromString(EDataType eDataType, String initialValue) {
-		return (Locale)super.createFromString(eDataType, initialValue);
+	public Locale createLocaleFromString(EDataType eDataType,
+			String initialValue) {
+		return (Locale) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertLocaleToString(EDataType eDataType, Object instanceValue) {
+	public String convertLocaleToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public File createFileFromString(EDataType eDataType, String initialValue) {
-		return (File)super.createFromString(eDataType, initialValue);
+		return (File) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertFileToString(EDataType eDataType, Object instanceValue) {
@@ -1331,52 +1466,57 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
-	public LocalDate createLocalDateFromString(EDataType eDataType, String initialValue) {
+	public LocalDate createLocalDateFromString(EDataType eDataType,
+			String initialValue) {
 		return initialValue != null ? new LocalDate(initialValue) : null;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertLocalDateToString(EDataType eDataType, Object instanceValue) {
+	public String convertLocalDateToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public NoSuchElementException createNoSuchElementExceptionFromString(EDataType eDataType, String initialValue) {
-		return (NoSuchElementException)super.createFromString(eDataType, initialValue);
+	public NoSuchElementException createNoSuchElementExceptionFromString(
+			EDataType eDataType, String initialValue) {
+		return (NoSuchElementException) super.createFromString(eDataType,
+				initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertNoSuchElementExceptionToString(EDataType eDataType, Object instanceValue) {
+	public String convertNoSuchElementExceptionToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Deque<?> createDequeFromString(EDataType eDataType, String initialValue) {
-		return (Deque<?>)super.createFromString(initialValue);
+	public Deque<?> createDequeFromString(EDataType eDataType,
+			String initialValue) {
+		return (Deque<?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertDequeToString(EDataType eDataType, Object instanceValue) {
@@ -1384,88 +1524,95 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Temperature createTemperatureFromString(EDataType eDataType, String initialValue) {
-		return (Temperature)super.createFromString(eDataType, initialValue);
+	public Temperature createTemperatureFromString(EDataType eDataType,
+			String initialValue) {
+		return (Temperature) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertTemperatureToString(EDataType eDataType, Object instanceValue) {
+	public String convertTemperatureToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 */
-	public LocalTime createLocalTimeFromString(EDataType eDataType, String initialValue) {
+	public LocalTime createLocalTimeFromString(EDataType eDataType,
+			String initialValue) {
 		return initialValue != null ? new LocalTime(initialValue) : null;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertLocalTimeToString(EDataType eDataType, Object instanceValue) {
+	public String convertLocalTimeToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Exception createExceptionFromString(EDataType eDataType, String initialValue) {
-		return (Exception)super.createFromString(eDataType, initialValue);
+	public Exception createExceptionFromString(EDataType eDataType,
+			String initialValue) {
+		return (Exception) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertExceptionToString(EDataType eDataType, Object instanceValue) {
+	public String convertExceptionToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public ListMultimap<?, ?> createListMultimapFromString(EDataType eDataType, String initialValue) {
-		return (ListMultimap<?, ?>)super.createFromString(initialValue);
+	public ListMultimap<?, ?> createListMultimapFromString(EDataType eDataType,
+			String initialValue) {
+		return (ListMultimap<?, ?>) super.createFromString(initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertListMultimapToString(EDataType eDataType, Object instanceValue) {
+	public String convertListMultimapToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public UUID createUUIDFromString(EDataType eDataType, String initialValue) {
-		return (UUID)super.createFromString(eDataType, initialValue);
+		return (UUID) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String convertUUIDToString(EDataType eDataType, Object instanceValue) {
@@ -1473,36 +1620,38 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public Period createPeriodFromString(EDataType eDataType, String initialValue) {
-		return (Period)super.createFromString(eDataType, initialValue);
+	public Period createPeriodFromString(EDataType eDataType,
+			String initialValue) {
+		return (Period) super.createFromString(eDataType, initialValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
-	public String convertPeriodToString(EDataType eDataType, Object instanceValue) {
+	public String convertPeriodToString(EDataType eDataType,
+			Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public CommonsPackage getCommonsPackage() {
-		return (CommonsPackage)getEPackage();
+		return (CommonsPackage) getEPackage();
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @deprecated
 	 * @generated
 	 */
@@ -1524,12 +1673,15 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	}
 
 	/*
-	 * Will generate name = firstName + " " + lastName; 
-	 * @see org.soluvas.commons.CommonsFactory#createPerson(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, org.soluvas.commons.Gender)
+	 * Will generate name = firstName + " " + lastName;
+	 * 
+	 * @see org.soluvas.commons.CommonsFactory#createPerson(java.lang.String,
+	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
+	 * org.soluvas.commons.Gender)
 	 */
 	@Override
-	public Person createPerson(String id, String slug,
-			String firstName, String lastName, String photoId, Gender gender) {
+	public Person createPerson(String id, String slug, String firstName,
+			String lastName, String photoId, Gender gender) {
 		final Person person = createPerson();
 		person.setId(id);
 		person.setSlug(slug);
@@ -1541,4 +1693,4 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 		return person;
 	}
 
-} //CommonsFactoryImpl
+} // CommonsFactoryImpl
