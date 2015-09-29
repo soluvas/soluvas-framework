@@ -8,6 +8,7 @@ import javax.money.format.AmountFormatQuery;
 import javax.money.format.AmountFormatQueryBuilder;
 import javax.money.format.MonetaryFormats;
 
+import org.apache.commons.lang3.StringUtils;
 import org.javamoney.moneta.Money;
 import org.javamoney.moneta.format.AmountFormatParams;
 import org.javamoney.moneta.format.CurrencyStyle;
@@ -23,7 +24,9 @@ public class MoneyUtils {
 	public static String getSymbol(Locale locale, CurrencyUnit currency) {
 		final AmountFormatQuery symbolQuery = AmountFormatQueryBuilder.of(locale).set(CurrencyStyle.SYMBOL)
 				.set(AmountFormatParams.PATTERN, "¤").build();
-		final String symbol = MonetaryFormats.getAmountFormat(symbolQuery).format(Money.of(BigDecimal.ZERO, currency)).replace("0", "");
+		final String symbol = StringUtils.removeEnd(
+				MonetaryFormats.getAmountFormat(symbolQuery).format(Money.of(BigDecimal.ZERO, currency)),
+						"0");
 		
 //		log.debug("Got symbol for locale '{}' - currency '{}': {}", locale.toLanguageTag(), currency, symbol);
 		
@@ -33,7 +36,9 @@ public class MoneyUtils {
 	public static String getName(Locale locale, CurrencyUnit currency) {
 		final AmountFormatQuery symbolQuery = AmountFormatQueryBuilder.of(locale).set(CurrencyStyle.NAME)
 				.set(AmountFormatParams.PATTERN, "¤").build();
-		final String symbol = MonetaryFormats.getAmountFormat(symbolQuery).format(Money.of(BigDecimal.ZERO, currency));
+		final String symbol = StringUtils.removeEnd(
+				MonetaryFormats.getAmountFormat(symbolQuery)
+					.format(Money.of(BigDecimal.ZERO, currency)), "0");
 		return symbol;
 	}
 
