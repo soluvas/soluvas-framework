@@ -521,12 +521,12 @@
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.texo</artifactId>
-				<version>0.9.0-v201412281911</version>
+				<version>0.9.0-v201501182340</version>
 			</dependency>
 			<dependency>
 				<groupId>org.eclipse.emf</groupId>
 				<artifactId>org.eclipse.emf.texo.server</artifactId>
-				<version>0.9.0-v201412281911</version>
+				<version>0.9.0-v201501182340</version>
 			</dependency>
 
 			<dependency>
