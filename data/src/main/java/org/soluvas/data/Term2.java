@@ -30,6 +30,7 @@ public class Term2 implements Serializable, Identifiable {
 	private String formalId;
 	private String name;
 	private String imageId;
+	private String imageUri;
 	private Integer positioner;
 	private String color;
 	private String language;
@@ -47,11 +48,29 @@ public class Term2 implements Serializable, Identifiable {
 		this.overridden = true;
 	}
 	
+	public void copy(Term2 term) {
+		this.setColor(term.getColor());
+		this.setDescription(term.getDescription());
+		this.setEnabled(term.getEnabled());
+		this.setEnumerationId(term.getEnumerationId());
+		this.setFormalId(term.getFormalId());
+		this.setId(term.getId());
+		this.setImageId(term.getImageId());
+		this.setImageUri(term.getImageUri());
+		this.setLanguage(term.getLanguage());
+		this.setName(term.getName());
+		this.setOverridden(term.getOverridden());
+		this.setPositioner(term.getPositioner());
+		this.setPrimaryUri(term.getPrimaryUri());
+		this.setSameAsUris(term.getSameAsUris());
+	}
+	
 	public void copyFromXmi(Term xmiTerm) {
 		this.setColor(xmiTerm.getColor());
 		this.setId(xmiTerm.getNsPrefix() + "_" + xmiTerm.getName());
 		this.setFormalId(getId());
 		this.setImageId(xmiTerm.getImageId());
+		this.setImageUri(xmiTerm.getImageUri());
 		this.setEnumerationId(xmiTerm.getKindName());
 		this.setLanguage(xmiTerm.getLanguage());
 		this.setName(xmiTerm.getDisplayName());
@@ -160,6 +179,20 @@ public class Term2 implements Serializable, Identifiable {
 	 */
 	public void setImageId(String imageId) {
 		this.imageId = imageId;
+	}
+	
+	/**
+	 * @return the imageUri
+	 */
+	public String getImageUri() {
+		return imageUri;
+	}
+
+	/**
+	 * @param imageUri the imageUri to set
+	 */
+	public void setImageUri(String imageUri) {
+		this.imageUri = imageUri;
 	}
 
 	/**
