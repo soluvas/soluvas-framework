@@ -1,5 +1,6 @@
 package org.soluvas.mongo;
 
+import java.util.Collection;
 import java.util.regex.Pattern;
 
 import org.soluvas.data.Existence;
@@ -62,6 +63,14 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 		query.put("name", pattern);
 		
 		return findAllByQuery(query, pageable);
+	}
+
+	@Override
+	public Page<Term2> findAll(Collection<String> ids, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", new BasicDBObject("$in", ids));
+		final Page<Term2> page = findAllByQuery(query, pageable);
+		return page;
 	}
 	
 }
