@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
  * @author haidar
  */
 public class DisplayAttribute {
+	
 	private final String attrDisplayName;
 	private final Value<?> value;
 	

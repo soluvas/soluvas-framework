@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import jline.internal.Preconditions;
+
 /**
  * @author rudi
  *
@@ -12,6 +14,9 @@ import java.util.Map;
 public class TermKind implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static String NAME_ATTR = "name";
+	public static String DESCRIPTION_ATTR = "description";
 	
 	private String id;
 	private String name;
@@ -135,6 +140,24 @@ public class TermKind implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	
+	public String getEffectiveName(String curLanguageTag) {
+		Preconditions.checkNotNull("For getting effective display name, the curLanguageTag must not be null.");
+		if (getTranslations() != null && !getTranslations().isEmpty()) {
+			if (curLanguageTag.equals(getLanguage())) {
+				return getName();
+			} else {
+				final Map<String, String> msg = getTranslations().get(curLanguageTag);
+				if (msg != null && msg.containsKey(Term2.NAME_ATTR)) {
+					return msg.get(Term2.NAME_ATTR);
+				} else {
+					return getName();
+				}
+			}
+		} else {
+			return getName();
+		}
 	}
 	
 }
