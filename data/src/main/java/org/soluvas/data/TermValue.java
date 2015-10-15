@@ -2,6 +2,8 @@
  */
 package org.soluvas.data;
 
+import java.io.Serializable;
+
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.data.impl.TermValueImpl;
@@ -32,7 +34,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=TermValueImpl.class)
-public interface TermValue extends Value<String>, Identifiable, Sluggable {
+public interface TermValue extends Value<String>, Identifiable, Sluggable, Serializable {
 	
 	public void copyFromMongo(Term2 term2);
 	
