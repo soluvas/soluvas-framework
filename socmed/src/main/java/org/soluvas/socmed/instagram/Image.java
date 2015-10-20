@@ -1,38 +1,39 @@
 package org.soluvas.socmed.instagram;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class Image implements Serializable{
 
-	private String url;
-	private Integer width;
-	private Integer height;
+	String link;
+	BigDecimal width;
+	BigDecimal height;
 	
-	public String getUrl() {
-		return url;
+	public String getLink() {
+		return link;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setLink(String link) {
+		this.link = link;
 	}
-	public Integer getWidth() {
+	public BigDecimal getWidth() {
 		return width;
 	}
-	public void setWidth(Integer width) {
+	public void setWidth(BigDecimal width) {
 		this.width = width;
 	}
-	public Integer getHeight() {
+	public BigDecimal getHeight() {
 		return height;
 	}
-	public void setHeight(Integer height) {
+	public void setHeight(BigDecimal height) {
 		this.height = height;
 	}
 	
 	@Override
 	public String toString() {
-		return "Image [url=" + url + ", width=" + width + ", height=" + height
+		return "Image [link=" + link + ", width=" + width + ", height=" + height
 				+ "]";
 	}
 	

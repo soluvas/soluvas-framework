@@ -18,6 +18,8 @@ public class PersonInfo2 implements Identifiable, Serializable {
 	private String name;
 	private String photoId;
 	private String slug;
+	private String instagramUserId;
+	private String instagramProfilePictureLink;
 	private Gender gender;
 	
 	@Override
@@ -72,9 +74,17 @@ public class PersonInfo2 implements Identifiable, Serializable {
 	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
-	
-	
-	
-	
+	public String getInstagramUserId() {
+		return instagramUserId;
+	}
+	public void setInstagramUserId(String instagramUserId) {
+		this.instagramUserId = instagramUserId;
+	}
+	public String getInstagramProfilePictureLink() {
+		return instagramProfilePictureLink;
+	}
+	public void setInstagramProfilePictureLink(String instagramProfilePictureLink) {
+		this.instagramProfilePictureLink = instagramProfilePictureLink;
+	}
 
 }
