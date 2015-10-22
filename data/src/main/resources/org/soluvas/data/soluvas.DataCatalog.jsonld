@@ -245,5 +245,12 @@
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
     "defaultUnit" : "cm"
+  }, {
+    "@type" : "PropertyDefinition",
+    "id" : "flavor",
+    "name" : "Flavor",
+    "enabled" : true,
+    "defaultKind" : "ENUMERATION",
+    "defaultEnum" : "Flavor"
   } ]
 }
