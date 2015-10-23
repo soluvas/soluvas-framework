@@ -1,17 +1,17 @@
 package org.soluvas.mongo;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
-import org.soluvas.commons.OnDemandXmiLoader;
-import org.soluvas.data.DataCatalog;
-import org.soluvas.data.DataPackage;
+import org.soluvas.data.DataException;
 import org.soluvas.data.Existence;
-import org.soluvas.data.Term;
 import org.soluvas.data.Term2;
-import org.soluvas.data.TermKindRepositoryImpl;
+import org.soluvas.data.Term2Catalog;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.json.JsonUtils;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.ReadPreference;
@@ -35,21 +35,14 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 	
 	public void addBaseTerms() {
 		if (count() <= 0) {
-			final DataCatalog sizeDataCatalog = new OnDemandXmiLoader<DataCatalog>(DataPackage.eINSTANCE, 
-					Term2.class, "base_Size-base.DataCatalog.xmi").get();
-			for (final Term xmiApparelSizeTerm : sizeDataCatalog.getTerms()) {
-				final Term2 term2 = new Term2();
-				term2.copyFromXmi(xmiApparelSizeTerm);
-				term2.setEnumerationId(TermKindRepositoryImpl.APPAREL_SIZE);
-				add(term2);
-			}
-			
-			final DataCatalog colorDataCatalog = new OnDemandXmiLoader<DataCatalog>(DataPackage.eINSTANCE, 
-					Term2.class, "base_Color-base.DataCatalog.xmi").get();
-			for (final Term xmiColorTerm : colorDataCatalog.getTerms()) {
-				final Term2 term2 = new Term2();
-				term2.copyFromXmi(xmiColorTerm);
-				add(term2);
+			try {
+				final URL url = Term2.class.getResource("soluvas.TermDataCatalog.jsonld");
+				final Term2Catalog dataCatalog = JsonUtils.mapper.readValue(url, Term2Catalog.class);
+				for (final Term2 term2 : dataCatalog.getData()) {
+					add(term2);
+				}
+			} catch (IOException e) {
+				throw new DataException("Failed to addBaseTerms: " + e);
 			}
 		}
 	}

@@ -3,7 +3,6 @@
   "termKinds" : [ {
     "id" : "Color",
     "name" : "Color",
-    "idPropertyDefinition" : "color",
     "description" : "Color",
     "expandable" : null,
     "language" : "en_US",
@@ -11,32 +10,98 @@
   }, {
     "id" : "ApparelSize",
     "name" : "Apparel Size",
-    "idPropertyDefinition" : "size",
     "description" : "Apparel Size",
-    "expandable" : null,
-    "language" : "en_US",
-    "translations" : { }
-  }, {
-  	"id" : "Flavor",
-    "name" : "Flavor",
-    "idPropertyDefinition" : "flavor",
-    "description" : "Flavor",
-    "expandable" : null,
-    "language" : "en_US",
-    "translations" : { }
-  }, {
-  "id" : "ScreenSize",
-    "name" : "Screen Size",
-    "idPropertyDefinition" : "size",
-    "description" : "Screen Size",
     "expandable" : null,
     "language" : "en_US",
     "translations" : { }
   }, {
     "id" : "ShoeSize",
     "name" : "Shoe Size",
-    "idPropertyDefinition" : "size",
     "description" : "Shoe Size",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Age",
+    "name" : "Age",
+    "description" : "Age",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Condition",
+    "name" : "Condition",
+    "description" : "Condition",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Leather",
+    "name" : "Leather",
+    "description" : "Leather",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Lining",
+    "name" : "Lining",
+    "description" : "Lining",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Material",
+    "name" : "Material",
+    "description" : "Material",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Motif",
+    "name" : "Motif",
+    "description" : "Motif",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Organization",
+    "name" : "Organization",
+    "description" : "Organization",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Origin",
+    "name" : "Origin",
+    "description" : "Origin",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Person",
+    "name" : "Person",
+    "description" : "Person",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "ShippingPolicy",
+    "name" : "ShippingPolicy",
+    "description" : "ShippingPolicy",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Signature",
+    "name" : "Signature",
+    "description" : "Signature",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
+  }, {
+    "id" : "Technique",
+    "name" : "Technique",
+    "description" : "Technique",
     "expandable" : null,
     "language" : "en_US",
     "translations" : { }
