@@ -60,7 +60,7 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 		final BasicDBObject query = new BasicDBObject();
 		query.put("enumerationId", enumerationId);
 		
-		return countByQuery(ReadPreference.secondaryPreferred(), query, "count", enumerationId);
+		return countByQuery(ReadPreference.secondaryPreferred(), query, "countByEnumId", enumerationId);
 	}
 
 	@Override
