@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -93,19 +92,4 @@ public class TermKindRepositoryImpl implements TermKindRepository {
 		}).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue())).values();
 	}
 
-	@Override
-	public List<TermKind> findAllByIdPropertyDefinition(String id) {
-		return baseTermKind.entrySet().stream().filter(new Predicate<Entry<String, TermKind>>() {
-			@Override
-			public boolean test(Entry<String, TermKind> t) {
-				return t.getValue().getIdPropertyDefinition().equals(id);
-			}
-		}).map(new Function<Entry<String, TermKind>, TermKind>() {
-			@Override
-			public TermKind apply(Entry<String, TermKind> t) {
-				return t.getValue();
-			}
-		}).collect(Collectors.toList());
-	}
-	
 }
