@@ -20,7 +20,6 @@ public class TermKind implements Serializable {
 	
 	private String id;
 	private String name;
-	private String idPropertyDefinition;
 	private String description;
 	private Boolean expandable;
 	private Locale language;
@@ -48,18 +47,6 @@ public class TermKind implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-	/**
-	 * @return the idPropertyDefinition
-	 */
-	public String getIdPropertyDefinition() {
-		return idPropertyDefinition;
-	}
-	/**
-	 * @param idPropertyDefinition the idPropertyDefinition to set
-	 */
-	public void setIdPropertyDefinition(String idPropertyDefinition) {
-		this.idPropertyDefinition = idPropertyDefinition;
 	}
 	/**
 	 * @return the description

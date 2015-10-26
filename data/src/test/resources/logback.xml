@@ -1,0 +1,26 @@
+<configuration scan="true" scanPeriod="15 seconds">
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.apache.directory.shared" level="INFO" />
+	<logger name="id.co" level="DEBUG" />
+	<logger name="org.soluvas" level="DEBUG" />
+	<logger name="com.soluvas" level="DEBUG" />
+	<logger name="com.tuneeca" level="DEBUG" />
+	<logger name="com.nignag" level="DEBUG" />
+	<logger name="com.berbatik" level="DEBUG" />
+	<logger name="com.cintalama" level="DEBUG" />
+	<logger name="org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider" level="WARN"/>
+	<logger name="org.soluvas.web.site.EmfModel" level="TRACE"/>
+
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+</configuration>

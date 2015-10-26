@@ -145,7 +145,7 @@ public class PropertyDefinition implements Serializable {
 	
 	/**
 	 * In root, tenant, {@link org.soluvas.category.FormalCategory}, and {@link org.soluvas.category.Category} layers,
-	 * this determines whether when creating a new Product, this property will be suggested as option.
+	 * this determines whether when creating a new Product, this property will be suggested as Option Type.
 	 * Inside product, this marks the property as option, which means its value is mandatory.
 	 * @return
 	 */

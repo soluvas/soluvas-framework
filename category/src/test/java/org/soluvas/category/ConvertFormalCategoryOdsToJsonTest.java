@@ -150,6 +150,7 @@ public class ConvertFormalCategoryOdsToJsonTest {
 						final PropertyDefinition propertyOverride = new PropertyDefinition();
 						propertyOverride.setEnabled(true);
 						propertyOverride.setId(optId);
+						propertyOverride.setUsableAsOption(true);
 						if (optEnum != null) {
 							propertyOverride.setDefaultKind(PropertyKind.ENUMERATION);
 							propertyOverride.setDefaultEnum(optEnum);

@@ -252,7 +252,6 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 	@Override
 	public ImmutableSet<String> getDefaultEnums() {
 		final Set<String> defaultEnums = basePropertyDefinitions.entrySet().stream().filter(e -> e.getValue().getDefaultKind() == PropertyKind.ENUMERATION).map(e -> e.getValue().getDefaultEnum()).collect(Collectors.toSet());
-		defaultEnums.add("ApparelSize");
 		return ImmutableSet.copyOf(defaultEnums);
 		
 	}
