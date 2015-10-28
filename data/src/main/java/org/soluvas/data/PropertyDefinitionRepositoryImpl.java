@@ -262,8 +262,7 @@ public class PropertyDefinitionRepositoryImpl implements PropertyDefinitionRepos
 		log.debug("Collecting {} PropertyDefinitions by term '{}' and page {}", found.size(), searchText, pageable);
 		final List<PropertyDefinition> collect = found.stream().map(entry -> entry.getValue()).collect(Collectors.toList());
 		log.debug("Collected {} PropertyDefinitions by term '{}' and page {}", collect.size(), searchText, pageable);
-		return new PageImpl<>(ImmutableList.copyOf( collect ),
-				pageable, countBase());
+		return new PageImpl<>(ImmutableList.copyOf( collect ), pageable, countBase());
 	}
 	
 	private Set<Entry<String, PropertyDefinition>> doFindAll(@Nullable String term, Set<String> excludedIds, Pageable pageable) {
