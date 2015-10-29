@@ -13,8 +13,8 @@ import java.io.Serializable;
  * Authorization by a specific Twitter user granted to a specific Twitter Consumer App.
  * This can be stored as embedded data structure in file or database for tenant, person, shop, etc.
  */
-@JsonTypeInfo(use=com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, property="@type")
-@JsonSubTypes(@com.fasterxml.jackson.annotation.JsonSubTypes.Type(name="TwitterAuthorization", value=TwitterAuthorization.class))
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property="@type")
+@JsonSubTypes(@JsonSubTypes.Type(name="TwitterAuthorization", value=TwitterAuthorization.class))
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TwitterAuthorization implements Serializable {
