@@ -1,15 +1,16 @@
 package org.soluvas.socmed.instagram;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class Image implements Serializable{
 
-	private String url;
-	private Integer width;
-	private Integer height;
+	String url;
+	BigDecimal width;
+	BigDecimal height;
 	
 	public String getUrl() {
 		return url;
@@ -17,16 +18,16 @@ public class Image implements Serializable{
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Integer getWidth() {
+	public BigDecimal getWidth() {
 		return width;
 	}
-	public void setWidth(Integer width) {
+	public void setWidth(BigDecimal width) {
 		this.width = width;
 	}
-	public Integer getHeight() {
+	public BigDecimal getHeight() {
 		return height;
 	}
-	public void setHeight(Integer height) {
+	public void setHeight(BigDecimal height) {
 		this.height = height;
 	}
 	

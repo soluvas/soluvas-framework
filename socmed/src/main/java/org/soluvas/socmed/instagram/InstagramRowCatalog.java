@@ -8,7 +8,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class InstagramRowCatalog implements Serializable{
 
+	private InstagramPagination pagination;
 	private List<InstagramRow> data;
+	
+	public InstagramPagination getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(InstagramPagination pagination) {
+		this.pagination = pagination;
+	}
 
 	public List<InstagramRow> getData() {
 		return data;
@@ -20,8 +29,8 @@ public class InstagramRowCatalog implements Serializable{
 
 	@Override
 	public String toString() {
-		return "InstagramRowCatalog [data=" + data + "]";
+		return "InstagramRowCatalog [pagination=" + pagination + ", data="
+				+ data + "]";
 	}
-
 	
 }
