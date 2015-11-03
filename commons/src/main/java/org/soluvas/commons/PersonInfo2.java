@@ -4,33 +4,25 @@ package org.soluvas.commons;
 
 import java.io.Serializable;
 
-import com.google.code.morphia.annotations.Id;
-
 @SuppressWarnings("serial")
 public class PersonInfo2 implements Identifiable, Serializable {
 	
-	@Id
 	private String id;
-
 	private String email;
 	private String imageId;
 	private String mobileNumber;
 	private String name;
 	private String photoId;
 	private String slug;
-	private String instagramUserId;
-	private String instagramProfilePictureLink;
 	private Gender gender;
 	
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
 	@Override
 	public void setId(String value) {
-		// TODO Auto-generated method stub
-		
+		this.id = value;
 	}
 	public String getEmail() {
 		return email;
@@ -73,18 +65,6 @@ public class PersonInfo2 implements Identifiable, Serializable {
 	}
 	public void setGender(Gender gender) {
 		this.gender = gender;
-	}
-	public String getInstagramUserId() {
-		return instagramUserId;
-	}
-	public void setInstagramUserId(String instagramUserId) {
-		this.instagramUserId = instagramUserId;
-	}
-	public String getInstagramProfilePictureLink() {
-		return instagramProfilePictureLink;
-	}
-	public void setInstagramProfilePictureLink(String instagramProfilePictureLink) {
-		this.instagramProfilePictureLink = instagramProfilePictureLink;
 	}
 
 }
