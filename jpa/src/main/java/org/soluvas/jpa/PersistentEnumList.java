@@ -1,29 +1,20 @@
 package org.soluvas.jpa;
 
-import java.io.Serializable;
-import java.sql.Array;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
-import java.util.Collection;
-import java.util.Properties;
-import java.util.Set;
-import java.util.TreeSet;
-
-import javax.annotation.Nullable;
-import javax.persistence.PersistenceException;
-
+import com.google.common.base.Preconditions;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.ParameterizedType;
 import org.hibernate.usertype.UserType;
 import org.postgresql.util.PGobject;
 
-import com.google.common.base.Preconditions;
+import javax.annotation.Nullable;
+import javax.persistence.PersistenceException;
+import java.io.Serializable;
+import java.sql.*;
+import java.util.*;
 
 /**
- * {@code Set<Enum>} backend by {@link TreeSet} and translates to 
+ * {@code List<Enum>} backend by {@link java.util.ArrayList} and translates to
  * <a href="http://www.postgresql.org/docs/9.3/static/datatype-enum.html">PostgreSQL {@code enum}</a>{@code []} custom data type.
  * Adapted from {@link PersistentStringList} and {@link PersistentEnum}.
  * 
@@ -34,7 +25,7 @@ import com.google.common.base.Preconditions;
  * 	<li>enumName: <a href="http://www.postgresql.org/docs/9.3/static/datatype-enum.html">PostgreSQL {@code enum}</a> data type name, e.g. {@link account_status}.</li>
  * @author anton
  */
-public class PersistentEnumSet /*extends AbstractReflectionUserType<Set<Enum<?>>>*/ implements UserType, ParameterizedType {
+public class PersistentEnumList /*extends AbstractReflectionUserType<Set<Enum<?>>>*/ implements UserType, ParameterizedType {
 	
 //	private static final long serialVersionUID = 1L;
 
@@ -48,7 +39,7 @@ public class PersistentEnumSet /*extends AbstractReflectionUserType<Set<Enum<?>>
 		final String mappedClassStr = Preconditions.checkNotNull(
 				parameters.getProperty("enumClass"), "'enumClass' UserType parameter is required");
 		try {
-			enumClass = (Class<Enum<?>>) PersistentEnumSet.class.forName(mappedClassStr);
+			enumClass = (Class<Enum<?>>) PersistentEnumList.class.forName(mappedClassStr);
 		} catch (ClassNotFoundException e) {
 			throw new PersistenceException("Cannot load enumClass: " + mappedClassStr, e);
 		}
@@ -63,7 +54,7 @@ public class PersistentEnumSet /*extends AbstractReflectionUserType<Set<Enum<?>>
 
 	@Override
 	public Class returnedClass() {
-		return TreeSet.class;
+		return ArrayList.class;
 	}
 
 	@Override
@@ -90,7 +81,7 @@ public class PersistentEnumSet /*extends AbstractReflectionUserType<Set<Enum<?>>
 	    if (rs.wasNull()) {
 	    	return null;
 	    }
-    	final Set<Enum<?>> enums = new TreeSet<>();
+    	final List<Enum<?>> enums = new ArrayList<>();
     	Object origArray = theArray.getArray();
     	// Notice how Object is mapped to PGobject. This makes this implementation Postgres specific
     	if (origArray instanceof PGobject[]) {
@@ -125,7 +116,7 @@ public class PersistentEnumSet /*extends AbstractReflectionUserType<Set<Enum<?>>
 	@Override
 	public Object deepCopy(Object value) throws HibernateException {
 		if (value != null)
-			return new TreeSet<>((Collection<String>) value);
+			return new ArrayList<>((Collection<String>) value);
 		else 
 			return null;
 	}
