@@ -24,14 +24,16 @@ import com.google.common.base.Preconditions;
 
 /**
  * {@code Set<Enum>} backend by {@link TreeSet} and translates to 
- * <a href="http://www.postgresql.org/docs/9.3/static/datatype-enum.html">PostgreSQL {@code enum}</a>{@code []} custom data type.
+ * <a href="http://www.postgresql.org/docs/9.3/static/datatype-enum.html">PostgreSQL {@code enum}</a>{@code []} custom data type
+ * or {@code varchar} data type.
  * Adapted from {@link PersistentStringList} and {@link PersistentEnum}.
  * 
  * <p>Parameters:
  * 
  * <ul>
  * 	<li>enumClass: Fully qualified Java {@link Enum} class name, e.g. {@link org.soluvas.commons.AccountStatus}.</li>
- * 	<li>enumName: <a href="http://www.postgresql.org/docs/9.3/static/datatype-enum.html">PostgreSQL {@code enum}</a> data type name, e.g. {@link account_status}.</li>
+ * 	<li>enumName: <a href="http://www.postgresql.org/docs/9.3/static/datatype-enum.html">PostgreSQL {@code enum}</a> data type name, e.g. {@link account_status}
+ * 		or {@code varchar}.</li>
  * @author anton
  */
 public class PersistentEnumSet /*extends AbstractReflectionUserType<Set<Enum<?>>>*/ implements UserType, ParameterizedType {
@@ -45,6 +47,7 @@ public class PersistentEnumSet /*extends AbstractReflectionUserType<Set<Enum<?>>
 
 	@Override
 	public void setParameterValues(Properties parameters) {
+		Preconditions.checkNotNull(parameters, "UserType parameters 'enumClass' and 'enumName' are required");
 		final String mappedClassStr = Preconditions.checkNotNull(
 				parameters.getProperty("enumClass"), "'enumClass' UserType parameter is required");
 		try {
