@@ -328,6 +328,7 @@ public class Category2 implements Serializable, Identifiable {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
+	
 	@JsonIgnore
 	public String getEffectiveName(String curLanguageTag) {
 		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
@@ -387,6 +388,10 @@ public class Category2 implements Serializable, Identifiable {
 			}
 		}
 	}
+	@JsonIgnore
+	public void setEffectiveDescription() {
+		throw new UnsupportedOperationException();
+	}
 	
 	/**
 	 * <!-- begin-user-doc -->
@@ -400,10 +405,6 @@ public class Category2 implements Serializable, Identifiable {
 		return new ToCategoryInfoXmi(curLanguageTag).apply(this);
 	}
 
-	@JsonIgnore
-	public void setEffectiveDescription() {
-		throw new UnsupportedOperationException();
-	}
 	/**
 	 * @return the propertyOverrides
 	 */

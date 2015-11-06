@@ -13,26 +13,26 @@ public class DisplayAttribute2 implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private final String attrDisplayName;
-	private final List<Value<?>> values;
+	private final PropertyDefinition propertyDefinition;
+	private final List<String> values;
 	
-	public DisplayAttribute2(String attrDisplayName, List<Value<?>> values) {
+	public DisplayAttribute2(PropertyDefinition propertyDefinition, List<String> values) {
 		super();
-		this.attrDisplayName = attrDisplayName;
+		this.propertyDefinition = propertyDefinition;
 		this.values = values;
 	}
 
 	/**
-	 * @return the attrDisplayName
+	 * @return the propertyDefinition
 	 */
-	public String getAttrDisplayName() {
-		return attrDisplayName;
+	public PropertyDefinition getPropertyDefinition() {
+		return propertyDefinition;
 	}
 
 	/**
 	 * @return the values
 	 */
-	public List<Value<?>> getValues() {
+	public List<String> getValues() {
 		return values;
 	}
 	

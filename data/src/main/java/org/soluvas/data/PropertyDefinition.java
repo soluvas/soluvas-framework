@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.google.common.base.Optional;
 
 /**
  * 
@@ -208,6 +209,71 @@ public class PropertyDefinition implements Serializable {
 	public void setLanguage(Locale language) {
 		this.language = language;
 	}
+	
+	@JsonIgnore
+	public String getEffectiveName(String curLanguageTag) {
+		if (Optional.fromNullable(getLanguage()).or(Locale.forLanguageTag("id-ID")).equals(curLanguageTag)) {
+			return getName();
+		} else {
+			final Map<String, Map<String, String>> translations = getTranslations();
+			if (translations == null || translations.isEmpty()) {
+				return getName();
+			} else {
+				if (!translations.containsKey(curLanguageTag)) {
+					return getName();
+				} else {
+					final Map<String, String> translation = translations.get(curLanguageTag);
+//					log.debug("Got translation by {}: {}", languageTag, translation.getMessages());
+					if (!translation.containsKey(NAME_ATTR)) {
+//						log.debug("Got translation by {}, but not value by attribute {}",
+//								curLanguageTag, NAME_ATTR);
+						return getName();
+					} else {
+						final String translatedValue = translation.get(NAME_ATTR);
+//						log.debug("Got translation by {} with value by attribute {}: {}",
+//								curLanguageTag, NAME_ATTR, translatedValue);
+						return translatedValue;
+					}
+				}
+			}
+		}
+	}
+	
+	@JsonIgnore
+	public void setEffectiveName() {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 */
+	@JsonIgnore
+	public String getEffectiveDescription(String curLanguageTag) {
+		if (curLanguageTag.equals(Optional.fromNullable(getLanguage()).or(Locale.forLanguageTag("id-ID")))) {
+			return getDescription();
+		} else {
+			if (getTranslations().isEmpty()) {
+				return getDescription();
+			} else {
+				if (!getTranslations().containsKey(curLanguageTag)) {
+					return getDescription();
+				} else {
+					final Map<String, String> translation = getTranslations().get(curLanguageTag);
+					if (!translation.containsKey(DESCRIPTION_ATTR)) {
+						return getDescription();
+					} else {
+						return translation.get(DESCRIPTION_ATTR);
+					}
+				}
+			}
+		}
+	}
+	@JsonIgnore
+	public void setEffectiveDescription() {
+		throw new UnsupportedOperationException();
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
