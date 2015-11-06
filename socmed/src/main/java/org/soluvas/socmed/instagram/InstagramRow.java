@@ -16,6 +16,7 @@ public class InstagramRow implements Serializable{
 	
 	private Images images;
 	private String link;
+	private String created_time;
 	private List<String> tags;
 	private InstagramCaption caption;
 	private InstagramUser user;
@@ -32,6 +33,14 @@ public class InstagramRow implements Serializable{
 	
 	public String getLink() {
 		return link;
+	}
+	
+	public String getCreated_time() {
+		return created_time;
+	}
+
+	public void setCreated_time(String created_time) {
+		this.created_time = created_time;
 	}
 
 	public void setLink(String link) {
