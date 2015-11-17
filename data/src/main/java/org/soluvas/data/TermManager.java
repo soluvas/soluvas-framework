@@ -18,11 +18,14 @@ import com.google.common.collect.Multimap;
  * </ul>
  * </p>
  *
+ *Use MongoTermRepository
+ *
  * @see org.soluvas.data.DataPackage#getTermManager()
  * @model
  * @extends SerializableEObject
  * @generated
  */
+@Deprecated
 public interface TermManager {
 	/**
 	 * Returns the value of the '<em><b>Data Catalog</b></em>' reference.
