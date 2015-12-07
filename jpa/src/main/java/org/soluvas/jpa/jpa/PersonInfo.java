@@ -7,12 +7,13 @@ import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
  * A representation of the model object '<em><b>PersonInfo</b></em>'. <!--
