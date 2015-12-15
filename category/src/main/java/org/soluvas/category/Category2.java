@@ -404,6 +404,10 @@ public class Category2 implements Serializable, Identifiable {
 	public CategoryInfo toInfoXmi(String curLanguageTag) {
 		return new ToCategoryInfoXmi(curLanguageTag).apply(this);
 	}
+	
+	public CategoryInfo toInfoXmi() {
+		return new ToCategoryInfoXmi(getLanguage()).apply(this);
+	}
 
 	/**
 	 * @return the propertyOverrides
