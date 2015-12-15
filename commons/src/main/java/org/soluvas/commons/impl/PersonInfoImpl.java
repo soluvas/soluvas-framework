@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons.impl;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -16,9 +18,9 @@ import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.PhotoIdContainer;
 import org.soluvas.commons.Sluggable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -364,6 +366,7 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMobileNumber() {
 		return mobileNumber;
 	}
@@ -373,6 +376,7 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMobileNumber(String newMobileNumber) {
 		String oldMobileNumber = mobileNumber;
 		mobileNumber = newMobileNumber;
