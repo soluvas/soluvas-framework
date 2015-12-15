@@ -39,6 +39,8 @@ public class SlugUtils {
 	public static final Pattern SCREEN_NAME_PATTERN = Pattern.compile("[a-z0-9][a-z0-9.]+");
 	public static final Pattern SEGMENT_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+");
 	public static final Pattern SEGMENT_PATH_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+[a-z0-9/-]*");
+	public static final Pattern INSTAGRAM_TAG_PATTERN = Pattern.compile("[a-zA-Z0-9]+");
+	
 	/**
 	 * Happens to be same as {@link #TENANT_ID_PATTERN} but different in purpose.
 	 */
