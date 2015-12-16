@@ -135,14 +135,23 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 	}
 
 	@Override 
-	public Province getProvinceByCountryIsoAndName(String countryAndName)
+	public Province getProvinceByCountryIsoAndName(String countryAndLowerName)
 			throws IllegalArgumentException {
 //		log.debug("Get ONE province by '{}'..", countryAndName);
-		final Province province = tree.getValueForExactKey(countryAndName);
+		final Province province = tree.getValueForExactKey(countryAndLowerName);
 		Preconditions.checkArgument(province != null,
-				"Invalid province for '%s'.", countryAndName);
+				"Invalid province for '%s'.", countryAndLowerName);
 		return province;
 	}
 
+	@Override
+	public Province findOne(String countryIso, String name)
+			throws IllegalArgumentException {
+		final String key = countryIso + ", " + name.toLowerCase();
+		final Province province = tree.getValueForExactKey(key);
+		Preconditions.checkArgument(province != null,
+				"Invalid province for '%s'.", key);
+		return province;
+	}
 
 }

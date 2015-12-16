@@ -364,58 +364,6 @@ public class PostalAddress implements Describable, Serializable {
 	private List<String> emails = new ArrayList<String>();
 
 	/**
-	 * Returns the value of '<em><b>id</b></em>' feature.
-	 *
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the value of '<em><b>id</b></em>' feature
-	 * @generated
-	 */
-	public UUID getId() {
-		return id;
-	}
-
-	/**
-	 * Sets the '{@link PostalAddress#getId() <em>id</em>}' feature.
-	 *
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param newId
-	 *            the new value of the '{@link PostalAddress#getId() id}'
-	 *            feature.
-	 * @generated
-	 */
-	public void setId(UUID newId) {
-		id = newId;
-	}
-
-	/**
-	 * Returns the value of '<em><b>name</b></em>' feature.
-	 *
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the value of '<em><b>name</b></em>' feature
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Sets the '{@link PostalAddress#getName() <em>name</em>}' feature.
-	 *
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param newName
-	 *            the new value of the '{@link PostalAddress#getName() name}'
-	 *            feature.
-	 * @generated
-	 */
-	public void setName(String newName) {
-		name = newName;
-	}
-
-	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Designates this Address as the primary Address of the containing list.
 	 * <!-- end-model-doc -->
@@ -519,6 +467,58 @@ public class PostalAddress implements Describable, Serializable {
 		setValidationTime(postalAddressUp.getValidationTime());
 		setWorkPhones(new ArrayList<>(postalAddressUp.getWorkPhones()));
 		setDistrict(postalAddressUp.getDistrict());
+	}
+
+	/**
+	 * Returns the value of '<em><b>id</b></em>' feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @return the value of '<em><b>id</b></em>' feature
+	 * @generated
+	 */
+	public UUID getId() {
+		return id;
+	}
+
+	/**
+	 * Sets the '{@link PostalAddress#getId() <em>id</em>}' feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @param newId
+	 *            the new value of the '{@link PostalAddress#getId() id}'
+	 *            feature.
+	 * @generated
+	 */
+	public void setId(UUID newId) {
+		id = newId;
+	}
+
+	/**
+	 * Returns the value of '<em><b>name</b></em>' feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @return the value of '<em><b>name</b></em>' feature
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Sets the '{@link PostalAddress#getName() <em>name</em>}' feature.
+	 *
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 *
+	 * @param newName
+	 *            the new value of the '{@link PostalAddress#getName() name}'
+	 *            feature.
+	 * @generated
+	 */
+	public void setName(String newName) {
+		name = newName;
 	}
 
 	/**

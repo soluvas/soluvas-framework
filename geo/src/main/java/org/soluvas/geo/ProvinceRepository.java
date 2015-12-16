@@ -7,12 +7,22 @@ import org.soluvas.data.domain.Pageable;
 
 public interface ProvinceRepository {
 	
-	public Page<Province> searchProvince(String term, @Nullable String countryIso, Pageable pageable);
+	Page<Province> searchProvince(String term, @Nullable String countryIso, Pageable pageable);
 	
-	public String getKeyForProvince(Province province); 
-	
-	Province getProvinceByCountryIsoAndName(String countryIsoAndName) throws IllegalArgumentException;
+	String getKeyForProvince(Province province);
+
+	/**
+	 *
+	 * @param countryIsoAndLowerName
+	 * @return
+	 * @throws IllegalArgumentException
+	 * @deprecated Use {@link #findOne(String, String)}
+     */
+	@Deprecated
+	Province getProvinceByCountryIsoAndName(String countryIsoAndLowerName) throws IllegalArgumentException;
 
 	Page<Province> searchProvince(String term, Pageable pageable);
-	
+
+	Province findOne(String countryIso, String name)
+			throws IllegalArgumentException;
 }
