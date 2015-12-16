@@ -27,13 +27,6 @@ import javax.persistence.criteria.Selection;
 import javax.persistence.metamodel.EntityType;
 import javax.sql.DataSource;
 
-import liquibase.Contexts;
-import liquibase.Liquibase;
-import liquibase.database.core.PostgresDatabase;
-import liquibase.database.jvm.JdbcConnection;
-import liquibase.exception.LiquibaseException;
-import liquibase.resource.ClassLoaderResourceAccessor;
-
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,10 +65,6 @@ import org.springframework.transaction.jta.JtaTransactionManager;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import scala.util.Failure;
-import scala.util.Success;
-import scala.util.Try;
-
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -89,6 +78,16 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
 import com.google.common.eventbus.EventBus;
+
+import liquibase.Contexts;
+import liquibase.Liquibase;
+import liquibase.database.core.PostgresDatabase;
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.LiquibaseException;
+import liquibase.resource.ClassLoaderResourceAccessor;
+import scala.util.Failure;
+import scala.util.Success;
+import scala.util.Try;
 
 /**
  * {@link PagingAndSortingRepository} implemented using JPA, supporting 
@@ -463,8 +462,9 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 			@Override @Nullable
 			public S apply(@Nullable S input) {
 				beforeSave(input);
-				final S mergedInput = em.merge(input);
-				return mergedInput;
+//				em.persist(input); //error --> EntityExistsException A different object with the same identifier value was already associated with the session
+//				return input;
+				return em.merge(input);
 			}
 		}).toList();
 		log.info("Added {} {} entities: {}", addeds.size(), entityClass.getSimpleName(),
