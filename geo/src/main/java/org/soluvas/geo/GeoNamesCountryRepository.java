@@ -33,7 +33,7 @@ public class GeoNamesCountryRepository  implements CountryRepository {
 	private static final Logger log = LoggerFactory
 			.getLogger(GeoNamesCountryRepository.class);
 	
-	final RadixTree<Country> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
+	//final RadixTree<Country> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
 	final ImmutableMap<String, Country> countryMap;
 	final ImmutableMap<String, Country> country3Map;
 	private final int realCountryCount = 0;

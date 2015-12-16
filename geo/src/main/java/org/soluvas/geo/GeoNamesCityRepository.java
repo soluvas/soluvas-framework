@@ -1,10 +1,13 @@
 package org.soluvas.geo;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -63,8 +66,8 @@ public class GeoNamesCityRepository implements CityRepository {
 	
 	/**
 	 * @param excludedCountryCodes Exclude cities from these country codes (2-letter ISO) from being loaded.
+	 *                             Best used with {@link GeoNamesDistrictRepository#putCitiesIntoCityRepo()}.
 	 * @param countryRepo TODO
-	 * @param provinceRepo TODO
 	 * @throws IOException
 	 */
 	public GeoNamesCityRepository(final Set<String> excludedCountryCodes, CountryRepository countryRepo) throws IOException {
@@ -191,9 +194,14 @@ public class GeoNamesCityRepository implements CityRepository {
 		} else {
 			normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
 		}
+
+		if (realCityCount <= 0) {
+			log.warn("Trying to search '{}' ({}) in empty city database", term, normalizedTerm);
+		}
 		
 //		log.debug("Nommalized term: {}", normalizedTerm);
 		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
+		log.debug("keys: {}", (Object) ImmutableList.copyOf(tree.getKeysStartingWith("")).stream().skip(100000).limit(10).toArray());
 //		final Iterable<CharSequence> keys = tree.getClosestKeys(normalizedTerm);
 		final ImmutableList<City> cities = FluentIterable.from(keys)
 				.skip((int) pageable.getOffset())
@@ -206,8 +214,8 @@ public class GeoNamesCityRepository implements CityRepository {
 				}).toList();
 		final int total = Iterables.size(keys);
 		final PageImpl<City> page = new PageImpl<>(cities, pageable, total);
-		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) cities: {}",
-				term, normalizedTerm, pageable, cities.size(), total, Iterables.limit(cities, 10));
+		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) cities (from {}): {}",
+				term, normalizedTerm, pageable, cities.size(), total, realCityCount, Iterables.limit(cities, 10));
 		return page;
 	}
 	
@@ -262,6 +270,44 @@ public class GeoNamesCityRepository implements CityRepository {
 		}
 		realCityCount++;		
 		return city;
+	}
+
+	public void putCitiesFromDistrictTsv(final String countryIso, URL url) throws IOException {
+		log.info("Adding {} provinces and cities from {} ...", countryIso, url);
+		int addedCities = 0;
+		try (final BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
+			try (final CSVReader csv = new CSVReader(reader, '\t', '"', 1)) {
+				while (true) {
+					@Nullable
+					final String[] line = csv.readNext();
+					if (line == null) {
+						break;
+					}
+					final String name = line[2];
+					if (Strings.isNullOrEmpty(name)) {
+						continue;
+					}
+					final String cityStr = line[1];
+					if (Strings.isNullOrEmpty(cityStr)) {
+						continue;
+					}
+					final String provinceStr = line[0];
+					if (Strings.isNullOrEmpty(provinceStr)) {
+						continue;
+					}
+
+					final String normalizedCity = Normalizer.normalize(cityStr, Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+					final String key = countryIso + ", " +
+							provinceStr.toLowerCase() + ", " + normalizedCity.toLowerCase();
+					if (tree.getValueForExactKey(key) != null) {
+						continue;
+					}
+					putCity(cityStr, normalizedCity, countryIso, provinceStr);
+					addedCities++;
+				}
+			}
+		}
+		log.info("Added {} {} cities (total {}) from {}", addedCities, countryIso, realCityCount, url);
 	}
 
 	@Override
