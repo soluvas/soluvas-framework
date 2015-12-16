@@ -29,6 +29,7 @@ package org.soluvas.commons;
  * @generated
  */
 public interface PersonInfo extends Identifiable, PhotoIdContainer, Sluggable, NameContainer, PersonLike {
+	
 	/**
 	 * Returns the value of the '<em><b>Gender</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.soluvas.commons.Gender}.
@@ -45,6 +46,7 @@ public interface PersonInfo extends Identifiable, PhotoIdContainer, Sluggable, N
 	 * @model
 	 * @generated
 	 */
+	@Override
 	Gender getGender();
 
 	/**
@@ -72,6 +74,7 @@ public interface PersonInfo extends Identifiable, PhotoIdContainer, Sluggable, N
 	 * @model
 	 * @generated
 	 */
+	@Override
 	String getEmail();
 
 	/**
