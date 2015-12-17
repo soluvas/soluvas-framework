@@ -14,6 +14,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.google.common.base.Preconditions;
 
 /**
  * A representation of the model object '<em><b>PersonInfo</b></em>'. <!--
@@ -46,6 +47,7 @@ public class PersonInfo implements Serializable {
 	}
 
 	public PersonInfo(org.soluvas.commons.PersonInfo personInfoUp) {
+		Preconditions.checkNotNull(personInfoUp, "Person Info EMF must not be null!");
 		setEmail(personInfoUp.getEmail());
 		setGender(personInfoUp.getGender());
 		setId(personInfoUp.getId());
