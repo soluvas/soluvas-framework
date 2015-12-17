@@ -94,7 +94,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 
 	@Override
 	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug) {
-		final DBObject dbo = findDBObjectByQuery(new BasicDBObject("canonicalSlug", SlugUtils.canonicalize(upSlug)),
+		final BasicDBObject query = new BasicDBObject("canonicalSlug", SlugUtils.canonicalize(upSlug));
+		augmentQueryForStatusMask(query, statusMask);
+		final DBObject dbo = findDBObjectByQuery(query,
 				new BasicDBObject("slug", true));
 		if (dbo != null) {
 			final String actualSlug = (String) dbo.get("slug");
@@ -116,6 +118,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			final String key = String.format("person:%s:%s", tenantId, upSlug);
 			@Nullable
 			Existence existence = slugsCache.get(key, Existence.class);
+			log.debug("cache: key '{}' with existence {}", key, existence);
 			if (existence == null) {
 				existence = existsBySlug(statusMask, upSlug);
 				if (existence.isPresent()) {

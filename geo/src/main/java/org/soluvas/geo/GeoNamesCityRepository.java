@@ -201,7 +201,6 @@ public class GeoNamesCityRepository implements CityRepository {
 		
 //		log.debug("Nommalized term: {}", normalizedTerm);
 		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
-		log.debug("keys: {}", (Object) ImmutableList.copyOf(tree.getKeysStartingWith("")).stream().skip(100000).limit(10).toArray());
 //		final Iterable<CharSequence> keys = tree.getClosestKeys(normalizedTerm);
 		final ImmutableList<City> cities = FluentIterable.from(keys)
 				.skip((int) pageable.getOffset())
