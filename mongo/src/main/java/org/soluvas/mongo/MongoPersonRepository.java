@@ -34,8 +34,6 @@ import org.soluvas.data.person.PersonRepository;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
-import scala.util.Try;
-
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -47,6 +45,8 @@ import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+
+import scala.util.Try;
 
 /**
  * MongoDB powered {@link Person} repository.
@@ -118,7 +118,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			Existence existence = slugsCache.get(key, Existence.class);
 			if (existence == null) {
 				existence = existsBySlug(statusMask, upSlug);
-				slugsCache.put(key, existence);
+				if (existence.isPresent()) {
+					slugsCache.put(key, existence);
+				}
 			}
 			return existence;
 		} else {
