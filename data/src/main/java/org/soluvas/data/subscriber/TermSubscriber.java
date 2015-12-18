@@ -37,9 +37,9 @@ public class TermSubscriber {
 	public void addNewTermToDataCatalogForTermManager(final AddedTermEvent ev) {
 		final Term addedTerm = ev.getTerm();
 		
-		log.debug("{} --> Adding to TermManager's dataCatalog ({} rows) for term: {}", ev.getTenantId(), termManager.getDataCatalog().getTerms().size(), addedTerm);
+		log.debug("{} --> Adding to TermManager's dataCatalog ({} rows) for term: {}", ev.getTenantId(), termManager.getDataCatalog().getTerms().size(), addedTerm.getQName());
 		termManager.getDataCatalog().getTerms().add(addedTerm);
-//		log.debug("Now terms on dataCatalog is {} rows", termManager.getDataCatalog().getTerms().size());
+		log.debug("Now terms on dataCatalog is {} rows", termManager.getDataCatalog().getTerms().size());
 	}
 	
 	@Subscribe
