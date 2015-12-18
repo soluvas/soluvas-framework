@@ -97,6 +97,30 @@ public class GeoNamesCountryRepository implements CountryRepository {
     }
 
     @Override
+    public Page<Country> searchCountryWithCallingCode(String term, Pageable pageable) {
+        // http://stackoverflow.com/a/3322174/1343587
+        final String normalizedTerm = Normalizer.normalize(term, Form.NFD).replaceAll("[^\\p{ASCII}]", "").toLowerCase();
+        final FluentIterable<Country> matching = FluentIterable.from(countryMap.values())
+                .filter(country -> {
+                    if (country.getCallingCodes().isEmpty()) {
+                        return false;
+                    } else {
+                        return StringUtils.containsIgnoreCase(country.getIso() + " " + country.getIso3() + " " +
+                                country.getName() + " +" + country.getCallingCodes().get(0), normalizedTerm);
+                    }
+                });
+        final int total = Iterables.size(matching);
+        final ImmutableList<Country> paged = matching
+                .skip((int) pageable.getOffset())
+                .limit((int) pageable.getPageSize())
+                .toList();
+        final PageImpl<Country> page = new PageImpl<>(paged, pageable, total);
+        log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) countries: {}",
+                term, normalizedTerm, pageable, paged.size(), total, Iterables.limit(paged, 10));
+        return page;
+    }
+
+    @Override
     public long count() {
         return realCountryCount;
     }

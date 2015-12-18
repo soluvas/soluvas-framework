@@ -9,7 +9,9 @@ public interface CountryRepository {
 			throws IllegalArgumentException;
 	
 	Page<Country> searchCountry(String term, Pageable pageable);
-	
+
+	Page<Country> searchCountryWithCallingCode(String term, Pageable pageable);
+
 	long count();
 
 }

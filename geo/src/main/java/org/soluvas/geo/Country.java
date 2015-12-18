@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,13 +23,49 @@ public class Country implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	public static class Translation implements Serializable {
+		private String official;
+		private String common;
+
+		public String getOfficial() {
+			return official;
+		}
+
+		public void setOfficial(String official) {
+			this.official = official;
+		}
+
+		public String getCommon() {
+			return common;
+		}
+
+		public void setCommon(String common) {
+			this.common = common;
+		}
+	}
+
 	private final String iso;
 	private final String iso3;
 	private final String name;
+	@JsonProperty("tld")
+	private List<String> tlds = new ArrayList<>();
+	private String ccn3;
+	private String cioc;
 	@JsonProperty("callingCode")
 	private List<String> callingCodes = new ArrayList<>();
 	@JsonProperty("currency")
 	private List<String> currencies = new ArrayList<>();
+	private String capital;
+	private List<String> altSpellings = new ArrayList<>();
+	private String region;
+	private String subregion;
+	private Map<String, String> languages = new LinkedHashMap<>();
+	private Map<String, Translation> translations = new LinkedHashMap<>();
+	private float[] latlng;
+	private String demonym;
+	private Boolean landlocked;
+	private List<String> borders = new ArrayList<>();
+	private Float area;
 
 	public Country(String iso, String iso3, String name) {
 		super();
@@ -71,6 +108,98 @@ public class Country implements Serializable {
 
 	public List<String> getCurrencies() {
 		return currencies;
+	}
+
+	public String getCcn3() {
+		return ccn3;
+	}
+
+	public void setCcn3(String ccn3) {
+		this.ccn3 = ccn3;
+	}
+
+	public String getCioc() {
+		return cioc;
+	}
+
+	public void setCioc(String cioc) {
+		this.cioc = cioc;
+	}
+
+	public String getCapital() {
+		return capital;
+	}
+
+	public void setCapital(String capital) {
+		this.capital = capital;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public String getSubregion() {
+		return subregion;
+	}
+
+	public void setSubregion(String subregion) {
+		this.subregion = subregion;
+	}
+
+	public float[] getLatlng() {
+		return latlng;
+	}
+
+	public void setLatlng(float[] latlng) {
+		this.latlng = latlng;
+	}
+
+	public String getDemonym() {
+		return demonym;
+	}
+
+	public void setDemonym(String demonym) {
+		this.demonym = demonym;
+	}
+
+	public Boolean getLandlocked() {
+		return landlocked;
+	}
+
+	public void setLandlocked(Boolean landlocked) {
+		this.landlocked = landlocked;
+	}
+
+	public Float getArea() {
+		return area;
+	}
+
+	public void setArea(Float area) {
+		this.area = area;
+	}
+
+	public List<String> getTlds() {
+		return tlds;
+	}
+
+	public List<String> getAltSpellings() {
+		return altSpellings;
+	}
+
+	public Map<String, String> getLanguages() {
+		return languages;
+	}
+
+	public Map<String, Translation> getTranslations() {
+		return translations;
+	}
+
+	public List<String> getBorders() {
+		return borders;
 	}
 
 	@Override
