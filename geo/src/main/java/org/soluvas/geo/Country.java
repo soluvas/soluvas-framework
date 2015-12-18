@@ -1,24 +1,48 @@
 package org.soluvas.geo;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Download from <a href="http://download.geonames.org/export/dump/countryInfo.txt">http://download.geonames.org/export/dump/countryInfo.txt</a>.
+ * Currently sourced from <a href="https://github.com/mledoze/countries">https://github.com/mledoze/countries</a>.
+ * Previously from <a href="http://download.geonames.org/export/dump/countryInfo.txt">http://download.geonames.org/export/dump/countryInfo.txt</a>.
  * @author rudi
+ * @see GeoNamesCountryRepository
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Country implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private final String iso;
 	private final String iso3;
 	private final String name;
-	
+	@JsonProperty("callingCode")
+	private List<String> callingCodes = new ArrayList<>();
+	@JsonProperty("currency")
+	private List<String> currencies = new ArrayList<>();
+
 	public Country(String iso, String iso3, String name) {
 		super();
 		this.iso = iso;
 		this.iso3 = iso3;
 		this.name = name;
+	}
+
+	@JsonCreator
+	public Country(@JsonProperty("cca2") String iso, @JsonProperty("cca3")String iso3, @JsonProperty("name") Map<String, Object> name) {
+		super();
+		this.iso = iso;
+		this.iso3 = iso3;
+		this.name = (String) name.get("common");
 	}
 
 	/**
@@ -39,6 +63,14 @@ public class Country implements Serializable {
 
 	public String getName() {
 		return name;
+	}
+
+	public List<String> getCallingCodes() {
+		return callingCodes;
+	}
+
+	public List<String> getCurrencies() {
+		return currencies;
 	}
 
 	@Override

@@ -45,9 +45,16 @@ import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFa
  * @author rudi
  */
 public class GeoNamesCityRepository implements CityRepository {
-	
+
+	/**
+	 * Hendy's note: Do NOT create your own CSV excluding {@code ID} (Indonesia),
+	 * {@code excludedCountryCodes} parameter is used for to exclude countries.
+	 */
+	public static final String CITIES1000LITE_CSV = "cities1000lite.csv";
+
 	private static final Logger log = LoggerFactory
 			.getLogger(GeoNamesCityRepository.class);
+
 	/**
 	 * Tree containing segmented city names.
 	 * e.g. "Other Kab. Labuhan Batu" will become 1 main entry + 3 full text search entries ({@code 123} is the RadixTree index
@@ -70,16 +77,21 @@ public class GeoNamesCityRepository implements CityRepository {
 	 * @param countryRepo TODO
 	 * @throws IOException
 	 */
-	public GeoNamesCityRepository(final Set<String> excludedCountryCodes, CountryRepository countryRepo) throws IOException {
+	public GeoNamesCityRepository(final Set<String> upExcludedCountryCodes, CountryRepository countryRepo) throws IOException {
 		super();
 		this.countryRepo = countryRepo;
-		
-		log.info("Initializing GeoNames city repository excluding {} countries: {}",
-				excludedCountryCodes.size(), excludedCountryCodes);
+
+		// Exclude countries not supported by GeoNamesCountryRepository
+		final ImmutableSet<String> excludedCountryCodes = ImmutableSet.<String>builder()
+				.addAll(upExcludedCountryCodes).add("BQ").add("SH").build();
+
 		// Cities
 		final List<String> skippedCities = new ArrayList<>();
 		final List<String> excludedCities = new ArrayList<>();
-		try (final InputStreamReader reader = new InputStreamReader(GeoNamesCityRepository.class.getResourceAsStream("cities1000lite_-id.csv"))) {
+		final URL url = GeoNamesCityRepository.class.getResource(CITIES1000LITE_CSV);
+		log.info("Initializing GeoNames city repository excluding {} countries {} from {}",
+				excludedCountryCodes.size(), excludedCountryCodes, url);
+		try (final BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
 			try (final CSVReader csv = new CSVReader(reader, '\t', '"')) {
 				while (true) {
 					@Nullable

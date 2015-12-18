@@ -3156,12 +3156,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 */
 	@Override @JsonProperty
 	public String getEmail() {
-		final Optional<Email> primaryEmail = Iterables.tryFind(getEmails(), new Predicate<Email>() {
-			@Override
-			public boolean apply(@Nullable Email input) {
-				return input.isPrimary();
-			}
-		});
+		final Optional<Email> primaryEmail = Iterables.tryFind(getEmails(), Email::isPrimary);
 		if (primaryEmail.isPresent()) {
 			return primaryEmail.get().getEmail();
 		} else if (!getEmails().isEmpty()) {
