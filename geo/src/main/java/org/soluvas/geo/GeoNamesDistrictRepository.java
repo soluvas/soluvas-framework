@@ -7,19 +7,15 @@ import java.net.URL;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
-
-import com.opencsv.CSVReader;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
@@ -30,6 +26,7 @@ import com.google.common.collect.Iterables;
 import com.googlecode.concurrenttrees.radix.ConcurrentRadixTree;
 import com.googlecode.concurrenttrees.radix.RadixTree;
 import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFactory;
+import com.opencsv.CSVReader;
 
 /**
  * How to prepare data:
@@ -38,7 +35,7 @@ import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFa
  *  <li>Get shipping tariff data from JNE</li>
  *  <li>Open in LibreOffice</li>
  *  <li>Keep column headers. Delete columns except: destinationProvince, mainCity, destinationDistrict</li>
- *  <li>Save as <tt>src/main/resources/org/soluvas/geo/{@value DISTRICTS_ID_JNE_2015_04_TSV}</tt> with these settings:
+ *  <li>Save as <tt>src/main/resources/org/soluvas/geo/{@value DISTRICTS_ID_JNE_2015_12_TSV}</tt> with these settings:
  *      Character set: UTF-8, Field delimiter: Tab, Text delimiter: ", Uncheck quote all text cells</li>
  * </ol>
  *
@@ -46,7 +43,7 @@ import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFa
  */
 public class GeoNamesDistrictRepository implements DistrictRepository {
 
-    public static final String DISTRICTS_ID_JNE_2015_04_TSV = "districts_ID_jne_2015-04.tsv";
+    public static final String DISTRICTS_ID_JNE_2015_12_TSV = "districts_ID_jne_2015-12.tsv";
 
     private final CityRepository cityRepo;
     private int entryCount = 0;
@@ -57,7 +54,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
     final Map<String, District> districtMap = new HashMap<>();
 
     public static URL getDistrictTsv() {
-        return GeoNamesDistrictRepository.class.getResource(DISTRICTS_ID_JNE_2015_04_TSV);
+        return GeoNamesDistrictRepository.class.getResource(DISTRICTS_ID_JNE_2015_12_TSV);
     }
 
     public GeoNamesDistrictRepository(CityRepository cityRepo) throws IOException {
