@@ -7,8 +7,6 @@ import java.net.UnknownHostException;
 
 import javax.annotation.Nullable;
 
-import jline.internal.InputStreamReader;
-
 import org.apache.commons.codec.binary.BinaryCodec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +16,8 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
 import com.opencsv.CSVReader;
+
+import jline.internal.InputStreamReader;
 
 /**
  * Source: http://dev.maxmind.com/geoip/geoip2/geolite2/
@@ -72,7 +72,7 @@ public class GeoIpLocationRepository implements IpLocationRepository {
 						continue;
 					}
 					final GeoCountryLocation geoCountryLocation = geoCountryLocationMap.get(line[1]);
-					if (Strings.isNullOrEmpty(geoCountryLocation.getCountryIsoCode())) {
+					if (Strings.isNullOrEmpty(geoCountryLocation.getCountryIsoCode()) || geoCountryLocation.getCountryIsoCode().equals("BQ") || geoCountryLocation.getCountryIsoCode().equals("SH")) {
 						continue;
 					}
 					final Country country = countryRepo.getCountry(geoCountryLocation.getCountryIsoCode());
