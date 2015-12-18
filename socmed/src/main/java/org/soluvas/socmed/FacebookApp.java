@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * Facebook Consumer App information, this does not contain any access token.
  * @see FacebookAuthorization
@@ -17,6 +20,7 @@ public class FacebookApp {
 
 	private String apiKey;
 	private String apiSecret;
+	private Set<String> loginPermissions = new LinkedHashSet<>();
 
 	/**
 	 * Facebook App ID.
@@ -41,4 +45,7 @@ public class FacebookApp {
 		this.apiSecret = value;
 	}
 
+	public Set<String> getLoginPermissions() {
+		return loginPermissions;
+	}
 }
