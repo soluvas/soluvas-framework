@@ -1235,4 +1235,179 @@ public class PostalAddress implements Describable, Serializable {
 				+ getDescription() + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((countryCode == null) ? 0 : countryCode.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((district == null) ? 0 : district.hashCode());
+		result = prime * result + ((emails == null) ? 0 : emails.hashCode());
+		result = prime * result + ((homePhones == null) ? 0 : homePhones.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((mobiles == null) ? 0 : mobiles.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((organization == null) ? 0 : organization.hashCode());
+		result = prime * result + ((phones == null) ? 0 : phones.hashCode());
+		result = prime * result + ((postalCode == null) ? 0 : postalCode.hashCode());
+		result = prime * result + ((primary == null) ? 0 : primary.hashCode());
+		result = prime * result + ((primaryBilling == null) ? 0 : primaryBilling.hashCode());
+		result = prime * result + ((primaryEmail == null) ? 0 : primaryEmail.hashCode());
+		result = prime * result + ((primaryHomePhone == null) ? 0 : primaryHomePhone.hashCode());
+		result = prime * result + ((primaryMobile == null) ? 0 : primaryMobile.hashCode());
+		result = prime * result + ((primaryPhone == null) ? 0 : primaryPhone.hashCode());
+		result = prime * result + ((primaryShipping == null) ? 0 : primaryShipping.hashCode());
+		result = prime * result + ((primaryWorkPhone == null) ? 0 : primaryWorkPhone.hashCode());
+		result = prime * result + ((province == null) ? 0 : province.hashCode());
+		result = prime * result + ((street == null) ? 0 : street.hashCode());
+		result = prime * result + ((validationTime == null) ? 0 : validationTime.hashCode());
+		result = prime * result + ((validationTime_zone == null) ? 0 : validationTime_zone.hashCode());
+		result = prime * result + ((workPhones == null) ? 0 : workPhones.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PostalAddress other = (PostalAddress) obj;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (countryCode == null) {
+			if (other.countryCode != null)
+				return false;
+		} else if (!countryCode.equals(other.countryCode))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (district == null) {
+			if (other.district != null)
+				return false;
+		} else if (!district.equals(other.district))
+			return false;
+		if (emails == null) {
+			if (other.emails != null)
+				return false;
+		} else if (!emails.equals(other.emails))
+			return false;
+		if (homePhones == null) {
+			if (other.homePhones != null)
+				return false;
+		} else if (!homePhones.equals(other.homePhones))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (mobiles == null) {
+			if (other.mobiles != null)
+				return false;
+		} else if (!mobiles.equals(other.mobiles))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (organization == null) {
+			if (other.organization != null)
+				return false;
+		} else if (!organization.equals(other.organization))
+			return false;
+		if (phones == null) {
+			if (other.phones != null)
+				return false;
+		} else if (!phones.equals(other.phones))
+			return false;
+		if (postalCode == null) {
+			if (other.postalCode != null)
+				return false;
+		} else if (!postalCode.equals(other.postalCode))
+			return false;
+		if (primary == null) {
+			if (other.primary != null)
+				return false;
+		} else if (!primary.equals(other.primary))
+			return false;
+		if (primaryBilling == null) {
+			if (other.primaryBilling != null)
+				return false;
+		} else if (!primaryBilling.equals(other.primaryBilling))
+			return false;
+		if (primaryEmail == null) {
+			if (other.primaryEmail != null)
+				return false;
+		} else if (!primaryEmail.equals(other.primaryEmail))
+			return false;
+		if (primaryHomePhone == null) {
+			if (other.primaryHomePhone != null)
+				return false;
+		} else if (!primaryHomePhone.equals(other.primaryHomePhone))
+			return false;
+		if (primaryMobile == null) {
+			if (other.primaryMobile != null)
+				return false;
+		} else if (!primaryMobile.equals(other.primaryMobile))
+			return false;
+		if (primaryPhone == null) {
+			if (other.primaryPhone != null)
+				return false;
+		} else if (!primaryPhone.equals(other.primaryPhone))
+			return false;
+		if (primaryShipping == null) {
+			if (other.primaryShipping != null)
+				return false;
+		} else if (!primaryShipping.equals(other.primaryShipping))
+			return false;
+		if (primaryWorkPhone == null) {
+			if (other.primaryWorkPhone != null)
+				return false;
+		} else if (!primaryWorkPhone.equals(other.primaryWorkPhone))
+			return false;
+		if (province == null) {
+			if (other.province != null)
+				return false;
+		} else if (!province.equals(other.province))
+			return false;
+		if (street == null) {
+			if (other.street != null)
+				return false;
+		} else if (!street.equals(other.street))
+			return false;
+		if (validationTime == null) {
+			if (other.validationTime != null)
+				return false;
+		} else if (!validationTime.equals(other.validationTime))
+			return false;
+		if (validationTime_zone == null) {
+			if (other.validationTime_zone != null)
+				return false;
+		} else if (!validationTime_zone.equals(other.validationTime_zone))
+			return false;
+		if (workPhones == null) {
+			if (other.workPhones != null)
+				return false;
+		} else if (!workPhones.equals(other.workPhones))
+			return false;
+		return true;
+	}
+	
 }
