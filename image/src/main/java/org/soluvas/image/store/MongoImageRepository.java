@@ -1,27 +1,10 @@
 package org.soluvas.image.store;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
-import java.util.regex.Pattern;
-
-import javax.annotation.Nullable;
-import javax.annotation.PreDestroy;
-
+import com.google.common.base.*;
+import com.google.common.base.Optional;
+import com.google.common.collect.*;
+import com.google.common.util.concurrent.*;
+import com.mongodb.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,75 +17,59 @@ import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
 import org.soluvas.commons.impl.ProgressMonitorWrapperImpl;
 import org.soluvas.commons.util.ThreadLocalProgress;
-import org.soluvas.data.domain.Page;
-import org.soluvas.data.domain.PageImpl;
-import org.soluvas.data.domain.PageRequest;
-import org.soluvas.data.domain.Pageable;
-import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.*;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import org.soluvas.data.util.BatchFinder;
 import org.soluvas.data.util.BatchProcessor;
 import org.soluvas.data.util.RepositoryUtils;
-import org.soluvas.image.DavConnector;
-import org.soluvas.image.ImageConnector;
-import org.soluvas.image.ImageException;
-import org.soluvas.image.ImageFactory;
-import org.soluvas.image.ImageTransform;
-import org.soluvas.image.ImageTransformer;
-import org.soluvas.image.ImageVariant;
-import org.soluvas.image.UploadedImage;
+import org.soluvas.image.*;
 import org.soluvas.image.util.ImageUtils;
 import org.soluvas.mongo.Index;
 import org.soluvas.mongo.MongoUtils;
 
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
-import com.google.common.base.Strings;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.util.concurrent.AsyncFunction;
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClientURI;
-import com.mongodb.MongoException;
-import com.mongodb.ReadPreference;
+import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.regex.Pattern;
 
 /**
- * @author ceefour
- * Stores images using WebDAV protocol and MongoDB.
+ * Stores images using S3 (typically) and MongoDB.
+ * Other than {@link org.soluvas.image.impl.S3ConnectorImpl},
+ * {@link org.soluvas.image.impl.FolderConnectorImpl} and {@link org.soluvas.image.impl.DavConnectorImpl}
+ * are also available.
  * 
- * Requirements:
- * - Uniquely identifiable
- * - SEO friendly
+ * <p>Requirements:</p>
+ * <ol>
+ * 	<li>Uniquely identifiable</li>
+ * 	<li>SEO friendly</li>
+ * </ol>
  * 
- * The image metadata are stored in MongoDB with a namespace.
+ * <p>The image metadata are stored in MongoDB with a namespace.</p>
  * 
- * Scheme is:
- * ${publicUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
- * ${safeDavUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}
+ * <p>Scheme is:</p>
+ * <code>${publicUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}</code>
+ * <code>${safeDavUri}/${namespace}/${shortCode}/${id}_${shortCode}.${extension}</code>
  *
- * Usage:
- * 1. Set the following 4 properties: namespace, safeDavUri, publicUri, mongoUri
- * 2. addStyle() as needed
- * 3. Additional 2 passwords during init().
+ * <p>Usage:</p>
+ * <ol>
+ * 	<li>Set the following 4 properties: namespace, safeDavUri, publicUri, mongoUri</li>
+ * 	<li>{@link #addStyle(String, String, int, int)} as needed</li>
+ * 	<li>Additional 2 passwords during init().</li>
+ * </ol>
  * 
  * @todo Make the name SEO friendly: prefix the UUID with the original name/title but slugged.
+ * @author ceefour
  */
 public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, String> 
 	implements ImageRepository {
@@ -151,7 +118,6 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	private DBCollection mongoColl;
 	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<>();
 	
-	private DavConnector innerConnector;
 	private final ImageConnector connector;
 	private final ImageTransformer transformer;
 
@@ -213,8 +179,6 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 //			system.shutdown();
 //			system.awaitTermination();
 //		}
-		if (innerConnector != null)
-			innerConnector.destroy();
 		// do NOT close Mongo, because it's reused throughout the app
 	}
 	
