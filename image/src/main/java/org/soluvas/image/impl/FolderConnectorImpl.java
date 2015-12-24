@@ -8,17 +8,46 @@ import java.util.concurrent.Callable;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.ecore.EClass;
-import org.soluvas.image.FolderConnector;
-import org.soluvas.image.ImageException;
-import org.soluvas.image.ImagePackage;
-import org.soluvas.image.UploadedImage;
+import org.soluvas.image.*;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
+import org.springframework.context.annotation.Bean;
+
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Folder Connector</b></em>'.
+ * Usage:
+
+	@Bean
+	public FolderConnector folderConnector() {
+		final String mediaFolder = env.getRequiredProperty("workspaceDir") + "/media";
+		return new FolderConnectorImpl(mediaFolder);
+	}
+
+	@Bean
+	public ImageTransformer imageTransformer() {
+		final File convertBin = new File("/usr/bin/convert");
+		if (convertBin.exists()) {
+			return new ImageMagickTransformerImpl(folderConnector());
+		} else {
+			return new ThumbnailatorTransformerImpl(folderConnector());
+		}
+	}
+
+	@PersonImage @Bean
+	public MongoImageRepository mongoPersonImageRepo() throws Exception {
+		final MongoSysConfig sysConfig = sysConfigMapHolder.sysConfigMap().get(APP_ID);
+		final String mongoUri = sysConfig.getMongoUri();
+		final ImageConnector imageConnector = folderConnector();
+		final ImageTransformer imageTransformer = imageTransformer();
+		return new MongoImageRepository("person", mongoUri, imageConnector,
+			imageTransformer, ImmutableList.of(
+				new ImageStyle("thumbnail", "t", 128, 128),
+				new ImageStyle("small", "s", 256, 256),
+				new ImageStyle("normal", "n", 512, 512),
+				new ImageStyle("large", "l", 1024, 1024) ));
+	}
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -147,21 +176,19 @@ public class FolderConnectorImpl extends ImageConnectorImpl implements FolderCon
 	public ListenableFuture<UploadedImage> upload(final String namespace, final String imageId,
 			final String styleCode, final String styleVariant, final String extension, final File file,
 			final String contentType) {
-		return getExecutor().submit(new Callable<UploadedImage>() {
-			@Override
-			public UploadedImage call() throws Exception {
-				final File destFile = getLocation(namespace, imageId, styleCode, styleVariant, extension);
-				try {
-					destFile.getParentFile().mkdirs();
-					FileUtils.copyFile(file, destFile);
-					final UploadedImageImpl uploaded = new UploadedImageImpl();
-					// FIXME: fill
-					return uploaded;
-				} catch (IOException e) {
-					throw new ImageException("Cannot copy " + file + " to " + destFile, e);
-				}
-			}
-		});
+		return getExecutor().submit((Callable<UploadedImage>) () -> {
+            final File destFile = getLocation(namespace, imageId, styleCode, styleVariant, extension);
+            try {
+                destFile.getParentFile().mkdirs();
+				log.debug("Copying {} to {}", file, destFile);
+                FileUtils.copyFile(file, destFile);
+                final UploadedImageImpl uploaded = new UploadedImageImpl();
+                // FIXME: fill
+                return uploaded;
+            } catch (IOException e) {
+                throw new ImageException("Cannot copy " + file + " to " + destFile, e);
+            }
+        });
 	}
 
 	@Override
@@ -169,6 +196,7 @@ public class FolderConnectorImpl extends ImageConnectorImpl implements FolderCon
 			String styleVariant, String extension, File file) {
 		final File sourceFile = getLocation(namespace, imageId, styleCode, styleVariant, extension);
 		try {
+			log.debug("Copying {} to {}", sourceFile, file);
 			FileUtils.copyFile(sourceFile, file);
 			return true;
 		} catch (IOException e) {
@@ -180,6 +208,8 @@ public class FolderConnectorImpl extends ImageConnectorImpl implements FolderCon
 	public void delete(String namespace, String imageId, String styleCode,
 			String styleVariant, String extension) {
 		final File sourceFile = getLocation(namespace, imageId, styleCode, styleVariant, extension);
+		log.debug("Deleting {} (namespace={} imageId={} styleCode={} styleVariant={} extension={})",
+				sourceFile, namespace, imageId, styleCode, styleVariant, extension);
 		sourceFile.delete();
 	}
 

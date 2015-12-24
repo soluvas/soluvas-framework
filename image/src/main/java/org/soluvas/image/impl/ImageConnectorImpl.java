@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutorService;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.image.ImageConnector;
 import org.soluvas.image.ImageException;
 import org.soluvas.image.ImagePackage;
@@ -73,6 +75,8 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	 * @ordered
 	 */
 	protected ListeningExecutorService executor = EXECUTOR_EDEFAULT;
+
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	/**
 	 * <!-- begin-user-doc -->
