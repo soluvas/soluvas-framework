@@ -36,6 +36,7 @@ public class SlugUtils {
 	 * Happens to be same as {@link #CANONICAL_PATTERN} but different in purpose.
 	 */
 	public static final Pattern TENANT_ID_PATTERN = Pattern.compile("[a-z0-9][a-z0-9]+");
+	@Deprecated
 	public static final Pattern SCREEN_NAME_PATTERN = Pattern.compile("[a-z0-9][a-z0-9.]+");
 	public static final Pattern SEGMENT_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+");
 	public static final Pattern SEGMENT_PATH_PATTERN = Pattern.compile("[a-z0-9][a-z0-9-]+[a-z0-9/-]*");
@@ -60,7 +61,9 @@ public class SlugUtils {
 	 * @param name
 	 * @param suffix
 	 * @return Guaranteed to conform to {@link #SCREEN_NAME_PATTERN}.
+	 * @deprecated Use {@link #generateId(String, int)}
 	 */
+	@Deprecated
 	public static String generateScreenName(String name, @Nonnegative int suffix) {
 		Preconditions.checkNotNull(name, "name must not be null");
 		Preconditions.checkArgument(suffix >= 0, "suffix must be non-negative");
@@ -81,7 +84,9 @@ public class SlugUtils {
 	 * Generates person slugs (using dots).
 	 * @param name
 	 * @return Guaranteed to conform to {@link #SCREEN_NAME_PATTERN}.
+	 * @deprecated Use {@link #generateId(String)}
 	 */
+	@Deprecated
 	public static String generateScreenName(String name) {
 		return generateScreenName(name, 0);
 	}
@@ -256,7 +261,9 @@ public class SlugUtils {
 	 * @param name
 	 * @param validator
 	 * @return Guaranteed to conform to {@link #SCREEN_NAME_PATTERN}.
+	 * @deprecated Use {@link #generateValidId(String, Predicate)}
 	 */
+	@Deprecated
 	public static String generateValidScreenName(String name, Predicate<String> validator) {
 		Preconditions.checkNotNull(validator, "validator must not be null");
 		String id = generateScreenName(name, 0);
