@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
+import com.google.common.base.Preconditions;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
@@ -158,6 +159,9 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	 */
 	@Override
 	public final String getUri(String namespace, String imageId, String styleCode, String styleVariant, String extension) {
+		if (null == getUriTemplate()) {
+			throw new UnsupportedOperationException(getClass().getSimpleName() + " does not support getUri(), caller must understand this");
+		}
 		// namespace, styleCode, imageId, styleVariant, extension
 		final Map<String, Object> uriVars = Maps.newHashMap();
 		uriVars.put("namespace", namespace);
@@ -167,7 +171,7 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 		uriVars.put("extension", extension);
 		try {
 			return UriTemplate.fromTemplate(getUriTemplate()).expand(uriVars);
-		} catch (VariableExpansionException | MalformedUriTemplateException e) {
+		} catch (final Exception e) {
 			throw new ImageException(e, "Cannot expand URI template '%s' using %s", getUriTemplate(), uriVars);
 		}
 	}

@@ -125,7 +125,12 @@ public class Image implements Serializable {
 		extension = dbo.getString("extension", "jpg");
 		if (uri == null) {
 			// Legacy schema support
-			uri = imageStore.getPublicUri(id, MongoImageRepository.ORIGINAL_NAME, extension);
+			try {
+				uri = imageStore.getPublicUri(id, MongoImageRepository.ORIGINAL_NAME, extension);
+			} catch (Exception e) {
+				// FolderImageConnector does not support public URI
+				log.debug("Not storing public URI for {] image '{}': {}", imageStore.getNamespace(), id, e);
+			}
 		}
 		contentType = dbo.getString("contentType");
 		fileName = dbo.getString("fileName");
@@ -153,7 +158,12 @@ public class Image implements Serializable {
 		// v1 field but forgotten in API
 		created = dbo.get("created") != null ? new DateTime(dbo.get("created")) : null;
 		// v2 field
-		originUri = dbo.get("originUri") != null ? dbo.getString("originUri") : uri.toString();
+		try {
+			originUri = dbo.get("originUri") != null ? dbo.getString("originUri") : uri.toString();
+		} catch (Exception e) {
+			// FolderImageConnector does not support public URI
+			log.debug("Not storing origin URI for {] image '{}': {}", imageStore.getNamespace(), id, e);
+		}
 	}
 	
 	public Image(String id, String uri, String originUri, String contentType,
