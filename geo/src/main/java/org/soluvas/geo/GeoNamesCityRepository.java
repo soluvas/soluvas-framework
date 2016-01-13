@@ -7,7 +7,6 @@ import java.net.URL;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,8 +18,6 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 
-import com.opencsv.CSVReader;
-
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -31,6 +28,7 @@ import com.google.common.collect.Iterables;
 import com.googlecode.concurrenttrees.radix.ConcurrentRadixTree;
 import com.googlecode.concurrenttrees.radix.RadixTree;
 import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFactory;
+import com.opencsv.CSVReader;
 
 /**
  * How to prepare data:
@@ -311,6 +309,7 @@ public class GeoNamesCityRepository implements CityRepository {
 					final String key = countryIso + ", " +
 							provinceStr.toLowerCase() + ", " + normalizedCity.toLowerCase();
 					if (tree.getValueForExactKey(key) != null) {
+						log.debug("SKIP for same value for key '{}'", key);
 						continue;
 					}
 					putCity(cityStr, normalizedCity, countryIso, provinceStr);
