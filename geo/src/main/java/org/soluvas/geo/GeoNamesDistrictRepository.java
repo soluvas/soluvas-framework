@@ -22,6 +22,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.googlecode.concurrenttrees.radix.ConcurrentRadixTree;
 import com.googlecode.concurrenttrees.radix.RadixTree;
@@ -207,7 +208,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
         log.debug("Querying districts by term: {}", normalizedTerm);
 
         final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
-        final ImmutableList<District> districts = FluentIterable.from(keys)
+        final ImmutableSet<District> districts = FluentIterable.from(keys)
                 .skip((int) pageable.getOffset())
                 .limit((int) pageable.getPageSize())
                 .transform(new Function<CharSequence, District>() {
@@ -216,7 +217,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
                     public District apply(@Nullable CharSequence key) {
                         return tree.getValueForExactKey(key);
                     }
-                }).toList();
+                }).toSet();
 
 		/*List<District> districtsFilterByCity = new ArrayList<District>();
 		for (District district : districts) {
@@ -226,7 +227,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
 		}*/
 
         final int total = Iterables.size(keys);
-        final PageImpl<District> page = new PageImpl<>(districts, pageable, total);
+        final PageImpl<District> page = new PageImpl<>(ImmutableList.copyOf(districts), pageable, total);
 
         log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) districts: {}",
                 term, normalizedTerm, pageable, districts.size(), total, Iterables.limit(districts, 5));

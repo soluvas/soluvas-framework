@@ -212,7 +212,7 @@ public class GeoNamesCityRepository implements CityRepository {
 //		log.debug("Nommalized term: {}", normalizedTerm);
 		final Iterable<CharSequence> keys = tree.getKeysStartingWith(normalizedTerm);
 //		final Iterable<CharSequence> keys = tree.getClosestKeys(normalizedTerm);
-		final ImmutableList<City> cities = FluentIterable.from(keys)
+		final ImmutableSet<City> cities = FluentIterable.from(keys)
 				.skip((int) pageable.getOffset())
 				.limit((int) pageable.getPageSize())
 				.transform(new Function<CharSequence, City>() {
@@ -220,9 +220,9 @@ public class GeoNamesCityRepository implements CityRepository {
 					public City apply(@Nullable CharSequence key) {
 						return tree.getValueForExactKey(key);
 					}
-				}).toList();
+				}).toSet();
 		final int total = Iterables.size(keys);
-		final PageImpl<City> page = new PageImpl<>(cities, pageable, total);
+		final PageImpl<City> page = new PageImpl<>(ImmutableList.copyOf(cities), pageable, total);
 		log.debug("Searching '{}' ({}) paged by {} returned {} (total {}) cities (from {}): {}",
 				term, normalizedTerm, pageable, cities.size(), total, realCityCount, Iterables.limit(cities, 10));
 		return page;

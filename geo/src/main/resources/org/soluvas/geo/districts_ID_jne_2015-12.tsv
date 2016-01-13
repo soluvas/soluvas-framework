@@ -43,11 +43,11 @@ Nusa Tenggara Barat	Kab. Lombok Timur	Labuhan Haji
 Nusa Tenggara Barat	Kab. Sumbawa	Sumbawa Besar
 Nusa Tenggara Barat	Kab. Sumbawa	Alas
 Nusa Tenggara Barat	Kab. Sumbawa	Empang
-Nusa Tenggara Barat	Kab. Sumbawa	Lape+AC0-Lopok
+Nusa Tenggara Barat	Kab. Sumbawa	Lape-Lopok
 Nusa Tenggara Barat	Kab. Sumbawa	Moyohilir
 Nusa Tenggara Barat	Kab. Sumbawa	Moyohulu
 Nusa Tenggara Barat	Kab. Sumbawa	Plampang
-Nusa Tenggara Barat	Kab. Sumbawa	Utan+AC0-Rhee
+Nusa Tenggara Barat	Kab. Sumbawa	Utan-Rhee
 Nusa Tenggara Barat	Kab. Sumbawa	Alas Barat
 Nusa Tenggara Barat	Kab. Sumbawa	Labuhan Badas
 Nusa Tenggara Barat	Kab. Sumbawa	Sumbawa
@@ -181,7 +181,7 @@ Kalimantan Selatan	Kab. Banjar	Sungai Pinang
 Kalimantan Selatan	Kab. Banjar	Aranio
 Kalimantan Selatan	Kab. Banjar	Mataraman
 Kalimantan Selatan	Kab. Tanah Laut	Pelaihari
-Kalimantan Selatan	Kab. Tanah Laut	Bati+AC0-Bati
+Kalimantan Selatan	Kab. Tanah Laut	Bati-Bati
 Kalimantan Selatan	Kab. Tanah Laut	Jorong
 Kalimantan Selatan	Kab. Tanah Laut	Kintap
 Kalimantan Selatan	Kab. Tanah Laut	Kurau
@@ -513,36 +513,36 @@ Jawa Barat	Kab. Subang	Cikaum
 Jawa Barat	Kab. Subang	Cipunagara
 Jawa Barat	Kab. Subang	Legon Kulon
 Jawa Barat	Kab. Subang	Pagaden
-Jawa Barat	Kab. Subang	Cianjur
-Jawa Barat	Kab. Subang	Agrabinta
-Jawa Barat	Kab. Subang	Bojongpicung
-Jawa Barat	Kab. Subang	Campaka
-Jawa Barat	Kab. Subang	Cibeber
-Jawa Barat	Kab. Subang	Cibinong
-Jawa Barat	Kab. Subang	Cidaun
-Jawa Barat	Kab. Subang	Cikalong Kulon
-Jawa Barat	Kab. Subang	Cilaku
-Jawa Barat	Kab. Subang	Ciranjang
-Jawa Barat	Kab. Subang	Cugenang
-Jawa Barat	Kab. Subang	Kadupandak
-Jawa Barat	Kab. Subang	Karangtengah
-Jawa Barat	Kab. Subang	Mande
-Jawa Barat	Kab. Subang	Naringgul
-Jawa Barat	Kab. Subang	Pacet
-Jawa Barat	Kab. Subang	Pagelaran
-Jawa Barat	Kab. Subang	Sindangbarang
-Jawa Barat	Kab. Subang	Sukaluyu
-Jawa Barat	Kab. Subang	Sukanagara
-Jawa Barat	Kab. Subang	Sukaresmi
-Jawa Barat	Kab. Subang	Takokak
-Jawa Barat	Kab. Subang	Tanggeung
-Jawa Barat	Kab. Subang	Warungkondang
-Jawa Barat	Kab. Subang	Cipanas
-Jawa Barat	Kab. Subang	Campaka Mulya
-Jawa Barat	Kab. Subang	Cijati
-Jawa Barat	Kab. Subang	Cikadu
-Jawa Barat	Kab. Subang	Gekbrong
-Jawa Barat	Kab. Subang	Leles
+Jawa Barat	Kab. Cianjur	Cianjur
+Jawa Barat	Kab. Cianjur	Agrabinta
+Jawa Barat	Kab. Cianjur	Bojongpicung
+Jawa Barat	Kab. Cianjur	Campaka
+Jawa Barat	Kab. Cianjur	Cibeber
+Jawa Barat	Kab. Cianjur	Cibinong
+Jawa Barat	Kab. Cianjur	Cidaun
+Jawa Barat	Kab. Cianjur	Cikalong Kulon
+Jawa Barat	Kab. Cianjur	Cilaku
+Jawa Barat	Kab. Cianjur	Ciranjang
+Jawa Barat	Kab. Cianjur	Cugenang
+Jawa Barat	Kab. Cianjur	Kadupandak
+Jawa Barat	Kab. Cianjur	Karangtengah
+Jawa Barat	Kab. Cianjur	Mande
+Jawa Barat	Kab. Cianjur	Naringgul
+Jawa Barat	Kab. Cianjur	Pacet
+Jawa Barat	Kab. Cianjur	Pagelaran
+Jawa Barat	Kab. Cianjur	Sindangbarang
+Jawa Barat	Kab. Cianjur	Sukaluyu
+Jawa Barat	Kab. Cianjur	Sukanagara
+Jawa Barat	Kab. Cianjur	Sukaresmi
+Jawa Barat	Kab. Cianjur	Takokak
+Jawa Barat	Kab. Cianjur	Tanggeung
+Jawa Barat	Kab. Cianjur	Warungkondang
+Jawa Barat	Kab. Cianjur	Cipanas
+Jawa Barat	Kab. Cianjur	Campaka Mulya
+Jawa Barat	Kab. Cianjur	Cijati
+Jawa Barat	Kab. Cianjur	Cikadu
+Jawa Barat	Kab. Cianjur	Gekbrong
+Jawa Barat	Kab. Cianjur	Leles
 Jawa Barat	Kota Bekasi	Bekasi
 Jawa Barat	Kota Bekasi	Bantar Gebang
 Jawa Barat	Kota Bekasi	Bekasi Barat
@@ -635,12 +635,12 @@ Bengkulu	Kab. Lebong	Lebong Selatan
 Bengkulu	Kab. Lebong	Lebong Tengah
 Bengkulu	Kab. Lebong	Lebong Utara
 Bengkulu	Kab. Lebong	Rimbo Pengadang
-Bengkulu	Kab. Muko+AC0-Muko	Muko+AC0-Muko
-Bengkulu	Kab. Muko+AC0-Muko	Lubuk Pinang
-Bengkulu	Kab. Muko+AC0-Muko	Muko+AC0-Muko Selatan
-Bengkulu	Kab. Muko+AC0-Muko	Muko+AC0-Muko Utara
-Bengkulu	Kab. Muko+AC0-Muko	Pondok Suguh
-Bengkulu	Kab. Muko+AC0-Muko	Teras Terunjam
+Bengkulu	Kab. Muko-Muko	Muko-Muko
+Bengkulu	Kab. Muko-Muko	Lubuk Pinang
+Bengkulu	Kab. Muko-Muko	Muko-Muko Selatan
+Bengkulu	Kab. Muko-Muko	Muko-Muko Utara
+Bengkulu	Kab. Muko-Muko	Pondok Suguh
+Bengkulu	Kab. Muko-Muko	Teras Terunjam
 Bengkulu	Kab. Seluma	Tais
 Bengkulu	Kab. Seluma	Air Periukan
 Bengkulu	Kab. Seluma	Ilir Talo
@@ -831,7 +831,7 @@ Aceh	Kab. Aceh Tenggara	Kutacane
 Aceh	Kab. Aceh Tenggara	Badar
 Aceh	Kab. Aceh Tenggara	Bambel
 Aceh	Kab. Aceh Tenggara	Lawe Alas
-Aceh	Kab. Aceh Tenggara	Lawe Sigala+AC0-Gala
+Aceh	Kab. Aceh Tenggara	Lawe Sigala-Gala
 Aceh	Kab. Aceh Tenggara	Babul Makmur
 Aceh	Kab. Aceh Tenggara	Babul Rahmat
 Aceh	Kab. Aceh Tenggara	Babussalam
@@ -869,7 +869,7 @@ Aceh	Kab. Pidie	Tangse
 Aceh	Kab. Pidie	Tiro/Truseb
 Aceh	Kab. Pidie	Titeua/Keumala
 Aceh	Kab. Pidie	Gleumpang Baro
-Aceh	Kab. Pidie	Grong+AC0-Grong
+Aceh	Kab. Pidie	Grong-Grong
 Aceh	Kab. Pidie	Mane
 Aceh	Kab. Pidie	Mutiara Timur
 Aceh	Kab. Aceh Tengah	Takengon
@@ -1788,13 +1788,13 @@ Sulawesi Tenggara	Kota Kendari	Kendar
 Sulawesi Tenggara	Kota Kendari	Barat
 Sulawesi Tenggara	Kota Kendari	Mandonga
 Sulawesi Tenggara	Kota Kendari	Poasia
-Sulawesi Tenggara	Kab. Kota Bau+AC0-Bau	Bau +AC0- Bau
-Sulawesi Tenggara	Kab. Kota Bau+AC0-Bau	Bungi
-Sulawesi Tenggara	Kab. Kota Bau+AC0-Bau	Betoambari
-Sulawesi Tenggara	Kab. Kota Bau+AC0-Bau	Kokalukuna
-Sulawesi Tenggara	Kab. Kota Bau+AC0-Bau	Murhum
-Sulawesi Tenggara	Kab. Kota Bau+AC0-Bau	Sorowalio
-Sulawesi Tenggara	Kab. Kota Bau+AC0-Bau	Wolio
+Sulawesi Tenggara	Kab. Kota Bau-Bau	Bau - Bau
+Sulawesi Tenggara	Kab. Kota Bau-Bau	Bungi
+Sulawesi Tenggara	Kab. Kota Bau-Bau	Betoambari
+Sulawesi Tenggara	Kab. Kota Bau-Bau	Kokalukuna
+Sulawesi Tenggara	Kab. Kota Bau-Bau	Murhum
+Sulawesi Tenggara	Kab. Kota Bau-Bau	Sorowalio
+Sulawesi Tenggara	Kab. Kota Bau-Bau	Wolio
 Sulawesi Tenggara	Kab. Kolaka	Kolaka
 Sulawesi Tenggara	Kab. Kolaka	Ladongi
 Sulawesi Tenggara	Kab. Kolaka	Mowewe
@@ -1882,8 +1882,8 @@ Sulawesi Tenggara	Kab. Konawe Utara/ Selatan	Moramo
 Sulawesi Tenggara	Kab. Konawe Utara/ Selatan	Palangga
 Sulawesi Tenggara	Kab. Konawe Utara/ Selatan	Ranomeeto
 Sulawesi Tenggara	Kab. Konawe Utara/ Selatan	Tinanggea
-Sulawesi Tenggara	Kab. Wakatobi	Wangi+AC0-Wangi
-Sulawesi Tenggara	Kab. Wakatobi	Wangi+AC0-Wangi Selatan
+Sulawesi Tenggara	Kab. Wakatobi	Wangi-Wangi
+Sulawesi Tenggara	Kab. Wakatobi	Wangi-Wangi Selatan
 Sulawesi Tenggara	Kab. Wakatobi	Kaledupa
 Jawa Timur	Kota Kediri	Kediri
 Jawa Timur	Kab. Kediri	Gampengrejo
@@ -2285,7 +2285,7 @@ Sumatera Utara	Kab. Dairi	Sidikalang
 Sumatera Utara	Kab. Dairi	Parbuluan
 Sumatera Utara	Kab. Dairi	Siempat Nempu
 Sumatera Utara	Kab. Dairi	Siempat Nempu Hilir
-Sumatera Utara	Kab. Dairi	Silima Pungga+AC0-Pungga
+Sumatera Utara	Kab. Dairi	Silima Pungga-Pungga
 Sumatera Utara	Kab. Dairi	Sumbul
 Sumatera Utara	Kab. Dairi	Tanah Pinem
 Sumatera Utara	Kab. Dairi	Tiga Lingga
@@ -2304,7 +2304,7 @@ Sumatera Utara	Kab. Deli Serdang	Pancur Batu
 Sumatera Utara	Kab. Deli Serdang	Percut Sei Tuan
 Sumatera Utara	Kab. Deli Serdang	Petumbak
 Sumatera Utara	Kab. Deli Serdang	Sibolangit
-Sumatera Utara	Kab. Deli Serdang	Biru+AC0-Biru
+Sumatera Utara	Kab. Deli Serdang	Biru-Biru
 Sumatera Utara	Kab. Deli Serdang	Sinembah Tanjungmuda Hilir
 Sumatera Utara	Kab. Deli Serdang	Sunggal
 Sumatera Utara	Kab. Deli Serdang	Tanjung Morawa
@@ -2383,7 +2383,7 @@ Sumatera Utara	Kab. Labuhan Batu	Kota Pinang
 Sumatera Utara	Kab. Labuhan Batu	Kualuh Hulu
 Sumatera Utara	Kab. Labuhan Batu	Kualuh Hilir
 Sumatera Utara	Kab. Labuhan Batu	Marbau
-Sumatera Utara	Kab. Labuhan Batu	Na Ix+AC0-X
+Sumatera Utara	Kab. Labuhan Batu	Na Ix-X
 Sumatera Utara	Kab. Labuhan Batu	Aek Kuo
 Sumatera Utara	Kab. Labuhan Batu	Bilah Barat
 Sumatera Utara	Kab. Labuhan Batu	Bilah Hulu
@@ -2436,7 +2436,7 @@ Sumatera Utara	Kab. Tapanuli Utara	Pahae Julu
 Sumatera Utara	Kab. Tapanuli Utara	Pahae Jae
 Sumatera Utara	Kab. Tapanuli Utara	Pangaribuan
 Sumatera Utara	Kab. Tapanuli Utara	Parmonangan
-Sumatera Utara	Kab. Tapanuli Utara	Siborong+AC0-Borong
+Sumatera Utara	Kab. Tapanuli Utara	Siborong-Borong
 Sumatera Utara	Kab. Tapanuli Utara	Sipoholon
 Sumatera Utara	Kab. Tapanuli Utara	Sipahutar
 Sumatera Utara	Kab. Tapanuli Utara	Muara
@@ -2506,7 +2506,7 @@ Sumatera Utara	Kab. Pakpak Barat	Salak
 Sumatera Utara	Kab. Pakpak Barat	Kerajaan
 Sumatera Utara	Kab. Pakpak Barat	Sitellu Tai Urang Jehe
 Sumatera Utara	Kab. Pakpak Barat	Sitellu Tai Urang Julu
-Sumatera Utara	Kab. Pakpak Barat	Pergetteng+AC0-Getteng Sengkut
+Sumatera Utara	Kab. Pakpak Barat	Pergetteng-Getteng Sengkut
 Sumatera Utara	Kab. Pakpak Barat	Pagindar
 Sumatera Utara	Kab. Pakpak Barat	Siempat Rube
 Sumatera Utara	Kab. Pakpak Barat	Tinada
@@ -3114,7 +3114,7 @@ Riau	Kab. Indragiri Hilir	Tembilahan
 Riau	Kab. Indragiri Hilir	Pulau Burung
 Riau	Kab. Indragiri Hilir	Teluk Balengkong
 Riau	Kab. Indragiri Hilir	Tembilahan Hulu
-Riau	Kab. Rokan Hilir	Bagan Siapi+AC0-Api
+Riau	Kab. Rokan Hilir	Bagan Siapi-Api
 Riau	Kab. Rokan Hilir	Tanah Putih
 Riau	Kab. Rokan Hilir	Bagan Sinembah
 Riau	Kab. Rokan Hilir	Bangko
@@ -3231,7 +3231,7 @@ Kalimantan Tengah	Kab. Sukamara	Balai Riam
 Kalimantan Tengah	Kab. Sukamara	Jelai
 Sumatera Selatan	Kota Palembang	Palembang
 Sumatera Selatan	Kota Palembang	Plaju
-Sumatera Selatan	Kota Palembang	Alang+AC0-Alang Lebar
+Sumatera Selatan	Kota Palembang	Alang-Alang Lebar
 Sumatera Selatan	Kota Palembang	Bukit Kecil
 Sumatera Selatan	Kota Palembang	Gandus
 Sumatera Selatan	Kota Palembang	Ilir Barat I
@@ -3418,16 +3418,16 @@ Sulawesi Tengah	Kab. Poso	Pamona Utara
 Sulawesi Tengah	Kab. Poso	Poso Pesisir
 Sulawesi Tengah	Kab. Poso	Lore Tengah
 Sulawesi Tengah	Kab. Poso	Pamona Timur
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Toli+AC0-Toli
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Dampal Utara
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Dampal Selatan
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Dondo
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Galang
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Utara Toli Toli
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Baolan
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Basidondo
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Lampasio
-Sulawesi Tengah	Kab. Toli+AC0-Toli	Ogo Deide
+Sulawesi Tengah	Kab. Toli-Toli	Toli-Toli
+Sulawesi Tengah	Kab. Toli-Toli	Dampal Utara
+Sulawesi Tengah	Kab. Toli-Toli	Dampal Selatan
+Sulawesi Tengah	Kab. Toli-Toli	Dondo
+Sulawesi Tengah	Kab. Toli-Toli	Galang
+Sulawesi Tengah	Kab. Toli-Toli	Utara Toli Toli
+Sulawesi Tengah	Kab. Toli-Toli	Baolan
+Sulawesi Tengah	Kab. Toli-Toli	Basidondo
+Sulawesi Tengah	Kab. Toli-Toli	Lampasio
+Sulawesi Tengah	Kab. Toli-Toli	Ogo Deide
 Sulawesi Tengah	Kab. Banggai Kepulauan	Banggai
 Sulawesi Tengah	Kab. Banggai Kepulauan	Bokan Kepulauan
 Sulawesi Tengah	Kab. Banggai Kepulauan	Buko
@@ -3485,14 +3485,14 @@ Sulawesi Tengah	Kab. Parigi Moutong	Tinombo
 Sulawesi Tengah	Kab. Parigi Moutong	Tinombo Selatan
 Sulawesi Tengah	Kab. Parigi Moutong	Tomini
 Sulawesi Tengah	Kab. Parigi Moutong	Torue
-Sulawesi Tengah	Kab. Tojo Una+AC0-Una	Ampana Kota
-Sulawesi Tengah	Kab. Tojo Una+AC0-Una	Ampana Tete
-Sulawesi Tengah	Kab. Tojo Una+AC0-Una	Togean
-Sulawesi Tengah	Kab. Tojo Una+AC0-Una	Tojo
-Sulawesi Tengah	Kab. Tojo Una+AC0-Una	Tojo Barat
-Sulawesi Tengah	Kab. Tojo Una+AC0-Una	Ulu Bongka
-Sulawesi Tengah	Kab. Tojo Una+AC0-Una	Una+AC0-Una
-Sulawesi Tengah	Kab. Tojo Una+AC0-Una	Walea Kepulauan
+Sulawesi Tengah	Kab. Tojo Una-Una	Ampana Kota
+Sulawesi Tengah	Kab. Tojo Una-Una	Ampana Tete
+Sulawesi Tengah	Kab. Tojo Una-Una	Togean
+Sulawesi Tengah	Kab. Tojo Una-Una	Tojo
+Sulawesi Tengah	Kab. Tojo Una-Una	Tojo Barat
+Sulawesi Tengah	Kab. Tojo Una-Una	Ulu Bongka
+Sulawesi Tengah	Kab. Tojo Una-Una	Una-Una
+Sulawesi Tengah	Kab. Tojo Una-Una	Walea Kepulauan
 Kalimantan Barat	Kota Pontianak	Pontianak
 Kalimantan Barat	Kota Pontianak	Pontianak Barat
 Kalimantan Barat	Kota Pontianak	Pontianak Kota
@@ -3671,7 +3671,7 @@ Kalimantan Timur	Kab. Kutai Kartanegara	Muara Muntai
 Kalimantan Timur	Kab. Kutai Kartanegara	Sebulu
 Kalimantan Timur	Kab. Kutai Kartanegara	Loa Janan
 Kalimantan Timur	Kab. Kutai Kartanegara	Muara Badak
-Kalimantan Timur	Kab. Kutai Kartanegara	Sanga+AC0-Sanga
+Kalimantan Timur	Kab. Kutai Kartanegara	Sanga-Sanga
 Kalimantan Timur	Kab. Kutai Kartanegara	Marang Kayu
 Kalimantan Timur	Kab. Kutai Kartanegara	Muara Wis
 Kalimantan Timur	Kab. Kutai Kartanegara	Tenggarong Seberang
@@ -3862,25 +3862,25 @@ Jawa Tengah	Kab. Wonogiri	Tirtomoyo
 Jawa Tengah	Kab. Wonogiri	Wuryantoro
 Jawa Tengah	Kab. Wonogiri	Puhpelem
 Jawa Tengah	Kab. Wonogiri	Paranggupito
-Papua Barat	Kab. Wonogiri	Sorong
-Papua Barat	Kab. Wonogiri	Makbon
-Papua Barat	Kab. Wonogiri	Moraid
-Papua Barat	Kab. Wonogiri	Salawati
-Papua Barat	Kab. Wonogiri	Sausapor
-Papua Barat	Kab. Wonogiri	Seget
-Papua Barat	Kab. Wonogiri	Abun
-Papua Barat	Kab. Wonogiri	Aimas
-Papua Barat	Kab. Wonogiri	Beraur
-Papua Barat	Kab. Wonogiri	Fef
-Papua Barat	Kab. Wonogiri	Klamono
-Papua Barat	Kab. Wonogiri	Sayosa
-Papua Barat	Kab. Wonogiri	Segun
-Papua Barat	Kab. Wonogiri	Sorong Barat
-Papua Barat	Kab. Wonogiri	Sorong Timur
-Papua Barat	Kab. Wonogiri	Fak+AC0-Fak
-Papua Barat	Kab. Fak+AC0-Fak	Fakfak Barat
-Papua Barat	Kab. Fak+AC0-Fak	Fakfak Timur
-Papua Barat	Kab. Fak+AC0-Fak	Kokas
+Papua Barat	Kab. Sorong	Sorong
+Papua Barat	Kab. Sorong	Makbon
+Papua Barat	Kab. Sorong	Moraid
+Papua Barat	Kab. Sorong	Salawati
+Papua Barat	Kab. Sorong	Sausapor
+Papua Barat	Kab. Sorong	Seget
+Papua Barat	Kab. Sorong	Abun
+Papua Barat	Kab. Sorong	Aimas
+Papua Barat	Kab. Sorong	Beraur
+Papua Barat	Kab. Sorong	Fef
+Papua Barat	Kab. Sorong	Klamono
+Papua Barat	Kab. Sorong	Sayosa
+Papua Barat	Kab. Sorong	Segun
+Papua Barat	Kota Sorong	Sorong Barat
+Papua Barat	Kota Sorong	Sorong Timur
+Papua Barat	Kab. Fak-Fak	Fak-Fak
+Papua Barat	Kab. Fak-Fak	Fakfak Baratgeo
+Papua Barat	Kab. Fak-Fak	Fakfak Timur
+Papua Barat	Kab. Fak-Fak	Kokas
 Papua Barat	Kab. Kaimana	Kaimana
 Papua Barat	Kab. Kaimana	Buruwai
 Papua Barat	Kab. Kaimana	Teluk Arguni
@@ -4474,7 +4474,7 @@ Jawa Timur	Kab. Sumenep	Dasuk
 Jawa Timur	Kab. Sumenep	Dungkek
 Jawa Timur	Kab. Sumenep	Ganding
 Jawa Timur	Kab. Sumenep	Gapura
-Jawa Timur	Kab. Sumenep	Guluk+AC0-Guluk
+Jawa Timur	Kab. Sumenep	Guluk-Guluk
 Jawa Timur	Kab. Sumenep	Kalianget
 Jawa Timur	Kab. Sumenep	Lenteng
 Jawa Timur	Kab. Sumenep	Manding
@@ -4867,7 +4867,7 @@ Sulawesi Selatan	Kab. Bulukumba	Bulukumba
 Sulawesi Selatan	Kab. Bulukumba	Bonto Bahari
 Sulawesi Selatan	Kab. Bulukumba	Bontotiro
 Sulawesi Selatan	Kab. Bulukumba	Gantarang /GANTARANGKINDANG/GANKING
-Sulawesi Selatan	Kab. Bulukumba	Hero Lange+AC0-Lange /HERALANGELANGE/HERLANG
+Sulawesi Selatan	Kab. Bulukumba	Hero Lange-Lange /HERALANGELANGE/HERLANG
 Sulawesi Selatan	Kab. Bulukumba	Kajang
 Sulawesi Selatan	Kab. Bulukumba	Kindang
 Sulawesi Selatan	Kab. Bulukumba	Riau Ale
@@ -4931,7 +4931,7 @@ Sulawesi Selatan	Kab. Tana Toraja Utara	Sopai
 Sulawesi Selatan	Kab. Tana Toraja Utara	Tallunglipu
 Sulawesi Selatan	Kab. Tana Toraja Utara	Tikala
 Sulawesi Selatan	Kab. Mamuju	Mamuju
-Sulawesi Selatan	Kab. Mamuju	Budong+AC0-Budong
+Sulawesi Selatan	Kab. Mamuju	Budong-Budong
 Sulawesi Selatan	Kab. Mamuju	Kalumpang
 Sulawesi Selatan	Kab. Mamuju	Kalukku
 Sulawesi Selatan	Kab. Mamuju	Tappalang
@@ -5112,10 +5112,10 @@ Sulawesi Selatan	Kab. Pangkajene Kepulauan	Kalukuang Masalima
 Sulawesi Selatan	Kab. Pangkajene Kepulauan	Mandalle
 Sulawesi Selatan	Kab. Pangkajene Kepulauan	Minasa Te'ne
 Sulawesi Selatan	Kab. Pangkajene Kepulauan	Tondong Talasa
-Sulawesi Selatan	Kota Pare+AC0-Pare	Pare+AC0-Pare
-Sulawesi Selatan	Kota Pare+AC0-Pare	Bacukiki
-Sulawesi Selatan	Kota Pare+AC0-Pare	Soreang
-Sulawesi Selatan	Kota Pare+AC0-Pare	Ujung
+Sulawesi Selatan	Kota Pare-Pare	Pare-Pare
+Sulawesi Selatan	Kota Pare-Pare	Bacukiki
+Sulawesi Selatan	Kota Pare-Pare	Soreang
+Sulawesi Selatan	Kota Pare-Pare	Ujung
 Sulawesi Selatan	Kab. Luwu Utara	Belopa
 Sulawesi Selatan	Kab. Luwu Utara	Bajo
 Sulawesi Selatan	Kab. Luwu Utara	Bassesangtempe
@@ -5139,7 +5139,7 @@ Sulawesi Selatan	Kab. Luwu Timur	Towuti
 Sulawesi Selatan	Kab. Luwu Timur	Wotu
 Sulawesi Selatan	Kab. Luwu Utara	Masamba
 Sulawesi Selatan	Kab. Luwu Utara	Baebunta
-Sulawesi Selatan	Kab. Luwu Utara	Bone+AC0-Bone
+Sulawesi Selatan	Kab. Luwu Utara	Bone-Bone
 Sulawesi Selatan	Kab. Luwu Utara	Limbong
 Sulawesi Selatan	Kab. Luwu Utara	Malangke
 Sulawesi Selatan	Kab. Luwu Utara	Malangke Barat
