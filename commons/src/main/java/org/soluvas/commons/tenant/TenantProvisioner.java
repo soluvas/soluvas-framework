@@ -2,10 +2,12 @@ package org.soluvas.commons.tenant;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.joda.time.DateTime;
+import org.soluvas.commons.AdminMall;
 import org.soluvas.commons.AppManifest;
 
 /**
@@ -39,5 +41,7 @@ public interface TenantProvisioner<T> {
 	 * @return
 	 */
 	public Map<String, DateTime> getTenantCreationTimes(Collection<String> tenantIds);
+	
+	Map<String, List<AdminMall>> findAllAdmin(final Set<String> tenantIds);
 	
 }
