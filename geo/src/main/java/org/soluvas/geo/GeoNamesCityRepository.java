@@ -309,7 +309,7 @@ public class GeoNamesCityRepository implements CityRepository {
 					final String key = countryIso + ", " +
 							provinceStr.toLowerCase() + ", " + normalizedCity.toLowerCase();
 					if (tree.getValueForExactKey(key) != null) {
-						log.debug("SKIP for same value for key '{}'", key);
+						log.trace("SKIP for same value for key '{}'", key);
 						continue;
 					}
 					putCity(cityStr, normalizedCity, countryIso, provinceStr);
