@@ -17,9 +17,12 @@ public class InstagramRow implements Serializable{
 	private Images images;
 	private String link;
 	private String created_time;
+	
 	private List<String> tags;
 	private InstagramCaption caption;
 	private InstagramUser user;
+	private InstagramLikes likes;
+	
 	@Id
 	private String id;
 
@@ -78,11 +81,19 @@ public class InstagramRow implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public InstagramLikes getLikes() {
+		return likes;
+	}
+
+	public void setLikes(InstagramLikes likes) {
+		this.likes = likes;
+	}
 
 	@Override
 	public String toString() {
-		return "InstagramRow [images=" + images + ", link=" + link + ", tags="
-				+ tags + ", caption=" + caption + ", user=" + user + "]";
+		return "InstagramRow [images=" + images + ", link=" + link + ", created_time=" + created_time + ", tags=" + tags
+				+ ", caption=" + caption + ", user=" + user + ", likes=" + likes + ", id=" + id + "]";
 	}
-
+	
 }
