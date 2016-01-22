@@ -64,7 +64,8 @@ public class FormalCategoryRepositoryImpl extends PagingAndSortingRepositoryBase
 			dataCatalog.getFormalCategories().forEach(it -> mab.put(it.getGoogleId(), it));
 		}
 		final ImmutableMap<Long, FormalCategory> map = mab.build();
-		log.info("Loaded {} Google-Formal Categories from {}: {}", map.size(), jsonldFiles, map.keySet());
+		log.info("Loaded {} Google-Formal Categories from {}: {}", map.size(), jsonldFiles, 
+				map.values().stream().limit(10).toArray());
 		return map;
 	}
 	
