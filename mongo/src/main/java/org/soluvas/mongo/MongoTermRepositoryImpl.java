@@ -3,6 +3,7 @@ package org.soluvas.mongo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.soluvas.data.DataException;
@@ -100,6 +101,14 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 		query.put("_id", new BasicDBObject("$in", ids));
 		final Page<Term2> page = findAllByQuery(query, pageable);
 		return page;
+	}
+	
+	@Override
+	public Page<Term2> findAllByEnumIds(List<String> enumerationIds, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("enumerationId", new BasicDBObject("$in", enumerationIds));
+		
+		return findAllByQuery(query, pageable);
 	}
 	
 }

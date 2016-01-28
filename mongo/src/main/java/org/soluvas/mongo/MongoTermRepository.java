@@ -2,6 +2,7 @@ package org.soluvas.mongo;
 
 
 import java.util.Collection;
+import java.util.List;
 
 import org.soluvas.data.Existence;
 import org.soluvas.data.Term2;
@@ -28,5 +29,7 @@ public interface MongoTermRepository extends PagingAndSortingRepository<Term2, S
 	Existence<String> existsByEnumerationId(String enumerationId, String termId);
 	
 	Term2 findOneByFormalId(String formalId);
+
+	Page<Term2> findAllByEnumIds(List<String> enumerationIds, Pageable pageable);
 
 }
