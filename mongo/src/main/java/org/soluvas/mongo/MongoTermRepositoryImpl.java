@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nullable;
+
 import org.soluvas.data.DataException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.Term2;
@@ -13,8 +15,11 @@ import org.soluvas.data.Term2Catalog;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.json.JsonUtils;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.ReadPreference;
 
 /**
@@ -23,13 +28,20 @@ import com.mongodb.ReadPreference;
  */
 public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implements MongoTermRepository {
 	
-	public MongoTermRepositoryImpl(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
+	private final CacheManager cacheMgr;
+	private final String tenantId;
+	
+	public MongoTermRepositoryImpl(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow,
+			final CacheManager cacheMgr, final String tenantId) {
 		super(Term2.class, Term2.class, Term2.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL,
 				"term", migrationEnabled, autoExplainSlow,
 				Index.uniqueAsc("formalId"),
 				Index.asc("name"),
 				Index.asc("enumerationId")
 				);
+		
+		this.cacheMgr = cacheMgr;
+		this.tenantId = tenantId;
 		
 		addBaseTerms();
 	}
@@ -109,6 +121,36 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 		query.put("enumerationId", new BasicDBObject("$in", enumerationIds));
 		
 		return findAllByQuery(query, pageable);
+	}
+	
+	@Override
+	@Nullable public Term2 existsByEx(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final DBObject objTerm2 = primary.findOne(query);
+		log.trace("existsByEx for id '{}'", id);
+		if (objTerm2 != null) {
+			final String actualId = (String) objTerm2.get("_id");
+			log.trace("Got term2 for id '{}'", actualId);
+			return new DBObjectToEntity().apply(objTerm2);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	@Nullable public Term2 findOneByExCacheable(String id) {
+		final Cache term2idsCache = cacheMgr.getCache("term2ids");
+		final String key = String.format("term2:%s:%s", tenantId, id);
+		@Nullable Term2 term2 = term2idsCache.get(key, Term2.class);
+		log.trace("findOneByExCacheable {}: {}", key, term2 != null ? term2.getId() : null);
+		if (term2 == null) {
+			term2 = existsByEx(id);
+			if (term2 != null) {
+				log.trace("Put {} for new term2 to the cache", key);
+				term2idsCache.put(key, term2);
+			}
+		}
+		return term2;
 	}
 	
 }

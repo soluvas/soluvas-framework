@@ -4,6 +4,8 @@ package org.soluvas.mongo;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.soluvas.data.Existence;
 import org.soluvas.data.Term2;
 import org.soluvas.data.domain.Page;
@@ -31,5 +33,9 @@ public interface MongoTermRepository extends PagingAndSortingRepository<Term2, S
 	Term2 findOneByFormalId(String formalId);
 
 	Page<Term2> findAllByEnumIds(List<String> enumerationIds, Pageable pageable);
+	
+	@Nullable Term2 findOneByExCacheable(String id);
+
+	@Nullable Term2 existsByEx(String id);
 
 }
