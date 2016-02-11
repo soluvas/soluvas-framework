@@ -2,6 +2,8 @@
  */
 package org.soluvas.image;
 
+import java.io.Serializable;
+
 import javax.annotation.Nullable;
 
 import org.eclipse.emf.ecore.EObject;
@@ -35,7 +37,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=DisplayImageImpl.class)
-public interface DisplayImage extends EObject {
+public interface DisplayImage extends EObject, Serializable {
 	/**
 	 * Returns the value of the '<em><b>Src</b></em>' attribute.
 	 * <!-- begin-user-doc -->

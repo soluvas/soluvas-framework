@@ -1,13 +1,16 @@
 package org.soluvas.image.store;
 
+import java.io.Serializable;
 
 /**
  * Was to be replaced by EMF {@link org.soluvas.image.StyledImage},
  * but now EMF is "deprecated". ;-)
  * @author ceefour
  */
-public class StyledImage {
+public class StyledImage implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private final String styleName;
 	private final String code;
 	private final String uri;

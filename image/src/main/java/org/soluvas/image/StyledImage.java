@@ -2,6 +2,8 @@
  */
 package org.soluvas.image;
 
+import java.io.Serializable;
+
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
@@ -52,7 +54,7 @@ import org.soluvas.commons.Timestamped;
  * @model
  * @generated
  */
-public interface StyledImage extends SchemaVersionable, DimensionLike, NameContainer, Timestamped {
+public interface StyledImage extends SchemaVersionable, DimensionLike, NameContainer, Timestamped, Serializable {
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
 	 * The default value is <code>"2"</code>.
@@ -67,6 +69,7 @@ public interface StyledImage extends SchemaVersionable, DimensionLike, NameConta
 	 * @model default="2" changeable="false"
 	 * @generated
 	 */
+	@Override
 	long getSchemaVersion();
 
 	/**
