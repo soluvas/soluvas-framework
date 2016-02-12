@@ -167,6 +167,53 @@ public interface NewsletterPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.soluvas.newsletter.impl.MailjetCredentialImpl <em>Mailjet Credential</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.soluvas.newsletter.impl.MailjetCredentialImpl
+	 * @see org.soluvas.newsletter.impl.NewsletterPackageImpl#getMailjetCredential()
+	 * @generated
+	 */
+	int MAILJET_CREDENTIAL = 2;
+
+	/**
+	 * The feature id for the '<em><b>Api Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAILJET_CREDENTIAL__API_KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Secret Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAILJET_CREDENTIAL__SECRET_KEY = 1;
+
+	/**
+	 * The feature id for the '<em><b>Default Contact ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAILJET_CREDENTIAL__DEFAULT_CONTACT_ID = 2;
+
+	/**
+	 * The number of structural features of the '<em>Mailjet Credential</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAILJET_CREDENTIAL_FEATURE_COUNT = 3;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.newsletter.MailjetManager <em>Mailjet Manager</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -275,6 +322,49 @@ public interface NewsletterPackage extends EPackage {
 	EAttribute getMailjetSysConfig_MailjetListId();
 
 	/**
+	 * Returns the meta object for class '{@link org.soluvas.newsletter.MailjetCredential <em>Mailjet Credential</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mailjet Credential</em>'.
+	 * @see org.soluvas.newsletter.MailjetCredential
+	 * @generated
+	 */
+	EClass getMailjetCredential();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.newsletter.MailjetCredential#getApiKey <em>Api Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Api Key</em>'.
+	 * @see org.soluvas.newsletter.MailjetCredential#getApiKey()
+	 * @see #getMailjetCredential()
+	 * @generated
+	 */
+	EAttribute getMailjetCredential_ApiKey();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.newsletter.MailjetCredential#getSecretKey <em>Secret Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Secret Key</em>'.
+	 * @see org.soluvas.newsletter.MailjetCredential#getSecretKey()
+	 * @see #getMailjetCredential()
+	 * @generated
+	 */
+	EAttribute getMailjetCredential_SecretKey();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.newsletter.MailjetCredential#getDefaultContactID <em>Default Contact ID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Contact ID</em>'.
+	 * @see org.soluvas.newsletter.MailjetCredential#getDefaultContactID()
+	 * @see #getMailjetCredential()
+	 * @generated
+	 */
+	EAttribute getMailjetCredential_DefaultContactID();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -379,6 +469,40 @@ public interface NewsletterPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MAILJET_SYS_CONFIG__MAILJET_LIST_ID = eINSTANCE.getMailjetSysConfig_MailjetListId();
+
+		/**
+		 * The meta object literal for the '{@link org.soluvas.newsletter.impl.MailjetCredentialImpl <em>Mailjet Credential</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.soluvas.newsletter.impl.MailjetCredentialImpl
+		 * @see org.soluvas.newsletter.impl.NewsletterPackageImpl#getMailjetCredential()
+		 * @generated
+		 */
+		EClass MAILJET_CREDENTIAL = eINSTANCE.getMailjetCredential();
+
+		/**
+		 * The meta object literal for the '<em><b>Api Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAILJET_CREDENTIAL__API_KEY = eINSTANCE.getMailjetCredential_ApiKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Secret Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAILJET_CREDENTIAL__SECRET_KEY = eINSTANCE.getMailjetCredential_SecretKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Contact ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAILJET_CREDENTIAL__DEFAULT_CONTACT_ID = eINSTANCE.getMailjetCredential_DefaultContactID();
 
 	}
 

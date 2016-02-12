@@ -6,6 +6,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.config.SysConfigMapHolder;
 import org.soluvas.commons.tenant.TenantBeans;
 import org.soluvas.commons.tenant.TenantUtils;
+import org.soluvas.newsletter.impl.MailjetCredentialImpl;
 import org.soluvas.newsletter.impl.MailjetManagerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,9 +37,36 @@ public class MailjetConfig {
 		};
 	}
 	
+	@Bean(destroyMethod="destroy")
+	public TenantBeans<MailjetServiceManager> mjServiceMgrBeans() {
+		return new TenantBeans<MailjetServiceManager>(MailjetServiceManagerImpl.class) {
+			@Override
+			protected MailjetServiceManager create(String tenantId,
+					AppManifest appManifest) throws Exception {
+				final MailjetSysConfig mjConfig = TenantUtils.selectBean(tenantId, sysConfigMapHolder.sysConfigMap(), 
+						MailjetSysConfig.class);
+				
+				final String contactID = String.valueOf(mjConfig.getMailjetListId());
+				final MailjetCredentialImpl mjCredential = new MailjetCredentialImpl(mjConfig.getMailjetApiKey(), 
+						mjConfig.getMailjetSecretKey(), contactID);
+				final MailjetServiceManagerImpl mjServiceMgr = new MailjetServiceManagerImpl(mjCredential, 
+						mjConfig.getMailjetEnabled());
+				
+				return mjServiceMgr;
+			}
+			
+		};
+	}
+	
+	
 	@Bean @Scope("prototype")
 	public MailjetManager mailjetMgr() {
 		return mailjetMgrBeans().getCurrent();
+	}
+	
+	@Bean @Scope("prototype")
+	public MailjetServiceManager mjServiceMgr() {
+		return mjServiceMgrBeans().getCurrent();
 	}
 	
 }

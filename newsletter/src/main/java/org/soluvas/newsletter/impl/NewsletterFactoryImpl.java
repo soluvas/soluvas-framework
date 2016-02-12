@@ -57,6 +57,7 @@ public class NewsletterFactoryImpl extends EFactoryImpl implements NewsletterFac
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case NewsletterPackage.MAILJET_MANAGER: return createMailjetManager();
+			case NewsletterPackage.MAILJET_CREDENTIAL: return createMailjetCredential();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -70,6 +71,16 @@ public class NewsletterFactoryImpl extends EFactoryImpl implements NewsletterFac
 	public MailjetManager createMailjetManager() {
 		MailjetManagerImpl mailjetManager = new MailjetManagerImpl();
 		return mailjetManager;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MailjetCredential createMailjetCredential() {
+		MailjetCredentialImpl mailjetCredential = new MailjetCredentialImpl();
+		return mailjetCredential;
 	}
 
 	/**

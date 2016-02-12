@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.soluvas.newsletter.MailjetCredential;
 import org.soluvas.newsletter.MailjetManager;
 import org.soluvas.newsletter.MailjetSysConfig;
 import org.soluvas.newsletter.NewsletterFactory;
@@ -33,6 +34,13 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 	 * @generated
 	 */
 	private EClass mailjetSysConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mailjetCredentialEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -190,6 +198,42 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMailjetCredential() {
+		return mailjetCredentialEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMailjetCredential_ApiKey() {
+		return (EAttribute)mailjetCredentialEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMailjetCredential_SecretKey() {
+		return (EAttribute)mailjetCredentialEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMailjetCredential_DefaultContactID() {
+		return (EAttribute)mailjetCredentialEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public NewsletterFactory getNewsletterFactory() {
 		return (NewsletterFactory)getEFactoryInstance();
 	}
@@ -224,6 +268,11 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 		createEAttribute(mailjetSysConfigEClass, MAILJET_SYS_CONFIG__MAILJET_API_KEY);
 		createEAttribute(mailjetSysConfigEClass, MAILJET_SYS_CONFIG__MAILJET_SECRET_KEY);
 		createEAttribute(mailjetSysConfigEClass, MAILJET_SYS_CONFIG__MAILJET_LIST_ID);
+
+		mailjetCredentialEClass = createEClass(MAILJET_CREDENTIAL);
+		createEAttribute(mailjetCredentialEClass, MAILJET_CREDENTIAL__API_KEY);
+		createEAttribute(mailjetCredentialEClass, MAILJET_CREDENTIAL__SECRET_KEY);
+		createEAttribute(mailjetCredentialEClass, MAILJET_CREDENTIAL__DEFAULT_CONTACT_ID);
 	}
 
 	/**
@@ -268,6 +317,11 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 		initEAttribute(getMailjetSysConfig_MailjetSecretKey(), ecorePackage.getEString(), "mailjetSecretKey", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMailjetSysConfig_MailjetListId(), ecorePackage.getELongObject(), "mailjetListId", null, 1, 1, MailjetSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(mailjetCredentialEClass, MailjetCredential.class, "MailjetCredential", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMailjetCredential_ApiKey(), ecorePackage.getEString(), "apiKey", null, 0, 1, MailjetCredential.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMailjetCredential_SecretKey(), ecorePackage.getEString(), "secretKey", null, 0, 1, MailjetCredential.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMailjetCredential_DefaultContactID(), ecorePackage.getEString(), "defaultContactID", null, 0, 1, MailjetCredential.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -283,37 +337,37 @@ public class NewsletterPackageImpl extends EPackageImpl implements NewsletterPac
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		String source = "http://www.eclipse.org/emf/2002/GenModel";	
 		addAnnotation
 		  (getMailjetManager_ApiKey(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Mailjet API Key."
-		   });		
+		   });	
 		addAnnotation
 		  (getMailjetManager_SecretKey(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Mailjet Secret Key."
-		   });		
+		   });	
 		addAnnotation
 		  (getMailjetManager_ListId(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Mailjet List ID."
-		   });		
+		   });	
 		addAnnotation
 		  (getMailjetSysConfig_MailjetApiKey(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Mailjet API Key."
-		   });		
+		   });	
 		addAnnotation
 		  (getMailjetSysConfig_MailjetSecretKey(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Mailjet Secret Key."
-		   });		
+		   });	
 		addAnnotation
 		  (getMailjetSysConfig_MailjetListId(), 
 		   source, 

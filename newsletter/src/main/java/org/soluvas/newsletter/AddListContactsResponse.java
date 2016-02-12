@@ -1,5 +1,9 @@
 package org.soluvas.newsletter;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author atang
  *
@@ -7,7 +11,10 @@ package org.soluvas.newsletter;
 public class AddListContactsResponse {
 	
 	private String status;
-	private String list_id;
+	private List<DataResponse> data;
+	private Integer total;
+	private Integer count;
+	
 	/**
 	 * 
 	 */
@@ -15,33 +22,48 @@ public class AddListContactsResponse {
 		super();
 	}
 	
-	public AddListContactsResponse(String status, String list_id) {
-		super();
-		this.status = status;
-		this.list_id = list_id;
-	}
-
+	
 	public String getStatus() {
 		return status;
 	}
-
+	
+	@JsonProperty("Status")
 	public void setStatus(String status) {
-		this.status = status;
+		status = status;
+	}
+	
+	public List<DataResponse> getData() {
+		return data;
+	}
+	
+	@JsonProperty("Data")
+	public void setData(List<DataResponse> data) {
+		data = data;
+	}
+	
+	public Integer getTotal() {
+		return total;
+	}
+	
+	@JsonProperty("Total")
+	public void setTotal(Integer total) {
+		total = total;
+	}
+	
+	public Integer getCount() {
+		return count;
+	}
+	
+	@JsonProperty("Count")
+	public void setCount(Integer count) {
+		count = count;
 	}
 
-	public String getList_id() {
-		return list_id;
-	}
-
-	public void setList_id(String list_id) {
-		this.list_id = list_id;
-	}
 
 	@Override
 	public String toString() {
-		return "NewListContactsResponse ["
-				+ (status != null ? "status=" + status + ", " : "")
-				+ (list_id != null ? "list_id=" + list_id : "") + "]";
+		return "AddListContactsResponse [Status=" + status + ", Data=" + data
+				+ ", Total=" + total + ", Count=" + count + "]";
 	}
 	
 	

@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -17,6 +18,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SuppressWarnings("serial")
 public class Mailjet implements Serializable {
 	private static final Logger log = LoggerFactory.getLogger(Mailjet.class);
-	private String apiUri;
+	private String basicApiUri;
 	
 	private UsernamePasswordCredentials userCredentials;
 	private DefaultHttpClient httpClient;
@@ -40,16 +42,20 @@ public class Mailjet implements Serializable {
 	
 	private String errorMessage;
 	private AddContactResponse addContactRespone;
+	private MailjetManager mailjetMgr;
 	
 	public Mailjet(MailjetManager mailjetManager) {
 		userCredentials = new UsernamePasswordCredentials(mailjetManager.getApiKey(),
 				mailjetManager.getSecretKey()
 				);
-		this.apiUri = "https://api.mailjet.com/0.1/";
+		
+		this.basicApiUri = "https://api.mailjet.com/v3/REST/";
 		httpClient = new DefaultHttpClient();
+		
 		httpClient.getCredentialsProvider().setCredentials(
 				AuthScope.ANY
 				, userCredentials);
+		mailjetMgr = mailjetManager;
 	}
 	
 	public Mailjet() {
@@ -58,22 +64,35 @@ public class Mailjet implements Serializable {
 	
 	/**
 	 * 
-	 * @param listId
-	 * @param email
+	 * @param contactID
+	 * @param emailValue
 	 * @return
 	 */
 	@Deprecated
-	public AddContactResponse addContact(long listId, String email) {
+	public AddContactResponse addContact(long contactID, String emailValue) {
 		ArrayList<NameValuePair> formParams = new ArrayList<NameValuePair>();
-		formParams.add(new BasicNameValuePair("contact", email));
-		formParams.add(new BasicNameValuePair("id", String.valueOf(listId)));
+		formParams.add(new BasicNameValuePair("Email", emailValue));
+		formParams.add(new BasicNameValuePair("Action", "addforce"));
 		
 		try {
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams, "UTF-8");
-			HttpPost httpPost = new HttpPost(apiUri + "listsAddcontact/?output=json");
+			HttpPost httpPost = new HttpPost(basicApiUri + "contactlist/"+ contactID +"/managecontact");
+			
+			final List<BasicHeader> basicHeaders = new ArrayList<BasicHeader>();
+			basicHeaders.add(new BasicHeader("Accept", "application/json"));
+			basicHeaders.add(new BasicHeader("user-agent", "mailjet-apiv3-java/v3.0.0"));
+			
+			org.apache.commons.codec.binary.Base64.encodeBase64((mailjetMgr.getApiKey() + ":" + mailjetMgr.getSecretKey()).getBytes());
+			basicHeaders.add(new BasicHeader("Authorization", "Basic "));
+			
+			httpPost.setHeader("Accept", "application/json");
+			
+			
+			
 			httpPost.setEntity(entity);
 			
-			log.info("sending request to add contact");
+			log.info("sending request to add contact {}", emailValue);
+			
 			HttpResponse httpResponse = httpClient.execute(httpPost);
 			log.debug("HttpResponse status code {}", httpResponse.getStatusLine().getStatusCode());
 			if (httpResponse.getStatusLine().getStatusCode() != 200 ){
@@ -84,24 +103,33 @@ public class Mailjet implements Serializable {
 			return mapper.readValue(responseContent, AddContactResponse.class);
 			
 		} catch (Exception ex) {
-			throw new RuntimeException("Cannot add contact "+ email, ex);
+			throw new RuntimeException("Cannot add contact "+ emailValue, ex);
 		}
 	}
 	
 	/**
 	 * 
 	 * @param listId
-	 * @param email
+	 * @param emailValue
 	 * @return
 	 */
-	public boolean insertContact(long listId, String email) {
-		ArrayList<NameValuePair> formParams = new ArrayList<NameValuePair>();
-		formParams.add(new BasicNameValuePair("contact", email));
-		formParams.add(new BasicNameValuePair("id", String.valueOf(listId)));
-		
+	public boolean insertContact(long contactID, String emailValue) {
 		try {
+			final String apiUri = basicApiUri + "contactslist/"+ contactID +"/managecontact";
+			HttpPost httpPost = new HttpPost(apiUri);
+			
+			final List<BasicHeader> basicHeaders = new ArrayList<BasicHeader>();
+			basicHeaders.add(new BasicHeader("Accept", "application/json"));
+			basicHeaders.add(new BasicHeader("user-agent", "mailjet-apiv3-java/v3.0.0"));
+			
+			final String authEncBytes = Base64.encodeBase64String((mailjetMgr.getApiKey() + ":" + mailjetMgr.getSecretKey()).getBytes());
+			basicHeaders.add(new BasicHeader("Authorization", "Basic "+ authEncBytes));
+			httpPost.setHeaders(basicHeaders.toArray(new BasicHeader[basicHeaders.size()]));
+			
+			ArrayList<NameValuePair> formParams = new ArrayList<NameValuePair>();
+			formParams.add(new BasicNameValuePair("Email", emailValue));
+			formParams.add(new BasicNameValuePair("Action", "unsub"));
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams, "UTF-8");
-			HttpPost httpPost = new HttpPost(apiUri + "listsAddcontact/?output=json");
 			httpPost.setEntity(entity);
 
 			HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -120,7 +148,7 @@ public class Mailjet implements Serializable {
 			}
 			
 		} catch (Exception ex) {
-			throw new RuntimeException("Cannot add contact "+ email, ex);
+			throw new RuntimeException("Cannot add contact "+ emailValue, ex);
 		}
 	}
 
@@ -140,7 +168,7 @@ public class Mailjet implements Serializable {
 	 * @return
 	 */
 	public ListContactsResponse showContacts() {
-		HttpGet httpGet = new HttpGet(apiUri + "contactList/?output=json");
+		HttpGet httpGet = new HttpGet(basicApiUri + "contactList/?output=json");
 		try {
 			log.info("sending request to mailjet to show all contacts");
 			HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -169,7 +197,7 @@ public class Mailjet implements Serializable {
 		
 		try {
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formParams, "UTF-8");
-			HttpPost httpPost = new HttpPost(apiUri + "listsAddcontact/?output=json");
+			HttpPost httpPost = new HttpPost(basicApiUri + "listsAddcontact/?output=json");
 			httpPost.setEntity(entity);
 			
 			log.info("sending request to create new list contact");

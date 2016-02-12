@@ -8,7 +8,6 @@ package org.soluvas.newsletter;
  *
  */
 public class AddContactResponse {
-	
 	private String status;
 	private String contact_id;
 	
@@ -36,13 +35,6 @@ public class AddContactResponse {
 
 	public void setContact_id(String contact_id) {
 		this.contact_id = contact_id;
-	}
-
-	@Override
-	public String toString() {
-		return "AddContactResponse ["
-				+ (status != null ? "status=" + status + ", " : "")
-				+ (contact_id != null ? "contact_id=" + contact_id : "") + "]";
 	}
 
 	

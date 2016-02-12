@@ -76,6 +76,10 @@ public class NewsletterAdapterFactory extends AdapterFactoryImpl {
 				return createMailjetSysConfigAdapter();
 			}
 			@Override
+			public Adapter caseMailjetCredential(MailjetCredential object) {
+				return createMailjetCredentialAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -120,6 +124,20 @@ public class NewsletterAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMailjetSysConfigAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.soluvas.newsletter.MailjetCredential <em>Mailjet Credential</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.soluvas.newsletter.MailjetCredential
+	 * @generated
+	 */
+	public Adapter createMailjetCredentialAdapter() {
 		return null;
 	}
 

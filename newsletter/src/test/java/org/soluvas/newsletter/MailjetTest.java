@@ -102,7 +102,6 @@ public class MailjetTest {
 	@Test
 	public void createListContacts() {
 		AddListContactsResponse newContact = mailjet.createListContact("berbatik_customers", "Berbatik Customers");
-		log.debug("1 list contacts had added with id {}", newContact.getList_id());
 		assertNotNull(newContact);
 	}
 

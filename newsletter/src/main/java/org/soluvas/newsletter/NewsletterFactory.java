@@ -31,6 +31,15 @@ public interface NewsletterFactory extends EFactory {
 	MailjetManager createMailjetManager();
 
 	/**
+	 * Returns a new object of class '<em>Mailjet Credential</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mailjet Credential</em>'.
+	 * @generated
+	 */
+	MailjetCredential createMailjetCredential();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
