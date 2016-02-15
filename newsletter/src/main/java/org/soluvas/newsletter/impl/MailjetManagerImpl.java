@@ -119,6 +119,7 @@ public class MailjetManagerImpl extends EObjectImpl implements MailjetManager {
 	}
 	
 	@Inject
+	@Deprecated
 	public MailjetManagerImpl(boolean enabled,
 			String apiKey, String secretKey, Long listId) {
 		super();
