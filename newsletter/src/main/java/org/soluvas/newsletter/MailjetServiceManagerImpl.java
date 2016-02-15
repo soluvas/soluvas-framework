@@ -14,6 +14,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.json.JsonUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,6 +23,9 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 public class MailjetServiceManagerImpl implements MailjetServiceManager {
+	private static final Logger log = LoggerFactory
+			.getLogger(MailjetServiceManagerImpl.class);
+	
 	private final MailjetCredential credential;
 	private final Boolean isServiceEnable;
 	
@@ -47,7 +52,7 @@ public class MailjetServiceManagerImpl implements MailjetServiceManager {
 	}
 	
 	@Override
-	public AddListContactsResponse addContact(String email) throws IOException {
+	public MailjetResponse addContact(String email) throws IOException {
 		final CloseableHttpClient httpClient = HttpClients.custom().build();
 		try {
 			final List<NameValuePair> data = new ArrayList<NameValuePair>();
@@ -64,8 +69,8 @@ public class MailjetServiceManagerImpl implements MailjetServiceManager {
 			CloseableHttpResponse reqResponse = httpClient.execute(httpPost);
 			final String responseContent = IOUtils.toString(reqResponse.getEntity().getContent());
 			
-			
-			return mapper.readValue(responseContent, AddListContactsResponse.class);
+			log.debug("responseContent {}", responseContent);
+			return mapper.readValue(responseContent, MailjetResponse.class);
 		} finally {
 			httpClient.close();
 		}

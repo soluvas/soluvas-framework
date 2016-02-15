@@ -11,6 +11,6 @@ import java.io.IOException;
  */
 public interface MailjetServiceManager {
 
-	AddListContactsResponse addContact(String email) throws IOException;
+	MailjetResponse addContact(String email) throws IOException;
 
 }

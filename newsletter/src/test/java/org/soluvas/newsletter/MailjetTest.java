@@ -2,6 +2,7 @@ package org.soluvas.newsletter;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -18,6 +19,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.newsletter.impl.MailjetManagerImpl;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -101,9 +106,29 @@ public class MailjetTest {
 	
 	@Test
 	public void createListContacts() {
-		AddListContactsResponse newContact = mailjet.createListContact("berbatik_customers", "Berbatik Customers");
+		MailjetResponse newContact = mailjet.createListContact("berbatik_customers", "Berbatik Customers");
 		assertNotNull(newContact);
 	}
-
+	
+	@Test
+	public void jsonMapper() {
+//		final String content = "{\"Count\": 1, \"Data\": [{\"ContactID\" : \"1567993179\", \"Email\": \"bebep@gmail.com\", \"Action\": \"unsub\", \"Name\": \"bebed\", \"Properties\": {} }], \"Total\": 1 }";
+		String content = "{ \"Count\": 1, \"Data\": [{ \"ContactID\": 1567993182, \"Email\": \"enamdimensi@localhost.com\", \"Action\": \"unsub\", \"Name\": \"\", \"Properties\": {  } }], \"Total\": 1 }";
+		try {
+			final ObjectMapper mapper = new ObjectMapper();
+//			mapper.configure(Feature.ALLOW_SINGLE_QUOTES, true);
+			MailjetResponse response = mapper.readValue(content, MailjetResponse.class);
+			log.debug("response {}", response);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }

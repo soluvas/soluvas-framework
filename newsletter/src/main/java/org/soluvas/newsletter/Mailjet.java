@@ -190,7 +190,7 @@ public class Mailjet implements Serializable {
 	 * @param name
 	 * @return
 	 */
-	public AddListContactsResponse createListContact(String label, String name) {
+	public MailjetResponse createListContact(String label, String name) {
 		ArrayList<NameValuePair> formParams = new ArrayList<NameValuePair>();
 		formParams.add(new BasicNameValuePair("label", label));
 		formParams.add(new BasicNameValuePair("name", name));
@@ -208,7 +208,7 @@ public class Mailjet implements Serializable {
 						);
 			
 			final String responseContent = IOUtils.toString(httpResponse.getEntity().getContent());
-			return mapper.readValue(responseContent, AddListContactsResponse.class);
+			return mapper.readValue(responseContent, MailjetResponse.class);
 			
 		} catch (Exception ex) {
 			throw new RuntimeException("Error when create new list contact ", ex);

@@ -8,63 +8,44 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author atang
  *
  */
-public class AddListContactsResponse {
-	
+public class MailjetResponse {
+	@JsonProperty("Status")
 	private String status;
+	@JsonProperty("Data")
 	private List<DataResponse> data;
+	@JsonProperty("Total")
 	private Integer total;
+	@JsonProperty("Count")
 	private Integer count;
-	
-	/**
-	 * 
-	 */
-	public AddListContactsResponse() {
-		super();
-	}
-	
 	
 	public String getStatus() {
 		return status;
 	}
 	
-	@JsonProperty("Status")
 	public void setStatus(String status) {
-		status = status;
-	}
-	
-	public List<DataResponse> getData() {
-		return data;
-	}
-	
-	@JsonProperty("Data")
-	public void setData(List<DataResponse> data) {
-		data = data;
+		this.status = status;
 	}
 	
 	public Integer getTotal() {
 		return total;
 	}
 	
-	@JsonProperty("Total")
 	public void setTotal(Integer total) {
-		total = total;
+		this.total = total;
 	}
 	
 	public Integer getCount() {
 		return count;
 	}
 	
-	@JsonProperty("Count")
 	public void setCount(Integer count) {
-		count = count;
+		this.count = count;
 	}
-
 
 	@Override
 	public String toString() {
-		return "AddListContactsResponse [Status=" + status + ", Data=" + data
-				+ ", Total=" + total + ", Count=" + count + "]";
+		return "MailjetResponse [status=" + status + ", data=" + data
+				+ ", total=" + total + ", count=" + count + "]";
 	}
-	
 	
 }
