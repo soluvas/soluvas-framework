@@ -33,7 +33,7 @@ public class MailjetServiceManagerImpl implements MailjetServiceManager {
 		this.credential = credential;
 		this.isServiceEnable = isServiceEnable;
 		
-		if (isServiceEnable) {
+		if (isServiceEnable != null && isServiceEnable) {
 			Preconditions.checkArgument(!Strings.isNullOrEmpty(credential.getApiKey()), "If Mailjet is enabled, apiKey must be provided");
 			Preconditions.checkArgument(!Strings.isNullOrEmpty(credential.getSecretKey()), "If Mailjet is enabled, secretKey must be provided");
 		}
