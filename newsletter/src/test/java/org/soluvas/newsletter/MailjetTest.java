@@ -106,8 +106,8 @@ public class MailjetTest {
 	
 	@Test
 	public void createListContacts() {
-		MailjetResponse newContact = mailjet.createListContact("berbatik_customers", "Berbatik Customers");
-		assertNotNull(newContact);
+//		MailjetResponse newContact = mailjet.createListContact("berbatik_customers", "Berbatik Customers");
+//		assertNotNull(newContact);
 	}
 	
 	@Test
