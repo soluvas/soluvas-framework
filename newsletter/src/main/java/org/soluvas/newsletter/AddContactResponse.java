@@ -7,6 +7,7 @@ package org.soluvas.newsletter;
  * @author atang
  *
  */
+@Deprecated
 public class AddContactResponse {
 	private String status;
 	private String contact_id;

@@ -5,66 +5,59 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class DataResponse {
+	@JsonProperty("ContactID")
 	private String contactId;
+	@JsonProperty("Name")
 	private String name;
+	@JsonProperty("Email")
 	private String email;
+	@JsonProperty("Action")
 	private String action;
+	@JsonProperty("Properties")
 	private Map<String, Object> properties;
 	
-	public DataResponse() {
-		super();
-	}
 	
 	public String getContactID() {
-		return contactId;
+		return contactId;	
 	}
 	
-	@JsonProperty("ContactID")
+	
 	public void setContactID(String contactID) {
-		contactId = contactID;
+		this.contactId = contactID;
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	@JsonProperty("Name")
+	
 	public void setName(String name) {
-		name = name;
+		this.name = name;
 	}
 	
 	public String getEmail() {
 		return email;
 	}
 	
-	@JsonProperty("Email")
+	
 	public void setEmail(String email) {
-		email = email;
+		this.email = email;
 	}
 	
 	public String getAction() {
 		return action;
 	}
 	
-	@JsonProperty("Action")
 	public void setAction(String action) {
-		action = action;
-	}
-	
-	public Map<String, Object> getProperties() {
-		return properties;
+		this.action = action;
 	}
 
-	@JsonProperty("Properties")
-	public void setProperties(Map<String, Object> properties) {
-		this.properties = properties;
-	}
-	
+
 	@Override
 	public String toString() {
-		return "DataResponse [ContactID=" + contactId + ", Name=" + name
-				+ ", Email=" + email + ", Action=" + action + "]";
+		return "DataResponse [contactId=" + contactId + ", name=" + name
+				+ ", email=" + email + ", action=" + action + ", properties="
+				+ properties + "]";
 	}
-	
 	
 }
