@@ -33,7 +33,7 @@ import com.google.common.collect.ImmutableList;
  *
  */
 @Service @Scope("prototype")
-@Command(scope="sec", name="migrate", description="Migrate Permissions from XMI to Jsonld")
+@Command(scope="sec", name="migratepermissions", description="Migrate Permissions from XMI to Jsonld")
 public class MigratePermissionCommand extends ExtCommandSupport {
 	
 	private static final Logger log = LoggerFactory.getLogger(MigratePermissionCommand.class);

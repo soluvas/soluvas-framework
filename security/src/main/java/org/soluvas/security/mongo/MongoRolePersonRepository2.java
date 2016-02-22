@@ -1,5 +1,6 @@
 package org.soluvas.security.mongo;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,8 +17,10 @@ import org.soluvas.security.Role2;
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.mapping.DefaultCreator;
 import com.google.common.base.Function;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClientURI;
 import com.mongodb.ReadPreference;
@@ -27,7 +30,7 @@ import com.mongodb.WriteResult;
  * @author anisa
  *
  */
-public class MongoRolePersonRepository2 implements RolePersonRepository {
+public class MongoRolePersonRepository2 implements RolePersonRepository2 {
 	
 	private static final Logger log = LoggerFactory.getLogger(MongoRolePersonRepository2.class);
 	
@@ -104,6 +107,22 @@ public class MongoRolePersonRepository2 implements RolePersonRepository {
 		log.info("{} role(s) has/have been added", result.getN());
 		
 		return upRoleList;
+	}
+
+	@Override
+	public List<Role2> findAll() {
+		final BasicDBObject query = new BasicDBObject();
+		final BasicDBObject fields = new BasicDBObject();
+		
+		final DBCursor dbCursor = rolePersonColl.find(query, fields);
+		final List<Role2> roleList = new ArrayList<>();
+		while (dbCursor.hasNext()) {
+			final DBObject dbObject = dbCursor.next();
+			final Role2 role = new DBObjectToEntity().apply(dbObject);
+			roleList.add(role);
+		}
+		log.info("Find all by query '{}' and field '{}' got {} role(s)", query, fields, roleList);
+		return roleList;
 	}
 	
 }

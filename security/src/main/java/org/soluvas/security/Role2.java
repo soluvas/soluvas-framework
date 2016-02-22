@@ -7,16 +7,22 @@ import java.util.Map;
 import org.joda.time.DateTime;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.mongo.DateTimeConverter;
+
+import com.google.code.morphia.annotations.Converters;
+import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.converters.EnumConverter;
 
 /**
  * @author anisa
  *
  */
+@Converters({DateTimeConverter.class, EnumConverter.class})
 public class Role2 implements Serializable, Identifiable, Timestamped {
 	
 	private static final long serialVersionUID = 1L;
 
-	private String id;
+	@Id private String id;
 	
 	private String name;
 	

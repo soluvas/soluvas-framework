@@ -8,8 +8,10 @@ import org.soluvas.security.Role2;
  * @author anisa
  *
  */
-public interface RolePersonRepository {
+public interface RolePersonRepository2 {
 	
 	List<Role2> addAll(List<Role2> upRoleList);
+	
+	List<Role2> findAll();
 
 }

@@ -1,0 +1,497 @@
+{
+  "@type" : "DomainPermissionCatalog",
+  "domainPermissions" : [ {
+    "@type" : "DomainPermission",
+    "id" : "person",
+    "name" : "person",
+    "description" : "Person or user",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "view",
+      "name" : "view",
+      "description" : "view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "list",
+      "name" : "list",
+      "description" : "list"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "sec_role",
+    "name" : "sec_role",
+    "description" : "Security role"
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "sec_action",
+    "name" : "sec_action",
+    "description" : "Security action"
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "sec_domain",
+    "name" : "sec_domain",
+    "description" : "Security domain"
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "story",
+    "name" : "story",
+    "description" : "Story",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "cart",
+    "name" : "cart",
+    "description" : "Cart/Shopping Bag",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "view",
+      "name" : "view",
+      "description" : "view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "booking_report",
+      "name" : "booking_report",
+      "description" : "booking_report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "list",
+      "name" : "list",
+      "description" : "list"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "comment",
+    "name" : "comment",
+    "description" : "Comment",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "mall",
+    "name" : "mall",
+    "description" : "Mall",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "report",
+      "name" : "report",
+      "description" : "report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "term_view",
+      "name" : "term_view",
+      "description" : "term_view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "term_list",
+      "name" : "term_list",
+      "description" : "term_list"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "term_add",
+      "name" : "term_add",
+      "description" : "term_add"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "void_rfc",
+      "name" : "void_rfc",
+      "description" : "void_rfc"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "gallery",
+    "name" : "gallery",
+    "description" : "Gallery"
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "inventory",
+    "name" : "inventory",
+    "description" : "Inventory",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "stock_reservation_list",
+      "name" : "stock_reservation_list",
+      "description" : "stock_reservation_list"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "add_line",
+      "name" : "add_line",
+      "description" : "add_line"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "initial_report",
+      "name" : "initial_report",
+      "description" : "initial_report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "inventory_report",
+      "name" : "inventory_report",
+      "description" : "inventory_report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "goods_receipt_list",
+      "name" : "goods_receipt_list",
+      "description" : "goods_receipt_list"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "goods_shipment_view",
+      "name" : "goods_shipment_view",
+      "description" : "goods_shipment_view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "view",
+      "name" : "view",
+      "description" : "view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "add",
+      "name" : "add",
+      "description" : "add"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "return_material_receipt_view",
+      "name" : "return_material_receipt_view",
+      "description" : "return_material_receipt_view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "void",
+      "name" : "void",
+      "description" : "void"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "mutation_report",
+      "name" : "mutation_report",
+      "description" : "mutation_report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "create_booked_goods_receipt",
+      "name" : "create_booked_goods_receipt",
+      "description" : "create_booked_goods_receipt"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "replay",
+      "name" : "replay",
+      "description" : "replay"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "list",
+      "name" : "list",
+      "description" : "list"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "barcode_report",
+      "name" : "barcode_report",
+      "description" : "barcode_report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "goods_shipment_list",
+      "name" : "goods_shipment_list",
+      "description" : "goods_shipment_list"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "modify",
+      "name" : "modify",
+      "description" : "modify"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "print",
+      "name" : "print",
+      "description" : "print"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "add_goods_receipt",
+      "name" : "add_goods_receipt",
+      "description" : "add_goods_receipt"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "remove_line",
+      "name" : "remove_line",
+      "description" : "remove_line"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "product_mutation_report",
+      "name" : "product_mutation_report",
+      "description" : "product_mutation_report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "create_draft_goods_receipt",
+      "name" : "create_draft_goods_receipt",
+      "description" : "create_draft_goods_receipt"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "return_material_receipt_list",
+      "name" : "return_material_receipt_list",
+      "description" : "return_material_receipt_list"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "available_report",
+      "name" : "available_report",
+      "description" : "available_report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "stock_reservation_view",
+      "name" : "stock_reservation_view",
+      "description" : "stock_reservation_view"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "like",
+    "name" : "like",
+    "description" : "Like",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "partnership",
+    "name" : "partnership",
+    "description" : "Partnership",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "payment",
+    "name" : "payment",
+    "description" : "Payment",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "person",
+    "name" : "person",
+    "description" : "Person",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "view",
+      "name" : "view",
+      "description" : "view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "list",
+      "name" : "list",
+      "description" : "list"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "product",
+    "name" : "product",
+    "description" : "Product",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "view",
+      "name" : "view",
+      "description" : "view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "report",
+      "name" : "report",
+      "description" : "report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "promotion",
+    "name" : "promotion",
+    "description" : "Promotion",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "set_active",
+      "name" : "set_active",
+      "description" : "set_active"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "report",
+      "name" : "report",
+      "description" : "report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "list",
+      "name" : "list",
+      "description" : "list"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "returnfromcustomer",
+    "name" : "returnfromcustomer",
+    "description" : "Return From Customer",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "view",
+      "name" : "view",
+      "description" : "view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "list",
+      "name" : "list",
+      "description" : "list"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "accept",
+      "name" : "accept",
+      "description" : "accept"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "review",
+    "name" : "review",
+    "description" : "Review",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "salesorder",
+    "name" : "salesorder",
+    "description" : "Sales Order",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "add",
+      "name" : "add",
+      "description" : "add"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "cancel",
+      "name" : "cancel",
+      "description" : "cancel"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "agent_sales_report",
+      "name" : "agent_sales_report",
+      "description" : "agent_sales_report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "checkout_product",
+      "name" : "checkout_product",
+      "description" : "checkout_product"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "ship",
+      "name" : "ship",
+      "description" : "ship"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "pay",
+      "name" : "pay",
+      "description" : "pay"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "unpay",
+      "name" : "unpay",
+      "description" : "unpay"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "list",
+      "name" : "list",
+      "description" : "list"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "modify",
+      "name" : "modify",
+      "description" : "modify"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "view",
+      "name" : "view",
+      "description" : "view"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "product_sales_report",
+      "name" : "product_sales_report",
+      "description" : "product_sales_report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "report",
+      "name" : "report",
+      "description" : "report"
+    }, {
+      "@type" : "ActionPermission",
+      "id" : "sales_perfomance",
+      "name" : "sales_perfomance",
+      "description" : "sales_perfomance"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "shipment",
+    "name" : "shipment",
+    "description" : "Shipment",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "add",
+      "name" : "add",
+      "description" : "add"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "shop",
+    "name" : "shop",
+    "description" : "Shop",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    } ]
+  }, {
+    "@type" : "DomainPermission",
+    "id" : "wink",
+    "name" : "wink",
+    "description" : "Wink",
+    "actionPermission" : [ {
+      "@type" : "ActionPermission",
+      "id" : "*",
+      "name" : "*",
+      "description" : "*"
+    } ]
+  } ]
+}
