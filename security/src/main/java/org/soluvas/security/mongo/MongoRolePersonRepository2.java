@@ -2,6 +2,7 @@ package org.soluvas.security.mongo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
@@ -10,6 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.impl.EmailImpl;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.mongo.MongoRepositoryException;
 import org.soluvas.mongo.MongoUtils;
 import org.soluvas.security.Role2;
@@ -17,6 +22,8 @@ import org.soluvas.security.Role2;
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.mapping.DefaultCreator;
 import com.google.common.base.Function;
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -116,13 +123,68 @@ public class MongoRolePersonRepository2 implements RolePersonRepository2 {
 		
 		final DBCursor dbCursor = rolePersonColl.find(query, fields);
 		final List<Role2> roleList = new ArrayList<>();
-		while (dbCursor.hasNext()) {
 			final DBObject dbObject = dbCursor.next();
+			while (dbCursor.hasNext()) {
 			final Role2 role = new DBObjectToEntity().apply(dbObject);
 			roleList.add(role);
 		}
 		log.info("Find all by query '{}' and field '{}' got {} role(s)", query, fields, roleList);
 		return roleList;
+	}
+
+	@Override
+	public Page<Role2> findAll(String searchText, Pageable pageable) {
+		final BasicDBObject query;
+		if (!Strings.isNullOrEmpty(searchText)) {
+			query = getQueryBySearchText(searchText);
+		} else {
+			query = new BasicDBObject();
+		}
+		final BasicDBObject fields = new BasicDBObject();
+		
+		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "modificationTime", Sort.Direction.DESC);
+		
+		final DBCursor dbCursor = rolePersonColl.find(query, fields, (int) pageable.getOffset(), (int) pageable.getPageSize()).sort(sortQuery);
+		final List<Role2> roleList = new ArrayList<>();
+		while (dbCursor.hasNext()) {
+			final DBObject dbObject = dbCursor.next();
+			final Role2 role = new DBObjectToEntity().apply(dbObject);
+			roleList.add(role);
+		}
+		
+		final long total = count(searchText);
+		return new PageImpl<>(roleList, pageable, total);
+		
+	}
+
+	@Override
+	public long count(String searchText) {
+		final BasicDBObject query;
+		if (!Strings.isNullOrEmpty(searchText)) {
+			query = getQueryBySearchText(searchText);
+		} else {
+			query = new BasicDBObject();
+		}
+		return rolePersonColl.count(query);
+	}
+	
+	private BasicDBObject getQueryBySearchText(String searchText) {
+		final Pattern regex = Pattern.compile(Pattern.quote(searchText), Pattern.CASE_INSENSITIVE);
+		BasicDBObject idQuery = new BasicDBObject("id", regex);
+		BasicDBObject nameQuery = new BasicDBObject("name", regex);
+		BasicDBObject descriptionQuery = new BasicDBObject("description", regex);
+		BasicDBObject query = new BasicDBObject("$or", ImmutableList.of(idQuery, nameQuery , descriptionQuery));
+		return query;
+	}
+
+	@Override
+	public Role2 findOne(String id) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", id);
+		log.debug("Find One Role by id '{}' - query: {}", id, query);
+		final DBObject dbObject = rolePersonColl.findOne(query);
+		final Role2 role = new DBObjectToEntity().apply(dbObject);
+		return role;
 	}
 	
 }
