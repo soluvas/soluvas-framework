@@ -984,14 +984,14 @@
 				<!-- for development -->
 			    <groupId>de.huxhorn.lilith</groupId>
 			    <artifactId>de.huxhorn.lilith.logback.appender.multiplex-classic</artifactId>
-			    <version>0.9.44</version>
+			    <version>8.0.0</version>
 			    <scope>runtime</scope>
 			</dependency>			
 			<dependency>
 				<!-- for live site -->
 			    <groupId>com.logentries</groupId>
 			    <artifactId>logentries-appender</artifactId>
-			    <version>1.1.30</version>
+			    <version>1.1.32</version>
 			    <scope>runtime</scope>
 			</dependency>
 			<dependency>
