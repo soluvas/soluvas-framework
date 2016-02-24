@@ -984,7 +984,7 @@
 				<!-- for development -->
 			    <groupId>de.huxhorn.lilith</groupId>
 			    <artifactId>de.huxhorn.lilith.logback.appender.multiplex-classic</artifactId>
-			    <version>0.9.44</version>
+			    <version>8.0.0</version>
 			    <scope>runtime</scope>
 			</dependency>			
 			<dependency>
