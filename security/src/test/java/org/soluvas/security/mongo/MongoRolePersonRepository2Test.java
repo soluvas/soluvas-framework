@@ -1,8 +1,10 @@
 package org.soluvas.security.mongo;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.security.AssignMode;
 import org.soluvas.security.Role2;
 
 /**
@@ -27,5 +29,20 @@ public class MongoRolePersonRepository2Test {
 		
 		log.info("Find one by id '{}': {}", id, role);
 	}
-
+	
+	@Test
+	public void addNew() {
+		final Role2 role = new Role2();
+		role.setAssignMode(AssignMode.AUTHENTICATED);
+		role.setCreationTime(new DateTime());
+		role.setDescription("Description");
+		role.setId("Id");
+		role.setModificationTime(new DateTime());
+		role.setName("Name");
+		
+		rolePersonRepo.add(role);
+		log.debug("inserting....");
+	}
+	
+	
 }

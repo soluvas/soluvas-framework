@@ -23,5 +23,9 @@ public interface RolePersonRepository2 {
 	long count(String searchText);
 	
 	@Nullable Role2 findOne(String id);
+	
+	Role2 add(Role2 newRole);
+	
+//	Role2 modify(String id, Role2 upRole);
 
 }

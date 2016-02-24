@@ -35,6 +35,10 @@ public class Role2 implements Serializable, Identifiable, Timestamped {
 	private AssignMode assignMode;
 	
 	private Map<String, List<String>> permissions;
+	
+	public Role2() {
+		super();
+	}
 
 	@Override
 	public String getId() {
