@@ -37,6 +37,8 @@ public interface CategoryInfo extends CategoryLike, Parentable<CategoryInfo>, Tr
 	 */
 	public static final String RSAQUO = " › ";
 
+	public CategoryInfo2 toInfo2();
+	
 	/**
 	 * Returns the value of the '<em><b>Parents</b></em>' containment reference list.
 	 * The list contents are of type {@link org.soluvas.commons.CategoryInfo}.
