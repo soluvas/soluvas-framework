@@ -39,6 +39,12 @@ public class Role2 implements Serializable, Identifiable, Timestamped {
 	public Role2() {
 		super();
 	}
+	
+	public Role2(final String id, final String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 
 	@Override
 	public String getId() {
