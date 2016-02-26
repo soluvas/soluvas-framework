@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.soluvas.commons.CategoryInfo;
+import org.soluvas.commons.CategoryInfo2;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
@@ -1319,6 +1320,29 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 	@JsonIgnore @Override
 	public String getUName() {
 		return getNsPrefix() + "_" + getId();
+	}
+
+	@Override
+	public CategoryInfo2 toInfo2() {
+		
+		CategoryInfo2 categoryInfo2 = new CategoryInfo2();
+		categoryInfo2.setColor(getColor());
+		categoryInfo2.setGoogleFormalId(getGoogleFormalId());
+		categoryInfo2.setId(getId());
+		categoryInfo2.setImageId(getImageId());
+		categoryInfo2.setLevel(getLevel());
+		categoryInfo2.setName(getName());
+		categoryInfo2.setNsPrefix(getNsPrefix());
+		if (getParent() != null){
+			categoryInfo2.setParentId(getParent().getId());
+		}
+		categoryInfo2.setPositioner(getPositioner());
+		categoryInfo2.setPrimaryUri(getPrimaryUri());
+		categoryInfo2.setSlug(getSlug());
+		categoryInfo2.setSlugPath(getSlugPath());
+		
+		
+		return categoryInfo2;
 	}
 	
 } //CategoryInfoImpl
