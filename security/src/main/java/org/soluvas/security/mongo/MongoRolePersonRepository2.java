@@ -187,13 +187,22 @@ public class MongoRolePersonRepository2 implements RolePersonRepository2 {
 		return role;
 	}
 
-	@Override
-	public Role2 add(Role2 newRole) {
-		final DBObject dbObject = new EntityToDBObject().apply(newRole);
+	@Override //method 
+	public Role2 add(Role2 roleBaru) {
+		final DBObject dbObject = new EntityToDBObject().apply(roleBaru);
 		final WriteResult result = rolePersonColl.insert(dbObject);
 		
-		log.info("Role '{}' has been added: {}", newRole, result.getLastError());
-		return newRole;
+		log.info("Role '{}' has been added: {}", roleBaru, result.getLastError());
+		return roleBaru;
+	}
+
+	@Override
+	public Role2 modify(String id, Role2 upRole) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", id);
+		final DBObject dbObject = new EntityToDBObject().apply(upRole);
+		rolePersonColl.update(query, dbObject);
+		return upRole;
 	}
 	
 }

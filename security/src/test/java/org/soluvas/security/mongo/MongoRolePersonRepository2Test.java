@@ -43,6 +43,15 @@ public class MongoRolePersonRepository2Test {
 		rolePersonRepo.add(role);
 		log.debug("inserting....");
 	}
-	
+
+	@Test
+	public void modifyData() {
+		final String idRole = ("3");
+		final Role2 role = rolePersonRepo.findOne(idRole);
+		role.setName("Name");
+		
+		final Role2 modifiedRole = rolePersonRepo.modify(idRole, role);
+		log.info("Role '{}' has been modified", modifiedRole.getId());
+	}
 	
 }
