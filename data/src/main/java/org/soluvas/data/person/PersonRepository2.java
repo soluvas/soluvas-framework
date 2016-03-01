@@ -1,6 +1,7 @@
 package org.soluvas.data.person;
 
 import org.soluvas.commons.Person;
+import org.soluvas.data.StatusMask;
 
 import java.util.Optional;
 
@@ -10,6 +11,6 @@ import java.util.Optional;
  */
 public interface PersonRepository2 {
 
-    Optional<Person> findOne(String tenantId, String personId);
+    Optional<Person> findOne(String tenantId, StatusMask statusMask, String personId);
 
 }

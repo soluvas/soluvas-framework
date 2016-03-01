@@ -1,6 +1,7 @@
 package org.soluvas.data.person;
 
 import org.soluvas.commons.Person;
+import org.soluvas.data.StatusMask;
 
 import java.util.Optional;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
  */
 public class JpaPersonRepository2 implements PersonRepository2 {
     @Override
-    public Optional<Person> findOne(String tenantId, String personId) {
+    public Optional<Person> findOne(String tenantId, StatusMask statusMask, String personId) {
         // FIXME: implement this
         return Optional.empty();
     }
