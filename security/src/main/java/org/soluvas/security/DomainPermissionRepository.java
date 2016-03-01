@@ -15,10 +15,10 @@ public interface DomainPermissionRepository {
 
 	void init() throws JsonParseException, JsonMappingException, IOException;
 	
-	DomainPermission2 findOne(String id);
+	DomainPermission2 findOne(String domainId);
 	
 	ImmutableCollection<DomainPermission2> findAll();
 	
-	Collection<DomainPermission2> findAll(Collection<String> ids);
+	Collection<DomainPermission2> findAll(Collection<String> domainIds);
 	
 }

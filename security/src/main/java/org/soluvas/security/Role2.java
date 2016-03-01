@@ -55,11 +55,11 @@ public class Role2 implements Serializable, Identifiable, Timestamped {
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}

@@ -53,8 +53,8 @@ public class DomainPermissionRepositoryImpl implements DomainPermissionRepositor
 	}
 
 	@Override
-	public DomainPermission2 findOne(String id) {
-		return baseDomainPermission2.get(id);
+	public DomainPermission2 findOne(String domainId) {
+		return baseDomainPermission2.get(domainId);
 	}
 
 	@Override
@@ -63,12 +63,12 @@ public class DomainPermissionRepositoryImpl implements DomainPermissionRepositor
 	}
 
 	@Override
-	public Collection<DomainPermission2> findAll(Collection<String> ids) {
+	public Collection<DomainPermission2> findAll(Collection<String> domainIds) {
 		return baseDomainPermission2.entrySet().stream().filter(new Predicate<Entry<String, DomainPermission2>>() {
 
 			@Override
 			public boolean test(Entry<String, DomainPermission2> t) {
-				return ids.contains(t.getKey());
+				return domainIds.contains(t.getKey());
 			}
 		}).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue())).values();
 	}

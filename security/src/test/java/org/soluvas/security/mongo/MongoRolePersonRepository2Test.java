@@ -24,7 +24,7 @@ public class MongoRolePersonRepository2Test {
 
 	@Test
 	public void findOneById() {
-		final String id = "";
+		final String id = "admin";
 		final Role2 role = rolePersonRepo.findOne(id);
 		
 		log.info("Find one by id '{}': {}", id, role);

@@ -291,28 +291,6 @@
     } ]
   }, {
     "@type" : "DomainPermission",
-    "id" : "person",
-    "name" : "person",
-    "description" : "Person",
-    "actionPermission" : [ {
-      "@type" : "ActionPermission",
-      "id" : "view",
-      "name" : "view",
-      "description" : "view"
-    }, {
-      "@type" : "ActionPermission",
-      "id" : "*",
-      "name" : "*",
-      "description" : "*"
-    }, {
-      "@type" : "ActionPermission",
-      "id" : "list",
-      "name" : "list",
-      "description" : "list"
-    } ]
-  }, {
-  
-    "@type" : "DomainPermission",
     "id" : "product",
     "name" : "product",
     "description" : "Product",
