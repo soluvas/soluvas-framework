@@ -311,6 +311,7 @@
       "description" : "list"
     } ]
   }, {
+  
     "@type" : "DomainPermission",
     "id" : "product",
     "name" : "product",
