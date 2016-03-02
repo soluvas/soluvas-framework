@@ -22,6 +22,8 @@ public class Role2 implements Serializable, Identifiable, Timestamped {
 	
 	private static final long serialVersionUID = 1L;
 
+	
+	//attribute 
 	@Id private String id;
 	
 	private String name;
@@ -36,10 +38,12 @@ public class Role2 implements Serializable, Identifiable, Timestamped {
 	
 	private Map<String, List<String>> permissions;
 	
+	//constructor tanpa parameter
 	public Role2() {
 		super();
 	}
 	
+	//contructor dengan parameter id dan name yang ber type data STRING!!!
 	public Role2(final String id, final String name) {
 		super();
 		this.id = id;
@@ -47,11 +51,13 @@ public class Role2 implements Serializable, Identifiable, Timestamped {
 	}
 
 	@Override
+	//method dengan return value yg bertype  "STRING"
 	public String getId() {
 		return id;
 	}
 
 	@Override
+	//method bukan return value //parameter id bertype string 
 	public void setId(String id) {
 		this.id = id;
 	}

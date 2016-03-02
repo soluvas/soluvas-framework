@@ -11,10 +11,13 @@ import com.google.common.collect.ImmutableCollection;
  * @author rudi
  *
  */
+
+//interface adalah standarisasi implementasi
 public interface DomainPermissionRepository {
 
 	void init() throws JsonParseException, JsonMappingException, IOException;
 	
+	//return type value //nama method di implementasi //nama parameter yang bertype data string 
 	DomainPermission2 findOne(String domainId);
 	
 	ImmutableCollection<DomainPermission2> findAll();
