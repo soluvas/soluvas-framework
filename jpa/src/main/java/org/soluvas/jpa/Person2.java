@@ -5,44 +5,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.soluvas.commons.*;
-import org.soluvas.commons.Describable;
-import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PostalAddress;
-import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.impl.EmailImpl;
 
-import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
-import javax.money.Monetary;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -64,6 +43,26 @@ import java.util.List;
 @JsonInclude(Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Person2 implements Serializable {
+
+    /**
+     * For Spring Security {@link org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl#setUsersByUsernameQuery()}.
+     */
+    public static final String USERS_BY_USERNAME_QUERY =
+            "SELECT id, password, status IN ('active', 'verified') AS enabled " +
+                    "FROM public.person " +
+                    "WHERE id = ?";
+    // other tables + ACL tables are same. we only customize the users/person table
+//    public static final String AUTHORITIES_BY_USERNAME_QUERY =
+//            "select username,authority " +
+//                    "from authorities " +
+//                    "where username = ?";
+//    public static final String GROUP_AUTHORITIES_BY_USERNAME_QUERY =
+//            "select g.id, g.group_name, ga.authority " +
+//                    "from groups g, group_members gm, group_authorities ga " +
+//                    "where gm.username = ? " +
+//                    "and g.id = ga.group_id " +
+//                    "and g.id = gm.group_id";
+
     @Id
     @JsonProperty("uid")
     protected String id;
@@ -101,7 +100,7 @@ public class Person2 implements Serializable {
     protected List<PhoneNumber> mobileNumbers = new ArrayList<>();
     protected List<PostalAddress> addresses = new ArrayList<>();
     protected static final AccountStatus ACCOUNT_STATUS_EDEFAULT = AccountStatus.DRAFT;
-    protected AccountStatus accountStatus = ACCOUNT_STATUS_EDEFAULT;
+    protected AccountStatus status = ACCOUNT_STATUS_EDEFAULT;
     protected Integer birthYear;
     protected Integer birthMonth;
     protected Integer birthDay;
@@ -476,12 +475,12 @@ public class Person2 implements Serializable {
         this.password = password;
     }
 
-    public AccountStatus getAccountStatus() {
-        return accountStatus;
+    public AccountStatus getStatus() {
+        return status;
     }
 
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
+    public void setStatus(AccountStatus status) {
+        this.status = status;
     }
 
     public Integer getBirthYear() {
@@ -822,7 +821,7 @@ public class Person2 implements Serializable {
                 .add("emails", emails)
                 .add("mobileNumbers", mobileNumbers)
                 .add("addresses", addresses)
-                .add("accountStatus", accountStatus)
+                .add("accountStatus", status)
                 .add("birthYear", birthYear)
                 .add("birthMonth", birthMonth)
                 .add("birthDay", birthDay)
