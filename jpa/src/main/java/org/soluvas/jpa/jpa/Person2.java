@@ -52,7 +52,7 @@ import java.util.List;
  * supports both app-scoped and tenant-scoped users in one table,
  * supports role based access control,
  * Liquibase YAML usable to be copied into app's {@code db.changelog-master.yaml},
- * and compatible with Spring Security's JDBC Authentication and Authorization with minimal configuration,
+ * and compatible with <a href="http://docs.spring.io/spring-security/site/docs/4.0.4.RELEASE/reference/htmlsingle/#appendix-schema">Spring Security's JDBC Authentication and Authorization + ACL</a> ({@link org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl} + {@code JdbcMutableAclService}) with minimal configuration,
  * usable to be integrated with graph database such as Neo4j and distributed graph database such as Titan+Cassandra
  * and Spark GraphX processing,
  * usable to be used in Spring HATEOAS / JSON-LD / Hydra as {@code schema:Person},
