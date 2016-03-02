@@ -1,14 +1,13 @@
-package org.soluvas.jpa.jpa;
+package org.soluvas.commons;
 
 /**
  * A representation of the model object '<em><b>Describable</b></em>'. <!--
  * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Has
  * description. <!-- end-model-doc -->
- *
- * @deprecated Use {@link org.soluvas.commons.Describable2}
+ * 
+ * @generated
  */
-@Deprecated
-public interface Describable {
+public interface Describable2 {
 	/**
 	 * Returns the value of '<em><b>description</em></b>' feature.
 	 *

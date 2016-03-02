@@ -1,4 +1,4 @@
-package org.soluvas.jpa;
+package org.soluvas.commons;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -10,9 +10,6 @@ import com.google.common.base.Optional;
 import com.google.common.collect.Iterables;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import org.soluvas.commons.*;
-import org.soluvas.commons.PostalAddress;
-import org.soluvas.commons.impl.EmailImpl;
 
 import javax.money.CurrencyUnit;
 import javax.persistence.Basic;
@@ -95,10 +92,10 @@ public class Person2 implements Serializable {
     protected String firstName;
     protected String lastName;
     protected String password;
-    protected List<PhoneNumber> phoneNumbers = new ArrayList<>();
-    protected List<Email> emails = new ArrayList<>();
-    protected List<PhoneNumber> mobileNumbers = new ArrayList<>();
-    protected List<PostalAddress> addresses = new ArrayList<>();
+    protected List<PhoneNumber2> phoneNumbers = new ArrayList<>();
+    protected List<Email2> emails = new ArrayList<>();
+    protected List<PhoneNumber2> mobileNumbers = new ArrayList<>();
+    protected List<PostalAddress2> addresses = new ArrayList<>();
     protected static final AccountStatus ACCOUNT_STATUS_EDEFAULT = AccountStatus.DRAFT;
     protected AccountStatus status = ACCOUNT_STATUS_EDEFAULT;
     protected Integer birthYear;
@@ -141,7 +138,7 @@ public class Person2 implements Serializable {
     protected BigDecimal debitBalance;
     protected CurrencyUnit debitCurrency;
     protected String verifyCode;
-    protected List<Organization> organizations = new ArrayList<>();
+    protected List<Organization2> organizations = new ArrayList<>();
 
     public Person2() {
         super();
@@ -172,12 +169,12 @@ public class Person2 implements Serializable {
         this.tenantId = tenantId;
     }
 
-    public List<PhoneNumber> getPhoneNumbers() {
+    public List<PhoneNumber2> getPhoneNumbers() {
         return phoneNumbers;
     }
 
     public String getPhoneNumber() {
-        final Optional<PhoneNumber> primaryPhone = Iterables.tryFind(getPhoneNumbers(), PhoneNumber::isPrimary);
+        final Optional<PhoneNumber2> primaryPhone = Iterables.tryFind(getPhoneNumbers(), PhoneNumber2::getPrimary);
         if (primaryPhone.isPresent()) {
             return primaryPhone.get().getPhoneNumber();
         } else if (!getPhoneNumbers().isEmpty()) {
@@ -193,13 +190,13 @@ public class Person2 implements Serializable {
         throw new UnsupportedOperationException();
     }
 
-    public List<PhoneNumber> getMobileNumbers() {
+    public List<PhoneNumber2> getMobileNumbers() {
         return mobileNumbers;
     }
 
     @JsonProperty
     public String getMobileNumber() {
-        final Optional<PhoneNumber> primaryMobile = Iterables.tryFind(getMobileNumbers(), PhoneNumber::isPrimary);
+        final Optional<PhoneNumber2> primaryMobile = Iterables.tryFind(getMobileNumbers(), PhoneNumber2::getPrimary);
         if (primaryMobile.isPresent()) {
             return primaryMobile.get().getPhoneNumber();
         } else if (!getMobileNumbers().isEmpty()) {
@@ -215,14 +212,14 @@ public class Person2 implements Serializable {
         throw new UnsupportedOperationException();
     }
 
-    public List<PostalAddress> getAddresses() {
+    public List<PostalAddress2> getAddresses() {
         return addresses;
     }
 
     @JsonIgnore
-    public PostalAddress getPrimaryAddress() {
+    public PostalAddress2 getPrimaryAddress() {
         if (getAddresses() != null && !getAddresses().isEmpty()) {
-            final Optional<PostalAddress> primaryAddress = Iterables.tryFind(getAddresses(), PostalAddress::isPrimary);
+            final Optional<PostalAddress2> primaryAddress = Iterables.tryFind(getAddresses(), PostalAddress2::isPrimary);
             if (primaryAddress.isPresent()) {
                 return primaryAddress.get();
             } else {
@@ -234,14 +231,14 @@ public class Person2 implements Serializable {
     }
 
     @JsonIgnore
-    public PostalAddress getPrimaryShippingAddress() {
+    public PostalAddress2 getPrimaryShippingAddress() {
         if (getAddresses() != null && !getAddresses().isEmpty()) {
-            final Optional<PostalAddress> primaryShippingAddress = Iterables.tryFind(getAddresses(), PostalAddress::isPrimaryShipping);
+            final Optional<PostalAddress2> primaryShippingAddress = Iterables.tryFind(getAddresses(), PostalAddress2::isPrimaryShipping);
             if (primaryShippingAddress.isPresent()) {
                 return primaryShippingAddress.get();
             }
 
-            final Optional<PostalAddress> primaryAddress = Iterables.tryFind(getAddresses(), PostalAddress::isPrimary);
+            final Optional<PostalAddress2> primaryAddress = Iterables.tryFind(getAddresses(), PostalAddress2::isPrimary);
             if (primaryAddress.isPresent()) {
                 return primaryAddress.get();
             } else {
@@ -253,14 +250,14 @@ public class Person2 implements Serializable {
     }
 
     @JsonIgnore
-    public PostalAddress getPrimaryBillingAddress() {
+    public PostalAddress2 getPrimaryBillingAddress() {
         if (getAddresses() != null && !getAddresses().isEmpty()) {
-            final Optional<PostalAddress> primaryBillingAddress = Iterables.tryFind(getAddresses(), PostalAddress::isPrimaryBilling);
+            final Optional<PostalAddress2> primaryBillingAddress = Iterables.tryFind(getAddresses(), PostalAddress2::isPrimaryBilling);
             if (primaryBillingAddress.isPresent()) {
                 return primaryBillingAddress.get();
             }
 
-            final Optional<PostalAddress> primaryAddress = Iterables.tryFind(getAddresses(), PostalAddress::isPrimary);
+            final Optional<PostalAddress2> primaryAddress = Iterables.tryFind(getAddresses(), PostalAddress2::isPrimary);
             if (primaryAddress.isPresent()) {
                 return primaryAddress.get();
             } else {
@@ -271,7 +268,7 @@ public class Person2 implements Serializable {
         }
     }
 
-    public List<Email> getEmails() {
+    public List<Email2> getEmails() {
         return emails;
     }
 
@@ -287,16 +284,16 @@ public class Person2 implements Serializable {
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      */
-    public Email putEmail(String email) {
+    public Email2 putEmail(String email) {
         if (email == null) {
             return null;
         }
         final String normalized = NameUtils.normalizeEmail(email);
-        final Optional<Email> found = Iterables.tryFind(getEmails(), input -> normalized.equals(input.getEmail()));
+        final Optional<Email2> found = Iterables.tryFind(getEmails(), input -> normalized.equals(input.getEmail()));
         if (found.isPresent()) {
             return found.get();
         } else {
-            final Email newEmail = new EmailImpl(normalized, getEmails().isEmpty());
+            final Email2 newEmail = new Email2(normalized, getEmails().isEmpty());
             getEmails().add(newEmail);
             return newEmail;
         }
@@ -304,7 +301,7 @@ public class Person2 implements Serializable {
 
     @JsonProperty
     public String getEmail() {
-        final Optional<Email> primaryEmail = Iterables.tryFind(getEmails(), Email::isPrimary);
+        final Optional<Email2> primaryEmail = Iterables.tryFind(getEmails(), Email2::getPrimary);
         if (primaryEmail.isPresent()) {
             return primaryEmail.get().getEmail();
         } else if (!getEmails().isEmpty()) {
@@ -791,7 +788,7 @@ public class Person2 implements Serializable {
         this.verifyCode = verifyCode;
     }
 
-    public List<Organization> getOrganizations() {
+    public List<Organization2> getOrganizations() {
         return organizations;
     }
 

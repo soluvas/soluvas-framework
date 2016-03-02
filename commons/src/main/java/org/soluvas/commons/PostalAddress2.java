@@ -1,25 +1,22 @@
-package org.soluvas.jpa.jpa;
+package org.soluvas.commons;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-
+import com.google.common.base.Preconditions;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.CommonsFactory;
 
-import com.google.common.base.Preconditions;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
- * A representation of the model object '<em><b>PostalAddress</b></em>'. <!--
+ * A representation of the model object '<em><b>PostalAddress2</b></em>'. <!--
  * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> See
  * http://www.upu.int/en/activities/addressing/standards.html - UPU S42.
  * 
@@ -35,17 +32,15 @@ import com.google.common.base.Preconditions;
  * (Customer) Address 5. Shop Address 6. Mall Address <!-- end-model-doc -->
  * 
  * @todo lat Latitude, lon Longitude, ele Elevation
- * @deprecated Use {@link org.soluvas.commons.PostalAddress2}
  */
 @Embeddable()
-@Deprecated
-public class PostalAddress implements Describable, Serializable {
+public class PostalAddress2 implements Describable2, Serializable {
 
 	private static final Logger log = LoggerFactory
-			.getLogger(PostalAddress.class);
+			.getLogger(PostalAddress2.class);
 
-	public static PostalAddress getDefaultPrimaryAddress() {
-		final PostalAddress postalAddress = new PostalAddress();
+	public static PostalAddress2 getDefaultPrimaryAddress() {
+		final PostalAddress2 postalAddress = new PostalAddress2();
 		postalAddress.setId(UUID.randomUUID());
 		postalAddress.setPrimary(true);
 		postalAddress.setPrimaryBilling(true);
@@ -53,21 +48,18 @@ public class PostalAddress implements Describable, Serializable {
 		return postalAddress;
 	}
 
-	public static PostalAddress getDefaultAddress() {
-		final PostalAddress postalAddress = new PostalAddress();
+	public static PostalAddress2 getDefaultAddress() {
+		final PostalAddress2 postalAddress = new PostalAddress2();
 		postalAddress.setId(UUID.randomUUID());
 		return postalAddress;
 	}
 
-	public static org.soluvas.commons.PostalAddress toCommons(
-			PostalAddress jpaPostalAddressUp) {
-		final org.soluvas.commons.PostalAddress emfPostalAddress = CommonsFactory.eINSTANCE
-				.createPostalAddress();
-		Preconditions.checkNotNull(jpaPostalAddressUp,
-				"Postal Address must not be null");
-		emfPostalAddress
-				.setId(jpaPostalAddressUp.getId() != null ? jpaPostalAddressUp
-						.getId().toString() : UUID.randomUUID().toString());
+	public static PostalAddress toCommons(
+			PostalAddress2 jpaPostalAddressUp) {
+		final PostalAddress emfPostalAddress = CommonsFactory.eINSTANCE.createPostalAddress();
+		Preconditions.checkNotNull(jpaPostalAddressUp, "Postal Address must not be null");
+		emfPostalAddress.setId(jpaPostalAddressUp.getId() != null ?
+				jpaPostalAddressUp.getId().toString() : UUID.randomUUID().toString());
 		emfPostalAddress.setCity(jpaPostalAddressUp.getCity());
 		emfPostalAddress.setCountry(jpaPostalAddressUp.getCountry());
 		emfPostalAddress.setCountryCode(jpaPostalAddressUp.getCountryCode());
@@ -120,13 +112,12 @@ public class PostalAddress implements Describable, Serializable {
 		return emfPostalAddress;
 	}
 
-	public static PostalAddress fromCommons(
-			org.soluvas.commons.PostalAddress commonsPostalAddressUp) {
-		final PostalAddress jpaPostalAddress = new PostalAddress();
+	public static PostalAddress2 fromCommons(
+			PostalAddress commonsPostalAddressUp) {
+		final PostalAddress2 jpaPostalAddress = new PostalAddress2();
 		Preconditions.checkNotNull(commonsPostalAddressUp,
 				"Postal Address must not be null");
-		jpaPostalAddress
-				.setId(commonsPostalAddressUp.getId() != null ? UUID
+		jpaPostalAddress.setId(commonsPostalAddressUp.getId() != null ? UUID
 						.fromString(commonsPostalAddressUp.getId()) : UUID
 						.randomUUID());
 		jpaPostalAddress.setCity(commonsPostalAddressUp.getCity());
@@ -195,7 +186,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 */
 	@Basic()
 	@Column(columnDefinition = "uuid")
@@ -204,7 +195,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -215,7 +206,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * Organization or company name who will send or receive. Can be empty.
 	 * RFC2256: organization this object belongs to LDAP: o, organizationName
 	 * <!-- end-model-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -223,7 +214,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -231,7 +222,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -239,7 +230,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -247,7 +238,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -256,9 +247,9 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC1274: friendly country name.
-	 * 
+	 *
 	 * LDAP: co, friendlyCountryName <!-- end-model-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -267,9 +258,9 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * ISO 3166-1 alpha-2.
-	 * 
+	 *
 	 * LDAP: c, countryName <!-- end-model-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -277,7 +268,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -287,7 +278,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC1274: mobile telephone number LDAP: mobile, mobileTelephoneNumber <!--
 	 * end-model-doc -->
-	 * 
+	 *
 	 */
 	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
@@ -296,10 +287,10 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC2256: Telephone Number LDAP: telephoneNumber
-	 * 
+	 *
 	 * For offices, usually work phone. For people, usually home phone. <!--
 	 * end-model-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -307,7 +298,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 */
 	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
@@ -315,7 +306,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -325,7 +316,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC1274: home telephone number. LDAP: homePhone, homeTelephoneNumber.
 	 * <!-- end-model-doc -->
-	 * 
+	 *
 	 */
 	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
@@ -333,7 +324,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -342,7 +333,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC2256: Telephone Number. LDAP: (not yet mapped) <!-- end-model-doc -->
-	 * 
+	 *
 	 */
 	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
@@ -350,7 +341,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -359,7 +350,7 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * LDAP: mail. <!-- end-model-doc -->
-	 * 
+	 *
 	 */
 	@Column(columnDefinition = "varchar[]")
 	@Type(type = "org.soluvas.jpa.PersistentStringList")
@@ -369,7 +360,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Designates this Address as the primary Address of the containing list.
 	 * <!-- end-model-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -379,7 +370,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Designates this Address as the primary billing Address of the containing
 	 * list. <!-- end-model-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -389,7 +380,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Designates this Address as the primary billing Address of the containing
 	 * list. <!-- end-model-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -398,13 +389,13 @@ public class PostalAddress implements Describable, Serializable {
 	/**
 	 * <!-- begin-user-doc --> Problem with @Columns and @Embeddable:
 	 * https://github.com/JadiraOrg/jadira/issues/20
-	 * 
+	 *
 	 * @todo <b>WARNING:</b> Custom {@link #getValidationTime()} and
 	 *       {@link #setValidationTime(DateTime)} implementation! Please reset
 	 *       if Jadira issue is fixed. <!-- end-user-doc --> <!--
 	 *       begin-model-doc --> When this postal address was validated by the
 	 *       user. <!-- end-model-doc -->
-	 * 
+	 *
 	 */
 	@Basic()
 	// @Columns(columns = { @Column(name = "validationtime"),
@@ -414,7 +405,7 @@ public class PostalAddress implements Describable, Serializable {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -424,7 +415,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * What this address represents, usually "Home", "Work", etc. <!--
 	 * end-model-doc -->
-	 * 
+	 *
 	 * @generated
 	 */
 	@Basic()
@@ -436,11 +427,11 @@ public class PostalAddress implements Describable, Serializable {
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTimeZoneAsString")
 	private DateTimeZone validationTime_zone = null;
 
-	public PostalAddress() {
+	public PostalAddress2() {
 		super();
 	}
 
-	public PostalAddress(final org.soluvas.commons.PostalAddress postalAddressUp) {
+	public PostalAddress2(final PostalAddress postalAddressUp) {
 		Preconditions.checkNotNull(postalAddressUp,
 				"Postal Address must not be null");
 		setId(postalAddressUp.getId() != null ? UUID.fromString(postalAddressUp
@@ -484,12 +475,12 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getId() <em>id</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getId() <em>id</em>}' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 *
 	 * @param newId
-	 *            the new value of the '{@link PostalAddress#getId() id}'
+	 *            the new value of the '{@link PostalAddress2#getId() id}'
 	 *            feature.
 	 * @generated
 	 */
@@ -510,12 +501,12 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getName() <em>name</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getName() <em>name</em>}' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 *
 	 * @param newName
-	 *            the new value of the '{@link PostalAddress#getName() name}'
+	 *            the new value of the '{@link PostalAddress2#getName() name}'
 	 *            feature.
 	 * @generated
 	 */
@@ -539,7 +530,7 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getOrganization() <em>organization</em>}'
+	 * Sets the '{@link PostalAddress2#getOrganization() <em>organization</em>}'
 	 * feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -548,7 +539,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @param newOrganization
-	 *            the new value of the '{@link PostalAddress#getOrganization()
+	 *            the new value of the '{@link PostalAddress2#getOrganization()
 	 *            organization}' feature.
 	 * @generated
 	 */
@@ -569,12 +560,12 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getStreet() <em>street</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getStreet() <em>street</em>}' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newStreet
-	 *            the new value of the '{@link PostalAddress#getStreet() street}
+	 *            the new value of the '{@link PostalAddress2#getStreet() street}
 	 *            ' feature.
 	 * @generated
 	 */
@@ -595,12 +586,12 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getCity() <em>city</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getCity() <em>city</em>}' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newCity
-	 *            the new value of the '{@link PostalAddress#getCity() city}'
+	 *            the new value of the '{@link PostalAddress2#getCity() city}'
 	 *            feature.
 	 * @generated
 	 */
@@ -621,13 +612,13 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getPostalCode() <em>postalCode</em>}'
+	 * Sets the '{@link PostalAddress2#getPostalCode() <em>postalCode</em>}'
 	 * feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPostalCode
-	 *            the new value of the '{@link PostalAddress#getPostalCode()
+	 *            the new value of the '{@link PostalAddress2#getPostalCode()
 	 *            postalCode}' feature.
 	 * @generated
 	 */
@@ -648,12 +639,12 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getProvince() <em>province</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getProvince() <em>province</em>}' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newProvince
-	 *            the new value of the '{@link PostalAddress#getProvince()
+	 *            the new value of the '{@link PostalAddress2#getProvince()
 	 *            province}' feature.
 	 * @generated
 	 */
@@ -677,7 +668,7 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getCountry() <em>country</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getCountry() <em>country</em>}' feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC1274: friendly country name.
@@ -685,7 +676,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * LDAP: co, friendlyCountryName <!-- end-model-doc -->
 	 * 
 	 * @param newCountry
-	 *            the new value of the '{@link PostalAddress#getCountry()
+	 *            the new value of the '{@link PostalAddress2#getCountry()
 	 *            country}' feature.
 	 * @generated
 	 */
@@ -709,7 +700,7 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getCountryCode() <em>countryCode</em>}'
+	 * Sets the '{@link PostalAddress2#getCountryCode() <em>countryCode</em>}'
 	 * feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -718,7 +709,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * LDAP: c, countryName <!-- end-model-doc -->
 	 * 
 	 * @param newCountryCode
-	 *            the new value of the '{@link PostalAddress#getCountryCode()
+	 *            the new value of the '{@link PostalAddress2#getCountryCode()
 	 *            countryCode}' feature.
 	 * @generated
 	 */
@@ -739,13 +730,13 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getPrimaryMobile() <em>primaryMobile</em>}
+	 * Sets the '{@link PostalAddress2#getPrimaryMobile() <em>primaryMobile</em>}
 	 * ' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryMobile
-	 *            the new value of the '{@link PostalAddress#getPrimaryMobile()
+	 *            the new value of the '{@link PostalAddress2#getPrimaryMobile()
 	 *            primaryMobile}' feature.
 	 * @generated
 	 */
@@ -768,14 +759,14 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getMobiles() <em>mobiles</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getMobiles() <em>mobiles</em>}' feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC1274: mobile telephone number LDAP: mobile, mobileTelephoneNumber <!--
 	 * end-model-doc -->
 	 * 
 	 * @param newMobiles
-	 *            the new value of the '{@link PostalAddress#getMobiles()
+	 *            the new value of the '{@link PostalAddress2#getMobiles()
 	 *            mobiles}' feature.
 	 * @generated
 	 */
@@ -800,7 +791,7 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getPrimaryPhone() <em>primaryPhone</em>}'
+	 * Sets the '{@link PostalAddress2#getPrimaryPhone() <em>primaryPhone</em>}'
 	 * feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -810,7 +801,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * end-model-doc -->
 	 * 
 	 * @param newPrimaryPhone
-	 *            the new value of the '{@link PostalAddress#getPrimaryPhone()
+	 *            the new value of the '{@link PostalAddress2#getPrimaryPhone()
 	 *            primaryPhone}' feature.
 	 * @generated
 	 */
@@ -831,12 +822,12 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getPhones() <em>phones</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getPhones() <em>phones</em>}' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPhones
-	 *            the new value of the '{@link PostalAddress#getPhones() phones}
+	 *            the new value of the '{@link PostalAddress2#getPhones() phones}
 	 *            ' feature.
 	 * @generated
 	 */
@@ -857,14 +848,14 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getPrimaryHomePhone()
+	 * Sets the '{@link PostalAddress2#getPrimaryHomePhone()
 	 * <em>primaryHomePhone</em>}' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryHomePhone
 	 *            the new value of the '
-	 *            {@link PostalAddress#getPrimaryHomePhone() primaryHomePhone}'
+	 *            {@link PostalAddress2#getPrimaryHomePhone() primaryHomePhone}'
 	 *            feature.
 	 * @generated
 	 */
@@ -887,7 +878,7 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getHomePhones() <em>homePhones</em>}'
+	 * Sets the '{@link PostalAddress2#getHomePhones() <em>homePhones</em>}'
 	 * feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -895,7 +886,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * <!-- end-model-doc -->
 	 * 
 	 * @param newHomePhones
-	 *            the new value of the '{@link PostalAddress#getHomePhones()
+	 *            the new value of the '{@link PostalAddress2#getHomePhones()
 	 *            homePhones}' feature.
 	 * @generated
 	 */
@@ -916,14 +907,14 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getPrimaryWorkPhone()
+	 * Sets the '{@link PostalAddress2#getPrimaryWorkPhone()
 	 * <em>primaryWorkPhone</em>}' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryWorkPhone
 	 *            the new value of the '
-	 *            {@link PostalAddress#getPrimaryWorkPhone() primaryWorkPhone}'
+	 *            {@link PostalAddress2#getPrimaryWorkPhone() primaryWorkPhone}'
 	 *            feature.
 	 * @generated
 	 */
@@ -945,14 +936,14 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getWorkPhones() <em>workPhones</em>}'
+	 * Sets the '{@link PostalAddress2#getWorkPhones() <em>workPhones</em>}'
 	 * feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * RFC2256: Telephone Number. LDAP: (not yet mapped) <!-- end-model-doc -->
 	 * 
 	 * @param newWorkPhones
-	 *            the new value of the '{@link PostalAddress#getWorkPhones()
+	 *            the new value of the '{@link PostalAddress2#getWorkPhones()
 	 *            workPhones}' feature.
 	 * @generated
 	 */
@@ -973,13 +964,13 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getPrimaryEmail() <em>primaryEmail</em>}'
+	 * Sets the '{@link PostalAddress2#getPrimaryEmail() <em>primaryEmail</em>}'
 	 * feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newPrimaryEmail
-	 *            the new value of the '{@link PostalAddress#getPrimaryEmail()
+	 *            the new value of the '{@link PostalAddress2#getPrimaryEmail()
 	 *            primaryEmail}' feature.
 	 * @generated
 	 */
@@ -1001,13 +992,13 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getEmails() <em>emails</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getEmails() <em>emails</em>}' feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * LDAP: mail. <!-- end-model-doc -->
 	 * 
 	 * @param newEmails
-	 *            the new value of the '{@link PostalAddress#getEmails() emails}
+	 *            the new value of the '{@link PostalAddress2#getEmails() emails}
 	 *            ' feature.
 	 * @generated
 	 */
@@ -1030,14 +1021,14 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#isPrimary() <em>primary</em>}' feature.
+	 * Sets the '{@link PostalAddress2#isPrimary() <em>primary</em>}' feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
 	 * Designates this Address as the primary Address of the containing list.
 	 * <!-- end-model-doc -->
 	 * 
 	 * @param newPrimary
-	 *            the new value of the '{@link PostalAddress#isPrimary()
+	 *            the new value of the '{@link PostalAddress2#isPrimary()
 	 *            primary}' feature.
 	 * @generated
 	 */
@@ -1060,7 +1051,7 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#isPrimaryBilling()
+	 * Sets the '{@link PostalAddress2#isPrimaryBilling()
 	 * <em>primaryBilling</em>}' feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -1068,7 +1059,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * list. <!-- end-model-doc -->
 	 * 
 	 * @param newPrimaryBilling
-	 *            the new value of the '{@link PostalAddress#isPrimaryBilling()
+	 *            the new value of the '{@link PostalAddress2#isPrimaryBilling()
 	 *            primaryBilling}' feature.
 	 * @generated
 	 */
@@ -1091,7 +1082,7 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#isPrimaryShipping()
+	 * Sets the '{@link PostalAddress2#isPrimaryShipping()
 	 * <em>primaryShipping</em>}' feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -1100,7 +1091,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * 
 	 * @param newPrimaryShipping
 	 *            the new value of the '
-	 *            {@link PostalAddress#isPrimaryShipping() primaryShipping}'
+	 *            {@link PostalAddress2#isPrimaryShipping() primaryShipping}'
 	 *            feature.
 	 * @generated
 	 */
@@ -1123,7 +1114,7 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getValidationTime()
+	 * Sets the '{@link PostalAddress2#getValidationTime()
 	 * <em>validationTime</em>}' feature.
 	 * 
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -1132,7 +1123,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * 
 	 * @param newValidationTime
 	 *            the new value of the '
-	 *            {@link PostalAddress#getValidationTime() validationTime}'
+	 *            {@link PostalAddress2#getValidationTime() validationTime}'
 	 *            feature.
 	 */
 	public void setValidationTime(DateTime newValidationTime) {
@@ -1157,12 +1148,12 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getDistrict() <em>district</em>}' feature.
+	 * Sets the '{@link PostalAddress2#getDistrict() <em>district</em>}' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newDistrict
-	 *            the new value of the '{@link PostalAddress#getDistrict()
+	 *            the new value of the '{@link PostalAddress2#getDistrict()
 	 *            district}' feature.
 	 * @generated
 	 */
@@ -1186,7 +1177,7 @@ public class PostalAddress implements Describable, Serializable {
 	}
 
 	/**
-	 * Sets the '{@link PostalAddress#getDescription() <em>description</em>}'
+	 * Sets the '{@link PostalAddress2#getDescription() <em>description</em>}'
 	 * feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -1194,7 +1185,7 @@ public class PostalAddress implements Describable, Serializable {
 	 * end-model-doc -->
 	 * 
 	 * @param newDescription
-	 *            the new value of the '{@link PostalAddress#getDescription()
+	 *            the new value of the '{@link PostalAddress2#getDescription()
 	 *            description}' feature.
 	 * @generated
 	 */
@@ -1219,7 +1210,7 @@ public class PostalAddress implements Describable, Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "PostalAddress " + " [id: " + getId() + "]" + " [name: "
+		return "PostalAddress2 " + " [id: " + getId() + "]" + " [name: "
 				+ getName() + "]" + " [organization: " + getOrganization()
 				+ "]" + " [street: " + getStreet() + "]" + " [city: "
 				+ getCity() + "]" + " [postalCode: " + getPostalCode() + "]"
@@ -1278,7 +1269,7 @@ public class PostalAddress implements Describable, Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PostalAddress other = (PostalAddress) obj;
+		PostalAddress2 other = (PostalAddress2) obj;
 		if (city == null) {
 			if (other.city != null)
 				return false;
