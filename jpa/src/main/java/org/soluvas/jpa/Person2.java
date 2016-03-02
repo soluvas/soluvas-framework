@@ -1,4 +1,4 @@
-package org.soluvas.jpa.jpa;
+package org.soluvas.jpa;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
