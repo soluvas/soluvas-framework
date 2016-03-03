@@ -23,7 +23,7 @@ import org.soluvas.security.Permission;
 import org.soluvas.security.Role;
 import org.soluvas.security.Role2;
 import org.soluvas.security.SecurityCatalog;
-import org.soluvas.security.mongo.MongoRolePersonRepository2;
+import org.soluvas.security.mongo.RolePersonRepository2;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +43,7 @@ public class MigrateRoleCommand extends ExtCommandSupport {
 	protected Object doExecute() throws Exception {
 		
 		final SecurityCatalog secCatalog = getBean(SecurityCatalog.class);
-		final MongoRolePersonRepository2 rolePersonRepo = getBean(MongoRolePersonRepository2.class);
+		final RolePersonRepository2 rolePersonRepo = getBean(RolePersonRepository2.class);
 		
 		final List<Role> roles = ImmutableList.copyOf(EcoreUtil.copyAll(secCatalog.getRoles()));
 		final List<Permission> permissions = ImmutableList.copyOf(EcoreUtil.copyAll(secCatalog.getPermissions()));
@@ -84,8 +84,6 @@ public class MigrateRoleCommand extends ExtCommandSupport {
 				}
 				
 				role2.setPermissions(permisssionMap);
-				
-				
 				
 				rolePersonRepo.addAll(ImmutableList.of(role2));
 			}
