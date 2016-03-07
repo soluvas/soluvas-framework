@@ -463,7 +463,9 @@
 			<dependency>
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
-				<version>9.4.1208</version>
+				<version>9.3-1103-jdbc41</version>
+<!-- 				<version>9.4.1208</version> -->
+<!-- 					salah baca schema: cart_kind = edianaarea.cart_kind -->
 				<scope>compile</scope>
 			</dependency>
 			<dependency>
