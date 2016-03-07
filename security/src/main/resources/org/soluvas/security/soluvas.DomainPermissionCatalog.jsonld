@@ -3,7 +3,7 @@
   "domainPermissions" : [ {
     "@type" : "DomainPermission",
     "id" : "person",
-    "name" : "person",
+    "name" : "Person",
     "description" : "Person or user",
     "actionPermission" : [ {
       "@type" : "ActionPermission",
@@ -24,17 +24,17 @@
   }, {
     "@type" : "DomainPermission",
     "id" : "sec_role",
-    "name" : "sec_role",
+    "name" : "Security Role",
     "description" : "Security role"
   }, {
     "@type" : "DomainPermission",
     "id" : "sec_action",
-    "name" : "sec_action",
+    "name" : "Security Action",
     "description" : "Security action"
   }, {
     "@type" : "DomainPermission",
     "id" : "sec_domain",
-    "name" : "sec_domain",
+    "name" : "Security Domain",
     "description" : "Security domain"
   }, {
     "@type" : "DomainPermission",
@@ -334,7 +334,7 @@
   }, {
     "@type" : "DomainPermission",
     "id" : "returnfromcustomer",
-    "name" : "returnfromcustomer",
+    "name" : "Return From Customer",
     "description" : "Return From Customer",
     "actionPermission" : [ {
       "@type" : "ActionPermission",
@@ -371,7 +371,7 @@
   }, {
     "@type" : "DomainPermission",
     "id" : "salesorder",
-    "name" : "salesorder",
+    "name" : "Sales Order",
     "description" : "Sales Order",
     "actionPermission" : [ {
       "@type" : "ActionPermission",
@@ -453,7 +453,7 @@
   }, {
     "@type" : "DomainPermission",
     "id" : "shop",
-    "name" : "shop",
+    "name" : "Shop",
     "description" : "Shop",
     "actionPermission" : [ {
       "@type" : "ActionPermission",
@@ -464,7 +464,7 @@
   }, {
     "@type" : "DomainPermission",
     "id" : "wink",
-    "name" : "wink",
+    "name" : "Wink",
     "description" : "Wink",
     "actionPermission" : [ {
       "@type" : "ActionPermission",
