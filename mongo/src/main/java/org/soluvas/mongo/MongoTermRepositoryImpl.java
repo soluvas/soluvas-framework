@@ -13,6 +13,7 @@ import org.soluvas.data.Existence;
 import org.soluvas.data.Term2;
 import org.soluvas.data.Term2Catalog;
 import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.json.JsonUtils;
 import org.springframework.cache.Cache;
@@ -105,6 +106,23 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 		query.put("enumerationId", enumerationId);
 		
 		return findAllByQuery(query, pageable);
+	}
+	
+	@Override
+	public Page<Term2> findAllByExCacheable(String enumerationId, Pageable pageable) {
+		final Cache term2EnumIdCache = cacheMgr.getCache("term2EnumId");
+		final String key = String.format("term2:%s:%s", tenantId, enumerationId);
+		@Nullable List<Term2> term2List = term2EnumIdCache.get(key, List.class);
+		log.debug("findAllByExCacheable {}: {}", key, term2List != null ? term2List.size() : null);
+		if (term2List == null) {
+			term2List = findAll(enumerationId, pageable).getContent();
+			if (term2List != null) {
+				log.debug("Put {} for new term2 to the cache", key);
+				term2EnumIdCache.put(key, term2List);
+			}
+		}
+
+		return new PageImpl<>(term2List, pageable, term2List.size());
 	}
 
 	@Override

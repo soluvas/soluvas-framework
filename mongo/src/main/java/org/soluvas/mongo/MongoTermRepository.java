@@ -26,6 +26,8 @@ public interface MongoTermRepository extends PagingAndSortingRepository<Term2, S
 	
 	Page<Term2> findAll(String enumerationId, Pageable pageable);
 	
+	Page<Term2> findAllByExCacheable(String enumerationId, Pageable pageable);
+	
 	long countByEnumId(String enumerationId);
 	
 	Existence<String> existsByEnumerationId(String enumerationId, String termId);
