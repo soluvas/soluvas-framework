@@ -6,6 +6,7 @@ import org.soluvas.commons.AppManifest;
 import org.soluvas.commons.MongoSysConfig;
 import org.soluvas.commons.config.SysConfigMapHolder;
 import org.soluvas.commons.tenant.TenantBeans;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -22,6 +23,8 @@ public class MongoCategoryConfig {
 	private Environment env;
 	@Inject
 	private SysConfigMapHolder<? extends MongoSysConfig> sysConfigMapHolder;
+	@Inject
+	private CacheManager cacheMgr;
 	
 	@Bean
 	public TenantBeans<MongoCategoryRepository> mongoCategoryRepoBeans() {
@@ -32,7 +35,8 @@ public class MongoCategoryConfig {
 			protected MongoCategoryRepository create(String tenantId, AppManifest appManifest) throws Exception {
 				final MongoSysConfig sysConfig = sysConfigMapHolder.sysConfigMap().get(tenantId);
 				final String mongoUri = sysConfig.getMongoUri();
-				return new MongoCategoryRepositoryImpl(mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
+				return new MongoCategoryRepositoryImpl(cacheMgr, tenantId,
+						mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
 			}
 		};
 	}
