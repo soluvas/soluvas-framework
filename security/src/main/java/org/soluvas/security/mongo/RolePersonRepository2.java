@@ -27,5 +27,6 @@ public interface RolePersonRepository2 {
 	Role2 add(Role2 newRole);
 	
 	Role2 modify(String id, Role2 upRole);
-
+	
+	Role2 addDomain(String id, Role2 upRole);
 }

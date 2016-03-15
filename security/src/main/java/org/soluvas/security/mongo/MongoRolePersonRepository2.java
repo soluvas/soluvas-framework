@@ -204,5 +204,15 @@ public class MongoRolePersonRepository2 implements RolePersonRepository2 {
 		rolePersonColl.update(query, dbObject);
 		return upRole;
 	}
+
+	@Override
+	public Role2 addDomain(String id, Role2 upRole) {
+		final BasicDBObject query  = new BasicDBObject();
+		query.put("_id", id);
+		final DBObject dbObject = new EntityToDBObject().apply(upRole);
+		rolePersonColl.update(query, dbObject);
+		return upRole;
+		
+	}
 	
 }

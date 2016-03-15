@@ -27,8 +27,13 @@ public interface DomainPermissionRepository {
 	
 	Collection<DomainPermission2> findAll(Collection<String> domainIds);
 
-	Page<DomainPermission2> findAllBySearchText(String searchText, Pageable pageable);
+	Page<DomainPermission2> findAllBySearchText(String searchText, Collection<String> excludedDomainIds, Pageable pageable);
 
-	long countBase(String searchText);
+	long countBase(String searchText, Collection<String> excludedDomainIds);
+	
+	Page<ActionPermission> findAllActionPermissionsBySearchText(String searchText, String domainId, Pageable pageable);
+	
+	Collection<ActionPermission> findAllActionPermissions(String domainId, Collection<String> actionPermissionIds);
+	
 
 }

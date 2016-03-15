@@ -84,10 +84,10 @@ public class DomainPermissionRepositoryImpl implements DomainPermissionRepositor
 	}
 
 	@Override
-	public Page<DomainPermission2> findAllBySearchText(String searchText, Pageable pageable) {
-		final Set<Entry<String, DomainPermission2>> found = doFindAll(searchText, ImmutableSet.of(), pageable);
+	public Page<DomainPermission2> findAllBySearchText(String searchText, Collection<String> excludedDomainIds, Pageable pageable) {
+		final Set<Entry<String, DomainPermission2>> found = doFindAll(searchText, ImmutableSet.copyOf(excludedDomainIds), pageable);
 		final List<DomainPermission2> collect = found.stream().map(entry -> entry.getValue()).collect(Collectors.toList());
-		return new PageImpl<>(ImmutableList.copyOf( collect ), pageable, countBase(searchText));
+		return new PageImpl<>(ImmutableList.copyOf( collect ), pageable, countBase(searchText, excludedDomainIds));
 	}
 	
 	private Set<Entry<String, DomainPermission2>> doFindAll(@Nullable String term, Set<String> excludedIds, Pageable pageable) {
@@ -128,11 +128,20 @@ public class DomainPermissionRepositoryImpl implements DomainPermissionRepositor
 	}
 	
 	@Override
-	public long countBase(@Nullable String searchText) {
-		if (Strings.isNullOrEmpty(searchText)) {
-			return baseDomainPermission2.size();
+	public long countBase(@Nullable String searchText, Collection<String> excludedDomainIds) {
+		final Map<String, DomainPermission2> tmpBaseDomainPermissionMap;
+		if (!excludedDomainIds.isEmpty()) {
+			tmpBaseDomainPermissionMap = baseDomainPermission2.entrySet().stream()
+					.filter( entry -> !excludedDomainIds.contains(entry.getValue().getId()) )
+					.collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 		} else {
-			return baseDomainPermission2.entrySet().stream().filter(new Predicate<Entry<String, DomainPermission2>>() {
+			tmpBaseDomainPermissionMap = baseDomainPermission2;
+		}
+		
+		if (Strings.isNullOrEmpty(searchText)) {
+			return tmpBaseDomainPermissionMap.size();
+		} else {
+			return tmpBaseDomainPermissionMap.entrySet().stream().filter(new Predicate<Entry<String, DomainPermission2>>() {
 
 				@Override
 				public boolean test(Entry<String, DomainPermission2> t) {
@@ -141,6 +150,31 @@ public class DomainPermissionRepositoryImpl implements DomainPermissionRepositor
 				
 			}).count();
 		}
+	}
+
+	@Override
+	public Page<ActionPermission> findAllActionPermissionsBySearchText(String searchText, String domainId, Pageable pageable) {
+		
+		final DomainPermission2 domainPermission = baseDomainPermission2.get(domainId);
+		
+		final List<ActionPermission> actionPermissions = domainPermission.getActionPermission();
+		final ImmutableList<ActionPermission> pagedActionPermissions = FluentIterable.from(actionPermissions).skip((int) pageable.getOffset()).limit((int) pageable.getPageSize()).toList();
+//		log.debug("tes {}", actionPermissions);
+		
+		return new PageImpl<>(ImmutableList.copyOf( pagedActionPermissions ), pageable, actionPermissions.size());
+		
+	}
+
+	@Override
+	public Collection<ActionPermission> findAllActionPermissions(String domainId, Collection<String> actionPermissionIds) {
+		final DomainPermission2 domainPermission2 = baseDomainPermission2.get(domainId);
+		final List<ActionPermission> filteredActionPermissionByDomain = domainPermission2.getActionPermission().stream().filter(new Predicate<ActionPermission>() {
+			@Override
+			public boolean test(ActionPermission t) {
+				return actionPermissionIds.contains(t.getId());
+			}
+		}).collect(Collectors.toList());
+		return filteredActionPermissionByDomain;
 	}
 	
 }
