@@ -21,6 +21,8 @@ public interface MongoCategoryRepository extends
 
 	Page<Category2> findAllByStatus(Collection<CategoryStatus> statuses, Pageable pageable);
 	
+	Page<Category2> findAllByStatusExCacheable(Collection<CategoryStatus> statuses, Pageable pageable);
+	
 	@Nullable
 	Category2 findOneBySlugPath(String slugPath, Collection<CategoryStatus> statuses);
 	
@@ -34,7 +36,11 @@ public interface MongoCategoryRepository extends
 	
 	Page<Category2> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, Pageable pageable);
 	
+	Page<Category2> findAllByLevelAndStatusExCacheable(Collection<CategoryStatus> statuses, int level, Pageable pageable);
+	
 	Page<Category2> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, String parentId, Pageable pageable);
+	
+	Page<Category2> findAllByLevelAndStatusExCacheable(Collection<CategoryStatus> statuses, int level, String parentId, Pageable pageable);
 
 	Existence<String> existsBySlugPath(StatusMask statusMask, String upSlugPath);
 	

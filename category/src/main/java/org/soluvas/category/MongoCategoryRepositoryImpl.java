@@ -5,15 +5,20 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nullable;
+
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.EnumNameFunction;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.mongo.Index;
 import org.soluvas.mongo.MongoRepositoryBase;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
@@ -28,8 +33,12 @@ import com.mongodb.DBObject;
  *
  */
 public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> implements MongoCategoryRepository {
+	
+	private final CacheManager cacheMgr;
+	private final String tenantId;
 
-	public MongoCategoryRepositoryImpl(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
+	public MongoCategoryRepositoryImpl(final CacheManager cacheMgr, final String tenantId,
+			String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(Category2.class, Category2.class, Category2.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL,
 				"category", migrationEnabled, autoExplainSlow,
 				Index.asc("name"),
@@ -40,6 +49,8 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 				Index.asc("parentId"),
 				Index.uniqueAsc("slug"),
 				Index.uniqueAsc("slugPath"));
+		this.cacheMgr = cacheMgr;
+		this.tenantId = tenantId;
 	}
 
 	@Override
@@ -47,6 +58,24 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 		final BasicDBObject query = new BasicDBObject();
 		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
 		return findAllByQuery(query, pageable);
+	}
+	
+	@Override
+	public Page<Category2> findAllByStatusExCacheable(Collection<CategoryStatus> statuses, Pageable pageable) {
+		final Cache category2StatusCache = cacheMgr.getCache("category2Status");
+		final String key = String.format("category2:%s:%s", tenantId, "category2Status");
+		@Nullable List<Category2> category2List = category2StatusCache.get(key, List.class);
+		log.debug("findAllByStatusExCacheable {}: {}", key, category2List != null ? category2List.size() : null);
+		if (category2List == null) {
+			category2List = findAllByStatus(statuses, pageable).getContent();
+			if (category2List != null) {
+				log.debug("Put {} for new categoryList to the cache", key);
+				category2StatusCache.put(key, category2List);
+			}
+		}
+
+		return new PageImpl<>(category2List, pageable, category2List.size());
+		
 	}
 
 	@Override
@@ -76,12 +105,46 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 	}
 	
 	@Override
+	public Page<Category2> findAllByLevelAndStatusExCacheable(Collection<CategoryStatus> statuses, int level, Pageable pageable) {
+		final Cache category2LevelStatusCache = cacheMgr.getCache("category2LevelStatus");
+		final String key = String.format("category2:%s:%s", tenantId, "category2LevelStatus");
+		@Nullable List<Category2> category2List = category2LevelStatusCache.get(key, List.class);
+		log.debug("findAllByLevelAndStatusExCacheable {}: {}", key, category2List != null ? category2List.size() : null);
+		if (category2List == null) {
+			category2List = findAllByLevelAndStatus(statuses, level, pageable).getContent();
+			if (category2List != null) {
+				log.debug("Put {} for new categoryList to the cache", key);
+				category2LevelStatusCache.put(key, category2List);
+			}
+		}
+
+		return new PageImpl<>(category2List, pageable, category2List.size());
+	}
+	
+	@Override
 	public Page<Category2> findAllByLevelAndStatus(Collection<CategoryStatus> statuses, int level, String parentId, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
 		query.put("level", level);
 		query.put("parentId", parentId);
 		return findAllByQuery(query, pageable);
+	}
+	
+	@Override
+	public Page<Category2> findAllByLevelAndStatusExCacheable(Collection<CategoryStatus> statuses, int level, String parentId, Pageable pageable) {
+		final Cache category2LevelStatusParentIdCache = cacheMgr.getCache("category2LevelStatusParentId");
+		final String key = String.format("category2:%s:%s", tenantId, "category2LevelStatusParentId");
+		@Nullable List<Category2> category2List = category2LevelStatusParentIdCache.get(key, List.class);
+		log.debug("findAllByLevelAndStatusExCacheable {}: {}", key, category2List != null ? category2List.size() : null);
+		if (category2List == null) {
+			category2List = findAllByLevelAndStatus(statuses, level, parentId, pageable).getContent();
+			if (category2List != null) {
+				log.debug("Put {} for new categoryList to the cache", key);
+				category2LevelStatusParentIdCache.put(key, category2List);
+			}
+		}
+
+		return new PageImpl<>(category2List, pageable, category2List.size());
 	}
 
 	@Override
