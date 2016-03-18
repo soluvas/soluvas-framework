@@ -34,6 +34,9 @@ import com.mongodb.DBObject;
  */
 public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> implements MongoCategoryRepository {
 	
+	public static final String CATEGORY2_LEVEL_STATUS = "category2LevelStatus";
+	public static final String CATEGORY2_LEVEL_STATUS_PARENT_ID = "category2LevelStatusParentId";
+	
 	private final CacheManager cacheMgr;
 	private final String tenantId;
 
@@ -106,8 +109,8 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 	
 	@Override
 	public Page<Category2> findAllByLevelAndStatusExCacheable(Collection<CategoryStatus> statuses, int level, Pageable pageable) {
-		final Cache category2LevelStatusCache = cacheMgr.getCache("category2LevelStatus");
-		final String key = String.format("category2:%s:%s", tenantId, "category2LevelStatus");
+		final Cache category2LevelStatusCache = cacheMgr.getCache(CATEGORY2_LEVEL_STATUS);
+		final String key = String.format("category2:%s:%s", tenantId, CATEGORY2_LEVEL_STATUS + level);
 		@Nullable List<Category2> category2List = category2LevelStatusCache.get(key, List.class);
 		log.debug("findAllByLevelAndStatusExCacheable {}: {}", key, category2List != null ? category2List.size() : null);
 		if (category2List == null) {
@@ -132,8 +135,8 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 	
 	@Override
 	public Page<Category2> findAllByLevelAndStatusExCacheable(Collection<CategoryStatus> statuses, int level, String parentId, Pageable pageable) {
-		final Cache category2LevelStatusParentIdCache = cacheMgr.getCache("category2LevelStatusParentId");
-		final String key = String.format("category2:%s:%s", tenantId, "category2LevelStatusParentId");
+		final Cache category2LevelStatusParentIdCache = cacheMgr.getCache(CATEGORY2_LEVEL_STATUS_PARENT_ID);
+		final String key = String.format("category2:%s:%s", tenantId, CATEGORY2_LEVEL_STATUS_PARENT_ID + level + parentId);
 		@Nullable List<Category2> category2List = category2LevelStatusParentIdCache.get(key, List.class);
 		log.debug("findAllByLevelAndStatusExCacheable {}: {}", key, category2List != null ? category2List.size() : null);
 		if (category2List == null) {
