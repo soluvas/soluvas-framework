@@ -183,6 +183,16 @@ public class MongoUtils {
 		return sortObj;
 	}
 	
+	public static BasicDBObject getSortWithPrefix(@Nullable String prefix, @Nullable Sort sort) {
+		final BasicDBObject sortObj = new BasicDBObject();
+		if (sort != null) {
+			for (final Order order : sort) {
+				sortObj.put(prefix + order.getProperty(), order.getDirection() == Direction.DESC ? -1 : 1);
+			}
+		}
+		return sortObj;
+	}
+	
 	/**
 	 * Gets the MongoDB sort {@link BasicDBObject} with specifying default sort.
 	 * @param sort
