@@ -51,7 +51,9 @@ import com.google.common.util.concurrent.MoreExecutors;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Magick Transformer</b></em>'.
+ * Requires <a href="http://www.imagemagick.org/script/binary-releases.php">ImageMagick</a>.
+ * In Windows, make sure to choose <b>Win64 static at 16 bits-per-pixel</b>,
+ * because the default <i>Win64 dynamic</i> throws {@code no decode delegate for this image format `JPEG' @ error/constitute.c/ReadImage/501.}.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
@@ -59,10 +61,10 @@ import com.google.common.util.concurrent.MoreExecutors;
  *   <li>{@link org.soluvas.image.impl.ImageMagickTransformerImpl#getDestination <em>Destination</em>}</li>
  * </ul>
  * </p>
- *
- * @generated
  */
 public class ImageMagickTransformerImpl extends ImageTransformerImpl implements ImageMagickTransformer {
+
+	public static final String IMAGEMAGICK_BIN = "convert";
 
 	public static byte[] quickTransform(byte[] originalImage, ImageTransform transform) {
 		final File originalFile;
@@ -95,7 +97,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 		// TODO: do not hardcode quality
 		final float quality = 0.85f;
 
-		final CommandLine cmd = new CommandLine("convert");
+		final CommandLine cmd = new CommandLine(IMAGEMAGICK_BIN);
 		cmd.addArgument(originalFile.getPath(), false);
 		cmd.addArgument("-verbose");
 
@@ -231,7 +233,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 						 * convert IMG00178-20141215-1005.jpg -verbose -gravity center -resize 800x700^ -extent 800x700 -quality 0.85f*100f miff:- | composite -watermark 15% -gravity center download.jpg - miff:- | composite -gravity south Signature_Rhupa.png - new.jpg
 						 * */
 
-						final CommandLine cmd = new CommandLine("convert");
+						final CommandLine cmd = new CommandLine(IMAGEMAGICK_BIN);
 						cmd.addArgument(originalFile.getPath(), false);
 						cmd.addArgument("-verbose");
 						
