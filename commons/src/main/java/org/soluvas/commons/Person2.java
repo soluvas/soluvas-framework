@@ -894,4 +894,9 @@ public class Person2 implements Serializable {
                 .add("organizations", organizations)
                 .toString();
     }
+
+    public PersonInfo toInfo() {
+        // FIXME: implement for LoggedInPersonInfoModel
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

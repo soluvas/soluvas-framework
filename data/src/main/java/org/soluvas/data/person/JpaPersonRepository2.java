@@ -1,6 +1,6 @@
 package org.soluvas.data.person;
 
-import org.soluvas.commons.Person;
+import org.soluvas.commons.Person2;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.data.StatusMask;
 import org.springframework.stereotype.Repository;
@@ -25,28 +25,18 @@ public class JpaPersonRepository2 implements PersonRepository2 {
     public Optional<String> getIdForSlugOrEmail(String tenantId, String slugOrEmail) {
         try {
             final String canonicalSlug = SlugUtils.canonicalize(slugOrEmail);
-            return Optional.of(em.createQuery("SELECT p.id FROM QuikdoPerson p, IN(p.emails) e WHERE p.tenantId=:tenantId AND (p.canonicalSlug=:canonicalSlug OR e.email=:lowerEmail)", String.class)
+            return Optional.of(em.createQuery("SELECT p.id FROM Person p, IN(p.emails) e WHERE p.tenantId=:tenantId AND (p.canonicalSlug=:canonicalSlug OR e.email=:lowerEmail)", String.class)
                     .setParameter("tenantId", tenantId)
                     .setParameter("canonicalSlug", canonicalSlug)
                     .setParameter("lowerEmail", slugOrEmail.toLowerCase())
                     .getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
-//            try {
-//                return Optional.of(em.createQuery("SELECT p.id FROM QuikdoPerson p" +
-//                        " JOIN p.emails e" +
-//                        " WHERE p.tenantId=:tenantId AND e.email=:lowerEmail", String.class)
-//                        .setParameter("tenantId", tenantId)
-//                        .setParameter("lowerEmail", slugOrEmail.toLowerCase())
-//                        .getSingleResult());
-//            } catch (NoResultException e2) {
-//                return Optional.empty();
-//            }
         }
     }
 
     @Override
-    public Optional<Person> findOne(String tenantId, StatusMask statusMask, String personId) {
+    public Optional<Person2> findOne(String tenantId, StatusMask statusMask, String personId) {
         // FIXME: implement this
         return Optional.empty();
     }
