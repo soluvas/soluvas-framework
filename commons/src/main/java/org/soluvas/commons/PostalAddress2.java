@@ -217,7 +217,7 @@ public class PostalAddress2 implements Describable2, Serializable {
 	 *
 	 * @generated
 	 */
-	@Basic()
+	@Column(columnDefinition = "varchar(1000)")
 	private String street = null;
 
 	/**
