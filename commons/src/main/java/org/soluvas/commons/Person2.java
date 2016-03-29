@@ -63,6 +63,8 @@ public class Person2 implements Serializable {
 //                    "and g.id = ga.group_id " +
 //                    "and g.id = gm.group_id";
 
+    public static final String SHIRO_AUTHENTICATION_QUERY = "select password from public.person where id = ?";
+
     @Id
     @JsonProperty("uid")
     protected String id;
@@ -160,7 +162,7 @@ public class Person2 implements Serializable {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime passwordResetExpiryTime;
     protected String clientAccessToken;
-    @Type(type = "org.soluvas.jpa.PersistentStringList")
+    @ElementCollection
     protected List<String> securityRoleIds = new ArrayList<>();
     protected BigDecimal debitBalance;
     @Type(type = "org.soluvas.jpa.PersistentCurrencyUnit")
@@ -485,6 +487,12 @@ public class Person2 implements Serializable {
         this.lastName = lastName;
     }
 
+    /**
+     * BCrypt-encoded password.
+     * For Spring Security, use {@link org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder}.
+     * For Shiro, use {@link org.soluvas.security.shiro.BCryptPasswordService}.
+     * @return
+     */
     public String getPassword() {
         return password;
     }
@@ -781,6 +789,11 @@ public class Person2 implements Serializable {
         this.clientAccessToken = clientAccessToken;
     }
 
+    /**
+     * To make it compatible with Spring's JdbcDaoImpl and Shiro's JdbcRealm,
+     * securityRoleIds is mapped using {@link ElementCollection} instead of {@code varchar[]}.
+     * @return
+     */
     public List<String> getSecurityRoleIds() {
         return securityRoleIds;
     }

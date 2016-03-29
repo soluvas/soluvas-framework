@@ -2,6 +2,7 @@ package org.soluvas.data.person;
 
 import org.soluvas.commons.Person;
 import org.soluvas.data.StatusMask;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -10,6 +11,8 @@ import java.util.Optional;
  * Created by ceefour on 01/03/2016.
  */
 public interface PersonRepository2 {
+
+    Optional<String> getIdForSlugOrEmail(String tenantId, String slugOrEmail);
 
     Optional<Person> findOne(String tenantId, StatusMask statusMask, String personId);
 

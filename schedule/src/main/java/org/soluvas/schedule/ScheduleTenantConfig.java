@@ -17,8 +17,11 @@ import com.google.common.collect.Iterables;
 /**
  * Soluvas Schedule tenant-specific {@link Configuration}.
  * @author ceefour
+ * @deprecated Only to support Quikdo 1.x.
+ * @see ScheduleMultiConfig
  */
-@Configuration @Lazy
+@Configuration
+@Deprecated
 public class ScheduleTenantConfig {
 	
 	@Inject

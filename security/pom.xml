@@ -72,6 +72,12 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>de.svenkubiak</groupId>
+			<artifactId>jBCrypt</artifactId>
+			<version>0.4.1</version>
+			<optional>true</optional>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.karaf.shell</groupId>
