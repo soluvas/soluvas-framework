@@ -8,33 +8,36 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Optional;
 import com.google.common.collect.Iterables;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 
 import javax.money.CurrencyUnit;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
- * Inspired by and attempts to be compatible to {@link Person},
- * usable as JPA and {@link javax.persistence.MappedSuperclass} so can be extended directly with app-specific information
- * (but not recommended, I think the best way is to have a {@link javax.persistence.OneToOne} extra table),
- * supports both app-scoped and tenant-scoped users in one table,
- * supports role based access control,
- * Liquibase YAML usable to be copied into app's {@code db.changelog-master.yaml},
- * and compatible with <a href="http://docs.spring.io/spring-security/site/docs/4.0.4.RELEASE/reference/htmlsingle/#appendix-schema">Spring Security's JDBC Authentication and Authorization + ACL</a> ({@link org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl} + {@code JdbcMutableAclService}) with minimal configuration,
- * usable to be integrated with graph database such as Neo4j and distributed graph database such as Titan+Cassandra
- * and Spark GraphX processing,
- * usable to be used in Spring HATEOAS / JSON-LD / Hydra as {@code schema:Person},
- * usable as Lumen users and can be interlinked with Lumen semantic Person entities.
+ * Inspired by and attempts to be compatible to {@link Person}.
  *
- * @generated
+ * <ul>
+ *  <li>usable as JPA and {@link javax.persistence.MappedSuperclass} so can be extended directly with app-specific information
+ * (but not recommended, I think the best way is to have a {@link javax.persistence.SecondaryTable} extra table)</li>
+ *  <li>supports both app-scoped and tenant-scoped users in one table</li>
+ *  <li>supports role based access control in Spring Security and Shiro</li>
+ *  <li>Liquibase YAML usable to be imported into app's {@code db.changelog-master.yaml}</li>
+ *  <li>compatible with <a href="http://docs.spring.io/spring-security/site/docs/4.0.4.RELEASE/reference/htmlsingle/#appendix-schema">Spring Security's JDBC Authentication and Authorization + ACL</a> ({@link org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl} + {@code JdbcMutableAclService}) with minimal configuration</li>
+ *  <li>compatible with {@link org.apache.shiro.realm.jdbc.JdbcRealm} with some configuration</li>
+ *  <li>usable to be integrated with graph database such as Neo4j and distributed graph database such as Titan+Cassandra
+ * and Spark GraphX processing</li>
+ *  <li>usable to be used in Spring HATEOAS / JSON-LD / Hydra as {@code schema:Person}</li>
+ *  <li>usable as Lumen users and can be interlinked with Lumen semantic Person entities</li>
+ * </ul>
  */
 @MappedSuperclass
 @JsonInclude(Include.NON_EMPTY)
@@ -68,7 +71,9 @@ public class Person2 implements Serializable {
     protected String tenantId;
     protected String name;
     protected String photoId;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime creationTime;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime modificationTime;
     protected String description;
     protected String slug;
@@ -87,25 +92,34 @@ public class Person2 implements Serializable {
 //    protected String revision;
 
     protected static final long SCHEMA_VERSION_EDEFAULT = 2L;
-    protected long schemaVersion = SCHEMA_VERSION_EDEFAULT;
+    //protected long schemaVersion = SCHEMA_VERSION_EDEFAULT;
     public static final long CURRENT_SCHEMA_VERSION = SCHEMA_VERSION_EDEFAULT;
     protected String firstName;
     protected String lastName;
     protected String password;
+    @ElementCollection
     protected List<PhoneNumber2> phoneNumbers = new ArrayList<>();
+    @ElementCollection
     protected List<Email2> emails = new ArrayList<>();
+    @ElementCollection
     protected List<PhoneNumber2> mobileNumbers = new ArrayList<>();
+    @ElementCollection
     protected List<PostalAddress2> addresses = new ArrayList<>();
     protected static final AccountStatus ACCOUNT_STATUS_EDEFAULT = AccountStatus.DRAFT;
+    @Enumerated(EnumType.STRING)
     protected AccountStatus status = ACCOUNT_STATUS_EDEFAULT;
-    protected Integer birthYear;
-    protected Integer birthMonth;
-    protected Integer birthDay;
+    protected Short birthYear;
+    protected Short birthMonth;
+    protected Short birthDay;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
     protected LocalDate birthDate;
     protected static final Gender GENDER_EDEFAULT = Gender.UNKNOWN;
+    @Enumerated(EnumType.STRING)
     protected Gender gender = GENDER_EDEFAULT;
-    protected String language;
-    protected String currencyCode;
+    @Type(type = "org.soluvas.jpa.PersistentLocale")
+    protected Locale language;
+    @Type(type = "org.soluvas.jpa.PersistentCurrencyUnit")
+    protected CurrencyUnit currency;
     protected String googlePlusId;
     protected String googleUsername;
     protected String virtualMail;
@@ -113,31 +127,46 @@ public class Person2 implements Serializable {
     protected String customerRole;
     protected String memberRole;
     protected String managerRole;
-    protected String timeZoneId;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTimeZoneAsString")
+    protected DateTimeZone timeZone;
     protected String referrerId;
     protected String referrerType;
     protected String signupSource;
+    @Enumerated(EnumType.STRING)
     protected SignupSourceType signupSourceType;
-    protected String ipAddress;
-    protected String lastIpAddress;
+    @Type(type = "org.soluvas.jpa.PersistentInetAddress")
+    protected InetAddress signupIpAddress;
+    @Type(type = "org.soluvas.jpa.PersistentInetAddress")
+    protected InetAddress lastIpAddress;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime lastLoginTime;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime validationTime;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime activationTime;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime verificationTime;
     protected Boolean newsletterSubscriptionEnabled;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime newsletterSubscriptionTime;
     protected Boolean socialSharingEnabled;
+    @Enumerated(EnumType.STRING)
     protected PublicationStatus publicationStatus;
+    @Enumerated(EnumType.STRING)
     protected ArchivalStatus archivalStatus;
     protected String folder;
     protected String religion;
     protected String passwordResetCode;
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime passwordResetExpiryTime;
     protected String clientAccessToken;
+    @Type(type = "org.soluvas.jpa.PersistentStringList")
     protected List<String> securityRoleIds = new ArrayList<>();
     protected BigDecimal debitBalance;
+    @Type(type = "org.soluvas.jpa.PersistentCurrencyUnit")
     protected CurrencyUnit debitCurrency;
     protected String verifyCode;
+    @ElementCollection
     protected List<Organization2> organizations = new ArrayList<>();
 
     public Person2() {
@@ -440,14 +469,6 @@ public class Person2 implements Serializable {
         this.facebookAccessToken = facebookAccessToken;
     }
 
-    public long getSchemaVersion() {
-        return schemaVersion;
-    }
-
-    public void setSchemaVersion(long schemaVersion) {
-        this.schemaVersion = schemaVersion;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -480,27 +501,27 @@ public class Person2 implements Serializable {
         this.status = status;
     }
 
-    public Integer getBirthYear() {
+    public Short getBirthYear() {
         return birthYear;
     }
 
-    public void setBirthYear(Integer birthYear) {
+    public void setBirthYear(Short birthYear) {
         this.birthYear = birthYear;
     }
 
-    public Integer getBirthMonth() {
+    public Short getBirthMonth() {
         return birthMonth;
     }
 
-    public void setBirthMonth(Integer birthMonth) {
+    public void setBirthMonth(Short birthMonth) {
         this.birthMonth = birthMonth;
     }
 
-    public Integer getBirthDay() {
+    public Short getBirthDay() {
         return birthDay;
     }
 
-    public void setBirthDay(Integer birthDay) {
+    public void setBirthDay(Short birthDay) {
         this.birthDay = birthDay;
     }
 
@@ -520,20 +541,20 @@ public class Person2 implements Serializable {
         this.gender = gender;
     }
 
-    public String getLanguage() {
+    public Locale getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(Locale language) {
         this.language = language;
     }
 
-    public String getCurrencyCode() {
-        return currencyCode;
+    public CurrencyUnit getCurrency() {
+        return currency;
     }
 
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
+    public void setCurrency(CurrencyUnit currency) {
+        this.currency = currency;
     }
 
     public String getGooglePlusId() {
@@ -592,12 +613,12 @@ public class Person2 implements Serializable {
         this.managerRole = managerRole;
     }
 
-    public String getTimeZoneId() {
-        return timeZoneId;
+    public DateTimeZone getTimeZone() {
+        return timeZone;
     }
 
-    public void setTimeZoneId(String timeZoneId) {
-        this.timeZoneId = timeZoneId;
+    public void setTimeZone(DateTimeZone timeZone) {
+        this.timeZone = timeZone;
     }
 
     public String getReferrerId() {
@@ -632,19 +653,19 @@ public class Person2 implements Serializable {
         this.signupSourceType = signupSourceType;
     }
 
-    public String getIpAddress() {
-        return ipAddress;
+    public InetAddress getSignupIpAddress() {
+        return signupIpAddress;
     }
 
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
+    public void setSignupIpAddress(InetAddress signupIpAddress) {
+        this.signupIpAddress = signupIpAddress;
     }
 
-    public String getLastIpAddress() {
+    public InetAddress getLastIpAddress() {
         return lastIpAddress;
     }
 
-    public void setLastIpAddress(String lastIpAddress) {
+    public void setLastIpAddress(InetAddress lastIpAddress) {
         this.lastIpAddress = lastIpAddress;
     }
 
@@ -810,7 +831,6 @@ public class Person2 implements Serializable {
                 .add("facebookId", facebookId)
                 .add("facebookUsername", facebookUsername)
                 .add("facebookAccessToken", facebookAccessToken)
-                .add("schemaVersion", schemaVersion)
                 .add("firstName", firstName)
                 .add("lastName", lastName)
                 .add("password", password)
@@ -825,7 +845,7 @@ public class Person2 implements Serializable {
                 .add("birthDate", birthDate)
                 .add("gender", gender)
                 .add("language", language)
-                .add("currencyCode", currencyCode)
+                .add("currencyCode", currency)
                 .add("googlePlusId", googlePlusId)
                 .add("googleUsername", googleUsername)
                 .add("virtualMail", virtualMail)
@@ -833,12 +853,12 @@ public class Person2 implements Serializable {
                 .add("customerRole", customerRole)
                 .add("memberRole", memberRole)
                 .add("managerRole", managerRole)
-                .add("timeZoneId", timeZoneId)
+                .add("timeZone", timeZone)
                 .add("referrerId", referrerId)
                 .add("referrerType", referrerType)
                 .add("signupSource", signupSource)
                 .add("signupSourceType", signupSourceType)
-                .add("ipAddress", ipAddress)
+                .add("ipAddress", signupIpAddress)
                 .add("lastIpAddress", lastIpAddress)
                 .add("lastLoginTime", lastLoginTime)
                 .add("validationTime", validationTime)
