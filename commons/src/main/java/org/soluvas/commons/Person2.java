@@ -99,6 +99,8 @@ public class Person2 implements Serializable {
     protected String firstName;
     protected String lastName;
     protected String password;
+    // NOTE: In Hibernate 4.x you had to specify @CollectionTable+@JoinColumn otherwise it's using incorrect foreign key column
+    // Hibernate 5.x got this correctly
     @ElementCollection
     protected List<PhoneNumber2> phoneNumbers = new ArrayList<>();
     @ElementCollection
@@ -898,5 +900,15 @@ public class Person2 implements Serializable {
     public PersonInfo toInfo() {
         // FIXME: implement for LoggedInPersonInfoModel
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @PrePersist
+    public void prePersist() {
+        if (null == getCreationTime()) {
+            setCreationTime(new DateTime());
+        }
+        if (null == getModificationTime()) {
+            setModificationTime(getCreationTime());
+        }
     }
 }

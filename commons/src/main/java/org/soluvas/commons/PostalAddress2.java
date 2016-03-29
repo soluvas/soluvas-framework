@@ -363,7 +363,6 @@ public class PostalAddress2 implements Describable2, Serializable {
 	 *
 	 * @generated
 	 */
-	@Basic()
 	private Boolean primary = false;
 
 	/**

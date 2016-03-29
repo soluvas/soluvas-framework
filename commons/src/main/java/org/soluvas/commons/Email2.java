@@ -7,8 +7,10 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
@@ -16,6 +18,7 @@ import java.io.Serializable;
 public class Email2 implements Serializable {
 	protected String email;
 	protected Boolean primary;
+	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	protected DateTime validationTime;
 
 	public Email2() {

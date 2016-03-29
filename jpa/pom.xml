@@ -29,8 +29,11 @@
 			<artifactId>spring-jdbc</artifactId>
 		</dependency>
 		<dependency>
+			<!-- c3p0 is now optional because Spring Boot can use tomcat-dbcp,
+				 if you still use c3p0 then please add c3p0 dependency in your project -->
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>

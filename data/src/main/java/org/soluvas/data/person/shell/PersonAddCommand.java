@@ -35,9 +35,11 @@ import com.google.common.base.Strings;
  * Add {@link Person} entity.
  *
  * @author ceefour
+ * @deprecated Will be replaced by {@code commands/person.groovy}
  */
 @Service @Scope("prototype")
 @Command(scope="person", name="add", description="Add a new Person entity.")
+@Deprecated
 public class PersonAddCommand extends ExtCommandSupport {
 
 	@Option(name="-e", aliases="--email", description="Email.")
@@ -81,12 +83,8 @@ public class PersonAddCommand extends ExtCommandSupport {
 		person.setGuid(Person.class.getSimpleName() + "_" + id);
 		person.setAccountStatus(accountStatus);
 		person.setName(name);
-		person.setSlug(SlugUtils.generateValidScreenName(name, new Predicate<String>() {
-			@Override
-			public boolean apply(@Nullable String input) {
-				return !personRepo.existsBySlug(StatusMask.RAW, input).isPresent();
-			}
-		}));
+		person.setSlug(SlugUtils.generateValidScreenName(name,
+				input -> !personRepo.existsBySlug(StatusMask.RAW, input).isPresent()));
 		final Matcher nameMatcher = Pattern.compile("(.+) (.+)").matcher(name);
 		if (nameMatcher.matches()) {
 			person.setFirstName(nameMatcher.group(1));

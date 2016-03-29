@@ -57,7 +57,6 @@ public final class Existence<T> implements Serializable {
 	private final String id;
 
 	/**
-	 * @param present
 	 * @param reference
 	 * @deprecated ID is mandatory. Otherwise you can't {@link SlugUtils#generateValidSlug(String, com.google.common.base.Predicate)}
 	 * for an <i>existing</i> entity.
@@ -74,20 +73,32 @@ public final class Existence<T> implements Serializable {
 		this.reference = reference;
 		this.id = id;
 	}
-	
+
+	/**
+	 * The entity to be found does not exist.
+	 * @param <T>
+	 * @return
+     */
 	public static <T> Existence<T> absent() {
 		return new Existence<>(State.ABSENT, null);
 	}
 
 	/**
-	 * @param reference
-	 * @param id Type of ID is assumed to be string.
+	 * @param reference Exact matched reference, e.g. looking for slug {@code hendyirawan} and got exactly that.
+	 * @param id Primary key/ID of the entity. Type of ID is assumed to be string.
 	 * @return
 	 */
 	public static <T> Existence<T> of(T reference, String id) {
 		return new Existence<>(State.MATCHED, reference, id);
 	}
 
+	/**
+	 *
+	 * @param mismatchedReference Mismatched reference, e.g. looking for slug {@code hendy_irawan} but got {@code hendyirawan}
+	 * @param id Primary key/ID of the entity.
+	 * @param <T>
+     * @return
+     */
 	public static <T> Existence<T> mismatch(T mismatchedReference, String id) {
 		return new Existence<>(State.MISMATCHED, mismatchedReference, id);
 	}
