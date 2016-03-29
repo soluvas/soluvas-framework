@@ -8,12 +8,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
  * Supersedes {@link Organization} and {@link org.soluvas.commons.impl.OrganizationImpl}.
  * Can be used with <a href="https://schema.org/Organization">schema:Organization</a>.
  */
+@Embeddable
 public class Organization2 implements Serializable {
 	protected String id;
 	protected String name;

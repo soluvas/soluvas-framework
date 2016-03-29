@@ -33,7 +33,7 @@ import java.util.UUID;
  * 
  * @todo lat Latitude, lon Longitude, ele Elevation
  */
-@Embeddable()
+@Embeddable
 public class PostalAddress2 implements Describable2, Serializable {
 
 	private static final Logger log = LoggerFactory

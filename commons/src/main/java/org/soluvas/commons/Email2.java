@@ -9,8 +9,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.joda.time.DateTime;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 public class Email2 implements Serializable {
 	protected String email;
 	protected Boolean primary;

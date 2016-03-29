@@ -4,11 +4,13 @@ package org.soluvas.commons;
 
 import org.joda.time.DateTime;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
  * Type of <a href="https://schema.org/telephone">schema:telephone</a>.
  */
+@Embeddable
 public class PhoneNumber2 implements Serializable {
     protected String phoneNumber;
     protected Boolean primary;

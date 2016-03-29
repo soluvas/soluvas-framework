@@ -23,15 +23,25 @@ public class JpaPersonRepository2 implements PersonRepository2 {
     @Override
     @Transactional(readOnly = true)
     public Optional<String> getIdForSlugOrEmail(String tenantId, String slugOrEmail) {
-        final String canonicalSlug = SlugUtils.canonicalize(slugOrEmail);
         try {
-            return Optional.of(em.createQuery("SELECT p.id FROM QuikdoPerson p WHERE p.tenantId=:tenantId AND p.canonicalSlug=:canonicalSlug OR p.email=:lowerEmail", String.class)
+            final String canonicalSlug = SlugUtils.canonicalize(slugOrEmail);
+            return Optional.of(em.createQuery("SELECT p.id FROM QuikdoPerson p, IN(p.emails) e WHERE p.tenantId=:tenantId AND (p.canonicalSlug=:canonicalSlug OR e.email=:lowerEmail)", String.class)
                     .setParameter("tenantId", tenantId)
                     .setParameter("canonicalSlug", canonicalSlug)
                     .setParameter("lowerEmail", slugOrEmail.toLowerCase())
                     .getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
+//            try {
+//                return Optional.of(em.createQuery("SELECT p.id FROM QuikdoPerson p" +
+//                        " JOIN p.emails e" +
+//                        " WHERE p.tenantId=:tenantId AND e.email=:lowerEmail", String.class)
+//                        .setParameter("tenantId", tenantId)
+//                        .setParameter("lowerEmail", slugOrEmail.toLowerCase())
+//                        .getSingleResult());
+//            } catch (NoResultException e2) {
+//                return Optional.empty();
+//            }
         }
     }
 

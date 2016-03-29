@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.SQLTransientConnectionException;
 import java.sql.Statement;
+import java.util.Optional;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
@@ -15,12 +17,18 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 
+import static org.soluvas.jpa.SoluvasMultiTenantConnectionProviderImpl.dataSource;
+
 /**
  * Implementing Hibernate 4.3 {@link MultiTenantConnectionProvider} using single connection pool.
  * Simplistic implementation for illustration purposes showing a single connection pool used to serve
  * multiple schemas using "connection altering".  Here we use the PostgreSQL specific SET SCHEMA command; Oracle
  * users might use the ALTER SESSION SET SCHEMA command; etc.
- * @see http://docs.jboss.org/hibernate/core/4.2/devguide/en-US/html/ch16.html#d5e4698
+ *
+ * See http://stackoverflow.com/a/31825971/122441
+ *
+ * See http://docs.jboss.org/hibernate/core/4.2/devguide/en-US/html/ch16.html#d5e4698
+ *
  * @see SoluvasTenantIdentifierResolver
  * @author ceefour
  */
@@ -30,9 +38,12 @@ public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConn
 	private static final Logger log = LoggerFactory
 			.getLogger(SoluvasMultiTenantConnectionProviderImpl.class);
 	public static final String PUBLIC_SCHEMA = "public";
-	
-//	@Inject
+
+	@Deprecated
 	public static DataSource dataSource;
+
+	@Inject
+	private DataSource injectedDataSource;
 
 	@Override
 	public boolean isUnwrappableAs(Class unwrapType) {
@@ -56,6 +67,8 @@ public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConn
 
 	@Override
 	public Connection getAnyConnection() throws SQLException {
+		final DataSource dataSource = Optional.ofNullable(this.injectedDataSource)
+				.orElse(SoluvasMultiTenantConnectionProviderImpl.dataSource);
 		Preconditions.checkNotNull(dataSource, "dataSource must be provided");
 		return dataSource.getConnection();
 	}
@@ -68,6 +81,8 @@ public class SoluvasMultiTenantConnectionProviderImpl implements MultiTenantConn
 	@Override
 	public Connection getConnection(String tenantIdentifier)
 			throws SQLException {
+		final DataSource dataSource = Optional.ofNullable(this.injectedDataSource)
+				.orElse(SoluvasMultiTenantConnectionProviderImpl.dataSource);
 		Preconditions.checkNotNull(dataSource, "dataSource must be provided");
 		Preconditions.checkArgument(tenantIdentifier.matches("[A-Za-z0-9_]+"),
 				"Invalid tenantIdentifier syntax, it must contain only alphanumeric and '_' characters.");

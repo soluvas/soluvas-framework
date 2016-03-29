@@ -1,6 +1,8 @@
 package org.soluvas.jpa;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.slf4j.Logger;
@@ -12,6 +14,9 @@ import org.springframework.context.ApplicationContext;
 
 /**
  * Uses {@link RequestOrCommandScope}.
+ *
+ * See http://stackoverflow.com/a/31825971/122441
+ *
  * @see SoluvasMultiTenantConnectionProviderImpl
  * @author ceefour
  */
@@ -20,7 +25,10 @@ public class SoluvasTenantIdentifierResolver implements
 
 	private static final Logger log = LoggerFactory
 			.getLogger(SoluvasTenantIdentifierResolver.class);
+	@Deprecated @Nullable
 	public static ApplicationContext appCtx;
+	@Inject
+	private Provider<TenantRef> tenantRefProvider;
 
 	/* (non-Javadoc)
 	 * @see org.hibernate.context.spi.CurrentTenantIdentifierResolver#resolveCurrentTenantIdentifier()
@@ -28,7 +36,12 @@ public class SoluvasTenantIdentifierResolver implements
 	@Override @Nullable
 	public String resolveCurrentTenantIdentifier() {
 		try {
-			final TenantRef tenantRef = appCtx.getBean(TenantRef.class);
+			final TenantRef tenantRef;
+			if (tenantRefProvider != null) {
+				tenantRef = tenantRefProvider.get();
+			} else {
+				tenantRef = appCtx.getBean(TenantRef.class);
+			}
 			log.trace("Resolved current tenant: {}", tenantRef.getTenantId());
 //			final RequestAttributes requestAttrs = RequestOrCommandScope.currentRequestAttributes();
 //			final TenantRef tenantRef = Preconditions.checkNotNull((TenantRef) requestAttrs.resolveReference("tenantRef"),
