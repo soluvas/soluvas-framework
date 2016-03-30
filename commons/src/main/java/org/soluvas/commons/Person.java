@@ -5,9 +5,9 @@ package org.soluvas.commons;
 import java.math.BigDecimal;
 
 import javax.annotation.Nullable;
+import javax.money.CurrencyUnit;
 
 import org.eclipse.emf.common.util.EList;
-import javax.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -657,6 +657,21 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setCustomerRole(String value);
+	
+	/**
+	 * Return the value of Customer Role Edit Time 
+	 * Mendapatkan waktu perubahan Customer Role
+	 * contoh : hervin, 2015-01-01, 2016-03-30, Karyawan, Agen Khusus 
+	 * @see #getCustomerRoleEditTime()
+	 */
+	DateTime getCustomerRoleEditTime();
+	
+	/**
+	 * Sets the value of Customer Role Edit Time 
+	 * waktu perubahan Customer Role
+	 * contoh : hervin, 2015-01-01, 2016-03-30, Karyawan, Agen Khusus 
+	 */
+	void setCustomerRoleEditTime(DateTime value);
 
 	/**
 	 * Returns the value of the '<em><b>Member Role</b></em>' attribute.
