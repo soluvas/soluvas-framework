@@ -22,7 +22,9 @@ import com.google.common.collect.ImmutableSet;
  * Shell command to set {@link Role}s of a {@link Person}.
  * 
  * @author ceefour
+ * @deprecated Will be replaced by {@code commands/person.groovy}
  */
+@Deprecated
 @Service @Scope("prototype")
 @Command(scope = "sec", name = "personroleset", description = "Set security roles of a person.")
 public class SecPersonRoleSetCommand extends ExtCommandSupport {

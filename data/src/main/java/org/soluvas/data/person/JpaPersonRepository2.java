@@ -1,5 +1,6 @@
 package org.soluvas.data.person;
 
+import com.google.common.base.Preconditions;
 import org.soluvas.commons.CommonsException;
 import org.soluvas.commons.Person2;
 import org.soluvas.commons.SlugUtils;
@@ -105,6 +106,29 @@ public class JpaPersonRepository2 implements PersonRepository2 {
     @Transactional
     public Person2 add(String tenantId, Person2 person) {
         person.setTenantId(tenantId);
+        return em.merge(person);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Person2> findOneBySlug(String tenantId, StatusMask statusMask, String upSlug) {
+        final String canonicalSlug = SlugUtils.canonicalize(upSlug);
+        try {
+            return Optional.of(em.createQuery("SELECT p FROM Person p" +
+                    " WHERE p.tenantId=:tenantId AND p.canonicalSlug=:canonicalSlug", entityClass)
+                    .setParameter("tenantId", tenantId)
+                    .setParameter("canonicalSlug", canonicalSlug)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    @Transactional
+    public Person2 modify(String tenantId, String personId, Person2 person) {
+        Preconditions.checkArgument(tenantId.equals(person.getTenantId()));
+        Preconditions.checkArgument(personId.equals(person.getId()));
         return em.merge(person);
     }
 

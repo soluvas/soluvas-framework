@@ -1,5 +1,7 @@
+import com.google.common.base.Joiner
 import com.google.common.base.Predicate
 import com.google.common.base.Strings
+import com.google.common.collect.ImmutableSet
 import org.apache.commons.lang3.StringUtils
 import org.crsh.cli.Argument
 import org.crsh.cli.Command
@@ -8,12 +10,14 @@ import org.crsh.cli.Required
 import org.crsh.cli.Usage
 import org.joda.time.DateTime
 import org.mindrot.jbcrypt.BCrypt
+import org.slf4j.LoggerFactory
 import org.soluvas.commons.*
 import org.soluvas.commons.util.HashedPasswordUtils
 import org.soluvas.data.StatusMask
 import org.soluvas.data.person.PersonRepository
 import org.soluvas.data.person.PersonRepository2
 import org.springframework.beans.factory.BeanFactory
+import org.springframework.transaction.annotation.Transactional
 
 import javax.annotation.Nullable
 import javax.inject.Inject
@@ -25,6 +29,7 @@ import static org.fusesource.jansi.Ansi.ansi
 
 @Usage('Person management')
 class person {
+    private static final log = LoggerFactory.getLogger('org.soluvas.data.commands.person')
 
     @Usage('Add a person')
     @Command
@@ -49,7 +54,7 @@ class person {
             accountStatus = AccountStatus.ACTIVE
         }
 
-        BeanFactory beanFactory = context.attributes['spring.beanfactory']
+        final BeanFactory beanFactory = context.attributes['spring.beanfactory']
         final personRepo = beanFactory.getBean(PersonRepository2.class)
 
         final person = personRepo.newBlank()
@@ -74,7 +79,7 @@ class person {
             final existingPersonByEmail = personRepo.findOneByEmail(tenantId, StatusMask.RAW, emailStr);
             if (existingPersonByEmail.isPresent()) {
                 log.info("Email {} already exists for person {}", emailStr, existingPersonByEmail.get().getId());
-                System.err.println(ansi().render("@|red Email|@ @|bold %s|@ @|red already exists for person|@ @|bold %s|@",
+                err.println(ansi().render("@|red Email|@ @|bold %s|@ @|red already exists for person|@ @|bold %s|@",
                         emailStr, existingPersonByEmail.get().getId()));
                 return null;
             } else {
@@ -91,7 +96,7 @@ class person {
 
         if (!Strings.isNullOrEmpty(password)) {
             final String encoded = BCrypt.hashpw(password, BCrypt.gensalt())
-            System.err.println(ansi().render("Encoded password: @|bold %s|@", encoded));
+            err.println(ansi().render("Encoded password: @|bold %s|@", encoded));
             person.setPassword(encoded);
         }
 
@@ -145,4 +150,28 @@ class person {
         return added;
     }
 
+    @Usage('Set security roles of a person.')
+    @Command
+    public String roleset(
+            @Usage('Tenant ID.')
+            @Required @Option(names = ['t', 'tenant']) String tenantId,
+            @Usage('Person Slug.')
+            @Argument String personSlug,
+            @Usage('Role name(s). If none specified, will remove all roles from the person.')
+            @Argument List<String> roles) {
+        //final AccessControlManager acMgr = getBean(AccessControlManager.class);
+        final BeanFactory beanFactory = context.attributes['spring.beanfactory']
+        final personRepo = beanFactory.getBean(PersonRepository2.class)
+        final person = personRepo.findOneBySlug(tenantId, StatusMask.RAW, personSlug);
+        final Set<String> roleSet = roles != null ? ImmutableSet.copyOf(roles) : ImmutableSet.<String>of();
+        out.print(ansi().render("Setting security roles of @|bold %s|@ to @|bold %s|@...",
+                personSlug, Joiner.on(", ").join(roleSet)));
+        person.get().securityRoleIds.clear()
+        person.get().securityRoleIds.addAll(roleSet)
+        personRepo.modify(tenantId, person.get().id, person.get())
+
+//        acMgr.replacePersonTenantRoles(getTenant().getTenantId(), personId, roleSet);
+        out.println(ansi().render(" @|bold,bg_green  OK |@"));
+        return roleSet;
+    }
 }

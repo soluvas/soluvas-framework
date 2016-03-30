@@ -63,7 +63,14 @@ public class Person2 implements Serializable {
 //                    "and g.id = ga.group_id " +
 //                    "and g.id = gm.group_id";
 
+    /**
+     * Query used to retrieve account data for the user.
+     */
     public static final String SHIRO_AUTHENTICATION_QUERY = "select password from public.person where id = ?";
+    /**
+     * Query used to retrieve the roles that apply to a user.
+     */
+    public static final String SHIRO_USER_ROLES_QUERY = "select securityroleids from public.person_securityroleids where person_id = ?";
 
     @Id
     @JsonProperty("uid")
@@ -164,7 +171,7 @@ public class Person2 implements Serializable {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime passwordResetExpiryTime;
     protected String clientAccessToken;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     protected List<String> securityRoleIds = new ArrayList<>();
     protected BigDecimal debitBalance;
     @Type(type = "org.soluvas.jpa.PersistentCurrencyUnit")
