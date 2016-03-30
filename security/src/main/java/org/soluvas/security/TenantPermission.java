@@ -38,5 +38,5 @@ public class TenantPermission extends DomainPermission {
 	public TenantPermission(Set<String> actions, Set<String> targets) {
 		super(actions, targets);
 	}
-
+	
 }
