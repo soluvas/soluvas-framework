@@ -68,8 +68,15 @@ public class JpaPersonRepository2 implements PersonRepository2 {
     @Override
     @Transactional(readOnly = true)
     public Optional<Person2> findOne(String tenantId, StatusMask statusMask, String personId) {
-        // FIXME: implement this
-        return Optional.empty();
+        try {
+            return Optional.of(em.createQuery("SELECT p FROM Person p" +
+                    " WHERE p.tenantId=:tenantId AND p.id=:personId", entityClass)
+                    .setParameter("tenantId", tenantId)
+                    .setParameter("personId", personId)
+                    .getSingleResult());
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 
     @Override
