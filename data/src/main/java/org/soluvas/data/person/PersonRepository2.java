@@ -26,4 +26,8 @@ public interface PersonRepository2 {
 
     @Transactional
     Person2 add(String tenantId, Person2 person);
+
+    Optional<Person2> findOneBySlug(String tenantId, StatusMask statusMask, String upSlug);
+
+    Person2 modify(String tenantId, String personId, Person2 person);
 }

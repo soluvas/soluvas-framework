@@ -12,6 +12,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
+import org.soluvas.commons.impl.PersonInfoImpl;
 
 import javax.money.CurrencyUnit;
 import javax.persistence.*;
@@ -21,6 +22,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Function;
 
 /**
  * Inspired by and attempts to be compatible to {@link Person}.
@@ -63,7 +65,18 @@ public class Person2 implements Serializable {
 //                    "and g.id = ga.group_id " +
 //                    "and g.id = gm.group_id";
 
+    /**
+     * Query used to retrieve account data for the user.
+     */
     public static final String SHIRO_AUTHENTICATION_QUERY = "select password from public.person where id = ?";
+    /**
+     * Query used to retrieve the roles that apply to a user.
+     */
+    public static final String SHIRO_USER_ROLES_QUERY = "select securityrole_id from public.person_securityrole where person_id = ?";
+    /**
+     * Query used to retrieve permissions that apply to a particular role.
+     */
+    public static final String SHIRO_PERMISSIONS_QUERY = "select permission from public.securityrole_permission where securityrole_id = ?";
 
     @Id
     @JsonProperty("uid")
@@ -103,9 +116,9 @@ public class Person2 implements Serializable {
     // Hibernate 5.x got this correctly
     @ElementCollection
     protected List<PhoneNumber2> phoneNumbers = new ArrayList<>();
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER) // EAGER required by toInfo()
     protected List<Email2> emails = new ArrayList<>();
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER) // EAGER required by toInfo()
     protected List<PhoneNumber2> mobileNumbers = new ArrayList<>();
     @ElementCollection
     protected List<PostalAddress2> addresses = new ArrayList<>();
@@ -164,7 +177,8 @@ public class Person2 implements Serializable {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     protected DateTime passwordResetExpiryTime;
     protected String clientAccessToken;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER) // EAGER required by security
+    @CollectionTable(name = "person_securityrole") @Column(name = "securityrole_id")
     protected List<String> securityRoleIds = new ArrayList<>();
     protected BigDecimal debitBalance;
     @Type(type = "org.soluvas.jpa.PersistentCurrencyUnit")
@@ -898,8 +912,19 @@ public class Person2 implements Serializable {
     }
 
     public PersonInfo toInfo() {
-        // FIXME: implement for LoggedInPersonInfoModel
-        throw new UnsupportedOperationException("Not yet implemented");
+        return ((Function<Person2, PersonInfo>)((Person2 input) -> {
+            if (input == null)
+                return null;
+            final PersonInfo personInfo = new PersonInfoImpl();
+            personInfo.setId(input.getId());
+            personInfo.setSlug(input.getSlug());
+            personInfo.setName(input.getName());
+            personInfo.setPhotoId(input.getPhotoId());
+            personInfo.setGender(input.getGender());
+            personInfo.setEmail(input.getEmail());
+            personInfo.setMobileNumber(input.getMobileNumber());
+            return personInfo;
+        })).apply(this);
     }
 
     @PrePersist

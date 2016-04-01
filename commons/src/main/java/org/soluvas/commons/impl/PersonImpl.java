@@ -883,6 +883,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 */
 	protected static final String CUSTOMER_ROLE_EDEFAULT = null;
 
+
 	/**
 	 * The cached value of the '{@link #getCustomerRole() <em>Customer Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -892,7 +893,11 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @ordered
 	 */
 	protected String customerRole = CUSTOMER_ROLE_EDEFAULT;
+	
+	protected static final DateTime CUSTOMER_ROLE_EDIT_TIME_EDEFAULT = null;
 
+	protected DateTime customerRoleEditTime = CUSTOMER_ROLE_EDIT_TIME_EDEFAULT;
+	
 	/**
 	 * The default value of the '{@link #getMemberRole() <em>Member Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -4394,6 +4399,16 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		result.append(verifyCode);
 		result.append(')');
 		return result.toString();
+	}
+
+	@Override
+	public DateTime getCustomerRoleEditTime() {
+		return this.customerRoleEditTime;
+	}
+
+	@Override
+	public void setCustomerRoleEditTime(DateTime value) {
+		this.customerRoleEditTime = value;
 	}
 
 } //PersonImpl
