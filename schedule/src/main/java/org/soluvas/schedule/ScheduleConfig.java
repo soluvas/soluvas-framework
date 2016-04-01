@@ -1,5 +1,6 @@
 package org.soluvas.schedule;
 
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
@@ -26,6 +27,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.scheduling.quartz.SpringBeanJobFactory;
 
 import com.google.common.base.Preconditions;
+import org.springframework.transaction.PlatformTransactionManager;
 
 /**
  * One global {@link Scheduler} in {@code PUBLIC} schema for all tenants, including the app itself.
@@ -47,8 +49,13 @@ public class ScheduleConfig {
 	/**
 	 * @see org.soluvas.jpa.PostgresConfig
 	 */
-	@Inject
+	@Autowired(required = false)
 	private DataSourceTransactionManager dsTxMgr;
+	/**
+	 * @see org.soluvas.jpa.PostgresConfig
+	 */
+	@Inject
+	private PlatformTransactionManager fallbackTxMgr;
 	@Autowired(required = false)
 	private ScheduleLiquibaseConfig scheduleLiquibaseConfig;
 	@Inject
@@ -84,7 +91,7 @@ public class ScheduleConfig {
 		schedulerFactoryBean.setWaitForJobsToCompleteOnShutdown(true);
 		
 		schedulerFactoryBean.setDataSource(dataSource);
-		schedulerFactoryBean.setTransactionManager(dsTxMgr);
+		schedulerFactoryBean.setTransactionManager(Optional.<PlatformTransactionManager>ofNullable(dsTxMgr).orElse(fallbackTxMgr));
 		final Properties props = new Properties();
 		//GA EFFECT T.T untuk: https://idbippo.atlassian.net/browse/BC-3222
 		//coba pk 4 thread --> ga effek juga

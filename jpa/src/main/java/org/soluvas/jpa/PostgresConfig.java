@@ -77,7 +77,10 @@ public class PostgresConfig {
      *
      * @return
      * @throws PropertyVetoException
+     * @deprecated Use Spring Boot's auto-configured {@link DataSource}, which usually uses {@code tomcat-dbcp}.
      */
+    @Deprecated
+    @Profile("!springDataSource")
     @Bean
     public DataSourceTransactionManager dataSourceTransactionManager() {
         return new DataSourceTransactionManager(dataSource());
