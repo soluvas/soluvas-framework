@@ -1,11 +1,13 @@
 package org.soluvas.jpa.jpa;
 
+import org.soluvas.commons.Describable2;
+
 /**
  * A representation of the model object '<em><b>Describable</b></em>'. <!--
  * begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc --> Has
  * description. <!-- end-model-doc -->
  *
- * @deprecated Use {@link org.soluvas.commons.Describable2}
+ * @deprecated Use {@link Describable2}
  */
 @Deprecated
 public interface Describable {

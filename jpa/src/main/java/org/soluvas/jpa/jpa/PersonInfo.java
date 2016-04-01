@@ -1,18 +1,15 @@
 package org.soluvas.jpa.jpa;
 
 import java.io.Serializable;
-
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
-
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Preconditions;
 
@@ -80,7 +77,7 @@ public class PersonInfo implements Serializable {
 	 * 
 	 */
 	@Basic()
-	@Type(type = "org.soluvas.jpa.PersistentEnum", parameters = @Parameter(name = "enumClass", value = "org.soluvas.commons.Gender"))
+	@Type(type = "org.soluvas.jpa.PersistentEnum", parameters = @Parameter(name = "enumClass", value = "org.soluvas.commons.Gender") )
 	private Gender gender = null;
 
 	/**
@@ -355,12 +352,9 @@ public class PersonInfo implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "PersonInfo " + " [id: " + getId() + "]" + " [name: "
-				+ getName() + "]" + " [gender: " + getGender() + "]"
-				+ " [slug: " + getSlug() + "]" + " [email: " + getEmail() + "]"
-				+ " [photoId: " + getPhotoId() + "]" + " [domain: "
-				+ getDomain() + "]" + " [mobileNumber: " + getMobileNumber()
-				+ "]";
+		return "PersonInfo " + " [id: " + getId() + "]" + " [name: " + getName() + "]" + " [gender: " + getGender()
+				+ "]" + " [slug: " + getSlug() + "]" + " [email: " + getEmail() + "]" + " [photoId: " + getPhotoId()
+				+ "]" + " [domain: " + getDomain() + "]" + " [mobileNumber: " + getMobileNumber() + "]";
 	}
 
 	public static PersonInfo fromPerson(Person person) {
@@ -379,10 +373,8 @@ public class PersonInfo implements Serializable {
 		return info;
 	}
 
-	public static org.soluvas.commons.PersonInfo toCommons(
-			PersonInfo personInfoJpa) {
-		final org.soluvas.commons.PersonInfo personInfoCommons = CommonsFactory.eINSTANCE
-				.createPersonInfo();
+	public static org.soluvas.commons.PersonInfo toCommons(PersonInfo personInfoJpa) {
+		final org.soluvas.commons.PersonInfo personInfoCommons = CommonsFactory.eINSTANCE.createPersonInfo();
 		personInfoCommons.setEmail(personInfoJpa.getEmail());
 		personInfoCommons.setGender(personInfoJpa.getGender());
 		personInfoCommons.setId(personInfoJpa.getId());

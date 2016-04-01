@@ -49,8 +49,7 @@ public interface Timestamped {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @param newModificationTime
-	 *            the new value of the '
-	 *            {@link Timestamped#getModificationTime()
+	 *            the new value of the '{@link Timestamped#getModificationTime()
 	 *            <em>modificationTime</em>}' feature.
 	 * @generated
 	 */

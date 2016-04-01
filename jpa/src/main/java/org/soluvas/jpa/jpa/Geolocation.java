@@ -136,8 +136,7 @@ public class Geolocation implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Geolocation " + " [latitude: " + getLatitude() + "]"
-				+ " [longitude: " + getLongitude() + "]" + " [elevation: "
-				+ getElevation() + "]";
+		return "Geolocation " + " [latitude: " + getLatitude() + "]" + " [longitude: " + getLongitude() + "]"
+				+ " [elevation: " + getElevation() + "]";
 	}
 }

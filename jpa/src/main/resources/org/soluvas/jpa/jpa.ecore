@@ -229,7 +229,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="CurrencyUnit" instanceClassName="org.joda.money.CurrencyUnit"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CurrencyUnit" instanceClassName="javax.money.CurrencyUnit"/>
   <eClassifiers xsi:type="ecore:EDataType" name="DateTime" instanceClassName="org.joda.time.DateTime"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Mass" instanceClassName="javax.measure.quantity.Mass"
       serializable="false"/>
