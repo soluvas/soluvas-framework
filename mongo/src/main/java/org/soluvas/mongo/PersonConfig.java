@@ -1,6 +1,7 @@
 package org.soluvas.mongo;
 
 import org.soluvas.commons.tenant.TenantBeans;
+import org.soluvas.data.person.PersonCustomerRoleHistoryRepository;
 import org.soluvas.data.person.PersonRepository;
 
 /**
@@ -10,5 +11,7 @@ import org.soluvas.data.person.PersonRepository;
 public interface PersonConfig {
 
 	TenantBeans<PersonRepository> personRepoBeans();
+
+	TenantBeans<PersonCustomerRoleHistoryRepository> personCustomerRoleHistoryRepoBeans();
 	
 }

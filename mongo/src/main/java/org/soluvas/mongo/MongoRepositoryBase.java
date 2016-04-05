@@ -374,6 +374,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		}
 	}
 	
+
 	public boolean isMigrationEnabled() {
 		return migrationEnabled;
 	}

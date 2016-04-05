@@ -7,6 +7,7 @@ import org.soluvas.commons.MongoSysConfig;
 import org.soluvas.commons.PersonRelated;
 import org.soluvas.commons.config.SysConfigMapHolder;
 import org.soluvas.commons.tenant.TenantBeans;
+import org.soluvas.data.person.PersonCustomerRoleHistoryRepository;
 import org.soluvas.data.person.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
@@ -50,5 +51,33 @@ public class MongoPersonConfig implements PersonConfig {
 	public PersonRepository personRepo() {
 		return personRepoBeans().getCurrent();
 	}
+
+//	@Override
+//	public TenantBeans<PersonCustomerRoleHistoryRepository> personCustomerRoleHistoryRepoBeans() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	
+	@Override
+	@Bean(destroyMethod = "destroy")
+	public TenantBeans<PersonCustomerRoleHistoryRepository> personCustomerRoleHistoryRepoBeans(){
+		final boolean mongoMigrationEnabled = env.getProperty("mongoMigrationEnabled",Boolean.class, true);
+		final boolean mongoAutoExplainSlow = env.getProperty("mongoAutoExplainSlow", Boolean.class, false);
+		return new TenantBeans<PersonCustomerRoleHistoryRepository>(MongoPersonCustomerRoleHistoryRepository.class) {
+			@Override
+			protected MongoPersonCustomerRoleHistoryRepository create(String tenantId, AppManifest appManifest) throws Exception {
+				final MongoSysConfig sysConfig = sysConfigMapHolder.sysConfigMap().get(tenantId);
+				final String mongoUri = sysConfig.getMongoUri();
+				final MongoPersonCustomerRoleHistoryRepository personCustomerRoleHistoryRepo = new MongoPersonCustomerRoleHistoryRepository(tenantId, cacheMgr, mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
+				return personCustomerRoleHistoryRepo;
+			}
+		};
+	}
+	
+	@Bean(name={"personCustomerRoleHistoryRepo", "personLookup"}) @PersonRelated @Scope("prototype")
+	public PersonCustomerRoleHistoryRepository personCustomerRoleHistoryRepo() {
+		return personCustomerRoleHistoryRepoBeans().getCurrent();
+	}
+
 	
 }
