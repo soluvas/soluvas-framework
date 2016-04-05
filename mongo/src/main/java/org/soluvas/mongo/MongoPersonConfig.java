@@ -52,12 +52,7 @@ public class MongoPersonConfig implements PersonConfig {
 		return personRepoBeans().getCurrent();
 	}
 
-//	@Override
-//	public TenantBeans<PersonCustomerRoleHistoryRepository> personCustomerRoleHistoryRepoBeans() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//	
+	
 	@Override
 	@Bean(destroyMethod = "destroy")
 	public TenantBeans<PersonCustomerRoleHistoryRepository> personCustomerRoleHistoryRepoBeans(){
@@ -74,7 +69,7 @@ public class MongoPersonConfig implements PersonConfig {
 		};
 	}
 	
-	@Bean(name={"personCustomerRoleHistoryRepo", "personLookup"}) @PersonRelated @Scope("prototype")
+	@Bean(name={"personCustomerRoleHistoryRepo"}) @Scope("prototype")
 	public PersonCustomerRoleHistoryRepository personCustomerRoleHistoryRepo() {
 		return personCustomerRoleHistoryRepoBeans().getCurrent();
 	}

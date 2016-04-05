@@ -14,7 +14,6 @@ import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
-import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.person.PersonCustomerRoleHistoryRepository;
 import org.springframework.cache.CacheManager;
 
@@ -45,12 +44,7 @@ public class MongoPersonCustomerRoleHistoryRepository extends MongoRepositoryBas
 				Index.asc("securityRoleIds"),
 				Index.asc("customerRole"),
 				Index.asc("memberRole"),
-				Index.asc("managerRole"),
-				Index.asc("facebookId"),
-				// used by MongoRealm#doGetAuthenticationInfo()
-				Index.compound("_id", Direction.ASC, "accountStatus", Direction.ASC),
-				Index.compound("canonicalSlug", Direction.ASC, "accountStatus", Direction.ASC),
-				Index.compound("emails.email", Direction.ASC, "accountStatus", Direction.ASC)
+				Index.asc("managerRole")
 			);
 		this.tenantId = tenantId;
 		this.cacheMgr = cacheMgr;
