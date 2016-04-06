@@ -46,6 +46,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isDropshipEnabled <em>Dropship Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isReviewReminderEnabled <em>Review Reminder Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isZendeskIntegration <em>Zendesk Integration</em>}</li>
  * </ul>
  *
  * @generated
@@ -411,6 +412,26 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * @ordered
 	 */
 	protected boolean reviewReminderEnabled = REVIEW_REMINDER_ENABLED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isZendeskIntegration() <em>Zendesk Integration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isZendeskIntegration()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ZENDESK_INTEGRATION_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isZendeskIntegration() <em>Zendesk Integration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isZendeskIntegration()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean zendeskIntegration = ZENDESK_INTEGRATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -815,6 +836,27 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isZendeskIntegration() {
+		return zendeskIntegration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setZendeskIntegration(boolean newZendeskIntegration) {
+		boolean oldZendeskIntegration = zendeskIntegration;
+		zendeskIntegration = newZendeskIntegration;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__ZENDESK_INTEGRATION, oldZendeskIntegration, zendeskIntegration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -854,6 +896,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return isDropshipEnabled();
 			case CommonsPackage.CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED:
 				return isReviewReminderEnabled();
+			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_INTEGRATION:
+				return isZendeskIntegration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -916,6 +960,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return;
 			case CommonsPackage.CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED:
 				setReviewReminderEnabled((Boolean)newValue);
+				return;
+			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_INTEGRATION:
+				setZendeskIntegration((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -980,6 +1027,9 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED:
 				setReviewReminderEnabled(REVIEW_REMINDER_ENABLED_EDEFAULT);
 				return;
+			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_INTEGRATION:
+				setZendeskIntegration(ZENDESK_INTEGRATION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1028,6 +1078,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return dropshipEnabled != DROPSHIP_ENABLED_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED:
 				return reviewReminderEnabled != REVIEW_REMINDER_ENABLED_EDEFAULT;
+			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_INTEGRATION:
+				return zendeskIntegration != ZENDESK_INTEGRATION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1156,6 +1208,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(dropshipEnabled);
 		result.append(", reviewReminderEnabled: ");
 		result.append(reviewReminderEnabled);
+		result.append(", zendeskIntegration: ");
+		result.append(zendeskIntegration);
 		result.append(')');
 		return result.toString();
 	}
