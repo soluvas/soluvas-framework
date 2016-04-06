@@ -1763,6 +1763,66 @@ public class PersonCustomerRoleHistoryImpl extends MinimalEObjectImpl.Container 
 		
 	}
 
+	@Override
+	public void setCustomerRole(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DateTime getCustomerRoleEditTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCustomerRoleEditTime(DateTime value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getMemberRole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setMemberRole(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getCustomerRole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getFirstName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setFirstName(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getLastName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setLastName(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
