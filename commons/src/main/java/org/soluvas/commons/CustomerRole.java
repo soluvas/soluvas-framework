@@ -25,6 +25,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#getBookingExpiryTimeInMinutes <em>Booking Expiry Time In Minutes</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isDropshipEnabled <em>Dropship Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isReviewReminderEnabled <em>Review Reminder Enabled</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#isZendeskIntegration <em>Zendesk Integration</em>}</li>
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getCustomerRole()
@@ -385,5 +386,32 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @generated
 	 */
 	void setReviewReminderEnabled(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Zendesk Integration</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Zendesk Integration</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Zendesk Integration</em>' attribute.
+	 * @see #setZendeskIntegration(boolean)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_ZendeskIntegration()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isZendeskIntegration();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#isZendeskIntegration <em>Zendesk Integration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Zendesk Integration</em>' attribute.
+	 * @see #isZendeskIntegration()
+	 * @generated
+	 */
+	void setZendeskIntegration(boolean value);
 
 } // CustomerRole

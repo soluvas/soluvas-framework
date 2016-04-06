@@ -23,7 +23,7 @@ import org.joda.time.DateTime;
  *
  * @see org.soluvas.commons.CommonsPackage#getTimestamped()
  * @model interface="true" abstract="true"
- * @generated
+ * @generated NOT
  */
 public interface Timestamped /*extends EObject*/ {
 	/**
