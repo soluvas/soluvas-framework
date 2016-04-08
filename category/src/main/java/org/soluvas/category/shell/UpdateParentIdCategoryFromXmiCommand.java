@@ -1,6 +1,7 @@
 package org.soluvas.category.shell;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.apache.felix.gogo.commands.Command;
@@ -30,20 +31,26 @@ public class UpdateParentIdCategoryFromXmiCommand extends ExtCommandSupport {
 		final List<Category2> mongoCategories = mongoRepo.findAll(new CappedRequest(500)).getContent();
 		
 		System.err.println(String.format("Updating %s categories", mongoCategories.size()));
+		int updated = 0;
 		for (final Category2 mongoCategory : mongoCategories) {
-			final Category xmiCategory = xmiCategories.stream().filter(new Predicate<Category>() {
+			final Optional<Category> optXmiCategory = xmiCategories.stream().filter(new Predicate<Category>() {
 				@Override
 				public boolean test(Category t) {
 					return t.getId().equals(mongoCategory.getId());
 				}
-			}).findFirst().get();
+			}).findFirst();
+			if (!optXmiCategory.isPresent()) {
+				continue;
+			}
+			final Category xmiCategory = optXmiCategory.get();
 			if (xmiCategory.getParentUName() == null) {
 				continue;
 			}
 			mongoCategory.setParentId(xmiCategory.getParentUName().replace(xmiCategory.getNsPrefix() + "_", ""));
 			mongoRepo.modify(mongoCategory.getId(), mongoCategory);
+			updated++;
 		}
-		System.err.println(String.format("Updated for %s categories", mongoCategories.size()));
+		System.err.println(String.format("Updated for %s categories", updated));
 		
 		return null;
 	}
