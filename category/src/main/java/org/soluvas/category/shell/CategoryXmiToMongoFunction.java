@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.category.Category;
 import org.soluvas.category.Category2;
 import org.soluvas.category.FormalCategory;
@@ -17,6 +19,8 @@ import com.google.common.base.Function;
  *
  */
 public class CategoryXmiToMongoFunction implements Function<Category, Category2> {
+	
+	private static final Logger log = LoggerFactory.getLogger(CategoryXmiToMongoFunction.class);
 	
 	private final FormalCategory formalCategory;
 	
@@ -43,8 +47,10 @@ public class CategoryXmiToMongoFunction implements Function<Category, Category2>
 		category2.setModificationTime( input.getModificationTime() );
 		category2.setName( input.getName() );
 		category2.setNsPrefix( input.getNsPrefix() );
-		if (input.getParent() != null) {
-			category2.setParentId( input.getParent().getId());
+//		log.debug("Category '{}' has parent '{}", input.getId(), input.getParentUName());
+		if (input.getParentUName() != null) {
+//			log.debug("Category '{}' has parent: {}", input.getId(), input.getParentUName());
+			category2.setParentId( input.getParentUName().replace(input.getNsPrefix() + "_", ""));
 		}
 		category2.setPositioner( input.getPositioner() );
 		category2.setPrimaryUri( input.getPrimaryUri() );
