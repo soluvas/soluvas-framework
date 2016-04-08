@@ -7,7 +7,6 @@ import org.apache.felix.gogo.commands.Command;
 import org.soluvas.category.Category;
 import org.soluvas.category.Category2;
 import org.soluvas.category.CategoryRepository;
-import org.soluvas.category.CategoryStatus;
 import org.soluvas.category.FormalCategory;
 import org.soluvas.category.FormalCategoryRepository;
 import org.soluvas.category.MongoCategoryRepository;
@@ -17,7 +16,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
 
 /**
  * @author rudi
@@ -39,7 +37,7 @@ public class MigrateCategoryFromXmiToMongoDBCommand extends ExtCommandSupport {
 		final FormalCategory formalCategory = Preconditions.checkNotNull(formalCategoryRepo.findOne(googleFormalId),
 				"Formal Category for '%s' must not be null", googleFormalId);
 		
-		final List<Category> categories = xmiRepo.findAllByStatus(ImmutableList.of(CategoryStatus.ACTIVE, CategoryStatus.VOID), new CappedRequest(500)).getContent();
+		final List<Category> categories = xmiRepo.findAll(new CappedRequest(500)).getContent();
 		System.err.println(String.format("Migrate for %s categories", categories.size()));
 		for (final Category category : categories) {
 			final Category2 category2 = new CategoryXmiToMongoFunction(formalCategory).apply(category);
