@@ -1823,6 +1823,18 @@ public class PersonCustomerRoleHistoryImpl extends MinimalEObjectImpl.Container 
 		
 	}
 
+	@Override
+	public String getManagerRole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setManagerRole(String value) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

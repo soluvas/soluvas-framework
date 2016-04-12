@@ -139,4 +139,32 @@ public interface PersonCustomerRoleHistory extends NameContainer, PhotoIdContain
 	 */
 	void setLastName(String value);
 	
+	/**
+	 * Returns the value of the '<em><b>Manager Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Name of Manager Role or Group for example : regular, moderator , administrator, sysadmin. (administrativeRole attribute OID 2.5.18.5 is already used by LDAP standard)
+	 * 
+	 * 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Manager Role</em>' attribute.
+	 * @see #setManagerRole(String)
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_ManagerRole()
+	 * @model
+	 * @generated
+	 */
+	String getManagerRole();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.Person#getManagerRole <em>Manager Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Manager Role</em>' attribute.
+	 * @see #getManagerRole()
+	 * @generated
+	 */
+	void setManagerRole(String value);
+
+	
 }
