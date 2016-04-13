@@ -3,8 +3,12 @@ package org.soluvas.data.person;
 import org.soluvas.commons.Person2;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,4 +34,8 @@ public interface PersonRepository2 {
     Optional<Person2> findOneBySlug(String tenantId, StatusMask statusMask, String upSlug);
 
     Person2 modify(String tenantId, String personId, Person2 person);
+
+    Page<Person2> findBySearchText(String tenantId, StatusMask statusMask, String term, PageRequest pageable);
+
+    List<Person2> findAll(String tenantId, StatusMask activeOnly, Collection<String> ids);
 }
