@@ -1,10 +1,27 @@
 package org.soluvas.image.store;
 
-import com.google.common.base.*;
-import com.google.common.base.Optional;
-import com.google.common.collect.*;
-import com.google.common.util.concurrent.*;
-import com.mongodb.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.regex.Pattern;
+
+import javax.annotation.Nullable;
+import javax.annotation.PreDestroy;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -17,31 +34,55 @@ import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
 import org.soluvas.commons.impl.ProgressMonitorWrapperImpl;
 import org.soluvas.commons.util.ThreadLocalProgress;
-import org.soluvas.data.domain.*;
+import org.soluvas.data.domain.Page;
+import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.PageRequest;
+import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import org.soluvas.data.util.BatchFinder;
 import org.soluvas.data.util.BatchProcessor;
 import org.soluvas.data.util.RepositoryUtils;
-import org.soluvas.image.*;
+import org.soluvas.image.ImageConnector;
+import org.soluvas.image.ImageException;
+import org.soluvas.image.ImageFactory;
+import org.soluvas.image.ImageTransform;
+import org.soluvas.image.ImageTransformer;
+import org.soluvas.image.ImageVariant;
+import org.soluvas.image.UploadedImage;
 import org.soluvas.image.util.ImageUtils;
 import org.soluvas.mongo.Index;
 import org.soluvas.mongo.MongoUtils;
 
-import javax.annotation.Nullable;
-import javax.annotation.PreDestroy;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
-import java.util.regex.Pattern;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
+import com.mongodb.BasicDBObject;
+import com.mongodb.BulkWriteOperation;
+import com.mongodb.BulkWriteResult;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClientURI;
+import com.mongodb.MongoException;
+import com.mongodb.ReadPreference;
 
 /**
  * Stores images using S3 (typically) and MongoDB.
@@ -1041,6 +1082,19 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 			}
 		});
 		doUpdateUri(images, monitor);
+	}
+	
+	@Override
+	public void updateName(Map<String, String> upNameMap) {
+		final BulkWriteOperation bulk = mongoColl.initializeUnorderedBulkOperation();
+		for (Entry<String, String> entry : upNameMap.entrySet()) {
+			final BasicDBObject setObj = new BasicDBObject();
+			setObj.put("name", entry.getValue());
+			bulk.find(new BasicDBObject("_id", entry.getKey())).updateOne(new BasicDBObject("$set", setObj));;
+		}
+		final BulkWriteResult result = bulk.execute();
+		log.debug("Modified {} image(s)", result.getModifiedCount());
+		
 	}
 
 	@Override
