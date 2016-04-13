@@ -178,7 +178,7 @@ public class Person2 implements Serializable {
     protected DateTime passwordResetExpiryTime;
     protected String clientAccessToken;
     @ElementCollection(fetch = FetchType.EAGER) // EAGER required by security
-    @CollectionTable(name = "person_securityrole") @Column(name = "securityrole_id")
+    @Column(name = "securityrole_id")
     protected List<String> securityRoleIds = new ArrayList<>();
     protected BigDecimal debitBalance;
     @Type(type = "org.soluvas.jpa.PersistentCurrencyUnit")
@@ -810,6 +810,7 @@ public class Person2 implements Serializable {
      * securityRoleIds is mapped using {@link ElementCollection} instead of {@code varchar[]}.
      * @return
      */
+    @CollectionTable(name = "person_securityrole")
     public List<String> getSecurityRoleIds() {
         return securityRoleIds;
     }
