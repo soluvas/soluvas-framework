@@ -155,6 +155,14 @@ public interface ImageRepository extends EntityLookup<Image, String>,
 
 	public abstract void updateUri(Collection<String> imageIds, ProgressMonitor monitor);
 	
+	/**
+	 * Update name in the collection only
+	 * 
+	 * @param imageIds
+	 * @param monitor
+	 */
+	public abstract void updateName(Map<String, String> upNameMap);
+	
 	public String getUriTemplate();
 	
 	public ImageConnector getConnector();

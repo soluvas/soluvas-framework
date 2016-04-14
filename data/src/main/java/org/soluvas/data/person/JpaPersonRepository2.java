@@ -7,6 +7,9 @@ import org.soluvas.commons.SlugUtils;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +18,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -137,6 +142,35 @@ public class JpaPersonRepository2 implements PersonRepository2 {
         Preconditions.checkArgument(tenantId.equals(person.getTenantId()));
         Preconditions.checkArgument(personId.equals(person.getId()));
         return em.merge(person);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Person2> findBySearchText(String tenantId, StatusMask statusMask, String term, PageRequest pageable) {
+        final String termLike = term.toLowerCase().replaceAll("%", "\\%").replaceAll("_", "\\_") + "%";
+        final long count = em.createQuery("SELECT COUNT(p.id) FROM Person p" +
+                " WHERE p.tenantId=:tenantId AND LOWER(p.name) LIKE :termLike ESCAPE '\\'", Long.class)
+                .setParameter("tenantId", tenantId)
+                .setParameter("termLike", termLike)
+                .getSingleResult();
+        final List<Person2> list = (List) em.createQuery("SELECT p FROM Person p" +
+                " WHERE p.tenantId=:tenantId AND LOWER(p.name) LIKE :termLike ESCAPE '\\'", entityClass)
+                .setParameter("tenantId", tenantId)
+                .setParameter("termLike", termLike)
+                .setFirstResult(pageable.getOffset())
+                .setMaxResults(pageable.getPageSize())
+                .getResultList();
+        return new PageImpl<Person2>(list, pageable, count);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Person2> findAll(String tenantId, StatusMask activeOnly, Collection<String> ids) {
+        return (List) em.createQuery("SELECT p FROM Person p" +
+                " WHERE p.tenantId=:tenantId AND p.id IN :ids", entityClass)
+                .setParameter("tenantId", tenantId)
+                .setParameter("ids", ids)
+                .getResultList();
     }
 
 }

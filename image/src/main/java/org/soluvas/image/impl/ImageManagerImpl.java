@@ -615,6 +615,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			final Image image = imageMap.get(imageId);
 			final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(),
 					imageId, style, image);
+//			log.debug("Display image: {}", displayImage);
 			b.put(imageId, displayImage);
 		}
 		return b.build();
