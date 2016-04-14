@@ -1088,6 +1088,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	public void updateName(Map<String, String> upNameMap) {
 		if (upNameMap.isEmpty()) {
 			log.warn("No need to update name documents..");
+			return;
 		}
 		final BulkWriteOperation bulk = mongoColl.initializeUnorderedBulkOperation();
 		for (Entry<String, String> entry : upNameMap.entrySet()) {
