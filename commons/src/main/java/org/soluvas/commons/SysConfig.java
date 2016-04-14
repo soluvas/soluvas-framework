@@ -2,8 +2,6 @@
  */
 package org.soluvas.commons;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Sys Config</b></em>'.
@@ -24,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface SysConfig extends Timestamped, EObject {
+public interface SysConfig extends Timestamped {
 	/**
 	 * Returns the value of the '<em><b>Tenant Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

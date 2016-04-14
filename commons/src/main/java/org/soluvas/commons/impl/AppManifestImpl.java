@@ -89,6 +89,7 @@ import com.google.common.collect.ImmutableSet;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderPeriodStr <em>Reminder Period Str</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderPeriod <em>Reminder Period</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderScheduleStr <em>Reminder Schedule Str</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getSupportEmail <em>Support Email</em>}</li>
  * </ul>
  *
  * @generated
@@ -863,6 +864,25 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected String reminderScheduleStr = REMINDER_SCHEDULE_STR_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getSupportEmail() <em>Support Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSupportEmail()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SUPPORT_EMAIL_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getSupportEmail() <em>Support Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSupportEmail()
+	 * @generated
+	 * @ordered
+	 */
+	protected String supportEmail = SUPPORT_EMAIL_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1621,6 +1641,27 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSupportEmail() {
+		return supportEmail;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSupportEmail(String newSupportEmail) {
+		String oldSupportEmail = supportEmail;
+		supportEmail = newSupportEmail;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__SUPPORT_EMAIL, oldSupportEmail, supportEmail));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getDefaultTimeZoneId() {
 		return defaultTimeZoneId;
@@ -2042,6 +2083,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getReminderPeriod();
 			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE_STR:
 				return getReminderScheduleStr();
+			case CommonsPackage.APP_MANIFEST__SUPPORT_EMAIL:
+				return getSupportEmail();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2167,6 +2210,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE_STR:
 				setReminderScheduleStr((String)newValue);
 				return;
+			case CommonsPackage.APP_MANIFEST__SUPPORT_EMAIL:
+				setSupportEmail((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2290,6 +2336,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE_STR:
 				setReminderScheduleStr(REMINDER_SCHEDULE_STR_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__SUPPORT_EMAIL:
+				setSupportEmail(SUPPORT_EMAIL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2386,6 +2435,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return REMINDER_PERIOD_EDEFAULT == null ? getReminderPeriod() != null : !REMINDER_PERIOD_EDEFAULT.equals(getReminderPeriod());
 			case CommonsPackage.APP_MANIFEST__REMINDER_SCHEDULE_STR:
 				return REMINDER_SCHEDULE_STR_EDEFAULT == null ? reminderScheduleStr != null : !REMINDER_SCHEDULE_STR_EDEFAULT.equals(reminderScheduleStr);
+			case CommonsPackage.APP_MANIFEST__SUPPORT_EMAIL:
+				return SUPPORT_EMAIL_EDEFAULT == null ? supportEmail != null : !SUPPORT_EMAIL_EDEFAULT.equals(supportEmail);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2587,6 +2638,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(reminderPeriodStr);
 		result.append(", reminderScheduleStr: ");
 		result.append(reminderScheduleStr);
+		result.append(", supportEmail: ");
+		result.append(supportEmail);
 		result.append(')');
 		return result.toString();
 	}
