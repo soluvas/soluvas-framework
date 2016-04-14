@@ -1086,6 +1086,9 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	
 	@Override
 	public void updateName(Map<String, String> upNameMap) {
+		if (upNameMap.isEmpty()) {
+			log.warn("No need to update name documents..");
+		}
 		final BulkWriteOperation bulk = mongoColl.initializeUnorderedBulkOperation();
 		for (Entry<String, String> entry : upNameMap.entrySet()) {
 			final BasicDBObject setObj = new BasicDBObject();
@@ -1094,7 +1097,6 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		}
 		final BulkWriteResult result = bulk.execute();
 		log.debug("Modified {} image(s)", result.getModifiedCount());
-		
 	}
 
 	@Override
