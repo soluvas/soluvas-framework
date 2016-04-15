@@ -70,6 +70,7 @@ import org.soluvas.commons.util.AppUtils;
  *   <li>{@link org.soluvas.commons.AppManifest#getReminderPeriodStr <em>Reminder Period Str</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getReminderPeriod <em>Reminder Period</em>}</li>
  *   <li>{@link org.soluvas.commons.AppManifest#getReminderScheduleStr <em>Reminder Schedule Str</em>}</li>
+ *   <li>{@link org.soluvas.commons.AppManifest#getSupportEmail <em>Support Email</em>}</li>
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getAppManifest()
@@ -823,6 +824,36 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	 * @generated
 	 */
 	void setReminderScheduleStr(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Support Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Email address (current environment) used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.
+	 * The default templated generalEmail is "{+userName}@{+fqdn}" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.
+	 * 
+	 * <p>Templated using URI templates.
+	 * 
+	 * <p>TODO: this should be read-only
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Support Email</em>' attribute.
+	 * @see #setSupportEmail(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_SupportEmail()
+	 * @model
+	 * @generated
+	 */
+	String getSupportEmail();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getSupportEmail <em>Support Email</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Support Email</em>' attribute.
+	 * @see #getSupportEmail()
+	 * @generated
+	 */
+	void setSupportEmail(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.

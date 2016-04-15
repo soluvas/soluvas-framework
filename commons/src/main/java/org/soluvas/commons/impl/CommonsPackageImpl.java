@@ -1360,6 +1360,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppManifest_SupportEmail() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(36);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
@@ -4837,6 +4846,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_PERIOD_STR);
 		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_PERIOD);
 		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_SCHEDULE_STR);
+		createEAttribute(appManifestEClass, APP_MANIFEST__SUPPORT_EMAIL);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
 		createEOperation(appManifestEClass, APP_MANIFEST___GET_WEB_HOST);
 
@@ -5509,6 +5519,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_ReminderPeriodStr(), ecorePackage.getEString(), "reminderPeriodStr", "P7D", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_ReminderPeriod(), this.getPeriod(), "reminderPeriod", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_ReminderScheduleStr(), ecorePackage.getEString(), "reminderScheduleStr", "18:00:00", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_SupportEmail(), ecorePackage.getEString(), "supportEmail", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -6322,6 +6333,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "When the reminder will be sent in that day, using the timezone of mall."
+		   });	
+		addAnnotation
+		  (getAppManifest_SupportEmail(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Email address (current environment) used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.\nThe default templated generalEmail is \"{+userName}@{+fqdn}\" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.\n\n<p>Templated using URI templates.\n\n<p>TODO: this should be read-only"
 		   });	
 		addAnnotation
 		  (personInfoEClass, 

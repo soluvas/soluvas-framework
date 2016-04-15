@@ -539,13 +539,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__REMINDER_SCHEDULE_STR = POSITIONABLE_FEATURE_COUNT + 40;
 
 	/**
+	 * The feature id for the '<em><b>Support Email</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__SUPPORT_EMAIL = POSITIONABLE_FEATURE_COUNT + 41;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 41;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 42;
 
 	/**
 	 * The operation id for the '<em>Expand</em>' operation.
@@ -6620,6 +6629,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_ReminderScheduleStr();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getSupportEmail <em>Support Email</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Support Email</em>'.
+	 * @see org.soluvas.commons.AppManifest#getSupportEmail()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_SupportEmail();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10596,6 +10616,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__REMINDER_SCHEDULE_STR = eINSTANCE.getAppManifest_ReminderScheduleStr();
+
+		/**
+		 * The meta object literal for the '<em><b>Support Email</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__SUPPORT_EMAIL = eINSTANCE.getAppManifest_SupportEmail();
 
 		/**
 		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.
