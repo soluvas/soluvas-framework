@@ -12,18 +12,23 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.util.HashedPasswordUtils;
+import org.soluvas.security.shiro.BCryptPasswordService;
 
 /**
  * Match credentials based on <a href="http://tools.ietf.org/html/rfc2307">RFC 2307</a>.
  * Algorithms supported are:
  * <ol>
+ *     <li>{@link org.soluvas.security.shiro.BCryptPasswordService}, e.g. {@code $2a$10$Wv...Q2}</li>
  * 	<li>SSHA (salted SHA1)</li>
  * 	<li>PLAIN. <b>strongly discouraged</b></li>
  * </ol>
  * This does not connect to LDAP. Instead it uses LDAP-encoded userPassword
  * to provide flexible salt and hashing algorithm. 
  * @author mahendri
+ * @see org.soluvas.security.shiro.BCryptPasswordService
+ * @deprecated Needed to support legacy apps that use RFC2307 password. New apps should use {@link org.soluvas.security.shiro.BCryptPasswordService}.
  */
+@Deprecated
 public class Rfc2307CredentialsMatcher implements CredentialsMatcher {
 	
 	private static final Logger log = LoggerFactory
@@ -80,6 +85,9 @@ public class Rfc2307CredentialsMatcher implements CredentialsMatcher {
 				log.error("Unknown password algorithm {} for {}", algorithm, info.getPrincipals());
 				return false;
 			}
+		} else if (userPassword.startsWith("$")) {
+			final BCryptPasswordService bCryptPasswordService = new BCryptPasswordService();
+			return bCryptPasswordService.passwordsMatch(passwordToken, userPassword);
 		} else {
 			log.error("Unknown password syntax for {}", info.getPrincipals());
 			return false;
