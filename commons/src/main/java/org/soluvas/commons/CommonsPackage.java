@@ -5622,13 +5622,22 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE__ZENDESK_INTEGRATION = IDENTIFIABLE_FEATURE_COUNT + 17;
 
 	/**
+	 * The feature id for the '<em><b>Zendesk Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CUSTOMER_ROLE__ZENDESK_ID = IDENTIFIABLE_FEATURE_COUNT + 18;
+
+	/**
 	 * The number of structural features of the '<em>Customer Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 18;
+	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 19;
 
 	/**
 	 * The operation id for the '<em>Get Schema Version</em>' operation.
@@ -9722,6 +9731,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCustomerRole_ZendeskIntegration();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#getZendeskId <em>Zendesk Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Zendesk Id</em>'.
+	 * @see org.soluvas.commons.CustomerRole#getZendeskId()
+	 * @see #getCustomerRole()
+	 * @generated
+	 */
+	EAttribute getCustomerRole_ZendeskId();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.CustomerRoleCatalog <em>Customer Role Catalog</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13050,6 +13070,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CUSTOMER_ROLE__ZENDESK_INTEGRATION = eINSTANCE.getCustomerRole_ZendeskIntegration();
+
+		/**
+		 * The meta object literal for the '<em><b>Zendesk Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CUSTOMER_ROLE__ZENDESK_ID = eINSTANCE.getCustomerRole_ZendeskId();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.CustomerRoleCatalogImpl <em>Customer Role Catalog</em>}' class.
