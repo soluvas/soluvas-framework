@@ -5,11 +5,12 @@ import org.soluvas.image.TransformGravity;
 import org.soluvas.image.impl.ResizeToFillImpl;
 import org.soluvas.image.impl.ResizeToFitImpl;
 
+import javax.annotation.Nullable;
+
 /**
  * Description on how to process an image to a different style like thumbnail.
  * 
  * @author ceefour
- * 
  */
 public class ImageStyle {
 
@@ -17,7 +18,16 @@ public class ImageStyle {
 	private final String code;
 	private ImageTransform transform;
 
-	public ImageStyle(String name, String code, Integer maxWidth, Integer maxHeight) {
+	/**
+	 *
+	 * @param name
+	 * @param code
+	 * @param maxWidth create {@link org.soluvas.image.ResizeToFill} if both maxWidth and maxHeight is filled,
+	 *                 otherwise assume {@link org.soluvas.image.ResizeToFit}
+	 * @param maxHeight create {@link org.soluvas.image.ResizeToFill} if both maxWidth and maxHeight is filled,
+	 *                 otherwise assume {@link org.soluvas.image.ResizeToFit}
+     */
+	public ImageStyle(String name, String code, @Nullable Integer maxWidth, @Nullable Integer maxHeight) {
 		super();
 		this.name = name;
 		this.code = code;
@@ -34,8 +44,10 @@ public class ImageStyle {
 	/**
 	 * @param name
 	 * @param code
-	 * @param maxWidth
-	 * @param maxHeight
+	 * @param maxWidth create {@link org.soluvas.image.ResizeToFill} if both maxWidth and maxHeight is filled,
+	 *                 otherwise assume {@link org.soluvas.image.ResizeToFit}
+	 * @param maxHeight create {@link org.soluvas.image.ResizeToFill} if both maxWidth and maxHeight is filled,
+	 *                 otherwise assume {@link org.soluvas.image.ResizeToFit}
 	 * @param gravity
 	 */
 	public ImageStyle(String name, String code, Integer maxWidth, Integer maxHeight,
