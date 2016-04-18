@@ -26,6 +26,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#isDropshipEnabled <em>Dropship Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isReviewReminderEnabled <em>Review Reminder Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isZendeskIntegration <em>Zendesk Integration</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#getZendeskId <em>Zendesk Id</em>}</li>
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getCustomerRole()
@@ -413,5 +414,31 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	 * @generated
 	 */
 	void setZendeskIntegration(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Zendesk Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Zendesk Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Zendesk Id</em>' attribute.
+	 * @see #setZendeskId(Long)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_ZendeskId()
+	 * @model
+	 * @generated
+	 */
+	Long getZendeskId();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#getZendeskId <em>Zendesk Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Zendesk Id</em>' attribute.
+	 * @see #getZendeskId()
+	 * @generated
+	 */
+	void setZendeskId(Long value);
 
 } // CustomerRole
