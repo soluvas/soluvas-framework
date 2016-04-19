@@ -81,6 +81,7 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getType <em>Type</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getVerifyCode <em>Verify Code</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getOrganizations <em>Organizations</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getZendeskUserId <em>Zendesk User Id</em>}</li>
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getPerson()
@@ -1428,6 +1429,32 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	EList<Organization> getOrganizations();
+
+	/**
+	 * Returns the value of the '<em><b>Zendesk User Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Zendesk User Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Zendesk User Id</em>' attribute.
+	 * @see #setZendeskUserId(Long)
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_ZendeskUserId()
+	 * @model
+	 * @generated
+	 */
+	Long getZendeskUserId();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.Person#getZendeskUserId <em>Zendesk User Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Zendesk User Id</em>' attribute.
+	 * @see #getZendeskUserId()
+	 * @generated
+	 */
+	void setZendeskUserId(Long value);
 
 	/**
 	 * <!-- begin-user-doc -->

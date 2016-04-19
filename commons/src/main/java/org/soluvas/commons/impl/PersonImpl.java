@@ -896,7 +896,15 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	
 	protected static final DateTime CUSTOMER_ROLE_EDIT_TIME_EDEFAULT = null;
 
+	/**
+	 * @generated
+	 */
 	protected DateTime customerRoleEditTime = CUSTOMER_ROLE_EDIT_TIME_EDEFAULT;
+	
+	/**
+	 * @generated
+	 */
+	protected Long zendeskUserId;
 	
 	/**
 	 * The default value of the '{@link #getMemberRole() <em>Member Role</em>}' attribute.
@@ -4401,14 +4409,40 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		return result.toString();
 	}
 
+	/**
+	 * @return
+	 * @generated
+	 */
 	@Override
 	public DateTime getCustomerRoleEditTime() {
 		return this.customerRoleEditTime;
 	}
 
+	/**
+	 * @generated
+	 * @param value
+	 */
 	@Override
 	public void setCustomerRoleEditTime(DateTime value) {
 		this.customerRoleEditTime = value;
+	}
+
+	/**
+	 * @generated
+	 * @return
+	 */
+	@Override
+	public Long getZendeskUserId() {
+		return this.zendeskUserId;
+	}
+
+	/**
+	 * @generated
+	 * @param value
+	 */
+	@Override
+	public void setZendeskUserId(Long value) {
+		this.zendeskUserId = value;
 	}
 
 } //PersonImpl
