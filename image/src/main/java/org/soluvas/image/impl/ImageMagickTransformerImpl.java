@@ -18,7 +18,6 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.PumpStreamHandler;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -64,7 +63,25 @@ import com.google.common.util.concurrent.MoreExecutors;
  */
 public class ImageMagickTransformerImpl extends ImageTransformerImpl implements ImageMagickTransformer {
 
-	public static final String IMAGEMAGICK_BIN = "convert";
+	/**
+	 * Static because {@link #quickTransform(File, File, ImageTransform)} requires this.
+	 */
+	public static String imageMagickDir;
+
+	public static String getImageMagickBin() {
+		return getImageMagickDir() != null ? getImageMagickDir() + "/convert" : "convert";
+	}
+
+	public static String getImageMagickDir() {
+		return ImageMagickTransformerImpl.imageMagickDir;
+	}
+
+	/**
+	 * Not required for Linux. Required for Windows.
+	 */
+	public static void setImageMagickDir(String imageMagickDir) {
+		ImageMagickTransformerImpl.imageMagickDir = imageMagickDir;
+	}
 
 	public static byte[] quickTransform(byte[] originalImage, ImageTransform transform) {
 		final File originalFile;
@@ -97,7 +114,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 		// TODO: do not hardcode quality
 		final float quality = 0.85f;
 
-		final CommandLine cmd = new CommandLine(IMAGEMAGICK_BIN);
+		final CommandLine cmd = new CommandLine(getImageMagickBin());
 		cmd.addArgument(originalFile.getPath(), false);
 		cmd.addArgument("-verbose");
 
@@ -233,7 +250,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 						 * convert IMG00178-20141215-1005.jpg -verbose -gravity center -resize 800x700^ -extent 800x700 -quality 0.85f*100f miff:- | composite -watermark 15% -gravity center download.jpg - miff:- | composite -gravity south Signature_Rhupa.png - new.jpg
 						 * */
 
-						final CommandLine cmd = new CommandLine(IMAGEMAGICK_BIN);
+						final CommandLine cmd = new CommandLine(getImageMagickBin());
 						cmd.addArgument(originalFile.getPath(), false);
 						cmd.addArgument("-verbose");
 						
@@ -484,6 +501,8 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 						final DefaultExecutor executor,
 						final Map<String, String> environment)
 						throws IOException {
+//					final ImmutableMap<String, String> newenv = ImmutableMap.<String, String>builder()
+//							.putAll(environment).put("PATH", System.getenv("PATH")).build();
 					final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 					executor.setStreamHandler(new PumpStreamHandler(buffer));
 					log.debug("Transforming using: {} {}", environment, cmd);
@@ -493,7 +512,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 					} catch (ExecuteException e) {
 						throw new ImageException(e, "Cannot execute %s %s: %s", environment, cmd, buffer);
 					}
-					log.info("{} {} returned {}: {}", environment, cmd, executionResult, buffer);
+					log.info("{} {} returned {}: {}", environment, environment, executionResult, buffer);
 				}
 			});
 			

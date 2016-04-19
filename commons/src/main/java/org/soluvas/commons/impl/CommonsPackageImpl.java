@@ -4234,6 +4234,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCustomerRole_ZendeskId() {
+		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCustomerRoleCatalog() {
 		return customerRoleCatalogEClass;
 	}
@@ -5188,6 +5197,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__DROPSHIP_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__ZENDESK_INTEGRATION);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__ZENDESK_ID);
 
 		customerRoleCatalogEClass = createEClass(CUSTOMER_ROLE_CATALOG);
 		createEReference(customerRoleCatalogEClass, CUSTOMER_ROLE_CATALOG__CUSTOMER_ROLES);
@@ -5931,6 +5941,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getCustomerRole_DropshipEnabled(), ecorePackage.getEBoolean(), "dropshipEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_ReviewReminderEnabled(), ecorePackage.getEBoolean(), "reviewReminderEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_ZendeskIntegration(), ecorePackage.getEBoolean(), "zendeskIntegration", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_ZendeskId(), ecorePackage.getELongObject(), "zendeskId", null, 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(customerRoleCatalogEClass, CustomerRoleCatalog.class, "CustomerRoleCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCustomerRoleCatalog_CustomerRoles(), this.getCustomerRole(), null, "customerRoles", null, 0, -1, CustomerRoleCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
