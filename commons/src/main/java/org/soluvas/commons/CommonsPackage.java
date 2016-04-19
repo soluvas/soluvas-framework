@@ -4193,13 +4193,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__ORGANIZATIONS = NAME_CONTAINER_FEATURE_COUNT + 67;
 
 	/**
+	 * The feature id for the '<em><b>Zendesk User Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__ZENDESK_USER_ID = NAME_CONTAINER_FEATURE_COUNT + 68;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 68;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 69;
 
 	/**
 	 * The operation id for the '<em>Get Image Id</em>' operation.
@@ -5622,13 +5631,13 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE__ZENDESK_INTEGRATION = IDENTIFIABLE_FEATURE_COUNT + 17;
 
 	/**
-	 * The feature id for the '<em><b>Zendesk Id</b></em>' attribute.
+	 * The feature id for the '<em><b>Zendesk Group Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CUSTOMER_ROLE__ZENDESK_ID = IDENTIFIABLE_FEATURE_COUNT + 18;
+	int CUSTOMER_ROLE__ZENDESK_GROUP_ID = IDENTIFIABLE_FEATURE_COUNT + 18;
 
 	/**
 	 * The number of structural features of the '<em>Customer Role</em>' class.
@@ -8759,6 +8768,17 @@ public interface CommonsPackage extends EPackage {
 	EReference getPerson_Organizations();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getZendeskUserId <em>Zendesk User Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Zendesk User Id</em>'.
+	 * @see org.soluvas.commons.Person#getZendeskUserId()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_ZendeskUserId();
+
+	/**
 	 * Returns the meta object for the '{@link org.soluvas.commons.Person#hasEmail(java.lang.String) <em>Has Email</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9731,15 +9751,15 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCustomerRole_ZendeskIntegration();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#getZendeskId <em>Zendesk Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.CustomerRole#getZendeskGroupId <em>Zendesk Group Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Zendesk Id</em>'.
-	 * @see org.soluvas.commons.CustomerRole#getZendeskId()
+	 * @return the meta object for the attribute '<em>Zendesk Group Id</em>'.
+	 * @see org.soluvas.commons.CustomerRole#getZendeskGroupId()
 	 * @see #getCustomerRole()
 	 * @generated
 	 */
-	EAttribute getCustomerRole_ZendeskId();
+	EAttribute getCustomerRole_ZendeskGroupId();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.CustomerRoleCatalog <em>Customer Role Catalog</em>}'.
@@ -12320,6 +12340,14 @@ public interface CommonsPackage extends EPackage {
 		EReference PERSON__ORGANIZATIONS = eINSTANCE.getPerson_Organizations();
 
 		/**
+		 * The meta object literal for the '<em><b>Zendesk User Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__ZENDESK_USER_ID = eINSTANCE.getPerson_ZendeskUserId();
+
+		/**
 		 * The meta object literal for the '<em><b>Has Email</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13072,12 +13100,12 @@ public interface CommonsPackage extends EPackage {
 		EAttribute CUSTOMER_ROLE__ZENDESK_INTEGRATION = eINSTANCE.getCustomerRole_ZendeskIntegration();
 
 		/**
-		 * The meta object literal for the '<em><b>Zendesk Id</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Zendesk Group Id</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CUSTOMER_ROLE__ZENDESK_ID = eINSTANCE.getCustomerRole_ZendeskId();
+		EAttribute CUSTOMER_ROLE__ZENDESK_GROUP_ID = eINSTANCE.getCustomerRole_ZendeskGroupId();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.CustomerRoleCatalogImpl <em>Customer Role Catalog</em>}' class.

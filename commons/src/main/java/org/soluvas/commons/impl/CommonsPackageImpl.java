@@ -3344,6 +3344,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPerson_ZendeskUserId() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(52);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EOperation getPerson__HasEmail__String() {
 		return personEClass.getEOperations().get(0);
@@ -4234,7 +4243,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getCustomerRole_ZendeskId() {
+	public EAttribute getCustomerRole_ZendeskGroupId() {
 		return (EAttribute)customerRoleEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -5091,6 +5100,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__TYPE);
 		createEAttribute(personEClass, PERSON__VERIFY_CODE);
 		createEReference(personEClass, PERSON__ORGANIZATIONS);
+		createEAttribute(personEClass, PERSON__ZENDESK_USER_ID);
 		createEOperation(personEClass, PERSON___HAS_EMAIL__STRING);
 		createEOperation(personEClass, PERSON___PUT_EMAIL__STRING);
 
@@ -5197,7 +5207,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__DROPSHIP_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__REVIEW_REMINDER_ENABLED);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__ZENDESK_INTEGRATION);
-		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__ZENDESK_ID);
+		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__ZENDESK_GROUP_ID);
 
 		customerRoleCatalogEClass = createEClass(CUSTOMER_ROLE_CATALOG);
 		createEReference(customerRoleCatalogEClass, CUSTOMER_ROLE_CATALOG__CUSTOMER_ROLES);
@@ -5831,6 +5841,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_Type(), ecorePackage.getEString(), "type", "Person", 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_VerifyCode(), ecorePackage.getEString(), "verifyCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPerson_Organizations(), this.getOrganization(), null, "organizations", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_ZendeskUserId(), ecorePackage.getELongObject(), "zendeskUserId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getPerson__HasEmail__String(), ecorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -5941,7 +5952,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getCustomerRole_DropshipEnabled(), ecorePackage.getEBoolean(), "dropshipEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_ReviewReminderEnabled(), ecorePackage.getEBoolean(), "reviewReminderEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_ZendeskIntegration(), ecorePackage.getEBoolean(), "zendeskIntegration", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCustomerRole_ZendeskId(), ecorePackage.getELongObject(), "zendeskId", null, 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCustomerRole_ZendeskGroupId(), ecorePackage.getELongObject(), "zendeskGroupId", null, 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(customerRoleCatalogEClass, CustomerRoleCatalog.class, "CustomerRoleCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCustomerRoleCatalog_CustomerRoles(), this.getCustomerRole(), null, "customerRoles", null, 0, -1, CustomerRoleCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
