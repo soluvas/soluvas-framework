@@ -20,13 +20,10 @@ public interface PersonCustomerRoleHistory extends NameContainer, PhotoIdContain
 			personInfo.setPhotoId(input.getPhotoId());
 			personInfo.setGender(input.getGender());
 			personInfo.setEmail(input.getEmail());
-//			personInfo.setMobileNumber(input.getMobileNumber());
 			return personInfo;
 		}
 	}
 	
-	@Override
-	long getSchemaVersion ();
 
 	/**
 	 * Returns the value of the '<em><b>Customer Role</b></em>' attribute.
@@ -38,10 +35,12 @@ public interface PersonCustomerRoleHistory extends NameContainer, PhotoIdContain
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Customer Role</em>' attribute.
 	 * @see #setCustomerRole(String)
-	 * @see org.soluvas.commons.CommonsPackage#getPerson_CustomerRole()
 	 * @model
 	 * @generated
 	 */
+	@Override
+	long getSchemaVersion ();
+
 	String getCustomerRole();
 	
 	void setCustomerRole(String value);
