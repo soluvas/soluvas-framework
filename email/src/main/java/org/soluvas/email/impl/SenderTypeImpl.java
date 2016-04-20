@@ -2,9 +2,7 @@
  */
 package org.soluvas.email.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -24,6 +22,7 @@ import org.soluvas.email.SenderType;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.impl.SenderTypeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.email.impl.SenderTypeImpl#getBundle <em>Bundle</em>}</li>
@@ -32,7 +31,6 @@ import org.soluvas.email.SenderType;
  *   <li>{@link org.soluvas.email.impl.SenderTypeImpl#getEmail <em>Email</em>}</li>
  *   <li>{@link org.soluvas.email.impl.SenderTypeImpl#getReplyTo <em>Reply To</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -492,20 +490,6 @@ public class SenderTypeImpl extends MinimalEObjectImpl.Container implements Send
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case EmailPackage.SENDER_TYPE___CREATE:
-				return create();
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

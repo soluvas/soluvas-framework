@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.SenderLike#getFrom <em>From</em>}</li>
  *   <li>{@link org.soluvas.email.SenderLike#getEmail <em>Email</em>}</li>
  *   <li>{@link org.soluvas.email.SenderLike#getReplyTo <em>Reply To</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getSenderLike()
  * @model interface="true" abstract="true"

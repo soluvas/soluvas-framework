@@ -2,7 +2,6 @@ package org.soluvas.email.impl;
 
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -38,6 +37,7 @@ import com.google.common.collect.ImmutableMap;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getSubjectTemplate <em>Subject Template</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getPlainTemplate <em>Plain Template</em>}</li>
@@ -46,7 +46,6 @@ import com.google.common.collect.ImmutableMap;
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getAppManifest <em>App Manifest</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateImpl#getRecipients <em>Recipients</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -519,24 +518,6 @@ public abstract class TemplateImpl extends MinimalEObjectImpl.Container implemen
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case EmailPackage.TEMPLATE___RENDER_SUBJECT__RECIPIENT:
-				return renderSubject((Recipient)arguments.get(0));
-			case EmailPackage.TEMPLATE___RENDER_TEXT__RECIPIENT:
-				return renderText((Recipient)arguments.get(0));
-			case EmailPackage.TEMPLATE___RENDER_HTML__RECIPIENT:
-				return renderHtml((Recipient)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

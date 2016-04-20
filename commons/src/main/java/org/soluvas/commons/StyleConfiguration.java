@@ -1,5 +1,7 @@
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * Used by {@link org.soluvas.web.site.SiteResource} to get the current Mall's default style.
  * @author rio

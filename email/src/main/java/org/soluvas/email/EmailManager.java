@@ -18,6 +18,7 @@ import org.soluvas.email.impl.EmailTemplate;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.EmailManager#getSmtpUser <em>Smtp User</em>}</li>
  *   <li>{@link org.soluvas.email.EmailManager#getSmtpPassword <em>Smtp Password</em>}</li>
@@ -25,7 +26,6 @@ import org.soluvas.email.impl.EmailTemplate;
  *   <li>{@link org.soluvas.email.EmailManager#getSmtpPort <em>Smtp Port</em>}</li>
  *   <li>{@link org.soluvas.email.EmailManager#getSmtpSecurity <em>Smtp Security</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getEmailManager()
  * @model

@@ -2,7 +2,6 @@
  */
 package org.soluvas.commons.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.Map;
 
@@ -26,6 +25,7 @@ import org.soluvas.commons.WebAddress;
 import com.damnhandy.uri.template.UriTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Strings;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -1117,57 +1117,6 @@ public class WebAddressImpl extends MinimalEObjectImpl.Container implements WebA
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == BundleAware.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == ResourceAware.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Expandable.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.EXPANDABLE___EXPAND__MAP: return CommonsPackage.WEB_ADDRESS___EXPAND__MAP;
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.WEB_ADDRESS___GET_API_URI:
-				return getApiUri();
-			case CommonsPackage.WEB_ADDRESS___GET_SECURE_API_URI:
-				return getSecureApiUri();
-			case CommonsPackage.WEB_ADDRESS___EXPAND__MAP:
-				try {
-					expand((Map<String, Object>)arguments.get(0));
-					return null;
-				}
-				catch (Throwable throwable) {
-					throw new InvocationTargetException(throwable);
-				}
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

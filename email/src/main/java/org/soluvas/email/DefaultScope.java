@@ -13,11 +13,11 @@ import org.soluvas.commons.WebAddress;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.DefaultScope#getWebAddress <em>Web Address</em>}</li>
  *   <li>{@link org.soluvas.email.DefaultScope#getAppManifest <em>App Manifest</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getDefaultScope()
  * @model interface="true" abstract="true"

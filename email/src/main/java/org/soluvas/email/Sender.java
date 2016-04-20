@@ -14,10 +14,10 @@ package org.soluvas.email;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.Sender#getSenderType <em>Sender Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getSender()
  * @model

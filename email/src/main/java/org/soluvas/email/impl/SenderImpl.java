@@ -4,9 +4,7 @@ package org.soluvas.email.impl;
 
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -28,6 +26,7 @@ import com.google.common.base.Strings;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.impl.SenderImpl#getFrom <em>From</em>}</li>
  *   <li>{@link org.soluvas.email.impl.SenderImpl#getEmail <em>Email</em>}</li>
@@ -36,7 +35,6 @@ import com.google.common.base.Strings;
  *   <li>{@link org.soluvas.email.impl.SenderImpl#getAppManifest <em>App Manifest</em>}</li>
  *   <li>{@link org.soluvas.email.impl.SenderImpl#getSenderType <em>Sender Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -506,21 +504,6 @@ public class SenderImpl extends MinimalEObjectImpl.Container implements Sender {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case EmailPackage.SENDER___EXPAND:
-				expand();
-				return null;
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

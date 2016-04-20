@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.TemplateLike#getSubjectTemplate <em>Subject Template</em>}</li>
  *   <li>{@link org.soluvas.email.TemplateLike#getPlainTemplate <em>Plain Template</em>}</li>
  *   <li>{@link org.soluvas.email.TemplateLike#getHtmlTemplate <em>Html Template</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getTemplateLike()
  * @model interface="true" abstract="true"

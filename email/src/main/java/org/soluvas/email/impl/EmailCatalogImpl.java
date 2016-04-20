@@ -26,6 +26,7 @@ import org.soluvas.email.SenderType;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getNsPrefix <em>Ns Prefix</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getPageTypes <em>Page Types</em>}</li>
@@ -35,7 +36,6 @@ import org.soluvas.email.SenderType;
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailCatalogImpl#getEFactory <em>EFactory</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

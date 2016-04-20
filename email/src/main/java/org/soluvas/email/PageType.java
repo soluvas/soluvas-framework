@@ -10,10 +10,10 @@ package org.soluvas.email;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.PageType#getSenderTypeName <em>Sender Type Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getPageType()
  * @model

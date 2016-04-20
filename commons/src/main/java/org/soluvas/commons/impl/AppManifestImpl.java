@@ -1,6 +1,5 @@
 package org.soluvas.commons.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
@@ -38,6 +37,7 @@ import com.damnhandy.uri.template.VariableExpansionException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -2499,57 +2499,6 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == ResourceAware.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == BundleAware.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Expandable.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.EXPANDABLE___EXPAND__MAP: return CommonsPackage.APP_MANIFEST___EXPAND__MAP;
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.APP_MANIFEST___GET_DEFAULT_LOCALE:
-				return getDefaultLocale();
-			case CommonsPackage.APP_MANIFEST___GET_WEB_HOST:
-				return getWebHost();
-			case CommonsPackage.APP_MANIFEST___EXPAND__MAP:
-				try {
-					expand((Map<String, Object>)arguments.get(0));
-					return null;
-				}
-				catch (Throwable throwable) {
-					throw new InvocationTargetException(throwable);
-				}
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

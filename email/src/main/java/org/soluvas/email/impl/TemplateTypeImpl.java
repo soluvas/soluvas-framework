@@ -2,10 +2,9 @@
  */
 package org.soluvas.email.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -34,6 +33,7 @@ import org.soluvas.email.TemplateType;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.impl.TemplateTypeImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateTypeImpl#getResourceUri <em>Resource Uri</em>}</li>
@@ -54,7 +54,6 @@ import org.soluvas.email.TemplateType;
  *   <li>{@link org.soluvas.email.impl.TemplateTypeImpl#getEClassName <em>EClass Name</em>}</li>
  *   <li>{@link org.soluvas.email.impl.TemplateTypeImpl#getEPackageName <em>EPackage Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -290,14 +289,24 @@ public abstract class TemplateTypeImpl<T extends Template> extends MinimalEObjec
 	protected JavaClassStatus javaClassStatus = JAVA_CLASS_STATUS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getEFactory() <em>EFactory</em>}' reference.
+	 * The default value of the '{@link #getEFactory() <em>EFactory</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getEFactory()
 	 * @generated
 	 * @ordered
 	 */
-	protected EFactory eFactory;
+	protected static final EFactory EFACTORY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getEFactory() <em>EFactory</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEFactory()
+	 * @generated
+	 * @ordered
+	 */
+	protected EFactory eFactory = EFACTORY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getEClass() <em>EClass</em>}' reference.
@@ -691,23 +700,6 @@ public abstract class TemplateTypeImpl<T extends Template> extends MinimalEObjec
 	 */
 	@Override
 	public EFactory getEFactory() {
-		if (eFactory != null && eFactory.eIsProxy()) {
-			InternalEObject oldEFactory = (InternalEObject)eFactory;
-			eFactory = (EFactory)eResolveProxy(oldEFactory);
-			if (eFactory != oldEFactory) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EmailPackage.TEMPLATE_TYPE__EFACTORY, oldEFactory, eFactory));
-			}
-		}
-		return eFactory;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EFactory basicGetEFactory() {
 		return eFactory;
 	}
 
@@ -907,8 +899,7 @@ public abstract class TemplateTypeImpl<T extends Template> extends MinimalEObjec
 			case EmailPackage.TEMPLATE_TYPE__JAVA_CLASS_STATUS:
 				return getJavaClassStatus();
 			case EmailPackage.TEMPLATE_TYPE__EFACTORY:
-				if (resolve) return getEFactory();
-				return basicGetEFactory();
+				return getEFactory();
 			case EmailPackage.TEMPLATE_TYPE__ECLASS:
 				if (resolve) return getEClass();
 				return basicGetEClass();
@@ -1036,7 +1027,7 @@ public abstract class TemplateTypeImpl<T extends Template> extends MinimalEObjec
 				setJavaClassStatus(JAVA_CLASS_STATUS_EDEFAULT);
 				return;
 			case EmailPackage.TEMPLATE_TYPE__EFACTORY:
-				setEFactory((EFactory)null);
+				setEFactory(EFACTORY_EDEFAULT);
 				return;
 			case EmailPackage.TEMPLATE_TYPE__ECLASS:
 				setEClass((EClass)null);
@@ -1090,7 +1081,7 @@ public abstract class TemplateTypeImpl<T extends Template> extends MinimalEObjec
 			case EmailPackage.TEMPLATE_TYPE__JAVA_CLASS_STATUS:
 				return javaClassStatus != JAVA_CLASS_STATUS_EDEFAULT;
 			case EmailPackage.TEMPLATE_TYPE__EFACTORY:
-				return eFactory != null;
+				return EFACTORY_EDEFAULT == null ? eFactory != null : !EFACTORY_EDEFAULT.equals(eFactory);
 			case EmailPackage.TEMPLATE_TYPE__ECLASS:
 				return eClass != null;
 			case EmailPackage.TEMPLATE_TYPE__ECLASS_STATUS:
@@ -1241,78 +1232,6 @@ public abstract class TemplateTypeImpl<T extends Template> extends MinimalEObjec
 	 * @generated
 	 */
 	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == BundleAware.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Nameable.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.NAMEABLE___GET_NAME: return EmailPackage.TEMPLATE_TYPE___GET_NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == NameContainer.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == TemplateLike.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == NsPrefixable.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == JavaClassLinked.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.JAVA_CLASS_LINKED___RESOLVE_JAVA_CLASS__BUNDLE: return EmailPackage.TEMPLATE_TYPE___RESOLVE_JAVA_CLASS__BUNDLE;
-				default: return -1;
-			}
-		}
-		if (baseClass == EFactoryLinked.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == EClassLinked.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.ECLASS_LINKED___RESOLVE_ECLASS__MAP: return EmailPackage.TEMPLATE_TYPE___RESOLVE_ECLASS__MAP;
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case EmailPackage.TEMPLATE_TYPE___RESOLVE_ECLASS__MAP:
-				resolveEClass((Map<String, EClass>)arguments.get(0));
-				return null;
-			case EmailPackage.TEMPLATE_TYPE___RESOLVE_JAVA_CLASS__BUNDLE:
-				resolveJavaClass((Bundle)arguments.get(0));
-				return null;
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
@@ -1341,6 +1260,8 @@ public abstract class TemplateTypeImpl<T extends Template> extends MinimalEObjec
 		result.append(javaClass);
 		result.append(", javaClassStatus: ");
 		result.append(javaClassStatus);
+		result.append(", eFactory: ");
+		result.append(eFactory);
 		result.append(", eClassStatus: ");
 		result.append(eClassStatus);
 		result.append(", ePackageNsPrefix: ");

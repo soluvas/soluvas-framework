@@ -164,18 +164,4 @@ public abstract class ModelNotificationImpl<T extends EObject> extends MinimalEO
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.MODEL_NOTIFICATION___GET_OBJECT:
-				return getObject();
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
 } //ModelNotificationImpl

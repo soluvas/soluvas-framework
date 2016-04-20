@@ -13,13 +13,13 @@ import org.apache.commons.mail.Email;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.Page#getLayout <em>Layout</em>}</li>
  *   <li>{@link org.soluvas.email.Page#getPageType <em>Page Type</em>}</li>
  *   <li>{@link org.soluvas.email.Page#getSender <em>Sender</em>}</li>
  *   <li>{@link org.soluvas.email.Page#getMailSession <em>Mail Session</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getPage()
  * @model abstract="true"

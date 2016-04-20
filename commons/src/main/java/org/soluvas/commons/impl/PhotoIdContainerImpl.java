@@ -160,20 +160,6 @@ public abstract class PhotoIdContainerImpl extends MinimalEObjectImpl.Container 
 	 * @generated
 	 */
 	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.PHOTO_ID_CONTAINER___GET_IMAGE_ID:
-				return getImageId();
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

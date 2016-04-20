@@ -286,39 +286,6 @@ public abstract class ProgressMonitorImpl extends MinimalEObjectImpl.Container i
 	 * @generated
 	 */
 	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG:
-				beginTask((String)arguments.get(0), (Long)arguments.get(1));
-				return null;
-			case CommonsPackage.PROGRESS_MONITOR___DONE:
-				done();
-				return null;
-			case CommonsPackage.PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE:
-				internalWorked((Double)arguments.get(0));
-				return null;
-			case CommonsPackage.PROGRESS_MONITOR___SUB_TASK__STRING:
-				subTask((String)arguments.get(0));
-				return null;
-			case CommonsPackage.PROGRESS_MONITOR___WORKED__LONG:
-				worked((Long)arguments.get(0));
-				return null;
-			case CommonsPackage.PROGRESS_MONITOR___DONE__PROGRESSSTATUS:
-				done((ProgressStatus)arguments.get(0));
-				return null;
-			case CommonsPackage.PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS:
-				worked((Long)arguments.get(0), (ProgressStatus)arguments.get(1));
-				return null;
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

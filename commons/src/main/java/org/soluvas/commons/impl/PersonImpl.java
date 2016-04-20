@@ -146,6 +146,8 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getVerifyCode <em>Verify Code</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getOrganizations <em>Organizations</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getZendeskUserId <em>Zendesk User Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getCustomerRoleEditTime <em>Customer Role Edit Time</em>}</li>
  * </ul>
  *
  * @generated
@@ -894,18 +896,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 */
 	protected String customerRole = CUSTOMER_ROLE_EDEFAULT;
 	
-	protected static final DateTime CUSTOMER_ROLE_EDIT_TIME_EDEFAULT = null;
-
-	/**
-	 * @generated
-	 */
-	protected DateTime customerRoleEditTime = CUSTOMER_ROLE_EDIT_TIME_EDEFAULT;
-	
-	/**
-	 * @generated
-	 */
-	protected Long zendeskUserId;
-	
 	/**
 	 * The default value of the '{@link #getMemberRole() <em>Member Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -1477,6 +1467,46 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 */
 	@JsonDeserialize(as=BasicEList.class)
 	protected EList<Organization> organizations;
+
+	/**
+	 * The default value of the '{@link #getZendeskUserId() <em>Zendesk User Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getZendeskUserId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long ZENDESK_USER_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getZendeskUserId() <em>Zendesk User Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getZendeskUserId()
+	 * @generated
+	 * @ordered
+	 */
+	protected Long zendeskUserId = ZENDESK_USER_ID_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCustomerRoleEditTime() <em>Customer Role Edit Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCustomerRoleEditTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DateTime CUSTOMER_ROLE_EDIT_TIME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCustomerRoleEditTime() <em>Customer Role Edit Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCustomerRoleEditTime()
+	 * @generated
+	 * @ordered
+	 */
+	protected DateTime customerRoleEditTime = CUSTOMER_ROLE_EDIT_TIME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3068,6 +3098,48 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Long getZendeskUserId() {
+		return zendeskUserId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setZendeskUserId(Long newZendeskUserId) {
+		Long oldZendeskUserId = zendeskUserId;
+		zendeskUserId = newZendeskUserId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__ZENDESK_USER_ID, oldZendeskUserId, zendeskUserId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DateTime getCustomerRoleEditTime() {
+		return customerRoleEditTime;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCustomerRoleEditTime(DateTime newCustomerRoleEditTime) {
+		DateTime oldCustomerRoleEditTime = customerRoleEditTime;
+		customerRoleEditTime = newCustomerRoleEditTime;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__CUSTOMER_ROLE_EDIT_TIME, oldCustomerRoleEditTime, customerRoleEditTime));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public boolean hasEmail(String email) {
@@ -3366,6 +3438,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return getVerifyCode();
 			case CommonsPackage.PERSON__ORGANIZATIONS:
 				return getOrganizations();
+			case CommonsPackage.PERSON__ZENDESK_USER_ID:
+				return getZendeskUserId();
+			case CommonsPackage.PERSON__CUSTOMER_ROLE_EDIT_TIME:
+				return getCustomerRoleEditTime();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -3586,6 +3662,12 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				getOrganizations().clear();
 				getOrganizations().addAll((Collection<? extends Organization>)newValue);
 				return;
+			case CommonsPackage.PERSON__ZENDESK_USER_ID:
+				setZendeskUserId((Long)newValue);
+				return;
+			case CommonsPackage.PERSON__CUSTOMER_ROLE_EDIT_TIME:
+				setCustomerRoleEditTime((DateTime)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -3799,6 +3881,12 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			case CommonsPackage.PERSON__ORGANIZATIONS:
 				getOrganizations().clear();
 				return;
+			case CommonsPackage.PERSON__ZENDESK_USER_ID:
+				setZendeskUserId(ZENDESK_USER_ID_EDEFAULT);
+				return;
+			case CommonsPackage.PERSON__CUSTOMER_ROLE_EDIT_TIME:
+				setCustomerRoleEditTime(CUSTOMER_ROLE_EDIT_TIME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -3949,6 +4037,10 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return VERIFY_CODE_EDEFAULT == null ? verifyCode != null : !VERIFY_CODE_EDEFAULT.equals(verifyCode);
 			case CommonsPackage.PERSON__ORGANIZATIONS:
 				return organizations != null && !organizations.isEmpty();
+			case CommonsPackage.PERSON__ZENDESK_USER_ID:
+				return ZENDESK_USER_ID_EDEFAULT == null ? zendeskUserId != null : !ZENDESK_USER_ID_EDEFAULT.equals(zendeskUserId);
+			case CommonsPackage.PERSON__CUSTOMER_ROLE_EDIT_TIME:
+				return CUSTOMER_ROLE_EDIT_TIME_EDEFAULT == null ? customerRoleEditTime != null : !CUSTOMER_ROLE_EDIT_TIME_EDEFAULT.equals(customerRoleEditTime);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -4161,122 +4253,6 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @generated
 	 */
 	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == Imageable.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.IMAGEABLE___GET_IMAGE_ID: return CommonsPackage.PERSON___GET_IMAGE_ID;
-				default: return -1;
-			}
-		}
-		if (baseClass == PhotoIdContainer.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Identifiable.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == PersonLike.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.PERSON_LIKE___GET_ID: return CommonsPackage.PERSON___GET_ID;
-				case CommonsPackage.PERSON_LIKE___GET_NAME: return CommonsPackage.PERSON___GET_NAME;
-				case CommonsPackage.PERSON_LIKE___GET_SLUG: return CommonsPackage.PERSON___GET_SLUG;
-				case CommonsPackage.PERSON_LIKE___GET_EMAIL: return CommonsPackage.PERSON___GET_EMAIL;
-				case CommonsPackage.PERSON_LIKE___GET_PHOTO_ID: return CommonsPackage.PERSON___GET_PHOTO_ID;
-				case CommonsPackage.PERSON_LIKE___GET_GENDER: return CommonsPackage.PERSON___GET_GENDER;
-				default: return -1;
-			}
-		}
-		if (baseClass == Informer.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.INFORMER___TO_INFO: return CommonsPackage.PERSON___TO_INFO;
-				default: return -1;
-			}
-		}
-		if (baseClass == Timestamped.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == SchemaVersionable.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.SCHEMA_VERSIONABLE___GET_SCHEMA_VERSION: return CommonsPackage.PERSON___GET_SCHEMA_VERSION;
-				default: return -1;
-			}
-		}
-		if (baseClass == Describable.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Sluggable.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == CanonicalSluggable.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == TwitterAccessible.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == TwitterIdentity.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == FacebookIdentity.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == FacebookAccessible.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Revisionable.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.PERSON___HAS_EMAIL__STRING:
-				return hasEmail((String)arguments.get(0));
-			case CommonsPackage.PERSON___PUT_EMAIL__STRING:
-				return putEmail((String)arguments.get(0));
-			case CommonsPackage.PERSON___TO_INFO:
-				return toInfo();
-			case CommonsPackage.PERSON___GET_EMAIL:
-				return getEmail();
-			case CommonsPackage.PERSON___GET_IMAGE_ID:
-				return getImageId();
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
@@ -4405,44 +4381,13 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		result.append(type);
 		result.append(", verifyCode: ");
 		result.append(verifyCode);
+		result.append(", zendeskUserId: ");
+		result.append(zendeskUserId);
+		result.append(", customerRoleEditTime: ");
+		result.append(customerRoleEditTime);
 		result.append(')');
 		return result.toString();
 	}
 
-	/**
-	 * @return
-	 * @generated
-	 */
-	@Override
-	public DateTime getCustomerRoleEditTime() {
-		return this.customerRoleEditTime;
-	}
-
-	/**
-	 * @generated
-	 * @param value
-	 */
-	@Override
-	public void setCustomerRoleEditTime(DateTime value) {
-		this.customerRoleEditTime = value;
-	}
-
-	/**
-	 * @generated
-	 * @return
-	 */
-	@Override
-	public Long getZendeskUserId() {
-		return this.zendeskUserId;
-	}
-
-	/**
-	 * @generated
-	 * @param value
-	 */
-	@Override
-	public void setZendeskUserId(Long value) {
-		this.zendeskUserId = value;
-	}
 
 } //PersonImpl

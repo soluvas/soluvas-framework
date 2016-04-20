@@ -48,19 +48,4 @@ public class TranslationManagerImpl extends MinimalEObjectImpl.Container impleme
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.TRANSLATION_MANAGER___TRANSLATE__TRANSLATABLE_STRING:
-				translate((Translatable)arguments.get(0), (String)arguments.get(1));
-				return null;
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
 } //TranslationManagerImpl

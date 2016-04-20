@@ -105,15 +105,6 @@ public interface CommonsPackage extends EPackage {
 	int RESOURCE_AWARE_FEATURE_COUNT = 3;
 
 	/**
-	 * The number of operations of the '<em>Resource Aware</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOURCE_AWARE_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Positionable <em>Positionable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -140,15 +131,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int POSITIONABLE_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Positionable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POSITIONABLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.AppManifestImpl <em>App Manifest</em>}' class.
@@ -557,42 +539,6 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 42;
 
 	/**
-	 * The operation id for the '<em>Expand</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST___EXPAND__MAP = POSITIONABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Default Locale</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST___GET_DEFAULT_LOCALE = POSITIONABLE_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Web Host</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST___GET_WEB_HOST = POSITIONABLE_OPERATION_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>App Manifest</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APP_MANIFEST_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -619,15 +565,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int IDENTIFIABLE_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Identifiable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IDENTIFIABLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
@@ -712,78 +649,6 @@ public interface CommonsPackage extends EPackage {
 	int PERSON_INFO_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 6;
 
 	/**
-	 * The operation id for the '<em>Get Image Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO___GET_IMAGE_ID = IDENTIFIABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO___GET_ID = IDENTIFIABLE_OPERATION_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO___GET_NAME = IDENTIFIABLE_OPERATION_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Get Slug</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO___GET_SLUG = IDENTIFIABLE_OPERATION_COUNT + 4;
-
-	/**
-	 * The operation id for the '<em>Get Email</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO___GET_EMAIL = IDENTIFIABLE_OPERATION_COUNT + 5;
-
-	/**
-	 * The operation id for the '<em>Get Photo Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO___GET_PHOTO_ID = IDENTIFIABLE_OPERATION_COUNT + 6;
-
-	/**
-	 * The operation id for the '<em>Get Gender</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO___GET_GENDER = IDENTIFIABLE_OPERATION_COUNT + 7;
-
-	/**
-	 * The number of operations of the '<em>Person Info</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_INFO_OPERATION_COUNT = IDENTIFIABLE_OPERATION_COUNT + 8;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Timestamped <em>Timestamped</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -821,15 +686,6 @@ public interface CommonsPackage extends EPackage {
 	int TIMESTAMPED_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>Timestamped</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIMESTAMPED_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Sluggable <em>Sluggable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -858,15 +714,6 @@ public interface CommonsPackage extends EPackage {
 	int SLUGGABLE_FEATURE_COUNT = 1;
 
 	/**
-	 * The number of operations of the '<em>Sluggable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SLUGGABLE_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Nameable <em>Nameable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -886,24 +733,6 @@ public interface CommonsPackage extends EPackage {
 	int NAMEABLE_FEATURE_COUNT = 0;
 
 	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMEABLE___GET_NAME = 0;
-
-	/**
-	 * The number of operations of the '<em>Nameable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMEABLE_OPERATION_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Imageable <em>Imageable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -921,24 +750,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMAGEABLE_FEATURE_COUNT = 0;
-
-	/**
-	 * The operation id for the '<em>Get Image Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGEABLE___GET_IMAGE_ID = 0;
-
-	/**
-	 * The number of operations of the '<em>Imageable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMAGEABLE_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PhotoIdContainerImpl <em>Photo Id Container</em>}' class.
@@ -969,24 +780,6 @@ public interface CommonsPackage extends EPackage {
 	int PHOTO_ID_CONTAINER_FEATURE_COUNT = IMAGEABLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Image Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHOTO_ID_CONTAINER___GET_IMAGE_ID = IMAGEABLE___GET_IMAGE_ID;
-
-	/**
-	 * The number of operations of the '<em>Photo Id Container</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHOTO_ID_CONTAINER_OPERATION_COUNT = IMAGEABLE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.NameContainer <em>Name Container</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1015,24 +808,6 @@ public interface CommonsPackage extends EPackage {
 	int NAME_CONTAINER_FEATURE_COUNT = NAMEABLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_CONTAINER___GET_NAME = NAMEABLE___GET_NAME;
-
-	/**
-	 * The number of operations of the '<em>Name Container</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAME_CONTAINER_OPERATION_COUNT = NAMEABLE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Informer <em>Informer</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1050,24 +825,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int INFORMER_FEATURE_COUNT = 0;
-
-	/**
-	 * The operation id for the '<em>To Info</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMER___TO_INFO = 0;
-
-	/**
-	 * The number of operations of the '<em>Informer</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INFORMER_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Describable <em>Describable</em>}' class.
@@ -1098,15 +855,6 @@ public interface CommonsPackage extends EPackage {
 	int DESCRIBABLE_FEATURE_COUNT = 1;
 
 	/**
-	 * The number of operations of the '<em>Describable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DESCRIBABLE_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.BundleAware <em>Bundle Aware</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1133,15 +881,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int BUNDLE_AWARE_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Bundle Aware</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUNDLE_AWARE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.JavaClassLinked <em>Java Class Linked</em>}' class.
@@ -1188,24 +927,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int JAVA_CLASS_LINKED_FEATURE_COUNT = 3;
-
-	/**
-	 * The operation id for the '<em>Resolve Java Class</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_CLASS_LINKED___RESOLVE_JAVA_CLASS__BUNDLE = 0;
-
-	/**
-	 * The number of operations of the '<em>Java Class Linked</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JAVA_CLASS_LINKED_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.EClassLinked <em>EClass Linked</em>}' class.
@@ -1272,24 +993,6 @@ public interface CommonsPackage extends EPackage {
 	int ECLASS_LINKED_FEATURE_COUNT = 5;
 
 	/**
-	 * The operation id for the '<em>Resolve EClass</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS_LINKED___RESOLVE_ECLASS__MAP = 0;
-
-	/**
-	 * The number of operations of the '<em>EClass Linked</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ECLASS_LINKED_OPERATION_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1307,24 +1010,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SCHEMA_VERSIONABLE_FEATURE_COUNT = 0;
-
-	/**
-	 * The operation id for the '<em>Get Schema Version</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEMA_VERSIONABLE___GET_SCHEMA_VERSION = 0;
-
-	/**
-	 * The number of operations of the '<em>Schema Versionable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEMA_VERSIONABLE_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.EFactoryLinked <em>EFactory Linked</em>}' class.
@@ -1355,15 +1040,6 @@ public interface CommonsPackage extends EPackage {
 	int EFACTORY_LINKED_FEATURE_COUNT = 1;
 
 	/**
-	 * The number of operations of the '<em>EFactory Linked</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EFACTORY_LINKED_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.NsPrefixable <em>Ns Prefixable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1390,15 +1066,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int NS_PREFIXABLE_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Ns Prefixable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NS_PREFIXABLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.WebAddressImpl <em>Web Address</em>}' class.
@@ -1564,42 +1231,6 @@ public interface CommonsPackage extends EPackage {
 	int WEB_ADDRESS_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 15;
 
 	/**
-	 * The operation id for the '<em>Expand</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WEB_ADDRESS___EXPAND__MAP = POSITIONABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Api Uri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WEB_ADDRESS___GET_API_URI = POSITIONABLE_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Secure Api Uri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WEB_ADDRESS___GET_SECURE_API_URI = POSITIONABLE_OPERATION_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>Web Address</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WEB_ADDRESS_OPERATION_COUNT = POSITIONABLE_OPERATION_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.EObjectLinked <em>EObject Linked</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1617,24 +1248,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EOBJECT_LINKED_FEATURE_COUNT = 0;
-
-	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOBJECT_LINKED___GET_OBJECT = 0;
-
-	/**
-	 * The number of operations of the '<em>EObject Linked</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EOBJECT_LINKED_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ModelNotificationImpl <em>Model Notification</em>}' class.
@@ -1663,24 +1276,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_NOTIFICATION_FEATURE_COUNT = EOBJECT_LINKED_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_NOTIFICATION___GET_OBJECT = EOBJECT_LINKED___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Model Notification</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_NOTIFICATION_OPERATION_COUNT = EOBJECT_LINKED_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ObjectNotificationImpl <em>Object Notification</em>}' class.
@@ -1720,24 +1315,6 @@ public interface CommonsPackage extends EPackage {
 	int OBJECT_NOTIFICATION_FEATURE_COUNT = MODEL_NOTIFICATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_NOTIFICATION___GET_OBJECT = MODEL_NOTIFICATION___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Object Notification</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_NOTIFICATION_OPERATION_COUNT = MODEL_NOTIFICATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.AddedImpl <em>Added</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1773,24 +1350,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ADDED_FEATURE_COUNT = OBJECT_NOTIFICATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADDED___GET_OBJECT = OBJECT_NOTIFICATION___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Added</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADDED_OPERATION_COUNT = OBJECT_NOTIFICATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.AttributeNotificationImpl <em>Attribute Notification</em>}' class.
@@ -1855,24 +1414,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ATTRIBUTE_NOTIFICATION_FEATURE_COUNT = MODEL_NOTIFICATION_FEATURE_COUNT + 4;
-
-	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_NOTIFICATION___GET_OBJECT = MODEL_NOTIFICATION___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Attribute Notification</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_NOTIFICATION_OPERATION_COUNT = MODEL_NOTIFICATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.AttributeSetImpl <em>Attribute Set</em>}' class.
@@ -1948,24 +1489,6 @@ public interface CommonsPackage extends EPackage {
 	int ATTRIBUTE_SET_FEATURE_COUNT = ATTRIBUTE_NOTIFICATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_SET___GET_OBJECT = ATTRIBUTE_NOTIFICATION___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Attribute Set</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_SET_OPERATION_COUNT = ATTRIBUTE_NOTIFICATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.AttributeUnsetImpl <em>Attribute Unset</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2030,24 +1553,6 @@ public interface CommonsPackage extends EPackage {
 	int ATTRIBUTE_UNSET_FEATURE_COUNT = ATTRIBUTE_NOTIFICATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_UNSET___GET_OBJECT = ATTRIBUTE_NOTIFICATION___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Attribute Unset</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ATTRIBUTE_UNSET_OPERATION_COUNT = ATTRIBUTE_NOTIFICATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.RemovedImpl <em>Removed</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2083,24 +1588,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int REMOVED_FEATURE_COUNT = OBJECT_NOTIFICATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REMOVED___GET_OBJECT = OBJECT_NOTIFICATION___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Removed</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REMOVED_OPERATION_COUNT = OBJECT_NOTIFICATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ObjectsNotificationImpl <em>Objects Notification</em>}' class.
@@ -2140,24 +1627,6 @@ public interface CommonsPackage extends EPackage {
 	int OBJECTS_NOTIFICATION_FEATURE_COUNT = MODEL_NOTIFICATION_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECTS_NOTIFICATION___GET_OBJECT = MODEL_NOTIFICATION___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Objects Notification</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECTS_NOTIFICATION_OPERATION_COUNT = MODEL_NOTIFICATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.AddedManyImpl <em>Added Many</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2193,24 +1662,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ADDED_MANY_FEATURE_COUNT = OBJECTS_NOTIFICATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADDED_MANY___GET_OBJECT = OBJECTS_NOTIFICATION___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Added Many</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADDED_MANY_OPERATION_COUNT = OBJECTS_NOTIFICATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.RemovedManyImpl <em>Removed Many</em>}' class.
@@ -2250,24 +1701,6 @@ public interface CommonsPackage extends EPackage {
 	int REMOVED_MANY_FEATURE_COUNT = OBJECTS_NOTIFICATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The operation id for the '<em>Get Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REMOVED_MANY___GET_OBJECT = OBJECTS_NOTIFICATION___GET_OBJECT;
-
-	/**
-	 * The number of operations of the '<em>Removed Many</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REMOVED_MANY_OPERATION_COUNT = OBJECTS_NOTIFICATION_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Parentable <em>Parentable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2294,15 +1727,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARENTABLE_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Parentable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARENTABLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.CategoryLike <em>Category Like</em>}' class.
@@ -2412,33 +1836,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int CATEGORY_LIKE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 9;
-
-	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_LIKE___GET_NAME = IDENTIFIABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Image Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_LIKE___GET_IMAGE_ID = IDENTIFIABLE_OPERATION_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Category Like</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_LIKE_OPERATION_COUNT = IDENTIFIABLE_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.CategoryInfoImpl <em>Category Info</em>}' class.
@@ -2622,42 +2019,6 @@ public interface CommonsPackage extends EPackage {
 	int CATEGORY_INFO_FEATURE_COUNT = CATEGORY_LIKE_FEATURE_COUNT + 8;
 
 	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_INFO___GET_NAME = CATEGORY_LIKE___GET_NAME;
-
-	/**
-	 * The operation id for the '<em>Get Image Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_INFO___GET_IMAGE_ID = CATEGORY_LIKE___GET_IMAGE_ID;
-
-	/**
-	 * The operation id for the '<em>Get Effective Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING = CATEGORY_LIKE_OPERATION_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Category Info</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATEGORY_INFO_OPERATION_COUNT = CATEGORY_LIKE_OPERATION_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2695,78 +2056,6 @@ public interface CommonsPackage extends EPackage {
 	int PROGRESS_MONITOR_FEATURE_COUNT = 2;
 
 	/**
-	 * The operation id for the '<em>Begin Task</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG = 0;
-
-	/**
-	 * The operation id for the '<em>Done</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR___DONE = 1;
-
-	/**
-	 * The operation id for the '<em>Internal Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE = 2;
-
-	/**
-	 * The operation id for the '<em>Sub Task</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR___SUB_TASK__STRING = 3;
-
-	/**
-	 * The operation id for the '<em>Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR___WORKED__LONG = 4;
-
-	/**
-	 * The operation id for the '<em>Done</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR___DONE__PROGRESSSTATUS = 5;
-
-	/**
-	 * The operation id for the '<em>Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS = 6;
-
-	/**
-	 * The number of operations of the '<em>Progress Monitor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR_OPERATION_COUNT = 7;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ShellProgressMonitorImpl <em>Shell Progress Monitor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2802,78 +2091,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int SHELL_PROGRESS_MONITOR_FEATURE_COUNT = PROGRESS_MONITOR_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Begin Task</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHELL_PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG = PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG;
-
-	/**
-	 * The operation id for the '<em>Done</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHELL_PROGRESS_MONITOR___DONE = PROGRESS_MONITOR___DONE;
-
-	/**
-	 * The operation id for the '<em>Internal Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHELL_PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE = PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE;
-
-	/**
-	 * The operation id for the '<em>Sub Task</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHELL_PROGRESS_MONITOR___SUB_TASK__STRING = PROGRESS_MONITOR___SUB_TASK__STRING;
-
-	/**
-	 * The operation id for the '<em>Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHELL_PROGRESS_MONITOR___WORKED__LONG = PROGRESS_MONITOR___WORKED__LONG;
-
-	/**
-	 * The operation id for the '<em>Done</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHELL_PROGRESS_MONITOR___DONE__PROGRESSSTATUS = PROGRESS_MONITOR___DONE__PROGRESSSTATUS;
-
-	/**
-	 * The operation id for the '<em>Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHELL_PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS = PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS;
-
-	/**
-	 * The number of operations of the '<em>Shell Progress Monitor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHELL_PROGRESS_MONITOR_OPERATION_COUNT = PROGRESS_MONITOR_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.EventBusProgressMonitorImpl <em>Event Bus Progress Monitor</em>}' class.
@@ -2931,78 +2148,6 @@ public interface CommonsPackage extends EPackage {
 	int EVENT_BUS_PROGRESS_MONITOR_FEATURE_COUNT = PROGRESS_MONITOR_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Begin Task</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_BUS_PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG = PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG;
-
-	/**
-	 * The operation id for the '<em>Done</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_BUS_PROGRESS_MONITOR___DONE = PROGRESS_MONITOR___DONE;
-
-	/**
-	 * The operation id for the '<em>Internal Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_BUS_PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE = PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE;
-
-	/**
-	 * The operation id for the '<em>Sub Task</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_BUS_PROGRESS_MONITOR___SUB_TASK__STRING = PROGRESS_MONITOR___SUB_TASK__STRING;
-
-	/**
-	 * The operation id for the '<em>Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_BUS_PROGRESS_MONITOR___WORKED__LONG = PROGRESS_MONITOR___WORKED__LONG;
-
-	/**
-	 * The operation id for the '<em>Done</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_BUS_PROGRESS_MONITOR___DONE__PROGRESSSTATUS = PROGRESS_MONITOR___DONE__PROGRESSSTATUS;
-
-	/**
-	 * The operation id for the '<em>Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_BUS_PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS = PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS;
-
-	/**
-	 * The number of operations of the '<em>Event Bus Progress Monitor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_BUS_PROGRESS_MONITOR_OPERATION_COUNT = PROGRESS_MONITOR_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ProgressMonitorWrapperImpl <em>Progress Monitor Wrapper</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3049,78 +2194,6 @@ public interface CommonsPackage extends EPackage {
 	int PROGRESS_MONITOR_WRAPPER_FEATURE_COUNT = PROGRESS_MONITOR_FEATURE_COUNT + 1;
 
 	/**
-	 * The operation id for the '<em>Begin Task</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR_WRAPPER___BEGIN_TASK__STRING_LONG = PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG;
-
-	/**
-	 * The operation id for the '<em>Done</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR_WRAPPER___DONE = PROGRESS_MONITOR___DONE;
-
-	/**
-	 * The operation id for the '<em>Internal Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR_WRAPPER___INTERNAL_WORKED__DOUBLE = PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE;
-
-	/**
-	 * The operation id for the '<em>Sub Task</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR_WRAPPER___SUB_TASK__STRING = PROGRESS_MONITOR___SUB_TASK__STRING;
-
-	/**
-	 * The operation id for the '<em>Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR_WRAPPER___WORKED__LONG = PROGRESS_MONITOR___WORKED__LONG;
-
-	/**
-	 * The operation id for the '<em>Done</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR_WRAPPER___DONE__PROGRESSSTATUS = PROGRESS_MONITOR___DONE__PROGRESSSTATUS;
-
-	/**
-	 * The operation id for the '<em>Worked</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR_WRAPPER___WORKED__LONG_PROGRESSSTATUS = PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS;
-
-	/**
-	 * The number of operations of the '<em>Progress Monitor Wrapper</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROGRESS_MONITOR_WRAPPER_OPERATION_COUNT = PROGRESS_MONITOR_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Colorable <em>Colorable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3147,15 +2220,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int COLORABLE_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Colorable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLORABLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Translatable <em>Translatable</em>}' class.
@@ -3213,15 +2277,6 @@ public interface CommonsPackage extends EPackage {
 	int TRANSLATABLE_FEATURE_COUNT = 4;
 
 	/**
-	 * The number of operations of the '<em>Translatable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSLATABLE_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.TranslationImpl <em>Translation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3257,15 +2312,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSLATION_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Translation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSLATION_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.TranslationMessageEntryImpl <em>Translation Message Entry</em>}' class.
@@ -3305,15 +2351,6 @@ public interface CommonsPackage extends EPackage {
 	int TRANSLATION_MESSAGE_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>Translation Message Entry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSLATION_MESSAGE_ENTRY_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.TranslationManagerImpl <em>Translation Manager</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3331,24 +2368,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRANSLATION_MANAGER_FEATURE_COUNT = 0;
-
-	/**
-	 * The operation id for the '<em>Translate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSLATION_MANAGER___TRANSLATE__TRANSLATABLE_STRING = 0;
-
-	/**
-	 * The number of operations of the '<em>Translation Manager</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSLATION_MANAGER_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.TranslationEntryImpl <em>Translation Entry</em>}' class.
@@ -3388,15 +2407,6 @@ public interface CommonsPackage extends EPackage {
 	int TRANSLATION_ENTRY_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>Translation Entry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSLATION_ENTRY_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.StyleConfiguration <em>Style Configuration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3414,24 +2424,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int STYLE_CONFIGURATION_FEATURE_COUNT = 0;
-
-	/**
-	 * The operation id for the '<em>Get Default Style</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLE_CONFIGURATION___GET_DEFAULT_STYLE = 0;
-
-	/**
-	 * The number of operations of the '<em>Style Configuration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STYLE_CONFIGURATION_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Expandable <em>Expandable</em>}' class.
@@ -3462,24 +2454,6 @@ public interface CommonsPackage extends EPackage {
 	int EXPANDABLE_FEATURE_COUNT = 1;
 
 	/**
-	 * The operation id for the '<em>Expand</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDABLE___EXPAND__MAP = 0;
-
-	/**
-	 * The number of operations of the '<em>Expandable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPANDABLE_OPERATION_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.PersonLike <em>Person Like</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3497,69 +2471,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int PERSON_LIKE_FEATURE_COUNT = 0;
-
-	/**
-	 * The operation id for the '<em>Get Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_LIKE___GET_ID = 0;
-
-	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_LIKE___GET_NAME = 1;
-
-	/**
-	 * The operation id for the '<em>Get Slug</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_LIKE___GET_SLUG = 2;
-
-	/**
-	 * The operation id for the '<em>Get Email</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_LIKE___GET_EMAIL = 3;
-
-	/**
-	 * The operation id for the '<em>Get Photo Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_LIKE___GET_PHOTO_ID = 4;
-
-	/**
-	 * The operation id for the '<em>Get Gender</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_LIKE___GET_GENDER = 5;
-
-	/**
-	 * The number of operations of the '<em>Person Like</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_LIKE_OPERATION_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonImpl <em>Person</em>}' class.
@@ -4202,121 +3113,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__ZENDESK_USER_ID = NAME_CONTAINER_FEATURE_COUNT + 68;
 
 	/**
+	 * The feature id for the '<em><b>Customer Role Edit Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__CUSTOMER_ROLE_EDIT_TIME = NAME_CONTAINER_FEATURE_COUNT + 69;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 69;
-
-	/**
-	 * The operation id for the '<em>Get Image Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___GET_IMAGE_ID = NAME_CONTAINER_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___GET_ID = NAME_CONTAINER_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___GET_NAME = NAME_CONTAINER_OPERATION_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Get Slug</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___GET_SLUG = NAME_CONTAINER_OPERATION_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Get Email</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___GET_EMAIL = NAME_CONTAINER_OPERATION_COUNT + 4;
-
-	/**
-	 * The operation id for the '<em>Get Photo Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___GET_PHOTO_ID = NAME_CONTAINER_OPERATION_COUNT + 5;
-
-	/**
-	 * The operation id for the '<em>Get Gender</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___GET_GENDER = NAME_CONTAINER_OPERATION_COUNT + 6;
-
-	/**
-	 * The operation id for the '<em>To Info</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___TO_INFO = NAME_CONTAINER_OPERATION_COUNT + 7;
-
-	/**
-	 * The operation id for the '<em>Get Schema Version</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___GET_SCHEMA_VERSION = NAME_CONTAINER_OPERATION_COUNT + 8;
-
-	/**
-	 * The operation id for the '<em>Has Email</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___HAS_EMAIL__STRING = NAME_CONTAINER_OPERATION_COUNT + 9;
-
-	/**
-	 * The operation id for the '<em>Put Email</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON___PUT_EMAIL__STRING = NAME_CONTAINER_OPERATION_COUNT + 10;
-
-	/**
-	 * The number of operations of the '<em>Person</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_OPERATION_COUNT = NAME_CONTAINER_OPERATION_COUNT + 11;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 70;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
@@ -4365,15 +3177,6 @@ public interface CommonsPackage extends EPackage {
 	int PHONE_NUMBER_FEATURE_COUNT = 3;
 
 	/**
-	 * The number of operations of the '<em>Phone Number</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PHONE_NUMBER_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.EmailImpl <em>Email</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4418,15 +3221,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EMAIL_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Email</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EMAIL_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PostalAddressImpl <em>Postal Address</em>}' class.
@@ -4682,33 +3476,6 @@ public interface CommonsPackage extends EPackage {
 	int POSTAL_ADDRESS_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 25;
 
 	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POSTAL_ADDRESS___GET_NAME = NAME_CONTAINER___GET_NAME;
-
-	/**
-	 * The operation id for the '<em>Get Schema Version</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POSTAL_ADDRESS___GET_SCHEMA_VERSION = NAME_CONTAINER_OPERATION_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Postal Address</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POSTAL_ADDRESS_OPERATION_COUNT = NAME_CONTAINER_OPERATION_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonCatalogImpl <em>Person Catalog</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4735,15 +3502,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int PERSON_CATALOG_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Person Catalog</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PERSON_CATALOG_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.CanonicalSluggable <em>Canonical Sluggable</em>}' class.
@@ -4783,15 +3541,6 @@ public interface CommonsPackage extends EPackage {
 	int CANONICAL_SLUGGABLE_FEATURE_COUNT = SLUGGABLE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Canonical Sluggable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CANONICAL_SLUGGABLE_OPERATION_COUNT = SLUGGABLE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.TwitterAccessible <em>Twitter Accessible</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4827,15 +3576,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int TWITTER_ACCESSIBLE_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Twitter Accessible</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TWITTER_ACCESSIBLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.TwitterIdentity <em>Twitter Identity</em>}' class.
@@ -4875,15 +3615,6 @@ public interface CommonsPackage extends EPackage {
 	int TWITTER_IDENTITY_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>Twitter Identity</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TWITTER_IDENTITY_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.FacebookIdentityImpl <em>Facebook Identity</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4921,15 +3652,6 @@ public interface CommonsPackage extends EPackage {
 	int FACEBOOK_IDENTITY_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>Facebook Identity</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACEBOOK_IDENTITY_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.FacebookAccessibleImpl <em>Facebook Accessible</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4956,15 +3678,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int FACEBOOK_ACCESSIBLE_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Facebook Accessible</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FACEBOOK_ACCESSIBLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Revisionable <em>Revisionable</em>}' class.
@@ -5002,15 +3715,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int REVISIONABLE_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Revisionable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REVISIONABLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.SysConfig <em>Sys Config</em>}' class.
@@ -5059,15 +3763,6 @@ public interface CommonsPackage extends EPackage {
 	int SYS_CONFIG_FEATURE_COUNT = TIMESTAMPED_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Sys Config</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SYS_CONFIG_OPERATION_COUNT = TIMESTAMPED_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.GeolocationImpl <em>Geolocation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5112,15 +3807,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int GEOLOCATION_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Geolocation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GEOLOCATION_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.ThingInfoImpl <em>Thing Info</em>}' class.
@@ -5176,33 +3862,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int THING_INFO_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 3;
-
-	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THING_INFO___GET_NAME = NAME_CONTAINER___GET_NAME;
-
-	/**
-	 * The operation id for the '<em>Get Image Id</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THING_INFO___GET_IMAGE_ID = NAME_CONTAINER_OPERATION_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Thing Info</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THING_INFO_OPERATION_COUNT = NAME_CONTAINER_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.GeneralSysConfigImpl <em>General Sys Config</em>}' class.
@@ -5267,24 +3926,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int GENERAL_SYS_CONFIG_FEATURE_COUNT = EXPANDABLE_FEATURE_COUNT + 4;
-
-	/**
-	 * The operation id for the '<em>Expand</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERAL_SYS_CONFIG___EXPAND__MAP = EXPANDABLE___EXPAND__MAP;
-
-	/**
-	 * The number of operations of the '<em>General Sys Config</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GENERAL_SYS_CONFIG_OPERATION_COUNT = EXPANDABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.OrganizationImpl <em>Organization</em>}' class.
@@ -5421,33 +4062,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ORGANIZATION_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 12;
-
-	/**
-	 * The operation id for the '<em>Get Schema Version</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORGANIZATION___GET_SCHEMA_VERSION = IDENTIFIABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORGANIZATION___GET_NAME = IDENTIFIABLE_OPERATION_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Organization</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORGANIZATION_OPERATION_COUNT = IDENTIFIABLE_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.CustomerRoleImpl <em>Customer Role</em>}' class.
@@ -5649,33 +4263,6 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 19;
 
 	/**
-	 * The operation id for the '<em>Get Schema Version</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOMER_ROLE___GET_SCHEMA_VERSION = IDENTIFIABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Get Name</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOMER_ROLE___GET_NAME = IDENTIFIABLE_OPERATION_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Customer Role</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOMER_ROLE_OPERATION_COUNT = IDENTIFIABLE_OPERATION_COUNT + 2;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.CustomerRoleCatalogImpl <em>Customer Role Catalog</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5704,15 +4291,6 @@ public interface CommonsPackage extends EPackage {
 	int CUSTOMER_ROLE_CATALOG_FEATURE_COUNT = 1;
 
 	/**
-	 * The number of operations of the '<em>Customer Role Catalog</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CUSTOMER_ROLE_CATALOG_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.soluvas.commons.MongoSysConfig <em>Mongo Sys Config</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5739,15 +4317,6 @@ public interface CommonsPackage extends EPackage {
 	 * @ordered
 	 */
 	int MONGO_SYS_CONFIG_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Mongo Sys Config</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MONGO_SYS_CONFIG_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.ResourceType <em>Resource Type</em>}' enum.
@@ -6746,26 +5315,6 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_DefaultCategoryUName();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.AppManifest#getDefaultLocale() <em>Get Default Locale</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Default Locale</em>' operation.
-	 * @see org.soluvas.commons.AppManifest#getDefaultLocale()
-	 * @generated
-	 */
-	EOperation getAppManifest__GetDefaultLocale();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.AppManifest#getWebHost() <em>Get Web Host</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Web Host</em>' operation.
-	 * @see org.soluvas.commons.AppManifest#getWebHost()
-	 * @generated
-	 */
-	EOperation getAppManifest__GetWebHost();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6893,16 +5442,6 @@ public interface CommonsPackage extends EPackage {
 	EClass getNameable();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.Nameable#getName() <em>Get Name</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Name</em>' operation.
-	 * @see org.soluvas.commons.Nameable#getName()
-	 * @generated
-	 */
-	EOperation getNameable__GetName();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Imageable <em>Imageable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6911,16 +5450,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getImageable();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.Imageable#getImageId() <em>Get Image Id</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Image Id</em>' operation.
-	 * @see org.soluvas.commons.Imageable#getImageId()
-	 * @generated
-	 */
-	EOperation getImageable__GetImageId();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PhotoIdContainer <em>Photo Id Container</em>}'.
@@ -6973,16 +5502,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInformer();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.Informer#toInfo() <em>To Info</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>To Info</em>' operation.
-	 * @see org.soluvas.commons.Informer#toInfo()
-	 * @generated
-	 */
-	EOperation getInformer__ToInfo();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Describable <em>Describable</em>}'.
@@ -7070,16 +5589,6 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getJavaClassLinked_JavaClassStatus();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.JavaClassLinked#resolveJavaClass(org.osgi.framework.Bundle) <em>Resolve Java Class</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Resolve Java Class</em>' operation.
-	 * @see org.soluvas.commons.JavaClassLinked#resolveJavaClass(org.osgi.framework.Bundle)
-	 * @generated
-	 */
-	EOperation getJavaClassLinked__ResolveJavaClass__Bundle();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.EClassLinked <em>EClass Linked</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7145,16 +5654,6 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getEClassLinked_EPackageName();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.EClassLinked#resolveEClass(java.util.Map) <em>Resolve EClass</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Resolve EClass</em>' operation.
-	 * @see org.soluvas.commons.EClassLinked#resolveEClass(java.util.Map)
-	 * @generated
-	 */
-	EOperation getEClassLinked__ResolveEClass__Map();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7163,16 +5662,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSchemaVersionable();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.SchemaVersionable#getSchemaVersion() <em>Get Schema Version</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Schema Version</em>' operation.
-	 * @see org.soluvas.commons.SchemaVersionable#getSchemaVersion()
-	 * @generated
-	 */
-	EOperation getSchemaVersionable__GetSchemaVersion();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.EFactoryLinked <em>EFactory Linked</em>}'.
@@ -7335,26 +5824,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getWebAddress_SecureJsUri();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.WebAddress#getApiUri() <em>Get Api Uri</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Api Uri</em>' operation.
-	 * @see org.soluvas.commons.WebAddress#getApiUri()
-	 * @generated
-	 */
-	EOperation getWebAddress__GetApiUri();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.WebAddress#getSecureApiUri() <em>Get Secure Api Uri</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Secure Api Uri</em>' operation.
-	 * @see org.soluvas.commons.WebAddress#getSecureApiUri()
-	 * @generated
-	 */
-	EOperation getWebAddress__GetSecureApiUri();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Added <em>Added</em>}'.
@@ -7555,16 +6024,6 @@ public interface CommonsPackage extends EPackage {
 	EClass getEObjectLinked();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.EObjectLinked#getObject() <em>Get Object</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Object</em>' operation.
-	 * @see org.soluvas.commons.EObjectLinked#getObject()
-	 * @generated
-	 */
-	EOperation getEObjectLinked__GetObject();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Parentable <em>Parentable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7694,16 +6153,6 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getCategoryInfo_GoogleFormalId();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.CategoryInfo#getEffectiveName(java.lang.String) <em>Get Effective Name</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Effective Name</em>' operation.
-	 * @see org.soluvas.commons.CategoryInfo#getEffectiveName(java.lang.String)
-	 * @generated
-	 */
-	EOperation getCategoryInfo__GetEffectiveName__String();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ProgressMonitor <em>Progress Monitor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7734,76 +6183,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getProgressMonitor_TaskName();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.ProgressMonitor#beginTask(java.lang.String, long) <em>Begin Task</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Begin Task</em>' operation.
-	 * @see org.soluvas.commons.ProgressMonitor#beginTask(java.lang.String, long)
-	 * @generated
-	 */
-	EOperation getProgressMonitor__BeginTask__String_long();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.ProgressMonitor#done() <em>Done</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Done</em>' operation.
-	 * @see org.soluvas.commons.ProgressMonitor#done()
-	 * @generated
-	 */
-	EOperation getProgressMonitor__Done();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.ProgressMonitor#internalWorked(double) <em>Internal Worked</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Internal Worked</em>' operation.
-	 * @see org.soluvas.commons.ProgressMonitor#internalWorked(double)
-	 * @generated
-	 */
-	EOperation getProgressMonitor__InternalWorked__double();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.ProgressMonitor#subTask(java.lang.String) <em>Sub Task</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Sub Task</em>' operation.
-	 * @see org.soluvas.commons.ProgressMonitor#subTask(java.lang.String)
-	 * @generated
-	 */
-	EOperation getProgressMonitor__SubTask__String();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.ProgressMonitor#worked(long) <em>Worked</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Worked</em>' operation.
-	 * @see org.soluvas.commons.ProgressMonitor#worked(long)
-	 * @generated
-	 */
-	EOperation getProgressMonitor__Worked__long();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.ProgressMonitor#done(org.soluvas.commons.ProgressStatus) <em>Done</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Done</em>' operation.
-	 * @see org.soluvas.commons.ProgressMonitor#done(org.soluvas.commons.ProgressStatus)
-	 * @generated
-	 */
-	EOperation getProgressMonitor__Done__ProgressStatus();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.ProgressMonitor#worked(long, org.soluvas.commons.ProgressStatus) <em>Worked</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Worked</em>' operation.
-	 * @see org.soluvas.commons.ProgressMonitor#worked(long, org.soluvas.commons.ProgressStatus)
-	 * @generated
-	 */
-	EOperation getProgressMonitor__Worked__long_ProgressStatus();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ShellProgressMonitor <em>Shell Progress Monitor</em>}'.
@@ -8020,16 +6399,6 @@ public interface CommonsPackage extends EPackage {
 	EClass getTranslationManager();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.TranslationManager#translate(org.soluvas.commons.Translatable, java.lang.String) <em>Translate</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Translate</em>' operation.
-	 * @see org.soluvas.commons.TranslationManager#translate(org.soluvas.commons.Translatable, java.lang.String)
-	 * @generated
-	 */
-	EOperation getTranslationManager__Translate__Translatable_String();
-
-	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Translation Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8075,16 +6444,6 @@ public interface CommonsPackage extends EPackage {
 	EClass getStyleConfiguration();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.StyleConfiguration#getDefaultStyle() <em>Get Default Style</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Default Style</em>' operation.
-	 * @see org.soluvas.commons.StyleConfiguration#getDefaultStyle()
-	 * @generated
-	 */
-	EOperation getStyleConfiguration__GetDefaultStyle();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Expandable <em>Expandable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8106,16 +6465,6 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getExpandable_ExpansionState();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.Expandable#expand(java.util.Map) <em>Expand</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Expand</em>' operation.
-	 * @see org.soluvas.commons.Expandable#expand(java.util.Map)
-	 * @generated
-	 */
-	EOperation getExpandable__Expand__Map();
-
-	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonLike <em>Person Like</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8124,66 +6473,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getPersonLike();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.PersonLike#getId() <em>Get Id</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Id</em>' operation.
-	 * @see org.soluvas.commons.PersonLike#getId()
-	 * @generated
-	 */
-	EOperation getPersonLike__GetId();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.PersonLike#getName() <em>Get Name</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Name</em>' operation.
-	 * @see org.soluvas.commons.PersonLike#getName()
-	 * @generated
-	 */
-	EOperation getPersonLike__GetName();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.PersonLike#getSlug() <em>Get Slug</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Slug</em>' operation.
-	 * @see org.soluvas.commons.PersonLike#getSlug()
-	 * @generated
-	 */
-	EOperation getPersonLike__GetSlug();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.PersonLike#getEmail() <em>Get Email</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Email</em>' operation.
-	 * @see org.soluvas.commons.PersonLike#getEmail()
-	 * @generated
-	 */
-	EOperation getPersonLike__GetEmail();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.PersonLike#getPhotoId() <em>Get Photo Id</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Photo Id</em>' operation.
-	 * @see org.soluvas.commons.PersonLike#getPhotoId()
-	 * @generated
-	 */
-	EOperation getPersonLike__GetPhotoId();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.PersonLike#getGender() <em>Get Gender</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Gender</em>' operation.
-	 * @see org.soluvas.commons.PersonLike#getGender()
-	 * @generated
-	 */
-	EOperation getPersonLike__GetGender();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.Person <em>Person</em>}'.
@@ -8779,24 +7068,15 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPerson_ZendeskUserId();
 
 	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.Person#hasEmail(java.lang.String) <em>Has Email</em>}' operation.
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getCustomerRoleEditTime <em>Customer Role Edit Time</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Has Email</em>' operation.
-	 * @see org.soluvas.commons.Person#hasEmail(java.lang.String)
+	 * @return the meta object for the attribute '<em>Customer Role Edit Time</em>'.
+	 * @see org.soluvas.commons.Person#getCustomerRoleEditTime()
+	 * @see #getPerson()
 	 * @generated
 	 */
-	EOperation getPerson__HasEmail__String();
-
-	/**
-	 * Returns the meta object for the '{@link org.soluvas.commons.Person#putEmail(java.lang.String) <em>Put Email</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Put Email</em>' operation.
-	 * @see org.soluvas.commons.Person#putEmail(java.lang.String)
-	 * @generated
-	 */
-	EOperation getPerson__PutEmail__String();
+	EAttribute getPerson_CustomerRoleEditTime();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PhoneNumber <em>Phone Number</em>}'.
@@ -10730,22 +9010,6 @@ public interface CommonsPackage extends EPackage {
 		EAttribute APP_MANIFEST__DEFAULT_CATEGORY_UNAME = eINSTANCE.getAppManifest_DefaultCategoryUName();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Default Locale</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation APP_MANIFEST___GET_DEFAULT_LOCALE = eINSTANCE.getAppManifest__GetDefaultLocale();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Web Host</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation APP_MANIFEST___GET_WEB_HOST = eINSTANCE.getAppManifest__GetWebHost();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10852,14 +9116,6 @@ public interface CommonsPackage extends EPackage {
 		EClass NAMEABLE = eINSTANCE.getNameable();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Name</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation NAMEABLE___GET_NAME = eINSTANCE.getNameable__GetName();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.Imageable <em>Imageable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10868,14 +9124,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass IMAGEABLE = eINSTANCE.getImageable();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Image Id</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMAGEABLE___GET_IMAGE_ID = eINSTANCE.getImageable__GetImageId();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PhotoIdContainerImpl <em>Photo Id Container</em>}' class.
@@ -10922,14 +9170,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INFORMER = eINSTANCE.getInformer();
-
-		/**
-		 * The meta object literal for the '<em><b>To Info</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation INFORMER___TO_INFO = eINSTANCE.getInformer__ToInfo();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.Describable <em>Describable</em>}' class.
@@ -11002,14 +9242,6 @@ public interface CommonsPackage extends EPackage {
 		EAttribute JAVA_CLASS_LINKED__JAVA_CLASS_STATUS = eINSTANCE.getJavaClassLinked_JavaClassStatus();
 
 		/**
-		 * The meta object literal for the '<em><b>Resolve Java Class</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation JAVA_CLASS_LINKED___RESOLVE_JAVA_CLASS__BUNDLE = eINSTANCE.getJavaClassLinked__ResolveJavaClass__Bundle();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.EClassLinked <em>EClass Linked</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11060,14 +9292,6 @@ public interface CommonsPackage extends EPackage {
 		EAttribute ECLASS_LINKED__EPACKAGE_NAME = eINSTANCE.getEClassLinked_EPackageName();
 
 		/**
-		 * The meta object literal for the '<em><b>Resolve EClass</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ECLASS_LINKED___RESOLVE_ECLASS__MAP = eINSTANCE.getEClassLinked__ResolveEClass__Map();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.SchemaVersionable <em>Schema Versionable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11076,14 +9300,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SCHEMA_VERSIONABLE = eINSTANCE.getSchemaVersionable();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Schema Version</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation SCHEMA_VERSIONABLE___GET_SCHEMA_VERSION = eINSTANCE.getSchemaVersionable__GetSchemaVersion();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.EFactoryLinked <em>EFactory Linked</em>}' class.
@@ -11210,22 +9426,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute WEB_ADDRESS__SECURE_JS_URI = eINSTANCE.getWebAddress_SecureJsUri();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Api Uri</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation WEB_ADDRESS___GET_API_URI = eINSTANCE.getWebAddress__GetApiUri();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Secure Api Uri</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation WEB_ADDRESS___GET_SECURE_API_URI = eINSTANCE.getWebAddress__GetSecureApiUri();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.AddedImpl <em>Added</em>}' class.
@@ -11402,14 +9602,6 @@ public interface CommonsPackage extends EPackage {
 		EClass EOBJECT_LINKED = eINSTANCE.getEObjectLinked();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Object</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation EOBJECT_LINKED___GET_OBJECT = eINSTANCE.getEObjectLinked__GetObject();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.Parentable <em>Parentable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11512,14 +9704,6 @@ public interface CommonsPackage extends EPackage {
 		EAttribute CATEGORY_INFO__GOOGLE_FORMAL_ID = eINSTANCE.getCategoryInfo_GoogleFormalId();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Effective Name</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING = eINSTANCE.getCategoryInfo__GetEffectiveName__String();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.ProgressMonitorImpl <em>Progress Monitor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11544,62 +9728,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PROGRESS_MONITOR__TASK_NAME = eINSTANCE.getProgressMonitor_TaskName();
-
-		/**
-		 * The meta object literal for the '<em><b>Begin Task</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG = eINSTANCE.getProgressMonitor__BeginTask__String_long();
-
-		/**
-		 * The meta object literal for the '<em><b>Done</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PROGRESS_MONITOR___DONE = eINSTANCE.getProgressMonitor__Done();
-
-		/**
-		 * The meta object literal for the '<em><b>Internal Worked</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE = eINSTANCE.getProgressMonitor__InternalWorked__double();
-
-		/**
-		 * The meta object literal for the '<em><b>Sub Task</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PROGRESS_MONITOR___SUB_TASK__STRING = eINSTANCE.getProgressMonitor__SubTask__String();
-
-		/**
-		 * The meta object literal for the '<em><b>Worked</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PROGRESS_MONITOR___WORKED__LONG = eINSTANCE.getProgressMonitor__Worked__long();
-
-		/**
-		 * The meta object literal for the '<em><b>Done</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PROGRESS_MONITOR___DONE__PROGRESSSTATUS = eINSTANCE.getProgressMonitor__Done__ProgressStatus();
-
-		/**
-		 * The meta object literal for the '<em><b>Worked</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS = eINSTANCE.getProgressMonitor__Worked__long_ProgressStatus();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.ShellProgressMonitorImpl <em>Shell Progress Monitor</em>}' class.
@@ -11778,14 +9906,6 @@ public interface CommonsPackage extends EPackage {
 		EClass TRANSLATION_MANAGER = eINSTANCE.getTranslationManager();
 
 		/**
-		 * The meta object literal for the '<em><b>Translate</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TRANSLATION_MANAGER___TRANSLATE__TRANSLATABLE_STRING = eINSTANCE.getTranslationManager__Translate__Translatable_String();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.TranslationEntryImpl <em>Translation Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11822,14 +9942,6 @@ public interface CommonsPackage extends EPackage {
 		EClass STYLE_CONFIGURATION = eINSTANCE.getStyleConfiguration();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Default Style</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation STYLE_CONFIGURATION___GET_DEFAULT_STYLE = eINSTANCE.getStyleConfiguration__GetDefaultStyle();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.Expandable <em>Expandable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11848,14 +9960,6 @@ public interface CommonsPackage extends EPackage {
 		EAttribute EXPANDABLE__EXPANSION_STATE = eINSTANCE.getExpandable_ExpansionState();
 
 		/**
-		 * The meta object literal for the '<em><b>Expand</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation EXPANDABLE___EXPAND__MAP = eINSTANCE.getExpandable__Expand__Map();
-
-		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.PersonLike <em>Person Like</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11864,54 +9968,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PERSON_LIKE = eINSTANCE.getPersonLike();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Id</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PERSON_LIKE___GET_ID = eINSTANCE.getPersonLike__GetId();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Name</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PERSON_LIKE___GET_NAME = eINSTANCE.getPersonLike__GetName();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Slug</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PERSON_LIKE___GET_SLUG = eINSTANCE.getPersonLike__GetSlug();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Email</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PERSON_LIKE___GET_EMAIL = eINSTANCE.getPersonLike__GetEmail();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Photo Id</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PERSON_LIKE___GET_PHOTO_ID = eINSTANCE.getPersonLike__GetPhotoId();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Gender</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PERSON_LIKE___GET_GENDER = eINSTANCE.getPersonLike__GetGender();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonImpl <em>Person</em>}' class.
@@ -12348,20 +10404,12 @@ public interface CommonsPackage extends EPackage {
 		EAttribute PERSON__ZENDESK_USER_ID = eINSTANCE.getPerson_ZendeskUserId();
 
 		/**
-		 * The meta object literal for the '<em><b>Has Email</b></em>' operation.
+		 * The meta object literal for the '<em><b>Customer Role Edit Time</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation PERSON___HAS_EMAIL__STRING = eINSTANCE.getPerson__HasEmail__String();
-
-		/**
-		 * The meta object literal for the '<em><b>Put Email</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation PERSON___PUT_EMAIL__STRING = eINSTANCE.getPerson__PutEmail__String();
+		EAttribute PERSON__CUSTOMER_ROLE_EDIT_TIME = eINSTANCE.getPerson_CustomerRoleEditTime();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.

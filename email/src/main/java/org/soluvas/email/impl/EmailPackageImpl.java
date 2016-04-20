@@ -224,6 +224,7 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		// Initialize simple dependencies
 		CommonsPackage.eINSTANCE.eClass();
+		EcorePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theEmailPackage.createPackageContents();
@@ -337,15 +338,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getPageType__Create__Layout() {
-		return pageTypeEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public EClass getTemplate() {
 		return templateEClass;
@@ -366,45 +358,9 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getTemplate__RenderSubject__Recipient() {
-		return templateEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getTemplate__RenderText__Recipient() {
-		return templateEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getTemplate__RenderHtml__Recipient() {
-		return templateEClass.getEOperations().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public EClass getLayoutType() {
 		return layoutTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getLayoutType__Create() {
-		return layoutTypeEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -587,33 +543,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getPage__Compose__Recipient() {
-		return pageEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getPage__ComposeAll() {
-		return pageEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getPage__Attach__byte_String() {
-		return pageEClass.getEOperations().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public EClass getTemplateLike() {
 		return templateLikeEClass;
@@ -708,42 +637,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getEmailManager__CreatePage__Class() {
-		return emailManagerEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getEmailManager__CreateSender__String() {
-		return emailManagerEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getEmailManager__SendAll__Page() {
-		return emailManagerEClass.getEOperations().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getEmailManager__SendAll__Page_Session() {
-		return emailManagerEClass.getEOperations().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSender() {
 		return senderEClass;
 	}
@@ -762,26 +655,8 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getSender__Expand() {
-		return senderEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getSenderType() {
 		return senderTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getSenderType__Create() {
-		return senderTypeEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -935,16 +810,11 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		pageTypeEClass = createEClass(PAGE_TYPE);
 		createEAttribute(pageTypeEClass, PAGE_TYPE__SENDER_TYPE_NAME);
-		createEOperation(pageTypeEClass, PAGE_TYPE___CREATE__LAYOUT);
 
 		layoutTypeEClass = createEClass(LAYOUT_TYPE);
-		createEOperation(layoutTypeEClass, LAYOUT_TYPE___CREATE);
 
 		templateEClass = createEClass(TEMPLATE);
 		createEReference(templateEClass, TEMPLATE__RECIPIENTS);
-		createEOperation(templateEClass, TEMPLATE___RENDER_SUBJECT__RECIPIENT);
-		createEOperation(templateEClass, TEMPLATE___RENDER_TEXT__RECIPIENT);
-		createEOperation(templateEClass, TEMPLATE___RENDER_HTML__RECIPIENT);
 
 		recipientEClass = createEClass(RECIPIENT);
 		createEAttribute(recipientEClass, RECIPIENT__EMAIL);
@@ -966,9 +836,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		createEReference(pageEClass, PAGE__PAGE_TYPE);
 		createEReference(pageEClass, PAGE__SENDER);
 		createEAttribute(pageEClass, PAGE__MAIL_SESSION);
-		createEOperation(pageEClass, PAGE___COMPOSE__RECIPIENT);
-		createEOperation(pageEClass, PAGE___COMPOSE_ALL);
-		createEOperation(pageEClass, PAGE___ATTACH__BYTE_STRING);
 
 		templateLikeEClass = createEClass(TEMPLATE_LIKE);
 		createEAttribute(templateLikeEClass, TEMPLATE_LIKE__SUBJECT_TEMPLATE);
@@ -981,17 +848,11 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		createEAttribute(emailManagerEClass, EMAIL_MANAGER__SMTP_HOST);
 		createEAttribute(emailManagerEClass, EMAIL_MANAGER__SMTP_PORT);
 		createEAttribute(emailManagerEClass, EMAIL_MANAGER__SMTP_SECURITY);
-		createEOperation(emailManagerEClass, EMAIL_MANAGER___CREATE_PAGE__CLASS);
-		createEOperation(emailManagerEClass, EMAIL_MANAGER___CREATE_SENDER__STRING);
-		createEOperation(emailManagerEClass, EMAIL_MANAGER___SEND_ALL__PAGE);
-		createEOperation(emailManagerEClass, EMAIL_MANAGER___SEND_ALL__PAGE_SESSION);
 
 		senderEClass = createEClass(SENDER);
 		createEReference(senderEClass, SENDER__SENDER_TYPE);
-		createEOperation(senderEClass, SENDER___EXPAND);
 
 		senderTypeEClass = createEClass(SENDER_TYPE);
-		createEOperation(senderTypeEClass, SENDER_TYPE___CREATE);
 
 		senderLikeEClass = createEClass(SENDER_LIKE);
 		createEAttribute(senderLikeEClass, SENDER_LIKE__FROM);
@@ -1037,7 +898,6 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 
 		// Obtain other dependent packages
 		CommonsPackage theCommonsPackage = (CommonsPackage)EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI);
-		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 		ETypeParameter templateTypeEClass_T = addETypeParameter(templateTypeEClass, "T");
@@ -1085,52 +945,52 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		senderTypeEClass.getESuperTypes().add(theCommonsPackage.getNsPrefixable());
 		senderTypeEClass.getESuperTypes().add(this.getSenderLike());
 
-		// Initialize classes, features, and operations; add parameters
+		// Initialize classes and features; add operations and parameters
 		initEClass(emailCatalogEClass, EmailCatalog.class, "EmailCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEmailCatalog_PageTypes(), this.getPageType(), null, "pageTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEmailCatalog_LayoutTypes(), this.getLayoutType(), null, "layoutTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEmailCatalog_SenderTypes(), this.getSenderType(), null, "senderTypes", null, 0, -1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmailCatalog_GeneratedPackageName(), theEcorePackage.getEString(), "generatedPackageName", null, 1, 1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEmailCatalog_EPackage(), theEcorePackage.getEPackage(), null, "ePackage", null, 0, 1, EmailCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getEmailCatalog_EFactory(), theEcorePackage.getEFactory(), null, "eFactory", null, 0, 1, EmailCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmailCatalog_GeneratedPackageName(), ecorePackage.getEString(), "generatedPackageName", null, 1, 1, EmailCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmailCatalog_EPackage(), ecorePackage.getEPackage(), null, "ePackage", null, 0, 1, EmailCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmailCatalog_EFactory(), ecorePackage.getEFactory(), null, "eFactory", null, 0, 1, EmailCatalog.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateTypeEClass, TemplateType.class, "TemplateType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(pageTypeEClass, PageType.class, "PageType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPageType_SenderTypeName(), theEcorePackage.getEString(), "senderTypeName", null, 0, 1, PageType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPageType_SenderTypeName(), ecorePackage.getEString(), "senderTypeName", null, 0, 1, PageType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = initEOperation(getPageType__Create__Layout(), this.getPage(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(pageTypeEClass, this.getPage(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getLayout(), "layout", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(layoutTypeEClass, LayoutType.class, "LayoutType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getLayoutType__Create(), this.getLayout(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(layoutTypeEClass, this.getLayout(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(templateEClass, Template.class, "Template", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTemplate_Recipients(), this.getRecipient(), null, "recipients", null, 0, -1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getTemplate__RenderSubject__Recipient(), theEcorePackage.getEString(), "renderSubject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(templateEClass, ecorePackage.getEString(), "renderSubject", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getRecipient(), "recipient", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getTemplate__RenderText__Recipient(), theEcorePackage.getEString(), "renderText", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(templateEClass, ecorePackage.getEString(), "renderText", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getRecipient(), "recipient", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getTemplate__RenderHtml__Recipient(), theEcorePackage.getEString(), "renderHtml", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(templateEClass, ecorePackage.getEString(), "renderHtml", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getRecipient(), "recipient", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(recipientEClass, Recipient.class, "Recipient", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRecipient_Email(), theEcorePackage.getEString(), "email", null, 1, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRecipient_Name(), theEcorePackage.getEString(), "name", null, 1, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRecipient_FirstName(), theEcorePackage.getEString(), "firstName", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRecipient_LastName(), theEcorePackage.getEString(), "lastName", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRecipient_RoleName(), theEcorePackage.getEString(), "roleName", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRecipient_Email(), ecorePackage.getEString(), "email", null, 1, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRecipient_Name(), ecorePackage.getEString(), "name", null, 1, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRecipient_FirstName(), ecorePackage.getEString(), "firstName", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRecipient_LastName(), ecorePackage.getEString(), "lastName", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRecipient_RoleName(), ecorePackage.getEString(), "roleName", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRecipient_PreferredFormat(), this.getEmailFormat(), "preferredFormat", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRecipient_PreferredWebSecurity(), this.getWebSecurity(), "preferredWebSecurity", null, 0, 1, Recipient.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(layoutEClass, Layout.class, "Layout", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLayout_PageSubject(), theEcorePackage.getEString(), "pageSubject", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLayout_PagePlain(), theEcorePackage.getEString(), "pagePlain", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLayout_PageHtml(), theEcorePackage.getEString(), "pageHtml", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLayout_PageSubject(), ecorePackage.getEString(), "pageSubject", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLayout_PagePlain(), ecorePackage.getEString(), "pagePlain", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLayout_PageHtml(), ecorePackage.getEString(), "pageHtml", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLayout_LayoutType(), this.getLayoutType(), null, "layoutType", null, 1, 1, Layout.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(pageEClass, Page.class, "Page", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1139,73 +999,73 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 		initEReference(getPage_Sender(), this.getSender(), null, "sender", null, 1, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPage_MailSession(), this.getMailSession(), "mailSession", null, 1, 1, Page.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getPage__Compose__Recipient(), this.getEmail(), "compose", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(pageEClass, this.getEmail(), "compose", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getRecipient(), "recipient", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getPage__ComposeAll(), null, "composeAll", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(pageEClass, null, "composeAll", 1, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getList());
 		g2 = createEGenericType(this.getEmail());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = initEOperation(getPage__Attach__byte_String(), null, "attach", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEByteArray(), "content", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEString(), "fileName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(pageEClass, null, "attach", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEByteArray(), "content", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "fileName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(templateLikeEClass, TemplateLike.class, "TemplateLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTemplateLike_SubjectTemplate(), theEcorePackage.getEString(), "subjectTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTemplateLike_PlainTemplate(), theEcorePackage.getEString(), "plainTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTemplateLike_HtmlTemplate(), theEcorePackage.getEString(), "htmlTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemplateLike_SubjectTemplate(), ecorePackage.getEString(), "subjectTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemplateLike_PlainTemplate(), ecorePackage.getEString(), "plainTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTemplateLike_HtmlTemplate(), ecorePackage.getEString(), "htmlTemplate", null, 0, 1, TemplateLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(emailManagerEClass, EmailManager.class, "EmailManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEmailManager_SmtpUser(), theEcorePackage.getEString(), "smtpUser", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmailManager_SmtpPassword(), theEcorePackage.getEString(), "smtpPassword", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmailManager_SmtpHost(), theEcorePackage.getEString(), "smtpHost", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getEmailManager_SmtpPort(), theEcorePackage.getEIntegerObject(), "smtpPort", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmailManager_SmtpUser(), ecorePackage.getEString(), "smtpUser", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmailManager_SmtpPassword(), ecorePackage.getEString(), "smtpPassword", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmailManager_SmtpHost(), ecorePackage.getEString(), "smtpHost", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmailManager_SmtpPort(), ecorePackage.getEIntegerObject(), "smtpPort", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEmailManager_SmtpSecurity(), this.getEmailSecurity(), "smtpSecurity", null, 0, 1, EmailManager.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getEmailManager__CreatePage__Class(), null, "createPage", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(emailManagerEClass, null, "createPage", 0, 1, IS_UNIQUE, IS_ORDERED);
 		ETypeParameter t1 = addETypeParameter(op, "T");
 		g1 = createEGenericType(this.getPage());
 		t1.getEBounds().add(g1);
-		g1 = createEGenericType(theEcorePackage.getEJavaClass());
+		g1 = createEGenericType(ecorePackage.getEJavaClass());
 		g2 = createEGenericType(t1);
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "pageClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(t1);
 		initEOperation(op, g1);
 
-		op = initEOperation(getEmailManager__CreateSender__String(), this.getSender(), "createSender", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theEcorePackage.getEString(), "qname", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(emailManagerEClass, this.getSender(), "createSender", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qname", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getEmailManager__SendAll__Page(), null, "sendAll", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(emailManagerEClass, null, "sendAll", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPage(), "page", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getList());
-		g2 = createEGenericType(theEcorePackage.getEString());
+		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = initEOperation(getEmailManager__SendAll__Page_Session(), null, "sendAll", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(emailManagerEClass, null, "sendAll", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPage(), "page", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getMailSession(), "mailSession", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getList());
-		g2 = createEGenericType(theEcorePackage.getEString());
+		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
 		initEClass(senderEClass, Sender.class, "Sender", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSender_SenderType(), this.getSenderType(), null, "senderType", null, 1, 1, Sender.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getSender__Expand(), null, "expand", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(senderEClass, null, "expand", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(senderTypeEClass, SenderType.class, "SenderType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getSenderType__Create(), this.getSender(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(senderTypeEClass, this.getSender(), "create", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(senderLikeEClass, SenderLike.class, "SenderLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSenderLike_From(), theEcorePackage.getEString(), "from", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSenderLike_Email(), theEcorePackage.getEString(), "email", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSenderLike_ReplyTo(), theEcorePackage.getEString(), "replyTo", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSenderLike_From(), ecorePackage.getEString(), "from", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSenderLike_Email(), ecorePackage.getEString(), "email", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSenderLike_ReplyTo(), ecorePackage.getEString(), "replyTo", null, 0, 1, SenderLike.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(defaultScopeEClass, DefaultScope.class, "DefaultScope", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDefaultScope_WebAddress(), theCommonsPackage.getWebAddress(), null, "webAddress", null, 0, 1, DefaultScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1248,187 +1108,187 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		String source = "http://www.eclipse.org/emf/2002/GenModel";	
 		addAnnotation
 		  (getEmailCatalog_GeneratedPackageName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Generated package name, in order to lookup the Java class. e.g. \"id.co.bippo.comment.email\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getEmailCatalog_EPackage(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Only used by EmailCatalogXmiTracker."
-		   });		
+		   });	
 		addAnnotation
 		  (getEmailCatalog_EFactory(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Only used by EmailCatalogXmiTracker."
-		   });		
+		   });	
 		addAnnotation
-		  (getPageType__Create__Layout(), 
+		  (pageTypeEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Create Page using the specified layout."
-		   });		
+		   });	
 		addAnnotation
 		  (getPageType_SenderTypeName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Sender type name, including prefix. If not set, \"builtin:general\" is default."
-		   });		
+		   });	
 		addAnnotation
-		  (getTemplate__RenderSubject__Recipient(), 
+		  (templateEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Render the subject."
-		   });		
+		   });	
 		addAnnotation
-		  (getTemplate__RenderText__Recipient(), 
+		  (templateEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Render body using text/plain format."
-		   });		
+		   });	
 		addAnnotation
-		  (getTemplate__RenderHtml__Recipient(), 
+		  (templateEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Render body using text/html format."
-		   });		
+		   });	
 		addAnnotation
 		  (getRecipient_RoleName(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Role e.g. \"administrator\", \"sales staff for O Batiks\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getLayout_PageSubject(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Rendered subject by Page, to be used as input for the layout."
-		   });		
+		   });	
 		addAnnotation
 		  (getLayout_PagePlain(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Rendered text/plain content by Page, to be used as input for the layout."
-		   });		
+		   });	
 		addAnnotation
 		  (getLayout_PageHtml(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Rendered text/html content by Page, to be used as input for the layout."
-		   });		
+		   });	
 		addAnnotation
-		  (getPage__Compose__Recipient(), 
+		  (pageEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Compose an Email to a recipient, using the provided layout."
-		   });		
+		   });	
 		addAnnotation
-		  (getPage__ComposeAll(), 
+		  (pageEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Compose emails based on attributes, using the provided layout."
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateLike_SubjectTemplate(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Some subjects include tracking ID, e.g.\n\n<pre>[#MCV-529-28864]: Email forwarding not working</pre>\n\n<p>Such subject would use this template:\n\n<pre>[#{{{ticket.formalId}}}]: {{{ticket.subject}}}</pre>\n\n<p>It\'s not recommended to put company name in the subject. Best practice is to put the company name as Sender\'s name, optionally suffixed with \"Support\" etc. Also, most services (Facebook, NameCheap) do not put the recipient name in the subject."
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateLike_PlainTemplate(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Plain text template."
-		   });		
+		   });	
 		addAnnotation
 		  (getTemplateLike_HtmlTemplate(), 
 		   source, 
 		   new String[] {
 			 "documentation", "If this is null, the html template will be synthesized from plain template."
-		   });		
+		   });	
 		addAnnotation
 		  (webSecurityEEnum, 
 		   source, 
 		   new String[] {
 			 "documentation", "Preference between URIs will use unsecure HTTP or secured HTTPS."
-		   });		
+		   });	
 		addAnnotation
 		  (webSecurityEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Prefer HTTPS for sensitive content (recommended)."
-		   });		
+		   });	
 		addAnnotation
 		  (webSecurityEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Always use secure HTTPS for all content, including content with publicly available URIs. (slows down)"
-		   });		
+		   });	
 		addAnnotation
 		  (webSecurityEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Always use plain HTTP for all content, including content with sensitive URIs. (not recommended, but sometimes required for older mobile devices, or for development purposes.)"
-		   });		
+		   });	
 		addAnnotation
-		  (getEmailManager__CreatePage__Class(), 
+		  (emailManagerEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Create an email Page using the tenant-wide default layout."
-		   });		
+		   });	
 		addAnnotation
-		  (getEmailManager__SendAll__Page(), 
+		  (emailManagerEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Compose the page to all recipients, then sends all of them. Returns the list of Email IDs returned by mailer."
-		   });		
+		   });	
 		addAnnotation
-		  (getEmailManager__SendAll__Page_Session(), 
+		  (emailManagerEClass.getEOperations().get(3), 
 		   source, 
 		   new String[] {
 			 "documentation", "Compose the page to all recipients, then sends all of them with custom MailSession. Returns the list of Email IDs returned by mailer."
-		   });						
+		   });	
 		addAnnotation
 		  (senderEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Sender information. Mustache variables are supported."
-		   });		
+		   });	
 		addAnnotation
-		  (getSender__Expand(), 
+		  (senderEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Expand the Mustache templates."
-		   });		
+		   });	
 		addAnnotation
 		  (getSenderLike_From(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Best practice is to put the company name as Sender\'s name, optionally suffixed with \"Support\" etc.\n\n<p>Most notifications should consist only of company name. Actual conversations with support (i.e. tickets) would be suffixed with \"Support\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getSenderLike_Email(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Email address of the sender. This can be:\n\n<ol>\n<li>a fully static text, e.g. \"support@berbatik.com\", very seldom used</li>\n<li>a variable, e.g. \"{{{generalEmail}}}\", most common</li>\n<li>a partial variable, e.g. \"support@{{{appManifest.domain}}}\", sometimes used</li>\n<li>multiple variables for randomly generated drop boxes, e.g. \"{{{dropbox.code}}}@{{{postEmailDomain}}}\" or \"{{{dropbox.code}}}@post.{{{appManifest.domain}}}\", which expands to \"yummy234food@post.berbatik.com\"</li>\n<li>a tracking address, e.g. \"notification+mwkuhkji@facebookmail.com\". Template is: \"notification+{{{tracker.code}}}@notification.{{{appManifest.domain}}}\" or \"notification+{{{tracker.code}}}@{{{notificationEmailDomain}}}\"</li>\n\n<p>WARNING: A suffix like \"+something\" is not recommended for non-tracking emails, some mail servers like NameCheap email forwarding does not support it, and many email forms do not accept \"+\"."
-		   });		
+		   });	
 		addAnnotation
 		  (emailSecurityEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Do not attempt to specify protocol. Amazon SES supports the default protocol at port 587."
-		   });		
+		   });	
 		addAnnotation
 		  (emailSecurityEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Set {@code mail.smtp.starttls.enable} to {@code true}, this is the recommended option. (Amazon SES supports this at port 587)"
-		   });		
+		   });	
 		addAnnotation
 		  (emailSecurityEEnum.getELiterals().get(2), 
 		   source, 
@@ -1444,31 +1304,31 @@ public class EmailPackageImpl extends EPackageImpl implements EmailPackage {
 	 * @generated
 	 */
 	protected void createExtendedMetaDataAnnotations() {
-		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";																										
+		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";	
 		addAnnotation
 		  (getEmailManager_SmtpUser(), 
 		   source, 
 		   new String[] {
 			 "name", "smtpSecurity"
-		   });		
+		   });	
 		addAnnotation
 		  (getEmailManager_SmtpPassword(), 
 		   source, 
 		   new String[] {
 			 "name", "smtpSecurity"
-		   });		
+		   });	
 		addAnnotation
 		  (getEmailManager_SmtpHost(), 
 		   source, 
 		   new String[] {
 			 "name", "smtpSecurity"
-		   });		
+		   });	
 		addAnnotation
 		  (getEmailManager_SmtpPort(), 
 		   source, 
 		   new String[] {
 			 "name", "smtpSecurity"
-		   });							
+		   });
 	}
 
 } //EmailPackageImpl

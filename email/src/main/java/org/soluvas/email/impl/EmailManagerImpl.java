@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -21,7 +20,6 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.HtmlEmail;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.slf4j.Logger;
@@ -68,6 +66,7 @@ import com.google.common.collect.Maps;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.impl.EmailManagerImpl#getSmtpUser <em>Smtp User</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailManagerImpl#getSmtpPassword <em>Smtp Password</em>}</li>
@@ -75,7 +74,6 @@ import com.google.common.collect.Maps;
  *   <li>{@link org.soluvas.email.impl.EmailManagerImpl#getSmtpPort <em>Smtp Port</em>}</li>
  *   <li>{@link org.soluvas.email.impl.EmailManagerImpl#getSmtpSecurity <em>Smtp Security</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -575,27 +573,6 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 				return smtpSecurity != SMTP_SECURITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case EmailPackage.EMAIL_MANAGER___CREATE_PAGE__CLASS:
-				return createPage((Class)arguments.get(0));
-			case EmailPackage.EMAIL_MANAGER___CREATE_SENDER__STRING:
-				return createSender((String)arguments.get(0));
-			case EmailPackage.EMAIL_MANAGER___SEND_ALL__PAGE:
-				return sendAll((Page)arguments.get(0));
-			case EmailPackage.EMAIL_MANAGER___SEND_ALL__PAGE_SESSION:
-				return sendAll((Page)arguments.get(0), (Session)arguments.get(1));
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

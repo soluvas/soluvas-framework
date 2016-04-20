@@ -3,7 +3,6 @@
 package org.soluvas.email.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.soluvas.email.Page;
 import org.soluvas.email.PageType;
 
 import com.google.common.base.Preconditions;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,10 +20,10 @@ import java.lang.reflect.InvocationTargetException;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.impl.PageTypeImpl#getSenderTypeName <em>Sender Type Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -168,20 +166,6 @@ public class PageTypeImpl extends TemplateTypeImpl<Page> implements PageType {
 				return SENDER_TYPE_NAME_EDEFAULT == null ? senderTypeName != null : !SENDER_TYPE_NAME_EDEFAULT.equals(senderTypeName);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case EmailPackage.PAGE_TYPE___CREATE__LAYOUT:
-				return create((Layout)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

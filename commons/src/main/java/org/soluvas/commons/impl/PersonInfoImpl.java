@@ -2,8 +2,6 @@
  */
 package org.soluvas.commons.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -21,6 +19,7 @@ import org.soluvas.commons.Sluggable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -586,68 +585,6 @@ public class PersonInfoImpl extends MinimalEObjectImpl.Container implements Pers
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == Imageable.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.IMAGEABLE___GET_IMAGE_ID: return CommonsPackage.PERSON_INFO___GET_IMAGE_ID;
-				default: return -1;
-			}
-		}
-		if (baseClass == PhotoIdContainer.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Sluggable.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == Nameable.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.NAMEABLE___GET_NAME: return CommonsPackage.PERSON_INFO___GET_NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == NameContainer.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == PersonLike.class) {
-			switch (baseOperationID) {
-				case CommonsPackage.PERSON_LIKE___GET_ID: return CommonsPackage.PERSON_INFO___GET_ID;
-				case CommonsPackage.PERSON_LIKE___GET_NAME: return CommonsPackage.PERSON_INFO___GET_NAME;
-				case CommonsPackage.PERSON_LIKE___GET_SLUG: return CommonsPackage.PERSON_INFO___GET_SLUG;
-				case CommonsPackage.PERSON_LIKE___GET_EMAIL: return CommonsPackage.PERSON_INFO___GET_EMAIL;
-				case CommonsPackage.PERSON_LIKE___GET_PHOTO_ID: return CommonsPackage.PERSON_INFO___GET_PHOTO_ID;
-				case CommonsPackage.PERSON_LIKE___GET_GENDER: return CommonsPackage.PERSON_INFO___GET_GENDER;
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.PERSON_INFO___GET_IMAGE_ID:
-				return getImageId();
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

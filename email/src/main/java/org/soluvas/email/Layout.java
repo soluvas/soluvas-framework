@@ -10,13 +10,13 @@ package org.soluvas.email;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.Layout#getPageSubject <em>Page Subject</em>}</li>
  *   <li>{@link org.soluvas.email.Layout#getPagePlain <em>Page Plain</em>}</li>
  *   <li>{@link org.soluvas.email.Layout#getPageHtml <em>Page Html</em>}</li>
  *   <li>{@link org.soluvas.email.Layout#getLayoutType <em>Layout Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getLayout()
  * @model abstract="true"

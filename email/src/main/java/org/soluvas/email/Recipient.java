@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.Recipient#getEmail <em>Email</em>}</li>
  *   <li>{@link org.soluvas.email.Recipient#getName <em>Name</em>}</li>
@@ -20,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.soluvas.email.Recipient#getPreferredFormat <em>Preferred Format</em>}</li>
  *   <li>{@link org.soluvas.email.Recipient#getPreferredWebSecurity <em>Preferred Web Security</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getRecipient()
  * @model

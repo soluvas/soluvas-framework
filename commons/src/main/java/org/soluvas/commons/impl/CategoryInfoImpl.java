@@ -2,7 +2,6 @@
  */
 package org.soluvas.commons.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,6 +34,7 @@ import org.soluvas.commons.TranslationState;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Optional;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
@@ -1232,20 +1232,6 @@ public class CategoryInfoImpl extends MinimalEObjectImpl.Container implements Ca
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING:
-				return getEffectiveName((String)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

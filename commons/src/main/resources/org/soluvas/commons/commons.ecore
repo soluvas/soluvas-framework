@@ -1283,6 +1283,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="organizations" upperBound="-1"
         eType="#//Organization"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="zendeskUserId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="customerRoleEditTime" eType="#//DateTime"/>
     <eGenericSuperTypes eClassifier="#//NameContainer"/>
     <eGenericSuperTypes eClassifier="#//PhotoIdContainer"/>
     <eGenericSuperTypes eClassifier="#//Identifiable"/>

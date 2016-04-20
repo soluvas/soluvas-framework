@@ -82,6 +82,7 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getVerifyCode <em>Verify Code</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getOrganizations <em>Organizations</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getZendeskUserId <em>Zendesk User Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getCustomerRoleEditTime <em>Customer Role Edit Time</em>}</li>
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getPerson()
@@ -659,21 +660,6 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 */
 	void setCustomerRole(String value);
 	
-	/**
-	 * Return the value of Customer Role Edit Time 
-	 * Mendapatkan waktu perubahan Customer Role
-	 * contoh : hervin, 2015-01-01, 2016-03-30, Karyawan, Agen Khusus 
-	 * @see #getCustomerRoleEditTime()
-	 */
-	DateTime getCustomerRoleEditTime();
-	
-	/**
-	 * Sets the value of Customer Role Edit Time 
-	 * waktu perubahan Customer Role
-	 * contoh : hervin, 2015-01-01, 2016-03-30, Karyawan, Agen Khusus 
-	 */
-	void setCustomerRoleEditTime(DateTime value);
-
 	/**
 	 * Returns the value of the '<em><b>Member Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -1455,6 +1441,32 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setZendeskUserId(Long value);
+
+	/**
+	 * Returns the value of the '<em><b>Customer Role Edit Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Customer Role Edit Time</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Customer Role Edit Time</em>' attribute.
+	 * @see #setCustomerRoleEditTime(DateTime)
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_CustomerRoleEditTime()
+	 * @model dataType="org.soluvas.commons.DateTime"
+	 * @generated
+	 */
+	DateTime getCustomerRoleEditTime();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.Person#getCustomerRoleEditTime <em>Customer Role Edit Time</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Customer Role Edit Time</em>' attribute.
+	 * @see #getCustomerRoleEditTime()
+	 * @generated
+	 */
+	void setCustomerRoleEditTime(DateTime value);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -400,27 +400,6 @@ public abstract class GeneralSysConfigImpl extends MinimalEObjectImpl.Container 
 	 * @generated
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case CommonsPackage.GENERAL_SYS_CONFIG___EXPAND__MAP:
-				try {
-					expand((Map<String, Object>)arguments.get(0));
-					return null;
-				}
-				catch (Throwable throwable) {
-					throw new InvocationTargetException(throwable);
-				}
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 

@@ -2,11 +2,10 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.soluvas.commons/src/main/java" modelPluginID="org.soluvas.commons"
     modelName="Commons" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="7.0"
-    suppressGenModelAnnotations="false" copyrightFields="false" publicConstructors="true"
-    operationReflection="true" importOrganizing="true">
+    importerID="org.eclipse.emf.importer.ecore" bundleManifest="false" complianceLevel="8.0"
+    suppressGenModelAnnotations="false" copyrightFields="false" publicConstructors="true">
   <foreignModel>commons.ecore</foreignModel>
-  <genPackages prefix="Commons" basePackage="org.soluvas" disposableProviderFactory="true"
+  <genPackages prefix="Commons" basePackage="org.soluvas" resource="XML" disposableProviderFactory="true"
       ecorePackage="commons.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//ResourceType">
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//ResourceType/bundle"/>
@@ -41,6 +40,7 @@
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/verified"/>
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/inactive"/>
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/void"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//AccountStatus/unregister"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//PublicationStatus">
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//PublicationStatus/draft"/>
@@ -70,6 +70,7 @@
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//TenantSource">
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//TenantSource/config"/>
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//TenantSource/repository"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//TenantSource/classpath"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//GenericStatus">
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//GenericStatus/booked"/>
@@ -81,6 +82,19 @@
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//CustomerRoleStatus/active"/>
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//CustomerRoleStatus/inactive"/>
       <genEnumLiterals ecoreEnumLiteral="commons.ecore#//CustomerRoleStatus/void"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="commons.ecore#//EntityKind">
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/person"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/shop"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/product"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/place"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/task"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/article"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/banner_shop"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/category"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/product_release"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/tag"/>
+      <genEnumLiterals ecoreEnumLiteral="commons.ecore#//EntityKind/page"/>
     </genEnums>
     <genDataTypes ecoreDataType="commons.ecore#//DateTime"/>
     <genDataTypes ecoreDataType="commons.ecore#//CurrencyUnit"/>
@@ -117,7 +131,7 @@
     </genDataTypes>
     <genDataTypes ecoreDataType="commons.ecore#//Serializable"/>
     <genDataTypes ecoreDataType="commons.ecore#//Bundle"/>
-    <genDataTypes ecoreDataType="commons.ecore#//BigMoneyProvider"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Money"/>
     <genDataTypes ecoreDataType="commons.ecore#//Measurable">
       <genTypeParameters ecoreTypeParameter="commons.ecore#//Measurable/Q"/>
     </genDataTypes>
@@ -140,6 +154,14 @@
     <genDataTypes ecoreDataType="commons.ecore#//LocalTime"/>
     <genDataTypes ecoreDataType="commons.ecore#//Exception"/>
     <genDataTypes ecoreDataType="commons.ecore#//EFactory"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Mass"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Length"/>
+    <genDataTypes ecoreDataType="commons.ecore#//ListMultimap">
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//ListMultimap/K"/>
+      <genTypeParameters ecoreTypeParameter="commons.ecore#//ListMultimap/V"/>
+    </genDataTypes>
+    <genDataTypes ecoreDataType="commons.ecore#//UUID"/>
+    <genDataTypes ecoreDataType="commons.ecore#//Period"/>
     <genClasses image="false" ecoreClass="commons.ecore#//ResourceAware">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ResourceAware/resourceType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ResourceAware/resourceUri"/>
@@ -153,28 +175,46 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/summary"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/domain"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/domainPrd"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/domainDev"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/domainStg"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/generalEmail"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/generalEmailPrd"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/generalEmailDev"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/generalEmailStg"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/organizationName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/organizationAddress"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/letterSalutation"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/letterClosing"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/organizationPhoneNumbers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultTimeZoneId"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultTimeZone"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultCurrencyCode"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultCurrency"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/emailLogoUriTemplate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultLanguageTag"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultCountryCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultCategoryUName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/emailLogoUriTemplate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/letterSalutation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/letterClosing"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/footnote"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/wwwUsed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/headNote"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/headTitle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultStyle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/defaultVariation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/kursDollarPaypal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/kursDollarDpex"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/reminderSchedule"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/reminderPeriodStr"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/reminderPeriod"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/reminderScheduleStr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AppManifest/supportEmail"/>
       <genOperations ecoreOperation="commons.ecore#//AppManifest/getDefaultLocale"/>
-      <genOperations ecoreOperation="commons.ecore#//AppManifest/getRealDomain">
-        <genParameters ecoreParameter="commons.ecore#//AppManifest/getRealDomain/tenantEnv"/>
-      </genOperations>
+      <genOperations ecoreOperation="commons.ecore#//AppManifest/getWebHost"/>
     </genClasses>
     <genClasses ecoreClass="commons.ecore#//PersonInfo">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/gender"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/email"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PersonInfo/mobileNumber"/>
     </genClasses>
     <genClasses image="false" ecoreClass="commons.ecore#//Timestamped">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Timestamped/creationTime"/>
@@ -260,6 +300,7 @@
     <genClasses ecoreClass="commons.ecore#//AttributeSet">
       <genTypeParameters ecoreTypeParameter="commons.ecore#//AttributeSet/T"/>
       <genTypeParameters ecoreTypeParameter="commons.ecore#//AttributeSet/V"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//AttributeSet/principals"/>
     </genClasses>
     <genClasses ecoreClass="commons.ecore#//AttributeUnset">
       <genTypeParameters ecoreTypeParameter="commons.ecore#//AttributeUnset/T"/>
@@ -296,7 +337,7 @@
     </genClasses>
     <genClasses image="false" ecoreClass="commons.ecore#//Parentable">
       <genTypeParameters ecoreTypeParameter="commons.ecore#//Parentable/P"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute commons.ecore#//Parentable/parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference commons.ecore#//Parentable/parent"/>
     </genClasses>
     <genClasses image="false" ecoreClass="commons.ecore#//CategoryLike">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CategoryLike/slugPath"/>
@@ -307,6 +348,11 @@
     </genClasses>
     <genClasses ecoreClass="commons.ecore#//CategoryInfo">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//CategoryInfo/parents"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CategoryInfo/primaryUri"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CategoryInfo/googleFormalId"/>
+      <genOperations ecoreOperation="commons.ecore#//CategoryInfo/getEffectiveName">
+        <genParameters ecoreParameter="commons.ecore#//CategoryInfo/getEffectiveName/curLanguageTag"/>
+      </genOperations>
     </genClasses>
     <genClasses image="false" ecoreClass="commons.ecore#//ProgressMonitor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ProgressMonitor/canceled"/>
@@ -438,6 +484,8 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/verifyCode"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference commons.ecore#//Person/organizations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/zendeskUserId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/customerRoleEditTime"/>
       <genOperations ecoreOperation="commons.ecore#//Person/hasEmail">
         <genParameters ecoreParameter="commons.ecore#//Person/hasEmail/email"/>
       </genOperations>
@@ -479,6 +527,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primaryBilling"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/primaryShipping"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/validationTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//PostalAddress/district"/>
     </genClasses>
     <genClasses ecoreClass="commons.ecore#//PersonCatalog">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//PersonCatalog/people"/>
@@ -516,7 +565,9 @@
     <genClasses ecoreClass="commons.ecore#//ThingInfo">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//ThingInfo/imageId"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="commons.ecore#//GeneralSysConfig"/>
+    <genClasses image="false" ecoreClass="commons.ecore#//GeneralSysConfig">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//GeneralSysConfig/sslSupported"/>
+    </genClasses>
     <genClasses ecoreClass="commons.ecore#//Organization">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/schemaVersion"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Organization/blackBerryPin"/>
@@ -533,6 +584,25 @@
     <genClasses ecoreClass="commons.ecore#//CustomerRole">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/schemaVersion"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/readOnly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/quickShopEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/salesOrderReportEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/historySalesOrderEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/agentSalesReportEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/transactionHistoryEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/bookingEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/paymentGatewayEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/bookingExpiryTimeInMinutes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/dropshipEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/reviewReminderEnabled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/zendeskIntegration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//CustomerRole/zendeskOrganizationId"/>
+    </genClasses>
+    <genClasses ecoreClass="commons.ecore#//CustomerRoleCatalog">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference commons.ecore#//CustomerRoleCatalog/customerRoles"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="commons.ecore#//MongoSysConfig">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//MongoSysConfig/mongoUri"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

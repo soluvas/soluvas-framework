@@ -1450,26 +1450,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getAppManifest__GetDefaultLocale() {
-		return appManifestEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getAppManifest__GetWebHost() {
-		return appManifestEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getPersonInfo() {
 		return personInfoEClass;
 	}
@@ -1589,28 +1569,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getNameable__GetName() {
-		return nameableEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getImageable() {
 		return imageableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getImageable__GetImageId() {
-		return imageableEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -1661,16 +1621,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EClass getInformer() {
 		return informerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getInformer__ToInfo() {
-		return informerEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -1759,16 +1709,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getJavaClassLinked__ResolveJavaClass__Bundle() {
-		return javaClassLinkedEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getEClassLinked() {
 		return eClassLinkedEClass;
 	}
@@ -1829,28 +1769,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getEClassLinked__ResolveEClass__Map() {
-		return eClassLinkedEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getSchemaVersionable() {
 		return schemaVersionableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getSchemaVersionable__GetSchemaVersion() {
-		return schemaVersionableEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -2001,26 +1921,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EAttribute getWebAddress_SecureJsUri() {
 		return (EAttribute)webAddressEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getWebAddress__GetApiUri() {
-		return webAddressEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getWebAddress__GetSecureApiUri() {
-		return webAddressEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2218,16 +2118,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getEObjectLinked__GetObject() {
-		return eObjectLinkedEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getParentable() {
 		return parentableEClass;
 	}
@@ -2345,15 +2235,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getCategoryInfo__GetEffectiveName__String() {
-		return categoryInfoEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public EClass getProgressMonitor() {
 		return progressMonitorEClass;
@@ -2377,76 +2258,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	@Override
 	public EAttribute getProgressMonitor_TaskName() {
 		return (EAttribute)progressMonitorEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getProgressMonitor__BeginTask__String_long() {
-		return progressMonitorEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getProgressMonitor__Done() {
-		return progressMonitorEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getProgressMonitor__InternalWorked__double() {
-		return progressMonitorEClass.getEOperations().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getProgressMonitor__SubTask__String() {
-		return progressMonitorEClass.getEOperations().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getProgressMonitor__Worked__long() {
-		return progressMonitorEClass.getEOperations().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getProgressMonitor__Done__ProgressStatus() {
-		return progressMonitorEClass.getEOperations().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getProgressMonitor__Worked__long_ProgressStatus() {
-		return progressMonitorEClass.getEOperations().get(6);
 	}
 
 	/**
@@ -2655,16 +2466,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getTranslationManager__Translate__Translatable_String() {
-		return translationManagerEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getTranslationEntry() {
 		return translationEntryEClass;
 	}
@@ -2705,16 +2506,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getStyleConfiguration__GetDefaultStyle() {
-		return styleConfigurationEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getExpandable() {
 		return expandableEClass;
 	}
@@ -2735,78 +2526,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getExpandable__Expand__Map() {
-		return expandableEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getPersonLike() {
 		return personLikeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getPersonLike__GetId() {
-		return personLikeEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getPersonLike__GetName() {
-		return personLikeEClass.getEOperations().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getPersonLike__GetSlug() {
-		return personLikeEClass.getEOperations().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getPersonLike__GetEmail() {
-		return personLikeEClass.getEOperations().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getPersonLike__GetPhotoId() {
-		return personLikeEClass.getEOperations().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getPersonLike__GetGender() {
-		return personLikeEClass.getEOperations().get(5);
 	}
 
 	/**
@@ -3353,19 +3074,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EOperation getPerson__HasEmail__String() {
-		return personEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EOperation getPerson__PutEmail__String() {
-		return personEClass.getEOperations().get(1);
+	public EAttribute getPerson_CustomerRoleEditTime() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(53);
 	}
 
 	/**
@@ -4865,8 +4575,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_PERIOD);
 		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_SCHEDULE_STR);
 		createEAttribute(appManifestEClass, APP_MANIFEST__SUPPORT_EMAIL);
-		createEOperation(appManifestEClass, APP_MANIFEST___GET_DEFAULT_LOCALE);
-		createEOperation(appManifestEClass, APP_MANIFEST___GET_WEB_HOST);
 
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
@@ -4884,10 +4592,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(sluggableEClass, SLUGGABLE__SLUG);
 
 		nameableEClass = createEClass(NAMEABLE);
-		createEOperation(nameableEClass, NAMEABLE___GET_NAME);
 
 		imageableEClass = createEClass(IMAGEABLE);
-		createEOperation(imageableEClass, IMAGEABLE___GET_IMAGE_ID);
 
 		photoIdContainerEClass = createEClass(PHOTO_ID_CONTAINER);
 		createEAttribute(photoIdContainerEClass, PHOTO_ID_CONTAINER__PHOTO_ID);
@@ -4896,7 +4602,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(nameContainerEClass, NAME_CONTAINER__NAME);
 
 		informerEClass = createEClass(INFORMER);
-		createEOperation(informerEClass, INFORMER___TO_INFO);
 
 		describableEClass = createEClass(DESCRIBABLE);
 		createEAttribute(describableEClass, DESCRIBABLE__DESCRIPTION);
@@ -4908,7 +4613,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(javaClassLinkedEClass, JAVA_CLASS_LINKED__JAVA_CLASS_NAME);
 		createEAttribute(javaClassLinkedEClass, JAVA_CLASS_LINKED__JAVA_CLASS);
 		createEAttribute(javaClassLinkedEClass, JAVA_CLASS_LINKED__JAVA_CLASS_STATUS);
-		createEOperation(javaClassLinkedEClass, JAVA_CLASS_LINKED___RESOLVE_JAVA_CLASS__BUNDLE);
 
 		eClassLinkedEClass = createEClass(ECLASS_LINKED);
 		createEReference(eClassLinkedEClass, ECLASS_LINKED__ECLASS);
@@ -4916,10 +4620,8 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__EPACKAGE_NS_PREFIX);
 		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__ECLASS_NAME);
 		createEAttribute(eClassLinkedEClass, ECLASS_LINKED__EPACKAGE_NAME);
-		createEOperation(eClassLinkedEClass, ECLASS_LINKED___RESOLVE_ECLASS__MAP);
 
 		schemaVersionableEClass = createEClass(SCHEMA_VERSIONABLE);
-		createEOperation(schemaVersionableEClass, SCHEMA_VERSIONABLE___GET_SCHEMA_VERSION);
 
 		eFactoryLinkedEClass = createEClass(EFACTORY_LINKED);
 		createEAttribute(eFactoryLinkedEClass, EFACTORY_LINKED__EFACTORY);
@@ -4938,8 +4640,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(webAddressEClass, WEB_ADDRESS__SECURE_IMAGES_URI);
 		createEAttribute(webAddressEClass, WEB_ADDRESS__SECURE_SKIN_URI);
 		createEAttribute(webAddressEClass, WEB_ADDRESS__SECURE_JS_URI);
-		createEOperation(webAddressEClass, WEB_ADDRESS___GET_API_URI);
-		createEOperation(webAddressEClass, WEB_ADDRESS___GET_SECURE_API_URI);
 
 		addedEClass = createEClass(ADDED);
 
@@ -4970,7 +4670,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(objectsNotificationEClass, OBJECTS_NOTIFICATION__OBJECTS);
 
 		eObjectLinkedEClass = createEClass(EOBJECT_LINKED);
-		createEOperation(eObjectLinkedEClass, EOBJECT_LINKED___GET_OBJECT);
 
 		parentableEClass = createEClass(PARENTABLE);
 		createEReference(parentableEClass, PARENTABLE__PARENT);
@@ -4986,18 +4685,10 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEReference(categoryInfoEClass, CATEGORY_INFO__PARENTS);
 		createEAttribute(categoryInfoEClass, CATEGORY_INFO__PRIMARY_URI);
 		createEAttribute(categoryInfoEClass, CATEGORY_INFO__GOOGLE_FORMAL_ID);
-		createEOperation(categoryInfoEClass, CATEGORY_INFO___GET_EFFECTIVE_NAME__STRING);
 
 		progressMonitorEClass = createEClass(PROGRESS_MONITOR);
 		createEAttribute(progressMonitorEClass, PROGRESS_MONITOR__CANCELED);
 		createEAttribute(progressMonitorEClass, PROGRESS_MONITOR__TASK_NAME);
-		createEOperation(progressMonitorEClass, PROGRESS_MONITOR___BEGIN_TASK__STRING_LONG);
-		createEOperation(progressMonitorEClass, PROGRESS_MONITOR___DONE);
-		createEOperation(progressMonitorEClass, PROGRESS_MONITOR___INTERNAL_WORKED__DOUBLE);
-		createEOperation(progressMonitorEClass, PROGRESS_MONITOR___SUB_TASK__STRING);
-		createEOperation(progressMonitorEClass, PROGRESS_MONITOR___WORKED__LONG);
-		createEOperation(progressMonitorEClass, PROGRESS_MONITOR___DONE__PROGRESSSTATUS);
-		createEOperation(progressMonitorEClass, PROGRESS_MONITOR___WORKED__LONG_PROGRESSSTATUS);
 
 		shellProgressMonitorEClass = createEClass(SHELL_PROGRESS_MONITOR);
 
@@ -5026,26 +4717,17 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(translationMessageEntryEClass, TRANSLATION_MESSAGE_ENTRY__VALUE);
 
 		translationManagerEClass = createEClass(TRANSLATION_MANAGER);
-		createEOperation(translationManagerEClass, TRANSLATION_MANAGER___TRANSLATE__TRANSLATABLE_STRING);
 
 		translationEntryEClass = createEClass(TRANSLATION_ENTRY);
 		createEReference(translationEntryEClass, TRANSLATION_ENTRY__VALUE);
 		createEAttribute(translationEntryEClass, TRANSLATION_ENTRY__KEY);
 
 		styleConfigurationEClass = createEClass(STYLE_CONFIGURATION);
-		createEOperation(styleConfigurationEClass, STYLE_CONFIGURATION___GET_DEFAULT_STYLE);
 
 		expandableEClass = createEClass(EXPANDABLE);
 		createEAttribute(expandableEClass, EXPANDABLE__EXPANSION_STATE);
-		createEOperation(expandableEClass, EXPANDABLE___EXPAND__MAP);
 
 		personLikeEClass = createEClass(PERSON_LIKE);
-		createEOperation(personLikeEClass, PERSON_LIKE___GET_ID);
-		createEOperation(personLikeEClass, PERSON_LIKE___GET_NAME);
-		createEOperation(personLikeEClass, PERSON_LIKE___GET_SLUG);
-		createEOperation(personLikeEClass, PERSON_LIKE___GET_EMAIL);
-		createEOperation(personLikeEClass, PERSON_LIKE___GET_PHOTO_ID);
-		createEOperation(personLikeEClass, PERSON_LIKE___GET_GENDER);
 
 		personEClass = createEClass(PERSON);
 		createEAttribute(personEClass, PERSON__SCHEMA_VERSION);
@@ -5101,8 +4783,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__VERIFY_CODE);
 		createEReference(personEClass, PERSON__ORGANIZATIONS);
 		createEAttribute(personEClass, PERSON__ZENDESK_USER_ID);
-		createEOperation(personEClass, PERSON___HAS_EMAIL__STRING);
-		createEOperation(personEClass, PERSON___PUT_EMAIL__STRING);
+		createEAttribute(personEClass, PERSON__CUSTOMER_ROLE_EDIT_TIME);
 
 		phoneNumberEClass = createEClass(PHONE_NUMBER);
 		createEAttribute(phoneNumberEClass, PHONE_NUMBER__PHONE_NUMBER);
@@ -5493,7 +5174,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		customerRoleEClass.getESuperTypes().add(this.getTimestamped());
 		customerRoleEClass.getESuperTypes().add(this.getDescribable());
 
-		// Initialize classes, features, and operations; add parameters
+		// Initialize classes and features; add operations and parameters
 		initEClass(resourceAwareEClass, ResourceAware.class, "ResourceAware", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getResourceAware_ResourceType(), this.getResourceType(), "resourceType", null, 0, 1, ResourceAware.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourceAware_ResourceUri(), ecorePackage.getEString(), "resourceUri", null, 0, 1, ResourceAware.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5541,9 +5222,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_ReminderScheduleStr(), ecorePackage.getEString(), "reminderScheduleStr", "18:00:00", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_SupportEmail(), ecorePackage.getEString(), "supportEmail", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getAppManifest__GetDefaultLocale(), this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(appManifestEClass, this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getAppManifest__GetWebHost(), ecorePackage.getEString(), "getWebHost", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(appManifestEClass, ecorePackage.getEString(), "getWebHost", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(personInfoEClass, PersonInfo.class, "PersonInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPersonInfo_Gender(), this.getGender(), "gender", null, 0, 1, PersonInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5562,11 +5243,11 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(nameableEClass, Nameable.class, "Nameable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getNameable__GetName(), ecorePackage.getEString(), "getName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(nameableEClass, ecorePackage.getEString(), "getName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(imageableEClass, Imageable.class, "Imageable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getImageable__GetImageId(), ecorePackage.getEString(), "getImageId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(imageableEClass, ecorePackage.getEString(), "getImageId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(photoIdContainerEClass, PhotoIdContainer.class, "PhotoIdContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPhotoIdContainer_PhotoId(), ecorePackage.getEString(), "photoId", null, 0, 1, PhotoIdContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5576,7 +5257,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(informerEClass, Informer.class, "Informer", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = initEOperation(getInformer__ToInfo(), null, "toInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(informerEClass, null, "toInfo", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(informerEClass_T);
 		initEOperation(op, g1);
 
@@ -5594,7 +5275,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getJavaClassLinked_JavaClass(), g1, "javaClass", null, 0, 1, JavaClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJavaClassLinked_JavaClassStatus(), this.getJavaClassStatus(), "javaClassStatus", "unresolved", 0, 1, JavaClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getJavaClassLinked__ResolveJavaClass__Bundle(), null, "resolveJavaClass", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(javaClassLinkedEClass, null, "resolveJavaClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getBundle(), "bundle", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eClassLinkedEClass, EClassLinked.class, "EClassLinked", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -5604,7 +5285,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getEClassLinked_EClassName(), ecorePackage.getEString(), "eClassName", null, 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEClassLinked_EPackageName(), ecorePackage.getEString(), "ePackageName", null, 0, 1, EClassLinked.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getEClassLinked__ResolveEClass__Map(), null, "resolveEClass", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(eClassLinkedEClass, null, "resolveEClass", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getMap());
 		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
@@ -5614,7 +5295,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(schemaVersionableEClass, SchemaVersionable.class, "SchemaVersionable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getSchemaVersionable__GetSchemaVersion(), ecorePackage.getELong(), "getSchemaVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(schemaVersionableEClass, ecorePackage.getELong(), "getSchemaVersion", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(eFactoryLinkedEClass, EFactoryLinked.class, "EFactoryLinked", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEFactoryLinked_EFactory(), this.getEFactory(), "eFactory", null, 0, 1, EFactoryLinked.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5634,9 +5315,9 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getWebAddress_SecureSkinUri(), ecorePackage.getEString(), "secureSkinUri", null, 0, 1, WebAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getWebAddress_SecureJsUri(), ecorePackage.getEString(), "secureJsUri", null, 0, 1, WebAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getWebAddress__GetApiUri(), ecorePackage.getEString(), "getApiUri", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(webAddressEClass, ecorePackage.getEString(), "getApiUri", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getWebAddress__GetSecureApiUri(), ecorePackage.getEString(), "getSecureApiUri", 1, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(webAddressEClass, ecorePackage.getEString(), "getSecureApiUri", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(addedEClass, Added.class, "Added", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -5673,7 +5354,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(eObjectLinkedEClass, EObjectLinked.class, "EObjectLinked", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		op = initEOperation(getEObjectLinked__GetObject(), null, "getObject", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(eObjectLinkedEClass, null, "getObject", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(eObjectLinkedEClass_T);
 		initEOperation(op, g1);
 
@@ -5693,32 +5374,32 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getCategoryInfo_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCategoryInfo_GoogleFormalId(), ecorePackage.getELongObject(), "googleFormalId", null, 0, 1, CategoryInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getCategoryInfo__GetEffectiveName__String(), ecorePackage.getEString(), "getEffectiveName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(categoryInfoEClass, ecorePackage.getEString(), "getEffectiveName", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "curLanguageTag", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(progressMonitorEClass, ProgressMonitor.class, "ProgressMonitor", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProgressMonitor_Canceled(), ecorePackage.getEBoolean(), "canceled", null, 0, 1, ProgressMonitor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getProgressMonitor_TaskName(), ecorePackage.getEString(), "taskName", null, 0, 1, ProgressMonitor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getProgressMonitor__BeginTask__String_long(), null, "beginTask", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(progressMonitorEClass, null, "beginTask", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getELong(), "totalWork", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getProgressMonitor__Done(), null, "done", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(progressMonitorEClass, null, "done", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getProgressMonitor__InternalWorked__double(), null, "internalWorked", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(progressMonitorEClass, null, "internalWorked", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDouble(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getProgressMonitor__SubTask__String(), null, "subTask", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(progressMonitorEClass, null, "subTask", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getProgressMonitor__Worked__long(), null, "worked", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(progressMonitorEClass, null, "worked", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getELong(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getProgressMonitor__Done__ProgressStatus(), null, "done", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(progressMonitorEClass, null, "done", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getProgressStatus(), "status", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getProgressMonitor__Worked__long_ProgressStatus(), null, "worked", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(progressMonitorEClass, null, "worked", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getELong(), "work", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getProgressStatus(), "status", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -5750,7 +5431,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(translationManagerEClass, TranslationManager.class, "TranslationManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		op = initEOperation(getTranslationManager__Translate__Translatable_String(), null, "translate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(translationManagerEClass, null, "translate", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getTranslatable(), "entity", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "targetLanguage", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -5760,12 +5441,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(styleConfigurationEClass, StyleConfiguration.class, "StyleConfiguration", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getStyleConfiguration__GetDefaultStyle(), ecorePackage.getEString(), "getDefaultStyle", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(styleConfigurationEClass, ecorePackage.getEString(), "getDefaultStyle", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(expandableEClass, Expandable.class, "Expandable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExpandable_ExpansionState(), this.getExpansionState(), "expansionState", null, 0, 1, Expandable.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getExpandable__Expand__Map(), null, "expand", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(expandableEClass, null, "expand", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getMap());
 		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
@@ -5776,17 +5457,17 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 
 		initEClass(personLikeEClass, PersonLike.class, "PersonLike", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getPersonLike__GetId(), ecorePackage.getEString(), "getId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(personLikeEClass, ecorePackage.getEString(), "getId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getPersonLike__GetName(), ecorePackage.getEString(), "getName", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(personLikeEClass, ecorePackage.getEString(), "getName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getPersonLike__GetSlug(), ecorePackage.getEString(), "getSlug", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(personLikeEClass, ecorePackage.getEString(), "getSlug", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getPersonLike__GetEmail(), ecorePackage.getEString(), "getEmail", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(personLikeEClass, ecorePackage.getEString(), "getEmail", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getPersonLike__GetPhotoId(), ecorePackage.getEString(), "getPhotoId", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(personLikeEClass, ecorePackage.getEString(), "getPhotoId", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getPersonLike__GetGender(), this.getGender(), "getGender", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEOperation(personLikeEClass, this.getGender(), "getGender", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(personEClass, Person.class, "Person", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPerson_SchemaVersion(), ecorePackage.getELong(), "schemaVersion", "2", 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -5842,11 +5523,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_VerifyCode(), ecorePackage.getEString(), "verifyCode", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPerson_Organizations(), this.getOrganization(), null, "organizations", null, 0, -1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_ZendeskUserId(), ecorePackage.getELongObject(), "zendeskUserId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_CustomerRoleEditTime(), this.getDateTime(), "customerRoleEditTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = initEOperation(getPerson__HasEmail__String(), ecorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(personEClass, ecorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getPerson__PutEmail__String(), this.getEmail(), "putEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(personEClass, this.getEmail(), "putEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(phoneNumberEClass, PhoneNumber.class, "PhoneNumber", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -6141,13 +5823,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "AppManifest is actually a misnomer, it should\'ve been called TenantManifest instead, which is the primary (non-sysconfig) information about a tenant.\n\n<p>Attributes are optional because can use OverlayingSupplier.\n\n<p>Expandable attributes are: domain, generalEmail.\n\n<p>Expansion variables are: fqdn (host-dependent), appDomain (from properties), userName (from System property user.name), domain (can only be used by other attributes than domain itself)."
 		   });	
 		addAnnotation
-		  (getAppManifest__GetDefaultLocale(), 
+		  (appManifestEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Returns the {@link java.util.Locale} referred by {@link @getDefaultLanguageTag()}."
 		   });	
 		addAnnotation
-		  (getAppManifest__GetWebHost(), 
+		  (appManifestEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "If {@link #isWwwUsed()} is {@code true}, will return \"www.\" + {@link #getDomain()}. Otherwise, just {@link #getDomain()}."
@@ -6429,7 +6111,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "An object that can provide a name."
 		   });	
 		addAnnotation
-		  (getImageable__GetImageId(), 
+		  (imageableEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Return the primary image ID for square proportion."
@@ -6465,7 +6147,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Can transform itself an \"Info\" object."
 		   });	
 		addAnnotation
-		  (getInformer__ToInfo(), 
+		  (informerEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Transforms to its \"Info\" model."
@@ -6507,13 +6189,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Implementation is in {@link org.soluvas.commons.JavaClassLinked.Trait}."
 		   });	
 		addAnnotation
-		  (getJavaClassLinked__ResolveJavaClass__Bundle(), 
+		  (javaClassLinkedEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Resolve referenced Java Class."
 		   });	
 		addAnnotation
-		  ((getJavaClassLinked__ResolveJavaClass__Bundle()).getEParameters().get(0), 
+		  ((javaClassLinkedEClass.getEOperations().get(0)).getEParameters().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Resolve referenced Java Class using the specified Bundle."
@@ -6537,13 +6219,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Implementation is in {@link org.soluvas.commons.util.EClassLinked.Trait}."
 		   });	
 		addAnnotation
-		  (getEClassLinked__ResolveEClass__Map(), 
+		  (eClassLinkedEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Resolve referenced EClass."
 		   });	
 		addAnnotation
-		  ((getEClassLinked__ResolveEClass__Map()).getEParameters().get(0), 
+		  ((eClassLinkedEClass.getEOperations().get(0)).getEParameters().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Keys are {ePackageName}.{eClassName}.\nValues are EClass instances themselves."
@@ -6597,13 +6279,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Tenant-wide website URI configuration. URI template variables: appId, tenantId, tenantEnv, appDomain, domain, fqdn, webHost."
 		   });	
 		addAnnotation
-		  (getWebAddress__GetApiUri(), 
+		  (webAddressEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.\n\nAlways returns baseUri + apiPath, removing double slash."
 		   });	
 		addAnnotation
-		  (getWebAddress__GetSecureApiUri(), 
+		  (webAddressEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "API URI is useful if you want to access API resources (e.g. MediaResource) from external apps, email, etc. or where you have taken care of the cross-origin request issues.\n\nAlways returns secureBaseUri + apiPath, removing double slash."
@@ -6723,19 +6405,19 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", " * The <code>IProgressMonitor</code> interface is implemented\n * by objects that monitor the progress of an activity; the methods\n * in this interface are invoked by code that performs the activity.\n * <p>\n * All activity is broken down into a linear sequence of tasks against\n * which progress is reported. When a task begins, a <code>beginTask(String, int)\n * </code> notification is reported, followed by any number and mixture of \n * progress reports (<code>worked()</code>) and subtask notifications \n * (<code>subTask(String)</code>).  When the task is eventually completed, a \n * <code>done()</code> notification is reported.  After the <code>done()</code>\n * notification, the progress monitor cannot be reused;  i.e., <code>\n * beginTask(String, int)</code> cannot be called again after the call to \n * <code>done()</code>.\n * </p>\n * <p>\n * A request to cancel an operation can be signaled using the \n * <code>setCanceled</code> method.  Operations taking a progress\n * monitor are expected to poll the monitor (using <code>isCanceled</code>)\n * periodically and abort at their earliest convenience.  Operation can however \n * choose to ignore cancelation requests.\n * </p>\n * <p>\n * Since notification is synchronous with the activity itself, the listener should \n * provide a fast and robust implementation. If the handling of notifications would \n * involve blocking operations, or operations which might throw uncaught exceptions, \n * the notifications should be queued, and the actual processing deferred (or perhaps\n * delegated to a separate thread).\n * </p><p>\n * This interface can be used without OSGi running.\n * </p><p>\n * Clients may implement this interface.\n * </p>\n\n\nInspired by: org.eclipse.core.runtime.IProgressMonitor\n"
 		   });	
 		addAnnotation
-		  (getProgressMonitor__BeginTask__String_long(), 
+		  (progressMonitorEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "\t * Notifies that the main task is beginning.  This must only be called once\n\t * on a given progress monitor instance.\n\t * \n\t * @param name the name (or description) of the main task\n\t * @param totalWork the total number of work units into which\n\t *  the main task is been subdivided. If the value is <code>UNKNOWN</code> \n\t *  the implementation is free to indicate progress in a way which \n\t *  doesn\'t require the total number of work units in advance.\n\nTODO: support formatting in the task name, probably using HTML5 or RDFa, which will be converted (in shell) into ANSI codes."
 		   });	
 		addAnnotation
-		  (getProgressMonitor__Done(), 
+		  (progressMonitorEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "\t * Notifies that the work is done; that is, either the main task is completed \n\t * or the user canceled it. This method may be called more than once \n\t * (implementations should be prepared to handle this case).\n"
 		   });	
 		addAnnotation
-		  (getProgressMonitor__InternalWorked__double(), 
+		  (progressMonitorEClass.getEOperations().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "\t * Internal method to handle scaling correctly. This method\n\t * must not be called by a client. Clients should \n\t * always use the method </code>worked(int)</code>.\n\t * \n\t * @param work the amount of work done\n"
@@ -6945,7 +6627,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "It\'s not an EMap so it won\'t be complex to create the underlying EMap (messages)."
 		   });	
 		addAnnotation
-		  (getTranslationManager__Translate__Translatable_String(), 
+		  (translationManagerEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Processes available translations and sets language to the targetLanguage.\nWill throw Exception if it\'s not already in the targetLanguage and translationState is translated."
@@ -6963,7 +6645,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Used by {@link org.soluvas.web.site.SiteResource} to get the current Mall\'s default style."
 		   });	
 		addAnnotation
-		  (getStyleConfiguration__GetDefaultStyle(), 
+		  (styleConfigurationEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Default style name for Wicket, e.g. \"fluid\" (Cinta Lama\'s original theme, created by Ahmad Syarif Farsiado)."
@@ -6975,7 +6657,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Can be expanded upon loading by XmiObjectLoader.\n\nExample is WebAddress, it will replace {+fqdn} with FQDN (useful for development)."
 		   });	
 		addAnnotation
-		  (getExpandable__Expand__Map(), 
+		  (expandableEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Expand attribute values."
@@ -7011,13 +6693,13 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 			 "documentation", "Database-agnostic future replacement for org.soluvas.ldap.SocialPerson & BippoPerson.\n\nA basic LDAP <tt>objectClass=person</tt> with proper mappings that can be subclassed."
 		   });	
 		addAnnotation
-		  (getPerson__HasEmail__String(), 
+		  (personEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Checks if the email is already in its list."
 		   });	
 		addAnnotation
-		  (getPerson__PutEmail__String(), 
+		  (personEClass.getEOperations().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "Puts the (normalized) email, and sets it as primary if the only one. Has no effect if already exists. Returns the added Email contained object."

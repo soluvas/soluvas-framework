@@ -16,13 +16,13 @@ import org.soluvas.email.LayoutType;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.impl.LayoutImpl#getPageSubject <em>Page Subject</em>}</li>
  *   <li>{@link org.soluvas.email.impl.LayoutImpl#getPagePlain <em>Page Plain</em>}</li>
  *   <li>{@link org.soluvas.email.impl.LayoutImpl#getPageHtml <em>Page Html</em>}</li>
  *   <li>{@link org.soluvas.email.impl.LayoutImpl#getLayoutType <em>Layout Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

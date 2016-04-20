@@ -19,6 +19,7 @@ import com.google.common.base.Objects;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.impl.RecipientImpl#getEmail <em>Email</em>}</li>
  *   <li>{@link org.soluvas.email.impl.RecipientImpl#getName <em>Name</em>}</li>
@@ -28,7 +29,6 @@ import com.google.common.base.Objects;
  *   <li>{@link org.soluvas.email.impl.RecipientImpl#getPreferredFormat <em>Preferred Format</em>}</li>
  *   <li>{@link org.soluvas.email.impl.RecipientImpl#getPreferredWebSecurity <em>Preferred Web Security</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

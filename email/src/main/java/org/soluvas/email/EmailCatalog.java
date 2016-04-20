@@ -14,6 +14,7 @@ import org.soluvas.commons.NsPrefixable;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.email.EmailCatalog#getPageTypes <em>Page Types</em>}</li>
  *   <li>{@link org.soluvas.email.EmailCatalog#getLayoutTypes <em>Layout Types</em>}</li>
@@ -22,7 +23,6 @@ import org.soluvas.commons.NsPrefixable;
  *   <li>{@link org.soluvas.email.EmailCatalog#getEPackage <em>EPackage</em>}</li>
  *   <li>{@link org.soluvas.email.EmailCatalog#getEFactory <em>EFactory</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.email.EmailPackage#getEmailCatalog()
  * @model
