@@ -108,7 +108,15 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 		log.info("Lifecycle methods for {}: init={} destroy={}",
 				implClass.getSimpleName(), initMethod, destroyMethod);
 	}
-	
+
+
+//	public TenantBeans(Class<MongoPersonCustomerRoleHistoryRepository> class1) {
+//		// TODO Auto-generated constructor stub
+//		super();
+//    	this.implClass 
+//	}
+
+
 	@PostConstruct
 	public void init() {
 		final ImmutableMap<String, AppManifest> initialTenantMap = tenantConfig.tenantMap();
