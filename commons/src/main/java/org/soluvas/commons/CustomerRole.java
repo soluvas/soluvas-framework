@@ -26,7 +26,7 @@ package org.soluvas.commons;
  *   <li>{@link org.soluvas.commons.CustomerRole#isDropshipEnabled <em>Dropship Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isReviewReminderEnabled <em>Review Reminder Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.CustomerRole#isZendeskIntegration <em>Zendesk Integration</em>}</li>
- *   <li>{@link org.soluvas.commons.CustomerRole#getZendeskGroupId <em>Zendesk Group Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.CustomerRole#getZendeskOrganizationId <em>Zendesk Organization Id</em>}</li>
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getCustomerRole()
@@ -416,29 +416,29 @@ public interface CustomerRole extends Identifiable, SchemaVersionable, NameConta
 	void setZendeskIntegration(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Zendesk Group Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Zendesk Organization Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Zendesk Group Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Zendesk Organization Id</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Zendesk Group Id</em>' attribute.
-	 * @see #setZendeskGroupId(Long)
-	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_ZendeskGroupId()
+	 * @return the value of the '<em>Zendesk Organization Id</em>' attribute.
+	 * @see #setZendeskOrganizationId(Long)
+	 * @see org.soluvas.commons.CommonsPackage#getCustomerRole_ZendeskOrganizationId()
 	 * @model
 	 * @generated
 	 */
-	Long getZendeskGroupId();
+	Long getZendeskOrganizationId();
 
 	/**
-	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#getZendeskGroupId <em>Zendesk Group Id</em>}' attribute.
+	 * Sets the value of the '{@link org.soluvas.commons.CustomerRole#getZendeskOrganizationId <em>Zendesk Organization Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Zendesk Group Id</em>' attribute.
-	 * @see #getZendeskGroupId()
+	 * @param value the new value of the '<em>Zendesk Organization Id</em>' attribute.
+	 * @see #getZendeskOrganizationId()
 	 * @generated
 	 */
-	void setZendeskGroupId(Long value);
+	void setZendeskOrganizationId(Long value);
 
 } // CustomerRole

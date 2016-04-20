@@ -47,7 +47,7 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isDropshipEnabled <em>Dropship Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isReviewReminderEnabled <em>Review Reminder Enabled</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#isZendeskIntegration <em>Zendesk Integration</em>}</li>
- *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getZendeskGroupId <em>Zendesk Group Id</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.CustomerRoleImpl#getZendeskOrganizationId <em>Zendesk Organization Id</em>}</li>
  * </ul>
  *
  * @generated
@@ -435,24 +435,24 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	protected boolean zendeskIntegration = ZENDESK_INTEGRATION_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getZendeskGroupId() <em>Zendesk Group Id</em>}' attribute.
+	 * The default value of the '{@link #getZendeskOrganizationId() <em>Zendesk Organization Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getZendeskGroupId()
+	 * @see #getZendeskOrganizationId()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Long ZENDESK_GROUP_ID_EDEFAULT = null;
+	protected static final Long ZENDESK_ORGANIZATION_ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getZendeskGroupId() <em>Zendesk Group Id</em>}' attribute.
+	 * The cached value of the '{@link #getZendeskOrganizationId() <em>Zendesk Organization Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getZendeskGroupId()
+	 * @see #getZendeskOrganizationId()
 	 * @generated
 	 * @ordered
 	 */
-	protected Long zendeskGroupId = ZENDESK_GROUP_ID_EDEFAULT;
+	protected Long zendeskOrganizationId = ZENDESK_ORGANIZATION_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -878,8 +878,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Long getZendeskGroupId() {
-		return zendeskGroupId;
+	public Long getZendeskOrganizationId() {
+		return zendeskOrganizationId;
 	}
 
 	/**
@@ -887,11 +887,11 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setZendeskGroupId(Long newZendeskGroupId) {
-		Long oldZendeskGroupId = zendeskGroupId;
-		zendeskGroupId = newZendeskGroupId;
+	public void setZendeskOrganizationId(Long newZendeskOrganizationId) {
+		Long oldZendeskOrganizationId = zendeskOrganizationId;
+		zendeskOrganizationId = newZendeskOrganizationId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__ZENDESK_GROUP_ID, oldZendeskGroupId, zendeskGroupId));
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.CUSTOMER_ROLE__ZENDESK_ORGANIZATION_ID, oldZendeskOrganizationId, zendeskOrganizationId));
 	}
 
 	/**
@@ -940,8 +940,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return isReviewReminderEnabled();
 			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_INTEGRATION:
 				return isZendeskIntegration();
-			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_GROUP_ID:
-				return getZendeskGroupId();
+			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_ORGANIZATION_ID:
+				return getZendeskOrganizationId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1008,8 +1008,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_INTEGRATION:
 				setZendeskIntegration((Boolean)newValue);
 				return;
-			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_GROUP_ID:
-				setZendeskGroupId((Long)newValue);
+			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_ORGANIZATION_ID:
+				setZendeskOrganizationId((Long)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1077,8 +1077,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_INTEGRATION:
 				setZendeskIntegration(ZENDESK_INTEGRATION_EDEFAULT);
 				return;
-			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_GROUP_ID:
-				setZendeskGroupId(ZENDESK_GROUP_ID_EDEFAULT);
+			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_ORGANIZATION_ID:
+				setZendeskOrganizationId(ZENDESK_ORGANIZATION_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -1130,8 +1130,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 				return reviewReminderEnabled != REVIEW_REMINDER_ENABLED_EDEFAULT;
 			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_INTEGRATION:
 				return zendeskIntegration != ZENDESK_INTEGRATION_EDEFAULT;
-			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_GROUP_ID:
-				return ZENDESK_GROUP_ID_EDEFAULT == null ? zendeskGroupId != null : !ZENDESK_GROUP_ID_EDEFAULT.equals(zendeskGroupId);
+			case CommonsPackage.CUSTOMER_ROLE__ZENDESK_ORGANIZATION_ID:
+				return ZENDESK_ORGANIZATION_ID_EDEFAULT == null ? zendeskOrganizationId != null : !ZENDESK_ORGANIZATION_ID_EDEFAULT.equals(zendeskOrganizationId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1262,8 +1262,8 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 		result.append(reviewReminderEnabled);
 		result.append(", zendeskIntegration: ");
 		result.append(zendeskIntegration);
-		result.append(", zendeskGroupId: ");
-		result.append(zendeskGroupId);
+		result.append(", zendeskOrganizationId: ");
+		result.append(zendeskOrganizationId);
 		result.append(')');
 		return result.toString();
 	}
