@@ -14,7 +14,6 @@ import org.joda.time.LocalTime;
 import org.joda.time.Period;
 import org.soluvas.commons.util.AppUtils;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>App Manifest</b></em>'.
