@@ -108,7 +108,7 @@ public class Image implements Serializable {
 	 * @param name
 	 */
 	public Image(File originalFile, String contentType, String name) {
-		this(null, originalFile, contentType, name);
+		this(name, originalFile, contentType, name);
 	}
 
 	/**
