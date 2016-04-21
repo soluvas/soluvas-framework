@@ -158,6 +158,8 @@ public interface PersonRepository extends
 	 * @see SlugLookup#existsBySlug(StatusMask, String)
 	 */
 //	public Existence<String> existsBySlugEx(StatusMask statusMask, String slug);
+	
+	Page<Person> findAllNotZendeskUserId(Pageable pageable);
 
 }
 

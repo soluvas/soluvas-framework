@@ -33,8 +33,6 @@ import org.soluvas.data.domain.Sort.Order;
 import org.soluvas.data.repository.PagingAndSortingRepositoryBase;
 import org.springframework.cache.annotation.Cacheable;
 
-import scala.util.Try;
-
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
@@ -42,6 +40,8 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
+
+import scala.util.Try;
 
 /**
  * {@link Person} Repository used for demo purposes.
@@ -468,6 +468,12 @@ public class EmfPersonRepository extends
 	public Page<Person> findAll(StatusMask statusMask, Collection<String> ids,
 			Pageable pageable) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public Page<Person> findAllNotZendeskUserId(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -742,6 +742,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 				}, "findAllSlugsByStatus", statusMask);
 	}
 
+	@Override
+	public Page<Person> findAllNotZendeskUserId(Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("zendeskUserId", new BasicDBObject("$exists", false));
+		return findAllByQuery(query, pageable);
+	}
+
 //	@Override
 //	public Existence<String> existsBySlugEx(StatusMask statusMask, String slug) {
 //		// TODO Auto-generated method stub
