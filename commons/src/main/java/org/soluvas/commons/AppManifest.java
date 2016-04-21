@@ -2,17 +2,16 @@
  */
 package org.soluvas.commons;
 
-import java.math.BigDecimal;
-import java.util.Locale;
-
-import javax.annotation.Nullable;
-
 import org.eclipse.emf.common.util.EList;
-import javax.money.CurrencyUnit;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
 import org.soluvas.commons.util.AppUtils;
+
+import javax.annotation.Nullable;
+import javax.money.CurrencyUnit;
+import java.math.BigDecimal;
+import java.util.Locale;
 
 /**
  * <!-- begin-user-doc -->
