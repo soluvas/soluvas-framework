@@ -3092,6 +3092,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPerson_ZendeskIntegration() {
+		return (EAttribute)personEClass.getEStructuralFeatures().get(55);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getPhoneNumber() {
 		return phoneNumberEClass;
@@ -4794,6 +4803,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(personEClass, PERSON__ZENDESK_USER_ID);
 		createEAttribute(personEClass, PERSON__CUSTOMER_ROLE_EDIT_TIME);
 		createEAttribute(personEClass, PERSON__LAST_TIME_SYNCHRONIZE_WITH_ZENDESK);
+		createEAttribute(personEClass, PERSON__ZENDESK_INTEGRATION);
 
 		phoneNumberEClass = createEClass(PHONE_NUMBER);
 		createEAttribute(phoneNumberEClass, PHONE_NUMBER__PHONE_NUMBER);
@@ -5535,6 +5545,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPerson_ZendeskUserId(), ecorePackage.getELongObject(), "zendeskUserId", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_CustomerRoleEditTime(), this.getDateTime(), "customerRoleEditTime", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPerson_LastTimeSynchronizeWithZendesk(), this.getDateTime(), "lastTimeSynchronizeWithZendesk", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPerson_ZendeskIntegration(), ecorePackage.getEBoolean(), "zendeskIntegration", null, 0, 1, Person.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(personEClass, ecorePackage.getEBoolean(), "hasEmail", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "email", 0, 1, IS_UNIQUE, IS_ORDERED);

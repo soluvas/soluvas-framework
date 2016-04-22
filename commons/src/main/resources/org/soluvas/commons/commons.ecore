@@ -1286,6 +1286,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="customerRoleEditTime" eType="#//DateTime"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastTimeSynchronizeWithZendesk"
         eType="#//DateTime"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="zendeskIntegration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eGenericSuperTypes eClassifier="#//NameContainer"/>
     <eGenericSuperTypes eClassifier="#//PhotoIdContainer"/>
     <eGenericSuperTypes eClassifier="#//Identifiable"/>
