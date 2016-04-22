@@ -84,6 +84,7 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getZendeskUserId <em>Zendesk User Id</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getCustomerRoleEditTime <em>Customer Role Edit Time</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getLastTimeSynchronizeWithZendesk <em>Last Time Synchronize With Zendesk</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#isZendeskIntegration <em>Zendesk Integration</em>}</li>
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getPerson()
@@ -1494,6 +1495,32 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setLastTimeSynchronizeWithZendesk(DateTime value);
+
+	/**
+	 * Returns the value of the '<em><b>Zendesk Integration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Zendesk Integration</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Zendesk Integration</em>' attribute.
+	 * @see #setZendeskIntegration(boolean)
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_ZendeskIntegration()
+	 * @model
+	 * @generated
+	 */
+	boolean isZendeskIntegration();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.Person#isZendeskIntegration <em>Zendesk Integration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Zendesk Integration</em>' attribute.
+	 * @see #isZendeskIntegration()
+	 * @generated
+	 */
+	void setZendeskIntegration(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->
