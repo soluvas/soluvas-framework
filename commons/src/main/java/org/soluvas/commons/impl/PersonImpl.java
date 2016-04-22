@@ -148,6 +148,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getOrganizations <em>Organizations</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getZendeskUserId <em>Zendesk User Id</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PersonImpl#getCustomerRoleEditTime <em>Customer Role Edit Time</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PersonImpl#getLastTimeSynchronizeWithZendesk <em>Last Time Synchronize With Zendesk</em>}</li>
  * </ul>
  *
  * @generated
@@ -1507,6 +1508,26 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * @ordered
 	 */
 	protected DateTime customerRoleEditTime = CUSTOMER_ROLE_EDIT_TIME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLastTimeSynchronizeWithZendesk() <em>Last Time Synchronize With Zendesk</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastTimeSynchronizeWithZendesk()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final DateTime LAST_TIME_SYNCHRONIZE_WITH_ZENDESK_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLastTimeSynchronizeWithZendesk() <em>Last Time Synchronize With Zendesk</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastTimeSynchronizeWithZendesk()
+	 * @generated
+	 * @ordered
+	 */
+	protected DateTime lastTimeSynchronizeWithZendesk = LAST_TIME_SYNCHRONIZE_WITH_ZENDESK_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3140,6 +3161,27 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DateTime getLastTimeSynchronizeWithZendesk() {
+		return lastTimeSynchronizeWithZendesk;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLastTimeSynchronizeWithZendesk(DateTime newLastTimeSynchronizeWithZendesk) {
+		DateTime oldLastTimeSynchronizeWithZendesk = lastTimeSynchronizeWithZendesk;
+		lastTimeSynchronizeWithZendesk = newLastTimeSynchronizeWithZendesk;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.PERSON__LAST_TIME_SYNCHRONIZE_WITH_ZENDESK, oldLastTimeSynchronizeWithZendesk, lastTimeSynchronizeWithZendesk));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public boolean hasEmail(String email) {
@@ -3442,6 +3484,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return getZendeskUserId();
 			case CommonsPackage.PERSON__CUSTOMER_ROLE_EDIT_TIME:
 				return getCustomerRoleEditTime();
+			case CommonsPackage.PERSON__LAST_TIME_SYNCHRONIZE_WITH_ZENDESK:
+				return getLastTimeSynchronizeWithZendesk();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -3668,6 +3712,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			case CommonsPackage.PERSON__CUSTOMER_ROLE_EDIT_TIME:
 				setCustomerRoleEditTime((DateTime)newValue);
 				return;
+			case CommonsPackage.PERSON__LAST_TIME_SYNCHRONIZE_WITH_ZENDESK:
+				setLastTimeSynchronizeWithZendesk((DateTime)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -3887,6 +3934,9 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			case CommonsPackage.PERSON__CUSTOMER_ROLE_EDIT_TIME:
 				setCustomerRoleEditTime(CUSTOMER_ROLE_EDIT_TIME_EDEFAULT);
 				return;
+			case CommonsPackage.PERSON__LAST_TIME_SYNCHRONIZE_WITH_ZENDESK:
+				setLastTimeSynchronizeWithZendesk(LAST_TIME_SYNCHRONIZE_WITH_ZENDESK_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -4041,6 +4091,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 				return ZENDESK_USER_ID_EDEFAULT == null ? zendeskUserId != null : !ZENDESK_USER_ID_EDEFAULT.equals(zendeskUserId);
 			case CommonsPackage.PERSON__CUSTOMER_ROLE_EDIT_TIME:
 				return CUSTOMER_ROLE_EDIT_TIME_EDEFAULT == null ? customerRoleEditTime != null : !CUSTOMER_ROLE_EDIT_TIME_EDEFAULT.equals(customerRoleEditTime);
+			case CommonsPackage.PERSON__LAST_TIME_SYNCHRONIZE_WITH_ZENDESK:
+				return LAST_TIME_SYNCHRONIZE_WITH_ZENDESK_EDEFAULT == null ? lastTimeSynchronizeWithZendesk != null : !LAST_TIME_SYNCHRONIZE_WITH_ZENDESK_EDEFAULT.equals(lastTimeSynchronizeWithZendesk);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -4385,6 +4437,8 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		result.append(zendeskUserId);
 		result.append(", customerRoleEditTime: ");
 		result.append(customerRoleEditTime);
+		result.append(", lastTimeSynchronizeWithZendesk: ");
+		result.append(lastTimeSynchronizeWithZendesk);
 		result.append(')');
 		return result.toString();
 	}

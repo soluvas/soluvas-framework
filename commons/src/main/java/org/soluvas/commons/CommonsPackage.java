@@ -3122,13 +3122,22 @@ public interface CommonsPackage extends EPackage {
 	int PERSON__CUSTOMER_ROLE_EDIT_TIME = NAME_CONTAINER_FEATURE_COUNT + 69;
 
 	/**
+	 * The feature id for the '<em><b>Last Time Synchronize With Zendesk</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERSON__LAST_TIME_SYNCHRONIZE_WITH_ZENDESK = NAME_CONTAINER_FEATURE_COUNT + 70;
+
+	/**
 	 * The number of structural features of the '<em>Person</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 70;
+	int PERSON_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 71;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.
@@ -7079,6 +7088,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPerson_CustomerRoleEditTime();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.Person#getLastTimeSynchronizeWithZendesk <em>Last Time Synchronize With Zendesk</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Time Synchronize With Zendesk</em>'.
+	 * @see org.soluvas.commons.Person#getLastTimeSynchronizeWithZendesk()
+	 * @see #getPerson()
+	 * @generated
+	 */
+	EAttribute getPerson_LastTimeSynchronizeWithZendesk();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PhoneNumber <em>Phone Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10410,6 +10430,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PERSON__CUSTOMER_ROLE_EDIT_TIME = eINSTANCE.getPerson_CustomerRoleEditTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Time Synchronize With Zendesk</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PERSON__LAST_TIME_SYNCHRONIZE_WITH_ZENDESK = eINSTANCE.getPerson_LastTimeSynchronizeWithZendesk();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PhoneNumberImpl <em>Phone Number</em>}' class.

@@ -83,6 +83,7 @@ import com.google.common.base.Function;
  *   <li>{@link org.soluvas.commons.Person#getOrganizations <em>Organizations</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getZendeskUserId <em>Zendesk User Id</em>}</li>
  *   <li>{@link org.soluvas.commons.Person#getCustomerRoleEditTime <em>Customer Role Edit Time</em>}</li>
+ *   <li>{@link org.soluvas.commons.Person#getLastTimeSynchronizeWithZendesk <em>Last Time Synchronize With Zendesk</em>}</li>
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getPerson()
@@ -1467,6 +1468,32 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	void setCustomerRoleEditTime(DateTime value);
+
+	/**
+	 * Returns the value of the '<em><b>Last Time Synchronize With Zendesk</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Last Time Synchronize With Zendesk</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last Time Synchronize With Zendesk</em>' attribute.
+	 * @see #setLastTimeSynchronizeWithZendesk(DateTime)
+	 * @see org.soluvas.commons.CommonsPackage#getPerson_LastTimeSynchronizeWithZendesk()
+	 * @model dataType="org.soluvas.commons.DateTime"
+	 * @generated
+	 */
+	DateTime getLastTimeSynchronizeWithZendesk();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.Person#getLastTimeSynchronizeWithZendesk <em>Last Time Synchronize With Zendesk</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last Time Synchronize With Zendesk</em>' attribute.
+	 * @see #getLastTimeSynchronizeWithZendesk()
+	 * @generated
+	 */
+	void setLastTimeSynchronizeWithZendesk(DateTime value);
 
 	/**
 	 * <!-- begin-user-doc -->
