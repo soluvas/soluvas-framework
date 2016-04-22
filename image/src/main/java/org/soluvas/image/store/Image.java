@@ -7,7 +7,6 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import com.google.common.base.Preconditions;
 import org.bson.BasicBSONObject;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -17,6 +16,7 @@ import org.soluvas.commons.SlugUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -95,7 +95,7 @@ public class Image implements Serializable {
 		super();
 		Preconditions.checkArgument(id.length() <= MAX_ID_LENGTH,
 				"Image ID '%s' (%s characters) cannot be more than %s characters.", id, id.length(), MAX_ID_LENGTH);
-		this.id = id;
+		this.id = SlugUtils.generateId(id, 0);
 		this.originalFile = originalFile;
 		this.contentType = contentType;
 		this.name = name;
