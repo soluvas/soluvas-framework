@@ -3247,6 +3247,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 		person2.setCanonicalSlug(getCanonicalSlug());
 		person2.setReligion(getReligion());
 		person2.setBirthDate(getBirthDate());
+		person2.setPhotoId(getImageId());
 		return person2;
 	}
 
