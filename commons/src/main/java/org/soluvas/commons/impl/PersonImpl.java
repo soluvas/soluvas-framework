@@ -23,34 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
-import org.soluvas.commons.AccountStatus;
-import org.soluvas.commons.ArchivalStatus;
-import org.soluvas.commons.CanonicalSluggable;
-import org.soluvas.commons.CommonsPackage;
-import org.soluvas.commons.Describable;
-import org.soluvas.commons.Email;
-import org.soluvas.commons.FacebookAccessible;
-import org.soluvas.commons.FacebookIdentity;
-import org.soluvas.commons.Gender;
-import org.soluvas.commons.Identifiable;
-import org.soluvas.commons.Imageable;
-import org.soluvas.commons.Informer;
-import org.soluvas.commons.NameUtils;
-import org.soluvas.commons.Organization;
-import org.soluvas.commons.Person;
-import org.soluvas.commons.PersonInfo;
-import org.soluvas.commons.PersonLike;
-import org.soluvas.commons.PhoneNumber;
-import org.soluvas.commons.PhotoIdContainer;
-import org.soluvas.commons.PostalAddress;
-import org.soluvas.commons.PublicationStatus;
-import org.soluvas.commons.Revisionable;
-import org.soluvas.commons.SchemaVersionable;
-import org.soluvas.commons.SignupSourceType;
-import org.soluvas.commons.Sluggable;
-import org.soluvas.commons.Timestamped;
-import org.soluvas.commons.TwitterAccessible;
-import org.soluvas.commons.TwitterIdentity;
+import org.soluvas.commons.*;
 import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.CurrencyUnitConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
@@ -3262,6 +3235,19 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 			getEmails().add(newEmail);
 			return newEmail;
 		}
+	}
+
+	@Override
+	public Person2 toPerson2() {
+		final Person2 person2 = new Person2();
+		person2.setId(getId());
+		person2.setGender(getGender());
+		person2.setName(getName());
+		person2.setSlug(getSlug());
+		person2.setCanonicalSlug(getCanonicalSlug());
+		person2.setReligion(getReligion());
+		person2.setBirthDate(getBirthDate());
+		return person2;
 	}
 
 	/**

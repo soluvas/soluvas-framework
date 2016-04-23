@@ -92,7 +92,7 @@ import com.google.common.base.Function;
  * @generated
  */
 public interface Person extends NameContainer, PhotoIdContainer, Identifiable, PersonLike, Informer<PersonInfo>, Timestamped, SchemaVersionable, Describable, Sluggable, CanonicalSluggable, TwitterAccessible, TwitterIdentity, FacebookIdentity, FacebookAccessible, Revisionable {
-	
+
 	public static class ToPersonInfo implements Function<Person, PersonInfo> {
 		@Override @Nullable
 		public PersonInfo apply(@Nullable Person input) {
@@ -1543,5 +1543,7 @@ public interface Person extends NameContainer, PhotoIdContainer, Identifiable, P
 	 * @generated
 	 */
 	Email putEmail(String email);
+
+	Person2 toPerson2();
 
 } // Person
