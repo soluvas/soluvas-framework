@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -4746,7 +4745,6 @@ public interface CommonsPackage extends EPackage {
 	 */
 	int NO_SUCH_ELEMENT_EXCEPTION = 106;
 
-
 	/**
 	 * The meta object id for the '<em>Deque</em>' data type.
 	 * <!-- begin-user-doc -->
@@ -4756,7 +4754,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	int DEQUE = 107;
-
 
 	/**
 	 * The meta object id for the '<em>Temperature</em>' data type.
@@ -4768,7 +4765,6 @@ public interface CommonsPackage extends EPackage {
 	 */
 	int TEMPERATURE = 108;
 
-
 	/**
 	 * The meta object id for the '<em>Local Time</em>' data type.
 	 * <!-- begin-user-doc -->
@@ -4779,7 +4775,6 @@ public interface CommonsPackage extends EPackage {
 	 */
 	int LOCAL_TIME = 109;
 
-
 	/**
 	 * The meta object id for the '<em>Exception</em>' data type.
 	 * <!-- begin-user-doc -->
@@ -4789,7 +4784,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	int EXCEPTION = 110;
-
 
 	/**
 	 * The meta object id for the '<em>EFactory</em>' data type.
@@ -4850,6 +4844,7 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	int PERIOD = 116;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.ResourceAware <em>Resource Aware</em>}'.
@@ -5080,6 +5075,94 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_OrganizationPhoneNumbers();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Time Zone Id</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultTimeZoneId()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultTimeZoneId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Time Zone</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultTimeZone()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultTimeZone();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Currency Code</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultCurrencyCode()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultCurrencyCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCurrency <em>Default Currency</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Currency</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultCurrency()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultCurrency();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultLanguageTag <em>Default Language Tag</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Language Tag</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultLanguageTag()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultLanguageTag();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCountryCode <em>Default Country Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Country Code</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultCountryCode()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultCountryCode();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCategoryUName <em>Default Category UName</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Default Category UName</em>'.
+	 * @see org.soluvas.commons.AppManifest#getDefaultCategoryUName()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_DefaultCategoryUName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Email Logo Uri Template</em>'.
+	 * @see org.soluvas.commons.AppManifest#getEmailLogoUriTemplate()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_EmailLogoUriTemplate();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getLetterSalutation <em>Letter Salutation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5243,94 +5326,6 @@ public interface CommonsPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAppManifest_SupportEmail();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZoneId <em>Default Time Zone Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Time Zone Id</em>'.
-	 * @see org.soluvas.commons.AppManifest#getDefaultTimeZoneId()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_DefaultTimeZoneId();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultTimeZone <em>Default Time Zone</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Time Zone</em>'.
-	 * @see org.soluvas.commons.AppManifest#getDefaultTimeZone()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_DefaultTimeZone();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCurrencyCode <em>Default Currency Code</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Currency Code</em>'.
-	 * @see org.soluvas.commons.AppManifest#getDefaultCurrencyCode()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_DefaultCurrencyCode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCurrency <em>Default Currency</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Currency</em>'.
-	 * @see org.soluvas.commons.AppManifest#getDefaultCurrency()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_DefaultCurrency();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getEmailLogoUriTemplate <em>Email Logo Uri Template</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Email Logo Uri Template</em>'.
-	 * @see org.soluvas.commons.AppManifest#getEmailLogoUriTemplate()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_EmailLogoUriTemplate();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultLanguageTag <em>Default Language Tag</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Language Tag</em>'.
-	 * @see org.soluvas.commons.AppManifest#getDefaultLanguageTag()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_DefaultLanguageTag();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCountryCode <em>Default Country Code</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Country Code</em>'.
-	 * @see org.soluvas.commons.AppManifest#getDefaultCountryCode()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_DefaultCountryCode();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getDefaultCategoryUName <em>Default Category UName</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default Category UName</em>'.
-	 * @see org.soluvas.commons.AppManifest#getDefaultCategoryUName()
-	 * @see #getAppManifest()
-	 * @generated
-	 */
-	EAttribute getAppManifest_DefaultCategoryUName();
 
 	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
@@ -8866,6 +8861,70 @@ public interface CommonsPackage extends EPackage {
 		EAttribute APP_MANIFEST__ORGANIZATION_PHONE_NUMBERS = eINSTANCE.getAppManifest_OrganizationPhoneNumbers();
 
 		/**
+		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_TIME_ZONE_ID = eINSTANCE.getAppManifest_DefaultTimeZoneId();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Time Zone</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_TIME_ZONE = eINSTANCE.getAppManifest_DefaultTimeZone();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Currency Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_CURRENCY_CODE = eINSTANCE.getAppManifest_DefaultCurrencyCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Currency</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_CURRENCY = eINSTANCE.getAppManifest_DefaultCurrency();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Language Tag</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_LANGUAGE_TAG = eINSTANCE.getAppManifest_DefaultLanguageTag();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Country Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_COUNTRY_CODE = eINSTANCE.getAppManifest_DefaultCountryCode();
+
+		/**
+		 * The meta object literal for the '<em><b>Default Category UName</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__DEFAULT_CATEGORY_UNAME = eINSTANCE.getAppManifest_DefaultCategoryUName();
+
+		/**
+		 * The meta object literal for the '<em><b>Email Logo Uri Template</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = eINSTANCE.getAppManifest_EmailLogoUriTemplate();
+
+		/**
 		 * The meta object literal for the '<em><b>Letter Salutation</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8984,70 +9043,6 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__SUPPORT_EMAIL = eINSTANCE.getAppManifest_SupportEmail();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Time Zone Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__DEFAULT_TIME_ZONE_ID = eINSTANCE.getAppManifest_DefaultTimeZoneId();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Time Zone</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__DEFAULT_TIME_ZONE = eINSTANCE.getAppManifest_DefaultTimeZone();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Currency Code</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__DEFAULT_CURRENCY_CODE = eINSTANCE.getAppManifest_DefaultCurrencyCode();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Currency</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__DEFAULT_CURRENCY = eINSTANCE.getAppManifest_DefaultCurrency();
-
-		/**
-		 * The meta object literal for the '<em><b>Email Logo Uri Template</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__EMAIL_LOGO_URI_TEMPLATE = eINSTANCE.getAppManifest_EmailLogoUriTemplate();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Language Tag</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__DEFAULT_LANGUAGE_TAG = eINSTANCE.getAppManifest_DefaultLanguageTag();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Country Code</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__DEFAULT_COUNTRY_CODE = eINSTANCE.getAppManifest_DefaultCountryCode();
-
-		/**
-		 * The meta object literal for the '<em><b>Default Category UName</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute APP_MANIFEST__DEFAULT_CATEGORY_UNAME = eINSTANCE.getAppManifest_DefaultCategoryUName();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.

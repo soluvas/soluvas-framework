@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getSysConfig()
  * @model interface="true" abstract="true"
- * @generated
+ * @generated NOT
  */
 public interface SysConfig extends Timestamped, EObject {
 	/**

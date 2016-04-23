@@ -486,6 +486,8 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference commons.ecore#//Person/organizations"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/zendeskUserId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/customerRoleEditTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/lastTimeSynchronizeWithZendesk"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute commons.ecore#//Person/zendeskIntegration"/>
       <genOperations ecoreOperation="commons.ecore#//Person/hasEmail">
         <genParameters ecoreParameter="commons.ecore#//Person/hasEmail/email"/>
       </genOperations>
