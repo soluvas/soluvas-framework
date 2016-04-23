@@ -41,6 +41,7 @@ import com.opencsv.CSVReader;
  * </ol>
  *
  * @author anton
+ * @see GeoNamesCityRepository
  */
 public class GeoNamesDistrictRepository implements DistrictRepository {
 
@@ -54,6 +55,10 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
     final RadixTree<District> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
     final Map<String, District> districtMap = new HashMap<>();
 
+    /**
+     * @see GeoNamesCityRepository#putCitiesFromDistrictTsv(String, URL)
+     * @return
+     */
     public static URL getDistrictTsv() {
         return GeoNamesDistrictRepository.class.getResource(DISTRICTS_ID_JNE_2015_12_TSV);
     }

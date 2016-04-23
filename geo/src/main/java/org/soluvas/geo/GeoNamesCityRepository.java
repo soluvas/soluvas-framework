@@ -41,6 +41,7 @@ import com.opencsv.CSVReader;
  * </ol>
  * 
  * @author rudi
+ * @see GeoNamesDistrictRepository
  */
 public class GeoNamesCityRepository implements CityRepository {
 
@@ -281,6 +282,23 @@ public class GeoNamesCityRepository implements CityRepository {
 		return city;
 	}
 
+	/**
+	 * Usage:
+	 *
+	 * {@code
+	 * @Bean
+	 * public GeoNamesCityRepository cityRepo() throws IOException {
+	 * 	final GeoNamesCityRepository cityRepo = new GeoNamesCityRepository(
+	 * 	ImmutableSet.of("ID"), countryRepo());
+	 * 	cityRepo.putCitiesFromDistrictTsv("ID", GeoNamesDistrictRepository.getDistrictTsv());
+	 * 	return cityRepo;
+	 * 	}
+	 * }
+	 * @param countryIso
+	 * @param url
+	 * @throws IOException
+	 * @see GeoNamesDistrictRepository
+     */
 	public void putCitiesFromDistrictTsv(final String countryIso, URL url) throws IOException {
 		log.info("Adding {} provinces and cities from {} ...", countryIso, url);
 		int addedCities = 0;
