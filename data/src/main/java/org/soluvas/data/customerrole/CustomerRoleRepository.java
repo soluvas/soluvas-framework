@@ -44,4 +44,6 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole, Str
 	
 	boolean isDropShipEnabled(String customerRole);
 	
+	@Nullable Long getZendeskOrganizationId(String customerRoleId);
+	
 }

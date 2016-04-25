@@ -159,7 +159,13 @@ public interface PersonRepository extends
 	 */
 //	public Existence<String> existsBySlugEx(StatusMask statusMask, String slug);
 	
-	Page<Person> findAllNotZendeskUserId(Pageable pageable);
+	/**
+	 * The Person is only 2 attributes: id + zendeskUserId!!
+	 * 
+	 * @param email
+	 * @return
+	 */
+	@Nullable Person getZendeskUserId(String email);
 
 }
 

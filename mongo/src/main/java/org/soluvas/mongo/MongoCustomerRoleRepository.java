@@ -286,5 +286,24 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			return false;
 		}
 	}
+
+	@Override @Nullable
+	public Long getZendeskOrganizationId(String customerRoleId) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", customerRoleId);
+		query.put("zendeskIntegration", true);
+		query.put("zendeskOrganizationId", new BasicDBObject("$exists", true));
+		
+		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("zendeskOrganizationId", 1), "getZendeskOrganizationId", customerRoleId);
+		if (dbObject != null) {
+			if (dbObject.get("getZendeskOrganizationId") != null && !"null".equals(dbObject.get("getZendeskOrganizationId"))) {
+				return Long.valueOf(dbObject.get("getZendeskOrganizationId").toString());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 }
 	

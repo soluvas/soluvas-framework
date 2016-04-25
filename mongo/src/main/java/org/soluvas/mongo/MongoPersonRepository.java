@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.EnumNameFunction;
@@ -743,10 +744,29 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public Page<Person> findAllNotZendeskUserId(Pageable pageable) {
-		final BasicDBObject query = new BasicDBObject();
-		query.put("zendeskUserId", new BasicDBObject("$exists", false));
-		return findAllByQuery(query, pageable);
+	@Nullable public Person getZendeskUserId(String email) {
+		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		query.put("zendeskIntegration", true);
+		query.put("zendeskUserId", new BasicDBObject("$exists", true));
+		query.put("customerRole", new BasicDBObject("$exists", true));
+		
+		final BasicDBObject fields = new BasicDBObject("zendeskUserId", true);
+		fields.put("customerRole", 1);
+		
+		final DBObject dbObject = findOnePrimary(query, fields, "getZendeskUserId", email);
+		if (dbObject != null) {
+			if (dbObject.get("zendeskUserId") != null && !"null".equals(dbObject.get("zendeskUserId"))) {
+				final Person person = CommonsFactory.eINSTANCE.createPerson();
+				person.setId(dbObject.get("zendeskUserId").toString());
+				person.setZendeskUserId(Long.valueOf(dbObject.get("zendeskUserId").toString()));
+				person.setCustomerRole(dbObject.get("customerRole").toString());
+				return person;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
 	}
 
 //	@Override

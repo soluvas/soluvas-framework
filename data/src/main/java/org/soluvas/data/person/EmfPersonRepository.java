@@ -471,7 +471,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Page<Person> findAllNotZendeskUserId(Pageable pageable) {
+	public Person getZendeskUserId(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
