@@ -37,6 +37,7 @@
 		<dependency>
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.couchdb</artifactId>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.ektorp</groupId>
