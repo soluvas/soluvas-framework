@@ -6,7 +6,13 @@
     "name" : "Age",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Age"
+    "defaultEnum" : "Age",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Usia"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "author",
@@ -14,145 +20,271 @@
     "name" : "Author",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Person"
+    "defaultEnum" : "Person",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Pencipta"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "bustSize",
     "name" : "Bust Size",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Ukuran Payudara"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "careInstructions",
     "name" : "Care Instructions",
     "enabled" : true,
-    "defaultKind" : "STRING"
+    "defaultKind" : "STRING",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Instruksi Perawatan"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "color",
     "name" : "Color",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Color"
+    "defaultEnum" : "Color",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Warna"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "condition",
     "name" : "Condition",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Condition"
+    "defaultEnum" : "Condition",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Kondisi"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "detailsize",
     "name" : "Detail Size",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Ukuran Detil"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "dressLength",
     "name" : "Dress Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Panjang Gaun"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "fabric",
     "name" : "Fabric",
     "enabled" : true,
-    "defaultKind" : "STRING"
+    "defaultKind" : "STRING",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Kain"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "heelsHeight",
     "name" : "Heels Height",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Tinggi Tumit"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "height",
     "name" : "Height",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Tinggi"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "leather",
     "name" : "Leather",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Leather"
+    "defaultEnum" : "Leather",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Kulit"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "length",
     "name" : "Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Panjang"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "lining",
     "name" : "Lining",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Lining"
+    "defaultEnum" : "Lining",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Lapisan"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "material",
     "name" : "Material",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Material"
+    "defaultEnum" : "Material",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Bahan"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "motif",
     "name" : "Motif",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Motif"
+    "defaultEnum" : "Motif",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Motif"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netHeight",
     "name" : "Net Height",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Tinggi Net"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netLength",
     "name" : "Net Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Panjang Net"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netVolume",
     "name" : "Net Volume",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "mL"
+    "defaultUnit" : "mL",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Volum Net"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netWeight",
     "name" : "Net Weight",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "g"
+    "defaultUnit" : "g",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Berat Net"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netWidth",
     "name" : "Net Width",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Lebah Net"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "origin",
     "name" : "Origin",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Origin"
+    "defaultEnum" : "Origin",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Asal"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "publisher",
@@ -160,97 +292,181 @@
     "name" : "Publisher",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Organization"
+    "defaultEnum" : "Organization",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Penerbit"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shawlLength",
     "name" : "Shawl Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Panjang Selendang"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shawlWidth",
     "name" : "Shawl Width",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Lebar Shawl"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shippingPolicy",
     "name" : "Shipping Policy",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "ShippingPolicy"
+    "defaultEnum" : "ShippingPolicy",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Kebijakan Pengiriman"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shoeMeasurement",
     "name" : "Shoe Measurement",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Ukuran Sepatu"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "signature",
     "name" : "Signature",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Signature"
+    "defaultEnum" : "Signature",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Tandatangan"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "size",
     "name" : "Size",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "ShoeSize"
+    "defaultEnum" : "ShoeSize",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Ukuran"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "sleeveLength",
     "name" : "Sleeve Length",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Panjang Lengan Baju"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "technique",
     "name" : "Technique",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Technique"
+    "defaultEnum" : "Technique",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Teknik"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "volume",
     "name" : "Volume",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "mL"
+    "defaultUnit" : "mL",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Volum"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "waistSize",
     "name" : "Waist Size",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Ukuran Pinggang"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "weight",
     "name" : "Weight",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "g"
+    "defaultUnit" : "g",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Berat"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "width",
     "name" : "Width",
     "enabled" : true,
     "defaultKind" : "MEASUREMENT",
-    "defaultUnit" : "cm"
+    "defaultUnit" : "cm",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Lebar"
+    	}
+    }
   }, {
     "@type" : "PropertyDefinition",
     "id" : "flavor",
     "name" : "Flavor",
     "enabled" : true,
     "defaultKind" : "ENUMERATION",
-    "defaultEnum" : "Flavor"
+    "defaultEnum" : "Flavor",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Rasa"
+    	}
+    }
   } ]
 }
