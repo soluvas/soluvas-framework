@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
+import org.apache.felix.gogo.commands.Option;
+import org.apache.felix.gogo.commands.Option;
 import org.soluvas.category.Category;
 import org.soluvas.category.Category2;
 import org.soluvas.category.CategoryRepository;
@@ -25,11 +27,19 @@ import com.google.common.base.Preconditions;
 @Command(scope="cat", name="migrate", description="Migrate categories from xmi file to mongoDB.")
 public class MigrateCategoryFromXmiToMongoDBCommand extends ExtCommandSupport {
 	
+	@Option(name="--force", aliases="-f", description="Force for migrating..")
+	private transient boolean f = false;
+	
 	@Argument(index = 0, name = "formalcategoryid", required = true, description = "Formal category from Google.")
 	private Long googleFormalId;
 
 	@Override
 	protected Object doExecute() throws Exception {
+		if (!f) {
+			System.err.println("Do nothing..");
+			return null;
+		}
+		
 		final CategoryRepository xmiRepo = getBean(CategoryRepository.class);
 		final MongoCategoryRepository mongoRepo = getBean(MongoCategoryRepository.class);
 		final FormalCategoryRepository formalCategoryRepo = getBean(FormalCategoryRepository.class);
