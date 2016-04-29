@@ -3,7 +3,6 @@ package org.soluvas.data;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -49,7 +48,7 @@ public class PropertyDefinition implements Serializable {
 	private String imageId;
 	private Integer fieldWidth;
 	private String primaryUri;
-	private Locale language;
+	private String language;
 	private final Set<String> sameAsUris = new HashSet<>();
 	private final Map<String, Map<String, String>> translations = new HashMap<>();
 	
@@ -203,16 +202,16 @@ public class PropertyDefinition implements Serializable {
 	 * After translation, this will be the translated language.
 	 * @return
 	 */
-	public Locale getLanguage() {
+	public String getLanguage() {
 		return language;
 	}
-	public void setLanguage(Locale language) {
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 	
 	@JsonIgnore
 	public String getEffectiveName(String curLanguageTag) {
-		if (Optional.fromNullable(getLanguage()).or(Locale.forLanguageTag("id-ID")).equals(curLanguageTag)) {
+		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
 			return getName();
 		} else {
 			final Map<String, Map<String, String>> translations = getTranslations();
@@ -250,7 +249,7 @@ public class PropertyDefinition implements Serializable {
 	 */
 	@JsonIgnore
 	public String getEffectiveDescription(String curLanguageTag) {
-		if (curLanguageTag.equals(Optional.fromNullable(getLanguage()).or(Locale.forLanguageTag("id-ID")))) {
+		if (curLanguageTag.equals(Optional.fromNullable(getLanguage()).or("id-ID"))) {
 			return getDescription();
 		} else {
 			if (getTranslations().isEmpty()) {
