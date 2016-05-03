@@ -12,13 +12,16 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.Repository;
 import org.soluvas.data.repository.StatusAwareRepository;
 import org.soluvas.data.repository.Trashable;
+import org.soluvas.image.rs.MediaResource;
 import org.springframework.http.ResponseEntity;
 
 /**
  * {@link Media} {@link Repository}.
  * 
  * @author ceefour
+ * @see MediaResource
  */
+//FIXME: Move MediaRepository from soluvas-couchdb into soluvas-image, otherwise soluvas-couchdb is always required
 public interface MediaRepository extends
 		PagingAndSortingRepository<Media, String>,
 		GenericLookup<Media>,

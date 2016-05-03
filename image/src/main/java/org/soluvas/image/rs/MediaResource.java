@@ -2,7 +2,8 @@ package org.soluvas.image.rs;
 
 import java.io.IOException;
 
-import com.google.common.base.Preconditions;
+import javax.inject.Inject;
+
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.LookupKey;
 import org.soluvas.data.StatusMask;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
+import com.google.common.base.Preconditions;
 
 /**
  * Works with {@link MediaRepository} to provide Wicket-independent secure media serving
@@ -24,6 +25,7 @@ import javax.inject.Inject;
  * email notifications, Facebook shares, or other non-webapp purposes.
  * @todo FIXME: Migrate to Spring {@link RestController}, see {@link ProductPubResource} for example.
  * @author ceefour
+ * @see MediaRepository
  */
 @RestController
 @Scope("request")
