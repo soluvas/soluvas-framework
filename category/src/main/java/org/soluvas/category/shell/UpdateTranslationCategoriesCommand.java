@@ -27,7 +27,7 @@ import com.google.common.base.Strings;
  *
  */
 @Service @Scope("prototype")
-@Command(scope="cat", name="updatetranslationcategories", description="Update translation for categories")
+@Command(scope="cat", name="updatetranslation", description="Update translation for categories")
 public class UpdateTranslationCategoriesCommand extends ExtCommandSupport {
 	
 	@Option(name="--force", aliases="-f", description="Force for migrating..")
