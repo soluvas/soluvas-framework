@@ -14,13 +14,16 @@ public class District implements Serializable {
 	private final Country country;
 	private final String province;
 	private final String city;
+	private final String areaCode;
 	
-	public District(String name, Country country, String province, String city) {
+	
+	public District(String name, Country country, String province, String city, String areaCode) {
 		super();
 		this.name = name;
 		this.country = country;
 		this.province = province;
 		this.city = city;
+		this.areaCode = areaCode;
 	}
 	
 	public String getName() {
@@ -39,15 +42,25 @@ public class District implements Serializable {
 		return city;
 	}
 
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	@Override
+	public String toString() {
+		return "District [name=" + name + ", country=" + country + ", province=" + province + ", city=" + city
+				+ ", areaCode=" + areaCode + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((areaCode == null) ? 0 : areaCode.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((province == null) ? 0 : province.hashCode());
+		result = prime * result + ((province == null) ? 0 : province.hashCode());
 		return result;
 	}
 
@@ -60,6 +73,11 @@ public class District implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		District other = (District) obj;
+		if (areaCode == null) {
+			if (other.areaCode != null)
+				return false;
+		} else if (!areaCode.equals(other.areaCode))
+			return false;
 		if (city == null) {
 			if (other.city != null)
 				return false;
@@ -81,14 +99,6 @@ public class District implements Serializable {
 		} else if (!province.equals(other.province))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "District [" + (name != null ? "name=" + name + ", " : "")
-				+ (country != null ? "country=" + country + ", " : "")
-				+ (province != null ? "province=" + province + ", " : "")
-				+ (city != null ? "city=" + city : "") + "]";
 	}
 	
 }

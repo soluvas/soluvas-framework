@@ -45,7 +45,7 @@ import com.opencsv.CSVReader;
  */
 public class GeoNamesDistrictRepository implements DistrictRepository {
 
-    public static final String DISTRICTS_ID_JNE_2015_12_TSV = "districts_ID_jne_2015-12.tsv";
+    public static final String DISTRICTS_ID_JNE_2015_12_TSV = "districts_ID_jne_2016-04.csv";
 
     private final CityRepository cityRepo;
     private int entryCount = 0;
@@ -76,6 +76,11 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
                     if (line == null) {
                         break;
                     }
+                    
+                    final String areaCode = line[3];
+                    if (Strings.isNullOrEmpty(areaCode)) {
+                        continue;
+                    }
                     final String name = line[2];
                     if (Strings.isNullOrEmpty(name)) {
                         continue;
@@ -105,7 +110,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
                             name.toLowerCase();
                     if (!districtMap.containsKey(keyOfDistrict)) {
                         try {
-                            final District district = new District(name, country, province, city.getName());
+                            final District district = new District(name, country, province, city.getName(), areaCode);
                             //data map sebenarnya
                             districtMap.put(keyOfDistrict, district);
                             //dipake untuk query by "country, province, city, district"
