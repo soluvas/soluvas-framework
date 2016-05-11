@@ -1,6 +1,7 @@
 package org.soluvas.category;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -73,7 +74,7 @@ public class Category2 implements Serializable, Identifiable {
 	private final Set<PropertyDefinition> propertyOverrides = new HashSet<>();
 	private final Set<String> tags = new HashSet<>();
 	private final Set<String> sameAsUris = new HashSet<>();
-	
+	private Map<String, String> images = new HashMap<>();
 	/**
 	 * @return the id
 	 */
@@ -327,6 +328,14 @@ public class Category2 implements Serializable, Identifiable {
 	 */
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+	
+	
+	public Map<String, String> getImages() {
+		return images;
+	}
+	public void setImages(Map<String, String> images) {
+		this.images = images;
 	}
 	
 	@JsonIgnore

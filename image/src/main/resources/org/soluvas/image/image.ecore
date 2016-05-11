@@ -344,6 +344,12 @@
     <eOperations name="getRepository" lowerBound="1" eType="#//ImageRepository">
       <eParameters name="imageType" lowerBound="1" eType="#//ImageType"/>
     </eOperations>
+    <eOperations name="getImageUris" lowerBound="1">
+      <eGenericType eClassifier="ecore:EDataType ../../../../../../../org.soluvas.commons/src/main/resources/org/soluvas/commons/commons.ecore#//Map">
+        <eTypeArguments/>
+        <eTypeArguments/>
+      </eGenericType>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ImageTransformType">
     <eLiterals name="resize_to_fit">

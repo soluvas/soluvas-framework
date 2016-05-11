@@ -1891,6 +1891,14 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		op = addEOperation(imageManagerEClass, this.getImageRepository(), "getRepository", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageType(), "imageType", 1, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = addEOperation(imageManagerEClass, null, "getImageUris", 1, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(theCommonsPackage.getMap());
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType();
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
 		initEClass(imageTransformEClass, ImageTransform.class, "ImageTransform", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(resizeToFitEClass, ResizeToFit.class, "ResizeToFit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

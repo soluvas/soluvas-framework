@@ -4,6 +4,7 @@ package org.soluvas.image;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nullable;
@@ -192,6 +193,14 @@ public interface ImageManager extends EObject {
 	 * @generated
 	 */
 	ImageRepository getRepository(ImageType imageType);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="org.soluvas.commons.Map<?, ?>" required="true"
+	 * @generated
+	 */
+	Map<String, Map<String, String>> getImageUris(ImageType namespace, List<String> imageIds);
 
 	String getThumbnailPhotoUri(Person person);
 

@@ -733,6 +733,26 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				imageType, imageRepos.size(), imageRepos.keySet());
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map<String, Map<String, String>> getImageUris(ImageType namespace, List<String> imageIds) {
+		final Map<String, Map<String, String>> imageUris = new HashMap<>();
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		List<Image> images = imageRepo.findAll(imageIds);
+		for (Image image : images) {
+			Map<String, String> imageUri = new HashMap<>();
+			for (Map.Entry<String, StyledImage> entry : image.getStyles().entrySet()) {
+				imageUri.put(entry.getKey(), entry.getValue().getUri());
+			}
+			imageUris.put(image.getId(), imageUri);
+		}
+		
+		return imageUris;
+	}
+
 	public String getPersonPhotoUri(@Nullable Gender gender) {
 		if (gender == null) {
 			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_person.png";
