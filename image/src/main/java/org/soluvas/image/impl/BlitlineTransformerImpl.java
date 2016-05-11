@@ -48,6 +48,7 @@ import com.google.common.util.concurrent.ListenableFuture;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getApplicationId <em>Application Id</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getBucket <em>Bucket</em>}</li>
@@ -58,7 +59,6 @@ import com.google.common.util.concurrent.ListenableFuture;
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getUriTemplate <em>Uri Template</em>}</li>
  *   <li>{@link org.soluvas.image.impl.BlitlineTransformerImpl#getOriginUriTemplate <em>Origin Uri Template</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

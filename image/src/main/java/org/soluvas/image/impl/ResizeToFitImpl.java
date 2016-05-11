@@ -20,6 +20,7 @@ import org.soluvas.image.WatermarkLike;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getHeight <em>Height</em>}</li>
@@ -30,7 +31,6 @@ import org.soluvas.image.WatermarkLike;
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOverlayGravity <em>Overlay Gravity</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOnlyShrinkLarger <em>Only Shrink Larger</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

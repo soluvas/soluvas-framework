@@ -14,10 +14,10 @@ package org.soluvas.image;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.FolderConnector#getFolder <em>Folder</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getFolderConnector()
  * @model

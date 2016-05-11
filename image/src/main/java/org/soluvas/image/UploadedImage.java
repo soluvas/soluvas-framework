@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.UploadedImage#getUri <em>Uri</em>}</li>
  *   <li>{@link org.soluvas.image.UploadedImage#getOriginUri <em>Origin Uri</em>}</li>
@@ -21,7 +22,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.soluvas.image.UploadedImage#getWidth <em>Width</em>}</li>
  *   <li>{@link org.soluvas.image.UploadedImage#getHeight <em>Height</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getUploadedImage()
  * @model

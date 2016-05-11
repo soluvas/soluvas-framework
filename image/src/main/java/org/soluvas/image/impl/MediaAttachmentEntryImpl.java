@@ -20,11 +20,11 @@ import org.soluvas.image.MediaAttachment;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.MediaAttachmentEntryImpl#getTypedKey <em>Key</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaAttachmentEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -171,6 +171,8 @@ public enum ImageStyles implements Enumerator, ImageStyle {
 	 * Returns the '<em><b>Styles</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ImageStyles get(String literal) {
@@ -187,6 +189,8 @@ public enum ImageStyles implements Enumerator, ImageStyle {
 	 * Returns the '<em><b>Styles</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ImageStyles getByName(String name) {
@@ -203,6 +207,8 @@ public enum ImageStyles implements Enumerator, ImageStyle {
 	 * Returns the '<em><b>Styles</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ImageStyles get(int value) {

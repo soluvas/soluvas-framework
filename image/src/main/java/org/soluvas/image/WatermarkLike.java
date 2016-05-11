@@ -17,12 +17,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.WatermarkLike#getWatermarkFile <em>Watermark File</em>}</li>
  *   <li>{@link org.soluvas.image.WatermarkLike#getWatermarkOpacity <em>Watermark Opacity</em>}</li>
  *   <li>{@link org.soluvas.image.WatermarkLike#getWatermarkGravity <em>Watermark Gravity</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getWatermarkLike()
  * @model interface="true" abstract="true"

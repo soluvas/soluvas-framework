@@ -20,12 +20,12 @@ import org.soluvas.commons.Timestamped;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.Media#getType <em>Type</em>}</li>
  *   <li>{@link org.soluvas.image.Media#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.image.Media#getAttachments <em>Attachments</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getMedia()
  * @model

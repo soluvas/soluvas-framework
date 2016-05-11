@@ -46,6 +46,7 @@ import org.soluvas.commons.Timestamped;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.Image#getStyles <em>Styles</em>}</li>
  *   <li>{@link org.soluvas.image.Image#getSchemaVersion <em>Schema Version</em>}</li>
@@ -59,7 +60,6 @@ import org.soluvas.commons.Timestamped;
  *   <li>{@link org.soluvas.image.Image#getLinkedFile <em>Linked File</em>}</li>
  *   <li>{@link org.soluvas.image.Image#getOriginalFile <em>Original File</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getImage()
  * @model

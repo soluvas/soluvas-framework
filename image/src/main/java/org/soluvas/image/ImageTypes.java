@@ -90,7 +90,15 @@ public enum ImageTypes implements Enumerator, ImageType {
 	 * @generated
 	 * @ordered
 	 */
-	GALLERY(7, "gallery", "gallery");
+	GALLERY(7, "gallery", "gallery"), /**
+	 * The '<em><b>Category</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #CATEGORY_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	CATEGORY(8, "category", "category");
 
 	/**
 	 * The '<em><b>Person</b></em>' literal value.
@@ -213,6 +221,21 @@ public enum ImageTypes implements Enumerator, ImageType {
 	public static final int GALLERY_VALUE = 7;
 
 	/**
+	 * The '<em><b>Category</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Category</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #CATEGORY
+	 * @model name="category"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CATEGORY_VALUE = 8;
+
+	/**
 	 * An array of all the '<em><b>Types</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -228,6 +251,7 @@ public enum ImageTypes implements Enumerator, ImageType {
 			ARTICLE,
 			BANNER_SHOP,
 			GALLERY,
+			CATEGORY,
 		};
 
 	/**
@@ -242,6 +266,8 @@ public enum ImageTypes implements Enumerator, ImageType {
 	 * Returns the '<em><b>Types</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ImageTypes get(String literal) {
@@ -258,6 +284,8 @@ public enum ImageTypes implements Enumerator, ImageType {
 	 * Returns the '<em><b>Types</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param name the name.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ImageTypes getByName(String name) {
@@ -274,6 +302,8 @@ public enum ImageTypes implements Enumerator, ImageType {
 	 * Returns the '<em><b>Types</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the integer value.
+	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
 	public static ImageTypes get(int value) {
@@ -286,6 +316,7 @@ public enum ImageTypes implements Enumerator, ImageType {
 			case ARTICLE_VALUE: return ARTICLE;
 			case BANNER_SHOP_VALUE: return BANNER_SHOP;
 			case GALLERY_VALUE: return GALLERY;
+			case CATEGORY_VALUE: return CATEGORY;
 		}
 		return null;
 	}

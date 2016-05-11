@@ -37,6 +37,7 @@ import org.soluvas.commons.Timestamped;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.StyledImage#getSchemaVersion <em>Schema Version</em>}</li>
  *   <li>{@link org.soluvas.image.StyledImage#getCode <em>Code</em>}</li>
@@ -48,13 +49,12 @@ import org.soluvas.commons.Timestamped;
  *   <li>{@link org.soluvas.image.StyledImage#getContentType <em>Content Type</em>}</li>
  *   <li>{@link org.soluvas.image.StyledImage#getLinkedFile <em>Linked File</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getStyledImage()
  * @model
  * @generated
  */
-public interface StyledImage extends SchemaVersionable, DimensionLike, NameContainer, Timestamped, Serializable {
+public interface StyledImage extends SchemaVersionable, DimensionLike, NameContainer, Timestamped {
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
 	 * The default value is <code>"2"</code>.

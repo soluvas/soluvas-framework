@@ -33,6 +33,7 @@ import com.google.common.collect.ImmutableList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getApplicationId <em>Application Id</em>}</li>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getBucket <em>Bucket</em>}</li>
@@ -43,7 +44,6 @@ import com.google.common.collect.ImmutableList;
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getUriTemplate <em>Uri Template</em>}</li>
  *   <li>{@link org.soluvas.image.BlitlineTransformer#getOriginUriTemplate <em>Origin Uri Template</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getBlitlineTransformer()
  * @model

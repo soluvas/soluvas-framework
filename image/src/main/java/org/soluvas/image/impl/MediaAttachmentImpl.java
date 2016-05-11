@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.MediaAttachmentImpl#getContentType <em>Content Type</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaAttachmentImpl#getRevPos <em>Rev Pos</em>}</li>
@@ -24,7 +25,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *   <li>{@link org.soluvas.image.impl.MediaAttachmentImpl#getLength <em>Length</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaAttachmentImpl#isStub <em>Stub</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

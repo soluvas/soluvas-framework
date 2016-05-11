@@ -18,6 +18,7 @@ import org.soluvas.image.UploadedImage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.UploadedImageImpl#getUri <em>Uri</em>}</li>
  *   <li>{@link org.soluvas.image.impl.UploadedImageImpl#getOriginUri <em>Origin Uri</em>}</li>
@@ -28,7 +29,6 @@ import org.soluvas.image.UploadedImage;
  *   <li>{@link org.soluvas.image.impl.UploadedImageImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link org.soluvas.image.impl.UploadedImageImpl#getHeight <em>Height</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

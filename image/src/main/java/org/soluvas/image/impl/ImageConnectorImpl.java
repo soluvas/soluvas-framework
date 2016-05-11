@@ -30,12 +30,12 @@ import com.google.common.util.concurrent.MoreExecutors;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getHiUriTemplate <em>Hi Uri Template</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getUriTemplate <em>Uri Template</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getExecutor <em>Executor</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -57,8 +57,6 @@ import com.google.common.util.concurrent.ListenableFuture;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Web Dav Connector</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

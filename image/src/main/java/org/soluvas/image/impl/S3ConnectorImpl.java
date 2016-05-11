@@ -62,6 +62,7 @@ import com.google.common.util.concurrent.ListenableFuture;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getCanonicalUserId <em>Canonical User Id</em>}</li>
  *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getBucket <em>Bucket</em>}</li>
@@ -70,7 +71,6 @@ import com.google.common.util.concurrent.ListenableFuture;
  *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getOriginAlias <em>Origin Alias</em>}</li>
  *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getCdnAlias <em>Cdn Alias</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

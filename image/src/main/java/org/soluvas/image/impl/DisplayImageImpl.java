@@ -18,6 +18,7 @@ import org.soluvas.image.ImagePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.DisplayImageImpl#getSrc <em>Src</em>}</li>
  *   <li>{@link org.soluvas.image.impl.DisplayImageImpl#getWidth <em>Width</em>}</li>
@@ -25,7 +26,6 @@ import org.soluvas.image.ImagePackage;
  *   <li>{@link org.soluvas.image.impl.DisplayImageImpl#getAlt <em>Alt</em>}</li>
  *   <li>{@link org.soluvas.image.impl.DisplayImageImpl#getTitle <em>Title</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

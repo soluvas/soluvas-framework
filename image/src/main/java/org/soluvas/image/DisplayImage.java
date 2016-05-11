@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.DisplayImage#getSrc <em>Src</em>}</li>
  *   <li>{@link org.soluvas.image.DisplayImage#getWidth <em>Width</em>}</li>
@@ -30,14 +31,13 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.image.DisplayImage#getAlt <em>Alt</em>}</li>
  *   <li>{@link org.soluvas.image.DisplayImage#getTitle <em>Title</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getDisplayImage()
  * @model
  * @generated
  */
 @JsonDeserialize(as=DisplayImageImpl.class)
-public interface DisplayImage extends EObject, Serializable {
+public interface DisplayImage extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Src</b></em>' attribute.
 	 * <!-- begin-user-doc -->

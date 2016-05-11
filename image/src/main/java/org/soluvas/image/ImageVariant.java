@@ -11,12 +11,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.ImageVariant#getStyleCode <em>Style Code</em>}</li>
  *   <li>{@link org.soluvas.image.ImageVariant#getStyleVariant <em>Style Variant</em>}</li>
  *   <li>{@link org.soluvas.image.ImageVariant#getExtension <em>Extension</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getImageVariant()
  * @model

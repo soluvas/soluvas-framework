@@ -40,6 +40,7 @@ import com.google.common.collect.Maps.EntryTransformer;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ImageImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ImageImpl#getName <em>Name</em>}</li>
@@ -59,7 +60,6 @@ import com.google.common.collect.Maps.EntryTransformer;
  *   <li>{@link org.soluvas.image.impl.ImageImpl#getLinkedFile <em>Linked File</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ImageImpl#getOriginalFile <em>Original File</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

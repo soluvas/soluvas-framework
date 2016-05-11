@@ -24,6 +24,7 @@ package org.soluvas.image;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.S3Connector#getCanonicalUserId <em>Canonical User Id</em>}</li>
  *   <li>{@link org.soluvas.image.S3Connector#getBucket <em>Bucket</em>}</li>
@@ -32,7 +33,6 @@ package org.soluvas.image;
  *   <li>{@link org.soluvas.image.S3Connector#getOriginAlias <em>Origin Alias</em>}</li>
  *   <li>{@link org.soluvas.image.S3Connector#getCdnAlias <em>Cdn Alias</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getS3Connector()
  * @model

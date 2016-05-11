@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.MediaAttachment#getContentType <em>Content Type</em>}</li>
  *   <li>{@link org.soluvas.image.MediaAttachment#getRevPos <em>Rev Pos</em>}</li>
@@ -21,7 +22,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.image.MediaAttachment#getLength <em>Length</em>}</li>
  *   <li>{@link org.soluvas.image.MediaAttachment#isStub <em>Stub</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getMediaAttachment()
  * @model

@@ -17,11 +17,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.OverlayLike#getOverlayFile <em>Overlay File</em>}</li>
  *   <li>{@link org.soluvas.image.OverlayLike#getOverlayGravity <em>Overlay Gravity</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getOverlayLike()
  * @model interface="true" abstract="true"

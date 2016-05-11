@@ -14,12 +14,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.ImageConnector#getHiUriTemplate <em>Hi Uri Template</em>}</li>
  *   <li>{@link org.soluvas.image.ImageConnector#getUriTemplate <em>Uri Template</em>}</li>
  *   <li>{@link org.soluvas.image.ImageConnector#getExecutor <em>Executor</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getImageConnector()
  * @model abstract="true"

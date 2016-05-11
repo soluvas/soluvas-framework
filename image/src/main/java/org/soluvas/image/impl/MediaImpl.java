@@ -41,6 +41,7 @@ import com.google.code.morphia.annotations.Converters;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getGuid <em>Guid</em>}</li>
@@ -53,7 +54,6 @@ import com.google.code.morphia.annotations.Converters;
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.image.impl.MediaImpl#getAttachments <em>Attachments</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

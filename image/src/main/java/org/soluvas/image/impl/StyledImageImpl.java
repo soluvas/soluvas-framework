@@ -21,6 +21,7 @@ import org.soluvas.image.StyledImage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.StyledImageImpl#getWidth <em>Width</em>}</li>
  *   <li>{@link org.soluvas.image.impl.StyledImageImpl#getHeight <em>Height</em>}</li>
@@ -37,7 +38,6 @@ import org.soluvas.image.StyledImage;
  *   <li>{@link org.soluvas.image.impl.StyledImageImpl#getContentType <em>Content Type</em>}</li>
  *   <li>{@link org.soluvas.image.impl.StyledImageImpl#getLinkedFile <em>Linked File</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

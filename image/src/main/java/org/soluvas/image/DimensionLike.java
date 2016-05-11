@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.DimensionLike#getWidth <em>Width</em>}</li>
  *   <li>{@link org.soluvas.image.DimensionLike#getHeight <em>Height</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.image.ImagePackage#getDimensionLike()
  * @model interface="true" abstract="true"

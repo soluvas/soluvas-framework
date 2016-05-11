@@ -15,12 +15,12 @@ import org.soluvas.image.ImageVariant;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ImageVariantImpl#getStyleCode <em>Style Code</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ImageVariantImpl#getStyleVariant <em>Style Variant</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ImageVariantImpl#getExtension <em>Extension</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

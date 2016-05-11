@@ -24,11 +24,11 @@ import org.soluvas.image.StyledImage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.StyledImageEntryImpl#getTypedKey <em>Key</em>}</li>
  *   <li>{@link org.soluvas.image.impl.StyledImageEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

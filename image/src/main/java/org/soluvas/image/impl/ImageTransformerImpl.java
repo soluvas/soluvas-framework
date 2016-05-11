@@ -34,10 +34,10 @@ import com.google.common.util.concurrent.MoreExecutors;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ImageTransformerImpl#getExecutor <em>Executor</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

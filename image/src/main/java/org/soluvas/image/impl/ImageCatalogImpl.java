@@ -22,10 +22,10 @@ import org.soluvas.image.ImagePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.impl.ImageCatalogImpl#getImages <em>Images</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
