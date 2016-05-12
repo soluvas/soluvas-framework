@@ -736,8 +736,8 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
 	 */
+	@Override
 	public Map<String, Map<String, String>> getImageUris(ImageType namespace, List<String> imageIds) {
 		final Map<String, Map<String, String>> imageUris = new HashMap<>();
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);

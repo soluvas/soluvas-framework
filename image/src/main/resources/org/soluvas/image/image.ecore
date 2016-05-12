@@ -551,6 +551,7 @@
     <eLiterals name="banner_shop" value="6"/>
     <eLiterals name="gallery" value="7"/>
     <eLiterals name="category" value="8"/>
+    <eLiterals name="product_release" value="9"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ImageStyles">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

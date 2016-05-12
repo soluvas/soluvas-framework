@@ -2023,6 +2023,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		addEEnumLiteral(imageTypesEEnum, ImageTypes.BANNER_SHOP);
 		addEEnumLiteral(imageTypesEEnum, ImageTypes.GALLERY);
 		addEEnumLiteral(imageTypesEEnum, ImageTypes.CATEGORY);
+		addEEnumLiteral(imageTypesEEnum, ImageTypes.PRODUCT_RELEASE);
 
 		initEEnum(imageStylesEEnum, ImageStyles.class, "ImageStyles");
 		addEEnumLiteral(imageStylesEEnum, ImageStyles.ORIGINAL);

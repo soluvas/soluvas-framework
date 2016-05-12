@@ -98,7 +98,15 @@ public enum ImageTypes implements Enumerator, ImageType {
 	 * @generated
 	 * @ordered
 	 */
-	CATEGORY(8, "category", "category");
+	CATEGORY(8, "category", "category"), /**
+	 * The '<em><b>Product release</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PRODUCT_RELEASE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PRODUCT_RELEASE(9, "product_release", "product_release");
 
 	/**
 	 * The '<em><b>Person</b></em>' literal value.
@@ -236,6 +244,21 @@ public enum ImageTypes implements Enumerator, ImageType {
 	public static final int CATEGORY_VALUE = 8;
 
 	/**
+	 * The '<em><b>Product release</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Product release</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #PRODUCT_RELEASE
+	 * @model name="product_release"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRODUCT_RELEASE_VALUE = 9;
+
+	/**
 	 * An array of all the '<em><b>Types</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -252,6 +275,7 @@ public enum ImageTypes implements Enumerator, ImageType {
 			BANNER_SHOP,
 			GALLERY,
 			CATEGORY,
+			PRODUCT_RELEASE,
 		};
 
 	/**
@@ -317,6 +341,7 @@ public enum ImageTypes implements Enumerator, ImageType {
 			case BANNER_SHOP_VALUE: return BANNER_SHOP;
 			case GALLERY_VALUE: return GALLERY;
 			case CATEGORY_VALUE: return CATEGORY;
+			case PRODUCT_RELEASE_VALUE: return PRODUCT_RELEASE;
 		}
 		return null;
 	}
