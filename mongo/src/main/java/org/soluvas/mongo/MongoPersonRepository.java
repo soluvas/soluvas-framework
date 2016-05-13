@@ -771,14 +771,17 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 
 	@Override
 	public Long getZendeskUserIdByPersonId(String personId) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(personId),
+				"Person ID for finding zendesk user id must not be null or empty.");
 		final BasicDBObject query = new BasicDBObject();
-		query.put("zendeskIntegration", true);
 		query.put("_id", personId);
+		query.put("zendeskIntegration", true);
 		query.put("customerRole", new BasicDBObject("$exists", true));
 		
 		final BasicDBObject fields = new BasicDBObject("zendeskUserId", true);
 		
 		final DBObject dbObject = findOnePrimary(query, fields, "getZendeskUserIdByPersonId", personId);
+		log.debug("Found zendesk user dbObject by personId '{}': {}", personId, dbObject);
 		if (dbObject != null) {
 			if (dbObject.get("zendeskUserId") != null && !"null".equals(dbObject.get("zendeskUserId"))) {
 				return Long.valueOf(dbObject.get("zendeskUserId").toString());
