@@ -769,6 +769,27 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}
 	}
 
+	@Override
+	public Long getZendeskUserIdByPersonId(String personId) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("zendeskIntegration", true);
+		query.put("_id", personId);
+		query.put("customerRole", new BasicDBObject("$exists", true));
+		
+		final BasicDBObject fields = new BasicDBObject("zendeskUserId", true);
+		
+		final DBObject dbObject = findOnePrimary(query, fields, "getZendeskUserIdByPersonId", personId);
+		if (dbObject != null) {
+			if (dbObject.get("zendeskUserId") != null && !"null".equals(dbObject.get("zendeskUserId"))) {
+				return Long.valueOf(dbObject.get("zendeskUserId").toString());
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
 //	@Override
 //	public Existence<String> existsBySlugEx(StatusMask statusMask, String slug) {
 //		// TODO Auto-generated method stub

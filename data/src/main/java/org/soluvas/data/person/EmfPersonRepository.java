@@ -476,4 +476,10 @@ public class EmfPersonRepository extends
 		return null;
 	}
 
+	@Override
+	public Long getZendeskUserIdByPersonId(String personId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -166,6 +166,8 @@ public interface PersonRepository extends
 	 * @return
 	 */
 	@Nullable Person getZendeskUserId(String email);
+	
+	@Nullable Long getZendeskUserIdByPersonId(String personId);
 
 }
 
