@@ -49,6 +49,9 @@ public class Category2 implements Serializable, Identifiable {
 	
 	public final static String NAME_ATTR = "name";
 	public final static String DESCRIPTION_ATTR = "description";
+	public final static String META_TITLE_ATTR = "metaTitle";
+	public final static String META_KEYWORDS_ATTR = "metaKeywords";
+	public final static String META_DESCRIPTION_ATTR = "metaDescription";
 	
 	@Id private String id;
 	private String nsPrefix;
@@ -352,14 +355,14 @@ public class Category2 implements Serializable, Identifiable {
 				} else {
 					final Map<String, String> translation = translations.get(curLanguageTag);
 //					log.debug("Got translation by {}: {}", languageTag, translation.getMessages());
-					if (!translation.containsKey(Category.NAME_ATTR)) {
+					if (!translation.containsKey(Category2.NAME_ATTR)) {
 						log.debug("Got translation by {}, but not value by attribute {}",
-								curLanguageTag, Category.NAME_ATTR);
+								curLanguageTag, Category2.NAME_ATTR);
 						return getName();
 					} else {
 						final String translatedValue = translation.get(Category.NAME_ATTR);
 						log.debug("Got translation by {} with value by attribute {}: {}",
-								curLanguageTag, Category.NAME_ATTR, translatedValue);
+								curLanguageTag, Category2.NAME_ATTR, translatedValue);
 						return translatedValue;
 					}
 				}
@@ -371,7 +374,7 @@ public class Category2 implements Serializable, Identifiable {
 	public void setEffectiveName() {
 		throw new UnsupportedOperationException();
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -388,10 +391,10 @@ public class Category2 implements Serializable, Identifiable {
 					return getDescription();
 				} else {
 					final Map<String, String> translation = getTranslations().get(curLanguageTag);
-					if (!translation.containsKey(Category.DESCRIPTION_ATTR)) {
+					if (!translation.containsKey(Category2.DESCRIPTION_ATTR)) {
 						return getDescription();
 					} else {
-						return translation.get(Category.DESCRIPTION_ATTR);
+						return translation.get(Category2.DESCRIPTION_ATTR);
 					}
 				}
 			}
@@ -399,6 +402,108 @@ public class Category2 implements Serializable, Identifiable {
 	}
 	@JsonIgnore
 	public void setEffectiveDescription() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@JsonIgnore
+	public String getEffectiveMetaTitle(String curLanguageTag) {
+		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
+			return getMetaTitle();
+		} else {
+			final Map<String, Map<String, String>> translations = getTranslations();
+			if (translations == null || translations.isEmpty()) {
+				return getMetaTitle();
+			} else {
+				if (!translations.containsKey(curLanguageTag)) {
+					return getMetaTitle();
+				} else {
+					final Map<String, String> translation = translations.get(curLanguageTag);
+//					log.debug("Got translation by {}: {}", languageTag, translation.getMessages());
+					if (!translation.containsKey(Category2.META_TITLE_ATTR)) {
+						log.debug("Got translation by {}, but not value by attribute {}",
+								curLanguageTag, Category2.META_TITLE_ATTR);
+						return getMetaTitle();
+					} else {
+						final String translatedValue = translation.get(Category2.META_TITLE_ATTR);
+						log.debug("Got translation by {} with value by attribute {}: {}",
+								curLanguageTag, Category2.META_TITLE_ATTR, translatedValue);
+						return translatedValue;
+					}
+				}
+			}
+		}
+	}
+	
+	@JsonIgnore
+	public void setEffectiveMetaTitle() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@JsonIgnore
+	public String getEffectiveMetaKeywords(String curLanguageTag) {
+		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
+			return getMetaKeywords();
+		} else {
+			final Map<String, Map<String, String>> translations = getTranslations();
+			if (translations == null || translations.isEmpty()) {
+				return getMetaKeywords();
+			} else {
+				if (!translations.containsKey(curLanguageTag)) {
+					return getMetaKeywords();
+				} else {
+					final Map<String, String> translation = translations.get(curLanguageTag);
+//					log.debug("Got translation by {}: {}", languageTag, translation.getMessages());
+					if (!translation.containsKey(Category2.META_KEYWORDS_ATTR)) {
+						log.debug("Got translation by {}, but not value by attribute {}",
+								curLanguageTag, Category2.META_KEYWORDS_ATTR);
+						return getMetaKeywords();
+					} else {
+						final String translatedValue = translation.get(Category2.META_KEYWORDS_ATTR);
+						log.debug("Got translation by {} with value by attribute {}: {}",
+								curLanguageTag, Category2.META_KEYWORDS_ATTR, translatedValue);
+						return translatedValue;
+					}
+				}
+			}
+		}
+	}
+	
+	@JsonIgnore
+	public void setEffectiveMetaKeywords() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@JsonIgnore
+	public String getEffectiveMetaDescription(String curLanguageTag) {
+		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
+			return getMetaDescription();
+		} else {
+			final Map<String, Map<String, String>> translations = getTranslations();
+			if (translations == null || translations.isEmpty()) {
+				return getMetaDescription();
+			} else {
+				if (!translations.containsKey(curLanguageTag)) {
+					return getMetaDescription();
+				} else {
+					final Map<String, String> translation = translations.get(curLanguageTag);
+//					log.debug("Got translation by {}: {}", languageTag, translation.getMessages());
+					if (!translation.containsKey(Category2.META_DESCRIPTION_ATTR)) {
+						log.debug("Got translation by {}, but not value by attribute {}",
+								curLanguageTag, Category2.META_DESCRIPTION_ATTR);
+						return getMetaDescription();
+					} else {
+						final String translatedValue = translation.get(Category2.META_DESCRIPTION_ATTR);
+						log.debug("Got translation by {} with value by attribute {}: {}",
+								curLanguageTag, Category2.META_DESCRIPTION_ATTR, translatedValue);
+						return translatedValue;
+					}
+				}
+			}
+		}
+	}
+	
+	@JsonIgnore
+	public void setEffectiveMetaDescription() {
 		throw new UnsupportedOperationException();
 	}
 	
