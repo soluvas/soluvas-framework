@@ -52,6 +52,7 @@ public class Category2 implements Serializable, Identifiable {
 	public final static String META_TITLE_ATTR = "metaTitle";
 	public final static String META_KEYWORDS_ATTR = "metaKeywords";
 	public final static String META_DESCRIPTION_ATTR = "metaDescription";
+	public final static String TITLE_ATTR = "title";
 	
 	@Id private String id;
 	private String nsPrefix;
@@ -78,6 +79,8 @@ public class Category2 implements Serializable, Identifiable {
 	private final Set<String> tags = new HashSet<>();
 	private final Set<String> sameAsUris = new HashSet<>();
 	private Map<String, String> images = new HashMap<>();
+	private String title;
+	
 	/**
 	 * @return the id
 	 */
@@ -668,6 +671,44 @@ public class Category2 implements Serializable, Identifiable {
 		return category.getParentId() != null
 				? getLevel(parent, categoryLookup) + 1
 				: 1;
+	}
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	@JsonIgnore
+	public String getEffectiveTitle(String curLanguageTag) {
+		if (curLanguageTag.equals(Optional.fromNullable(getLanguage()).or("id-ID"))) {
+			return getTitle();
+		} else {
+			if (getTranslations().isEmpty()) {
+				return getTitle();
+			} else {
+				if (!getTranslations().containsKey(curLanguageTag)) {
+					return getTitle();
+				} else {
+					final Map<String, String> translation = getTranslations().get(curLanguageTag);
+					if (!translation.containsKey(Category2.TITLE_ATTR)) {
+						return getTitle();
+					} else {
+						return translation.get(Category2.TITLE_ATTR);
+					}
+				}
+			}
+		}
+	}
+	@JsonIgnore
+	public void setEffectiveTitle() {
+		throw new UnsupportedOperationException();
 	}
 	
 }
