@@ -28,6 +28,7 @@ import org.soluvas.data.PropertyDefinition;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Id;
+import com.google.code.morphia.converters.EnumConverter;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
@@ -38,7 +39,7 @@ import com.google.common.collect.Iterables;
  * @author rudi
  *
  */
-@Converters({DateTimeConverter.class, UnitConverter.class})
+@Converters({DateTimeConverter.class, UnitConverter.class, EnumConverter.class})
 public class Category2 implements Serializable, Identifiable {
 	
 	private static final long serialVersionUID = 1L;
@@ -80,6 +81,7 @@ public class Category2 implements Serializable, Identifiable {
 	private final Set<String> sameAsUris = new HashSet<>();
 	private Map<String, String> images = new HashMap<>();
 	private String title;
+	private LayoutCategory layout;
 	
 	/**
 	 * @return the id
@@ -709,6 +711,18 @@ public class Category2 implements Serializable, Identifiable {
 	@JsonIgnore
 	public void setEffectiveTitle() {
 		throw new UnsupportedOperationException();
+	}
+	/**
+	 * @return the layout
+	 */
+	public LayoutCategory getLayout() {
+		return layout;
+	}
+	/**
+	 * @param layout the layout to set
+	 */
+	public void setLayout(LayoutCategory layout) {
+		this.layout = layout;
 	}
 	
 }
