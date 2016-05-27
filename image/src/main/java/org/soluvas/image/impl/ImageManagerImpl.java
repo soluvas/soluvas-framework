@@ -552,7 +552,20 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	@Override
 	public DisplayImage getSafeImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style) {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
-		final Image image = imageRepo.findOne(imageId);
+		@Nullable final Image image = imageRepo.findOne(imageId);
+		
+		final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(), 
+				imageId, style, image);
+		return displayImage;
+	}
+	
+	@Override @Nullable
+	public DisplayImage getImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style) {
+		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
+		@Nullable final Image image = imageRepo.findOne(imageId);
+		if (image == null) {
+			return null;
+		}
 		
 		final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(), 
 				imageId, style, image);

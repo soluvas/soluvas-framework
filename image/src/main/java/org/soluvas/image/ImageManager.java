@@ -111,6 +111,8 @@ public interface ImageManager extends EObject {
 	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
 	 */
 	DisplayImage getSafeImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style);
+	
+	@Nullable DisplayImage getImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->

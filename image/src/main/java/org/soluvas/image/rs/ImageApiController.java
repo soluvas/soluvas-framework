@@ -3,6 +3,7 @@ package org.soluvas.image.rs;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -36,11 +37,34 @@ public class ImageApiController {
 	@RequestMapping(method=RequestMethod.GET, value="api/product_image/detail/{imageId}")
 	public Map<ImageStyles, DisplayImage> findImagesByProductId(@PathVariable String imageId) {
 		final Map<ImageStyles, DisplayImage> imageProductMap = new HashMap<>();
-		imageProductMap.put(ImageStyles.LARGE, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.LARGE));
-		imageProductMap.put(ImageStyles.NORMAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.NORMAL));
-		imageProductMap.put(ImageStyles.ORIGINAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.ORIGINAL));
-		imageProductMap.put(ImageStyles.SMALL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.SMALL));
-		imageProductMap.put(ImageStyles.THUMBNAIL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.THUMBNAIL));
+		
+		@Nullable final DisplayImage largeImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.LARGE);
+		if (largeImage != null) {
+			imageProductMap.put(ImageStyles.LARGE, largeImage);
+		}
+		
+		@Nullable final DisplayImage normalImage = imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.NORMAL);
+		if (normalImage != null) {
+			imageProductMap.put(ImageStyles.NORMAL, normalImage);
+		}
+		
+		@Nullable final DisplayImage originalImage = imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.ORIGINAL);
+		if (originalImage != null) {
+			imageProductMap.put(ImageStyles.ORIGINAL, originalImage);
+		}
+		
+		
+		@Nullable final DisplayImage smallImage = imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.SMALL);
+		if (smallImage != null) {
+			imageProductMap.put(ImageStyles.SMALL, smallImage);
+		}
+		
+		
+		@Nullable final DisplayImage thumbnailImage = imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.THUMBNAIL);
+		if (thumbnailImage != null) {
+			imageProductMap.put(ImageStyles.THUMBNAIL, thumbnailImage);
+		}
+		
 		log.debug("find Image by {} result is {} ", imageId, imageProductMap);
 		return imageProductMap;
 	}
