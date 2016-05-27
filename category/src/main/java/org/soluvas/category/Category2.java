@@ -48,6 +48,14 @@ public class Category2 implements Serializable, Identifiable {
 	
 	private static final Logger log = LoggerFactory.getLogger(Category2.class);
 	
+	public final static String KEY_CONTENT_FULL_HORIZONTAL = LayoutCategory.FULL_HORIZONTAL.name();
+	
+	public final static String KEY_CONTENT_THREE_COLUMNS_1 = LayoutCategory.THREE_COLUMNS.name() + "_1";
+	
+	public final static String KEY_CONTENT_THREE_COLUMNS_2 = LayoutCategory.THREE_COLUMNS.name() + "_2";
+	
+	public final static String KEY_CONTENT_THREE_COLUMNS_3 = LayoutCategory.THREE_COLUMNS.name() + "_3";
+	
 	public final static String NAME_ATTR = "name";
 	public final static String DESCRIPTION_ATTR = "description";
 	public final static String META_TITLE_ATTR = "metaTitle";
@@ -82,6 +90,11 @@ public class Category2 implements Serializable, Identifiable {
 	private Map<String, String> images = new HashMap<>();
 	private String title;
 	private LayoutCategory layout;
+	/**
+	 * Key: {@link LayoutCategory}
+	 * Value: content
+	 */
+	private final Map<String, String> contents = new HashMap<>();
 	
 	/**
 	 * @return the id
@@ -723,6 +736,116 @@ public class Category2 implements Serializable, Identifiable {
 	 */
 	public void setLayout(LayoutCategory layout) {
 		this.layout = layout;
+	}
+	/**
+	 * @return the contents
+	 */
+	public Map<String, String> getContents() {
+		return contents;
+	}
+	
+	@JsonIgnore
+	public String getEffectiveContentFullHorizontal(String curLanguageTag) {
+		if (curLanguageTag.equals(Optional.fromNullable(getLanguage()).or("id-ID"))) {
+			return getContents().get(KEY_CONTENT_FULL_HORIZONTAL);
+		} else {
+			if (getTranslations().isEmpty()) {
+				return getContents().get(KEY_CONTENT_FULL_HORIZONTAL);
+			} else {
+				if (!getTranslations().containsKey(curLanguageTag)) {
+					return getContents().get(KEY_CONTENT_FULL_HORIZONTAL);
+				} else {
+					final Map<String, String> translation = getTranslations().get(curLanguageTag);
+					if (!translation.containsKey(KEY_CONTENT_FULL_HORIZONTAL)) {
+						return getContents().get(KEY_CONTENT_FULL_HORIZONTAL);
+					} else {
+						return translation.get(KEY_CONTENT_FULL_HORIZONTAL);
+					}
+				}
+			}
+		}
+	}
+	@JsonIgnore
+	public void setEffectiveContentFullHorizontal() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@JsonIgnore
+	public String getEffectiveContentThreeColumns1(String curLanguageTag) {
+		if (curLanguageTag.equals(Optional.fromNullable(getLanguage()).or("id-ID"))) {
+			return getContents().get(KEY_CONTENT_THREE_COLUMNS_1);
+		} else {
+			if (getTranslations().isEmpty()) {
+				return getContents().get(KEY_CONTENT_THREE_COLUMNS_1);
+			} else {
+				if (!getTranslations().containsKey(curLanguageTag)) {
+					return getContents().get(KEY_CONTENT_THREE_COLUMNS_1);
+				} else {
+					final Map<String, String> translation = getTranslations().get(curLanguageTag);
+					if (!translation.containsKey(KEY_CONTENT_THREE_COLUMNS_1)) {
+						return getContents().get(KEY_CONTENT_THREE_COLUMNS_1);
+					} else {
+						return translation.get(KEY_CONTENT_THREE_COLUMNS_1);
+					}
+				}
+			}
+		}
+	}
+	@JsonIgnore
+	public void setEffectiveContentThreeColumns1() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@JsonIgnore
+	public String getEffectiveContentThreeColumns2(String curLanguageTag) {
+		if (curLanguageTag.equals(Optional.fromNullable(getLanguage()).or("id-ID"))) {
+			return getContents().get(KEY_CONTENT_THREE_COLUMNS_2);
+		} else {
+			if (getTranslations().isEmpty()) {
+				return getContents().get(KEY_CONTENT_THREE_COLUMNS_2);
+			} else {
+				if (!getTranslations().containsKey(curLanguageTag)) {
+					return getContents().get(KEY_CONTENT_THREE_COLUMNS_2);
+				} else {
+					final Map<String, String> translation = getTranslations().get(curLanguageTag);
+					if (!translation.containsKey(KEY_CONTENT_THREE_COLUMNS_2)) {
+						return getContents().get(KEY_CONTENT_THREE_COLUMNS_2);
+					} else {
+						return translation.get(KEY_CONTENT_THREE_COLUMNS_2);
+					}
+				}
+			}
+		}
+	}
+	@JsonIgnore
+	public void setEffectiveContentThreeColumns2() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@JsonIgnore
+	public String getEffectiveContentThreeColumns3(String curLanguageTag) {
+		if (curLanguageTag.equals(Optional.fromNullable(getLanguage()).or("id-ID"))) {
+			return getContents().get(KEY_CONTENT_THREE_COLUMNS_3);
+		} else {
+			if (getTranslations().isEmpty()) {
+				return getContents().get(KEY_CONTENT_THREE_COLUMNS_3);
+			} else {
+				if (!getTranslations().containsKey(curLanguageTag)) {
+					return getContents().get(KEY_CONTENT_THREE_COLUMNS_3);
+				} else {
+					final Map<String, String> translation = getTranslations().get(curLanguageTag);
+					if (!translation.containsKey(KEY_CONTENT_THREE_COLUMNS_3)) {
+						return getContents().get(KEY_CONTENT_THREE_COLUMNS_3);
+					} else {
+						return translation.get(KEY_CONTENT_THREE_COLUMNS_3);
+					}
+				}
+			}
+		}
+	}
+	@JsonIgnore
+	public void setEffectiveContentThreeColumns3() {
+		throw new UnsupportedOperationException();
 	}
 	
 }
