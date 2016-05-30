@@ -466,6 +466,8 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				log.warn("grabDisplayImage: Cannot get '{}' image, invalid imageId={}", 
 						namespace, imageId);
 			}
+			displayImage.setAlt("No Image");
+			displayImage.setTitle("No Image");
 			displayImage.setSrc(getNoImageUri());
 		}
 
@@ -563,6 +565,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	public DisplayImage getImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style) {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
 		@Nullable final Image image = imageRepo.findOne(imageId);
+		log.debug("Got {} image for '{}' - id '{}'", image, namespace, imageId);
 		if (image == null) {
 			return null;
 		}

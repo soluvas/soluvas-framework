@@ -43,24 +43,24 @@ public class ImageApiController {
 			imageProductMap.put(ImageStyles.LARGE, largeImage);
 		}
 		
-		@Nullable final DisplayImage normalImage = imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.NORMAL);
+		@Nullable final DisplayImage normalImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.NORMAL);
 		if (normalImage != null) {
 			imageProductMap.put(ImageStyles.NORMAL, normalImage);
 		}
 		
-		@Nullable final DisplayImage originalImage = imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.ORIGINAL);
+		@Nullable final DisplayImage originalImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.ORIGINAL);
 		if (originalImage != null) {
 			imageProductMap.put(ImageStyles.ORIGINAL, originalImage);
 		}
 		
 		
-		@Nullable final DisplayImage smallImage = imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.SMALL);
+		@Nullable final DisplayImage smallImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.SMALL);
 		if (smallImage != null) {
 			imageProductMap.put(ImageStyles.SMALL, smallImage);
 		}
 		
 		
-		@Nullable final DisplayImage thumbnailImage = imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.THUMBNAIL);
+		@Nullable final DisplayImage thumbnailImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.THUMBNAIL);
 		if (thumbnailImage != null) {
 			imageProductMap.put(ImageStyles.THUMBNAIL, thumbnailImage);
 		}
