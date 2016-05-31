@@ -20,6 +20,7 @@ package org.soluvas.image;
  * </p>
  * <ul>
  *   <li>{@link org.soluvas.image.ResizeToFit#getOnlyShrinkLarger <em>Only Shrink Larger</em>}</li>
+ *   <li>{@link org.soluvas.image.ResizeToFit#isExtentEnabled <em>Extent Enabled</em>}</li>
  * </ul>
  *
  * @see org.soluvas.image.ImagePackage#getResizeToFit()
@@ -57,5 +58,32 @@ public interface ResizeToFit extends ImageTransform, DimensionLike, WatermarkLik
 	 * @generated
 	 */
 	void setOnlyShrinkLarger(Boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Extent Enabled</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extent Enabled</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extent Enabled</em>' attribute.
+	 * @see #setExtentEnabled(boolean)
+	 * @see org.soluvas.image.ImagePackage#getResizeToFit_ExtentEnabled()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isExtentEnabled();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.image.ResizeToFit#isExtentEnabled <em>Extent Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Extent Enabled</em>' attribute.
+	 * @see #isExtentEnabled()
+	 * @generated
+	 */
+	void setExtentEnabled(boolean value);
 
 } // ResizeToFit

@@ -30,6 +30,7 @@ import org.soluvas.image.WatermarkLike;
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOverlayFile <em>Overlay File</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOverlayGravity <em>Overlay Gravity</em>}</li>
  *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#getOnlyShrinkLarger <em>Only Shrink Larger</em>}</li>
+ *   <li>{@link org.soluvas.image.impl.ResizeToFitImpl#isExtentEnabled <em>Extent Enabled</em>}</li>
  * </ul>
  *
  * @generated
@@ -194,6 +195,26 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * @ordered
 	 */
 	protected Boolean onlyShrinkLarger = ONLY_SHRINK_LARGER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isExtentEnabled() <em>Extent Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtentEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXTENT_ENABLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExtentEnabled() <em>Extent Enabled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtentEnabled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean extentEnabled = EXTENT_ENABLED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -400,6 +421,27 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExtentEnabled() {
+		return extentEnabled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtentEnabled(boolean newExtentEnabled) {
+		boolean oldExtentEnabled = extentEnabled;
+		extentEnabled = newExtentEnabled;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImagePackage.RESIZE_TO_FIT__EXTENT_ENABLED, oldExtentEnabled, extentEnabled));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -419,6 +461,8 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return getOverlayGravity();
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				return getOnlyShrinkLarger();
+			case ImagePackage.RESIZE_TO_FIT__EXTENT_ENABLED:
+				return isExtentEnabled();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -454,6 +498,9 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return;
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				setOnlyShrinkLarger((Boolean)newValue);
+				return;
+			case ImagePackage.RESIZE_TO_FIT__EXTENT_ENABLED:
+				setExtentEnabled((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -491,6 +538,9 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				setOnlyShrinkLarger(ONLY_SHRINK_LARGER_EDEFAULT);
 				return;
+			case ImagePackage.RESIZE_TO_FIT__EXTENT_ENABLED:
+				setExtentEnabled(EXTENT_ENABLED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -519,6 +569,8 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 				return overlayGravity != OVERLAY_GRAVITY_EDEFAULT;
 			case ImagePackage.RESIZE_TO_FIT__ONLY_SHRINK_LARGER:
 				return ONLY_SHRINK_LARGER_EDEFAULT == null ? onlyShrinkLarger != null : !ONLY_SHRINK_LARGER_EDEFAULT.equals(onlyShrinkLarger);
+			case ImagePackage.RESIZE_TO_FIT__EXTENT_ENABLED:
+				return extentEnabled != EXTENT_ENABLED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -613,6 +665,8 @@ public class ResizeToFitImpl extends EObjectImpl implements ResizeToFit {
 		result.append(overlayGravity);
 		result.append(", onlyShrinkLarger: ");
 		result.append(onlyShrinkLarger);
+		result.append(", extentEnabled: ");
+		result.append(extentEnabled);
 		result.append(')');
 		return result.toString();
 	}

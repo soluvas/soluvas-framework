@@ -202,8 +202,10 @@ public interface ImageManager extends EObject {
 	 * @model kind="operation" dataType="org.soluvas.commons.Map<?, ?>" required="true"
 	 * @generated
 	 */
-	Map<String, Map<String, String>> getImageUris(ImageType namespace, List<String> imageIds);
+	Map<?, ?> getImageUris();
 
 	String getThumbnailPhotoUri(Person person);
+
+	Map<String, Map<String, String>> getImageUris(ImageType namespace, List<String> imageIds);
 
 } // ImageManager

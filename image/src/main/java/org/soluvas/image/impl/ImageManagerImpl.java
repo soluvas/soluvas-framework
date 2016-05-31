@@ -752,6 +752,17 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map<?, ?> getImageUris() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 */
 	@Override
 	public Map<String, Map<String, String>> getImageUris(ImageType namespace, List<String> imageIds) {

@@ -630,13 +630,22 @@ public interface ImagePackage extends EPackage {
 	int RESIZE_TO_FIT__ONLY_SHRINK_LARGER = IMAGE_TRANSFORM_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Extent Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESIZE_TO_FIT__EXTENT_ENABLED = IMAGE_TRANSFORM_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Resize To Fit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 8;
+	int RESIZE_TO_FIT_FEATURE_COUNT = IMAGE_TRANSFORM_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.image.impl.ResizeToFillImpl <em>Resize To Fill</em>}' class.
@@ -2164,6 +2173,17 @@ public interface ImagePackage extends EPackage {
 	EAttribute getResizeToFit_OnlyShrinkLarger();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.image.ResizeToFit#isExtentEnabled <em>Extent Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extent Enabled</em>'.
+	 * @see org.soluvas.image.ResizeToFit#isExtentEnabled()
+	 * @see #getResizeToFit()
+	 * @generated
+	 */
+	EAttribute getResizeToFit_ExtentEnabled();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.image.ResizeToFill <em>Resize To Fill</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3337,6 +3357,14 @@ public interface ImagePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute RESIZE_TO_FIT__ONLY_SHRINK_LARGER = eINSTANCE.getResizeToFit_OnlyShrinkLarger();
+
+		/**
+		 * The meta object literal for the '<em><b>Extent Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESIZE_TO_FIT__EXTENT_ENABLED = eINSTANCE.getResizeToFit_ExtentEnabled();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.image.impl.ResizeToFillImpl <em>Resize To Fill</em>}' class.

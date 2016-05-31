@@ -373,6 +373,8 @@
         <details key="documentation" value="If true, only shrink larger images, but do not enlarge small images.&#xA;If false, both shrinking and enlarging are performed."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extentEnabled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ResizeToFill" eSuperTypes="#//ImageTransform #//DimensionLike #//WatermarkLike #//OverlayLike">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

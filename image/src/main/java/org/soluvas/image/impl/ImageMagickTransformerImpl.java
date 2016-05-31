@@ -314,6 +314,17 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 							final String onlyShrinkLargerFlag = fx.getOnlyShrinkLarger() ? ">" : "";
 							cmd.addArgument(widthStr + "x" + heightStr + onlyShrinkLargerFlag);
 							
+							cmd.addArgument("-gravity");
+							cmd.addArgument("center");
+							
+							if (fx.isExtentEnabled()) {
+								cmd.addArgument("-background");
+								cmd.addArgument("white");
+								
+								cmd.addArgument("-extent");
+								cmd.addArgument(widthStr + "x" + heightStr);
+							}
+							
 							log.debug("ResizeToFit {} to {}, {}x{} onlyShrinkLarger={} quality={} progressive={} using: {}",
 									originalFile, styledFile, fx.getWidth(), fx.getHeight(), fx.getOnlyShrinkLarger(),
 									quality, progressive, cmd );

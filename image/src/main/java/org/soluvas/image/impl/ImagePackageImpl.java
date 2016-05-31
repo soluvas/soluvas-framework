@@ -722,6 +722,15 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getResizeToFit_ExtentEnabled() {
+		return (EAttribute)resizeToFitEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getResizeToFill() {
 		return resizeToFillEClass;
@@ -1517,6 +1526,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		resizeToFitEClass = createEClass(RESIZE_TO_FIT);
 		createEAttribute(resizeToFitEClass, RESIZE_TO_FIT__ONLY_SHRINK_LARGER);
+		createEAttribute(resizeToFitEClass, RESIZE_TO_FIT__EXTENT_ENABLED);
 
 		resizeToFillEClass = createEClass(RESIZE_TO_FILL);
 		createEAttribute(resizeToFillEClass, RESIZE_TO_FILL__GRAVITY);
@@ -1903,6 +1913,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 
 		initEClass(resizeToFitEClass, ResizeToFit.class, "ResizeToFit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getResizeToFit_OnlyShrinkLarger(), ecorePackage.getEBooleanObject(), "onlyShrinkLarger", null, 0, 1, ResizeToFit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResizeToFit_ExtentEnabled(), ecorePackage.getEBoolean(), "extentEnabled", "false", 0, 1, ResizeToFit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(resizeToFillEClass, ResizeToFill.class, "ResizeToFill", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getResizeToFill_Gravity(), this.getTransformGravity(), "gravity", null, 0, 1, ResizeToFill.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
