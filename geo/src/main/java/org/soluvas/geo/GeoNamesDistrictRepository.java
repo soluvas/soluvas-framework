@@ -53,6 +53,9 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
     private static final Logger log = LoggerFactory.getLogger(GeoNamesDistrictRepository.class);
 
     final RadixTree<District> tree = new ConcurrentRadixTree<>(new DefaultCharArrayNodeFactory());
+    /**
+     * Key:country.getIso() + ", " + province.toLowerCase() + ", " + city.getName().toLowerCase() + ", " + name.toLowerCase();
+     */
     final Map<String, District> districtMap = new HashMap<>();
 
     /**
