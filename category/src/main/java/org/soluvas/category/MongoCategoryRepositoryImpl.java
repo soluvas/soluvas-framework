@@ -21,6 +21,7 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -209,15 +210,24 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 	}
 
 	@Override
-	public Page<Category2> findAll(String searchText, Collection<CategoryStatus> statuses, Pageable pageable) {
-		final BasicDBObject query = new BasicDBObject();
-		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
-		
-		final String quotedSearchText = Pattern.quote(searchText);
-		final Pattern pattern = Pattern.compile(".*" + quotedSearchText + ".*", Pattern.CASE_INSENSITIVE);
-		query.put("name", pattern);
-		
+	public Page<Category2> findAll(@Nullable String searchText, Collection<CategoryStatus> statuses, Pageable pageable) {
+		final BasicDBObject query = getQueryByStatusesAndSearchText(searchText, statuses);
 		return findAllByQuery(query, pageable);
+	}
+	
+	private BasicDBObject getQueryByStatusesAndSearchText(@Nullable String searchText, Collection<CategoryStatus> statuses) {
+		Preconditions.checkNotNull(statuses, "For getting query by statuses and search text, the statuses must not be null");
+		final BasicDBObject query = new BasicDBObject();
+		if (!statuses.isEmpty()) {
+			query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
+		}
+		
+		if (!Strings.isNullOrEmpty(searchText)) {
+			final String quotedSearchText = Pattern.quote(searchText);
+			final Pattern pattern = Pattern.compile(".*" + quotedSearchText + ".*", Pattern.CASE_INSENSITIVE);
+			query.put("name", pattern);
+		}
+		return query;
 	}
 
 	@Override
@@ -225,6 +235,13 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 		final BasicDBObject query = new BasicDBObject();
 		augmentQueryForStatusMask(query, StatusMask.ACTIVE_ONLY);
 		return findOneByQuery(query);
+	}
+
+	@Override
+	public long countAll(String searchText, Collection<CategoryStatus> statuses) {
+		final BasicDBObject query = getQueryByStatusesAndSearchText(searchText, statuses);
+		
+		return countByQuery(query);
 	}
 
 		
