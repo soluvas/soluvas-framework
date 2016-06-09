@@ -482,4 +482,10 @@ public class EmfPersonRepository extends
 		return null;
 	}
 
+	@Override
+	public Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

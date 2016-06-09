@@ -675,4 +675,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		return null;
 	}
 
+	@Override
+	public Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -168,6 +168,8 @@ public interface PersonRepository extends
 	@Nullable Person getZendeskUserId(String email);
 	
 	@Nullable Long getZendeskUserIdByPersonId(String personId);
+	
+	Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable);
 
 }
 

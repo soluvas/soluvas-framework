@@ -793,6 +793,15 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}
 	}
 
+	@Override
+	public Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
+		final BasicDBObject query = new BasicDBObject();
+		augmentQueryForStatusMask(query, statusMask);
+		query.put("emails", new BasicDBObject("$exists", true));
+		final Page<Person> page = findAllByQuery(query, pageable);
+		return page;
+	}
+
 //	@Override
 //	public Existence<String> existsBySlugEx(StatusMask statusMask, String slug) {
 //		// TODO Auto-generated method stub
