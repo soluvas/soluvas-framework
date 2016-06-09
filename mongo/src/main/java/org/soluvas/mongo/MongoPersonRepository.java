@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
@@ -800,6 +802,34 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		query.put("emails", new BasicDBObject("$exists", true));
 		final Page<Person> page = findAllByQuery(query, pageable);
 		return page;
+	}
+
+	@Override
+	public Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
+			Pageable pageable) {
+		final BasicDBObject query = getQueryByCreationTime(starTime.toLocalDate(), endTime.toLocalDate());
+		augmentQueryForStatusMask(query, statusMask);
+		query.put("emails", new BasicDBObject("$exists", true));
+		final Page<Person> page = findAllByQuery(query, pageable);
+		return page;
+	}
+	
+	private BasicDBObject getQueryByCreationTime(@Nullable LocalDate startDate,
+			@Nullable LocalDate endDate) {
+		final BasicDBObject query = new BasicDBObject();
+		if (startDate != null || endDate != null) {
+			final BasicDBObject creationTimeQuery = new BasicDBObject();
+			if (startDate != null) {
+				creationTimeQuery.put("$gte",
+						startDate.toDateTimeAtStartOfDay(timeZone).toDate());
+			}
+			if (endDate != null) {
+				creationTimeQuery.put("$lt", endDate.plusDays(1)
+						.toDateTimeAtStartOfDay(timeZone).toDate());
+			}
+			query.put("creationTime", creationTimeQuery);
+		}
+		return query;
 	}
 
 //	@Override

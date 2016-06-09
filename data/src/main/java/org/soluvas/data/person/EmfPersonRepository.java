@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
@@ -484,6 +485,13 @@ public class EmfPersonRepository extends
 
 	@Override
 	public Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
+			Pageable pageable) {
 		// TODO Auto-generated method stub
 		return null;
 	}

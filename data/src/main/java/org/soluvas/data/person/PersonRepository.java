@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Email;
@@ -170,6 +171,8 @@ public interface PersonRepository extends
 	@Nullable Long getZendeskUserIdByPersonId(String personId);
 	
 	Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable);
+	
+	Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask, Pageable pageable);
 
 }
 
