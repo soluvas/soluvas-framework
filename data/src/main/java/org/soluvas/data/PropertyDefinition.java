@@ -51,6 +51,7 @@ public class PropertyDefinition implements Serializable {
 	private String language;
 	private final Set<String> sameAsUris = new HashSet<>();
 	private final Map<String, Map<String, String>> translations = new HashMap<>();
+	private boolean editabled;
 	
 	public String getId() {
 		return id;
@@ -319,6 +320,18 @@ public class PropertyDefinition implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	/**
+	 * @return the editabled
+	 */
+	public boolean isEditabled() {
+		return editabled;
+	}
+	/**
+	 * @param editabled the editabled to set
+	 */
+	public void setEditabled(boolean editabled) {
+		this.editabled = editabled;
 	}
 	
 }

@@ -12,7 +12,8 @@
     	"id-ID" : {
     		"name" : "Usia"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "author",
@@ -26,7 +27,8 @@
     	"id-ID" : {
     		"name" : "Pencipta"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "bustSize",
@@ -39,7 +41,8 @@
     	"id-ID" : {
     		"name" : "Ukuran Dada"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "careInstructions",
@@ -51,7 +54,8 @@
     	"id-ID" : {
     		"name" : "Instruksi Perawatan"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "color",
@@ -64,7 +68,8 @@
     	"id-ID" : {
     		"name" : "Warna"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "condition",
@@ -77,7 +82,8 @@
     	"id-ID" : {
     		"name" : "Kondisi"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "detailsize",
@@ -90,7 +96,8 @@
     	"id-ID" : {
     		"name" : "Ukuran Detil"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "dressLength",
@@ -103,7 +110,8 @@
     	"id-ID" : {
     		"name" : "Panjang Gaun"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "fabric",
@@ -115,7 +123,8 @@
     	"id-ID" : {
     		"name" : "Kain"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "heelsHeight",
@@ -128,7 +137,8 @@
     	"id-ID" : {
     		"name" : "Tinggi Tumit"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "height",
@@ -141,7 +151,8 @@
     	"id-ID" : {
     		"name" : "Tinggi"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "leather",
@@ -154,7 +165,8 @@
     	"id-ID" : {
     		"name" : "Kulit"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "length",
@@ -167,7 +179,8 @@
     	"id-ID" : {
     		"name" : "Panjang"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "lining",
@@ -180,7 +193,8 @@
     	"id-ID" : {
     		"name" : "Lapisan"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "material",
@@ -193,7 +207,8 @@
     	"id-ID" : {
     		"name" : "Bahan"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "motif",
@@ -206,7 +221,8 @@
     	"id-ID" : {
     		"name" : "Motif"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netHeight",
@@ -219,7 +235,8 @@
     	"id-ID" : {
     		"name" : "Tinggi Net"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netLength",
@@ -232,7 +249,8 @@
     	"id-ID" : {
     		"name" : "Panjang Net"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netVolume",
@@ -245,7 +263,8 @@
     	"id-ID" : {
     		"name" : "Volum Net"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netWeight",
@@ -258,7 +277,8 @@
     	"id-ID" : {
     		"name" : "Berat Net"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "netWidth",
@@ -271,7 +291,8 @@
     	"id-ID" : {
     		"name" : "Lebah Net"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "origin",
@@ -284,7 +305,8 @@
     	"id-ID" : {
     		"name" : "Asal"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "publisher",
@@ -298,7 +320,8 @@
     	"id-ID" : {
     		"name" : "Penerbit"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shawlLength",
@@ -311,7 +334,8 @@
     	"id-ID" : {
     		"name" : "Panjang Selendang"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shawlWidth",
@@ -324,7 +348,8 @@
     	"id-ID" : {
     		"name" : "Lebar Shawl"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shippingPolicy",
@@ -337,7 +362,8 @@
     	"id-ID" : {
     		"name" : "Kebijakan Pengiriman"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "shoeMeasurement",
@@ -350,7 +376,8 @@
     	"id-ID" : {
     		"name" : "Ukuran Sepatu"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "signature",
@@ -363,7 +390,8 @@
     	"id-ID" : {
     		"name" : "Tandatangan"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "size",
@@ -376,7 +404,8 @@
     	"id-ID" : {
     		"name" : "Ukuran"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "sleeveLength",
@@ -389,7 +418,8 @@
     	"id-ID" : {
     		"name" : "Panjang Lengan Baju"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "technique",
@@ -402,7 +432,8 @@
     	"id-ID" : {
     		"name" : "Teknik"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "volume",
@@ -415,7 +446,8 @@
     	"id-ID" : {
     		"name" : "Volum"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "waistSize",
@@ -428,7 +460,8 @@
     	"id-ID" : {
     		"name" : "Ukuran Pinggang"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "weight",
@@ -441,7 +474,8 @@
     	"id-ID" : {
     		"name" : "Berat"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "width",
@@ -454,7 +488,8 @@
     	"id-ID" : {
     		"name" : "Lebar"
     	}
-    }
+    },
+    "editabled": true
   }, {
     "@type" : "PropertyDefinition",
     "id" : "flavor",
@@ -467,6 +502,21 @@
     	"id-ID" : {
     		"name" : "Rasa"
     	}
-    }
+    },
+    "editabled": true
+  }, {
+    "@type" : "PropertyDefinition",
+    "id" : "sizeGuide",
+    "name" : "Size Guide",
+    "enabled" : true,
+    "defaultKind" : "ENUMERATION",
+    "defaultEnum" : "SizeGuide",
+    "language" : "en-US",
+    "translations" : {
+    	"id-ID" : {
+    		"name" : "Panduan Ukuran"
+    	}
+    },
+    "editabled": false
   } ]
 }

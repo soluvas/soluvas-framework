@@ -105,5 +105,12 @@
     "expandable" : null,
     "language" : "en_US",
     "translations" : { }
+  }, {
+    "id" : "SizeGuide",
+    "name" : "Size Guide",
+    "description" : "Size Guide",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
   } ]
 }
