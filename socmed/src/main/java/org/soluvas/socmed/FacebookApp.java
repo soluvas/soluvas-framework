@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -16,11 +17,20 @@ import java.util.Set;
 @JsonSubTypes(@JsonSubTypes.Type(name="FacebookApp", value=FacebookApp.class))
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class FacebookApp {
+public class FacebookApp implements Serializable {
 
 	private String apiKey;
 	private String apiSecret;
 	private Set<String> loginPermissions = new LinkedHashSet<>();
+
+	public FacebookApp() {
+	}
+
+	public FacebookApp(String apiKey, String apiSecret, Set<String> loginPermissions) {
+		this.apiKey = apiKey;
+		this.apiSecret = apiSecret;
+		this.loginPermissions.addAll(loginPermissions);
+	}
 
 	/**
 	 * Facebook App ID.
