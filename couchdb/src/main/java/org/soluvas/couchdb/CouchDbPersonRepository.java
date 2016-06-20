@@ -688,4 +688,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		return null;
 	}
 
+	@Override
+	public List<String> findAllIdsByCustomerRoleId(StatusMask statusMask, String customerRoleId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

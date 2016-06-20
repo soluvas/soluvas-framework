@@ -173,6 +173,8 @@ public interface PersonRepository extends
 	Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable);
 	
 	Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask, Pageable pageable);
+	
+	List<String> findAllIdsByCustomerRoleId(StatusMask statusMask, String customerRoleId);
 
 }
 

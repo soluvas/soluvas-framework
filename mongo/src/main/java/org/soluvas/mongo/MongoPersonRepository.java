@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
@@ -830,6 +831,25 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			query.put("creationTime", creationTimeQuery);
 		}
 		return query;
+	}
+
+	@Override
+	public List<String> findAllIdsByCustomerRoleId(StatusMask statusMask, String customerRoleId) {
+		final BasicDBObject query = new BasicDBObject("customerRole", customerRoleId);
+		augmentQueryForStatusMask(query, statusMask);
+
+		final BasicDBObject fields = new BasicDBObject("_id", true);
+		
+		final BasicDBObject sort = new BasicDBObject("_id", 1);
+		
+		final List<DBObject> dbObjects = findSecondaryAsDBObjects(query, fields, sort, 0, 0, "findAllIdsByCustomerRoleId", statusMask, customerRoleId);
+		final List<String> ids = dbObjects.stream().map(new java.util.function.Function<DBObject, String>() {
+			@Override
+			public String apply(DBObject t) {
+				return t.get("_id").toString();
+			}
+		}).collect(Collectors.toList());
+		return ids;
 	}
 
 //	@Override
