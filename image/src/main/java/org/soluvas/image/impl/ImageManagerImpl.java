@@ -624,19 +624,18 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			}
 		});
 		
-		//klo kena duplikat error
-//		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
-		final Map<String, DisplayImage> displayImageMap = new HashMap<>();
+		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
+//		final Map<String, DisplayImage> displayImageMap = new HashMap<>();
 		for (final String imageId : imageIds) {
 			final Image image = imageMap.get(imageId);
 			final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(),
 					imageId, style, image);
 //			log.debug("Display image: {}", displayImage);
-//			b.put(imageId, displayImage);
-			displayImageMap.put(imageId, displayImage);
+			b.put(imageId, displayImage);
+//			displayImageMap.put(imageId, displayImage);
 		}
-//		return b.build();
-		return displayImageMap;
+		return b.build();
+//		return displayImageMap;
 	}
 
 	/**
