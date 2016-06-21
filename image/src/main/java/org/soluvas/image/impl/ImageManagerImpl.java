@@ -624,15 +624,19 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			}
 		});
 		
-		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
+		//klo kena duplikat error
+//		final ImmutableMap.Builder<String, DisplayImage> b = ImmutableMap.builder();
+		final Map<String, DisplayImage> displayImageMap = new HashMap<>();
 		for (final String imageId : imageIds) {
 			final Image image = imageMap.get(imageId);
 			final DisplayImage displayImage = grabDisplayImage(namespace, imageRepo.getStyles(),
 					imageId, style, image);
 //			log.debug("Display image: {}", displayImage);
-			b.put(imageId, displayImage);
+//			b.put(imageId, displayImage);
+			displayImageMap.put(imageId, displayImage);
 		}
-		return b.build();
+//		return b.build();
+		return displayImageMap;
 	}
 
 	/**
@@ -754,6 +758,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Map<?, ?> getImageUris() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
