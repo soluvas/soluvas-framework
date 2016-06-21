@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -125,8 +126,14 @@ public class FacebookUtilsImpl implements FacebookUtils {
 				try {
 					FileUtils.copyInputStreamToFile(response.getEntity().getContent(), tmpFile);
 					log.debug("Photo Status Line {}",  response.getStatusLine());
+					final Predicate<String> predicate = new Predicate<String>() {
+						@Override
+						public boolean apply(String input) {
+							return !imageRepo.exists(input);
+						}
+					};
 					final Image newImage = new Image(tmpFile, response.getEntity().getContentType().getValue(),
-							personName + " Facebook " + facebookId);
+							personName + " Facebook " + facebookId, predicate);
 					final String imageId = imageRepo.add(newImage).getId();
 					log.debug("tmp file path from Facebook user {} is {}", tmpFile);
 					return imageId;

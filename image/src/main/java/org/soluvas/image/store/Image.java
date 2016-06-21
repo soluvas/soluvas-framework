@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -91,11 +92,16 @@ public class Image implements Serializable {
 	 * @param contentType
 	 * @param name
 	 */
-	public Image(String id, File originalFile, String contentType, String name) {
+	public Image(String id, File originalFile, String contentType, String name,
+			@Nullable Predicate<String> predicate) {
 		super();
 		Preconditions.checkArgument(id.length() <= MAX_ID_LENGTH,
 				"Image ID '%s' (%s characters) cannot be more than %s characters.", id, id.length(), MAX_ID_LENGTH);
-		this.id = SlugUtils.generateId(id, 0);
+		if (predicate != null) {
+			this.id = SlugUtils.generateValidId(id, predicate);
+		} else {
+			this.id = SlugUtils.generateId(id, 0);
+		}
 		this.originalFile = originalFile;
 		this.contentType = contentType;
 		this.name = name;
@@ -107,8 +113,12 @@ public class Image implements Serializable {
 	 * @param contentType
 	 * @param name
 	 */
+	public Image(File originalFile, String contentType, String name, @Nullable Predicate<String> predicate) {
+		this(name, originalFile, contentType, name, predicate);
+	}
+	
 	public Image(File originalFile, String contentType, String name) {
-		this(name, originalFile, contentType, name);
+		this(name, originalFile, contentType, name, null);
 	}
 
 	/**

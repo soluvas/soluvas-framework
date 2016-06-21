@@ -683,8 +683,13 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 				log.info("Upserting image {} ({}) metadata into MongoDB collection {}", 
 						original.imageId, original.name, mongoColl.getName() );
 				mongoColl.update(new BasicDBObject("_id", original.imageId), dbo, true, false);
-				
-				final Image addedImage = new Image(original.imageId, null, original.contentType, original.name);
+				final Predicate<String> predicate = new Predicate<String>() {
+					@Override
+					public boolean apply(String input) {
+						return !exists(input);
+					}
+				};
+				final Image addedImage = new Image(original.imageId, null, original.contentType, original.name, predicate);
 				return addedImage;
 			}
 		});

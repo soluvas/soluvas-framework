@@ -386,8 +386,14 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 						submon.worked(1, ProgressStatus.SKIPPED);
 						break;
 					case ADD:
+						final Predicate<String> predicate = new Predicate<String>() {
+							@Override
+							public boolean apply(String input) {
+								return !imageRepo.exists(input);
+							}
+						};
 						final Image addImage = new Image(null, originalFile, image.getContentType(),
-								Optional.fromNullable(image.getName()).or(image.getId()));
+								Optional.fromNullable(image.getName()).or(image.getId()), predicate);
 						final String addImageId = imageRepo.add(addImage).getId();
 						log.info("Added possibly duplicate image {} as {}", image.getId(), addImageId);
 						importedCount++;
@@ -395,7 +401,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 						break;
 					case OVERWRITE:
 						final Image overwriteImage = new Image(image.getId(), originalFile, image.getContentType(),
-								Optional.fromNullable(image.getName()).or(image.getId()));
+								Optional.fromNullable(image.getName()).or(image.getId()), null);
 						final String overwriteImageId = imageRepo.add(overwriteImage).getId();
 						log.info("Overwritten image {} as {}", image.getId(), overwriteImageId);
 						importedCount++;
@@ -406,7 +412,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 					}
 				} else {
 					newImage = new Image(image.getId(), originalFile, image.getContentType(),
-							Optional.fromNullable(image.getName()).or(image.getId()));
+							Optional.fromNullable(image.getName()).or(image.getId()), null);
 					final String newImageId = imageRepo.add(newImage).getId();
 					log.info("Imported image {} as {}", image.getId(), newImageId);
 					importedCount++;
