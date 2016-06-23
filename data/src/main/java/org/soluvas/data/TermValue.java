@@ -2,8 +2,6 @@
  */
 package org.soluvas.data;
 
-import java.io.Serializable;
-
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.data.impl.TermValueImpl;
@@ -27,6 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.data.TermValue#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getValue <em>Value</em>}</li>
  *   <li>{@link org.soluvas.data.TermValue#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.TermValue#getContent <em>Content</em>}</li>
  * </ul>
  *
  * @see org.soluvas.data.DataPackage#getTermValue()
@@ -34,7 +33,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=TermValueImpl.class)
-public interface TermValue extends Value<String>, Identifiable, Sluggable, Serializable {
+public interface TermValue extends Value<String>, Identifiable, Sluggable {
+	
+	public static String CONTENT_ATTR = "content";
 	
 	public void copyFromMongo(Term2 term2);
 	
@@ -140,5 +141,33 @@ public interface TermValue extends Value<String>, Identifiable, Sluggable, Seria
 	 * @generated
 	 */
 	void setPrimaryUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Content</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Content</em>' attribute.
+	 * @see #setContent(String)
+	 * @see org.soluvas.data.DataPackage#getTermValue_Content()
+	 * @model
+	 * @generated
+	 */
+	String getContent();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.data.TermValue#getContent <em>Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Content</em>' attribute.
+	 * @see #getContent()
+	 * @generated
+	 */
+	void setContent(String value);
+
+	String getEffectiveContent(String curLanguageTag);
 
 } // TermValue

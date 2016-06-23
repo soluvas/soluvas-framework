@@ -707,6 +707,15 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTermValue_Content() {
+		return (EAttribute)termValueEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getVocab() {
 		return vocabEClass;
@@ -1196,6 +1205,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		createEAttribute(termValueEClass, TERM_VALUE__SLUG_PATH);
 		createEAttribute(termValueEClass, TERM_VALUE__VALUE);
 		createEAttribute(termValueEClass, TERM_VALUE__PRIMARY_URI);
+		createEAttribute(termValueEClass, TERM_VALUE__CONTENT);
 
 		vocabEClass = createEClass(VOCAB);
 
@@ -1451,6 +1461,7 @@ public class DataPackageImpl extends EPackageImpl implements DataPackage {
 		initEAttribute(getTermValue_SlugPath(), ecorePackage.getEString(), "slugPath", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTermValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTermValue_PrimaryUri(), ecorePackage.getEString(), "primaryUri", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTermValue_Content(), ecorePackage.getEString(), "content", null, 0, 1, TermValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(vocabEClass, Vocab.class, "Vocab", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.soluvas.data.*;
 import org.soluvas.data.Attribute;
 import org.soluvas.data.AttributeSemantic;
 import org.soluvas.data.CurrencyValue;

@@ -30,6 +30,7 @@ public class TermKindRepositoryImpl implements TermKindRepository {
 	public static final String COLOR = "Color";
 	public static final String APPAREL_SIZE = "ApparelSize";
 	public static final String SHOE_SIZE = "ShoeSize";
+	public static final String SIZE_GUID = "SizeGuide";
 	
 	private static final Logger log = LoggerFactory
 			.getLogger(TermKindRepositoryImpl.class);

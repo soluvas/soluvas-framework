@@ -225,6 +225,7 @@
         <details key="documentation" value="Primary Linked Data URI, to be usable as property &lt;tt>@vocab&lt;/tt> value or &lt;tt>@id&lt;/tt>, e.g. {@code http://purl.org/opdm/garment#Polyester}."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eGenericSuperTypes eClassifier="#//Value">
       <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eGenericSuperTypes>

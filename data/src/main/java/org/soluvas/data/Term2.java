@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import jline.internal.Preconditions;
-
 import org.soluvas.commons.Identifiable;
 
 import com.google.code.morphia.annotations.Id;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
+
+import jline.internal.Preconditions;
 
 /**
  * @author rudi
@@ -25,6 +25,7 @@ public class Term2 implements Serializable, Identifiable {
 	
 	public static String NAME_ATTR = "name";
 	public static String DESCRIPTION_ATTR = "description";
+	public static String CONTENT_ATTR = "content";
 	
 	@Id private String id;
 	private String formalId;
@@ -41,6 +42,7 @@ public class Term2 implements Serializable, Identifiable {
 	private String description;
 	private Boolean enabled;
 	private Boolean overridden;
+	private String content;
 	
 	public Term2() {
 		super();
@@ -63,6 +65,7 @@ public class Term2 implements Serializable, Identifiable {
 		this.setPositioner(term.getPositioner());
 		this.setPrimaryUri(term.getPrimaryUri());
 		this.setSameAsUris(term.getSameAsUris());
+		this.setContent(term.getContent());
 	}
 	
 	public void copyFromXmi(Term xmiTerm) {
@@ -303,14 +306,50 @@ public class Term2 implements Serializable, Identifiable {
 				return getName();
 			} else {
 				final Map<String, String> msg = getTranslations().get(curLanguageTag);
-				if (msg != null && msg.containsKey(Term2.NAME_ATTR)) {
-					return msg.get(Term2.NAME_ATTR);
+				if (msg != null && msg.containsKey(NAME_ATTR)) {
+					return msg.get(NAME_ATTR);
 				} else {
 					return getName();
 				}
 			}
 		} else {
 			return getName();
+		}
+	}
+	
+	public String getEffectiveDescription(String curLanguageTag) {
+		Preconditions.checkNotNull("For getting effective description, the curLanguageTag must not be null.");
+		if (getTranslations() != null && !getTranslations().isEmpty()) {
+			if (curLanguageTag.equals(getLanguage())) {
+				return getDescription();
+			} else {
+				final Map<String, String> msg = getTranslations().get(curLanguageTag);
+				if (msg != null && msg.containsKey(DESCRIPTION_ATTR)) {
+					return msg.get(DESCRIPTION_ATTR);
+				} else {
+					return getDescription();
+				}
+			}
+		} else {
+			return getDescription();
+		}
+	}
+	
+	public String getEffectiveContent(String curLanguageTag) {
+		Preconditions.checkNotNull("For getting effective content, the curLanguageTag must not be null.");
+		if (getTranslations() != null && !getTranslations().isEmpty()) {
+			if (curLanguageTag.equals(getLanguage())) {
+				return getContent();
+			} else {
+				final Map<String, String> msg = getTranslations().get(curLanguageTag);
+				if (msg != null && msg.containsKey(CONTENT_ATTR)) {
+					return msg.get(CONTENT_ATTR);
+				} else {
+					return getContent();
+				}
+			}
+		} else {
+			return getContent();
 		}
 	}
 	
@@ -324,6 +363,20 @@ public class Term2 implements Serializable, Identifiable {
 				+ ", color=" + color + ", language=" + language
 				+ ", translations=" + translations + ", kindName=" + enumerationId + ", primaryUri="
 				+ primaryUri + ", sameAsUris=" + sameAsUris + "]";
+	}
+
+	/**
+	 * @return the content
+	 */
+	public String getContent() {
+		return content;
+	}
+
+	/**
+	 * @param content the content to set
+	 */
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 }

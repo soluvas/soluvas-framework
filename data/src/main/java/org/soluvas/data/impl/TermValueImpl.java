@@ -21,6 +21,8 @@ import org.soluvas.data.Term;
 import org.soluvas.data.Term2;
 import org.soluvas.data.TermValue;
 
+import jline.internal.Preconditions;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Term Value</b></em>'.
@@ -35,6 +37,7 @@ import org.soluvas.data.TermValue;
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getSlugPath <em>Slug Path</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.soluvas.data.impl.TermValueImpl#getPrimaryUri <em>Primary Uri</em>}</li>
+ *   <li>{@link org.soluvas.data.impl.TermValueImpl#getContent <em>Content</em>}</li>
  * </ul>
  *
  * @generated
@@ -154,6 +157,26 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 	 * @ordered
 	 */
 	protected String primaryUri = PRIMARY_URI_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getContent() <em>Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContent()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CONTENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContent() <em>Content</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContent()
+	 * @generated
+	 * @ordered
+	 */
+	protected String content = CONTENT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -362,6 +385,29 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 	 * @generated
 	 */
 	@Override
+	public String getContent() {
+		return content;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setContent(String newContent) {
+		String oldContent = content;
+		content = newContent;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DataPackage.TERM_VALUE__CONTENT, oldContent, content));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case DataPackage.TERM_VALUE__ID:
@@ -377,6 +423,8 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 				return getValue();
 			case DataPackage.TERM_VALUE__PRIMARY_URI:
 				return getPrimaryUri();
+			case DataPackage.TERM_VALUE__CONTENT:
+				return getContent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -408,6 +456,9 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 			case DataPackage.TERM_VALUE__PRIMARY_URI:
 				setPrimaryUri((String)newValue);
 				return;
+			case DataPackage.TERM_VALUE__CONTENT:
+				setContent((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -438,6 +489,9 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 			case DataPackage.TERM_VALUE__PRIMARY_URI:
 				setPrimaryUri(PRIMARY_URI_EDEFAULT);
 				return;
+			case DataPackage.TERM_VALUE__CONTENT:
+				setContent(CONTENT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -462,6 +516,8 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case DataPackage.TERM_VALUE__PRIMARY_URI:
 				return PRIMARY_URI_EDEFAULT == null ? primaryUri != null : !PRIMARY_URI_EDEFAULT.equals(primaryUri);
+			case DataPackage.TERM_VALUE__CONTENT:
+				return CONTENT_EDEFAULT == null ? content != null : !CONTENT_EDEFAULT.equals(content);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -530,6 +586,8 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 		result.append(value);
 		result.append(", primaryUri: ");
 		result.append(primaryUri);
+		result.append(", content: ");
+		result.append(content);
 		result.append(')');
 		return result.toString();
 	}
@@ -577,14 +635,34 @@ public class TermValueImpl extends ValueImpl<String> implements TermValue {
 		setSlugPath(null);
 		setTranslationState(TranslationState.ORIGINAL);
 		setValue(term2.getId());
+		setContent(term2.getContent());
 		for ( final Entry<String, Map<String, String>> entry : term2.getTranslations().entrySet()) {
 			final String key = entry.getKey();
 			final Translation translation = CommonsFactory.eINSTANCE.createTranslation();
-			for (Entry<String, String> transEntry : entry.getValue().entrySet()) {
+			for (final Entry<String, String> transEntry : entry.getValue().entrySet()) {
 				translation.setLanguage(key);
 				translation.getMessages().put(transEntry.getKey(), transEntry.getValue());
 			}
 			getTranslations().put(key, translation);
+		}
+	}
+	
+	@Override
+	public String getEffectiveContent(String curLanguageTag) {
+		Preconditions.checkNotNull("For getting effective content, the curLanguageTag must not be null.");
+		if (getTranslations() != null && !getTranslations().isEmpty()) {
+			if (curLanguageTag.equals(getLanguage())) {
+				return getContent();
+			} else {
+				final Map<String, String> msg = getTranslations().get(curLanguageTag).getMessages().map();
+				if (msg != null && msg.containsKey(CONTENT_ATTR)) {
+					return msg.get(CONTENT_ATTR);
+				} else {
+					return getContent();
+				}
+			}
+		} else {
+			return getContent();
 		}
 	}
 	

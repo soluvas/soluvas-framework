@@ -76,7 +76,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @model
  */
 @JsonDeserialize(as=AttributeImpl.class)
-public interface Attribute extends NsPrefixable, NameContainer, Imageable, Describable, Positionable, Serializable {
+public interface Attribute extends NsPrefixable, NameContainer, Imageable, Describable, Positionable {
 	/**
 	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

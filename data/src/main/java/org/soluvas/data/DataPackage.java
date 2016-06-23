@@ -895,13 +895,22 @@ public interface DataPackage extends EPackage {
 	int TERM_VALUE__PRIMARY_URI = VALUE_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Content</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERM_VALUE__CONTENT = VALUE_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Term Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TERM_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 6;
+	int TERM_VALUE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.data.TermContainer <em>Term Container</em>}' class.
@@ -2300,6 +2309,17 @@ public interface DataPackage extends EPackage {
 	EAttribute getTermValue_PrimaryUri();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.data.TermValue#getContent <em>Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Content</em>'.
+	 * @see org.soluvas.data.TermValue#getContent()
+	 * @see #getTermValue()
+	 * @generated
+	 */
+	EAttribute getTermValue_Content();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.data.Vocab <em>Vocab</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3089,6 +3109,14 @@ public interface DataPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TERM_VALUE__PRIMARY_URI = eINSTANCE.getTermValue_PrimaryUri();
+
+		/**
+		 * The meta object literal for the '<em><b>Content</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TERM_VALUE__CONTENT = eINSTANCE.getTermValue_Content();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.data.impl.VocabImpl <em>Vocab</em>}' class.
