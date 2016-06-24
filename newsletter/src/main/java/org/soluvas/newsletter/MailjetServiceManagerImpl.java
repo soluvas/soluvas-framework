@@ -57,7 +57,7 @@ public class MailjetServiceManagerImpl implements MailjetServiceManager {
 		try {
 			final List<NameValuePair> data = new ArrayList<NameValuePair>();
 			data.add(new BasicNameValuePair("Email", email));
-			data.add(new BasicNameValuePair("Action", "unsub"));
+			data.add(new BasicNameValuePair("Action", "addforce"));
 			data.add(new BasicNameValuePair("Content-Type", "application/json"));
 			
 			final String requestUri = baseApiUri + "contactslist/"+ credential.getDefaultContactID() +"/managecontact";
