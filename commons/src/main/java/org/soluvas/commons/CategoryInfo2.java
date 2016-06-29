@@ -22,6 +22,22 @@ public class CategoryInfo2 implements Serializable {
 	private Long googleFormalId;
 	private String primaryUri;
 	private String parentId;
+	
+	public void copyFrom(CategoryInfo upInfo) {
+		setColor(upInfo.getColor());
+		setGoogleFormalId(upInfo.getGoogleFormalId());
+		setId(upInfo.getId());
+		setImageId(upInfo.getImageId());
+		setLevel(upInfo.getLevel());
+		setName(upInfo.getName());
+		setNsPrefix(upInfo.getNsPrefix());
+		setParentId(upInfo.getParent() != null ? upInfo.getParent().getId() : null);
+		setPositioner(upInfo.getPositioner());
+		setPrimaryUri(upInfo.getPrimaryUri());
+		setSlug(upInfo.getSlug());
+		setSlugPath(upInfo.getSlugPath());
+	}
+	
 	/**
 	 * @return the id
 	 */
