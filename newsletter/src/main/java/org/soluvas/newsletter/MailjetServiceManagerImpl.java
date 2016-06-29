@@ -30,18 +30,13 @@ public class MailjetServiceManagerImpl implements MailjetServiceManager {
 	private final Boolean isServiceEnable;
 	
 	private final ObjectMapper mapper = JsonUtils.mapper;
-	private final String baseApiUri = "https://api.mailjet.com/v3/REST/";
+	private final String baseUri = "https://api.mailjet.com/v3/REST/";
 	private final List<BasicHeader> basicHeaders = new ArrayList<BasicHeader>();
 	
 	public MailjetServiceManagerImpl(MailjetCredential credential, Boolean isServiceEnable) {
 		super();
 		this.credential = credential;
 		this.isServiceEnable = isServiceEnable;
-		
-		if (isServiceEnable != null && isServiceEnable) {
-			Preconditions.checkArgument(!Strings.isNullOrEmpty(credential.getApiKey()), "If Mailjet is enabled, apiKey must be provided");
-			Preconditions.checkArgument(!Strings.isNullOrEmpty(credential.getSecretKey()), "If Mailjet is enabled, secretKey must be provided");
-		}
 		
 		basicHeaders.add(new BasicHeader("Accept", "application/json"));
 		basicHeaders.add(new BasicHeader("user-agent", "mailjet-apiv3-java/v3.0.0"));
@@ -52,28 +47,36 @@ public class MailjetServiceManagerImpl implements MailjetServiceManager {
 	}
 	
 	@Override
-	public MailjetResponse addContact(String email) throws IOException {
+	public MailjetResponse addContact(String email) throws IOException, NullMailjetConfigurationException {
+		checkConfigurationIsNotNullOrEmpty(credential.getApiKey(), "API KEY must no be null");
+		checkConfigurationIsNotNullOrEmpty(credential.getSecretKey(), "SecretKey must no be null");
+		checkConfigurationIsNotNullOrEmpty(credential.getDefaultContactID(), "Contact ID must no be null");
+		
+		final List<NameValuePair> data = new ArrayList<NameValuePair>();
+		data.add(new BasicNameValuePair("Email", email));
+		data.add(new BasicNameValuePair("Action", "addforce"));
+		data.add(new BasicNameValuePair("Content-Type", "application/json"));
+		
+		final String requestUri = baseUri + "contactslist/"+ credential.getDefaultContactID() +"/managecontact";
+		final HttpPost httpPost = new HttpPost(requestUri);
+		httpPost.setEntity(new UrlEncodedFormEntity(data, "UTF-8"));
+		httpPost.setHeaders(basicHeaders.toArray(new BasicHeader[basicHeaders.size()]));
+		
 		final CloseableHttpClient httpClient = HttpClients.custom().build();
-		try {
-			final List<NameValuePair> data = new ArrayList<NameValuePair>();
-			data.add(new BasicNameValuePair("Email", email));
-			data.add(new BasicNameValuePair("Action", "addforce"));
-			data.add(new BasicNameValuePair("Content-Type", "application/json"));
-			
-			final String requestUri = baseApiUri + "contactslist/"+ credential.getDefaultContactID() +"/managecontact";
-			final HttpPost httpPost = new HttpPost(requestUri);
-			httpPost.setEntity(new UrlEncodedFormEntity(data, "UTF-8"));
-			httpPost.setHeaders(basicHeaders.toArray(new BasicHeader[basicHeaders.size()]));
-			
-			
-			CloseableHttpResponse reqResponse = httpClient.execute(httpPost);
-			final String responseContent = IOUtils.toString(reqResponse.getEntity().getContent());
-			
-			log.debug("responseContent {}", responseContent);
-			return mapper.readValue(responseContent, MailjetResponse.class);
-		} finally {
-			httpClient.close();
+		log.info("attempting to add {} to contact id {}", email, 
+				credential.getDefaultContactID());
+		CloseableHttpResponse reqResponse = httpClient.execute(httpPost);
+		final String responseContent = IOUtils.toString(reqResponse.getEntity().getContent());
+		httpClient.close();
+		
+		return mapper.readValue(responseContent, MailjetResponse.class);
+	}
+	
+	private String checkConfigurationIsNotNullOrEmpty(String attrVal, String errMsg) {
+		if (Strings.isNullOrEmpty(attrVal)) {
+			throw new NullMailjetConfigurationException(errMsg);
 		}
+		return attrVal;
 	}
 	
 	

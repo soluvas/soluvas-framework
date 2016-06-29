@@ -10,7 +10,11 @@ import java.io.IOException;
  *
  */
 public interface MailjetServiceManager {
-
+	public enum AddContactActionType {
+		ADDFORCE, 
+		ADDNOFORCE, 
+		UNSUB
+	}
 	MailjetResponse addContact(String email) throws IOException;
 
 }
