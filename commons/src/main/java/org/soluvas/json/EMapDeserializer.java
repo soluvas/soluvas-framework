@@ -3,6 +3,7 @@ package org.soluvas.json;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.BasicEMap;
@@ -17,8 +18,6 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 /**
@@ -65,13 +64,23 @@ public class EMapDeserializer extends StdDeserializer<EMap<Object, Object>> {
 		final JsonDeserializer<Map<Object, Object>> mapDeser = (JsonDeserializer) ctxt.findRootValueDeserializer(ctxt.getTypeFactory().constructType(Map.class));
 		final Map<Object, Object> map = mapDeser.deserialize(jp, ctxt);
 		// convert List to EList
-		final Map<Object, Object> transformed = ImmutableMap.copyOf(Maps.transformValues(map, it -> {
+		
+		//https://idbippo.atlassian.net/browse/BC-3979
+//		final Map<Object, Object> transformed = ImmutableMap.copyOf(Maps.transformValues(map, it -> {
+		final Map<Object, Object> transformed = Maps.transformValues(map, it -> {
 				if (it == null)
 					return null;
 				if (it instanceof List)
 					return new BasicEList<>((List) it);
 				return it;
-			}));
+//			}));
+			});
+		transformed.values().removeIf(new Predicate<Object>() {
+			@Override
+			public boolean test(Object t) {
+				return t == null;
+			}
+		});
 		return new BasicEMap<>(transformed);
 	}
 
