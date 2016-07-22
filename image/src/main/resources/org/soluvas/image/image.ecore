@@ -274,7 +274,7 @@
       </eParameters>
       <eParameters name="style" eType="#//ImageStyle"/>
     </eOperations>
-    <eOperations name="getSafeImagesById" lowerBound="1">
+    <eOperations name="getSafeImagesByIds" lowerBound="1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Gets DisplayImages for image IDs &amp; styleName in a specified repository.&#xA;If image is not available, use the default object noimage.&#xA;Returns Map&lt;imageId, DisplayImage>."/>
       </eAnnotations>

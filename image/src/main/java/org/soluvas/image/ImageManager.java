@@ -139,7 +139,7 @@ public interface ImageManager extends EObject {
 	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" imageIdsDataType="org.soluvas.commons.Collection<org.eclipse.emf.ecore.EString>" imageIdsRequired="true" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	Map<String, DisplayImage> getSafeImagesById(ImageType namespace, Collection<String> imageIds, ImageStyle style);
+	Map<String, DisplayImage> getSafeImagesByIds(ImageType namespace, Collection<String> imageIds, ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->

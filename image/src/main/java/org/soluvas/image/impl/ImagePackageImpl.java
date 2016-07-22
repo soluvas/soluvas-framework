@@ -1843,7 +1843,7 @@ public class ImagePackageImpl extends EPackageImpl implements ImagePackage {
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
 
-		op = addEOperation(imageManagerEClass, null, "getSafeImagesById", 1, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(imageManagerEClass, null, "getSafeImagesByIds", 1, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getImageType(), "namespace", 1, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getCollection());
 		g2 = createEGenericType(ecorePackage.getEString());

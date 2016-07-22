@@ -620,7 +620,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public Map<String, DisplayImage> getSafeImagesById(ImageType namespace, Collection<String> imageIds, ImageStyle style) {
+	public Map<String, DisplayImage> getSafeImagesByIds(ImageType namespace, Collection<String> imageIds, ImageStyle style) {
 		final ImageRepository imageRepo = getImageRepositoryChecked(namespace);
 		final List<Image> images = imageRepo.findAll(imageIds);
 		final Map<String, Image> imageMap = Maps.uniqueIndex(images, new Function<Image, String>() {
