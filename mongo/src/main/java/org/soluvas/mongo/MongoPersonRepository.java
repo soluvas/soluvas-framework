@@ -544,7 +544,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	 * @param keyword (ID, name, emails and phone numbers)
 	 * @param accountStatuses
 	 * @param customerRole
-	 * @param securityRoles
+	 * @param securityRoleIds
 	 * @param pageable
 	 * @return
 	 */
@@ -553,7 +553,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			String keyword,
 			Collection<AccountStatus> accountStatuses,
 			CustomerRole customerRole, 
-			Collection<String> securityRoles,
+			Collection<String> securityRoleIds,
 			Pageable pageable) {
 		
 		BasicDBObject query;
@@ -572,9 +572,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			query.put("customerRole", customerRole.getId()); 
 		}
 		
-		if (securityRoles != null && !securityRoles.isEmpty()) {
+		if (securityRoleIds != null && !securityRoleIds.isEmpty()) {
 			query.put("securityRoleIds", 
-					new BasicDBObject("$in", securityRoles));
+					new BasicDBObject("$in", securityRoleIds));
 		}
 			
 		final Sort mySort;
@@ -593,11 +593,11 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	
 	/**
 	 * 
+	 * @param pageable
 	 * @param keyword (ID, name, emails and phone numbers)
 	 * @param accountStatuses
 	 * @param customerRole
 	 * @param securityRoleIds
-	 * @param pageable
 	 * @return
 	 */
 	@Override

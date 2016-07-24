@@ -136,11 +136,11 @@ public interface PersonRepository extends
 
 	long countAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> customerRoleIds);
+			CustomerRole customerRole, Collection<String> securityRoleIds);
 
 	Page<Person> findAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> securityRoles,
+			CustomerRole customerRole, Collection<String> securityRoleIds,
 			Pageable pageable);
 
 	Page<Person> findAllByCustomerRoleIds(StatusMask statusMask,

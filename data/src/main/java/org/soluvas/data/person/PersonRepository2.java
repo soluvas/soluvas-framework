@@ -45,9 +45,9 @@ public interface PersonRepository2 {
     long count(String tenantId, StatusMask statusMask);
     Page<Person2> findAll(String tenantId, StatusMask statusMask, Pageable pageable);
 
-    long countAllByKeywordAndRoles(String keyword,
+    long countAllByKeywordAndRoles(String tenantId, String keyword,
                                    Collection<AccountStatus> accountStatuses,
-                                   CustomerRole customerRole, Collection<String> customerRoleIds);
-    Page<Person2> findAllByKeywordAndRoles(String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> securityRoleIds, PageRequest pageable);
+                                   CustomerRole customerRole, Collection<String> securityRoleIds);
+    Page<Person2> findAllByKeywordAndRoles(String tenantId, String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> securityRoleIds, PageRequest pageable);
 
 }

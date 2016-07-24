@@ -1,14 +1,12 @@
 package org.soluvas.data.person;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import org.soluvas.commons.*;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.springframework.core.env.Environment;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +18,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Environment property {@code person.class} is required, it's also required by {@code commands/person.groovy}
@@ -175,29 +174,56 @@ public class JpaPersonRepository2 implements PersonRepository2 {
     @Override
     @Transactional(readOnly = true)
     public long count(String tenantId, StatusMask statusMask) {
-        // FIXME: implement
-        return 0;
+        return em.createQuery("SELECT COUNT(p.id) FROM Person p" +
+                " WHERE p.tenantId=:tenantId", Long.class)
+                .setParameter("tenantId", tenantId)
+                .getSingleResult();
+    }
+
+    public static String toOrderBy(Sort upSort, Sort defaultSort, String alias) {
+        final Sort realSort = null != upSort ? upSort : defaultSort;
+        return "ORDER BY " + ImmutableList.copyOf(realSort).stream()
+                .map(it -> alias + "." + it.getProperty() + " " + it.getDirection().name())
+                .collect(Collectors.joining(", "));
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<Person2> findAll(String tenantId, StatusMask statusMask, Pageable pageable) {
-        // FIXME: implement
-        return null;
+        final long cnt = count(tenantId, statusMask);
+        pageable.getSort();
+        final List<Person2> content = (List<Person2>) em.createQuery("SELECT COUNT(p.id) FROM Person p" +
+                " WHERE p.tenantId=:tenantId " + toOrderBy(pageable.getSort(), new Sort("name"), "p"),
+                entityClass)
+                .setParameter("tenantId", tenantId)
+                .setFirstResult(pageable.getOffset())
+                .setMaxResults(pageable.getPageSize())
+                .getResultList();
+        return new PageImpl<>(content, pageable, cnt);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public long countAllByKeywordAndRoles(String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> customerRoleIds) {
-        // FIXME: implement
-        return 0;
+    public long countAllByKeywordAndRoles(String tenantId, String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> securityRoleIds) {
+        return em.createQuery("SELECT COUNT(p.id) FROM Person p" +
+                " WHERE p.tenantId=:tenantId AND (lower(p.id) LIKE :likeExpr OR lower(p.slug) LIKE :likeExpr OR lower(p.name) LIKE :likeExpr)", Long.class)
+                .setParameter("tenantId", tenantId)
+                .setParameter("likeExpr", keyword.toLowerCase() + "%")
+                .getSingleResult();
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Person2> findAllByKeywordAndRoles(String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> securityRoleIds, PageRequest pageable) {
-        // FIXME: implement
-        return null;
+    public Page<Person2> findAllByKeywordAndRoles(String tenantId, String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> customerRoleIds, PageRequest pageable) {
+        final long cnt = countAllByKeywordAndRoles(tenantId, keyword, accountStatuses, customerRole, customerRoleIds);
+        final List<Person2> content = (List<Person2>) em.createQuery("SELECT p FROM Person p" +
+                        " WHERE p.tenantId=:tenantId AND (lower(p.id) LIKE :likeExpr OR lower(p.slug) LIKE :likeExpr OR lower(p.name) LIKE :likeExpr) " +
+                        toOrderBy(pageable.getSort(), new Sort("name"), "p"),
+                entityClass)
+                .setParameter("tenantId", tenantId)
+                .setParameter("likeExpr", keyword.toLowerCase() + "%")
+                .getResultList();
+        return new PageImpl<>(content, pageable, cnt);
     }
 
 }

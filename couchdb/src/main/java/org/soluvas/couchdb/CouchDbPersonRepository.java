@@ -609,14 +609,14 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	@Override
 	public long countAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> customerRoleIds) {
+			CustomerRole customerRole, Collection<String> securityRoleIds) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Page<Person> findAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> securityRoles,
+			CustomerRole customerRole, Collection<String> securityRoleIds,
 			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
