@@ -174,4 +174,29 @@ class person {
         out.println(ansi().render(" @|bold,bg_green  OK |@"));
         return roleSet;
     }
+
+    @Usage('Change person password')
+    @Command
+    public String passwd(
+            @Usage('Tenant ID.')
+            @Required @Option(names = ['t', 'tenant']) String tenantId,
+            @Usage('Person Slug.')
+            @Argument String personSlug,
+            @Usage('Password (will be encoded using BCrypt).')
+            @Argument String password) {
+
+        //final AccessControlManager acMgr = getBean(AccessControlManager.class);
+        final BeanFactory beanFactory = context.attributes['spring.beanfactory']
+        final personRepo = beanFactory.getBean(PersonRepository2.class)
+        final person = personRepo.findOneBySlug(tenantId, StatusMask.RAW, personSlug).get();
+
+        final String encoded = BCrypt.hashpw(password, BCrypt.gensalt())
+        err.println(ansi().render("Encoded password: @|bold %s|@", encoded));
+        person.setPassword(encoded);
+
+        personRepo.modify(tenantId, person.id, person)
+
+        out.println(ansi().render(" @|bold,bg_green  OK |@"));
+    }
+
 }
