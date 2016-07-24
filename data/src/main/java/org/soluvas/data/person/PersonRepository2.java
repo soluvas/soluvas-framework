@@ -1,10 +1,13 @@
 package org.soluvas.data.person;
 
+import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Person2;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
@@ -37,5 +40,14 @@ public interface PersonRepository2 {
 
     Page<Person2> findBySearchText(String tenantId, StatusMask statusMask, String term, PageRequest pageable);
 
-    List<Person2> findAll(String tenantId, StatusMask activeOnly, Collection<String> ids);
+    List<Person2> findAll(String tenantId, StatusMask statusMask, Collection<String> ids);
+
+    long count(String tenantId, StatusMask statusMask);
+    Page<Person2> findAll(String tenantId, StatusMask statusMask, Pageable pageable);
+
+    long countAllByKeywordAndRoles(String keyword,
+                                   Collection<AccountStatus> accountStatuses,
+                                   CustomerRole customerRole, Collection<String> customerRoleIds);
+    Page<Person2> findAllByKeywordAndRoles(String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> securityRoleIds, PageRequest pageable);
+
 }

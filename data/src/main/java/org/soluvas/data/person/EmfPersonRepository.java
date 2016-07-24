@@ -417,7 +417,7 @@ public class EmfPersonRepository extends
 	@Override
 	public long countAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> custoemrRoleIds) {
+			CustomerRole customerRole, Collection<String> customerRoleIds) {
 		throw new UnsupportedOperationException();
 	}
 

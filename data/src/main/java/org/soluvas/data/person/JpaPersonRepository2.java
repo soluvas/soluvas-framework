@@ -1,15 +1,14 @@
 package org.soluvas.data.person;
 
 import com.google.common.base.Preconditions;
-import org.soluvas.commons.CommonsException;
-import org.soluvas.commons.Person2;
-import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.*;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -165,12 +164,40 @@ public class JpaPersonRepository2 implements PersonRepository2 {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Person2> findAll(String tenantId, StatusMask activeOnly, Collection<String> ids) {
+    public List<Person2> findAll(String tenantId, StatusMask statusMask, Collection<String> ids) {
         return (List) em.createQuery("SELECT p FROM Person p" +
                 " WHERE p.tenantId=:tenantId AND p.id IN :ids", entityClass)
                 .setParameter("tenantId", tenantId)
                 .setParameter("ids", ids)
                 .getResultList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public long count(String tenantId, StatusMask statusMask) {
+        // FIXME: implement
+        return 0;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Person2> findAll(String tenantId, StatusMask statusMask, Pageable pageable) {
+        // FIXME: implement
+        return null;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public long countAllByKeywordAndRoles(String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> customerRoleIds) {
+        // FIXME: implement
+        return 0;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Person2> findAllByKeywordAndRoles(String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> securityRoleIds, PageRequest pageable) {
+        // FIXME: implement
+        return null;
     }
 
 }
