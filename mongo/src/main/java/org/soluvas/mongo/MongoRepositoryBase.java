@@ -686,7 +686,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				collName, query, sortQuery, pageable.getOffset(), pageable.getPageSize());
 		final long total = secondary.count(query);
 		final List<T> entities = findSecondary(query, null, sortQuery, pageable.getOffset(), pageable.getPageSize(), "findAllByQuery");
-		log.info("findAllByQuery {} {} returned {} out of {} documents, sort {} skip {} limit {}",
+		log.debug("findAllByQuery {} {} returned {} out of {} documents, sort {} skip {} limit {}",
 				collName, query, entities.size(), total, sortQuery, pageable.getOffset(), pageable.getPageSize());
 		return new PageImpl<>(entities, pageable, total);		
 	}
@@ -694,7 +694,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	protected DBObject findDBObjectByQuery(DBObject query, DBObject fields) {
 		log.trace("findDBObjectByQuery {} {}", collName, query, fields);
 		final DBObject dbo = secondary.findOne(query, fields);
-		log.debug("findDBObjectByQuery {} {} {} returned {}",
+		log.trace("findDBObjectByQuery {} {} {} returned {}",
 				collName, query, fields, dbo != null ? dbo.get("_id") : null);
 		return dbo;
 	}
