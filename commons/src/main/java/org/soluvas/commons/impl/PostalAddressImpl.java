@@ -19,6 +19,7 @@ import org.soluvas.commons.PostalAddress;
 import org.soluvas.commons.SchemaVersionable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.code.morphia.annotations.Id;
 
 /**
  * <!-- begin-user-doc -->
@@ -97,7 +98,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * @generated
 	 * @ordered
 	 */
-	protected String id = ID_EDEFAULT;
+	@Id protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
@@ -1095,6 +1096,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDistrict() {
 		return district;
 	}
@@ -1104,6 +1106,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDistrict(String newDistrict) {
 		String oldDistrict = district;
 		district = newDistrict;
