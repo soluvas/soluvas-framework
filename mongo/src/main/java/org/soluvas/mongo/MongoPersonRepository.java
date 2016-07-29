@@ -92,7 +92,6 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	@Override @Nullable
 	public Person findOneBySlug(StatusMask statusMask, String upSlug) {
 		String canonicalize = SlugUtils.canonicalize(upSlug);
-		log.debug("slug to canonicalSlug : {}", canonicalize);
 		return findOneByQuery(new BasicDBObject("canonicalSlug", canonicalize));
 	}
 
