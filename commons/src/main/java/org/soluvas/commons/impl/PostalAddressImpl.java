@@ -19,7 +19,6 @@ import org.soluvas.commons.PostalAddress;
 import org.soluvas.commons.SchemaVersionable;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.code.morphia.annotations.Id;
 
 /**
  * <!-- begin-user-doc -->
@@ -98,7 +97,7 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * @generated
 	 * @ordered
 	 */
-	@Id protected String id = ID_EDEFAULT;
+	protected String id = ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSchemaVersion() <em>Schema Version</em>}' attribute.
