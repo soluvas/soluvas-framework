@@ -49,9 +49,7 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 				Index.asc("status"),
 				Index.asc("level"),
 				Index.asc("slug"),
-				Index.asc("slugPath"),
 				Index.asc("parentId"),
-				Index.uniqueAsc("slug"),
 				Index.uniqueAsc("slugPath"));
 		this.cacheMgr = cacheMgr;
 		this.tenantId = tenantId;
