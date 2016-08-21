@@ -759,7 +759,7 @@
 			<dependency>
 				<groupId>com.amazonaws</groupId>
 				<artifactId>aws-java-sdk-s3</artifactId>
-				<version>1.10.26</version>
+				<version>1.10.77</version>
 				<exclusions>
 					<exclusion>
 						<groupId>commons-logging</groupId>
