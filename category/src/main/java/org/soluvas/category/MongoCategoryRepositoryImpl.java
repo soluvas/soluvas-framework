@@ -101,7 +101,17 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 		final BasicDBObject query = new BasicDBObject();
 		query.put("status", new BasicDBObject("$in", FluentIterable.from(statuses).transform(new EnumNameFunction()).toList()));
 		query.put("level", level);
-		final Page<Category2> result = findAllByQuery(query, pageable);
+		
+		final BasicDBObject fields = new BasicDBObject();
+		fields.put("name", true);
+		fields.put("slugPath", true);
+		fields.put("translations", true);
+		
+//		final Page<Category2> result = findAllByQuery(query, pageable);
+		final List<Category2> list = findPrimary(query, fields, null, pageable.getOffset(), pageable.getPageSize(),
+				"findAllByLevelAndStatus", statuses, level);
+		final long count = countByQuery(query);
+		final Page<Category2> result = new PageImpl<>(list, pageable, count);
 		log.debug("Got {} categories by status '{}' and level '{}'", result.getContent().size(), statuses, level);
 		return result;
 	}
