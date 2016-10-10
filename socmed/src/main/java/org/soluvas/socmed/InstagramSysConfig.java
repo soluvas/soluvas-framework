@@ -15,10 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.socmed.InstagramSysConfig#getInstagramScreenName <em>Instagram Screen Name</em>}</li>
+ *   <li>{@link org.soluvas.socmed.InstagramSysConfig#getInstagramClientSecret <em>Instagram Client Secret</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.socmed.SocmedPackage#getInstagramSysConfig()
  * @model interface="true" abstract="true"
@@ -49,5 +50,31 @@ public interface InstagramSysConfig extends EObject {
 	 * @generated
 	 */
 	void setInstagramScreenName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Instagram Client Secret</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Instagram Client Secret</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Instagram Client Secret</em>' attribute.
+	 * @see #setInstagramClientSecret(String)
+	 * @see org.soluvas.socmed.SocmedPackage#getInstagramSysConfig_InstagramClientSecret()
+	 * @model
+	 * @generated
+	 */
+	String getInstagramClientSecret();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.socmed.InstagramSysConfig#getInstagramClientSecret <em>Instagram Client Secret</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Instagram Client Secret</em>' attribute.
+	 * @see #getInstagramClientSecret()
+	 * @generated
+	 */
+	void setInstagramClientSecret(String value);
 
 } // InstagramSysConfig

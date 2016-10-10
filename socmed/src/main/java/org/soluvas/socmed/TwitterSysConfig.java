@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.socmed.TwitterSysConfig#getTwitterConsumerKey <em>Twitter Consumer Key</em>}</li>
  *   <li>{@link org.soluvas.socmed.TwitterSysConfig#getTwitterConsumerSecret <em>Twitter Consumer Secret</em>}</li>
@@ -22,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.soluvas.socmed.TwitterSysConfig#getTwitterTenantAccessToken <em>Twitter Tenant Access Token</em>}</li>
  *   <li>{@link org.soluvas.socmed.TwitterSysConfig#getTwitterTenantAccessTokenSecret <em>Twitter Tenant Access Token Secret</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.socmed.SocmedPackage#getTwitterSysConfig()
  * @model interface="true" abstract="true"

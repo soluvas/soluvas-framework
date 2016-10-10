@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookAppId <em>Facebook App Id</em>}</li>
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookAppSecret <em>Facebook App Secret</em>}</li>
@@ -29,7 +30,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookPixelId <em>Facebook Pixel Id</em>}</li>
  *   <li>{@link org.soluvas.socmed.FacebookSysConfig#getFacebookPixelEnabled <em>Facebook Pixel Enabled</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.socmed.SocmedPackage#getFacebookSysConfig()
  * @model interface="true" abstract="true"

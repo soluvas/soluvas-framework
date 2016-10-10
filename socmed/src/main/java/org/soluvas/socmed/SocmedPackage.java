@@ -361,13 +361,22 @@ public interface SocmedPackage extends EPackage {
 	int INSTAGRAM_SYS_CONFIG__INSTAGRAM_SCREEN_NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Instagram Client Secret</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTAGRAM_SYS_CONFIG__INSTAGRAM_CLIENT_SECRET = 1;
+
+	/**
 	 * The number of structural features of the '<em>Instagram Sys Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTAGRAM_SYS_CONFIG_FEATURE_COUNT = 1;
+	int INSTAGRAM_SYS_CONFIG_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Instagram Sys Config</em>' class.
@@ -650,6 +659,17 @@ public interface SocmedPackage extends EPackage {
 	EAttribute getInstagramSysConfig_InstagramScreenName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.socmed.InstagramSysConfig#getInstagramClientSecret <em>Instagram Client Secret</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Instagram Client Secret</em>'.
+	 * @see org.soluvas.socmed.InstagramSysConfig#getInstagramClientSecret()
+	 * @see #getInstagramSysConfig()
+	 * @generated
+	 */
+	EAttribute getInstagramSysConfig_InstagramClientSecret();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -881,6 +901,14 @@ public interface SocmedPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INSTAGRAM_SYS_CONFIG__INSTAGRAM_SCREEN_NAME = eINSTANCE.getInstagramSysConfig_InstagramScreenName();
+
+		/**
+		 * The meta object literal for the '<em><b>Instagram Client Secret</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INSTAGRAM_SYS_CONFIG__INSTAGRAM_CLIENT_SECRET = eINSTANCE.getInstagramSysConfig_InstagramClientSecret();
 
 	}
 

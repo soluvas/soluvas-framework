@@ -137,5 +137,7 @@
         <details key="documentation" value="Instagram screen name for tenant, usable in Instagram URI e.g. &lt;a href=&quot;http://instagram.com/mamadanbayi&quot;>http://instagram.com/mamadanbayi&lt;/a>."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instagramClientSecret"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

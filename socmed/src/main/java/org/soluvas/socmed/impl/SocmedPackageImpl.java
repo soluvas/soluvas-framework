@@ -347,6 +347,15 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getInstagramSysConfig_InstagramClientSecret() {
+		return (EAttribute)instagramSysConfigEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SocmedFactory getSocmedFactory() {
 		return (SocmedFactory)getEFactoryInstance();
 	}
@@ -399,6 +408,7 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 
 		instagramSysConfigEClass = createEClass(INSTAGRAM_SYS_CONFIG);
 		createEAttribute(instagramSysConfigEClass, INSTAGRAM_SYS_CONFIG__INSTAGRAM_SCREEN_NAME);
+		createEAttribute(instagramSysConfigEClass, INSTAGRAM_SYS_CONFIG__INSTAGRAM_CLIENT_SECRET);
 	}
 
 	/**
@@ -460,6 +470,7 @@ public class SocmedPackageImpl extends EPackageImpl implements SocmedPackage {
 
 		initEClass(instagramSysConfigEClass, InstagramSysConfig.class, "InstagramSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInstagramSysConfig_InstagramScreenName(), ecorePackage.getEString(), "instagramScreenName", null, 0, 1, InstagramSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInstagramSysConfig_InstagramClientSecret(), ecorePackage.getEString(), "instagramClientSecret", null, 0, 1, InstagramSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
