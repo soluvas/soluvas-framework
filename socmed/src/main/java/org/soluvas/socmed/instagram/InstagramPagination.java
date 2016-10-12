@@ -3,61 +3,67 @@ package org.soluvas.socmed.instagram;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class InstagramPagination implements Serializable{
-
-	private String next_max_tag_id;
-	private String deprecation_warning;
-	private String next_max_id;
-	private String next_min_id;
-	private String min_tag_id;
-	private String next_url;
+	@JsonProperty("next_min_id")
+	private String nextMinId;
+	@JsonProperty("deprecation_warning")
+	private String deprecationWarning;
+	@JsonProperty("min_tag_id")
+	private String minTagId;
+	@JsonProperty("max_tag_id")
+	private String maxTagId;
+	@JsonProperty("next_url")
+	private String nextUrl;
 	
-	public String getNext_max_tag_id() {
-		return next_max_tag_id;
+	public String getNextMinId() {
+		return nextMinId;
 	}
-	public void setNext_max_tag_id(String next_max_tag_id) {
-		this.next_max_tag_id = next_max_tag_id;
+	
+	public void setNextMinId(String nextMinId) {
+		this.nextMinId = nextMinId;
 	}
-	public String getDeprecation_warning() {
-		return deprecation_warning;
+	
+	public String getDeprecationWarning() {
+		return deprecationWarning;
 	}
-	public void setDeprecation_warning(String deprecation_warning) {
-		this.deprecation_warning = deprecation_warning;
+	
+	public void setDeprecationWarning(String deprecationWarning) {
+		this.deprecationWarning = deprecationWarning;
 	}
-	public String getNext_max_id() {
-		return next_max_id;
+	
+	public String getMinTagId() {
+		return minTagId;
 	}
-	public void setNext_max_id(String next_max_id) {
-		this.next_max_id = next_max_id;
+	
+	public void setMinTagId(String minTagId) {
+		this.minTagId = minTagId;
 	}
-	public String getNext_min_id() {
-		return next_min_id;
+	
+	public String getMaxTagId() {
+		return maxTagId;
 	}
-	public void setNext_min_id(String next_min_id) {
-		this.next_min_id = next_min_id;
+	
+	public void setMaxTagId(String maxTagId) {
+		this.maxTagId = maxTagId;
 	}
-	public String getMin_tag_id() {
-		return min_tag_id;
+	
+	public String getNextUrl() {
+		return nextUrl;
 	}
-	public void setMin_tag_id(String min_tag_id) {
-		this.min_tag_id = min_tag_id;
+	
+	public void setNextUrl(String nextUrl) {
+		this.nextUrl = nextUrl;
 	}
-	public String getNext_url() {
-		return next_url;
-	}
-	public void setNext_url(String next_url) {
-		this.next_url = next_url;
-	}
+
 	@Override
 	public String toString() {
-		return "InstagramPagination [next_max_tag_id=" + next_max_tag_id
-				+ ", deprecation_warning=" + deprecation_warning
-				+ ", next_max_id=" + next_max_id + ", next_min_id="
-				+ next_min_id + ", min_tag_id=" + min_tag_id + ", next_url="
-				+ next_url + "]";
+		return "InstagramPagination [nextMaxTagId=" + nextMinId + ", deprecationWarning=" + deprecationWarning
+				+ ", minTagId=" + minTagId + ", maxTagId=" + maxTagId + ", nextUrl=" + nextUrl + "]";
 	}
+	
 	
 	
 }
