@@ -3,7 +3,6 @@ package org.soluvas.socmed.instagram;
 public class InstagramCaption {
 
 	private String text;
-//	private InstagramCaption caption;
 	private String created_time;
 	private InstagramUser from;
 	private String id;
@@ -15,14 +14,6 @@ public class InstagramCaption {
 	public void setText(String text) {
 		this.text = text;
 	}
-
-//	public InstagramCaption getCaption() {
-//		return caption;
-//	}
-//
-//	public void setCaption(InstagramCaption caption) {
-//		this.caption = caption;
-//	}
 
 	public String getCreated_time() {
 		return created_time;
