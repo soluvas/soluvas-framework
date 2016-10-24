@@ -19,6 +19,7 @@ import org.soluvas.security.SecurityPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.DomainImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.security.impl.DomainImpl#getResourceUri <em>Resource Uri</em>}</li>
@@ -26,7 +27,6 @@ import org.soluvas.security.SecurityPackage;
  *   <li>{@link org.soluvas.security.impl.DomainImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.soluvas.security.impl.DomainImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

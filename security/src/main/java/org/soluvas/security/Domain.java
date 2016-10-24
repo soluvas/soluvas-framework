@@ -13,10 +13,10 @@ import org.soluvas.commons.ResourceAware;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.Domain#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.security.SecurityPackage#getDomain()
  * @model

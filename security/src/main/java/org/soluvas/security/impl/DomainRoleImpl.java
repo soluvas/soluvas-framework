@@ -19,6 +19,7 @@ import org.soluvas.security.SecurityPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.DomainRoleImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.security.impl.DomainRoleImpl#getResourceUri <em>Resource Uri</em>}</li>
@@ -27,7 +28,6 @@ import org.soluvas.security.SecurityPackage;
  *   <li>{@link org.soluvas.security.impl.DomainRoleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.impl.DomainRoleImpl#getDomain <em>Domain</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

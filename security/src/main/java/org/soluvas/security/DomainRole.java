@@ -22,11 +22,11 @@ import org.soluvas.commons.ResourceAware;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.DomainRole#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.DomainRole#getDomain <em>Domain</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.security.SecurityPackage#getDomainRole()
  * @model

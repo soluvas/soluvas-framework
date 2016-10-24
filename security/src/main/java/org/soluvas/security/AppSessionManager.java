@@ -23,11 +23,11 @@ import org.soluvas.data.EntityLookup;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.AppSessionManager#getSecurityManager <em>Security Manager</em>}</li>
  *   <li>{@link org.soluvas.security.AppSessionManager#getPersonLookup <em>Person Lookup</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.security.SecurityPackage#getAppSessionManager()
  * @model

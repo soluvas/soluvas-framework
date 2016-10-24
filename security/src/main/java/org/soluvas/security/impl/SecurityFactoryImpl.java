@@ -103,6 +103,8 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 				return createAppSessionStatusFromString(eDataType, initialValue);
 			case SecurityPackage.PERSON_ACTION:
 				return createPersonActionFromString(eDataType, initialValue);
+			case SecurityPackage.CUSTOMER_ROLE_ACTION:
+				return createCustomerRoleActionFromString(eDataType, initialValue);
 			case SecurityPackage.SESSION:
 				return createSessionFromString(eDataType, initialValue);
 			case SecurityPackage.HTTP_SERVLET_REQUEST:
@@ -128,6 +130,8 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 				return convertAppSessionStatusToString(eDataType, instanceValue);
 			case SecurityPackage.PERSON_ACTION:
 				return convertPersonActionToString(eDataType, instanceValue);
+			case SecurityPackage.CUSTOMER_ROLE_ACTION:
+				return convertCustomerRoleActionToString(eDataType, instanceValue);
 			case SecurityPackage.SESSION:
 				return convertSessionToString(eDataType, instanceValue);
 			case SecurityPackage.HTTP_SERVLET_REQUEST:
@@ -305,6 +309,26 @@ public class SecurityFactoryImpl extends EFactoryImpl implements SecurityFactory
 	 * @generated
 	 */
 	public String convertPersonActionToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CustomerRoleAction createCustomerRoleActionFromString(EDataType eDataType, String initialValue) {
+		CustomerRoleAction result = CustomerRoleAction.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCustomerRoleActionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

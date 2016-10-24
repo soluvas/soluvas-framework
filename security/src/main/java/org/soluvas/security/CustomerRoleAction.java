@@ -10,17 +10,17 @@ import org.eclipse.emf.common.util.Enumerator;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the literals of the enumeration '<em><b>Person Action</b></em>',
+ * A representation of the literals of the enumeration '<em><b>Customer Role Action</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
  * Permissions for Person domain.
  * <!-- end-model-doc -->
- * @see org.soluvas.security.SecurityPackage#getPersonAction()
+ * @see org.soluvas.security.SecurityPackage#getCustomerRoleAction()
  * @model
  * @generated
  */
-public enum PersonAction implements Enumerator {
+public enum CustomerRoleAction implements Enumerator {
 	/**
 	 * The '<em><b>List</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -32,26 +32,6 @@ public enum PersonAction implements Enumerator {
 	LIST(0, "list", "list"),
 
 	/**
-	 * The '<em><b>View</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #VIEW_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	VIEW(1, "view", "view"),
-
-	/**
-	 * The '<em><b>View administrative</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #VIEW_ADMINISTRATIVE_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	VIEW_ADMINISTRATIVE(2, "view_administrative", "view_administrative"),
-
-	/**
 	 * The '<em><b>Modify</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -59,17 +39,7 @@ public enum PersonAction implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	MODIFY(3, "modify", "modify"),
-
-	/**
-	 * The '<em><b>Modify administrative</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #MODIFY_ADMINISTRATIVE_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	MODIFY_ADMINISTRATIVE(4, "modify_administrative", "modify_administrative"),
+	MODIFY(1, "modify", "modify"),
 
 	/**
 	 * The '<em><b>Add</b></em>' literal object.
@@ -79,7 +49,7 @@ public enum PersonAction implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	ADD(5, "add", "add");
+	ADD(2, "add", "add");
 
 	/**
 	 * The '<em><b>List</b></em>' literal value.
@@ -96,34 +66,6 @@ public enum PersonAction implements Enumerator {
 	public static final int LIST_VALUE = 0;
 
 	/**
-	 * The '<em><b>View</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * View a person (non-administrative attributes).
-	 * <!-- end-model-doc -->
-	 * @see #VIEW
-	 * @model name="view"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int VIEW_VALUE = 1;
-
-	/**
-	 * The '<em><b>View administrative</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * View a person (administrative or sensitive attributes, e.g. hashed password).
-	 * <!-- end-model-doc -->
-	 * @see #VIEW_ADMINISTRATIVE
-	 * @model name="view_administrative"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int VIEW_ADMINISTRATIVE_VALUE = 2;
-
-	/**
 	 * The '<em><b>Modify</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -135,21 +77,7 @@ public enum PersonAction implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int MODIFY_VALUE = 3;
-
-	/**
-	 * The '<em><b>Modify administrative</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Modify a person (administrative or sensitive attributes, e.g. status, hashed password).
-	 * <!-- end-model-doc -->
-	 * @see #MODIFY_ADMINISTRATIVE
-	 * @model name="modify_administrative"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int MODIFY_ADMINISTRATIVE_VALUE = 4;
+	public static final int MODIFY_VALUE = 1;
 
 	/**
 	 * The '<em><b>Add</b></em>' literal value.
@@ -163,43 +91,40 @@ public enum PersonAction implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ADD_VALUE = 5;
+	public static final int ADD_VALUE = 2;
 
 	/**
-	 * An array of all the '<em><b>Person Action</b></em>' enumerators.
+	 * An array of all the '<em><b>Customer Role Action</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final PersonAction[] VALUES_ARRAY =
-		new PersonAction[] {
+	private static final CustomerRoleAction[] VALUES_ARRAY =
+		new CustomerRoleAction[] {
 			LIST,
-			VIEW,
-			VIEW_ADMINISTRATIVE,
 			MODIFY,
-			MODIFY_ADMINISTRATIVE,
 			ADD,
 		};
 
 	/**
-	 * A public read-only list of all the '<em><b>Person Action</b></em>' enumerators.
+	 * A public read-only list of all the '<em><b>Customer Role Action</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final List<PersonAction> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
+	public static final List<CustomerRoleAction> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Person Action</b></em>' literal with the specified literal value.
+	 * Returns the '<em><b>Customer Role Action</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param literal the literal.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static PersonAction get(String literal) {
+	public static CustomerRoleAction get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			PersonAction result = VALUES_ARRAY[i];
+			CustomerRoleAction result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {
 				return result;
 			}
@@ -208,16 +133,16 @@ public enum PersonAction implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Person Action</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Customer Role Action</b></em>' literal with the specified name.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param name the name.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static PersonAction getByName(String name) {
+	public static CustomerRoleAction getByName(String name) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-			PersonAction result = VALUES_ARRAY[i];
+			CustomerRoleAction result = VALUES_ARRAY[i];
 			if (result.getName().equals(name)) {
 				return result;
 			}
@@ -226,20 +151,17 @@ public enum PersonAction implements Enumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Person Action</b></em>' literal with the specified integer value.
+	 * Returns the '<em><b>Customer Role Action</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the integer value.
 	 * @return the matching enumerator or <code>null</code>.
 	 * @generated
 	 */
-	public static PersonAction get(int value) {
+	public static CustomerRoleAction get(int value) {
 		switch (value) {
 			case LIST_VALUE: return LIST;
-			case VIEW_VALUE: return VIEW;
-			case VIEW_ADMINISTRATIVE_VALUE: return VIEW_ADMINISTRATIVE;
 			case MODIFY_VALUE: return MODIFY;
-			case MODIFY_ADMINISTRATIVE_VALUE: return MODIFY_ADMINISTRATIVE;
 			case ADD_VALUE: return ADD;
 		}
 		return null;
@@ -272,7 +194,7 @@ public enum PersonAction implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private PersonAction(int value, String name, String literal) {
+	private CustomerRoleAction(int value, String name, String literal) {
 		this.value = value;
 		this.name = name;
 		this.literal = literal;
@@ -316,4 +238,4 @@ public enum PersonAction implements Enumerator {
 		return literal;
 	}
 	
-} //PersonAction
+} //CustomerRoleAction

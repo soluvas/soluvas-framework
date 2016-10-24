@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.SecurityCatalog#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.soluvas.security.SecurityCatalog#getInstanceRoles <em>Instance Roles</em>}</li>
@@ -25,7 +26,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.soluvas.security.SecurityCatalog#getPermissions <em>Permissions</em>}</li>
  *   <li>{@link org.soluvas.security.SecurityCatalog#getDomainPermissions <em>Domain Permissions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.security.SecurityPackage#getSecurityCatalog()
  * @model

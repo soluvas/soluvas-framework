@@ -40,12 +40,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.DomainPermission#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.soluvas.security.DomainPermission#getDomainRoles <em>Domain Roles</em>}</li>
  *   <li>{@link org.soluvas.security.DomainPermission#getActions <em>Actions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.security.SecurityPackage#getDomainPermission()
  * @model

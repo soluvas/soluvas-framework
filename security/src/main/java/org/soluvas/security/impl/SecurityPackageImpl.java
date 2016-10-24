@@ -28,6 +28,7 @@ import org.soluvas.security.AppSession;
 import org.soluvas.security.AppSessionManager;
 import org.soluvas.security.AppSessionStatus;
 import org.soluvas.security.AssignMode;
+import org.soluvas.security.CustomerRoleAction;
 import org.soluvas.security.Domain;
 import org.soluvas.security.DomainPermission;
 import org.soluvas.security.DomainRole;
@@ -135,6 +136,13 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	private EEnum personActionEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum customerRoleActionEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -785,6 +793,15 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getCustomerRoleAction() {
+		return customerRoleActionEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EDataType getSession() {
 		return sessionEDataType;
@@ -934,6 +951,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		assignModeEEnum = createEEnum(ASSIGN_MODE);
 		appSessionStatusEEnum = createEEnum(APP_SESSION_STATUS);
 		personActionEEnum = createEEnum(PERSON_ACTION);
+		customerRoleActionEEnum = createEEnum(CUSTOMER_ROLE_ACTION);
 
 		// Create data types
 		sessionEDataType = createEDataType(SESSION);
@@ -969,7 +987,6 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		// Obtain other dependent packages
 		CommonsPackage theCommonsPackage = (CommonsPackage)EPackage.Registry.INSTANCE.getEPackage(CommonsPackage.eNS_URI);
-		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 		addETypeParameter(entityLookupEDataType, "T");
@@ -1004,7 +1021,7 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		initEClass(roleEClass, Role.class, "Role", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRole_Name(), ecorePackage.getEString(), "name", null, 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRole_AssignMode(), this.getAssignMode(), "assignMode", "manual", 0, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getRole_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "1", 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRole_SchemaVersion(), ecorePackage.getELong(), "schemaVersion", "1", 1, 1, Role.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainRoleEClass, DomainRole.class, "DomainRole", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomainRole_Name(), ecorePackage.getEString(), "name", null, 1, 1, DomainRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1043,19 +1060,19 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 
 		initEClass(appSessionEClass, AppSession.class, "AppSession", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAppSession_Person(), theCommonsPackage.getPersonInfo(), null, "person", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_SchemaVersion(), theEcorePackage.getELong(), "schemaVersion", "2", 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_SchemaVersion(), ecorePackage.getELong(), "schemaVersion", "2", 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_Status(), this.getAppSessionStatus(), "status", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_IpAddress(), theEcorePackage.getEString(), "ipAddress", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_Ipv6Address(), theEcorePackage.getEString(), "ipv6Address", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_IpAddresses(), theEcorePackage.getEString(), "ipAddresses", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_Ipv6Addresses(), theEcorePackage.getEString(), "ipv6Addresses", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_UserAgent(), theEcorePackage.getEString(), "userAgent", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_IpAddress(), ecorePackage.getEString(), "ipAddress", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_Ipv6Address(), ecorePackage.getEString(), "ipv6Address", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_IpAddresses(), ecorePackage.getEString(), "ipAddresses", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_Ipv6Addresses(), ecorePackage.getEString(), "ipv6Addresses", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_UserAgent(), ecorePackage.getEString(), "userAgent", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		g1 = createEGenericType(theCommonsPackage.getList());
-		EGenericType g2 = createEGenericType(theEcorePackage.getEString());
+		EGenericType g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getAppSession_UserAgents(), g1, "userAgents", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAppSession_Attributes(), this.getAppSessionAttributeEntry(), null, "attributes", null, 0, -1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSession_Timeout(), theEcorePackage.getELongObject(), "timeout", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSession_Timeout(), ecorePackage.getELongObject(), "timeout", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_AccessTime(), theCommonsPackage.getDateTime(), "accessTime", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_ExpiryTime(), theCommonsPackage.getDateTime(), "expiryTime", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppSession_TimeZone(), theCommonsPackage.getDateTimeZone(), "timeZone", null, 0, 1, AppSession.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1064,8 +1081,8 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		addEOperation(appSessionEClass, this.getSession(), "toSession", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(appSessionAttributeEntryEClass, Map.Entry.class, "AppSessionAttributeEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getAppSessionAttributeEntry_Key(), theEcorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAppSessionAttributeEntry_Value(), theEcorePackage.getEJavaObject(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSessionAttributeEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppSessionAttributeEntry_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(appSessionManagerEClass, AppSessionManager.class, "AppSessionManager", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAppSessionManager_SecurityManager(), this.getSecurityManager(), "securityManager", null, 0, 1, AppSessionManager.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1113,6 +1130,11 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 		addEEnumLiteral(personActionEEnum, PersonAction.MODIFY_ADMINISTRATIVE);
 		addEEnumLiteral(personActionEEnum, PersonAction.ADD);
 
+		initEEnum(customerRoleActionEEnum, CustomerRoleAction.class, "CustomerRoleAction");
+		addEEnumLiteral(customerRoleActionEEnum, CustomerRoleAction.LIST);
+		addEEnumLiteral(customerRoleActionEEnum, CustomerRoleAction.MODIFY);
+		addEEnumLiteral(customerRoleActionEEnum, CustomerRoleAction.ADD);
+
 		// Initialize data types
 		initEDataType(sessionEDataType, Session.class, "Session", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(httpServletRequestEDataType, HttpServletRequest.class, "HttpServletRequest", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
@@ -1136,255 +1158,279 @@ public class SecurityPackageImpl extends EPackageImpl implements SecurityPackage
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		String source = "http://www.eclipse.org/emf/2002/GenModel";	
 		addAnnotation
 		  (roleEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Roles contain global permissions."
-		   });		
+		   });	
 		addAnnotation
 		  (getRole_Name(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of role, e.g. \"admin\", \"sysadmin\", \"manager\", \"sales\", in lower_underscore format.\n\nThis corresponds directly to entries in ou=groups in LDAP."
-		   });		
+		   });	
 		addAnnotation
 		  (domainRoleEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Can be assigned to a person (security subject) in relation to a domain instance, e.g. \"manager\" of \"zibalabel\" \"shop\".\n\nmanager : instance role.\nzibalabel : instance.\nshop : domain.\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getDomainRole_Name(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of instance role, e.g. \"admin\", \"sysadmin\", \"manager\", \"sales\", in lower_underscore format.\n\nThis corresponds directly to entries in ou=groups in LDAP."
-		   });		
+		   });	
 		addAnnotation
 		  (getDomainRole_Domain(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Domain where this role applies to."
-		   });		
+		   });	
 		addAnnotation
 		  (getDomain_Name(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of the security domain (object class), e.g. \"shop\", \"person\", \"product\", in lower_underscore format."
-		   });		
+		   });	
 		addAnnotation
 		  (actionEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Secured action."
-		   });		
+		   });	
 		addAnnotation
 		  (getAction_Name(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name of action, e.g. \"print\", \"edit\", in lower_underscore format."
-		   });		
+		   });	
 		addAnnotation
 		  (getAction_Global(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Global actions apply to the whole application, in addition to domain instances (if specified)."
-		   });		
+		   });	
 		addAnnotation
 		  (getAction_Domains(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The list of domains this action applies to."
-		   });		
+		   });	
 		addAnnotation
 		  (securityCatalogEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Contains objects used to define security: roles, instance roles, domains, actions."
-		   });		
+		   });	
 		addAnnotation
 		  (securityCatalogEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Ensures that {@link Role} definitions have unique IDs and names."
-		   });		
+		   });	
 		addAnnotation
 		  (permissionEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Format it as string usable by Shiro."
-		   });		
+		   });	
 		addAnnotation
 		  (getPermission_Roles(), 
 		   source, 
 		   new String[] {
 			 "documentation", "The roles this permission apply to."
-		   });		
+		   });	
 		addAnnotation
 		  (getPermission_DomainPermission(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name(s) of the domain, can be \"*\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getPermission_ActionPermission(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name(s) of the action, can be \"*\"."
-		   });		
+		   });	
 		addAnnotation
 		  (getPermission_InstancePermission(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Name(s) of the instance(s), can be \"*\".\n\nTo specify multiple parts, separate each with \":\".\ne.g.\ndomain=wink\naction=add\ninstance=hendy:car:nana\n\nmeans permit hendy to add wink for car to nana."
-		   });		
+		   });	
 		addAnnotation
 		  (assignModeEEnum, 
 		   source, 
 		   new String[] {
 			 "documentation", "Specify how a role should be assigned to a subject."
-		   });		
+		   });	
 		addAnnotation
 		  (assignModeEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "Do not automatically assign this role."
-		   });		
+		   });	
 		addAnnotation
 		  (assignModeEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "This role is given to all subjects including guest (not logged in)."
-		   });		
+		   });	
 		addAnnotation
 		  (assignModeEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "This role is given to all remembered or authenticated users."
-		   });		
+		   });	
 		addAnnotation
 		  (domainPermissionEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Permission for arbitrary instance of a single domain.\n\nTo express \"manager of shop X can edit shop X\" :\ndomain: shop\ninstanceRole: manager\naction: edit,delete\n\nMore complex use cases are not possible, and need a different and much more complex DSL, such as...\n\nTo express \"moderator of shop X can edit+delete comment * to shop X\"\ndomain: shop\ninstanceRole: moderator\naction: edit,delete\ntargetDomain: comment\ntargetInstance: *\n\nTo express \"wink_moderator of zibalabel can edit+delete wink * of product * for zibalabel\"\n\nTo express \"creator of comment X can edit+delete comment X for *\":\ninstanceRole: creator\ndomain: comment\naction: edit,delete\n\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getDomainPermission_Domain(), 
 		   source, 
 		   new String[] {
 			 "documentation", "A simple (non-composite) domain this permission refers to.\n\nA composite domain example is \"comment-shop\" or \"wink-product-person\".\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getDomainPermission_Actions(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Action permissions given to subjects having the specified domain roles of a particular domain."
-		   });		
+		   });	
 		addAnnotation
 		  (appSessionEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "An OAuth app session.\n\nid is used as the accessToken.\n\nSee: https://sites.google.com/a/bippo.co.id/dev/berbatik/oauth\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getAppSession_IpAddress(), 
 		   source, 
 		   new String[] {
 			 "documentation", "IPv4 Address during initial sign in."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppSession_Ipv6Address(), 
 		   source, 
 		   new String[] {
 			 "documentation", "IPv6 address during initial sign in."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppSession_IpAddresses(), 
 		   source, 
 		   new String[] {
 			 "documentation", "IPv4 Addresses used during the whole session."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppSession_Ipv6Addresses(), 
 		   source, 
 		   new String[] {
 			 "documentation", "IPv6 Addresses used during the whole session."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppSession_UserAgents(), 
 		   source, 
 		   new String[] {
 			 "documentation", "HTTP user agents used during the whole session."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppSession_Timeout(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Sets the time in milliseconds that the session may remain idle before expiring.\n<ul>\n <li>A negative value means the session will never expire.</li>\n <li>A non-negative value (0 or greater) means the session expiration will occur if idle for that\n length of time.</li>\n</ul>\n<p/>\n<b>*Note:</b> if you are used to the {@code HttpSession}\'s {@code getMaxInactiveInterval()} method, the scale on\nthis method is different: Shiro Sessions use millisecond values for timeout whereas\n{@code HttpSession.getMaxInactiveInterval} uses seconds.  Always use millisecond values with Shiro sessions.\n"
-		   });		
+		   });	
 		addAnnotation
 		  (getAppSession_AccessTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Returns the last time the application received a request or method invocation from the user associated with this session.\nApplication calls to this method do not affect this access time."
-		   });		
+		   });	
 		addAnnotation
 		  (getAppSession_ExpiryTime(), 
 		   source, 
 		   new String[] {
 			 "documentation", "Returns the time that the session will expire (if it remains idle).\n\nIf there is activity, expiryTime may be extended.\n\n@see {@link getAccessTime()}"
-		   });		
+		   });	
 		addAnnotation
 		  (appSessionManagerEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Allows universal access to security Subject and derivatives (i.e. Person) from Wicket, JAX-RS, or other means."
-		   });		
+		   });	
 		addAnnotation
 		  (appSessionManagerEClass.getEOperations().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", " Ensure personId is set. If not, throw Exception.\nThe IP Address and User Agent is required for security purposes.\nConvenience method for {@link #requirePerson(RequestIdentity)}."
-		   });		
+		   });	
 		addAnnotation
 		  (personActionEEnum, 
 		   source, 
 		   new String[] {
 			 "documentation", "Permissions for Person domain."
-		   });		
+		   });	
 		addAnnotation
 		  (personActionEEnum.getELiterals().get(0), 
 		   source, 
 		   new String[] {
 			 "documentation", "List all people."
-		   });		
+		   });	
 		addAnnotation
 		  (personActionEEnum.getELiterals().get(1), 
 		   source, 
 		   new String[] {
 			 "documentation", "View a person (non-administrative attributes)."
-		   });		
+		   });	
 		addAnnotation
 		  (personActionEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "View a person (administrative or sensitive attributes, e.g. hashed password)."
-		   });		
+		   });	
 		addAnnotation
 		  (personActionEEnum.getELiterals().get(3), 
 		   source, 
 		   new String[] {
 			 "documentation", "Modify a person (non-administrative attributes)."
-		   });		
+		   });	
 		addAnnotation
 		  (personActionEEnum.getELiterals().get(4), 
 		   source, 
 		   new String[] {
 			 "documentation", "Modify a person (administrative or sensitive attributes, e.g. status, hashed password)."
-		   });		
+		   });	
 		addAnnotation
 		  (personActionEEnum.getELiterals().get(5), 
+		   source, 
+		   new String[] {
+			 "documentation", "Add a person."
+		   });	
+		addAnnotation
+		  (customerRoleActionEEnum, 
+		   source, 
+		   new String[] {
+			 "documentation", "Permissions for Person domain."
+		   });	
+		addAnnotation
+		  (customerRoleActionEEnum.getELiterals().get(0), 
+		   source, 
+		   new String[] {
+			 "documentation", "List all people."
+		   });	
+		addAnnotation
+		  (customerRoleActionEEnum.getELiterals().get(1), 
+		   source, 
+		   new String[] {
+			 "documentation", "Modify a person (non-administrative attributes)."
+		   });	
+		addAnnotation
+		  (customerRoleActionEEnum.getELiterals().get(2), 
 		   source, 
 		   new String[] {
 			 "documentation", "Add a person."

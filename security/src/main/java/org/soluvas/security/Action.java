@@ -18,12 +18,12 @@ import org.soluvas.commons.ResourceAware;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.Action#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.Action#getGlobal <em>Global</em>}</li>
  *   <li>{@link org.soluvas.security.Action#getDomains <em>Domains</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.security.SecurityPackage#getAction()
  * @model

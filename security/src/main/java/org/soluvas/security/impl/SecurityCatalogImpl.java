@@ -33,6 +33,7 @@ import org.soluvas.security.SecurityPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.SecurityCatalogImpl#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.soluvas.security.impl.SecurityCatalogImpl#getInstanceRoles <em>Instance Roles</em>}</li>
@@ -41,7 +42,6 @@ import org.soluvas.security.SecurityPackage;
  *   <li>{@link org.soluvas.security.impl.SecurityCatalogImpl#getPermissions <em>Permissions</em>}</li>
  *   <li>{@link org.soluvas.security.impl.SecurityCatalogImpl#getDomainPermissions <em>Domain Permissions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -32,6 +32,7 @@ import com.google.code.morphia.annotations.Id;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getResourceUri <em>Resource Uri</em>}</li>
@@ -44,14 +45,13 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getAssignMode <em>Assign Mode</em>}</li>
  *   <li>{@link org.soluvas.security.impl.RoleImpl#getSchemaVersion <em>Schema Version</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 @Entity(noClassnameStored=true)
 @Converters({BigDecimalConverter.class, DateTimeConverter.class,
 	CurrencyUnitConverter.class, UnitConverter.class})
-public class RoleImpl extends EObjectImpl implements Role, Serializable {
+public class RoleImpl extends EObjectImpl implements Role {
 
 	/**
 	 * The default value of the '{@link #getResourceType() <em>Resource Type</em>}' attribute.

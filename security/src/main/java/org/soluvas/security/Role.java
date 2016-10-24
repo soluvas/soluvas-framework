@@ -20,12 +20,12 @@ import org.soluvas.commons.Timestamped;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.Role#getName <em>Name</em>}</li>
  *   <li>{@link org.soluvas.security.Role#getAssignMode <em>Assign Mode</em>}</li>
  *   <li>{@link org.soluvas.security.Role#getSchemaVersion <em>Schema Version</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.security.SecurityPackage#getRole()
  * @model

@@ -24,12 +24,12 @@ import org.soluvas.security.SecurityPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.DomainPermissionImpl#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.soluvas.security.impl.DomainPermissionImpl#getDomainRoles <em>Domain Roles</em>}</li>
  *   <li>{@link org.soluvas.security.impl.DomainPermissionImpl#getActions <em>Actions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

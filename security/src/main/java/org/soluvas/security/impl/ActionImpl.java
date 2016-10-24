@@ -23,6 +23,7 @@ import org.soluvas.security.SecurityPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getResourceUri <em>Resource Uri</em>}</li>
@@ -32,7 +33,6 @@ import org.soluvas.security.SecurityPackage;
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getGlobal <em>Global</em>}</li>
  *   <li>{@link org.soluvas.security.impl.ActionImpl#getDomains <em>Domains</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

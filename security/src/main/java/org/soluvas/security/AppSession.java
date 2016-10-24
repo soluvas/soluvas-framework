@@ -48,6 +48,7 @@ import com.google.common.collect.Maps;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.AppSession#getPerson <em>Person</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getSchemaVersion <em>Schema Version</em>}</li>
@@ -65,7 +66,6 @@ import com.google.common.collect.Maps;
  *   <li>{@link org.soluvas.security.AppSession#getTimeZone <em>Time Zone</em>}</li>
  *   <li>{@link org.soluvas.security.AppSession#getLocale <em>Locale</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.security.SecurityPackage#getAppSession()
  * @model

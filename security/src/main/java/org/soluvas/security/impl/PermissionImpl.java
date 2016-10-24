@@ -20,6 +20,7 @@ import org.soluvas.security.SecurityPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.PermissionImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.soluvas.security.impl.PermissionImpl#getResourceUri <em>Resource Uri</em>}</li>
@@ -29,7 +30,6 @@ import org.soluvas.security.SecurityPackage;
  *   <li>{@link org.soluvas.security.impl.PermissionImpl#getActionPermission <em>Action Permission</em>}</li>
  *   <li>{@link org.soluvas.security.impl.PermissionImpl#getInstancePermission <em>Instance Permission</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

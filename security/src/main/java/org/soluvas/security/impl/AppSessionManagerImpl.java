@@ -32,14 +32,13 @@ import com.google.common.base.Preconditions;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.AppSessionManagerImpl#getSecurityManager <em>Security Manager</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionManagerImpl#getPersonLookup <em>Person Lookup</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
- * @todo Remove the @Service because doesn't work in multitenant applications.
  */
 @Service("appSessionMgr") @Lazy
 public class AppSessionManagerImpl extends EObjectImpl implements AppSessionManager {

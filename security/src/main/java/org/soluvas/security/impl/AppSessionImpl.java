@@ -43,6 +43,7 @@ import com.google.code.morphia.annotations.Id;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getCreationTime <em>Creation Time</em>}</li>
@@ -63,7 +64,6 @@ import com.google.code.morphia.annotations.Id;
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getTimeZone <em>Time Zone</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionImpl#getLocale <em>Locale</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

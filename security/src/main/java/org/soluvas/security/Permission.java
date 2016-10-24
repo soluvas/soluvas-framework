@@ -17,13 +17,13 @@ import com.google.common.base.Joiner;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.Permission#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.soluvas.security.Permission#getDomainPermission <em>Domain Permission</em>}</li>
  *   <li>{@link org.soluvas.security.Permission#getActionPermission <em>Action Permission</em>}</li>
  *   <li>{@link org.soluvas.security.Permission#getInstancePermission <em>Instance Permission</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.security.SecurityPackage#getPermission()
  * @model

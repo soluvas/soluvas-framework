@@ -21,11 +21,11 @@ import org.soluvas.security.SecurityPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.security.impl.AppSessionAttributeEntryImpl#getTypedKey <em>Key</em>}</li>
  *   <li>{@link org.soluvas.security.impl.AppSessionAttributeEntryImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
