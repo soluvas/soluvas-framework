@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.joda.time.DateTime;
@@ -852,7 +853,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override
-	public Optional<String> getCustomerRole(String personId) {
+	public Optional<String> getCustomerRole(@Nonnull String personId) {
 		String customerRole = getCustomerRoleByPersonId(personId);
 		return Optional.fromNullable(customerRole);
 	}
