@@ -694,4 +694,9 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		return null;
 	}
 
+	@Override
+	public Optional<String> getCustomerRole(String personId) {
+		throw new UnsupportedOperationException();
+	}
+
 }
