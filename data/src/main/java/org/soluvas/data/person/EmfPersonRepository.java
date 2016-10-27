@@ -502,4 +502,9 @@ public class EmfPersonRepository extends
 		return null;
 	}
 
+	@Override
+	public Optional<String> getCustomerRole(String personId) {
+		throw new UnsupportedOperationException();
+	}
+
 }

@@ -850,6 +850,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}).collect(Collectors.toList());
 		return ids;
 	}
+	
+	@Override
+	public Optional<String> getCustomerRole(String personId) {
+		String customerRole = getCustomerRoleByPersonId(personId);
+		return Optional.fromNullable(customerRole);
+	}
+
 
 //	@Override
 //	public Existence<String> existsBySlugEx(StatusMask statusMask, String slug) {

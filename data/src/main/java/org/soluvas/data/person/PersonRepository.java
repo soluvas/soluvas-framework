@@ -176,5 +176,7 @@ public interface PersonRepository extends
 	
 	List<String> findAllIdsByCustomerRoleId(StatusMask statusMask, String customerRoleId);
 
+	public Optional<String> getCustomerRole(String personId);
+
 }
 
