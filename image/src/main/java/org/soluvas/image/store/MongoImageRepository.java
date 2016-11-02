@@ -496,14 +496,14 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	protected ListenableFuture<Image> doCreate(String existingImageId, final File originalFile, final String contentType,
 			final long length, final String name, final String originalName, boolean alsoUploadOriginal) {
 		final ListenableFuture<OriginalUpload> originalFuture = doCreateOriginal(existingImageId, originalFile, contentType, length, name, originalName, alsoUploadOriginal);
-		final ListenableFuture<OriginalUpload> transformedsFuture = Futures.transform(originalFuture, new AsyncFunction<OriginalUpload, OriginalUpload>() {
+		final ListenableFuture<OriginalUpload> transformedsFuture = Futures.transformAsync(originalFuture, new AsyncFunction<OriginalUpload, OriginalUpload>() {
 			@Override
 			public ListenableFuture<OriginalUpload> apply(
 					OriginalUpload original) throws Exception {
 				return doTransform(original);
 			}
 		});
-		final ListenableFuture<Image> addedImageFuture = Futures.transform(transformedsFuture, 
+		final ListenableFuture<Image> addedImageFuture = Futures.transformAsync(transformedsFuture, 
 				new AsyncFunction<OriginalUpload, Image>() {
 			@Override
 			public ListenableFuture<Image> apply(OriginalUpload input)

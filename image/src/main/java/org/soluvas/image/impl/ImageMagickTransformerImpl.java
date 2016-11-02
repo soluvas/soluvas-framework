@@ -527,7 +527,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 				}
 			});
 			
-			final ListenableFuture<UploadedImage> styledImageFuture = Futures.transform(styledFileFuture, new AsyncFunction<File, UploadedImage>() {
+			final ListenableFuture<UploadedImage> styledImageFuture = Futures.transformAsync(styledFileFuture, new AsyncFunction<File, UploadedImage>() {
 				@Override
 				public ListenableFuture<UploadedImage> apply(File styledFile)
 						throws Exception {

@@ -203,7 +203,7 @@ public abstract class ImageTransformerImpl extends EObjectImpl implements ImageT
 				}
 			});
 		}
-		final ListenableFuture<List<UploadedImage>> styledImagesFuture = Futures.transform(originalFileFuture, processor, getExecutor());
+		final ListenableFuture<List<UploadedImage>> styledImagesFuture = Futures.transformAsync(originalFileFuture, processor, getExecutor());
 		if (deleteAfterProcess) {
 			styledImagesFuture.addListener(new Runnable() {
 				@Override
