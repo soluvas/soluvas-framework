@@ -699,4 +699,28 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public boolean existsByEmailAndStatus(String email, AccountStatus status) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean existsByEmail(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ImmutableList<AccountStatus> getStatusesByEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Person findOneByEmail(AccountStatus status, String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

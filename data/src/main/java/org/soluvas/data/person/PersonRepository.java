@@ -22,6 +22,7 @@ import org.soluvas.data.repository.PagingAndSortingRepository;
 import org.soluvas.data.repository.Trashable;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -177,6 +178,14 @@ public interface PersonRepository extends
 	List<String> findAllIdsByCustomerRoleId(StatusMask statusMask, String customerRoleId);
 
 	public Optional<String> getCustomerRole(String personId);
+	
+	boolean existsByEmailAndStatus(String email, AccountStatus status);
+
+	boolean existsByEmail(String email);
+
+	ImmutableList<AccountStatus> getStatusesByEmail(String email);
+
+	Person findOneByEmail(AccountStatus status, String email);
 
 }
 

@@ -164,6 +164,14 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		return findOneByQuery(query);
 	}
 	
+	@Override @Nullable
+	public Person findOneByEmail(AccountStatus status, String email) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
+		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		query.put("accountStatus", status.name());
+		return findOneByQuery(query);
+	}
+	
 	@Override
 	public boolean isExistsByEmail(StatusMask statusMask, String email) {
 		final Optional<String> optExists = getIdByEmail(statusMask, email);
@@ -856,6 +864,56 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	public Optional<String> getCustomerRole(@Nonnull String personId) {
 		String customerRole = getCustomerRoleByPersonId(personId);
 		return Optional.fromNullable(customerRole);
+	}
+
+	@Override
+	public boolean existsByEmail(String email) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty for existsByEmail");
+		
+		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		
+		final long count = countByQuery(query);
+		return count > 0;
+	}
+	
+	@Override
+	public boolean existsByEmailAndStatus(String email, AccountStatus status) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty for existsByEmailAndStatus");
+		Preconditions.checkState(status != null, "Status must not be null for existsByEmailAndStatus");
+		
+		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		query.put("accountStatus", status.name());
+		
+		final long count = countByQuery(query);
+		return count > 0;
+	}
+	
+	/**
+	 * Karena satu email bisa dimiliki oleh beberapa person dengan beragam status nya..
+	 * 
+	 * @param email
+	 * @return
+	 */
+	@Override
+	public ImmutableList<AccountStatus> getStatusesByEmail(String email) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty for getStatusesByEmail");
+		
+		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		
+		final BasicDBObject fields = new BasicDBObject();
+		fields.put("accountStatus", true);
+		
+		
+		final List<DBObject> dbObjectList = findSecondaryAsDBObjects(query, fields, null, 0, 0, "getStatusesByEmail", email);
+		if (dbObjectList != null && !dbObjectList.isEmpty()) {
+			final ImmutableList.Builder<AccountStatus> bList = ImmutableList.builder();
+			for (final DBObject dbObject : dbObjectList) {
+				bList.add(AccountStatus.valueOf(String.valueOf(dbObject.get("accountStatus"))));
+			}
+			return bList.build();
+		} else {
+			return ImmutableList.of();
+		}
 	}
 
 
