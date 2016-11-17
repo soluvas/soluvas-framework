@@ -106,6 +106,7 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 		fields.put("name", true);
 		fields.put("slugPath", true);
 		fields.put("translations", true);
+		fields.put("status", true);
 		
 //		final Page<Category2> result = findAllByQuery(query, pageable);
 		final List<Category2> list = findPrimary(query, fields, null, pageable.getOffset(), pageable.getPageSize(),
