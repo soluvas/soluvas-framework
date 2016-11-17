@@ -15,8 +15,10 @@ import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.mongo.Index;
 import org.soluvas.mongo.MongoRepositoryBase;
+import org.soluvas.mongo.MongoUtils;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
@@ -107,9 +109,11 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 		fields.put("slugPath", true);
 		fields.put("translations", true);
 		fields.put("status", true);
+		fields.put("positioner", true);
 		
 //		final Page<Category2> result = findAllByQuery(query, pageable);
-		final List<Category2> list = findPrimary(query, fields, null, pageable.getOffset(), pageable.getPageSize(),
+		final BasicDBObject sortQuery = MongoUtils.getSort(pageable.getSort(), "positioner", Sort.Direction.DESC);
+		final List<Category2> list = findPrimary(query, fields, sortQuery, pageable.getOffset(), pageable.getPageSize(),
 				"findAllByLevelAndStatus", statuses, level);
 		final long count = countByQuery(query);
 		final Page<Category2> result = new PageImpl<>(list, pageable, count);
