@@ -189,10 +189,11 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 //		Preconditions.checkArgument(entityNames.contains(entityClass.getName()),
 //				"EntityManager for '%s' JPA repository must include entity '%s'. Make sure you have set e.g. @PersistenceContext(unitName=\"fulan\"). %s known entities are: %s",
 //				entityClass.getSimpleName(), entityClass.getName(), entityNames.size(), entityNames);
-		Preconditions.checkArgument(entityNames.contains(entityClass.getName()),
-				"EntityManager for '%s' JPA repository must include entity '%s'. Make sure you have called factoryBean.setPackagesToScan(). %s known entities are: %s",
-				entityClass.getSimpleName(), entityClass.getName(), entityNames.size(), entityNames);
-		
+		if (!entityNames.contains(entityClass.getName())) {
+			throw new IllegalArgumentException(String.format("EntityManager for '%s' JPA repository must include entity '%s'. Make sure you have called factoryBean.setPackagesToScan(). %s known entities are: %s",
+					entityClass.getSimpleName(), entityClass.getName(), entityNames.size(), entityNames));
+		}
+
 		this.log = LoggerFactory.getLogger(JpaRepositoryBase.class.getName() + "/" + entityClass.getSimpleName());
 		if (initialTenantIds != null) {
 			log.info("Initializing {} JPA repository using {} with {} entities ({}) and {} initial tenants: {}", 
