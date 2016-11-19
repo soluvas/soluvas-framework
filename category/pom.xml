@@ -58,11 +58,6 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>org.soluvas</groupId>
-			<artifactId>org.soluvas.mongo</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.eclipse.jgit</groupId>
 			<artifactId>org.eclipse.jgit</artifactId>
 			<optional>true</optional>
