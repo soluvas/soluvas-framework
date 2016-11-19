@@ -13,6 +13,7 @@ import org.joda.time.DateTime;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Embeddable
 public class Email2 implements Serializable {
@@ -53,6 +54,21 @@ public class Email2 implements Serializable {
 
 	public void setValidationTime(DateTime validationTime) {
 		this.validationTime = validationTime;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Email2 email2 = (Email2) o;
+		return Objects.equals(email, email2.email) &&
+				Objects.equals(primary, email2.primary) &&
+				Objects.equals(validationTime, email2.validationTime);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(email, primary, validationTime);
 	}
 
 	@Override

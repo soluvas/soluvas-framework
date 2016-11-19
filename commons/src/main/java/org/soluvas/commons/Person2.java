@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Optional;
 import com.google.common.collect.Iterables;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -19,9 +21,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -117,9 +117,10 @@ public class Person2 implements Serializable {
     @ElementCollection
     protected List<PhoneNumber2> phoneNumbers = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER) // EAGER required by toInfo()
-    protected List<Email2> emails = new ArrayList<>();
+    @Fetch(FetchMode.SUBSELECT) // http://stackoverflow.com/a/8309458/122441
+    protected Set<Email2> emails = new LinkedHashSet<>();
     @ElementCollection(fetch = FetchType.EAGER) // EAGER required by toInfo()
-    protected List<PhoneNumber2> mobileNumbers = new ArrayList<>();
+    protected Set<PhoneNumber2> mobileNumbers = new LinkedHashSet<>();
     @ElementCollection
     protected List<PostalAddress2> addresses = new ArrayList<>();
     protected static final AccountStatus ACCOUNT_STATUS_EDEFAULT = AccountStatus.DRAFT;
@@ -179,7 +180,7 @@ public class Person2 implements Serializable {
     protected String clientAccessToken;
     @ElementCollection(fetch = FetchType.EAGER) // EAGER required by security
     @Column(name = "securityrole_id")
-    protected List<String> securityRoleIds = new ArrayList<>();
+    protected Set<String> securityRoleIds = new LinkedHashSet<>();
     protected BigDecimal debitBalance;
     @Type(type = "org.soluvas.jpa.PersistentCurrencyUnit")
     protected CurrencyUnit debitCurrency;
@@ -237,7 +238,7 @@ public class Person2 implements Serializable {
         throw new UnsupportedOperationException();
     }
 
-    public List<PhoneNumber2> getMobileNumbers() {
+    public Set<PhoneNumber2> getMobileNumbers() {
         return mobileNumbers;
     }
 
@@ -247,7 +248,7 @@ public class Person2 implements Serializable {
         if (primaryMobile.isPresent()) {
             return primaryMobile.get().getPhoneNumber();
         } else if (!getMobileNumbers().isEmpty()) {
-            return getMobileNumbers().get(0).getPhoneNumber();
+            return getMobileNumbers().iterator().next().getPhoneNumber();
         } else {
             return null;
         }
@@ -315,7 +316,7 @@ public class Person2 implements Serializable {
         }
     }
 
-    public List<Email2> getEmails() {
+    public Set<Email2> getEmails() {
         return emails;
     }
 
@@ -352,7 +353,7 @@ public class Person2 implements Serializable {
         if (primaryEmail.isPresent()) {
             return primaryEmail.get().getEmail();
         } else if (!getEmails().isEmpty()) {
-            return getEmails().get(0).getEmail();
+            return getEmails().iterator().next().getEmail();
         } else {
             return null;
         }
@@ -811,7 +812,7 @@ public class Person2 implements Serializable {
      * @return
      */
     @CollectionTable(name = "person_securityrole")
-    public List<String> getSecurityRoleIds() {
+    public Set<String> getSecurityRoleIds() {
         return securityRoleIds;
     }
 
