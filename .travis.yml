@@ -1,0 +1,4 @@
+language: java
+script:
+- mvn sources:jar javadoc:jar
+- mvn -DskipTests deploy
