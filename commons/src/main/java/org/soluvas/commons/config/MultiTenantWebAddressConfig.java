@@ -92,7 +92,10 @@ public class MultiTenantWebAddressConfig implements TenantRepositoryListener {
 		// TODO: due to impracticality of classpath resource packaging, hotel-specific files/templates should be put in either
 		// app config dir or workspace (hotel's config) dir
 		final String hotelWebAddressRes = "/META-INF/template.WebAddress.xmi";
-		final File hotelWebAddressFile = new File("config/hotel.WebAddress.xmi").getAbsoluteFile();
+		// Workaround for Pivotal Web Services / Cloud Foundry
+		final File hotelWebAddressNoLabel = new File("config/hotel.WebAddress.xmi");
+		final File hotelWebAddressWithLabel = new File("config_" + tenantConfig.getTenantEnv() + "/hotel.WebAddress.xmi");
+		final File hotelWebAddressFile = (hotelWebAddressNoLabel.exists() ? hotelWebAddressNoLabel : hotelWebAddressWithLabel).getAbsoluteFile();
 		if (dataDir != null) {
 			final File webAddressFile = new File(dataDir, "model/" + tenantId + "_" + tenantConfig.getTenantEnv() + ".WebAddress.xmi");
 			if (webAddressFile.exists()) {

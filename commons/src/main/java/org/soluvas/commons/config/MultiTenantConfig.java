@@ -200,8 +200,12 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 		if (tenantSource == TenantSource.CONFIG || tenantSource == TenantSource.CLASSPATH) {
 			final Resource[] resources;
 			if (tenantSource == TenantSource.CONFIG) {
-				resources = new PathMatchingResourcePatternResolver(MultiTenantConfig.class.getClassLoader())
+				// Workaround for Pivotal Web Services / Cloud Foundry
+				final Resource[] noLabel = new PathMatchingResourcePatternResolver(MultiTenantConfig.class.getClassLoader())
 						.getResources("file:config/*.AppManifest.xmi");
+				final Resource[] withLabel = new PathMatchingResourcePatternResolver(MultiTenantConfig.class.getClassLoader())
+						.getResources("file:config_" + tenantEnv + "/*.AppManifest.xmi");
+				resources = noLabel.length != 0 ? noLabel : withLabel;
 				log.info("Loading {} AppManifest resources from config dir: {}", resources.length, resources);
 			} else {
 				resources = new PathMatchingResourcePatternResolver(MultiTenantConfig.class.getClassLoader())
