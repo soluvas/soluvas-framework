@@ -1,3 +1,6 @@
+branches:
+  only:
+  - master
 language: java
 script:
 - mvn sources:jar javadoc:jar
