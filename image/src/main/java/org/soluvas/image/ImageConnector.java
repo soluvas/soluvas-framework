@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.image.ImagePackage#getImageConnector()
  * @model abstract="true"
- * @generated
+ * @generated NOT
  */
-public interface ImageConnector extends EObject {
+public interface ImageConnector {
 
 	/**
 	 * Returns the value of the '<em><b>Hi Uri Template</b></em>' attribute.

@@ -6,6 +6,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -37,9 +38,9 @@ import com.google.common.util.concurrent.MoreExecutors;
  *   <li>{@link org.soluvas.image.impl.ImageConnectorImpl#getExecutor <em>Executor</em>}</li>
  * </ul>
  *
- * @generated
+ * @generated NOT
  */
-public abstract class ImageConnectorImpl extends EObjectImpl implements ImageConnector {
+public abstract class ImageConnectorImpl implements ImageConnector {
 	/**
 	 * The default value of the '{@link #getHiUriTemplate() <em>Hi Uri Template</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -91,16 +92,6 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 	public ImageConnectorImpl(ExecutorService executor) {
 		super();
 		this.executor = MoreExecutors.listeningDecorator(executor);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ImagePackage.Literals.IMAGE_CONNECTOR;
 	}
 
 	/**
@@ -196,56 +187,10 @@ public abstract class ImageConnectorImpl extends EObjectImpl implements ImageCon
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ImagePackage.IMAGE_CONNECTOR__HI_URI_TEMPLATE:
-				return getHiUriTemplate();
-			case ImagePackage.IMAGE_CONNECTOR__URI_TEMPLATE:
-				return getUriTemplate();
-			case ImagePackage.IMAGE_CONNECTOR__EXECUTOR:
-				return getExecutor();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ImagePackage.IMAGE_CONNECTOR__HI_URI_TEMPLATE:
-				return HI_URI_TEMPLATE_EDEFAULT == null ? getHiUriTemplate() != null : !HI_URI_TEMPLATE_EDEFAULT.equals(getHiUriTemplate());
-			case ImagePackage.IMAGE_CONNECTOR__URI_TEMPLATE:
-				return URI_TEMPLATE_EDEFAULT == null ? getUriTemplate() != null : !URI_TEMPLATE_EDEFAULT.equals(getUriTemplate());
-			case ImagePackage.IMAGE_CONNECTOR__EXECUTOR:
-				return EXECUTOR_EDEFAULT == null ? executor != null : !EXECUTOR_EDEFAULT.equals(executor);
-		}
-		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (executor: ");
-		result.append(executor);
-		result.append(')');
-		return result.toString();
+		return MoreObjects.toStringHelper(this).omitNullValues()
+				.add("executor", executor)
+				.toString();
 	}
-
 } //ImageConnectorImpl

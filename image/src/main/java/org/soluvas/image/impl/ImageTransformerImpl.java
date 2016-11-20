@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 
+import com.google.common.util.concurrent.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
@@ -22,11 +23,6 @@ import org.soluvas.image.ImageVariant;
 import org.soluvas.image.UploadedImage;
 
 import com.google.common.base.Preconditions;
-import com.google.common.util.concurrent.AsyncFunction;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
 
 /**
  * <!-- begin-user-doc -->

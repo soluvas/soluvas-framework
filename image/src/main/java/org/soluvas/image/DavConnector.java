@@ -15,7 +15,7 @@ package org.soluvas.image;
  *
  * @see org.soluvas.image.ImagePackage#getDavConnector()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface DavConnector extends ImageConnector {
 } // DavConnector

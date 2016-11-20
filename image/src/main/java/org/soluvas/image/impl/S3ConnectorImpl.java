@@ -72,7 +72,7 @@ import com.google.common.util.concurrent.ListenableFuture;
  *   <li>{@link org.soluvas.image.impl.S3ConnectorImpl#getCdnAlias <em>Cdn Alias</em>}</li>
  * </ul>
  *
- * @generated
+ * @generated NOT
  */
 @SuppressWarnings("serial")
 public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
@@ -203,16 +203,6 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		if (!Strings.isNullOrEmpty(endpoint))
 			s3Client.setEndpoint(endpoint);
 		transferMgr = new TransferManager(s3Client);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ImagePackage.Literals.S3_CONNECTOR;
 	}
 
 	/**
@@ -392,80 +382,6 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 		transferMgr.shutdownNow();
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ImagePackage.S3_CONNECTOR__CANONICAL_USER_ID:
-				return getCanonicalUserId();
-			case ImagePackage.S3_CONNECTOR__BUCKET:
-				return getBucket();
-			case ImagePackage.S3_CONNECTOR__TENANT_ID:
-				return getTenantId();
-			case ImagePackage.S3_CONNECTOR__TENANT_ENV:
-				return getTenantEnv();
-			case ImagePackage.S3_CONNECTOR__ORIGIN_ALIAS:
-				return getOriginAlias();
-			case ImagePackage.S3_CONNECTOR__CDN_ALIAS:
-				return getCdnAlias();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ImagePackage.S3_CONNECTOR__CANONICAL_USER_ID:
-				return CANONICAL_USER_ID_EDEFAULT == null ? canonicalUserId != null : !CANONICAL_USER_ID_EDEFAULT.equals(canonicalUserId);
-			case ImagePackage.S3_CONNECTOR__BUCKET:
-				return BUCKET_EDEFAULT == null ? bucket != null : !BUCKET_EDEFAULT.equals(bucket);
-			case ImagePackage.S3_CONNECTOR__TENANT_ID:
-				return TENANT_ID_EDEFAULT == null ? tenantId != null : !TENANT_ID_EDEFAULT.equals(tenantId);
-			case ImagePackage.S3_CONNECTOR__TENANT_ENV:
-				return TENANT_ENV_EDEFAULT == null ? tenantEnv != null : !TENANT_ENV_EDEFAULT.equals(tenantEnv);
-			case ImagePackage.S3_CONNECTOR__ORIGIN_ALIAS:
-				return ORIGIN_ALIAS_EDEFAULT == null ? originAlias != null : !ORIGIN_ALIAS_EDEFAULT.equals(originAlias);
-			case ImagePackage.S3_CONNECTOR__CDN_ALIAS:
-				return CDN_ALIAS_EDEFAULT == null ? cdnAlias != null : !CDN_ALIAS_EDEFAULT.equals(cdnAlias);
-		}
-		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (canonicalUserId: ");
-		result.append(canonicalUserId);
-		result.append(", bucket: ");
-		result.append(bucket);
-		result.append(", tenantId: ");
-		result.append(tenantId);
-		result.append(", tenantEnv: ");
-		result.append(tenantEnv);
-		result.append(", originAlias: ");
-		result.append(originAlias);
-		result.append(", cdnAlias: ");
-		result.append(cdnAlias);
-		result.append(')');
-		return result.toString();
-	}
-
 	@Override
 	public boolean download(String namespace, String imageId, String styleCode,
 			String styleVariant, String extension, File file) {

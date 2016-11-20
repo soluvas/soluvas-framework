@@ -36,7 +36,7 @@ package org.soluvas.image;
  *
  * @see org.soluvas.image.ImagePackage#getS3Connector()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface S3Connector extends ImageConnector {
 

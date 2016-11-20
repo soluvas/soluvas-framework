@@ -645,18 +645,10 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public ImageConnector getDestination() {
-		if (destination != null && destination.eIsProxy()) {
-			InternalEObject oldDestination = (InternalEObject)destination;
-			destination = (ImageConnector)eResolveProxy(oldDestination);
-			if (destination != oldDestination) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImagePackage.IMAGE_MAGICK_TRANSFORMER__DESTINATION, oldDestination, destination));
-			}
-		}
 		return destination;
 	}
 

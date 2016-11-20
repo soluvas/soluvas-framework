@@ -82,8 +82,8 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ImagePackage.DAV_CONNECTOR: return createDavConnector();
-			case ImagePackage.S3_CONNECTOR: return createS3Connector();
+//			case ImagePackage.DAV_CONNECTOR: return createDavConnector();
+//			case ImagePackage.S3_CONNECTOR: return createS3Connector();
 			case ImagePackage.BLITLINE_TRANSFORMER: return createBlitlineTransformer();
 			case ImagePackage.THUMBNAILATOR_TRANSFORMER: return createThumbnailatorTransformer();
 			case ImagePackage.UPLOADED_IMAGE: return createUploadedImage();
@@ -95,7 +95,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.STYLED_IMAGE: return createStyledImage();
 			case ImagePackage.IMAGE_CATALOG: return createImageCatalog();
 			case ImagePackage.IMAGE_MAGICK_TRANSFORMER: return createImageMagickTransformer();
-			case ImagePackage.FOLDER_CONNECTOR: return createFolderConnector();
+//			case ImagePackage.FOLDER_CONNECTOR: return createFolderConnector();
 			case ImagePackage.DISPLAY_IMAGE: return createDisplayImage();
 			case ImagePackage.STYLED_IMAGE_ENTRY: return (EObject)createStyledImageEntry();
 			case ImagePackage.MEDIA: return createMedia();

@@ -21,7 +21,7 @@ package org.soluvas.image;
  *
  * @see org.soluvas.image.ImagePackage#getFolderConnector()
  * @model
- * @generated
+ * @generated NOT
  */
 public interface FolderConnector extends ImageConnector {
 	/**

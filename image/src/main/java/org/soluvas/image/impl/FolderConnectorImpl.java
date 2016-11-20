@@ -56,7 +56,7 @@ import org.springframework.context.annotation.Bean;
  * </ul>
  * </p>
  *
- * @generated
+ * @generated NOT
  */
 public class FolderConnectorImpl extends ImageConnectorImpl implements FolderConnector {
 	/**
@@ -103,62 +103,8 @@ public class FolderConnectorImpl extends ImageConnectorImpl implements FolderCon
 	 * @generated
 	 */
 	@Override
-	protected EClass eStaticClass() {
-		return ImagePackage.Literals.FOLDER_CONNECTOR;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String getFolder() {
 		return folder;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ImagePackage.FOLDER_CONNECTOR__FOLDER:
-				return getFolder();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ImagePackage.FOLDER_CONNECTOR__FOLDER:
-				return FOLDER_EDEFAULT == null ? folder != null : !FOLDER_EDEFAULT.equals(folder);
-		}
-		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (folder: ");
-		result.append(folder);
-		result.append(')');
-		return result.toString();
 	}
 
 	@Override

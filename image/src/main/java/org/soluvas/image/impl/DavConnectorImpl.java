@@ -58,7 +58,7 @@ import com.google.common.util.concurrent.ListenableFuture;
  * An implementation of the model object '<em><b>Web Dav Connector</b></em>'.
  * <!-- end-user-doc -->
  *
- * @generated
+ * @generated NOT
  */
 @SuppressWarnings("serial")
 public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector {
@@ -137,16 +137,6 @@ public class DavConnectorImpl extends ImageConnectorImpl implements DavConnector
 		return httpContext;
 	}
 	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ImagePackage.Literals.DAV_CONNECTOR;
-	}
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
