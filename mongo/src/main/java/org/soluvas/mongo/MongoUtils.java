@@ -56,8 +56,10 @@ public class MongoUtils {
 	 * 
 	 * <p>The {@code dbName} part is stripped from the URI for the purpose of connecting.
 	 * The reason is to optimize number of connections when using large number of databases (> 100)
-	 * and also due to <a href="https://jira.mongodb.org/browse/SERVER-3301">SERVER-3301</a>. 
+	 * and also due to <a href="https://jira.mongodb.org/browse/SERVER-3301">SERVER-3301</a>.
+	 * @deprecated
 	 */
+	@Deprecated
 	private static final Map<String, MongoClient> mongoClients = new HashMap<>();
 
 	/**
@@ -70,30 +72,35 @@ public class MongoUtils {
 	 * @throws UnsupportedEncodingException 
 	 */
 	protected static synchronized MongoClient getClient(MongoClientURI realMongoUri, ReadPreference readPreference) throws UnknownHostException, UnsupportedEncodingException {
-		String uriWithoutDbStr = "mongodb://";
-		if (realMongoUri.getUsername() != null) {
-			// MongoDB passwords are never empty
-			uriWithoutDbStr += URLEncoder.encode(realMongoUri.getUsername(), "UTF-8") +
-					":" + URLEncoder.encode(String.valueOf(realMongoUri.getPassword()), "UTF-8"); 
-			uriWithoutDbStr += "@";
-		}
-		uriWithoutDbStr += Joiner.on(',').join(realMongoUri.getHosts());
-		uriWithoutDbStr += "/";
-		final String key = readPreference + ":" + uriWithoutDbStr;
-		if (mongoClients.containsKey(key)) {
-			final MongoClient client = mongoClients.get(key);
-			log.debug("Reusing existing MongoClient {} for {}:{}@{}/{}", 
-					client, readPreference, realMongoUri.getUsername(), realMongoUri.getHosts(), realMongoUri.getDatabase());
-			return client;
-		} else {
-			final MongoClientOptions.Builder optionsBuilder = MongoClientOptions.builder().readPreference(readPreference);
-			final MongoClientURI optionsMongoUri = new MongoClientURI(uriWithoutDbStr, optionsBuilder);
-			final MongoClient client = new MongoClient(optionsMongoUri);
-			log.info("Instantiating + authenticating new MongoClient {} for {}:{}@{}/{}", 
-					client, readPreference, optionsMongoUri.getUsername(), optionsMongoUri.getHosts(), optionsMongoUri.getDatabase());
-			mongoClients.put(key, client);
-			return client;
-		}
+//		String uriWithoutDbStr = "mongodb://";
+//		if (realMongoUri.getUsername() != null) {
+//			// MongoDB passwords are never empty
+//			uriWithoutDbStr += URLEncoder.encode(realMongoUri.getUsername(), "UTF-8") +
+//					":" + URLEncoder.encode(String.valueOf(realMongoUri.getPassword()), "UTF-8");
+//			uriWithoutDbStr += "@";
+//		}
+//		uriWithoutDbStr += Joiner.on(',').join(realMongoUri.getHosts());
+//		uriWithoutDbStr += "/";
+//		final String key = readPreference + ":" + uriWithoutDbStr;
+//		if (mongoClients.containsKey(key)) {
+//			final MongoClient client = mongoClients.get(key);
+//			log.debug("Reusing existing MongoClient {} for {}:{}@{}/{}",
+//					client, readPreference, realMongoUri.getUsername(), realMongoUri.getHosts(), realMongoUri.getDatabase());
+//			return client;
+//		} else {
+//			final MongoClientOptions.Builder optionsBuilder = MongoClientOptions.builder().readPreference(readPreference);
+//			final MongoClientURI optionsMongoUri = new MongoClientURI(uriWithoutDbStr, optionsBuilder);
+//			final MongoClient client = new MongoClient(optionsMongoUri);
+//			log.info("Instantiating + authenticating new MongoClient {} for {}:{}@{}/{}",
+//					client, readPreference, optionsMongoUri.getUsername(), optionsMongoUri.getHosts(), optionsMongoUri.getDatabase());
+//			mongoClients.put(key, client);
+//			return client;
+//		}
+
+		// Hendy's workaround for new MongoDB driver: always create NEW MongoClient
+		final MongoClientOptions.Builder optionsBuilder = MongoClientOptions.builder().readPreference(readPreference);
+		final MongoClientURI newUri = new MongoClientURI(realMongoUri.getURI(), optionsBuilder);
+		return new MongoClient(newUri);
 	}
 	
 	/**
