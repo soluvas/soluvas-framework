@@ -9,6 +9,7 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.*;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.soluvas.image.ImageException;
@@ -30,6 +31,10 @@ import java.util.Map;
  */
 @SuppressWarnings("serial")
 public class GsConnectorImpl extends ImageConnectorImpl {
+
+	/** Global configuration of Google Cloud Storage OAuth 2.0 scope. */
+	private static final String STORAGE_SCOPE =
+			"https://www.googleapis.com/auth/devstorage.read_write";
 
 	@Inject
 	private GoogleCredential credential;
@@ -130,7 +135,7 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 				// Set up and execute a Google Cloud Storage request.
 				HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 				HttpRequestFactory requestFactory = httpTransport.createRequestFactory(
-						credential);
+						credential.createScoped(ImmutableList.of(STORAGE_SCOPE)));
 
 				GenericUrl url = new GenericUrl(uri);
 				final InputStreamContent httpContent = new InputStreamContent(contentType, new FileInputStream(file));
@@ -167,7 +172,7 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 
 			HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 			HttpRequestFactory requestFactory = httpTransport.createRequestFactory(
-					credential);
+					credential.createScoped(ImmutableList.of(STORAGE_SCOPE)));
 
 			GenericUrl url = new GenericUrl(uri);
 			HttpRequest request = requestFactory.buildDeleteRequest(url);
@@ -197,7 +202,7 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 
 			HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 			HttpRequestFactory requestFactory = httpTransport.createRequestFactory(
-					credential);
+					credential.createScoped(ImmutableList.of(STORAGE_SCOPE)));
 
 			GenericUrl url = new GenericUrl(uri);
 			HttpRequest request = requestFactory.buildGetRequest(url);
