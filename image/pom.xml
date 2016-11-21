@@ -119,6 +119,12 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>com.imgix</groupId>
+			<artifactId>imgix-java</artifactId>
+			<version>1.1.8</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
 		</dependency>
@@ -173,4 +179,14 @@
 		</dependency>
 	</dependencies>
 
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>bintray</name>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
+	</repositories>
 </project>
