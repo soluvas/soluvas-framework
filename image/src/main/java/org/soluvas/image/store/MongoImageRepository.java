@@ -173,9 +173,10 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	 *                    to a cloud storage service such as <a href="https://cloud.google.com/storage/">Google Cloud Storage</a> or <a href="https://aws.amazon.com/s3/">Amazon S3</a>, and process transformations
 	 *                    using a service such as
 	 *                    <a href="https://cloud.google.com/appengine/docs/java/images/">Google App Engine Images API</a>,
-	 *                    <a href="https://www.imgix.com>imgix</a>, <a href="https://www.blitline.com/">blitline</a>,
+	 *                    <a href="https://www.imgix.com/">imgix</a>, <a href="https://www.blitline.com/">blitline</a>,
 	 *                    <a href="https://uploadcare.com/documentation/cdn/#image-operations">Uploadcare</a>,
-	 *                    <a href="https://www.contentful.com/developers/docs/references/images-api/">Contentful</a>.
+	 *                    <a href="https://www.contentful.com/developers/docs/references/images-api/">Contentful</a>,
+	 *                    <a href="http://www.elasticimagecache.com/">ElasticImageCache</a>.
 	 * @param imageStyles
 	 */
 	public MongoImageRepository(String namespace, String mongoUri, ImageConnector connector,
