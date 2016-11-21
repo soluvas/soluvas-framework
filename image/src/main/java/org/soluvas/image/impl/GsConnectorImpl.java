@@ -145,6 +145,7 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 				GenericUrl url = new GenericUrl(uri);
 				final InputStreamContent httpContent = new InputStreamContent(contentType, new FileInputStream(file));
 				HttpRequest request = requestFactory.buildPutRequest(url, httpContent);
+				request.getHeaders().setCacheControl("public, max-age=0, must-revalidate"); // soft "do not cache unless you know what you're doing", for imgix operation
 				HttpResponse response = request.execute();
 				String content = response.parseAsString();
 				log.info("Uploaded '{}' to '{}', {} bytes transferred: gs://{}/{}",
@@ -160,7 +161,7 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 				final String errorMessage = String.format("Failed upload '%s' to '%s' (%s bytes): %s",
 						file, uri, file.length(), e);
 				log.error(errorMessage, e);
-				throw new ImageException(errorMessage, e);
+				throw new ImageException(e, errorMessage, e);
 			}
         });
 	}

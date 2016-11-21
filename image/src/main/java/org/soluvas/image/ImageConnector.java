@@ -110,6 +110,17 @@ public interface ImageConnector {
 	void delete(String namespace, String imageId, String styleCode, String styleVariant, String extension);
 
 	/**
+	 * Get the base path without the prefixing host and tenantId/tenantEnv.
+	 * @param namespace
+	 * @param imageId
+	 * @param styleCode
+	 * @param styleVariant
+	 * @param extension
+	 * @return
+	 */
+	String getBasePath(String namespace, String imageId, String styleCode, String styleVariant, String extension);
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->

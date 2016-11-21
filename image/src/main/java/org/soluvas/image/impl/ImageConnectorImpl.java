@@ -145,6 +145,31 @@ public abstract class ImageConnectorImpl implements ImageConnector {
 	public abstract void delete(String namespace, String imageId, String styleCode, String styleVariant, String extension);
 
 	/**
+	 * Get the base path without the prefixing host and tenantId/tenantEnv.
+	 * @param namespace
+	 * @param imageId
+	 * @param styleCode
+	 * @param styleVariant
+	 * @param extension
+	 * @return
+	 */
+	public final String getBasePath(String namespace, String imageId, String styleCode, String styleVariant, String extension) {
+		final String basePathTemplate = "{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}";
+		// namespace, styleCode, imageId, styleVariant, extension
+		final Map<String, Object> uriVars = Maps.newHashMap();
+		uriVars.put("namespace", namespace);
+		uriVars.put("styleCode", styleCode);
+		uriVars.put("imageId", imageId);
+		uriVars.put("styleVariant", styleVariant);
+		uriVars.put("extension", extension);
+		try {
+			return UriTemplate.fromTemplate(basePathTemplate).expand(uriVars);
+		} catch (final Exception e) {
+			throw new ImageException(e, "Cannot expand URI template '%s' using %s", getUriTemplate(), uriVars);
+		}
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 */
