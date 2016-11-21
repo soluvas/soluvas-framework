@@ -24,7 +24,9 @@ import org.eclipse.emf.ecore.EObject;
  * @see org.soluvas.image.ImagePackage#getImageTransformer()
  * @model abstract="true"
  * @generated
+ * @deprecated
  */
+@Deprecated
 public interface ImageTransformer extends EObject {
 
 	/**

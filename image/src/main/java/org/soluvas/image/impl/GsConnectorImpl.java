@@ -109,11 +109,16 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 			final String styleCode, final String styleVariant, final String extension, final File file,
 			final String contentType) {
 		// sanity check
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(contentType), "Cannot upload image without content type, namespace=%s imageId=%s styleCode=%s styleVariant=%s extension=%s file=%s",
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(contentType),
+				"Cannot upload image without content type, namespace=%s imageId=%s styleCode=%s styleVariant=%s extension=%s file=%s",
 				namespace, imageId, styleCode, styleVariant, extension, file);
-		Preconditions.checkArgument(!Strings.isNullOrEmpty(extension), "Cannot upload image without extension, namespace=%s imageId=%s styleCode=%s styleVariant=%s file=%s contentType=%s",
+		Preconditions.checkArgument(!Strings.isNullOrEmpty(extension),
+				"Cannot upload image without extension, namespace=%s imageId=%s styleCode=%s styleVariant=%s file=%s contentType=%s",
 				namespace, imageId, styleCode, styleVariant, file, contentType);
-		
+		Preconditions.checkArgument(file.length() > 0,
+				"Cannot upload empty image, namespace=%s imageId=%s styleCode=%s styleVariant=%s file=%s contentType=%s",
+				namespace, imageId, styleCode, styleVariant, file, contentType);
+
 //		final SettableFuture<UploadedImage> future = SettableFuture.create();
 		final boolean useHi = ImageRepository.ORIGINAL_CODE.equals(styleCode);
 		final String key = String.format("%s_%s/%s/%s/%s_%s.%s",

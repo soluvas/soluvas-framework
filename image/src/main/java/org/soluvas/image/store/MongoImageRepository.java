@@ -5,14 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ConcurrentHashMap;
@@ -56,7 +50,6 @@ import org.soluvas.mongo.Index;
 import org.soluvas.mongo.MongoUtils;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
@@ -160,7 +153,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	private final Map<String, ImageStyle> styles = new ConcurrentHashMap<>();
 	
 	private final ImageConnector connector;
-	private final ImageTransformer transformer;
+	@Deprecated
+	private final Optional<ImageTransformer> transformer;
 
 	private final List<String> mongoHosts;
 	private final String mongoDatabase;
@@ -170,13 +164,27 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	private final ListeningExecutorService executor = MoreExecutors.sameThreadExecutor();
 	
 	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
+
+	/**
+	 * @param namespace
+	 * @param mongoUri
+	 * @param connector
+	 * @param transformer Transformer is optional and deprecated. Current best practice is only upload the master image
+	 *                    to a cloud storage service such as <a href="https://cloud.google.com/storage/">Google Cloud Storage</a> or <a href="https://aws.amazon.com/s3/">Amazon S3</a>, and process transformations
+	 *                    using a service such as
+	 *                    <a href="https://cloud.google.com/appengine/docs/java/images/">Google App Engine Images API</a>,
+	 *                    <a href="https://www.imgix.com>imgix</a>, <a href="https://www.blitline.com/">blitline</a>,
+	 *                    <a href="https://uploadcare.com/documentation/cdn/#image-operations">Uploadcare</a>,
+	 *                    <a href="https://www.contentful.com/developers/docs/references/images-api/">Contentful</a>.
+	 * @param imageStyles
+	 */
 	public MongoImageRepository(String namespace, String mongoUri, ImageConnector connector,
-			ImageTransformer transformer, List<ImageStyle> imageStyles) {
+			@Nullable ImageTransformer transformer, List<ImageStyle> imageStyles) {
 		super();
 		this.namespace = namespace;
 		this.mongoUri = mongoUri;
 		this.connector = connector;
-		this.transformer = transformer;
+		this.transformer = Optional.ofNullable(transformer);
 		setStyles(imageStyles);
 		
 		final MongoClientURI mongoUriDetail = new MongoClientURI(mongoUri);
@@ -528,7 +536,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 //		final String seoName = name + " " + FilenameUtils.getBaseName(fileName);
 		final String seoName1 = SlugUtils.generateId(name, 0);
 		final String seoName2 = SlugUtils.generateId(FilenameUtils.getBaseName(originalName), 0);
-		final String imageId = Optional.fromNullable(existingImageId).or( seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2 );
+		final String imageId = Optional.ofNullable(existingImageId)
+				.orElse( seoName1.equals(seoName2) ? seoName1 : seoName1 + "_" + seoName2 );
 		
 		// guess content type if necessary
 		final String contentType;
@@ -562,6 +571,8 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(contentType), "Failed to get content type for %s (%s bytes) as %s",
 				originalFile, length, imageId);
 		Preconditions.checkArgument(!Strings.isNullOrEmpty(extension), "Failed to get extension for %s (%s bytes) as %s",
+				originalFile, length, imageId);
+		Preconditions.checkArgument(length > 0 && originalFile.length() > 0, "Image cannot be empty: %s (%s bytes) as %s",
 				originalFile, length, imageId);
 		log.debug("Adding image from {} ({} {} bytes) as {}, originalName={} extension={}",
 				originalFile.getName(), contentType, length, imageId,
@@ -619,8 +630,13 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 				// at this point, the original will have been uploaded, so Blitline can transform
 		log.debug("Transforming {} into {} variants using {}", original.imageId,
 				transforms.size(), transformer.getClass().getName());
-		final ListenableFuture<List<UploadedImage>> transformedsFuture = transformer.transform(
-				connector, original.file, namespace, original.imageId, sourceVariant, transforms);
+		final ListenableFuture<List<UploadedImage>> transformedsFuture;
+		if (transformer.isPresent()) {
+			transformedsFuture = transformer.get().transform(
+					connector, original.file, namespace, original.imageId, sourceVariant, transforms);
+		} else {
+			transformedsFuture = Futures.immediateFuture(ImmutableList.of());
+		}
 		final ListenableFuture<OriginalUpload> updatedWipFuture = Futures.transform(transformedsFuture, new Function<List<UploadedImage>, OriginalUpload>() {
 			@Override @Nullable
 			public OriginalUpload apply(@Nullable List<UploadedImage> input) {
@@ -755,7 +771,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 
 			try {
 				doDeleteOriginal(image.getId(), image.getOriginUri(), image.getFileName(),
-						Optional.fromNullable(Strings.emptyToNull(image.getExtension())));
+						Optional.ofNullable(Strings.emptyToNull(image.getExtension())));
 			} catch (Exception e) {
 				log.error("Error deleting original for " + namespace + " image '" + id + "' from '" + image.getOriginUri() + "': " + e, e);
 			}
@@ -773,7 +789,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 
 	protected void doDeleteOriginal(String imageId, String originalOriginUri, String fileName, Optional<String> upExtension) throws Exception {
 		log.info("Deleting {} image {} - original: {}", namespace, imageId, originalOriginUri);
-		final String originalExtension = upExtension.or(
+		final String originalExtension = upExtension.orElse(
 				!Strings.isNullOrEmpty(fileName) ? FilenameUtils.getExtension(fileName) : "jpg");
 		connector.delete(namespace, imageId, ImageRepository.ORIGINAL_CODE, ImageRepository.ORIGINAL_CODE, originalExtension);
 	}
@@ -941,10 +957,6 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 							submon.worked(1, ProgressStatus.ERROR);
 						}
 
-						/**
-						 * @param image
-						 * @param tempFile
-						 */
 						protected void deleteOriginal() {
 							log.trace("Deleting temporary file {} (image {})", tempFile, image.getId());
 							tempFile.delete();
@@ -1043,9 +1055,9 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 		monitor.subTask("Updating URIs for " + images.size() + " images");
 		for (Image image : images) {
 			final String newPublicUri = getPublicUri(image.getId(), ORIGINAL_NAME,
-					Optional.fromNullable(image.getExtension()).or("jpg"));
+					Optional.ofNullable(image.getExtension()).orElse("jpg"));
 			final String newOriginUri = getOriginUri(image.getId(), ORIGINAL_NAME,
-					Optional.fromNullable(image.getExtension()).or("jpg"));
+					Optional.ofNullable(image.getExtension()).orElse("jpg"));
 			final BasicDBObject dbo = new BasicDBObject();
 			dbo.put("uri", newPublicUri.toString());
 			dbo.put("originUri", newOriginUri.toString());
