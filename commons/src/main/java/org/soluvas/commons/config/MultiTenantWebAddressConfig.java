@@ -15,7 +15,14 @@ import javax.inject.Inject;
 import org.apache.commons.lang3.BooleanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.*;
+import org.soluvas.commons.AppManifest;
+import org.soluvas.commons.CommonsException;
+import org.soluvas.commons.CommonsPackage;
+import org.soluvas.commons.GeneralSysConfig;
+import org.soluvas.commons.OnDemandXmiLoader;
+import org.soluvas.commons.TenantSource;
+import org.soluvas.commons.WebAddress;
+import org.soluvas.commons.tenant.TenantAdded;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.commons.tenant.TenantRepositoryListener;
 import org.soluvas.commons.tenant.TenantsStarting;
@@ -167,6 +174,10 @@ public class MultiTenantWebAddressConfig implements TenantRepositoryListener {
 			webAddressMap.remove(tenantId);
 			log.info("Destroyed WebAddress for tenant '{}'", tenantId);
 		}
+	}
+
+	@Override
+	public void onTenantAdded(TenantAdded tenantAdded) throws Exception {
 	}
 	
 }

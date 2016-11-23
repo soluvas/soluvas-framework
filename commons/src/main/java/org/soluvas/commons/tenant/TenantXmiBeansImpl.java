@@ -306,6 +306,10 @@ public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryLi
 				tenantIdsToRemove.size(), eClass.getName(), tenantIdsToRemove);
 	}
 
+	@Override
+	public void onTenantAdded(TenantAdded tenantAdded) throws Exception {
+	}
+
 	/**
 	 * Adds the entity, saves it to disk, then performs commit/sync based on {@link #getVersioningMode()}.
 	 * @param id

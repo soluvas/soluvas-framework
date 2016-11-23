@@ -28,6 +28,7 @@ import org.soluvas.commons.Network;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.TenantSource;
+import org.soluvas.commons.tenant.TenantAdded;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.commons.tenant.TenantRepositoryListener;
 import org.soluvas.commons.tenant.TenantsStarting;
@@ -409,6 +410,10 @@ public class MultiTenantConfig implements TenantRepositoryListener, DefaultsConf
 	@Override
 	public DateTimeZone getDefaultTimeZone() {
 		return DateTimeZone.forID(env.getRequiredProperty("defaultTimeZone"));
+	}
+
+	@Override
+	public void onTenantAdded(TenantAdded tenantAdded) throws Exception {
 	}
 
 }

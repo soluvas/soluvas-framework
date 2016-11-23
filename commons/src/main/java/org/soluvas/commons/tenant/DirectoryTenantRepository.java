@@ -33,6 +33,7 @@ import org.soluvas.commons.EmfUtils;
 import org.soluvas.commons.OnDemandXmiLoader;
 import org.soluvas.commons.ResourceType;
 import org.soluvas.commons.config.DirectorySourcedConfig;
+import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -77,6 +78,8 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	private final TenantProvisioner<T> provisioner;
 	private final List<TenantRepositoryListener> listeners = new ArrayList<>();
 	private final AtomicBoolean listenersLocked = new AtomicBoolean();
+
+	private final ApplicationContext appCtx;
 	
 	/**
 	 * @param tenantEnv
@@ -86,7 +89,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	 * @throws IOException
 	 */
 	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir,
-			@Nullable TenantProvisioner<T> provisioner) throws IOException {
+			@Nullable TenantProvisioner<T> provisioner, ApplicationContext appCtx) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
@@ -94,6 +97,7 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		this.rootDir = rootDir;
 		this.provisioner = provisioner;
 		this.whitelist = null;
+		this.appCtx = appCtx;
 		init();
 	}
 
@@ -106,13 +110,14 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	 * @throws IOException
 	 */
 	public DirectoryTenantRepository(EventBus appEventBus, String tenantEnv, String appDomain, File rootDir, 
-			@Nullable TenantProvisioner<T> provisioner, Set<String> whitelist) throws IOException {
+			@Nullable TenantProvisioner<T> provisioner, ApplicationContext appCtx, Set<String> whitelist) throws IOException {
 		super();
 		this.appEventBus = appEventBus;
 		this.tenantEnv = tenantEnv;
 		this.appDomain = appDomain;
 		this.rootDir = rootDir;
 		this.provisioner = provisioner;
+		this.appCtx = appCtx;
 		this.whitelist = ImmutableSet.copyOf(whitelist);
 		log.info("Using whitelist of {} tenants: {}", whitelist.size(), Iterables.limit(whitelist, 10));
 		init();
@@ -282,6 +287,10 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 	public ImmutableMap<String, AppManifest> findAll() {
 		return ImmutableMap.copyOf(tenantMap);
 	}
+	
+	public ApplicationContext getAppCtx() {
+		return appCtx;
+	}
 
 	@Override
 	public AppManifest newBlank() {
@@ -303,9 +312,17 @@ public class DirectoryTenantRepository<T extends ProvisionData> implements Tenan
 		final AppManifest appManifest = combineAppManifest(tenantId, upAppManifest);
 		tenantMap.put(tenantId, appManifest);
 		start(tenantId, appManifest, trackingId);
+		// TODO: tambahin di sini
+		for (final TenantRepositoryListener listener : listeners) {
+			try {
+				listener.onTenantAdded(new TenantAdded(tenantId, appManifest, provisionData, trackingId));
+			} catch (Exception e) {
+				log.error("Failed to onTenantAdded " + e, e);
+			}
+		}
 		return appManifest;
 	}
-
+	
 	@Override
 	public synchronized AppManifest modify(String tenantId, AppManifest upAppManifest) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(tenantId), "TenantID must not be null or empty.");

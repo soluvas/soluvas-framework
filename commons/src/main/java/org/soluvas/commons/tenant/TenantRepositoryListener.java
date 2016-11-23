@@ -10,5 +10,6 @@ public interface TenantRepositoryListener {
 	
 	void onTenantsStarting(TenantsStarting starting) throws Exception;
 	void onTenantsStopping(TenantsStopping stopping) throws Exception;
+	void onTenantAdded(TenantAdded tenantAdded) throws Exception;
 
 }

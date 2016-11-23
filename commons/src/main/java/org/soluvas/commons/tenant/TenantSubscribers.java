@@ -177,6 +177,11 @@ public abstract class TenantSubscribers implements TenantRepositoryListener {
 		}
 	}
 	
+	@Override
+	public void onTenantAdded(TenantAdded tenantAdded) throws Exception {
+		
+	}
+	
 	/**
 	 * Called when tenant {@link EventBus} is ready for subscribers.
 	 * @param tenantId

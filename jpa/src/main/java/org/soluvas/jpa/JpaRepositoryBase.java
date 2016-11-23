@@ -35,6 +35,7 @@ import org.soluvas.commons.GenericStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.tenant.CommandRequestAttributes;
+import org.soluvas.commons.tenant.TenantAdded;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.soluvas.commons.tenant.TenantRepositoryListener;
@@ -323,6 +324,10 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	
 	@Override
 	public void onTenantsStopping(TenantsStopping stopping) throws Exception {
+	}
+	
+	@Override
+	public void onTenantAdded(TenantAdded tenantAdded) throws Exception {
 	}
 	
 	@Override @Transactional

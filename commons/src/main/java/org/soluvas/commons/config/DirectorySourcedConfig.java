@@ -13,6 +13,7 @@ import org.soluvas.commons.tenant.DirectoryTenantRepository;
 import org.soluvas.commons.tenant.TenantProvisioner;
 import org.soluvas.commons.tenant.TenantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -33,6 +34,8 @@ public class DirectorySourcedConfig {
 	@Inject
 	private Environment env;
 	@Inject
+	private ApplicationContext appCtx;
+	@Inject
 	private SoluvasApplication app;
 	@Inject @Named(CommonsWebConfig.APP_EVENT_BUS)
 	private EventBus appEventBus;
@@ -49,9 +52,9 @@ public class DirectorySourcedConfig {
 		final String tenantWhitelistStr = env.getProperty("tenantWhitelist", String.class);
 		if (tenantWhitelistStr != null) {
 			final Set<String> tenantWhitelist = ImmutableSet.copyOf( Splitter.on(',').trimResults().omitEmptyStrings().splitToList( tenantWhitelistStr ) );
-			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner, tenantWhitelist);
+			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner, appCtx, tenantWhitelist);
 		} else {
-			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner);
+			return new DirectoryTenantRepository(appEventBus, tenantEnv, appDomain, workspaceDir, tenantProvisioner, appCtx);
 		}
 	}
 	

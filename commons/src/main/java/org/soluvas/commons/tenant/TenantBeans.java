@@ -420,5 +420,9 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 		}
 		
 	}
+	
+	@Override
+	public void onTenantAdded(TenantAdded tenantAdded) throws Exception {
+	}
 
 }
