@@ -44,7 +44,14 @@ import com.mongodb.ReadPreference;
  *
  */
 public class MongoUtils {
-	
+
+	/**
+	 * Compatbility flag: Bippo Commerce requires CONNECT_URI_DIRECTLY = false,
+	 * Hendy's new apps requires CONNECT_URI_DIRECTLY = true.
+	 * @see #getDb(MongoClientURI, ReadPreference)
+	 */
+	public static boolean CONNECT_URI_DIRECTLY = false;
+
 	private static final Logger log = LoggerFactory.getLogger(MongoUtils.class);
 	/**
 	 * Singleton {@link MongoClient} instances so we can effectively limit to 11 connections per webapp
@@ -69,38 +76,41 @@ public class MongoUtils {
 	 * @param readPreference 
 	 * @return
 	 * @throws UnknownHostException
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
+	 * @see #CONNECT_URI_DIRECTLY
 	 */
 	protected static synchronized MongoClient getClient(MongoClientURI realMongoUri, ReadPreference readPreference) throws UnknownHostException, UnsupportedEncodingException {
-//		String uriWithoutDbStr = "mongodb://";
-//		if (realMongoUri.getUsername() != null) {
-//			// MongoDB passwords are never empty
-//			uriWithoutDbStr += URLEncoder.encode(realMongoUri.getUsername(), "UTF-8") +
-//					":" + URLEncoder.encode(String.valueOf(realMongoUri.getPassword()), "UTF-8");
-//			uriWithoutDbStr += "@";
-//		}
-//		uriWithoutDbStr += Joiner.on(',').join(realMongoUri.getHosts());
-//		uriWithoutDbStr += "/";
-//		final String key = readPreference + ":" + uriWithoutDbStr;
-//		if (mongoClients.containsKey(key)) {
-//			final MongoClient client = mongoClients.get(key);
-//			log.debug("Reusing existing MongoClient {} for {}:{}@{}/{}",
-//					client, readPreference, realMongoUri.getUsername(), realMongoUri.getHosts(), realMongoUri.getDatabase());
-//			return client;
-//		} else {
-//			final MongoClientOptions.Builder optionsBuilder = MongoClientOptions.builder().readPreference(readPreference);
-//			final MongoClientURI optionsMongoUri = new MongoClientURI(uriWithoutDbStr, optionsBuilder);
-//			final MongoClient client = new MongoClient(optionsMongoUri);
-//			log.info("Instantiating + authenticating new MongoClient {} for {}:{}@{}/{}",
-//					client, readPreference, optionsMongoUri.getUsername(), optionsMongoUri.getHosts(), optionsMongoUri.getDatabase());
-//			mongoClients.put(key, client);
-//			return client;
-//		}
-
-		// Hendy's workaround for new MongoDB driver: always create NEW MongoClient
-		final MongoClientOptions.Builder optionsBuilder = MongoClientOptions.builder().readPreference(readPreference);
-		final MongoClientURI newUri = new MongoClientURI(realMongoUri.getURI(), optionsBuilder);
-		return new MongoClient(newUri);
+		if (CONNECT_URI_DIRECTLY) {
+			// Hendy's workaround for new MongoDB driver: always create NEW MongoClient
+			final MongoClientOptions.Builder optionsBuilder = MongoClientOptions.builder().readPreference(readPreference);
+			final MongoClientURI newUri = new MongoClientURI(realMongoUri.getURI(), optionsBuilder);
+			return new MongoClient(newUri);
+		} else {
+			String uriWithoutDbStr = "mongodb://";
+			if (realMongoUri.getUsername() != null) {
+				// MongoDB passwords are never empty
+				uriWithoutDbStr += URLEncoder.encode(realMongoUri.getUsername(), "UTF-8") +
+						":" + URLEncoder.encode(String.valueOf(realMongoUri.getPassword()), "UTF-8");
+				uriWithoutDbStr += "@";
+			}
+			uriWithoutDbStr += Joiner.on(',').join(realMongoUri.getHosts());
+			uriWithoutDbStr += "/";
+			final String key = readPreference + ":" + uriWithoutDbStr;
+			if (mongoClients.containsKey(key)) {
+				final MongoClient client = mongoClients.get(key);
+				log.debug("Reusing existing MongoClient {} for {}:{}@{}/{}",
+						client, readPreference, realMongoUri.getUsername(), realMongoUri.getHosts(), realMongoUri.getDatabase());
+				return client;
+			} else {
+				final MongoClientOptions.Builder optionsBuilder = MongoClientOptions.builder().readPreference(readPreference);
+				final MongoClientURI optionsMongoUri = new MongoClientURI(uriWithoutDbStr, optionsBuilder);
+				final MongoClient client = new MongoClient(optionsMongoUri);
+				log.info("Instantiating + authenticating new MongoClient {} for {}:{}@{}/{}",
+						client, readPreference, optionsMongoUri.getUsername(), optionsMongoUri.getHosts(), optionsMongoUri.getDatabase());
+				mongoClients.put(key, client);
+				return client;
+			}
+		}
 	}
 	
 	/**
