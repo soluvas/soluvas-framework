@@ -610,6 +610,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 */
 	@Override
 	public final List<T> findAll(Collection<String> ids, Sort sort) {
+		Preconditions.checkNotNull(ids, "ids must be provided");
 		final BasicDBObject sortQuery = MongoUtils.getSort(sort, "_id", Direction.ASC);
 		log.trace("finding {} {} sort by {}: {}", ids.size(), collName, sort, Iterables.limit(ids, 10));
 		final List<T> entities;
