@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Strings;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Country implements Serializable {
+public class Country implements Serializable, Comparable<Country> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -232,5 +233,10 @@ public class Country implements Serializable {
 		return "Country [" + (iso != null ? "iso=" + iso + ", " : "")
 				+ (name != null ? "name=" + name : "") + "]";
 	}
-	
+
+	@Override
+	public int compareTo(Country o) {
+		return Strings.nullToEmpty(name).compareTo(o.getName());
+	}
+
 }

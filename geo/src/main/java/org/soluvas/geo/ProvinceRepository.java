@@ -5,9 +5,13 @@ import javax.annotation.Nullable;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 
+import java.util.List;
+
 public interface ProvinceRepository {
-	
-	Page<Province> searchProvince(String term, @Nullable String countryIso, Pageable pageable);
+
+    List<Province> findAllByCountryIso(String countryIso);
+
+    Page<Province> searchProvince(String term, @Nullable String countryIso, Pageable pageable);
 	
 	String getKeyForProvince(Province province);
 

@@ -1,8 +1,11 @@
 package org.soluvas.geo;
 
-import java.io.Serializable;
+import com.google.common.base.Strings;
 
-public class Province implements Serializable{
+import java.io.Serializable;
+import java.util.Comparator;
+
+public class Province implements Serializable, Comparable<Province> {
 	
 	private final String name;
 	private final Country country;
@@ -57,4 +60,8 @@ public class Province implements Serializable{
 				+ (country != null ? "country=" + country : "") + "]";
 	}
 
+	@Override
+	public int compareTo(Province o) {
+		return Strings.nullToEmpty(name).compareToIgnoreCase(o.getName());
+	}
 }

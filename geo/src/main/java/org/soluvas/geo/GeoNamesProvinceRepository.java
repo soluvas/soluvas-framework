@@ -5,22 +5,23 @@ import java.io.InputStreamReader;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import com.google.common.collect.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.googlecode.concurrenttrees.radix.ConcurrentRadixTree;
 import com.googlecode.concurrenttrees.radix.RadixTree;
 import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFactory;
@@ -41,7 +42,7 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 	final Map<String, Province> provinceMap = new HashMap<>();
 	private int entryCount = 0;
 	
-	public GeoNamesProvinceRepository(CountryRepository countryRepo) throws IOException{
+	public GeoNamesProvinceRepository(CountryRepository countryRepo) throws IOException {
 		super();
 //		final Country indonesia = countryRepo.getCountry("ID");
 		// Provinces for ID
@@ -63,7 +64,7 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 					
 					final Province province = new Province(name, country);
 					/*handle for same province name*/
-					if (!provinceMap.containsKey(name)){
+					if (!provinceMap.containsKey(name)) {
 //						log.debug("Putting province -> {}", province);
 						provinceMap.put(name, province);
 						tree.put(country.getIso() + ", " + province.getName().toLowerCase(), province);
@@ -95,8 +96,18 @@ public class GeoNamesProvinceRepository implements ProvinceRepository{
 	public Page<Province> searchProvince(String term, Pageable pageable) {
 		return searchProvince(term, null, pageable);
 	}
-	
-	
+
+	/**
+	 * Deduplicated and sorted.
+	 * @param countryIso
+	 * @return
+	 */
+	@Override
+	public List<Province> findAllByCountryIso(String countryIso) {
+		final Set<Province> all = ImmutableSet.copyOf(searchProvince("", countryIso, new PageRequest(0, 1000)).getContent());
+		return Ordering.natural().immutableSortedCopy(all);
+	}
+
 	@Override
 	public Page<Province> searchProvince(String term, @Nullable String countryIso, Pageable pageable) {
 		final String normalizedTerm;
