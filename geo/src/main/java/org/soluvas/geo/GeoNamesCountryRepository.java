@@ -65,6 +65,11 @@ public class GeoNamesCountryRepository implements CountryRepository {
     }
 
     @Override
+    public List<Country> findAll() {
+        return ImmutableList.copyOf(countryMap.values());
+    }
+
+    @Override
     public Country getCountry(String iso2orIso3) throws IllegalArgumentException {
         Country country = countryMap.get(iso2orIso3);
         if (country == null) {

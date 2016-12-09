@@ -3,8 +3,16 @@ package org.soluvas.geo;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 
+import java.util.List;
+
 public interface CountryRepository {
-	
+
+	/**
+	 * List all countries.
+	 * @return
+	 */
+	List<Country> findAll();
+
 	Country getCountry(String iso2orIso3)
 			throws IllegalArgumentException;
 	
