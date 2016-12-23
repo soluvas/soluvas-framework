@@ -52,7 +52,6 @@ public class MongoPersonConfig implements PersonConfig {
 		return personRepoBeans().getCurrent();
 	}
 
-	
 	@Override
 	@Bean(destroyMethod = "destroy")
 	public TenantBeans<PersonCustomerRoleHistoryRepository> personCustomerRoleHistoryRepoBeans(){
@@ -74,5 +73,4 @@ public class MongoPersonConfig implements PersonConfig {
 		return personCustomerRoleHistoryRepoBeans().getCurrent();
 	}
 
-	
 }
