@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 /**
- * Non-web tenant-related application configuration.
+ * Non-web tenant-related {@link DefaultsConfig} implementation.
  * @author ceefour
  * @see MultiTenantWebConfig
  */
@@ -25,8 +25,8 @@ public class SingleTenantConfig implements DefaultsConfig {
 	
 	/**
 	 * Default {@link Locale} for tenantless operations, e.g. Manage and Open pages.
+	 * Property {@code defaultLocale}
 	 * @return
-	 * @see commerce.properties: defaultLocale
 	 */
 	@Override
 	public Locale getDefaultLocale() {
@@ -35,8 +35,8 @@ public class SingleTenantConfig implements DefaultsConfig {
 
 	/**
 	 * Default {@link DateTimeZone} for tenantless operations, e.g. Manage and Open pages.
+	 * Property {@code defaultTimeZone}
 	 * @return
-	 * @see commerce.properties: defaultTimeZone
 	 */
 	@Override
 	public DateTimeZone getDefaultTimeZone() {

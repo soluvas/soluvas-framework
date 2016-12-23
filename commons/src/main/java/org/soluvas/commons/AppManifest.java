@@ -72,8 +72,8 @@ import java.util.Locale;
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getAppManifest()
+ * @see Tenant
  * @model
- * @generated
  */
 public interface AppManifest extends Positionable, ResourceAware, BundleAware, Expandable {
 	

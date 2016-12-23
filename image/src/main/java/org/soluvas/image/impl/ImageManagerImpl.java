@@ -1,17 +1,9 @@
 package org.soluvas.image.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-import javax.inject.Inject;
-
+import com.google.common.base.*;
+import com.google.common.base.Objects;
+import com.google.common.base.Optional;
+import com.google.common.collect.*;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -24,47 +16,20 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Gender;
-import org.soluvas.commons.Identifiable;
-import org.soluvas.commons.Imageable;
-import org.soluvas.commons.NotNullPredicate;
-import org.soluvas.commons.Person;
-import org.soluvas.commons.PersonLike;
-import org.soluvas.commons.ProgressMonitor;
-import org.soluvas.commons.ProgressStatus;
-import org.soluvas.commons.WebAddress;
+import org.soluvas.commons.*;
 import org.soluvas.commons.impl.ProgressMonitorImpl;
-import org.soluvas.image.DimensionLike;
-import org.soluvas.image.DisplayImage;
-import org.soluvas.image.DuplicateIdHandling;
-import org.soluvas.image.FileExport;
-import org.soluvas.image.ImageCatalog;
-import org.soluvas.image.ImageException;
-import org.soluvas.image.ImageFactory;
-import org.soluvas.image.ImageManager;
-import org.soluvas.image.ImagePackage;
-import org.soluvas.image.ImageStyle;
-import org.soluvas.image.ImageStyles;
-import org.soluvas.image.ImageTransform;
-import org.soluvas.image.ImageType;
-import org.soluvas.image.ImageTypes;
+import org.soluvas.image.*;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 import org.soluvas.image.store.StyledImage;
 import org.soluvas.image.util.ImageUtils;
 
-import com.google.common.base.Function;
-import com.google.common.base.Objects;
-import com.google.common.base.Optional;
-import com.google.common.base.Preconditions;
-import com.google.common.base.Predicate;
-import com.google.common.base.Strings;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
+import javax.annotation.Nullable;
+import javax.inject.Inject;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,7 +46,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	private String maleDefaultPhotoId;
 	private String femaleDefaultPhotoId;
 	private String unknownDefaultPhotoId;
-	private WebAddress webAddress;
+	private String unsecureImagesUri;
 	final Map<ImageType, ImageRepository> imageRepos;
 	private boolean sslSupported;
 	
@@ -92,12 +57,32 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	protected ImageManagerImpl() {
 		throw new UnsupportedOperationException();
 	}
-	
-	@Inject
+
+	/**
+	 *
+	 * @param sslSupported
+	 * @param webAddress
+	 * @param imageRepos
+	 * @deprecated Use {@link #ImageManagerImpl(boolean, String, Map)}.
+	 */
+	@Inject @Deprecated
 	public ImageManagerImpl(boolean sslSupported, WebAddress webAddress, Map<ImageType, ImageRepository> imageRepos) {
 		super();
 		this.sslSupported = sslSupported;
-		this.webAddress = webAddress;
+		this.unsecureImagesUri = webAddress.getImagesUri();
+		this.imageRepos = imageRepos;
+	}
+
+	/**
+	 *
+	 * @param sslSupported
+	 * @param unsecureImagesUri e.g. from absolute template "http://{+webHost}:8080/img/", but expanded as absolute URI e.g. "http://localhost:8080/img/"
+	 * @param imageRepos
+	 */
+	public ImageManagerImpl(boolean sslSupported, String unsecureImagesUri, Map<ImageType, ImageRepository> imageRepos) {
+		super();
+		this.sslSupported = sslSupported;
+		this.unsecureImagesUri = unsecureImagesUri;
 		this.imageRepos = imageRepos;
 	}
 	
@@ -129,7 +114,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	 */
 	@Override
 	public String getNoImageUri() {
-		return webAddress.getImagesUri() + "org.soluvas.commons/noimage.png";
+		return unsecureImagesUri + "org.soluvas.commons/noimage.png";
 	}
 
 	/**
@@ -158,15 +143,15 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 	@Override
 	public String getPersonIconUri(@Nullable Gender gender) {
 		if (gender == null) {
-			return webAddress.getImagesUri() + "org.soluvas.commons/user_unknown.png";
+			return unsecureImagesUri + "org.soluvas.commons/user_unknown.png";
 		}
 		switch (gender) {
 		case MALE:
-			return webAddress.getImagesUri() + "org.soluvas.commons/user_male.png";
+			return unsecureImagesUri + "org.soluvas.commons/user_male.png";
 		case FEMALE:
-			return webAddress.getImagesUri() + "org.soluvas.commons/user_female.png";
+			return unsecureImagesUri + "org.soluvas.commons/user_female.png";
 		default:
-			return webAddress.getImagesUri() + "org.soluvas.commons/user_unknown.png";
+			return unsecureImagesUri + "org.soluvas.commons/user_unknown.png";
 		}
 	}
 
@@ -792,15 +777,15 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 
 	public String getPersonPhotoUri(@Nullable Gender gender) {
 		if (gender == null) {
-			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_person.png";
+			return unsecureImagesUri + "org.soluvas.commons/nophoto_person.png";
 		}
 		switch (gender) {
 		case MALE:
-			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_male.png";
+			return unsecureImagesUri + "org.soluvas.commons/nophoto_male.png";
 		case FEMALE:
-			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_female.png";
+			return unsecureImagesUri + "org.soluvas.commons/nophoto_female.png";
 		default:
-			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_person.png";	
+			return unsecureImagesUri + "org.soluvas.commons/nophoto_person.png";	
 		}
 	}
 
@@ -824,7 +809,7 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 				return getPersonPhotoUri(person.getGender());
 			}
 		} else {
-			return webAddress.getImagesUri() + "org.soluvas.commons/nophoto_person.png";
+			return unsecureImagesUri + "org.soluvas.commons/nophoto_person.png";
 		}
 	}
 	
