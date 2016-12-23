@@ -75,7 +75,7 @@ import java.util.Locale;
  * @see Tenant
  * @model
  */
-public interface AppManifest extends Positionable, ResourceAware, BundleAware, Expandable {
+public interface AppManifest extends Positionable, ResourceAware, BundleAware, Expandable, ITenant {
 	
 	public static final String ENV_DEV = "dev";
 	public static final String ENV_STG_PREFIX = "st";
