@@ -20,6 +20,7 @@ import org.soluvas.image.store.ImageRepository;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -28,7 +29,28 @@ import java.util.Map;
 
 /**
  * Google (Cloud) Storage connector.
- */
+ * Requires {@link GoogleCredential} as a bean (can be prototype bean), e.g. from environment or from database (recommended):
+ *
+ * <pre>{@code
+ * @Inject
+ * private Environment env;
+ *
+ * @Bean
+ * public GoogleCredential googleCredential() throws IOException {
+ *     return GoogleCredential.fromStream(IOUtils.toInputStream(env.getRequiredProperty("google.cloud.credential"),
+ *             StandardCharsets.UTF_8));
+ * }
+ * }</pre>
+ *
+ * can also be from file (not recommended for 12-factor app):
+ *
+ * <pre>{@code
+ * @Bean
+ * public GoogleCredential googleCredential() throws IOException {
+ * 	return GoogleCredential.fromStream(new FileInputStream("config/SatukanCinta-a8a980474e42.json"));
+ * }
+ * }</pre>
+*/
 @SuppressWarnings("serial")
 public class GsConnectorImpl extends ImageConnectorImpl {
 
@@ -37,21 +59,17 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 			"https://www.googleapis.com/auth/devstorage.read_write";
 
 	@Inject
-	private GoogleCredential credential;
+	private Provider<GoogleCredential> credentialProvider;
 	private String bucket;
 	private String tenantId;
 	private String tenantEnv;
 
-	public GoogleCredential getCredential() {
-		return credential;
+	public Provider<GoogleCredential> getCredentialProvider() {
+		return credentialProvider;
 	}
 
-	/**
-	 * Must set this, usually from JSON private key file.
-	 * @param credential
-	 */
-	public void setCredential(GoogleCredential credential) {
-		this.credential = credential;
+	public void setCredentialProvider(Provider<GoogleCredential> credentialProvider) {
+		this.credentialProvider = credentialProvider;
 	}
 
 	/**
@@ -76,7 +94,6 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 
 	@PostConstruct
 	public void init() {
-		Preconditions.checkNotNull(credential, "credential must be set");
 		Preconditions.checkNotNull(bucket, "bucket must be set");
 		Preconditions.checkNotNull(tenantId, "tenantId must be set");
 		Preconditions.checkNotNull(tenantEnv, "tenantEnv must be set");
@@ -139,6 +156,7 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 			try {
 				// Set up and execute a Google Cloud Storage request.
 				HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+				final GoogleCredential credential = credentialProvider.get();
 				HttpRequestFactory requestFactory = httpTransport.createRequestFactory(
 						credential.createScoped(ImmutableList.of(STORAGE_SCOPE)));
 
@@ -177,6 +195,7 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 					+ URLEncoder.encode(bucket, "UTF-8") + "/" + key;
 
 			HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+			final GoogleCredential credential = credentialProvider.get();
 			HttpRequestFactory requestFactory = httpTransport.createRequestFactory(
 					credential.createScoped(ImmutableList.of(STORAGE_SCOPE)));
 
@@ -207,6 +226,7 @@ public class GsConnectorImpl extends ImageConnectorImpl {
 					+ URLEncoder.encode(bucket, "UTF-8") + "/" + key;
 
 			HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+			final GoogleCredential credential = credentialProvider.get();
 			HttpRequestFactory requestFactory = httpTransport.createRequestFactory(
 					credential.createScoped(ImmutableList.of(STORAGE_SCOPE)));
 
