@@ -1,14 +1,11 @@
 package org.soluvas.couchdb;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Nullable;
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.*;
+import com.google.common.collect.Sets.SetView;
 import org.apache.commons.lang3.StringUtils;
 import org.ektorp.ComplexKey;
 import org.ektorp.CouchDbConnector;
@@ -23,39 +20,19 @@ import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.impl.PersonImpl;
-import org.soluvas.data.EntityLookupException;
-import org.soluvas.data.Existence;
-import org.soluvas.data.LookupKey;
-import org.soluvas.data.StatusMask;
-import org.soluvas.data.TrashResult;
-import org.soluvas.data.UntrashResult;
-import org.soluvas.data.domain.Page;
-import org.soluvas.data.domain.PageImpl;
-import org.soluvas.data.domain.Pageable;
-import org.soluvas.data.domain.Projection;
-import org.soluvas.data.domain.Sort;
+import org.soluvas.data.*;
+import org.soluvas.data.domain.*;
 import org.soluvas.data.person.PersonRepository;
 import org.soluvas.data.push.RepositoryException;
 import org.soluvas.json.JsonUtils;
 import org.springframework.cache.annotation.Cacheable;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.collect.Sets.SetView;
-
 import scala.util.Failure;
 import scala.util.Success;
 import scala.util.Try;
+
+import javax.annotation.Nullable;
+import java.io.Serializable;
+import java.util.*;
 
 /**
  * CouchDB implementation of {@link PersonRepository}.
@@ -558,6 +535,11 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
+	public long countByFacebook() {
+		return 0;
+	}
+
+	@Override
 	public Page<Person> findAllByKeywordAndStatus(String searchText,
 			Collection<AccountStatus> accountStatuses, Pageable pageable) {
 		throw new UnsupportedOperationException();
@@ -636,8 +618,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	@Override
 	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask,
 			String mobileNumber) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -665,33 +646,28 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	public Person getZendeskUserId(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Long getZendeskUserIdByPersonId(String personId) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
 			Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<String> findAllIdsByCustomerRoleId(StatusMask statusMask, String customerRoleId) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -701,26 +677,22 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	public boolean existsByEmailAndStatus(String email, AccountStatus status) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean existsByEmail(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ImmutableList<AccountStatus> getStatusesByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Person findOneByEmail(AccountStatus status, String email) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 }

@@ -672,7 +672,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		}
 		
 		final long count = countByQuery(query);
-		log.debug("Got {} people by query: {}", count, query);
+		log.debug("Got {} people by SearchText query: {}", count, query);
 		return count;
 	}
 
@@ -683,7 +683,16 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
 		}
 		final long count = countByQuery(query);
-		log.debug("Got {} record(s) by query: {}", count, query);
+		log.debug("Got {} record(s) by Statuses query: {}", count, query);
+		return count;
+	}
+
+	@Override
+	public long countByFacebook() {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("facebookId", new BasicDBObject("$exists", true));
+		final long count = countByQuery(query);
+		log.debug("Got {} record(s) by Facebook query: {}", count, query);
 		return count;
 	}
 

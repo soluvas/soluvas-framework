@@ -115,7 +115,7 @@ public interface PersonRepository extends
 	List<Person> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds);
 	
 	List<Person> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
-	
+
 	boolean existByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
 	
 	boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds);
@@ -125,7 +125,12 @@ public interface PersonRepository extends
 	long count(StatusMask statusMask);
 	
 	long countByStatuses(Collection<AccountStatus> accountStatuses);
-	
+
+	/**
+	 * Count all people having {@link Person#getFacebookId()}.
+	 */
+	long countByFacebook();
+
 	void setNullCustomerRole(Collection<String> customerRoleIds);
 	
 	@Nullable

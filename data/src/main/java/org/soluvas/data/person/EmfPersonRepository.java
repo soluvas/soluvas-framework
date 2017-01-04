@@ -363,7 +363,11 @@ public class EmfPersonRepository extends
 		throw new UnsupportedOperationException();
 	}
 
-	
+	@Override
+	public long countByFacebook() {
+		return 0;
+	}
+
 
 	@Override
 	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
@@ -473,33 +477,28 @@ public class EmfPersonRepository extends
 
 	@Override
 	public Person getZendeskUserId(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Long getZendeskUserIdByPersonId(String personId) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
 			Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public List<String> findAllIdsByCustomerRoleId(StatusMask statusMask, String customerRoleId) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -509,26 +508,22 @@ public class EmfPersonRepository extends
 
 	@Override
 	public boolean existsByEmailAndStatus(String email, AccountStatus status) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public boolean existsByEmail(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ImmutableList<AccountStatus> getStatusesByEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Person findOneByEmail(AccountStatus status, String email) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 }
