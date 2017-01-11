@@ -666,10 +666,14 @@ public class Category2 implements Serializable, Identifiable {
 	}
 
 	public void resolve(EntityLookup<Category2, String> categoryLookup) {
-		if (getSlug() == null) {
+		if (getSlug() == null && getName() != null) {
 			setSlug(SlugUtils.generateSegment(getName()));
 		}
-		setSlugPath(Joiner.on('/').join(getSlugSegments(this, categoryLookup)));
+		if (getSlug() != null) {
+			setSlugPath(Joiner.on('/').join(getSlugSegments(this, categoryLookup)));
+		} else {
+			setSlugPath(null);
+		}
 		setLevel(getLevel(this, categoryLookup));
 	}
 	
