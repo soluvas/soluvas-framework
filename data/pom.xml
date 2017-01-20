@@ -68,6 +68,7 @@
 		<dependency>
 			<groupId>com.google.code.morphia</groupId>
 			<artifactId>morphia</artifactId>
+			<version>0.99.1.soluvas2</version>
 			<optional>true</optional>
 		</dependency>
 

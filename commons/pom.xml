@@ -65,10 +65,14 @@
 		<dependency>
 			<groupId>com.google.code.morphia</groupId>
 			<artifactId>morphia</artifactId>
+			<version>0.99.1.soluvas2</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.morphia</groupId>
 			<artifactId>morphia-logging-slf4j</artifactId>
+			<version>0.99</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>
