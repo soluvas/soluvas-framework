@@ -130,18 +130,18 @@ public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryLi
 	protected File getFileFor(String tenantId) {
 		final ImmutableMap<String, Object> scope = ImmutableMap.<String, Object>of(
 				"tenantId", tenantId, "tenantEnv", tenantConfig.getTenantEnv(), 
-				"dataDir", tenantConfig.dataDirMap().get(tenantId).toString());
+				"dataDir", tenantConfig.dataDirMap().get(tenantId).toURI().toString().replace("file:/", ""));
 		final String path;
 		try {
-			path = pathTemplate.expand(scope);
+			path = pathTemplate.expand(scope).replace("file://", "");
 		} catch (Exception e) {
 			throw new TenantException(e, "Cannot get %s file path for tenant '%s' template: %s scope: %s",
 					getClass().getName(), tenantId, pathTemplate.getTemplate(), scope);
 		}
 		try {
-			return new File(URI.create(path));
+			return new File(path);
 		} catch (Exception e) {
-			throw new TenantException(e, "Invalid %s file URI '%s' for tenant '%s' template: %s scope: %s",
+			throw new TenantException(e, "Invalid %s file path '%s' for tenant '%s' template: %s scope: %s",
 					getClass().getName(), path, tenantId, pathTemplate.getTemplate(), scope);
 		}
 	}
