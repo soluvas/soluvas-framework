@@ -1,10 +1,13 @@
 package org.soluvas.commons.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.code.morphia.logging.MorphiaLoggerFactory;
-import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;
-import com.google.common.eventbus.EventBus;
-import com.google.common.util.concurrent.ListeningExecutorService;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.inject.Inject;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.ClientConnectionManager;
@@ -23,20 +26,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.soluvas.commons.Cpu;
-import org.soluvas.commons.IdAsyncEventBus;
 import org.soluvas.commons.Network;
 import org.soluvas.commons.ProxyConfig;
 import org.soluvas.commons.util.AppUtils;
 import org.soluvas.json.JsonUtils;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
-import javax.inject.Inject;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.code.morphia.logging.MorphiaLoggerFactory;
+import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;
+import com.google.common.eventbus.EventBus;
+import com.google.common.util.concurrent.ListeningExecutorService;
 
 /**
  * Common infrastructure beans for Spring applications:
@@ -104,7 +112,8 @@ public class CommonsWebConfig {
      */
     @Bean
     public EventBus appEventBus() {
-        return new IdAsyncEventBus("APP", networkExecutor());
+//        return new IdAsyncEventBus("APP", networkExecutor());
+    	return new EventBus("APP");
     }
 
     /**
