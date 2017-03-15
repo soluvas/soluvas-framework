@@ -466,7 +466,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			ids = ImmutableList.copyOf(transformedAsIds);
 		} catch (Exception e1) {
 			throw new DataException(e1, "In colName '%s' and dbName '%s' --> Make sure all of the entities have valid 'id': %s",
-					db.getName(), collName, transformedAsIds);
+					collName, db.getName(), transformedAsIds);
 		}
 		log.debug("Adding {} {} documents: {}", entities.size(), collName, ids);
 		String dbObjsStr = "";
