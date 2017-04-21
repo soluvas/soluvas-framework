@@ -3484,13 +3484,22 @@ public interface CommonsPackage extends EPackage {
 	int POSTAL_ADDRESS__DISTRICT = NAME_CONTAINER_FEATURE_COUNT + 24;
 
 	/**
+	 * The feature id for the '<em><b>Jne Area Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POSTAL_ADDRESS__JNE_AREA_CODE = NAME_CONTAINER_FEATURE_COUNT + 25;
+
+	/**
 	 * The number of structural features of the '<em>Postal Address</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POSTAL_ADDRESS_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 25;
+	int POSTAL_ADDRESS_FEATURE_COUNT = NAME_CONTAINER_FEATURE_COUNT + 26;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.impl.PersonCatalogImpl <em>Person Catalog</em>}' class.
@@ -7474,6 +7483,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getPostalAddress_District();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.PostalAddress#getJneAreaCode <em>Jne Area Code</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Jne Area Code</em>'.
+	 * @see org.soluvas.commons.PostalAddress#getJneAreaCode()
+	 * @see #getPostalAddress()
+	 * @generated
+	 */
+	EAttribute getPostalAddress_JneAreaCode();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonCatalog <em>Person Catalog</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10731,6 +10751,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute POSTAL_ADDRESS__DISTRICT = eINSTANCE.getPostalAddress_District();
+
+		/**
+		 * The meta object literal for the '<em><b>Jne Area Code</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POSTAL_ADDRESS__JNE_AREA_CODE = eINSTANCE.getPostalAddress_JneAreaCode();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonCatalogImpl <em>Person Catalog</em>}' class.

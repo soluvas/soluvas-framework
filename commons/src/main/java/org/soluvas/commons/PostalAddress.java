@@ -62,6 +62,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.commons.PostalAddress#isPrimaryShipping <em>Primary Shipping</em>}</li>
  *   <li>{@link org.soluvas.commons.PostalAddress#getValidationTime <em>Validation Time</em>}</li>
  *   <li>{@link org.soluvas.commons.PostalAddress#getDistrict <em>District</em>}</li>
+ *   <li>{@link org.soluvas.commons.PostalAddress#getJneAreaCode <em>Jne Area Code</em>}</li>
  * </ul>
  *
  * @see org.soluvas.commons.CommonsPackage#getPostalAddress()
@@ -637,5 +638,31 @@ public interface PostalAddress extends NameContainer, Identifiable, SchemaVersio
 	 * @generated
 	 */
 	void setDistrict(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Jne Area Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Jne Area Code</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Jne Area Code</em>' attribute.
+	 * @see #setJneAreaCode(String)
+	 * @see org.soluvas.commons.CommonsPackage#getPostalAddress_JneAreaCode()
+	 * @model
+	 * @generated
+	 */
+	String getJneAreaCode();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.PostalAddress#getJneAreaCode <em>Jne Area Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Jne Area Code</em>' attribute.
+	 * @see #getJneAreaCode()
+	 * @generated
+	 */
+	void setJneAreaCode(String value);
 
 } // PostalAddress

@@ -54,6 +54,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#isPrimaryShipping <em>Primary Shipping</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#getValidationTime <em>Validation Time</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#getDistrict <em>District</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.PostalAddressImpl#getJneAreaCode <em>Jne Area Code</em>}</li>
  * </ul>
  *
  * @generated
@@ -533,6 +534,26 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * @ordered
 	 */
 	protected String district = DISTRICT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getJneAreaCode() <em>Jne Area Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJneAreaCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String JNE_AREA_CODE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getJneAreaCode() <em>Jne Area Code</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJneAreaCode()
+	 * @generated
+	 * @ordered
+	 */
+	protected String jneAreaCode = JNE_AREA_CODE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1118,6 +1139,27 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getJneAreaCode() {
+		return jneAreaCode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setJneAreaCode(String newJneAreaCode) {
+		String oldJneAreaCode = jneAreaCode;
+		jneAreaCode = newJneAreaCode;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.POSTAL_ADDRESS__JNE_AREA_CODE, oldJneAreaCode, jneAreaCode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -1173,6 +1215,8 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 				return getValidationTime();
 			case CommonsPackage.POSTAL_ADDRESS__DISTRICT:
 				return getDistrict();
+			case CommonsPackage.POSTAL_ADDRESS__JNE_AREA_CODE:
+				return getJneAreaCode();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1266,6 +1310,9 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 			case CommonsPackage.POSTAL_ADDRESS__DISTRICT:
 				setDistrict((String)newValue);
 				return;
+			case CommonsPackage.POSTAL_ADDRESS__JNE_AREA_CODE:
+				setJneAreaCode((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1353,6 +1400,9 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 			case CommonsPackage.POSTAL_ADDRESS__DISTRICT:
 				setDistrict(DISTRICT_EDEFAULT);
 				return;
+			case CommonsPackage.POSTAL_ADDRESS__JNE_AREA_CODE:
+				setJneAreaCode(JNE_AREA_CODE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1417,6 +1467,8 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 				return VALIDATION_TIME_EDEFAULT == null ? validationTime != null : !VALIDATION_TIME_EDEFAULT.equals(validationTime);
 			case CommonsPackage.POSTAL_ADDRESS__DISTRICT:
 				return DISTRICT_EDEFAULT == null ? district != null : !DISTRICT_EDEFAULT.equals(district);
+			case CommonsPackage.POSTAL_ADDRESS__JNE_AREA_CODE:
+				return JNE_AREA_CODE_EDEFAULT == null ? jneAreaCode != null : !JNE_AREA_CODE_EDEFAULT.equals(jneAreaCode);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1525,6 +1577,8 @@ public class PostalAddressImpl extends MinimalEObjectImpl.Container implements P
 		result.append(validationTime);
 		result.append(", district: ");
 		result.append(district);
+		result.append(", jneAreaCode: ");
+		result.append(jneAreaCode);
 		result.append(')');
 		return result.toString();
 	}

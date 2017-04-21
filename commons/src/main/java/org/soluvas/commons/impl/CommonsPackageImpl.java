@@ -3430,6 +3430,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPostalAddress_JneAreaCode() {
+		return (EAttribute)postalAddressEClass.getEStructuralFeatures().get(24);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EClass getPersonCatalog() {
 		return personCatalogEClass;
@@ -4840,6 +4849,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__PRIMARY_SHIPPING);
 		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__VALIDATION_TIME);
 		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__DISTRICT);
+		createEAttribute(postalAddressEClass, POSTAL_ADDRESS__JNE_AREA_CODE);
 
 		personCatalogEClass = createEClass(PERSON_CATALOG);
 		createEReference(personCatalogEClass, PERSON_CATALOG__PEOPLE);
@@ -5588,6 +5598,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getPostalAddress_PrimaryShipping(), ecorePackage.getEBoolean(), "primaryShipping", "false", 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPostalAddress_ValidationTime(), this.getDateTime(), "validationTime", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPostalAddress_District(), ecorePackage.getEString(), "district", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPostalAddress_JneAreaCode(), ecorePackage.getEString(), "jneAreaCode", null, 0, 1, PostalAddress.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(personCatalogEClass, PersonCatalog.class, "PersonCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPersonCatalog_People(), this.getPerson(), null, "people", null, 0, -1, PersonCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
