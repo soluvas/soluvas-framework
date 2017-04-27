@@ -2,9 +2,6 @@
  */
 package org.soluvas.commons;
 
-import org.eclipse.emf.ecore.EObject;
-
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Schema Versionable</b></em>'.
@@ -13,9 +10,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getSchemaVersionable()
  * @model interface="true" abstract="true"
- * @generated
+ * @generated NOT
  */
-public interface SchemaVersionable extends EObject {
+public interface SchemaVersionable {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -16,6 +16,7 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EObject;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -72,7 +73,7 @@ import com.google.common.collect.Maps;
  * @generated
  */
 @JsonDeserialize(as=AppSessionImpl.class)
-public interface AppSession extends Identifiable, Timestamped, SchemaVersionable {
+public interface AppSession extends Identifiable, Timestamped, SchemaVersionable, EObject {
 	
 	public class FromSession implements Function<Session, AppSession> {
 		private static final Logger log = LoggerFactory

@@ -21,9 +21,9 @@ package org.soluvas.commons;
  *
  * @see org.soluvas.commons.CommonsPackage#getNameContainer()
  * @model interface="true" abstract="true"
- * @generated
+ * @generated NOT
  */
-public interface NameContainer extends Nameable {
+public interface NameContainer {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -58,7 +58,6 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 import com.mongodb.ReadPreference;
 import com.mongodb.WriteResult;
-
 /**
  * {@link PagingAndSortingRepository} implemented using MongoDB, with {@link SchemaVersionable} support.
  * <p>{@link SchemaVersionable#getSchemaVersion()} is <b>not</b> used for filtering documents,

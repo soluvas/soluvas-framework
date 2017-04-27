@@ -229,4 +229,4 @@ public class TranslationImpl extends MinimalEObjectImpl.Container implements Tra
 		return result.toString();
 	}
 
-} //TranslationImpl
+} //Translation2

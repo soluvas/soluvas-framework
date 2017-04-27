@@ -2,9 +2,6 @@
  */
 package org.soluvas.commons;
 
-import org.eclipse.emf.ecore.EObject;
-
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Describable</b></em>'.
@@ -23,9 +20,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getDescribable()
  * @model interface="true" abstract="true"
- * @generated
+ * @generated NOT
  */
-public interface Describable extends EObject {
+public interface Describable {
 
 	/**
 	 * Returns the value of the '<em><b>Description</b></em>' attribute.
