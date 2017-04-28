@@ -45,6 +45,7 @@ public interface Organization extends Identifiable, SchemaVersionable, NameConta
 	 * @model default="1" changeable="false"
 	 * @generated
 	 */
+	@Override
 	long getSchemaVersion();
 
 	/**

@@ -2,8 +2,6 @@
  */
 package org.soluvas.image;
 
-import java.io.Serializable;
-
 import org.soluvas.commons.NameContainer;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;

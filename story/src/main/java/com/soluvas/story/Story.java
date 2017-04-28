@@ -229,6 +229,7 @@ public interface Story extends Identifiable, Timestamped, SchemaVersionable, EOb
 	 * @model default="3" required="true" changeable="false"
 	 * @generated
 	 */
+	@Override
 	long getSchemaVersion();
 
 	/**

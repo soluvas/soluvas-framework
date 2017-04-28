@@ -23,7 +23,7 @@ package org.soluvas.commons;
  * @model interface="true" abstract="true"
  * @generated NOT
  */
-public interface NameContainer {
+public interface NameContainer extends Nameable {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -38,6 +38,7 @@ public interface NameContainer {
 	 * @model required="true"
 	 * @generated
 	 */
+	@Override
 	String getName();
 
 	/**

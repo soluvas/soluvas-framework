@@ -10,6 +10,7 @@ import org.soluvas.commons.BundleAware;
 import org.soluvas.commons.Colorable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.NameContainer;
+import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Positionable;
 import org.soluvas.commons.ResourceAware;
@@ -43,7 +44,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=TermImpl.class)
-public interface Term extends TermContainer, BundleAware, NameContainer, ResourceAware, NsPrefixable, Imageable, Positionable, Colorable, Translatable {
+public interface Term extends TermContainer, BundleAware, NameContainer, ResourceAware, NsPrefixable, Imageable, Positionable, Colorable, Translatable, Nameable {
 	/**
 	 * Returns the value of the '<em><b>Vocab</b></em>' reference.
 	 * <!-- begin-user-doc -->
