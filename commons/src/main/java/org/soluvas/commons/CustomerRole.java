@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +34,7 @@ package org.soluvas.commons;
  * @model
  * @generated
  */
-public interface CustomerRole extends Identifiable, SchemaVersionable, NameContainer, Timestamped, Describable {
+public interface CustomerRole extends Identifiable, SchemaVersionable, NameContainer, Timestamped, Describable, EObject {
 	
 	/**
 	 * Registered user / retail.

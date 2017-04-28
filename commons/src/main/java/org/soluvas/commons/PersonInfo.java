@@ -28,7 +28,7 @@ package org.soluvas.commons;
  * @model
  * @generated
  */
-public interface PersonInfo extends Identifiable, PhotoIdContainer, Sluggable, NameContainer, PersonLike {
+public interface PersonInfo extends Identifiable, PhotoIdContainer, Sluggable, NameContainer, PersonLike, Nameable {
 	
 	/**
 	 * Returns the value of the '<em><b>Gender</b></em>' attribute.

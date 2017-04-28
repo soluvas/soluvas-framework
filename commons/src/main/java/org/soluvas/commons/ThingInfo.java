@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.impl.ThingInfoImpl;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -28,7 +29,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=ThingInfoImpl.class)
-public interface ThingInfo extends NameContainer, Identifiable, Sluggable, Imageable {
+public interface ThingInfo extends NameContainer, Identifiable, Sluggable, Imageable, EObject {
 	/**
 	 * Returns the value of the '<em><b>Image Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

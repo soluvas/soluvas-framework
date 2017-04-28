@@ -3,9 +3,8 @@
 package org.soluvas.data;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.soluvas.commons.NameContainer;
 import org.eclipse.emf.ecore.EObject;
+import org.soluvas.commons.NameContainer;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface MixinCatalog extends NameContainer {
+public interface MixinCatalog extends NameContainer, EObject {
 	/**
 	 * Returns the value of the '<em><b>Mixins</b></em>' containment reference list.
 	 * The list contents are of type {@link org.soluvas.data.Mixin}.

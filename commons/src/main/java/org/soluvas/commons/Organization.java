@@ -2,6 +2,7 @@
  */
 package org.soluvas.commons;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +30,7 @@ package org.soluvas.commons;
  * @model
  * @generated
  */
-public interface Organization extends Identifiable, SchemaVersionable, NameContainer {
+public interface Organization extends Identifiable, SchemaVersionable, NameContainer, EObject {
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
 	 * The default value is <code>"1"</code>.
@@ -44,6 +45,7 @@ public interface Organization extends Identifiable, SchemaVersionable, NameConta
 	 * @model default="1" changeable="false"
 	 * @generated
 	 */
+	@Override
 	long getSchemaVersion();
 
 	/**

@@ -30,6 +30,7 @@ import org.soluvas.commons.ResourceType;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.category.impl.CategoryCatalogImpl#getCategories <em>Categories</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryCatalogImpl#getName <em>Name</em>}</li>
@@ -38,7 +39,6 @@ import org.soluvas.commons.ResourceType;
  *   <li>{@link org.soluvas.category.impl.CategoryCatalogImpl#getResourceName <em>Resource Name</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryCatalogImpl#getBundle <em>Bundle</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

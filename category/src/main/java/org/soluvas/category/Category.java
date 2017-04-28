@@ -14,6 +14,7 @@ import org.soluvas.commons.CategoryLike;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.Informer;
+import org.soluvas.commons.Nameable;
 import org.soluvas.commons.NsPrefixable;
 import org.soluvas.commons.Parentable;
 import org.soluvas.commons.ResourceAware;
@@ -33,6 +34,7 @@ import com.google.common.collect.Iterables;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.category.Category#getStatus <em>Status</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getMetaDescription <em>Meta Description</em>}</li>
@@ -51,13 +53,12 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.Category#getTags <em>Tags</em>}</li>
  *   <li>{@link org.soluvas.category.Category#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.soluvas.category.CategoryPackage#getCategory()
  * @model
  * @generated
  */
-public interface Category extends CategoryLike, NsPrefixable, Parentable<Category>, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo>, Timestamped, Translatable {
+public interface Category extends CategoryLike, NsPrefixable, Parentable<Category>, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo>, Timestamped, Translatable, Nameable {
 	
 	public final static String NAME_ATTR = "name";
 	public final static String DESCRIPTION_ATTR = "description";

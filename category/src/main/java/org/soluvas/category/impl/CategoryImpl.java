@@ -65,6 +65,7 @@ import com.google.common.collect.Iterables;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getNsPrefix <em>Ns Prefix</em>}</li>
@@ -106,7 +107,6 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.soluvas.category.impl.CategoryImpl#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
