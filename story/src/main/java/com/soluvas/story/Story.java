@@ -3,6 +3,7 @@
 package com.soluvas.story;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SchemaVersionable;
 import org.soluvas.commons.Timestamped;
@@ -33,7 +34,7 @@ import org.soluvas.social.Target;
  * @model
  * @generated
  */
-public interface Story extends Identifiable, Timestamped, SchemaVersionable {
+public interface Story extends Identifiable, Timestamped, SchemaVersionable, EObject {
 	/**
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
 	 * The literals are from the enumeration {@link com.soluvas.story.StoryStatus}.
