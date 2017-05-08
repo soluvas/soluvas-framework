@@ -86,6 +86,7 @@ import com.google.common.eventbus.EventBus;
  * </ol>
  * @author ceefour
  */
+@Deprecated
 public class XmiCategoryRepository 
 		extends PagingAndSortingRepositoryBase<Category, String>
 		implements CategoryRepository {

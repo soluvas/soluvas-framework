@@ -54,10 +54,13 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.soluvas.category.Category#getGoogleFormalId <em>Google Formal Id</em>}</li>
  * </ul>
  *
+ *Use {@link Category2}
+ *
  * @see org.soluvas.category.CategoryPackage#getCategory()
  * @model
- * @generated
+ * @generated NOT
  */
+@Deprecated
 public interface Category extends CategoryLike, NsPrefixable, Parentable<Category>, ResourceAware, BundleAware, CategoryContainer, Describable, Informer<CategoryInfo>, Timestamped, Translatable, Nameable {
 	
 	public final static String NAME_ATTR = "name";

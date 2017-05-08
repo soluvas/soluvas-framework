@@ -1,14 +1,20 @@
 package org.soluvas.commons;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.base.Optional;
 
 /**
  * @author rudi
  *
  */
-public class CategoryInfo2 implements Serializable {
+public class CategoryInfo2 implements Serializable, Translatable2 {
 
 	private static final long serialVersionUID = 1L;
+	protected static final Long CATEGORY_COUNT_EDEFAULT = null;
 	
 	private String id;
 	private String nsPrefix;
@@ -22,6 +28,13 @@ public class CategoryInfo2 implements Serializable {
 	private Long googleFormalId;
 	private String primaryUri;
 	private String parentId;
+	private TranslationState translationState;
+	private String originalLanguage;
+	private String language;
+	private Map<String, Translation2> translations;
+	protected Long categoryCount = CATEGORY_COUNT_EDEFAULT;
+	private CategoryInfo2 parent;
+	protected List<CategoryInfo2> parents;
 	
 	public void copyFrom(CategoryInfo upInfo) {
 		setColor(upInfo.getColor());
@@ -38,6 +51,37 @@ public class CategoryInfo2 implements Serializable {
 		setSlugPath(upInfo.getSlugPath());
 	}
 	
+	
+	public String getEffectiveName(String curLanguageTag) {
+		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
+			return getName();
+		} else {
+			final Map<String, Translation2> translations = getTranslations();
+			if (translations.isEmpty()) {
+				return getName();
+			} else {
+				if (!translations.containsKey(curLanguageTag)) {
+					return getName();
+				} else {
+					final Translation2 translation = translations.get(curLanguageTag);
+					if (!translation.getMessages().containsKey(CategoryInfo.NAME_ATTR)) {
+						return getName();
+					} else {
+						final String translatedValue = translation.getMessages().get(CategoryInfo.NAME_ATTR);
+						return translatedValue;
+					}
+				}
+			}
+		}
+	}
+	
+	public Long getCategoryCount() {
+		return categoryCount;
+	}
+	
+	public void setCategoryCount(Long newCategoryCount) {
+		categoryCount = newCategoryCount;
+	}
 	/**
 	 * @return the id
 	 */
@@ -193,5 +237,58 @@ public class CategoryInfo2 implements Serializable {
 				+ ", color=" + color + ", level=" + level + ", googleFormalId=" + googleFormalId
 				+ ", primaryUri=" + primaryUri + ", parentId=" + parentId + "]";
 	}
+
+	@Override
+	public TranslationState getTranslationState() {
+		return translationState;
+	}
+
+	@Override
+	public void setTranslationState(TranslationState value) {
+		translationState = value;
+	}
+
+	@Override
+	public String getOriginalLanguage() {
+		return originalLanguage;
+	}
+
+	@Override
+	public void setOriginalLanguage(String value) {
+		originalLanguage = value;
+	}
+
+	@Override
+	public String getLanguage() {
+		return language;
+	}
+
+	@Override
+	public void setLanguage(String value) {
+		language = value;
+	}
+
+	@Override
+	public Map<String, Translation2> getTranslations() {
+		return translations;
+	}
 	
+	public CategoryInfo2 getParent() {
+		return parent;
+	}
+
+	public CategoryInfo2 basicGetParent() {
+		return parent;
+	}
+
+	public void setParent(CategoryInfo2 newParent) {
+		parent = newParent;
+	}
+	
+	public List<CategoryInfo2> getParents() {
+		if (parents == null) {
+			parents = new ArrayList<>();
+		}
+		return parents;
+	}
 }

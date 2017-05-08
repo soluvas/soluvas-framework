@@ -73,5 +73,10 @@ public class Translation2 implements Serializable {
 		result.append(')');
 		return result.toString();
 	}
+	
+	public void copyFrom(org.soluvas.commons.Translation2 upTranslation) {
+		setLanguage(upTranslation.getLanguage());
+		getMessages().putAll(upTranslation.getMessages());
+	}
 
 } //Translation2

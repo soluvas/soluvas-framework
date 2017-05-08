@@ -40,6 +40,7 @@ import com.google.common.eventbus.EventBus;
  * then this should work too. 
  * @author ceefour
  */
+@Deprecated
 public class GitXmiCategoryRepository extends XmiCategoryRepository {
 	
 	private Map<String, Repository> gitRepos;
