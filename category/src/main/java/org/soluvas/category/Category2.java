@@ -42,7 +42,7 @@ import com.google.common.collect.Iterables;
  *
  */
 @Converters({ DateTimeConverter.class, UnitConverter.class, EnumConverter.class })
-public class Category2 extends CategoryCatalog2 implements Serializable, Identifiable {
+public class Category2 implements Serializable, Identifiable {
 
 	private static final long serialVersionUID = 1L;
 
