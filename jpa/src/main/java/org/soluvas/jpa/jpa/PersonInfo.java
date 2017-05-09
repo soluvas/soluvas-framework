@@ -10,6 +10,8 @@ import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.PersonInfo2;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Preconditions;
 
@@ -52,6 +54,29 @@ public class PersonInfo implements Serializable {
 		setPhotoId(personInfoUp.getPhotoId());
 		setSlug(personInfoUp.getSlug());
 		setMobileNumber(personInfoUp.getMobileNumber());
+	}
+	
+	public PersonInfo(PersonInfo2 personInfo2) {
+		Preconditions.checkNotNull(personInfo2, "Person Info EMF must not be null!");
+		setEmail(personInfo2.getEmail());
+		setGender(personInfo2.getGender());
+		setId(personInfo2.getId());
+		setName(personInfo2.getName());
+		setPhotoId(personInfo2.getPhotoId());
+		setSlug(personInfo2.getSlug());
+		setMobileNumber(personInfo2.getMobileNumber());
+	}
+	
+	public PersonInfo2 toInfo2() {
+		final PersonInfo2 info2 = new PersonInfo2();
+		info2.setEmail(getEmail());
+		info2.setGender(getGender());
+		info2.setId(getId());
+		info2.setName(getName());
+		info2.setPhotoId(getPhotoId());
+		info2.setSlug(getSlug());
+		info2.setMobileNumber(getMobileNumber());
+		return info2;
 	}
 
 	/**

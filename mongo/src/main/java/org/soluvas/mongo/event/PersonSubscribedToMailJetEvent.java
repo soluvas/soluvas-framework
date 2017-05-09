@@ -1,6 +1,6 @@
 package org.soluvas.mongo.event;
 
-import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.push.TrackableEvent;
 
 /**
@@ -10,14 +10,14 @@ import org.soluvas.push.TrackableEvent;
  */
 public class PersonSubscribedToMailJetEvent extends TrackableEvent {
 	
-	private final Person person;
+	private final Person2 person;
 
-	public PersonSubscribedToMailJetEvent(Person person, String trackingId) {
+	public PersonSubscribedToMailJetEvent(Person2 person, String trackingId) {
 		super(trackingId);
 		this.person = person;
 	}
 
-	public Person getPerson() {
+	public Person2 getPerson() {
 		return person;
 	}
 

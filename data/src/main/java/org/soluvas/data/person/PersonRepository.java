@@ -11,6 +11,7 @@ import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
 import org.soluvas.data.SlugLookup;
@@ -190,7 +191,7 @@ public interface PersonRepository extends
 
 	ImmutableList<AccountStatus> getStatusesByEmail(String email);
 
-	Person findOneByEmail(AccountStatus status, String email);
+	Person2 findOneByEmail(AccountStatus status, String email);
 
 }
 

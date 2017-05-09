@@ -142,6 +142,49 @@ public class PostalAddress implements Describable, Serializable {
 		return jpaPostalAddress;
 	}
 
+	
+	public static PostalAddress2 toClasic(PostalAddress jpaPostalAddressUp) {
+		final PostalAddress2 clasicPostalAddress = new PostalAddress2();
+		Preconditions.checkNotNull(jpaPostalAddressUp, "Postal Address must not be null");
+		clasicPostalAddress.setId(jpaPostalAddressUp.getId() != null ? jpaPostalAddressUp.getId()
+				: UUID.randomUUID());
+		clasicPostalAddress.setCity(jpaPostalAddressUp.getCity());
+		clasicPostalAddress.setCountry(jpaPostalAddressUp.getCountry());
+		clasicPostalAddress.setCountryCode(jpaPostalAddressUp.getCountryCode());
+		clasicPostalAddress.setDescription(jpaPostalAddressUp.getDescription());
+		clasicPostalAddress.setDistrict(jpaPostalAddressUp.getDistrict());
+		if (jpaPostalAddressUp.getEmails() != null && !jpaPostalAddressUp.getEmails().isEmpty()) {
+			clasicPostalAddress.getEmails().addAll(jpaPostalAddressUp.getEmails());
+		}
+		if (jpaPostalAddressUp.getHomePhones() != null && !jpaPostalAddressUp.getHomePhones().isEmpty()) {
+			clasicPostalAddress.getHomePhones().addAll(jpaPostalAddressUp.getHomePhones());
+		}
+		if (jpaPostalAddressUp.getMobiles() != null && !jpaPostalAddressUp.getMobiles().isEmpty()) {
+			clasicPostalAddress.getMobiles().addAll(jpaPostalAddressUp.getMobiles());
+		}
+		clasicPostalAddress.setName(jpaPostalAddressUp.getName());
+		clasicPostalAddress.setOrganization(jpaPostalAddressUp.getOrganization());
+		if (jpaPostalAddressUp.getPhones() != null && !jpaPostalAddressUp.getPhones().isEmpty()) {
+			clasicPostalAddress.getPhones().addAll(jpaPostalAddressUp.getPhones());
+		}
+		clasicPostalAddress.setPostalCode(jpaPostalAddressUp.getPostalCode());
+		clasicPostalAddress.setPrimary(jpaPostalAddressUp.isPrimary());
+		clasicPostalAddress.setPrimaryBilling(jpaPostalAddressUp.isPrimaryBilling());
+		clasicPostalAddress.setPrimaryEmail(jpaPostalAddressUp.getPrimaryEmail());
+		clasicPostalAddress.setPrimaryHomePhone(jpaPostalAddressUp.getPrimaryHomePhone());
+		clasicPostalAddress.setPrimaryMobile(jpaPostalAddressUp.getPrimaryMobile());
+		clasicPostalAddress.setPrimaryPhone(jpaPostalAddressUp.getPrimaryPhone());
+		clasicPostalAddress.setPrimaryShipping(jpaPostalAddressUp.isPrimaryShipping());
+		clasicPostalAddress.setPrimaryWorkPhone(jpaPostalAddressUp.getPrimaryWorkPhone());
+		clasicPostalAddress.setProvince(jpaPostalAddressUp.getProvince());
+		clasicPostalAddress.setStreet(jpaPostalAddressUp.getStreet());
+		clasicPostalAddress.setValidationTime(jpaPostalAddressUp.getValidationTime());
+		if (jpaPostalAddressUp.getWorkPhones() != null && !jpaPostalAddressUp.getWorkPhones().isEmpty()) {
+			clasicPostalAddress.getWorkPhones().addAll(jpaPostalAddressUp.getWorkPhones());
+		}
+
+		return clasicPostalAddress;
+	}
 	/**
 	 * @generated
 	 */
@@ -421,6 +464,36 @@ public class PostalAddress implements Describable, Serializable {
 		setValidationTime(postalAddressUp.getValidationTime());
 		setWorkPhones(new ArrayList<>(postalAddressUp.getWorkPhones()));
 		setDistrict(postalAddressUp.getDistrict());
+	}
+	
+	public PostalAddress toAddress2(final PostalAddress2 postalAddressUp) {
+		Preconditions.checkNotNull(postalAddressUp, "Postal Address must not be null");
+		setId(postalAddressUp.getId() != null ? postalAddressUp.getId() : UUID.randomUUID());
+		setCity(postalAddressUp.getCity());
+		setCountry(postalAddressUp.getCountry());
+		setCountryCode(postalAddressUp.getCountryCode());
+		setDescription(postalAddressUp.getDescription());
+		setEmails(new ArrayList<>(postalAddressUp.getEmails()));
+		setHomePhones(new ArrayList<>(postalAddressUp.getHomePhones()));
+		setMobiles(new ArrayList<>(postalAddressUp.getMobiles()));
+		setName(postalAddressUp.getName());
+		setOrganization(postalAddressUp.getOrganization());
+		setPhones(new ArrayList<>(postalAddressUp.getPhones()));
+		setPostalCode(postalAddressUp.getPostalCode());
+		setPrimary(postalAddressUp.isPrimary());
+		setPrimaryBilling(postalAddressUp.isPrimaryBilling());
+		setPrimaryEmail(postalAddressUp.getPrimaryEmail());
+		setPrimaryHomePhone(postalAddressUp.getPrimaryHomePhone());
+		setPrimaryMobile(postalAddressUp.getPrimaryMobile());
+		setPrimaryPhone(postalAddressUp.getPrimaryPhone());
+		setPrimaryShipping(postalAddressUp.isPrimaryShipping());
+		setPrimaryWorkPhone(postalAddressUp.getPrimaryWorkPhone());
+		setProvince(postalAddressUp.getProvince());
+		setStreet(postalAddressUp.getStreet());
+		setValidationTime(postalAddressUp.getValidationTime());
+		setWorkPhones(new ArrayList<>(postalAddressUp.getWorkPhones()));
+		setDistrict(postalAddressUp.getDistrict());
+		return this;
 	}
 
 	/**
