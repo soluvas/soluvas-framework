@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.measure.unit.Unit;
 
-import org.soluvas.commons.mongo.UnitConverter;
-
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;

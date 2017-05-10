@@ -3,13 +3,13 @@ package org.soluvas.commons.mongo;
 import java.io.Serializable;
 
 import javax.money.CurrencyUnit;
-import org.soluvas.commons.mongo.CurrencyUnitConverter;
 
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 
-@Entity @Converters(CurrencyUnitConverter.class)
+@Entity  
+@Converters(CurrencyUnitConverter.class)
 public class CurrencyUnitProduct implements Serializable {
 
 	/**

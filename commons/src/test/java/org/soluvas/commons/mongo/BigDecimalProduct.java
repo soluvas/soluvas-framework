@@ -3,13 +3,12 @@ package org.soluvas.commons.mongo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.soluvas.commons.mongo.BigDecimalConverter;
-
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 
-@Entity @Converters(BigDecimalConverter.class)
+@Entity 
+@Converters(BigDecimalConverter.class)
 public class BigDecimalProduct implements Serializable {
 
 	@Id private String id;
