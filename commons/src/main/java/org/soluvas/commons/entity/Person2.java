@@ -16,9 +16,12 @@ import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.ArchivalStatus;
 import org.soluvas.commons.Email2;
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.Organization;
+import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo2;
+import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.PhoneNumber2;
 import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.PublicationStatus;
@@ -44,7 +47,7 @@ import com.google.common.collect.Iterables;
 @Entity(noClassnameStored=true)
 @Converters({BigDecimalConverter.class, DateTimeConverter.class,
 	CurrencyUnitConverter.class, UnitConverter.class, LocalDateConverter.class})
-public class Person2 implements Serializable {
+public class Person2 implements Serializable, Identifiable, PersonLike  {
 	/**
 	 * 
 	 */
@@ -238,6 +241,19 @@ public class Person2 implements Serializable {
 			personInfo.setMobileNumber(input.getMobileNumber());
 			return personInfo;
 		}
+	}
+	
+	public Person2 createPerson(String id, String slug, String firstName,
+			String lastName, String photoId, Gender gender) {
+		final Person2 person = new Person2();
+		person.setId(id);
+		person.setSlug(slug);
+		person.setFirstName(firstName);
+		person.setLastName(lastName);
+		person.setName(firstName + " " + lastName);
+		person.setPhotoId(photoId);
+		person.setGender(gender);
+		return person;
 	}
 	
 	public String getName() {

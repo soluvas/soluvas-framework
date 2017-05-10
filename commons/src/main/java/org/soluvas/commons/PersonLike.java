@@ -2,9 +2,6 @@
  */
 package org.soluvas.commons;
 
-import org.eclipse.emf.ecore.EObject;
-
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Person Like</b></em>'.
@@ -17,9 +14,9 @@ import org.eclipse.emf.ecore.EObject;
  *
  * @see org.soluvas.commons.CommonsPackage#getPersonLike()
  * @model interface="true" abstract="true"
- * @generated
+ * @generated NOT
  */
-public interface PersonLike extends EObject {
+public interface PersonLike{
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

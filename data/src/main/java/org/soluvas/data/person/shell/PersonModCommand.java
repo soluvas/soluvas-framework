@@ -14,11 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Email;
+import org.soluvas.commons.Email2;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.NameUtils.PersonName;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.commons.util.HashedPasswordUtils;
 import org.soluvas.data.Existence;
@@ -60,17 +62,17 @@ public class PersonModCommand extends ExtCommandSupport {
 	protected String[] doExecute() throws Exception {
 		final PersonRepository personRepo = getBean(PersonRepository.class);
 		for (final String id : ids) {
-			final Person person = Preconditions.checkNotNull(personRepo.findOne(id), String.format("Person by ID %s must not be null", id));
+			final Person2 person = Preconditions.checkNotNull(personRepo.findOne(id), String.format("Person by ID %s must not be null", id));
 			if (!Strings.isNullOrEmpty(emailStr)) {
-				final Person personByEmail = personRepo.findOneByEmail(StatusMask.RAW, emailStr);
+				final Person2 personByEmail = personRepo.findOneByEmail(StatusMask.RAW, emailStr);
 				if (personByEmail != null && !personByEmail.getId().equalsIgnoreCase(id)) {
 					 log.warn("Person by email {} is already exists by {}", emailStr, personByEmail.getId());
 				} else {
 					// remove last primary email AND the new email before adding a new one
 					String lastPrimaryEmail = person.getEmail();
-					final Iterator<Email> emailIter = person.getEmails().iterator();
+					final Iterator<Email2> emailIter = person.getEmails().iterator();
 					while (emailIter.hasNext()) {
-						final Email email = emailIter.next();
+						final Email2 email = emailIter.next();
 						if (lastPrimaryEmail != null && lastPrimaryEmail.equalsIgnoreCase(email.getEmail())) {
 							emailIter.remove();
 						} else if (emailStr.equalsIgnoreCase(email.getEmail())) {
@@ -80,7 +82,7 @@ public class PersonModCommand extends ExtCommandSupport {
 						}
 					}
 					
-					final Email email = CommonsFactory.eINSTANCE.createEmail();
+					final Email2 email = new Email2();//CommonsFactory.eINSTANCE.createEmail();
 					email.setEmail(emailStr);
 					email.setPrimary(true);
 					email.setValidationTime(new DateTime());

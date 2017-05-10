@@ -227,7 +227,7 @@ public class EmailUtils {
 	 * @param personLookup
 	 * @return
 	 */
-	public static Set<Recipient> getRecipients(@Nullable PersonInfo personInfo, @Nullable EntityLookup<Person, String> personLookup) {
+	public static Set<Recipient> getRecipients(@Nullable PersonInfo personInfo, @Nullable EntityLookup<Person2, String> personLookup) {
 		final Set<Recipient> recipients = Sets.newHashSet();
 		
 		if (personInfo != null) {

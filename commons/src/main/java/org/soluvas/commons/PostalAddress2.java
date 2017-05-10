@@ -425,7 +425,9 @@ public class PostalAddress2 implements Describable2, Serializable {
 	@Column(columnDefinition = "varchar(255)")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTimeZoneAsString")
 	private DateTimeZone validationTime_zone = null;
-
+	protected static final String JNE_AREA_CODE_EDEFAULT = null;
+	protected String jneAreaCode = JNE_AREA_CODE_EDEFAULT;
+		
 	public PostalAddress2() {
 		super();
 	}
@@ -1201,6 +1203,13 @@ public class PostalAddress2 implements Describable2, Serializable {
 		this.validationTime_zone = validationTime_zone;
 	}
 
+	public String getJneAreaCode() {
+		return jneAreaCode;
+	}
+	
+	public void setJneAreaCode(String code) {
+		jneAreaCode = code;
+	}
 	/**
 	 * A toString method which prints the values of all EAttributes of this
 	 * instance. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1401,5 +1410,5 @@ public class PostalAddress2 implements Describable2, Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

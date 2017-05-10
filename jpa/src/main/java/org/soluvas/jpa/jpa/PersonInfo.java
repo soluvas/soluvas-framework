@@ -11,6 +11,7 @@ import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo2;
+import org.soluvas.commons.entity.Person2;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Preconditions;
@@ -385,8 +386,24 @@ public class PersonInfo implements Serializable {
 	public static PersonInfo fromPerson(Person person) {
 		return fromPerson(person, null);
 	}
+	
+	public static PersonInfo fromPerson2(Person2 person) {
+		return fromPerson2(person, null);
+	}
 
 	public static PersonInfo fromPerson(Person person, @Nullable String domain) {
+		final PersonInfo info = new PersonInfo();
+		info.setId(person.getId());
+		info.setSlug(person.getSlug());
+		info.setName(person.getName());
+		info.setPhotoId(person.getPhotoId());
+		info.setEmail(person.getEmail());
+		info.setGender(person.getGender());
+		info.setDomain(domain);
+		return info;
+	}
+	
+	public static PersonInfo fromPerson2(Person2 person, @Nullable String domain) {
 		final PersonInfo info = new PersonInfo();
 		info.setId(person.getId());
 		info.setSlug(person.getSlug());

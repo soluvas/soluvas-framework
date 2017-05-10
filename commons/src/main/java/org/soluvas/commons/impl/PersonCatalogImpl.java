@@ -2,7 +2,9 @@
  */
 package org.soluvas.commons.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -14,6 +16,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonCatalog;
+import org.soluvas.commons.entity.Person2;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,10 +37,10 @@ public class PersonCatalogImpl extends MinimalEObjectImpl.Container implements P
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPeople()
-	 * @generated
+	 * @generated NOT
 	 * @ordered
 	 */
-	protected EList<Person> people;
+	protected List<Person2> people;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -61,12 +64,12 @@ public class PersonCatalogImpl extends MinimalEObjectImpl.Container implements P
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
-	public EList<Person> getPeople() {
+	public List<Person2> getPeople() {
 		if (people == null) {
-			people = new EObjectContainmentEList<Person>(Person.class, this, CommonsPackage.PERSON_CATALOG__PEOPLE);
+			people = new ArrayList<>();//EObjectContainmentEList<Person>(Person.class, this, CommonsPackage.PERSON_CATALOG__PEOPLE);
 		}
 		return people;
 	}
@@ -102,7 +105,7 @@ public class PersonCatalogImpl extends MinimalEObjectImpl.Container implements P
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -110,7 +113,7 @@ public class PersonCatalogImpl extends MinimalEObjectImpl.Container implements P
 		switch (featureID) {
 			case CommonsPackage.PERSON_CATALOG__PEOPLE:
 				getPeople().clear();
-				getPeople().addAll((Collection<? extends Person>)newValue);
+				getPeople().addAll((Collection<? extends Person2>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

@@ -19,6 +19,7 @@ import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.*;
 import org.soluvas.data.domain.*;
@@ -38,7 +39,7 @@ import java.util.*;
  * CouchDB implementation of {@link PersonRepository}.
  * @author ceefour
  */
-public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, AccountStatus>
+public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, AccountStatus>
 		implements PersonRepository {
 	
 	/**
@@ -51,7 +52,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	public static final String VIEW_SECURITY_ROLE_MEMBERS = "securityRoleMembers";
 
 	public CouchDbPersonRepository(CouchDbConnector dbConn, String dbName) {
-		super(dbConn, Person.class, PersonImpl.class, 1L, dbName,
+		super(dbConn, Person2.class, Person2.class, 1L, dbName,
 				ImmutableList.<String>of(), ImmutableMap.<String, Integer>of(),
 				DeleteMethod.DELETE, 
 				"accountStatus",
@@ -61,7 +62,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 	
 	@Override
-	protected void beforeSave(Person entity) {
+	protected void beforeSave(Person2 entity) {
 		super.beforeSave(entity);
 		entity.setModificationTime(new DateTime());
 		entity.setCanonicalSlug(SlugUtils.canonicalize(entity.getSlug()));
@@ -122,7 +123,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 */
 	@Override
 	@Nullable
-	public Person findOneBySlug(StatusMask statusMask, String upSlug) {
+	public Person2 findOneBySlug(StatusMask statusMask, String upSlug) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
@@ -152,7 +153,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 * @see org.soluvas.data.person.PersonRepository#findOneByFacebook(java.lang.Long, java.lang.String)
 	 */
 	@Override @Nullable
-	public Person findOneByFacebook(@Nullable Long facebookId,
+	public Person2 findOneByFacebook(@Nullable Long facebookId,
 			@Nullable String facebookUsername) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
@@ -163,9 +164,9 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 */
 	@Override
 	@Nullable
-	public Person findOneByEmail(StatusMask statusMask, @Nullable String email) {
+	public Person2 findOneByEmail(StatusMask statusMask, @Nullable String email) {
 		try {
-			final Person found = lookupOne(statusMask, LookupKey.EMAIL, email);
+			final Person2 found = lookupOne(statusMask, LookupKey.EMAIL, email);
 			return found;
 		} catch (EntityLookupException e) {
 			log.debug("lookupOne {} {} {} returned {}", statusMask, LookupKey.EMAIL, email, e);
@@ -178,9 +179,9 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 */
 	@Override
 	@Nullable
-	public Person findOneById(StatusMask statusMask, @Nullable String id) {
+	public Person2 findOneById(StatusMask statusMask, @Nullable String id) {
 		try {
-			final Person found = lookupOne(statusMask, LookupKey.EMAIL, id);
+			final Person2 found = lookupOne(statusMask, LookupKey.EMAIL, id);
 			return found;
 		} catch (EntityLookupException e) {
 			log.debug("lookupOne {} {} {} returned {}", statusMask, LookupKey.EMAIL, id, e);
@@ -193,7 +194,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 */
 	@Override
 	@Nullable
-	public Person findOneByTwitter(@Nullable Long twitterId,
+	public Person2 findOneByTwitter(@Nullable Long twitterId,
 			@Nullable String twitterScreenName) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
@@ -204,13 +205,13 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 */
 	@Override
 	@Nullable
-	public Person findOneByClientAccessToken(@Nullable String clientAccessToken) {
+	public Person2 findOneByClientAccessToken(@Nullable String clientAccessToken) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Person findOneActive(String personId) {
+	public Person2 findOneActive(String personId) {
 		// FIXME: implement status=ACTIVE|VALIDATED|VERIFIED filter
 		return findOne(personId);
 	}
@@ -268,28 +269,28 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 					resultMap.put(actualEmail, new Success<>(person));
 				} else {
 					resultMap.put(actualEmail, new Failure<S>(
-							new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
+							new EntityLookupException(Person2.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
 				}
 			case INCLUDE_INACTIVE:
 				if (Sets.union(activeStatuses, inactiveStatuses).contains(person.getAccountStatus())) {
 					resultMap.put(actualEmail, new Success<>(person));
 				} else {
 					resultMap.put(actualEmail, new Failure<S>(
-							new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
+							new EntityLookupException(Person2.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
 				}
 			case DRAFT_ONLY:
 				if (ImmutableSet.of(AccountStatus.DRAFT).contains(person.getAccountStatus())) {
 					resultMap.put(actualEmail, new Success<>(person));
 				} else {
 					resultMap.put(actualEmail, new Failure<S>(
-							new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
+							new EntityLookupException(Person2.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
 				}
 			case VOID_ONLY:
 				if (ImmutableSet.of(AccountStatus.VOID).contains(person.getAccountStatus())) {
 					resultMap.put(actualEmail, new Success<>(person));
 				} else {
 					resultMap.put(actualEmail, new Failure<S>(
-							new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
+							new EntityLookupException(Person2.class, statusMask, LookupKey.EMAIL, actualEmail, this, Optional.fromNullable(person.getAccountStatus()))));
 				}
 			}
 		}
@@ -297,14 +298,14 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 		// those actually not found
 		final SetView<String> unfoundKeys = Sets.difference(ImmutableSet.copyOf(normalizedEmails), resultMap.keySet());
 		for (final String unfoundKey : unfoundKeys) {
-			resultMap.put(unfoundKey, new Failure<S>(new EntityLookupException(Person.class, statusMask, LookupKey.EMAIL, unfoundKey, this, Optional.<AccountStatus>absent())));
+			resultMap.put(unfoundKey, new Failure<S>(new EntityLookupException(Person2.class, statusMask, LookupKey.EMAIL, unfoundKey, this, Optional.<AccountStatus>absent())));
 		}
 		
 		return resultMap;
 	}
 	
 	@Override
-	public <S extends Person, K extends Serializable> Map<K, Try<S>> lookupAll(
+	public <S extends Person2, K extends Serializable> Map<K, Try<S>> lookupAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
 		switch (lookupKey) {
 		case ID:
@@ -341,7 +342,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 						resultMap.put((K) row.getSlug(), new Success<>(row));
 					} else if (!resultMap.containsKey(row.getSlug())) {
 						resultMap.put((K) row.getSlug(), new Failure<S>(
-								new EntityLookupException(Person.class, statusMask, lookupKey, row.getSlug(), this, Optional.fromNullable(row.getAccountStatus()))));
+								new EntityLookupException(Person2.class, statusMask, lookupKey, row.getSlug(), this, Optional.fromNullable(row.getAccountStatus()))));
 					}
 					break;
 				case INCLUDE_INACTIVE:
@@ -349,7 +350,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 						resultMap.put((K) row.getSlug(), new Success<>(row));
 					} else if (!resultMap.containsKey(row.getSlug())) {
 						resultMap.put((K) row.getSlug(), new Failure<S>(
-								new EntityLookupException(Person.class, statusMask, lookupKey, row.getSlug(), this, Optional.fromNullable(row.getAccountStatus()))));
+								new EntityLookupException(Person2.class, statusMask, lookupKey, row.getSlug(), this, Optional.fromNullable(row.getAccountStatus()))));
 					}
 					break;
 				case DRAFT_ONLY:
@@ -357,7 +358,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 						resultMap.put((K) row.getSlug(), new Success<>(row));
 					} else if (!resultMap.containsKey(row.getSlug())) {
 						resultMap.put((K) row.getSlug(), new Failure<S>(
-								new EntityLookupException(Person.class, statusMask, lookupKey, row.getSlug(), this, Optional.fromNullable(row.getAccountStatus()))));
+								new EntityLookupException(Person2.class, statusMask, lookupKey, row.getSlug(), this, Optional.fromNullable(row.getAccountStatus()))));
 					}
 					break;
 				case VOID_ONLY:
@@ -365,7 +366,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 						resultMap.put((K) row.getSlug(), new Success<>(row));
 					} else if (!resultMap.containsKey(row.getSlug())) {
 						resultMap.put((K) row.getSlug(), new Failure<S>(
-								new EntityLookupException(Person.class, statusMask, lookupKey, row.getSlug(), this, Optional.fromNullable(row.getAccountStatus()))));
+								new EntityLookupException(Person2.class, statusMask, lookupKey, row.getSlug(), this, Optional.fromNullable(row.getAccountStatus()))));
 					}
 					break;
 				}
@@ -374,7 +375,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 			// those actually not found
 			final SetView<K> unfoundKeys = Sets.difference(ImmutableSet.copyOf(keys), resultMap.keySet());
 			for (final K unfoundKey : unfoundKeys) {
-				resultMap.put(unfoundKey, new Failure<S>(new EntityLookupException(Person.class, statusMask, lookupKey, unfoundKey, this, Optional.<AccountStatus>absent())));
+				resultMap.put(unfoundKey, new Failure<S>(new EntityLookupException(Person2.class, statusMask, lookupKey, unfoundKey, this, Optional.<AccountStatus>absent())));
 			}
 			
 			return resultMap;
@@ -387,7 +388,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public TrashResult trash(Person entity) {
+	public TrashResult trash(Person2 entity) {
 		return trashAll(ImmutableSet.of(entity)).get(entity.getId()).get();
 	}
 
@@ -397,7 +398,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public Map<String, Try<TrashResult>> trashAll(Collection<Person> entities) {
+	public Map<String, Try<TrashResult>> trashAll(Collection<Person2> entities) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -407,7 +408,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public UntrashResult untrash(Person entity) {
+	public UntrashResult untrash(Person2 entity) {
 		return untrashAll(ImmutableSet.of(entity)).get(entity.getId()).get();
 	}
 
@@ -418,7 +419,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	public Map<String, Try<UntrashResult>> untrashAll(
-			Collection<Person> entities) {
+			Collection<Person2> entities) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -436,7 +437,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 * @todo View 'searchText' doesn't support accountStatus
 	 */
 	@Override
-	public Page<Person> findBySearchText(StatusMask statusMask,
+	public Page<Person2> findBySearchText(StatusMask statusMask,
 			final String searchText, Pageable pageable) {
 		final ViewQuery viewQuery = new ViewQuery().designDocId(getDesignDocId()).viewName("searchText")
 				.reduce(false).includeDocs(false);
@@ -462,7 +463,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 				limitedGuids.size(), limitedGuids);
 		final ViewQuery guidsViewQuery = new ViewQuery().allDocs()
 				.keys(limitedGuids).reduce(false).includeDocs(true);
-		final List<Person> limiteds = (List) dbConn.queryView(guidsViewQuery, implClass);
+		final List<Person2> limiteds = (List) dbConn.queryView(guidsViewQuery, implClass);
 		
 		return new PageImpl<>(limiteds, pageable, matchingGuids.size());
 	}
@@ -499,7 +500,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 
 	@Override
 	@Nullable
-	public Person findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber) {
+	public Person2 findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -508,12 +509,12 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	 * @see org.soluvas.data.person.PersonRepository#findAll(org.soluvas.data.StatusMask, java.util.Collection)
 	 */
 	@Override
-	public List<Person> findAll(StatusMask statusMask, Collection<String> ids) {
+	public List<Person2> findAll(StatusMask statusMask, Collection<String> ids) {
 		return findAll(ids, new Sort("name"));
 	}
 
 	@Override
-	public List<Person> findAllBySecRoleIds(StatusMask statusMask,
+	public List<Person2> findAllBySecRoleIds(StatusMask statusMask,
 			Collection<String> secRoleIds) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
@@ -524,12 +525,12 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public Page<Person> findAll(StatusMask statusMask, Projection projection, Pageable pageable) {
+	public Page<Person2> findAll(StatusMask statusMask, Projection projection, Pageable pageable) {
 		return null;
 	}
 
 	@Override
-	public List<Person> findAllByCustomerRoleIds(StatusMask statusMask,
+	public List<Person2> findAllByCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
@@ -540,13 +541,13 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public Page<Person> findAllByKeywordAndStatus(String searchText,
+	public Page<Person2> findAllByKeywordAndStatus(String searchText,
 			Collection<AccountStatus> accountStatuses, Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
+	public Page<Person2> findAll(Collection<AccountStatus> accountStatuses,
 			Pageable pageable) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
@@ -596,7 +597,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public Page<Person> findAllByKeywordAndRoles(String keyword,
+	public Page<Person2> findAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
 			CustomerRole customerRole, Collection<String> securityRoleIds,
 			Pageable pageable) {
@@ -604,7 +605,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public Page<Person> findAllByCustomerRoleIds(StatusMask statusMask,
+	public Page<Person2> findAllByCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds, Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
@@ -639,7 +640,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public Page<Person> findAll(StatusMask statusMask, Collection<String> ids,
+	public Page<Person2> findAll(StatusMask statusMask, Collection<String> ids,
 			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
@@ -655,12 +656,12 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
+	public Page<Person2> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
+	public Page<Person2> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
 			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
@@ -691,7 +692,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person, Accou
 	}
 
 	@Override
-	public Person findOneByEmail(AccountStatus status, String email) {
+	public Person2 findOneByEmail(AccountStatus status, String email) {
 		throw new UnsupportedOperationException();
 	}
 

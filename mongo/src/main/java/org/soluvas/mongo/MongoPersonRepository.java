@@ -20,6 +20,7 @@ import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.EnumNameFunction;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
@@ -57,7 +58,7 @@ import scala.util.Try;
  * MongoDB powered {@link Person} repository.
  * @author ceefour
  */
-public class MongoPersonRepository extends MongoRepositoryBase<Person> implements
+public class MongoPersonRepository extends MongoRepositoryBase<Person2> implements
 		PersonRepository {
 	
 	private final String tenantId;
@@ -65,7 +66,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	private final CacheManager cacheMgr;
 
 	public MongoPersonRepository(String tenantId, @Nullable CacheManager cacheMgr, String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
-		super(Person.class, PersonImpl.class, PersonImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "person",
+		super(Person2.class, Person2.class, Person2.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "person",
 				ImmutableList.of("canonicalSlug"), migrationEnabled, autoExplainSlow,
 				Index.asc("name"), // for sorting in list
 				Index.desc("creationTime"),
@@ -85,15 +86,15 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	protected void beforeSave(Person entity, ModificationTimePolicy mtimePolicy) {
+	protected void beforeSave(Person2 entity, ModificationTimePolicy mtimePolicy) {
 		super.beforeSave(entity, mtimePolicy);
 		entity.setCanonicalSlug(SlugUtils.canonicalize(entity.getSlug()));
 	}
 	
 	@Override @Nullable
-	public Person findOneBySlug(StatusMask statusMask, String upSlug) {
+	public Person2 findOneBySlug(StatusMask statusMask, String upSlug) {
 		String canonicalize = SlugUtils.canonicalize(upSlug);
-		return findOneByQuery(new BasicDBObject("canonicalSlug", canonicalize));
+		return (Person2) findOneByQuery(new BasicDBObject("canonicalSlug", canonicalize));
 	}
 
 	@Override
@@ -136,7 +137,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public Person findOneByFacebook(@Nullable Long facebookId,
+	public Person2 findOneByFacebook(@Nullable Long facebookId,
 			@Nullable String facebookUsername) {
 		if (facebookId == null && facebookUsername == null) {
 			return null;
@@ -155,7 +156,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override @Nullable
-	public Person findOneByEmail(StatusMask statusMask, @Nullable String email) {
+	public Person2 findOneByEmail(StatusMask statusMask, @Nullable String email) {
 		if (Strings.isNullOrEmpty(email))  {
 			return null;
 		}
@@ -165,11 +166,11 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override @Nullable
-	public Person findOneByEmail(AccountStatus status, String email) {
+	public Person2 findOneByEmail(AccountStatus status, String email) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
 		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
 		query.put("accountStatus", status.name());
-		return findOneByQuery(query);
+		return (Person2) findOneByQuery(query);
 	}
 	
 	@Override
@@ -192,7 +193,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override @Nullable
-	public Person findOneById(StatusMask statusMask, @Nullable String id) {
+	public Person2 findOneById(StatusMask statusMask, @Nullable String id) {
 		if (Strings.isNullOrEmpty(id))  {
 			return null;
 		}
@@ -202,7 +203,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override @Nullable
-	public Person findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String phoneNumber) {
+	public Person2 findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String phoneNumber) {
 		if (phoneNumber == null) {
 			return null;
 		}
@@ -238,7 +239,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override @Nullable
-	public Person findOneByTwitter(@Nullable Long twitterId,
+	public Person2 findOneByTwitter(@Nullable Long twitterId,
 			@Nullable String twitterScreenName) {
 		if (twitterId == null && twitterScreenName == null) {
 			return null;
@@ -257,7 +258,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override @Nullable
-	public Person findOneByClientAccessToken(@Nullable String clientAccessToken) {
+	public Person2 findOneByClientAccessToken(@Nullable String clientAccessToken) {
 		if (clientAccessToken == null) {
 			return null;
 		}
@@ -266,7 +267,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public Page<Person> findBySearchText(StatusMask statusMask, @Nullable String searchText, Pageable pageable) {
+	public Page<Person2> findBySearchText(StatusMask statusMask, @Nullable String searchText, Pageable pageable) {
 		final BasicDBObject queryBySearchText = getQueryByKeyword(searchText);
 		augmentQueryForStatusMask(queryBySearchText, statusMask);
 		final Sort mySort;
@@ -310,19 +311,19 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override
-	public Page<Person> findAll(StatusMask statusMask, Pageable pageable) {
+	public Page<Person2> findAll(StatusMask statusMask, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		augmentQueryForStatusMask(query, statusMask);
-		final Page<Person> page = findAllByQuery(query, pageable);
+		final Page<Person2> page = findAllByQuery(query, pageable);
 		return page;
 	}
 
 	@Override
-	public Page<Person> findAll(StatusMask statusMask, Projection projection, Pageable pageable) {
+	public Page<Person2> findAll(StatusMask statusMask, Projection projection, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		augmentQueryForStatusMask(query, statusMask);
 		final long total = count(statusMask);
-		final ImmutableList<Person> people = findSecondary(query, getProjectionDBObject(projection),
+		final ImmutableList<Person2> people = findSecondary(query, getProjectionDBObject(projection),
 				MongoUtils.getSort(pageable.getSort()),
 				pageable.getOffset(), pageable.getPageSize(),
 				"findAll", statusMask, projection);
@@ -362,13 +363,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public Person findOneActive(String personId) {
+	public Person2 findOneActive(String personId) {
 		// FIXME: implement status=ACTIVE|VALIDATED|VERIFIED filter
 		return findOne(personId);
 	}
 
 	@Override
-	public <S extends Person, K extends Serializable> S lookupOne(
+	public <S extends Person2, K extends Serializable> S lookupOne(
 			StatusMask statusMask, LookupKey lookupKey, K key)
 			throws EntityLookupException {
 		final String attribute;
@@ -409,7 +410,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public <S extends Person, K extends Serializable> Map<K, Try<S>> lookupAll(
+	public <S extends Person2, K extends Serializable> Map<K, Try<S>> lookupAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
@@ -427,7 +428,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public TrashResult trash(Person entity) {
+	public TrashResult trash(Person2 entity) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -437,7 +438,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public Map<String, Try<TrashResult>> trashAll(Collection<Person> entities) {
+	public Map<String, Try<TrashResult>> trashAll(Collection<Person2> entities) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -447,7 +448,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public UntrashResult untrash(Person entity) {
+	public UntrashResult untrash(Person2 entity) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -458,7 +459,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 
 	@Override
 	public Map<String, Try<UntrashResult>> untrashAll(
-			Collection<Person> entities) {
+			Collection<Person2> entities) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -469,21 +470,21 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public List<Person> findAll(StatusMask statusMask, Collection<String> ids) {
+	public List<Person2> findAll(StatusMask statusMask, Collection<String> ids) {
 		final BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$in", ids));
 		augmentQueryForStatusMask(query, statusMask);
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
 	
 	@Override
-	public Page<Person> findAll(StatusMask statusMask, Collection<String> ids, Pageable pageable) {
+	public Page<Person2> findAll(StatusMask statusMask, Collection<String> ids, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$in", ids));
 		augmentQueryForStatusMask(query, statusMask);
 		return findAllByQuery(query, pageable);
 	}
 
 	@Override
-	public List<Person> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds) {
+	public List<Person2> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds) {
 		final BasicDBObject query = new BasicDBObject();
 		query.put("securityRoleIds", new BasicDBObject("$in", secRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
@@ -496,12 +497,12 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 		final BasicDBObject query = new BasicDBObject();
 		query.put("_id", personId);
 		query.put("securityRoleIds", new BasicDBObject("$in", secRoleIds));
-		final Person person = findOneByQuery(query);
+		final Person2 person = findOneByQuery(query);
 		return person != null;
 	}
 
 	@Override
-	public List<Person> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds) {
+	public List<Person2> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds) {
 		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
 		
@@ -509,7 +510,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 	
 	@Override
-	public Page<Person> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds, Pageable pageable) {
+	public Page<Person2> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
 		
@@ -526,7 +527,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public Page<Person> findAllByKeywordAndStatus(
+	public Page<Person2> findAllByKeywordAndStatus(
 			String keyword,
 			Collection<AccountStatus> accountStatuses, 
 			Pageable pageable) {
@@ -557,7 +558,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	 * @return
 	 */
 	@Override
-	public Page<Person> findAllByKeywordAndRoles(
+	public Page<Person2> findAllByKeywordAndRoles(
 			String keyword,
 			Collection<AccountStatus> accountStatuses,
 			CustomerRole customerRole, 
@@ -644,7 +645,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 //	}
 
 	@Override
-	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
+	public Page<Person2> findAll(Collection<AccountStatus> accountStatuses,
 			Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		if (!accountStatuses.isEmpty()) {
@@ -814,21 +815,21 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person> implement
 	}
 
 	@Override
-	public Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
+	public Page<Person2> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		augmentQueryForStatusMask(query, statusMask);
 		query.put("emails", new BasicDBObject("$exists", true));
-		final Page<Person> page = findAllByQuery(query, pageable);
+		final Page<Person2> page = findAllByQuery(query, pageable);
 		return page;
 	}
 
 	@Override
-	public Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
+	public Page<Person2> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
 			Pageable pageable) {
 		final BasicDBObject query = getQueryByCreationTime(starTime.toLocalDate(), endTime.toLocalDate());
 		augmentQueryForStatusMask(query, statusMask);
 		query.put("emails", new BasicDBObject("$exists", true));
-		final Page<Person> page = findAllByQuery(query, pageable);
+		final Page<Person2> page = findAllByQuery(query, pageable);
 		return page;
 	}
 	

@@ -19,6 +19,7 @@ import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.IdPredicate;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonCatalog;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
@@ -49,7 +50,7 @@ import scala.util.Try;
  * @author ceefour
  */
 public class EmfPersonRepository extends
-		PagingAndSortingRepositoryBase<Person, String> implements
+		PagingAndSortingRepositoryBase<Person2, String> implements
 		PersonRepository {
 	
 	private static final Logger log = LoggerFactory
@@ -67,17 +68,17 @@ public class EmfPersonRepository extends
 	}
 
 	@Override @Nullable
-	protected String getId(Person entity) {
+	protected String getId(Person2 entity) {
 		return entity.getId();
 	}
 
 	@Override
-	public <S extends Person> Collection<S> add(Collection<S> entities) {
+	public <S extends Person2> Collection<S> add(Collection<S> entities) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public <S extends Person> Collection<S> modify(Map<String, S> entities) {
+	public <S extends Person2> Collection<S> modify(Map<String, S> entities) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -90,10 +91,10 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public List<Person> findAll(Collection<String> ids, Sort sort) {
+	public List<Person2> findAll(Collection<String> ids, Sort sort) {
 		// TODO: support sort
-		final Iterable<Person> filtered = Iterables.filter(catalog.getPeople(), new IdPredicate(ids));
-		final List<Person> copied = ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(filtered)));
+		final Iterable<Person2> filtered = Iterables.filter(catalog.getPeople(), new IdPredicate(ids));
+		final List<Person2> copied = ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(filtered)));
 		return copied;
 	}
 
@@ -107,11 +108,11 @@ public class EmfPersonRepository extends
 		final int total = catalog.getPeople().size();
 		// sort
 		final Order firstOrder = Iterables.getFirst(pageable.getSort(), null);
-		final List<Person> sorted;
+		final List<Person2> sorted;
 		if (firstOrder != null) {
-			final Ordering<Person> ordering = new Ordering<Person>() {
+			final Ordering<Person2> ordering = new Ordering<Person2>() {
 				@Override
-				public int compare(@Nullable Person left, @Nullable Person right) {
+				public int compare(@Nullable Person2 left, @Nullable Person2 right) {
 					try {
 						final String leftProp = BeanUtils.getSimpleProperty(left, firstOrder.getProperty());
 						final String rightProp = BeanUtils.getSimpleProperty(left, firstOrder.getProperty());
@@ -128,8 +129,8 @@ public class EmfPersonRepository extends
 			sorted = catalog.getPeople();
 		}
 		// page
-		final Iterable<Person> skipped = Iterables.skip(sorted, (int) pageable.getOffset());
-		final Iterable<Person> limited = Iterables.limit(sorted, (int) pageable.getPageSize());
+		final Iterable<Person2> skipped = Iterables.skip(sorted, (int) pageable.getOffset());
+		final Iterable<Person2> limited = Iterables.limit(sorted, (int) pageable.getPageSize());
 		// return
 		final Iterable<String> transformed = Iterables.transform(limited, new org.soluvas.commons.IdFunction());
 		final List<String> transformedList = ImmutableList.copyOf(transformed);
@@ -137,15 +138,15 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Page<Person> findAll(Pageable pageable) {
+	public Page<Person2> findAll(Pageable pageable) {
 		final int total = catalog.getPeople().size();
 		// sort
 		final Order firstOrder = Iterables.getFirst(pageable.getSort(), null);
-		final List<Person> sorted;
+		final List<Person2> sorted;
 		if (firstOrder != null) {
-			final Ordering<Person> ordering = new Ordering<Person>() {
+			final Ordering<Person2> ordering = new Ordering<Person2>() {
 				@Override
-				public int compare(@Nullable Person left, @Nullable Person right) {
+				public int compare(@Nullable Person2 left, @Nullable Person2 right) {
 					try {
 						final String leftProp = BeanUtils.getSimpleProperty(left, firstOrder.getProperty());
 						final String rightProp = BeanUtils.getSimpleProperty(left, firstOrder.getProperty());
@@ -162,23 +163,23 @@ public class EmfPersonRepository extends
 			sorted = catalog.getPeople();
 		}
 		// page
-		final Iterable<Person> skipped = Iterables.skip(sorted, (int) pageable.getOffset());
-		final Iterable<Person> limited = Iterables.limit(sorted, (int) pageable.getPageSize());
+		final Iterable<Person2> skipped = Iterables.skip(sorted, (int) pageable.getOffset());
+		final Iterable<Person2> limited = Iterables.limit(sorted, (int) pageable.getPageSize());
 		// return
-		final List<Person> copied = ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited)));
+		final List<Person2> copied = ImmutableList.copyOf(EcoreUtil.copyAll(ImmutableList.copyOf(limited)));
 		return new PageImpl<>(copied, pageable, total);
 	}
 
 	@Override
-	public Person findOneBySlug(StatusMask statusMask, final String slug) {
-		final Optional<Person> found = Iterables.tryFind(catalog.getPeople(), new Predicate<Person>() {
+	public Person2 findOneBySlug(StatusMask statusMask, final String slug) {
+		final Optional<Person2> found = Iterables.tryFind(catalog.getPeople(), new Predicate<Person2>() {
 			@Override
-			public boolean apply(@Nullable Person input) {
+			public boolean apply(@Nullable Person2 input) {
 				return slug != null ? slug.equals(input.getSlug()) : false;
 			}
 		});
 		if (found.isPresent()) {
-			return EcoreUtil.copy(found.get());
+			return found.get();
 		} else {
 			return null;
 		}
@@ -192,9 +193,9 @@ public class EmfPersonRepository extends
 
 	@Override
 	public Existence<String> existsBySlug(StatusMask statusMask, final String slug) {
-		final Optional<Person> found = Iterables.tryFind(catalog.getPeople(), new Predicate<Person>() {
+		final Optional<Person2> found = Iterables.tryFind(catalog.getPeople(), new Predicate<Person2>() {
 			@Override
-			public boolean apply(@Nullable Person input) {
+			public boolean apply(@Nullable Person2 input) {
 				return slug != null && slug.equals(input.getSlug());
 			}
 		});
@@ -209,35 +210,35 @@ public class EmfPersonRepository extends
 	}
 
 	@Override @Nullable
-	public Person findOneByFacebook(@Nullable Long facebookId,
+	public Person2 findOneByFacebook(@Nullable Long facebookId,
 			@Nullable String facebookUsername) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override @Nullable
-	public Person findOneByEmail(StatusMask statusMask, @Nullable String email) {
+	public Person2 findOneByEmail(StatusMask statusMask, @Nullable String email) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 	
 	@Override @Nullable
-	public Person findOneById(StatusMask statusMask, @Nullable String id) {
+	public Person2 findOneById(StatusMask statusMask, @Nullable String id) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override @Nullable
-	public Person findOneByTwitter(@Nullable Long twitterId,
+	public Person2 findOneByTwitter(@Nullable Long twitterId,
 			@Nullable String twitterScreenName) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
 	@Nullable
-	public Person findOneByClientAccessToken(@Nullable String clientAccessToken) {
+	public Person2 findOneByClientAccessToken(@Nullable String clientAccessToken) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
-	public Page<Person> findBySearchText(
+	public Page<Person2> findBySearchText(
 			StatusMask statusMask, @Nullable String idNameEmailMobile, Pageable pageable) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
@@ -249,25 +250,25 @@ public class EmfPersonRepository extends
 
 	@Override
 	@Nullable
-	public Person findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber) {
+	public Person2 findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileNumber) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
-	public Person findOneActive(String personId) {
+	public Person2 findOneActive(String personId) {
 		// FIXME: implement status=ACTIVE|VALIDATED|VERIFIED filter
 		return findOne(personId);
 	}
 
 	@Override
-	public <S extends Person, K extends Serializable> S lookupOne(
+	public <S extends Person2, K extends Serializable> S lookupOne(
 			StatusMask statusMask, LookupKey lookupKey, K key)
 			throws EntityLookupException {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
-	public <S extends Person, K extends Serializable> Map<K, Try<S>> lookupAll(
+	public <S extends Person2, K extends Serializable> Map<K, Try<S>> lookupAll(
 			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
@@ -285,7 +286,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public TrashResult trash(Person entity) {
+	public TrashResult trash(Person2 entity) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -295,7 +296,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Map<String, Try<TrashResult>> trashAll(Collection<Person> entities) {
+	public Map<String, Try<TrashResult>> trashAll(Collection<Person2> entities) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -305,7 +306,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public UntrashResult untrash(Person entity) {
+	public UntrashResult untrash(Person2 entity) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -316,7 +317,7 @@ public class EmfPersonRepository extends
 
 	@Override
 	public Map<String, Try<UntrashResult>> untrashAll(
-			Collection<Person> entities) {
+			Collection<Person2> entities) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -327,7 +328,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Page<Person> findAll(StatusMask statusMask, Pageable pageable) {
+	public Page<Person2> findAll(StatusMask statusMask, Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -337,12 +338,12 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public List<Person> findAll(StatusMask statusMask, Collection<String> ids) {
+	public List<Person2> findAll(StatusMask statusMask, Collection<String> ids) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public List<Person> findAllBySecRoleIds(StatusMask statusMask,
+	public List<Person2> findAllBySecRoleIds(StatusMask statusMask,
 			Collection<String> secRoleIds) {
 		throw new UnsupportedOperationException();
 	}
@@ -353,12 +354,12 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Page<Person> findAll(StatusMask statusMask, Projection projection, Pageable pageable) {
+	public Page<Person2> findAll(StatusMask statusMask, Projection projection, Pageable pageable) {
 		return null;
 	}
 
 	@Override
-	public List<Person> findAllByCustomerRoleIds(StatusMask statusMask,
+	public List<Person2> findAllByCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds) {
 		throw new UnsupportedOperationException();
 	}
@@ -370,7 +371,7 @@ public class EmfPersonRepository extends
 
 
 	@Override
-	public Page<Person> findAll(Collection<AccountStatus> accountStatuses,
+	public Page<Person2> findAll(Collection<AccountStatus> accountStatuses,
 			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
@@ -413,7 +414,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Page<Person> findAllByKeywordAndStatus(String searchText,
+	public Page<Person2> findAllByKeywordAndStatus(String searchText,
 			Collection<AccountStatus> accountStatuses, Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
@@ -426,7 +427,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Page<Person> findAllByKeywordAndRoles(String keyword,
+	public Page<Person2> findAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
 			CustomerRole customerRole, Collection<String> securityRoleIds,
 			Pageable pageable) {
@@ -434,7 +435,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Page<Person> findAllByCustomerRoleIds(StatusMask statusMask,
+	public Page<Person2> findAllByCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds, Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
@@ -470,7 +471,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Page<Person> findAll(StatusMask statusMask, Collection<String> ids,
+	public Page<Person2> findAll(StatusMask statusMask, Collection<String> ids,
 			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
@@ -486,12 +487,12 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
+	public Page<Person2> findAllByEmailExists(StatusMask statusMask, Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
+	public Page<Person2> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask,
 			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}
@@ -522,7 +523,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Person findOneByEmail(AccountStatus status, String email) {
+	public Person2 findOneByEmail(AccountStatus status, String email) {
 		throw new UnsupportedOperationException();
 	}
 

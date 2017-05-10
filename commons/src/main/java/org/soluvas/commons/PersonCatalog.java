@@ -2,6 +2,8 @@
  */
 package org.soluvas.commons;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -36,6 +38,6 @@ public interface PersonCatalog extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Person> getPeople();
+	List<org.soluvas.commons.entity.Person2> getPeople();
 
 } // PersonCatalog

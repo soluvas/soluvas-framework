@@ -4,6 +4,7 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.ProgressMonitor;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.commons.util.HashedPasswordUtils;
 import org.soluvas.data.domain.Page;
@@ -34,14 +35,14 @@ public class PersonEncryptPasswordCommand extends ExtCommandSupport {
 		if (forge) {
 			final PersonRepository personRepo = getBean(PersonRepository.class);
 			
-			RepositoryUtils.runBatch("Encrypt text password", new Sort("_id"), new BatchFinder<Person>() {
+			RepositoryUtils.runBatch("Encrypt text password", new Sort("_id"), new BatchFinder<Person2>() {
 				@Override
-				public Page<Person> find(Pageable pageable) throws Exception {
+				public Page<Person2> find(Pageable pageable) throws Exception {
 					return personRepo.findAll(pageable);
 				}
-			}, new BatchProcessor<Person>() {
+			}, new BatchProcessor<Person2>() {
 				@Override
-				public void process(Person input, long elementIndex,
+				public void process(Person2 input, long elementIndex,
 						long elementOffset, long numberOfElements,
 						long totalElements, long pageNumber, long totalPages,
 						ProgressMonitor monitor) throws Exception {

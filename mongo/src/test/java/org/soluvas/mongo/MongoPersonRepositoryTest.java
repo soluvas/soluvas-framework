@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.CappedRequest;
@@ -50,14 +51,14 @@ public class MongoPersonRepositoryTest {
 	
 	@Test
 	public void addPerson() {
-		final Person person = new PersonImpl();
+		final Person2 person = new Person2();
 		person.setId("atang");
 		person.setName("Atang Sutisna");
 		person.setAccountStatus(AccountStatus.ACTIVE);
 		
 		final List<String> roles = ImmutableList.of("admin", "sysadmin");
 		person.getSecurityRoleIds().addAll(roles);
-		final Person personAdded = personRepo.add(person);
+		final Person2 personAdded = personRepo.add(person);
 		assertNotNull(personAdded);
 		assertEquals(personAdded, person);
 		
@@ -67,7 +68,7 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void canFindOneBySlug() {
 		final String slug = "yuni-arcadia";
-		final Person person = personRepo.findOneBySlug(StatusMask.ACTIVE_ONLY, slug);
+		final Person2 person = personRepo.findOneBySlug(StatusMask.ACTIVE_ONLY, slug);
 		assertNotNull(String.format("Person by slug %s must not be null", slug),  person);
 		log.info("Got person by slug {}: {}", slug, person);
 	}
@@ -75,7 +76,7 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void findAllBySecRoleIdsAndStatus() {
 		final List<String> secRoleIds = ImmutableList.of("sales_admin", "sales_staff");
-		final List<Person> personList = personRepo.findAllBySecRoleIds(StatusMask.ACTIVE_ONLY, secRoleIds);
+		final List<Person2> personList = personRepo.findAllBySecRoleIds(StatusMask.ACTIVE_ONLY, secRoleIds);
 		log.debug("People by secRoleIds {} and statusMask Active Only: {}", secRoleIds, personList);
 		assertEquals(3, personList.size());
 	}
@@ -83,7 +84,7 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void findByPhoneNumberOrMobileNumber() {
 		final String mobileNumber = "+6285286185328";
-		final Person person = personRepo.findOneByMobileOrPhoneNumber(StatusMask.INCLUDE_INACTIVE, mobileNumber);
+		final Person2 person = personRepo.findOneByMobileOrPhoneNumber(StatusMask.INCLUDE_INACTIVE, mobileNumber);
 		assertNotNull(person);
 		log.debug("we found person {} with mobileNumber {}", person, mobileNumber);
 	}
@@ -92,7 +93,7 @@ public class MongoPersonRepositoryTest {
 	public void findPersonByMobileNumber() {
 		final String mobileNumber = "+6285286185328";
 		
-		final Page<Person> personPage = personRepo.findBySearchText(StatusMask.INCLUDE_INACTIVE, mobileNumber, new CappedRequest(100));
+		final Page<Person2> personPage = personRepo.findBySearchText(StatusMask.INCLUDE_INACTIVE, mobileNumber, new CappedRequest(100));
 		assertNotNull(personPage.getContent());
 		log.info("web found {} person with mobileNumber {}", personPage.getContent(), mobileNumber);
 	}
@@ -100,7 +101,7 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void findOneBySearchText() {
 		final String searchText = "emiral_diana_15382";
-		final List<Person> people = personRepo.findAllByKeywordAndStatus(searchText, ImmutableList.of(AccountStatus.ACTIVE, AccountStatus.VERIFIED), 
+		final List<Person2> people = personRepo.findAllByKeywordAndStatus(searchText, ImmutableList.of(AccountStatus.ACTIVE, AccountStatus.VERIFIED), 
 				new CappedRequest(10)).getContent();
 		assertEquals(1, people.size());
 	}

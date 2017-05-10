@@ -10,6 +10,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
 
@@ -37,7 +38,7 @@ public class TwitterUtils {
 	 * @return ImageID from the ImageRepository.
 	 * @throws TwitterException 
 	 */
-	public static String refreshPhotoFromTwitter(final Person person, String consumerKey,
+	public static String refreshPhotoFromTwitter(final Person2 person, String consumerKey,
 			String consumerSecret, ImageRepository imageRepo) throws TwitterException {
 		Preconditions.checkNotNull(person, "Person must not be null.");
 		final String personTwitterAt = Preconditions.checkNotNull(person.getTwitterAccessToken(),

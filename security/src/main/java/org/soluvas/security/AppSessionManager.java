@@ -9,6 +9,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.data.EntityLookup;
 
 /**
@@ -63,7 +64,7 @@ public interface AppSessionManager extends EObject {
 	 * @model dataType="org.soluvas.security.EntityLookup<? extends org.soluvas.commons.Person, org.eclipse.emf.ecore.EString>" transient="true" changeable="false"
 	 * @generated
 	 */
-	EntityLookup<? extends Person, String> getPersonLookup();
+	EntityLookup<? extends Person2, String> getPersonLookup();
 
 	/**
 	 * <!-- begin-user-doc -->

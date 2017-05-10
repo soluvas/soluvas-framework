@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonRelated;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.security.AppSessionManager;
 import org.soluvas.security.NotLoggedInException;
@@ -73,7 +74,7 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * @generated
 	 * @ordered
 	 */
-	protected EntityLookup<? extends Person, String> personLookup;
+	protected EntityLookup<? extends Person2, String> personLookup;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -89,7 +90,7 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 */
 	@Inject
 	public AppSessionManagerImpl(SecurityManager securityManager,
-			@PersonRelated EntityLookup<? extends Person, String> personLookup) {
+			@PersonRelated EntityLookup<? extends Person2, String> personLookup) {
 		super();
 		this.securityManager = securityManager;
 		this.personLookup = personLookup;
@@ -121,7 +122,7 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * @generated
 	 */
 	@Override
-	public EntityLookup<? extends Person, String> getPersonLookup() {
+	public EntityLookup<? extends Person2, String> getPersonLookup() {
 		return personLookup;
 	}
 

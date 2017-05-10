@@ -3,6 +3,7 @@ package org.soluvas.newsletter.handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.mongo.event.PersonSubscribedToMailJetEvent;
 import org.soluvas.newsletter.Mailjet;
 import org.soluvas.newsletter.MailjetManager;
@@ -28,7 +29,7 @@ public class PersonSubscribedToMailJetHandler {
 	}
 
 	public void subcribeToMailJet(PersonSubscribedToMailJetEvent ev) {
-		final Person person = ev.getPerson();
+		final Person2 person = ev.getPerson();
 		try {
 			log.debug("Subcribing {}({}) to Mail Jet", person.getId(), person.getEmail());
 			final Mailjet mailjet = new Mailjet(mailJetMgr);

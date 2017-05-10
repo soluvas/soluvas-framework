@@ -16,11 +16,15 @@ import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Email;
+import org.soluvas.commons.Email2;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PhoneNumber;
+import org.soluvas.commons.PhoneNumber2;
 import org.soluvas.commons.PostalAddress;
+import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.commons.util.HashedPasswordUtils;
 import org.soluvas.data.StatusMask;
@@ -75,10 +79,10 @@ public class PersonAddCommand extends ExtCommandSupport {
 	private String name;
 	
 	@Override
-	protected Person doExecute() throws Exception {
+	protected Person2 doExecute() throws Exception {
 		final PersonRepository personRepo = getBean(PersonRepository.class);
 		
-		final Person person = CommonsFactory.eINSTANCE.createPerson();
+		final Person2 person = new Person2();//CommonsFactory.eINSTANCE.createPerson();
 		person.setId(id);
 		person.setGuid(Person.class.getSimpleName() + "_" + id);
 		person.setAccountStatus(accountStatus);
@@ -94,18 +98,18 @@ public class PersonAddCommand extends ExtCommandSupport {
 			person.setLastName(name);
 		}
 
-		PostalAddress address = CommonsFactory.eINSTANCE.createPostalAddress();
-		address.setId(UUID.randomUUID().toString());
+		PostalAddress2 address = new PostalAddress2();//CommonsFactory.eINSTANCE.createPostalAddress();
+		address.setId(UUID.randomUUID());
 		
 		if (!Strings.isNullOrEmpty(emailStr)) {
-			final Person existingPersonByEmail = personRepo.findOneByEmail(StatusMask.RAW, emailStr);
+			final Person2 existingPersonByEmail = personRepo.findOneByEmail(StatusMask.RAW, emailStr);
 			if (existingPersonByEmail != null) {
 				log.info("Email {} already exists for person {}", emailStr, existingPersonByEmail.getId());
 				System.err.println(ansi().render("@|red Email|@ @|bold %s|@ @|red already exists for person|@ @|bold %s|@",
 						emailStr, existingPersonByEmail.getId()));
 				return null;
 			} else {
-				final Email email = CommonsFactory.eINSTANCE.createEmail();
+				final Email2 email = new Email2();//CommonsFactory.eINSTANCE.createEmail();
 				email.setEmail(emailStr);
 				email.setPrimary(true);
 				email.setValidationTime(new DateTime());
@@ -135,7 +139,7 @@ public class PersonAddCommand extends ExtCommandSupport {
 			person.setFacebookAccessToken(fbAccessToken);
 
 		if (!Strings.isNullOrEmpty(mobileNumber)) {
-			PhoneNumber theMobile = CommonsFactory.eINSTANCE.createPhoneNumber();
+			PhoneNumber2 theMobile = new PhoneNumber2();//CommonsFactory.eINSTANCE.createPhoneNumber();
 			theMobile.setPhoneNumber(mobileNumber);
 			theMobile.setPrimary(true);
 			person.getMobileNumbers().add(theMobile);
@@ -168,7 +172,7 @@ public class PersonAddCommand extends ExtCommandSupport {
 		}
 		person.getAddresses().add(address);
 
-		final Person added = personRepo.add(person);
+		final Person2 added = personRepo.add(person);
 		return added;
 	}
 

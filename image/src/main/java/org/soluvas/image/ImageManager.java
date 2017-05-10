@@ -15,6 +15,7 @@ import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.ProgressMonitor;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.image.store.ImageRepository;
 
 /**

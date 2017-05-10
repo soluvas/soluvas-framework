@@ -8,6 +8,7 @@ import org.apache.felix.gogo.commands.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.person.PersonRepository;
 import org.springframework.context.annotation.Scope;
@@ -38,7 +39,7 @@ public class PersonCatCommand extends ExtCommandSupport {
 			try {
 				parsedId = Integer.valueOf(id);
 				// TODO: natively support findOneByIndex in Repository
-				final List<Person> personList = personRepo.findAll();
+				final List<Person2> personList = personRepo.findAll();
 				return personList.get(parsedId - 1);
 			} catch (NumberFormatException e) {
 				if (byIndex != null && byIndex == true) {

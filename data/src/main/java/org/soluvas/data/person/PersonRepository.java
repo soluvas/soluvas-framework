@@ -31,9 +31,9 @@ import com.google.common.collect.ImmutableSet;
  * @author ceefour
  */
 public interface PersonRepository extends
-		PagingAndSortingRepository<Person, String>, SlugLookup<Person>,
-		GenericLookup<Person>,
-		Trashable<Person, String> {
+		PagingAndSortingRepository<Person2, String>, SlugLookup<Person2>,
+		GenericLookup<Person2>,
+		Trashable<Person2, String> {
 	
 	/**
 	 * 
@@ -53,7 +53,7 @@ public interface PersonRepository extends
 	 * 		were {@code null}.
 	 */
 	@Nullable
-	public Person findOneByFacebook(@Nullable Long facebookId, @Nullable String facebookUsername);
+	public Person2 findOneByFacebook(@Nullable Long facebookId, @Nullable String facebookUsername);
 
 	/**
 	 * Find a {@link Person} by any {@link Email}. All email status are included,
@@ -63,17 +63,17 @@ public interface PersonRepository extends
 	 * @param statusMask TODO
 	 */
 	@Nullable
-	public Person findOneByEmail(StatusMask statusMask, @Nullable String email);
+	public Person2 findOneByEmail(StatusMask statusMask, @Nullable String email);
 	
 	public boolean isExistsByEmail(StatusMask statusMask, String email);
 	
 	Optional<String> getIdByEmail(StatusMask statusMask, String email);
 	
 	@Nullable
-	public Person findOneById(StatusMask statusMask, @Nullable String id);
+	public Person2 findOneById(StatusMask statusMask, @Nullable String id);
 	
 	@Nullable
-	public Person findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileOrPhoneNumber);
+	public Person2 findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileOrPhoneNumber);
 	
 	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask, String mobileOrPhoneNumber);
 	
@@ -87,7 +87,7 @@ public interface PersonRepository extends
 	 * 		were {@code null}.
 	 */
 	@Nullable
-	public Person findOneByTwitter(@Nullable Long twitterId, @Nullable String twitterScreenName);
+	public Person2 findOneByTwitter(@Nullable Long twitterId, @Nullable String twitterScreenName);
 
 	/**
 	 * Find a {@link Person} by Client Access Token, useful for implementing REST API provider.
@@ -95,33 +95,33 @@ public interface PersonRepository extends
 	 * @return Person, or {@code null} if not found.
 	 */
 	@Nullable
-	public Person findOneByClientAccessToken(@Nullable String clientAccessToken);
+	public Person2 findOneByClientAccessToken(@Nullable String clientAccessToken);
 	
-	public Page<Person> findBySearchText(StatusMask statusMask, String searchText, Pageable pageable);
+	public Page<Person2> findBySearchText(StatusMask statusMask, String searchText, Pageable pageable);
 	
-	public Page<Person> findAllByKeywordAndStatus(String searchText, Collection<AccountStatus> accountStatuses, Pageable pageable);
+	public Page<Person2> findAllByKeywordAndStatus(String searchText, Collection<AccountStatus> accountStatuses, Pageable pageable);
 	
 	public long countBySearchText(StatusMask statusMask, String searchText);
 	
 	public long countBySearchText(Collection<AccountStatus> accountStatuses, String searchText);
 
-	public Person findOneActive(String personId);
+	public Person2 findOneActive(String personId);
 	
-	Page<Person> findAll(StatusMask statusMask, Pageable pageable);
+	Page<Person2> findAll(StatusMask statusMask, Pageable pageable);
 	
-	Page<Person> findAll(Collection<AccountStatus> accountStatuses, Pageable pageable);
+	Page<Person2> findAll(Collection<AccountStatus> accountStatuses, Pageable pageable);
 	
-	List<Person> findAll(StatusMask statusMask, Collection<String> ids);
+	List<Person2> findAll(StatusMask statusMask, Collection<String> ids);
 	
-	List<Person> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds);
+	List<Person2> findAllBySecRoleIds(StatusMask statusMask, Collection<String> secRoleIds);
 	
-	List<Person> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
+	List<Person2> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
 
 	boolean existByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds);
 	
 	boolean hasMatchWithSecRoleIds(String personId, Collection<String> secRoleIds);
 
-	Page<Person> findAll(StatusMask statusMask, Projection projection, Pageable pageable);
+	Page<Person2> findAll(StatusMask statusMask, Projection projection, Pageable pageable);
 
 	long count(StatusMask statusMask);
 	
@@ -145,18 +145,18 @@ public interface PersonRepository extends
 			Collection<AccountStatus> accountStatuses,
 			CustomerRole customerRole, Collection<String> securityRoleIds);
 
-	Page<Person> findAllByKeywordAndRoles(String keyword,
+	Page<Person2> findAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
 			CustomerRole customerRole, Collection<String> securityRoleIds,
 			Pageable pageable);
 
-	Page<Person> findAllByCustomerRoleIds(StatusMask statusMask,
+	Page<Person2> findAllByCustomerRoleIds(StatusMask statusMask,
 			Collection<String> customerRoleIds, Pageable pageable);
 
 	long countAllByCustomerRolesIds(StatusMask statusMask,
 			Collection<String> customerRoleIds);
 
-	Page<Person> findAll(StatusMask statusMask, Collection<String> ids,
+	Page<Person2> findAll(StatusMask statusMask, Collection<String> ids,
 			Pageable pageable);
 
 	/**
@@ -177,9 +177,9 @@ public interface PersonRepository extends
 	
 	@Nullable Long getZendeskUserIdByPersonId(String personId);
 	
-	Page<Person> findAllByEmailExists(StatusMask statusMask, Pageable pageable);
+	Page<Person2> findAllByEmailExists(StatusMask statusMask, Pageable pageable);
 	
-	Page<Person> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask, Pageable pageable);
+	Page<Person2> findAllByEmailExists(DateTime starTime, DateTime endTime, StatusMask statusMask, Pageable pageable);
 	
 	List<String> findAllIdsByCustomerRoleId(StatusMask statusMask, String customerRoleId);
 

@@ -7,8 +7,10 @@ import org.apache.felix.gogo.commands.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Email;
+import org.soluvas.commons.Email2;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.data.StatusMask;
@@ -52,13 +54,13 @@ public class PersonLsCommand extends ExtCommandSupport {
 		final TenantRef tenant = getBean(TenantRef.class);
 		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-20s|%-21s|%-10s|%-30s|@",
 				"№", "ID", "Slug", "Name", "Status", "Email(s)" ));
-		final Page<Person> personPage = personRepo.findAll(new PageRequest(pageNumber, pageSize, sortDir, sortProperty));
+		final Page<Person2> personPage = personRepo.findAll(new PageRequest(pageNumber, pageSize, sortDir, sortProperty));
 		int i = 0;
-		for (Person it : personPage.getContent()) {
+		for (Person2 it : personPage.getContent()) {
 			final String genderStr = it.getGender() == Gender.MALE ? "@|bold,blue ♂|@" : it.getGender() == Gender.FEMALE ? "@|bold,magenta ♀|@" : " ";
 			String emails = "";
 			if (!it.getEmails().isEmpty()) {
-				for (final Email email : it.getEmails()) {
+				for (final Email2 email : it.getEmails()) {
 					if (emails.equals("")) {
 						emails += email.getEmail();
 					} else {

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.commons.tenant.TenantRef;
 import org.soluvas.data.StatusMask;
@@ -36,9 +37,9 @@ public class PersonSearchCommand extends ExtCommandSupport {
 		System.out.println(ansi().render("@|negative_on %3s|%-15s|%-15s|%-21s|%-20s|@",
 				"#", "ID", "Slug", "Name", "Email" ));
 		
-		final List<Person> personList = personRepo.findBySearchText(StatusMask.RAW, searchText, new CappedRequest(100)).getContent();
+		final List<Person2> personList = personRepo.findBySearchText(StatusMask.RAW, searchText, new CappedRequest(100)).getContent();
 		int i = 0;
-		for (final Person it : personList) {
+		for (final Person2 it : personList) {
 			final String genderStr = it.getGender() == Gender.MALE ? "@|bold,blue ♂|@" : it.getGender() == Gender.FEMALE ? "@|bold,magenta ♀|@" : " "; 
 			System.out.println(ansi().render("@|bold,black %3d||@@|bold %-15s|@@|bold,black ||@%-15s@|bold,black ||@" + genderStr + "%-20s@|bold,black ||@%-20s",
 				++i, it.getId(), it.getSlug(), it.getName(), it.getEmail()) );
