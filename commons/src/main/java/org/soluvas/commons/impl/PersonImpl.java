@@ -155,8 +155,8 @@ import com.google.common.collect.Iterables;
  * @generated
  */
 @Entity(noClassnameStored=true)
-@Converters({BigDecimalConverter.class, DateTimeConverter.class,
-	CurrencyUnitConverter.class, UnitConverter.class, LocalDateConverter.class})
+@Converters({BigDecimalConverter.class, DateTimeConverter.class, CurrencyUnitConverter.class,
+	UnitConverter.class, LocalDateConverter.class})
 public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
