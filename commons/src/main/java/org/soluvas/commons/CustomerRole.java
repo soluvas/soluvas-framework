@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface CustomerRole extends Identifiable, SchemaVersionable, NameContainer, Timestamped, Describable, EObject {
+public interface CustomerRole extends Identifiable, SchemaVersionable, NameContainer, Timestamped, Describable {
 	
 	/**
 	 * Registered user / retail.

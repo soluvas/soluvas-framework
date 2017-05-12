@@ -29,7 +29,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=ThingInfoImpl.class)
-public interface ThingInfo extends NameContainer, Identifiable, Sluggable, Imageable, EObject {
+public interface ThingInfo extends NameContainer, Identifiable, Sluggable, Imageable {
 	/**
 	 * Returns the value of the '<em><b>Image Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

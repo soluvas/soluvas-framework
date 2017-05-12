@@ -554,12 +554,6 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case CommonsPackage.CUSTOMER_ROLE_CATALOG: {
-				CustomerRoleCatalog customerRoleCatalog = (CustomerRoleCatalog)theEObject;
-				T1 result = caseCustomerRoleCatalog(customerRoleCatalog);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case CommonsPackage.MONGO_SYS_CONFIG: {
 				MongoSysConfig mongoSysConfig = (MongoSysConfig)theEObject;
 				T1 result = caseMongoSysConfig(mongoSysConfig);
@@ -1527,21 +1521,6 @@ public class CommonsSwitch<T1> extends Switch<T1> {
 	 * @generated
 	 */
 	public T1 caseCustomerRole(CustomerRole object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Customer Role Catalog</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Customer Role Catalog</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T1 caseCustomerRoleCatalog(CustomerRoleCatalog object) {
 		return null;
 	}
 

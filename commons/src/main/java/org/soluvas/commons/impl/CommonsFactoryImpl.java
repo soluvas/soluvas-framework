@@ -35,7 +35,6 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.Period;
-import org.soluvas.commons.*;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Added;
 import org.soluvas.commons.AddedMany;
@@ -48,7 +47,6 @@ import org.soluvas.commons.CategoryInfo;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
-import org.soluvas.commons.CustomerRoleCatalog;
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.EClassStatus;
 import org.soluvas.commons.Email;
@@ -161,7 +159,6 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 			case CommonsPackage.THING_INFO: return createThingInfo();
 			case CommonsPackage.ORGANIZATION: return createOrganization();
 			case CommonsPackage.CUSTOMER_ROLE: return createCustomerRole();
-			case CommonsPackage.CUSTOMER_ROLE_CATALOG: return createCustomerRoleCatalog();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -651,16 +648,6 @@ public class CommonsFactoryImpl extends EFactoryImpl implements CommonsFactory {
 	public CustomerRole createCustomerRole() {
 		CustomerRoleImpl customerRole = new CustomerRoleImpl();
 		return customerRole;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public CustomerRoleCatalog createCustomerRoleCatalog() {
-		CustomerRoleCatalogImpl customerRoleCatalog = new CustomerRoleCatalogImpl();
-		return customerRoleCatalog;
 	}
 
 	/**

@@ -71,7 +71,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @generated
  */
 @JsonDeserialize(as=PostalAddressImpl.class)
-public interface PostalAddress extends NameContainer, Identifiable, SchemaVersionable, EObject {
+public interface PostalAddress extends NameContainer, Identifiable, SchemaVersionable {
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
 	 * The default value is <code>"3"</code>.

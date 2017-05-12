@@ -3,6 +3,7 @@ package org.soluvas.data.person;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.soluvas.commons.*;
+import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.springframework.core.env.Environment;
@@ -204,7 +205,7 @@ public class JpaPersonRepository2 implements PersonRepository2 {
 
     @Override
     @Transactional(readOnly = true)
-    public long countAllByKeywordAndRoles(String tenantId, String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> securityRoleIds) {
+    public long countAllByKeywordAndRoles(String tenantId, String keyword, Collection<AccountStatus> accountStatuses, CustomerRole2 customerRole, Collection<String> securityRoleIds) {
         return em.createQuery("SELECT COUNT(p.id) FROM Person p" +
                 " WHERE p.tenantId=:tenantId AND (lower(p.id) LIKE :likeExpr OR lower(p.slug) LIKE :likeExpr OR lower(p.name) LIKE :likeExpr)", Long.class)
                 .setParameter("tenantId", tenantId)
@@ -214,7 +215,7 @@ public class JpaPersonRepository2 implements PersonRepository2 {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Person2> findAllByKeywordAndRoles(String tenantId, String keyword, Collection<AccountStatus> accountStatuses, CustomerRole customerRole, Collection<String> customerRoleIds, PageRequest pageable) {
+    public Page<Person2> findAllByKeywordAndRoles(String tenantId, String keyword, Collection<AccountStatus> accountStatuses, CustomerRole2 customerRole, Collection<String> customerRoleIds, PageRequest pageable) {
         final long cnt = countAllByKeywordAndRoles(tenantId, keyword, accountStatuses, customerRole, customerRoleIds);
         final List<Person2> content = (List<Person2>) em.createQuery("SELECT p FROM Person p" +
                         " WHERE p.tenantId=:tenantId AND (lower(p.id) LIKE :likeExpr OR lower(p.slug) LIKE :likeExpr OR lower(p.name) LIKE :likeExpr) " +

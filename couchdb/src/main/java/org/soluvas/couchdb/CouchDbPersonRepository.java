@@ -19,10 +19,9 @@ import org.ektorp.support.DesignDocument;
 import org.ektorp.support.DesignDocument.View;
 import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
-import org.soluvas.commons.CustomerRole;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.entity.Person2;
+import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
@@ -156,7 +155,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	@Override
 	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug) {
 		try {
-			final Person found = lookupOne(statusMask, LookupKey.SLUG, upSlug);
+			final Person2 found = lookupOne(statusMask, LookupKey.SLUG, upSlug);
 			return Existence.of(found.getSlug(), found.getId());
 		} catch (EntityLookupException e) {
 			log.trace("existsBySlug {} '{}' returned {}", statusMask, upSlug, e);
@@ -245,7 +244,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	 * @return The returned keys will be normalized/lowercased emails. Hmm... should we use non-normalized keys?
 	 * 		Like slug/canonicalSlug?
 	 */
-	public <S extends Person> Map<String, Try<S>> lookupAllByEmail(
+	public <S extends Person2> Map<String, Try<S>> lookupAllByEmail(
 			StatusMask statusMask, Collection<String> emails) {
 		// normalize expected emails
 		final Set<String> normalizedEmails = FluentIterable.from(emails).transform(new Function<String, String>() {
@@ -614,14 +613,14 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	@Override
 	public long countAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> securityRoleIds) {
+			CustomerRole2 customerRole, Collection<String> securityRoleIds) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Page<Person2> findAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> securityRoleIds,
+			CustomerRole2 customerRole, Collection<String> securityRoleIds,
 			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}

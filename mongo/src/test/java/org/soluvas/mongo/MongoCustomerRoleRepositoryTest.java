@@ -3,7 +3,7 @@ package org.soluvas.mongo;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.CustomerRole;
+import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.customerrole.CustomerRoleRepository;
 
 /**
@@ -24,7 +24,7 @@ public class MongoCustomerRoleRepositoryTest {
 	@Test
 	public void findOneById() {
 		final String queryId = "common";
-		final CustomerRole customerRole = repo.findOne(queryId);
+		final CustomerRole2 customerRole = repo.findOne(queryId);
 		log.info("Got customerRole by id '{}': {}", queryId, customerRole);
 	}
 

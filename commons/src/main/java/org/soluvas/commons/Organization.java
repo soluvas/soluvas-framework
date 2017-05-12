@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Organization extends Identifiable, SchemaVersionable, NameContainer, EObject {
+public interface Organization extends Identifiable, SchemaVersionable, NameContainer {
 	/**
 	 * Returns the value of the '<em><b>Schema Version</b></em>' attribute.
 	 * The default value is <code>"1"</code>.

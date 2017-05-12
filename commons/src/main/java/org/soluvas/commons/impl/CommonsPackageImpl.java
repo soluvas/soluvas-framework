@@ -1,6 +1,5 @@
 package org.soluvas.commons.impl;
 
-import com.google.common.collect.ListMultimap;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Collection;
@@ -19,6 +18,7 @@ import javax.measure.quantity.Mass;
 import javax.measure.quantity.Quantity;
 import javax.measure.quantity.Temperature;
 import javax.measure.unit.Unit;
+import javax.money.CurrencyUnit;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.javamoney.moneta.Money;
-import javax.money.CurrencyUnit;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -56,7 +55,6 @@ import org.soluvas.commons.Colorable;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
-import org.soluvas.commons.CustomerRoleCatalog;
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.Describable;
 import org.soluvas.commons.EClassLinked;
@@ -122,6 +120,7 @@ import org.soluvas.commons.TwitterAccessible;
 import org.soluvas.commons.TwitterIdentity;
 import org.soluvas.commons.WebAddress;
 
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 import com.google.common.eventbus.EventBus;
@@ -582,13 +581,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * @generated
 	 */
 	private EClass customerRoleEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass customerRoleCatalogEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -3989,24 +3981,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getCustomerRoleCatalog() {
-		return customerRoleCatalogEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getCustomerRoleCatalog_CustomerRoles() {
-		return (EReference)customerRoleCatalogEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public EClass getMongoSysConfig() {
 		return mongoSysConfigEClass;
@@ -4920,9 +4894,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__ZENDESK_INTEGRATION);
 		createEAttribute(customerRoleEClass, CUSTOMER_ROLE__ZENDESK_ORGANIZATION_ID);
 
-		customerRoleCatalogEClass = createEClass(CUSTOMER_ROLE_CATALOG);
-		createEReference(customerRoleCatalogEClass, CUSTOMER_ROLE_CATALOG__CUSTOMER_ROLES);
-
 		mongoSysConfigEClass = createEClass(MONGO_SYS_CONFIG);
 		createEAttribute(mongoSysConfigEClass, MONGO_SYS_CONFIG__MONGO_URI);
 
@@ -5668,9 +5639,6 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getCustomerRole_ReviewReminderEnabled(), ecorePackage.getEBoolean(), "reviewReminderEnabled", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_ZendeskIntegration(), ecorePackage.getEBoolean(), "zendeskIntegration", "false", 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCustomerRole_ZendeskOrganizationId(), ecorePackage.getELongObject(), "zendeskOrganizationId", null, 0, 1, CustomerRole.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(customerRoleCatalogEClass, CustomerRoleCatalog.class, "CustomerRoleCatalog", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCustomerRoleCatalog_CustomerRoles(), this.getCustomerRole(), null, "customerRoles", null, 0, -1, CustomerRoleCatalog.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mongoSysConfigEClass, MongoSysConfig.class, "MongoSysConfig", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMongoSysConfig_MongoUri(), ecorePackage.getEString(), "mongoUri", null, 0, 1, MongoSysConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

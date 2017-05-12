@@ -1674,10 +1674,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="zendeskOrganizationId"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CustomerRoleCatalog">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="customerRoles" upperBound="-1"
-        eType="#//CustomerRole" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="EFactory" instanceClassName="org.eclipse.emf.ecore.EFactory"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EClass" name="MongoSysConfig" abstract="true" interface="true">

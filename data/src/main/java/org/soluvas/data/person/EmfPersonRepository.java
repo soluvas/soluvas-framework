@@ -15,11 +15,10 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
-import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.IdPredicate;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonCatalog;
 import org.soluvas.commons.entity.Person2;
+import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
@@ -84,7 +83,7 @@ public class EmfPersonRepository extends
 
 	@Override
 	public Set<String> exists(Collection<String> ids) {
-		final Iterable<Person> filtered = Iterables.filter(catalog.getPeople(), new IdPredicate(ids));
+		final Iterable<Person2> filtered = Iterables.filter(catalog.getPeople(), new IdPredicate(ids));
 		final Iterable<String> transformed = Iterables.transform(filtered, new org.soluvas.commons.IdFunction());
 		final Set<String> transformedSet = ImmutableSet.copyOf(transformed);
 		return transformedSet;
@@ -422,14 +421,14 @@ public class EmfPersonRepository extends
 	@Override
 	public long countAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> securityRoleIds) {
+			CustomerRole2 customerRole, Collection<String> securityRoleIds) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Page<Person2> findAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> securityRoleIds,
+			CustomerRole2 customerRole, Collection<String> securityRoleIds,
 			Pageable pageable) {
 		throw new UnsupportedOperationException();
 	}

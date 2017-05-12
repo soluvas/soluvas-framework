@@ -3,16 +3,14 @@ package org.soluvas.mongo;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
-import org.soluvas.commons.CustomerRoleCatalog;
 import org.soluvas.commons.CustomerRoleStatus;
-import org.soluvas.commons.OnDemandXmiLoader;
-import org.soluvas.commons.impl.CustomerRoleImpl;
+import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.customerrole.CustomerRoleRepository;
 import org.soluvas.data.domain.Page;
@@ -30,18 +28,13 @@ import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
-/**
- * {@code base} {@link CustomerRole}s are read from
- * {@code /org.soluvas.commons/src/main/resources/org/soluvas/commons/base.CustomerRoleCatalog.xmi}.
- * @author rudi
- */
-public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRole>
+public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRole2>
 	implements CustomerRoleRepository {
 
 	public MongoCustomerRoleRepository(String mongoUri,
 			boolean migrationEnabled,
 			boolean autoExplainSlow) {
-		super(CustomerRole.class, CustomerRoleImpl.class, CustomerRoleImpl.serialVersionUID, mongoUri, ReadPattern.SECONDARY_PREFERRED,
+		super(CustomerRole2.class, CustomerRole2.class, CustomerRole2.serialVersionUID, mongoUri, ReadPattern.SECONDARY_PREFERRED,
 				"customerRole", null, migrationEnabled, autoExplainSlow,
 				Index.desc("creationTime"),
 				Index.desc("modificationTime"),
@@ -53,17 +46,49 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 				Index.asc("transactionHistoryEnabled"));
 		ensureBaseEntities();
 	}
-
+	
+	private List<CustomerRole2> getBases() {
+		//common
+		final CustomerRole2 common = new CustomerRole2();
+		common.setId(CustomerRole2.COMMON_ID);
+		common.setName("Common");
+		common.setReadOnly(true);
+		common.setDescription("Registered users / retail.");
+		
+		//agent
+		final CustomerRole2 member = new CustomerRole2();
+		member.setId(CustomerRole2.MEMBER_ID);
+		member.setName("Premium Member");
+		member.setReadOnly(true);
+		member.setDescription("Premium members.");
+		
+		final CustomerRole2 agent = new CustomerRole2();
+		member.setId(CustomerRole2.AGENT_ID);
+		member.setName("Agent");
+		member.setReadOnly(true);
+		member.setDescription("Reseller agents.");
+		
+		final CustomerRole2 drops = new CustomerRole2();
+		member.setId(CustomerRole2.DROPS_ID);
+		member.setName("Drop shipper");
+		member.setReadOnly(true);
+		member.setDescription("Retailers not keeping goods in stock, but instead transfer customer orders and shipment details to us.");
+		
+		return ImmutableList.of(common, member, agent, drops);
+	}
+			
 	protected void ensureBaseEntities() {
-		final CustomerRoleCatalog base = new OnDemandXmiLoader<CustomerRoleCatalog>(CommonsPackage.eINSTANCE,
-				CustomerRole.class, "base.CustomerRoleCatalog.xmi").get();
-		final ImmutableSet<String> baseCustomerRoleIds = FluentIterable.from(base.getCustomerRoles())
-				.transform(new org.soluvas.commons.IdFunction()).toSet();
-		log.debug("Ensuring {} base CustomerRoles from {}: {}",
-				base.getCustomerRoles().size(), base.eResource().getURI(),
-				baseCustomerRoleIds);
+		final List<CustomerRole2> bases = getBases();
+//		final List<String> baseCustomerRoleIds = bases.stream().map(new Function<CustomerRole2, String>() {
+//			@Override
+//			public String apply(CustomerRole2 t) {
+//				return t.getId();
+//			}
+//		}).collect(Collectors.toList());
+		final List<String> baseCustomerRoleIds = bases.stream().map(it -> it.getId()).collect(Collectors.toList());
+		log.debug("Ensuring {} base CustomerRoles: {}", bases.size(), baseCustomerRoleIds);
 		final Set<String> existing = exists(baseCustomerRoleIds);
-		for (final CustomerRole customerRole : base.getCustomerRoles()) {
+		for (final CustomerRole2 customerRole : bases) {
 			if (!existing.contains(customerRole.getId())) {
 				add(customerRole);
 			}
@@ -72,13 +97,11 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 							"description", customerRole.getDescription(),
 							"readOnly", customerRole.isReadOnly())));
 		}
-		log.info("Ensured {} base CustomerRoles from {}: {}",
-				base.getCustomerRoles().size(), base.eResource().getURI(),
-				baseCustomerRoleIds);
+		log.info("Ensured {} base CustomerRoles: {}", bases.size(), baseCustomerRoleIds);
 	}
 
 	@Override
-	public Page<CustomerRole> findAll(@Nonnull StatusMask statusMask, @Nonnull Pageable pageable) {
+	public Page<CustomerRole2> findAll(@Nonnull StatusMask statusMask, @Nonnull Pageable pageable) {
 		//query
 		final DBObject query = new BasicDBObject();
 		augmentQueryForStatusMask(query, statusMask);
@@ -94,10 +117,10 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			log.warn("No sort for find customerRoles using {} pageable {}, please add Order or use Sort.unsorted()",
 					query, pageable);
 		}
-		final List<CustomerRole> customerRoles = findPrimary(query, null, sortObj, pageable.getOffset(), pageable.getPageSize(), "findAll",
+		final List<CustomerRole2> customerRoles = findPrimary(query, null, sortObj, pageable.getOffset(), pageable.getPageSize(), "findAll",
 				statusMask, pageable);
 		if (customerRoles.isEmpty()) {
-			return new PageImpl<>(ImmutableList.<CustomerRole>of(), pageable, 0);
+			return new PageImpl<>(ImmutableList.<CustomerRole2>of(), pageable, 0);
 		} else {
 			//count
 			final long count = countByQuery(query);
@@ -106,7 +129,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 	
 	@Override
-	public Page<CustomerRole> findAll(@Nonnull StatusMask statusMask, @Nullable String searchText, @Nonnull Pageable pageable) {
+	public Page<CustomerRole2> findAll(@Nonnull StatusMask statusMask, @Nullable String searchText, @Nonnull Pageable pageable) {
 		//query
 		final BasicDBObject query = getQueryBySearchText(statusMask, searchText);
 		//sort
@@ -121,10 +144,10 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			log.warn("No sort for find customerRoles using {} pageable {}, please add Order or use Sort.unsorted()",
 					query, pageable);
 		}
-		final List<CustomerRole> customerRoles = findSecondary(query, null, sortObj, pageable.getOffset(), pageable.getPageSize(), "findAll",
+		final List<CustomerRole2> customerRoles = findSecondary(query, null, sortObj, pageable.getOffset(), pageable.getPageSize(), "findAll",
 				statusMask, pageable);
 		if (customerRoles.isEmpty()) {
-			return new PageImpl<>(ImmutableList.<CustomerRole>of(), pageable, 0);
+			return new PageImpl<>(ImmutableList.<CustomerRole2>of(), pageable, 0);
 		} else {
 			//count
 			final long count = countByQuery(query);

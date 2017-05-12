@@ -12,6 +12,7 @@ import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.entity.Person2;
+import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.Existence;
 import org.soluvas.data.GenericLookup;
 import org.soluvas.data.SlugLookup;
@@ -143,11 +144,11 @@ public interface PersonRepository extends
 
 	long countAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> securityRoleIds);
+			CustomerRole2 customerRole, Collection<String> securityRoleIds);
 
 	Page<Person2> findAllByKeywordAndRoles(String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, Collection<String> securityRoleIds,
+			CustomerRole2 customerRole, Collection<String> securityRoleIds,
 			Pageable pageable);
 
 	Page<Person2> findAllByCustomerRoleIds(StatusMask statusMask,

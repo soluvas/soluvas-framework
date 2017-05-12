@@ -3,6 +3,7 @@ package org.soluvas.data.customerrole;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.CustomerRole;
+import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
@@ -14,11 +15,11 @@ import com.google.common.collect.ImmutableSet;
  * @author rudi
  *
  */
-public interface CustomerRoleRepository extends CrudRepository<CustomerRole, String> {
+public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, String> {
 	
-	Page<CustomerRole> findAll(StatusMask statusMask, Pageable pageable);
+	Page<CustomerRole2> findAll(StatusMask statusMask, Pageable pageable);
 	
-	Page<CustomerRole> findAll(StatusMask statusMask, @Nullable String searchText, Pageable pageable);
+	Page<CustomerRole2> findAll(StatusMask statusMask, @Nullable String searchText, Pageable pageable);
 	
 	long count(StatusMask statusMask);
 	

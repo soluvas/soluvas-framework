@@ -15,14 +15,13 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsPackage;
-import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Email2;
 import org.soluvas.commons.EnumNameFunction;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.PhoneNumber2;
 import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.entity.Person2;
+import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
@@ -606,7 +605,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public Page<Person2> findAllByKeywordAndRoles(
 			String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, 
+			CustomerRole2 customerRole, 
 			Collection<String> securityRoleIds,
 			Pageable pageable) {
 		
@@ -658,7 +657,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public long countAllByKeywordAndRoles(
 			String keyword,
 			Collection<AccountStatus> accountStatuses,
-			CustomerRole customerRole, 
+			CustomerRole2 customerRole, 
 			Collection<String> securityRoleIds) {
 		
 		BasicDBObject query;
