@@ -14,14 +14,12 @@ import javax.annotation.Nullable;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.soluvas.commons.AccountStatus;
-import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.EnumNameFunction;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.entity.Person2;
-import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
@@ -94,7 +92,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	@Override @Nullable
 	public Person2 findOneBySlug(StatusMask statusMask, String upSlug) {
 		String canonicalize = SlugUtils.canonicalize(upSlug);
-		return (Person2) findOneByQuery(new BasicDBObject("canonicalSlug", canonicalize));
+		return findOneByQuery(new BasicDBObject("canonicalSlug", canonicalize));
 	}
 
 	@Override
@@ -170,7 +168,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
 		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
 		query.put("accountStatus", status.name());
-		return (Person2) findOneByQuery(query);
+		return findOneByQuery(query);
 	}
 	
 	@Override
@@ -765,7 +763,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	}
 
 	@Override
-	@Nullable public Person getZendeskUserId(String email) {
+	@Nullable public Person2 getZendeskUserId(String email) {
 		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
 		query.put("zendeskIntegration", true);
 		query.put("zendeskUserId", new BasicDBObject("$exists", true));
@@ -777,7 +775,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		final DBObject dbObject = findOnePrimary(query, fields, "getZendeskUserId", email);
 		if (dbObject != null) {
 			if (dbObject.get("zendeskUserId") != null && !"null".equals(dbObject.get("zendeskUserId"))) {
-				final Person person = CommonsFactory.eINSTANCE.createPerson();
+				final Person2 person = new Person2();
 				person.setId(dbObject.get("zendeskUserId").toString());
 				person.setZendeskUserId(Long.valueOf(dbObject.get("zendeskUserId").toString()));
 				person.setCustomerRole(dbObject.get("customerRole").toString());

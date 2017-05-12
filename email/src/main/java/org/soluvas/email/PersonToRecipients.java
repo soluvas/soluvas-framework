@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import org.soluvas.commons.Email;
 import org.soluvas.commons.Email2;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.entity.Person2;

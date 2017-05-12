@@ -173,7 +173,7 @@ public interface PersonRepository extends
 	 * @param email
 	 * @return
 	 */
-	@Nullable Person getZendeskUserId(String email);
+	@Nullable Person2 getZendeskUserId(String email);
 	
 	@Nullable Long getZendeskUserIdByPersonId(String personId);
 	
