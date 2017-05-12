@@ -19,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo;
-import org.soluvas.commons.entity.Person2;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.data.person.PersonRepository;
 import org.soluvas.email.EmailCatalog;
@@ -238,7 +237,7 @@ public class EmailUtils {
 			}
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
-				final Person2 socialPerson = personLookup.findOne(personInfo.getId());
+				final Person socialPerson = personLookup.findOne(personInfo.getId());
 				recipients.addAll(new PersonToRecipients(REGISTERED_CUSTOMER, false).apply(socialPerson));
 			}
 		}
@@ -257,7 +256,7 @@ public class EmailUtils {
 			}
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personRepo != null) {
-				final Person2 socialPerson = personRepo.findOne(personInfo.getId());
+				final Person socialPerson = personRepo.findOne(personInfo.getId());
 				recipients.addAll(new PersonToRecipients(REGISTERED_CUSTOMER, false).apply(socialPerson));
 			}
 		}
@@ -292,7 +291,7 @@ public class EmailUtils {
 			}
 			//find person by customerId
 			if (!Strings.isNullOrEmpty(personInfo.getId()) && personLookup != null) {
-				final Person2 person = personLookup.findOne(personInfo.getId());
+				final Person person = personLookup.findOne(personInfo.getId());
 				recipients.addAll(new PersonToRecipients(roleName, false).apply(person));
 			}
 		}

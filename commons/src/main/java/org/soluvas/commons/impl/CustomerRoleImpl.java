@@ -52,7 +52,7 @@ import com.google.code.morphia.annotations.Id;
  *
  * @generated
  */
-@Converters({DateTimeConverter.class})
+@Converters(DateTimeConverter.class)
 public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements CustomerRole {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
@@ -570,6 +570,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -579,6 +580,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDescription(String newDescription) {
 		String oldDescription = description;
 		description = newDescription;
@@ -626,6 +628,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isReadOnly() {
 		return readOnly;
 	}
@@ -635,6 +638,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReadOnly(boolean newReadOnly) {
 		boolean oldReadOnly = readOnly;
 		readOnly = newReadOnly;
@@ -647,6 +651,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isQuickShopEnabled() {
 		return quickShopEnabled;
 	}
@@ -656,6 +661,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setQuickShopEnabled(boolean newQuickShopEnabled) {
 		boolean oldQuickShopEnabled = quickShopEnabled;
 		quickShopEnabled = newQuickShopEnabled;
@@ -668,6 +674,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSalesOrderReportEnabled() {
 		return salesOrderReportEnabled;
 	}
@@ -677,6 +684,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSalesOrderReportEnabled(boolean newSalesOrderReportEnabled) {
 		boolean oldSalesOrderReportEnabled = salesOrderReportEnabled;
 		salesOrderReportEnabled = newSalesOrderReportEnabled;
@@ -689,6 +697,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isHistorySalesOrderEnabled() {
 		return historySalesOrderEnabled;
 	}
@@ -698,6 +707,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHistorySalesOrderEnabled(boolean newHistorySalesOrderEnabled) {
 		boolean oldHistorySalesOrderEnabled = historySalesOrderEnabled;
 		historySalesOrderEnabled = newHistorySalesOrderEnabled;
@@ -710,6 +720,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isAgentSalesReportEnabled() {
 		return agentSalesReportEnabled;
 	}
@@ -719,6 +730,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAgentSalesReportEnabled(boolean newAgentSalesReportEnabled) {
 		boolean oldAgentSalesReportEnabled = agentSalesReportEnabled;
 		agentSalesReportEnabled = newAgentSalesReportEnabled;
@@ -731,6 +743,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isTransactionHistoryEnabled() {
 		return transactionHistoryEnabled;
 	}
@@ -740,6 +753,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransactionHistoryEnabled(boolean newTransactionHistoryEnabled) {
 		boolean oldTransactionHistoryEnabled = transactionHistoryEnabled;
 		transactionHistoryEnabled = newTransactionHistoryEnabled;
@@ -752,6 +766,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isBookingEnabled() {
 		return bookingEnabled;
 	}
@@ -761,6 +776,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBookingEnabled(boolean newBookingEnabled) {
 		boolean oldBookingEnabled = bookingEnabled;
 		bookingEnabled = newBookingEnabled;
@@ -773,6 +789,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isPaymentGatewayEnabled() {
 		return paymentGatewayEnabled;
 	}
@@ -782,6 +799,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPaymentGatewayEnabled(boolean newPaymentGatewayEnabled) {
 		boolean oldPaymentGatewayEnabled = paymentGatewayEnabled;
 		paymentGatewayEnabled = newPaymentGatewayEnabled;
@@ -794,6 +812,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getBookingExpiryTimeInMinutes() {
 		return bookingExpiryTimeInMinutes;
 	}
@@ -803,6 +822,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBookingExpiryTimeInMinutes(int newBookingExpiryTimeInMinutes) {
 		int oldBookingExpiryTimeInMinutes = bookingExpiryTimeInMinutes;
 		bookingExpiryTimeInMinutes = newBookingExpiryTimeInMinutes;
@@ -815,6 +835,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isDropshipEnabled() {
 		return dropshipEnabled;
 	}
@@ -824,6 +845,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDropshipEnabled(boolean newDropshipEnabled) {
 		boolean oldDropshipEnabled = dropshipEnabled;
 		dropshipEnabled = newDropshipEnabled;
@@ -836,6 +858,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isReviewReminderEnabled() {
 		return reviewReminderEnabled;
 	}
@@ -845,6 +868,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReviewReminderEnabled(boolean newReviewReminderEnabled) {
 		boolean oldReviewReminderEnabled = reviewReminderEnabled;
 		reviewReminderEnabled = newReviewReminderEnabled;
@@ -857,6 +881,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isZendeskIntegration() {
 		return zendeskIntegration;
 	}
@@ -866,6 +891,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setZendeskIntegration(boolean newZendeskIntegration) {
 		boolean oldZendeskIntegration = zendeskIntegration;
 		zendeskIntegration = newZendeskIntegration;
@@ -878,6 +904,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getZendeskOrganizationId() {
 		return zendeskOrganizationId;
 	}
@@ -887,6 +914,7 @@ public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements Cu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setZendeskOrganizationId(Long newZendeskOrganizationId) {
 		Long oldZendeskOrganizationId = zendeskOrganizationId;
 		zendeskOrganizationId = newZendeskOrganizationId;

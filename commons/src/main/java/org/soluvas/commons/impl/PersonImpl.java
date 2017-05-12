@@ -1,6 +1,5 @@
 package org.soluvas.commons.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.Collection;
 
@@ -35,8 +34,10 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Informer;
+import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.Organization;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.Person2;
 import org.soluvas.commons.PersonInfo;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.PhoneNumber;
@@ -50,7 +51,6 @@ import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.TwitterAccessible;
 import org.soluvas.commons.TwitterIdentity;
-import org.soluvas.commons.*;
 import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.CurrencyUnitConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
@@ -3142,6 +3142,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Long getZendeskUserId() {
 		return zendeskUserId;
 	}
@@ -3151,6 +3152,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setZendeskUserId(Long newZendeskUserId) {
 		Long oldZendeskUserId = zendeskUserId;
 		zendeskUserId = newZendeskUserId;
@@ -3163,6 +3165,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getCustomerRoleEditTime() {
 		return customerRoleEditTime;
 	}
@@ -3172,6 +3175,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCustomerRoleEditTime(DateTime newCustomerRoleEditTime) {
 		DateTime oldCustomerRoleEditTime = customerRoleEditTime;
 		customerRoleEditTime = newCustomerRoleEditTime;
@@ -3184,6 +3188,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getLastTimeSynchronizeWithZendesk() {
 		return lastTimeSynchronizeWithZendesk;
 	}
@@ -3193,6 +3198,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLastTimeSynchronizeWithZendesk(DateTime newLastTimeSynchronizeWithZendesk) {
 		DateTime oldLastTimeSynchronizeWithZendesk = lastTimeSynchronizeWithZendesk;
 		lastTimeSynchronizeWithZendesk = newLastTimeSynchronizeWithZendesk;
@@ -3205,6 +3211,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isZendeskIntegration() {
 		return zendeskIntegration;
 	}
@@ -3214,6 +3221,7 @@ public class PersonImpl extends MinimalEObjectImpl.Container implements Person {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setZendeskIntegration(boolean newZendeskIntegration) {
 		boolean oldZendeskIntegration = zendeskIntegration;
 		zendeskIntegration = newZendeskIntegration;
