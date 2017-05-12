@@ -477,7 +477,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public Person getZendeskUserId(String email) {
+	public Person2 getZendeskUserId(String email) {
 		throw new UnsupportedOperationException();
 	}
 

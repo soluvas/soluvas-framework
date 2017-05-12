@@ -23,7 +23,6 @@ import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.entity.Person2;
-import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
@@ -669,7 +668,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	}
 
 	@Override
-	public Person getZendeskUserId(String email) {
+	public Person2 getZendeskUserId(String email) {
 		throw new UnsupportedOperationException();
 	}
 

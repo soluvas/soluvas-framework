@@ -4,8 +4,9 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import org.soluvas.commons.Email;
+import org.soluvas.commons.Email2;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 
 import com.google.common.base.Function;
 import com.google.common.base.Strings;
@@ -18,7 +19,7 @@ import com.google.common.collect.Sets;
  * @author ceefour
  */
 public class PersonToRecipients implements
-		Function<Person, Set<Recipient>> {
+		Function<Person2, Set<Recipient>> {
 	
 	private final String roleName;
 	private final boolean includeVirtualMail;
@@ -34,11 +35,11 @@ public class PersonToRecipients implements
 	}
 
 	@Override @Nullable
-	public Set<Recipient> apply(@Nullable Person person) {
+	public Set<Recipient> apply(@Nullable Person2 person) {
 		final Set<Recipient> recipients = Sets.newHashSet();
 		if (person != null) {
 			if (person.getEmails() != null) {
-				for (final Email email : person.getEmails()) {
+				for (final Email2 email : person.getEmails()) {
 					recipients.add(EmailFactory.eINSTANCE.createRecipient(
 							person.getName(), email.getEmail(), roleName));
 				}

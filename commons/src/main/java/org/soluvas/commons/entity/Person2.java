@@ -19,7 +19,6 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.Organization;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo2;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.PhoneNumber2;
@@ -243,7 +242,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		}
 	}
 	
-	public Person2 createPerson(String id, String slug, String firstName,
+	public static Person2 createPerson(String id, String slug, String firstName,
 			String lastName, String photoId, Gender gender) {
 		final Person2 person = new Person2();
 		person.setId(id);
@@ -256,6 +255,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		return person;
 	}
 	
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -264,6 +264,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		name = newName;
 	}
 
+	@Override
 	public String getPhotoId() {
 		return photoId;
 	}
@@ -271,9 +272,11 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		photoId = newPhotoId;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}
+	@Override
 	public void setId(String newId) {
 		id = newId;
 	}
@@ -517,6 +520,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		birthDate = newBirthDate;
 	}
 
+	@Override
 	public Gender getGender() {
 		return gender;
 	}
@@ -977,6 +981,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		return new ToPersonInfo().apply(this);
 	}
 
+	@Override
 	public String getSlug() {
 		return slug;
 	}
@@ -993,6 +998,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		canonicalSlug = newCanonicalSlug;
 	}
 
+	@Override
 	@JsonProperty
 	public String getEmail() {
 		final Optional<Email2> primaryEmail = Iterables.tryFind(getEmails(), Email2::getPrimary);
