@@ -16,10 +16,14 @@ import org.joda.time.LocalDate;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.CustomerRole;
+import org.soluvas.commons.Email2;
 import org.soluvas.commons.EnumNameFunction;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.PhoneNumber2;
+import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.entity.Person2;
+import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
@@ -46,6 +50,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -81,8 +86,50 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 			);
 		this.tenantId = tenantId;
 		this.cacheMgr = cacheMgr;
+		
+		upgradeEntityFrom1To2();
 	}
 
+	private void upgradeEntityFrom1To2() {
+		final DBObject query = new BasicDBObject();
+		query.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
+		
+		final DBCursor cursor = primary.find(query);
+		log.debug("Updating for {} row(s)", cursor.size());
+		for (final DBObject dbObject : cursor) {
+			dbObject.put("schemaVersion", Person2.serialVersionUID);
+			if (dbObject.containsField("emails")) {
+				final BasicDBList objListEmails = (BasicDBList) dbObject.get("emails");
+				for (final Object object : objListEmails) {
+					final DBObject objEmail = (DBObject) object;
+					objEmail.put("className", Email2.class.getName());
+				}
+			}
+//			if (dbObject.containsField("mobileNumbers")) {
+//				final BasicDBList objListMobileNumbers = (BasicDBList) dbObject.get("mobileNumbers");
+//				for (final Object object : objListMobileNumbers) {
+//					final DBObject objMN = (DBObject) object;
+//					objMN.put("className", PhoneNumber2.class.getName());
+//				}
+//			}
+			if (dbObject.containsField("addresses")) {
+				final BasicDBList objListAddresses = (BasicDBList) dbObject.get("addresses");
+				for (final Object object : objListAddresses) {
+					final DBObject objEmail = (DBObject) object;
+					objEmail.put("className", PostalAddress2.class.getName());
+				}
+			}
+			if (dbObject.containsField("phoneNumbers")) {
+				final BasicDBList objListPhoneNums = (BasicDBList) dbObject.get("phoneNumbers");
+				for (final Object object : objListPhoneNums) {
+					final DBObject objPN = (DBObject) object;
+					objPN.put("className", PhoneNumber2.class.getName());
+				}
+			}
+			primary.save(dbObject);
+		}//end of looping
+	}
+	
 	@Override
 	protected void beforeSave(Person2 entity, ModificationTimePolicy mtimePolicy) {
 		super.beforeSave(entity, mtimePolicy);

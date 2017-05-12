@@ -50,7 +50,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 3L;
 	
 	protected static final String NAME_EDEFAULT = null;
 	protected String name = NAME_EDEFAULT;
