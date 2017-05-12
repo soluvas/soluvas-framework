@@ -11,10 +11,7 @@ import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Sluggable;
 import org.soluvas.commons.ThingInfo;
-import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.CurrencyUnitConverter;
-import org.soluvas.commons.mongo.DateTimeConverter;
-import org.soluvas.commons.mongo.UnitConverter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

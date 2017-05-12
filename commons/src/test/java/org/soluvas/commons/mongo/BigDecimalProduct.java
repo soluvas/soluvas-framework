@@ -8,7 +8,7 @@ import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 
 @Entity 
-@Converters(BigDecimalConverter.class)
+@Converters({BigDecimalConverter.class})
 public class BigDecimalProduct implements Serializable {
 
 	@Id private String id;
