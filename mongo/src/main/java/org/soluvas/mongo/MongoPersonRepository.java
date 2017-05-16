@@ -107,6 +107,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 //			if (dbObject.containsField("mobileNumbers")) {
 //				final BasicDBList objListMobileNumbers = (BasicDBList) dbObject.get("mobileNumbers");
 //				for (final Object object : objListMobileNumbers) {
+//					System.out.println(object.toString());
 //					final DBObject objMN = (DBObject) object;
 //					objMN.put("className", PhoneNumber2.class.getName());
 //				}

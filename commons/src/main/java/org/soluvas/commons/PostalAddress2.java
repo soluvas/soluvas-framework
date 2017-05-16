@@ -1,15 +1,20 @@
 package org.soluvas.commons;
 
+import com.google.code.morphia.annotations.Converters;
+import com.google.code.morphia.converters.UUIDConverter;
 import com.google.common.base.Preconditions;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.mongo.DateTimeConverter;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Transient;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,7 @@ import java.util.UUID;
  * @todo lat Latitude, lon Longitude, ele Elevation
  */
 @Embeddable
+@Converters({DateTimeConverter.class, UUIDConverter.class})
 public class PostalAddress2 implements Describable2, Serializable {
 
 	private static final Logger log = LoggerFactory
@@ -425,7 +431,9 @@ public class PostalAddress2 implements Describable2, Serializable {
 	@Column(columnDefinition = "varchar(255)")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTimeZoneAsString")
 	private DateTimeZone validationTime_zone = null;
+	
 	protected static final String JNE_AREA_CODE_EDEFAULT = null;
+	@Transient
 	protected String jneAreaCode = JNE_AREA_CODE_EDEFAULT;
 		
 	public PostalAddress2() {
