@@ -32,7 +32,7 @@ public class CustomerRole2 implements Serializable, Identifiable {
 	protected DateTime modificationTime = MODIFICATION_TIME_EDEFAULT;
 	protected static final String DESCRIPTION_EDEFAULT = null;
 	protected String description = DESCRIPTION_EDEFAULT;
-	protected static final long SCHEMA_VERSION_EDEFAULT = 2L;
+	protected static final long SCHEMA_VERSION_EDEFAULT = 3L;
 	protected long schemaVersion = SCHEMA_VERSION_EDEFAULT;
 	protected static final CustomerRoleStatus STATUS_EDEFAULT = CustomerRoleStatus.ACTIVE;
 	protected CustomerRoleStatus status = STATUS_EDEFAULT;

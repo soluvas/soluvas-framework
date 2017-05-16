@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.impl.CustomerRole2;
+import org.soluvas.commons.impl.CustomerRoleImpl;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.customerrole.CustomerRoleRepository;
 import org.soluvas.data.domain.Page;
@@ -26,6 +26,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRole2>
@@ -44,7 +45,21 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 				Index.asc("salesOrderReportEnabled"),
 				Index.asc("agentSalesReportEnabled"),
 				Index.asc("transactionHistoryEnabled"));
+		upgradeEntityFrom1To2();
 		ensureBaseEntities();
+	}
+	
+	private void upgradeEntityFrom1To2() {
+		final DBObject query = new BasicDBObject();
+		query.put("schemaVersion", CustomerRoleImpl.serialVersionUID);
+		
+		final DBCursor cursor = primary.find(query);
+		log.debug("Updating for {} row(s)", cursor.size());
+		for (final DBObject dbObject : cursor) {
+			dbObject.put("schemaVersion", CustomerRole2.serialVersionUID);
+			dbObject.put("className", CustomerRole2.class.getName());
+			primary.save(dbObject);
+		}//end of looping
 	}
 	
 	private List<CustomerRole2> getBases() {
@@ -63,16 +78,16 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		member.setDescription("Premium members.");
 		
 		final CustomerRole2 agent = new CustomerRole2();
-		member.setId(CustomerRole2.AGENT_ID);
-		member.setName("Agent");
-		member.setReadOnly(true);
-		member.setDescription("Reseller agents.");
+		agent.setId(CustomerRole2.AGENT_ID);
+		agent.setName("Agent");
+		agent.setReadOnly(true);
+		agent.setDescription("Reseller agents.");
 		
 		final CustomerRole2 drops = new CustomerRole2();
-		member.setId(CustomerRole2.DROPS_ID);
-		member.setName("Drop shipper");
-		member.setReadOnly(true);
-		member.setDescription("Retailers not keeping goods in stock, but instead transfer customer orders and shipment details to us.");
+		drops.setId(CustomerRole2.DROPS_ID);
+		drops.setName("Drop shipper");
+		drops.setReadOnly(true);
+		drops.setDescription("Retailers not keeping goods in stock, but instead transfer customer orders and shipment details to us.");
 		
 		return ImmutableList.of(common, member, agent, drops);
 	}
@@ -88,14 +103,18 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final List<String> baseCustomerRoleIds = bases.stream().map(it -> it.getId()).collect(Collectors.toList());
 		log.debug("Ensuring {} base CustomerRoles: {}", bases.size(), baseCustomerRoleIds);
 		final Set<String> existing = exists(baseCustomerRoleIds);
+		log.debug("Existing customerRoles: {}", existing);
 		for (final CustomerRole2 customerRole : bases) {
 			if (!existing.contains(customerRole.getId())) {
+				log.debug("Adding new base customerRole: {}", customerRole);
 				add(customerRole);
+			} else {
+				log.debug("Updating base customerRole: {}", customerRole);
+				primary.update(new BasicDBObject("_id", customerRole.getId()),
+						new BasicDBObject("$set", ImmutableMap.of(
+								"description", customerRole.getDescription(),
+								"readOnly", customerRole.isReadOnly())));
 			}
-			primary.update(new BasicDBObject("_id", customerRole.getId()),
-					new BasicDBObject("$set", ImmutableMap.of(
-							"description", customerRole.getDescription(),
-							"readOnly", customerRole.isReadOnly())));
 		}
 		log.info("Ensured {} base CustomerRoles: {}", bases.size(), baseCustomerRoleIds);
 	}

@@ -1,5 +1,7 @@
 package org.soluvas.commons;
 
+import java.util.UUID;
+
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +15,7 @@ import com.mongodb.DBObject;
  * @author rudi
  *
  */
-public class DBObjectToPostalAddress implements Function<DBObject, PostalAddressImpl> {
+public class DBObjectToPostalAddress implements Function<DBObject, PostalAddress2> {
 	
 	private static final Logger log = LoggerFactory.getLogger(DBObjectToPostalAddress.class);
 	
@@ -22,17 +24,17 @@ public class DBObjectToPostalAddress implements Function<DBObject, PostalAddress
 	}
 
 	@Override
-	public PostalAddressImpl apply(DBObject input) {
+	public PostalAddress2 apply(DBObject input) {
 		if (input == null)
 			return null;
 		try {
-			final PostalAddressImpl postalAddressImpl = new PostalAddressImpl();
+			final PostalAddress2 postalAddressImpl = new PostalAddress2();
 			postalAddressImpl.setCity(input.get("city") != null ? String.valueOf(input.get("city")) : null);
 			postalAddressImpl.setCountry(input.get("country") != null ? String.valueOf(input.get("country")) : null);
 			postalAddressImpl.setCountryCode(input.get("countryCode") != null ? String.valueOf(input.get("countryCode")) : null);
 			postalAddressImpl.setDescription(input.get("description") != null ? String.valueOf(input.get("description")) : null);
 			postalAddressImpl.setDistrict(input.get("district") != null ? String.valueOf(input.get("district")) : null);
-			postalAddressImpl.setId(input.get("id") != null ? String.valueOf(input.get("id")) : null);
+			postalAddressImpl.setId(input.get("id") != null ? UUID.fromString(input.get("id").toString()) : null);
 			postalAddressImpl.setName(input.get("name") != null ? String.valueOf(input.get("name")) : null);
 			postalAddressImpl.setOrganization(input.get("organization") != null ? String.valueOf(input.get("organization")) : null);
 			postalAddressImpl.setPostalCode(input.get("postalCode") != null ? String.valueOf(input.get("postalCode")) : null);

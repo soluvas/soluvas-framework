@@ -2,7 +2,6 @@ package org.soluvas.data.customerrole;
 
 import javax.annotation.Nullable;
 
-import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.Page;
