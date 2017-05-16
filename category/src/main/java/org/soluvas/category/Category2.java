@@ -18,6 +18,7 @@ import org.soluvas.commons.CategoryInfo2;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.Translation;
 import org.soluvas.commons.Translation2;
 import org.soluvas.commons.TranslationState;
@@ -42,7 +43,7 @@ import com.google.common.collect.Iterables;
  *
  */
 @Converters({ DateTimeConverter.class, UnitConverter.class, EnumConverter.class })
-public class Category2 implements Serializable, Identifiable {
+public class Category2 implements Serializable, Identifiable, Timestamped {
 
 	private static final long serialVersionUID = 1L;
 
@@ -263,6 +264,7 @@ public class Category2 implements Serializable, Identifiable {
 	/**
 	 * @return the creationTime
 	 */
+	@Override
 	public DateTime getCreationTime() {
 		return creationTime;
 	}
@@ -271,6 +273,7 @@ public class Category2 implements Serializable, Identifiable {
 	 * @param creationTime
 	 *            the creationTime to set
 	 */
+	@Override
 	public void setCreationTime(DateTime creationTime) {
 		this.creationTime = creationTime;
 	}
@@ -278,6 +281,7 @@ public class Category2 implements Serializable, Identifiable {
 	/**
 	 * @return the modificationTime
 	 */
+	@Override
 	public DateTime getModificationTime() {
 		return modificationTime;
 	}
@@ -286,6 +290,7 @@ public class Category2 implements Serializable, Identifiable {
 	 * @param modificationTime
 	 *            the modificationTime to set
 	 */
+	@Override
 	public void setModificationTime(DateTime modificationTime) {
 		this.modificationTime = modificationTime;
 	}
