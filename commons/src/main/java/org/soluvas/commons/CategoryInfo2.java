@@ -11,7 +11,7 @@ import com.google.common.base.Optional;
  * @author rudi
  *
  */
-public class CategoryInfo2 implements Serializable, Translatable2 {
+public class CategoryInfo2 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected static final Long CATEGORY_COUNT_EDEFAULT = null;
@@ -31,7 +31,7 @@ public class CategoryInfo2 implements Serializable, Translatable2 {
 	private TranslationState translationState;
 	private String originalLanguage;
 	private String language;
-	private Map<String, Translation2> translations;
+	private Map<String, Map<String, String>> translations;
 	protected Long categoryCount = CATEGORY_COUNT_EDEFAULT;
 	private CategoryInfo2 parent;
 	protected List<CategoryInfo2> parents;
@@ -56,18 +56,18 @@ public class CategoryInfo2 implements Serializable, Translatable2 {
 		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
 			return getName();
 		} else {
-			final Map<String, Translation2> translations = getTranslations();
+			final Map<String, Map<String, String>> translations = getTranslations();
 			if (translations.isEmpty()) {
 				return getName();
 			} else {
 				if (!translations.containsKey(curLanguageTag)) {
 					return getName();
 				} else {
-					final Translation2 translation = translations.get(curLanguageTag);
-					if (!translation.getMessages().containsKey(CategoryInfo.NAME_ATTR)) {
+					final Map<String, String> translation = translations.get(curLanguageTag);
+					if (!translation.containsKey(CategoryInfo.NAME_ATTR)) {
 						return getName();
 					} else {
-						final String translatedValue = translation.getMessages().get(CategoryInfo.NAME_ATTR);
+						final String translatedValue = translation.get(CategoryInfo.NAME_ATTR);
 						return translatedValue;
 					}
 				}
@@ -238,38 +238,31 @@ public class CategoryInfo2 implements Serializable, Translatable2 {
 				+ ", primaryUri=" + primaryUri + ", parentId=" + parentId + "]";
 	}
 
-	@Override
 	public TranslationState getTranslationState() {
 		return translationState;
 	}
 
-	@Override
 	public void setTranslationState(TranslationState value) {
 		translationState = value;
 	}
 
-	@Override
 	public String getOriginalLanguage() {
 		return originalLanguage;
 	}
 
-	@Override
 	public void setOriginalLanguage(String value) {
 		originalLanguage = value;
 	}
 
-	@Override
 	public String getLanguage() {
 		return language;
 	}
 
-	@Override
 	public void setLanguage(String value) {
 		language = value;
 	}
 
-	@Override
-	public Map<String, Translation2> getTranslations() {
+	public Map<String, Map<String, String>> getTranslations() {
 		return translations;
 	}
 	

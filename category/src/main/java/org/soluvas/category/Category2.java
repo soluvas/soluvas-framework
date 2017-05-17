@@ -19,8 +19,6 @@ import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.Timestamped;
-import org.soluvas.commons.Translation;
-import org.soluvas.commons.Translation2;
 import org.soluvas.commons.TranslationState;
 import org.soluvas.commons.mongo.DateTimeConverter;
 import org.soluvas.commons.mongo.UnitConverter;
@@ -619,7 +617,7 @@ public class Category2 implements Serializable, Identifiable, Timestamped {
 		return new ToCategoryInfo(curLanguageTag).apply(this);
 	}
 
-	public CategoryInfo toInfoXmi(String curLanguageTag) {
+	public CategoryInfo2 toInfoXmi(String curLanguageTag) {
 		return new ToCategoryInfoXmi(curLanguageTag).apply(this);
 	}
 
@@ -627,7 +625,7 @@ public class Category2 implements Serializable, Identifiable, Timestamped {
 		return new ToCategoryInfoXmi2(curLanguageTag).apply(this);
 	}
 
-	public CategoryInfo toInfoXmi() {
+	public CategoryInfo2 toInfoXmi() {
 		return new ToCategoryInfoXmi(getLanguage()).apply(this);
 	}
 
@@ -706,7 +704,7 @@ public class Category2 implements Serializable, Identifiable, Timestamped {
 		}
 	}
 
-	public class ToCategoryInfoXmi implements Function<Category2, CategoryInfo> {
+	public class ToCategoryInfoXmi implements Function<Category2, CategoryInfo2> {
 
 		private final String curLanguageTag;
 
@@ -723,8 +721,8 @@ public class Category2 implements Serializable, Identifiable, Timestamped {
 
 		@Override
 		@Nullable
-		public CategoryInfo apply(@Nullable Category2 cat) {
-			final CategoryInfo catInfo = CommonsFactory.eINSTANCE.createCategoryInfo();
+		public CategoryInfo2 apply(@Nullable Category2 cat) {
+			final CategoryInfo2 catInfo = new CategoryInfo2();//CommonsFactory.eINSTANCE.createCategoryInfo();
 			catInfo.setColor(cat.getColor());
 			catInfo.setGoogleFormalId(cat.getGoogleFormalId());
 			catInfo.setId(cat.getId());
@@ -745,10 +743,10 @@ public class Category2 implements Serializable, Identifiable, Timestamped {
 			if (cat.getTranslations() != null && !cat.getTranslations().isEmpty()) {
 				for (final Entry<String, Map<String, String>> entry : cat.getTranslations().entrySet()) {
 					final String key = entry.getKey();
-					final Translation translation = CommonsFactory.eINSTANCE.createTranslation();
-					translation.setLanguage(key);
+					final Map<String, String> translation = new HashMap<>();//CommonsFactory.eINSTANCE.createTranslation();
+//					translation.put(key, entry.getValue());
 					for (final Entry<String, String> entryTrans : entry.getValue().entrySet()) {
-						translation.getMessages().put(entryTrans.getKey(), entryTrans.getValue());
+						translation.put(entryTrans.getKey(), entryTrans.getValue());
 					}
 					catInfo.getTranslations().put(key, translation);
 				}
@@ -797,10 +795,10 @@ public class Category2 implements Serializable, Identifiable, Timestamped {
 			if (cat.getTranslations() != null && !cat.getTranslations().isEmpty()) {
 				for (final Entry<String, Map<String, String>> entry : cat.getTranslations().entrySet()) {
 					final String key = entry.getKey();
-					final Translation2 translation = new Translation2();// CommonsFactory.eINSTANCE.createTranslation();
-					translation.setLanguage(key);
+					final Map<String, String> translation = new HashMap<String, String>();// CommonsFactory.eINSTANCE.createTranslation();
+//					translation.setLanguage(key);
 					for (final Entry<String, String> entryTrans : entry.getValue().entrySet()) {
-						translation.getMessages().put(entryTrans.getKey(), entryTrans.getValue());
+						translation.put(entryTrans.getKey(), entryTrans.getValue());
 					}
 					catInfo.getTranslations().put(key, translation);
 				}
