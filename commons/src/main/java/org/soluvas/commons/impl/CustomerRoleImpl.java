@@ -52,7 +52,7 @@ import com.google.code.morphia.annotations.Id;
  *
  * @generated
  */
-@Converters(DateTimeConverter.class)
+@Converters({DateTimeConverter.class})
 public class CustomerRoleImpl extends MinimalEObjectImpl.Container implements CustomerRole {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
