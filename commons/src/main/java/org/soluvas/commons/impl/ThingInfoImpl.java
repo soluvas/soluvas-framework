@@ -36,8 +36,7 @@ import com.google.code.morphia.annotations.Converters;
  *
  * @generated
  */
-@Converters({BigDecimalConverter.class, DateTimeConverter.class,
-	CurrencyUnitConverter.class, UnitConverter.class})
+@Converters({BigDecimalConverter.class, DateTimeConverter.class, CurrencyUnitConverter.class, UnitConverter.class})
 public class ThingInfoImpl extends MinimalEObjectImpl.Container implements ThingInfo {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
