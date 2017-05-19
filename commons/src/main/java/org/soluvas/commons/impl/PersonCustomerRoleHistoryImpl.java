@@ -121,8 +121,7 @@ import com.google.code.morphia.annotations.Id;
  * @generated
  */
 @Entity(noClassnameStored=true)
-@Converters({CurrencyUnitConverter.class, LocalDateConverter.class, BigDecimalConverter.class,
-	DateTimeConverter.class, UnitConverter.class})
+@Converters({BigDecimalConverter.class, DateTimeConverter.class, CurrencyUnitConverter.class, UnitConverter.class, LocalDateConverter.class})
 public class PersonCustomerRoleHistoryImpl extends MinimalEObjectImpl.Container implements PersonCustomerRoleHistory {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
