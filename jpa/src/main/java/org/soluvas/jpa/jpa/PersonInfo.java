@@ -425,5 +425,16 @@ public class PersonInfo implements Serializable {
 		personInfoCommons.setSlug(personInfoJpa.getSlug());
 		return personInfoCommons;
 	}
+	
+	public static org.soluvas.commons.PersonInfo2 toClasic(PersonInfo personInfoJpa) {
+		final org.soluvas.commons.PersonInfo2 personInfoCommons =new PersonInfo2();
+		personInfoCommons.setEmail(personInfoJpa.getEmail());
+		personInfoCommons.setGender(personInfoJpa.getGender());
+		personInfoCommons.setId(personInfoJpa.getId());
+		personInfoCommons.setName(personInfoJpa.getName());
+		personInfoCommons.setPhotoId(personInfoJpa.getPhotoId());
+		personInfoCommons.setSlug(personInfoJpa.getSlug());
+		return personInfoCommons;
+	}
 
 }
