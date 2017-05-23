@@ -37,6 +37,7 @@ import com.mongodb.DBObject;
  */
 public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> implements MongoCategoryRepository {
 	
+	
 	public static final String CATEGORY2_LEVEL_STATUS = "category2LevelStatus";
 	public static final String CATEGORY2_LEVEL_STATUS_PARENT_ID = "category2LevelStatusParentId";
 	
@@ -55,6 +56,18 @@ public class MongoCategoryRepositoryImpl extends MongoRepositoryBase<Category2> 
 				Index.uniqueAsc("slugPath"));
 		this.cacheMgr = cacheMgr;
 		this.tenantId = tenantId;
+		createDefault();
+	}
+	
+	private void createDefault(){
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", Category2.CATEGORY_DEFAULT_ID);
+		final long count = primary.count(query);
+		if (count <= 0) {
+			final Category2 defaultCategory = new Category2();
+			defaultCategory.fillDefault(tenantId);
+			add(defaultCategory);
+		}
 	}
 
 	@Override

@@ -42,6 +42,8 @@ import com.google.common.collect.Iterables;
  */
 @Converters({ DateTimeConverter.class, UnitConverter.class, EnumConverter.class })
 public class Category2 implements Serializable, Identifiable, Timestamped {
+	
+	public static final String CATEGORY_DEFAULT_ID = "default";
 
 	private static final long serialVersionUID = 1L;
 
@@ -100,6 +102,15 @@ public class Category2 implements Serializable, Identifiable, Timestamped {
 	protected String parentUName = PARENT_UNAME_EDEFAULT;
 	private String catalogName;
 	private Long categoryCount;
+	
+	public void fillDefault(final String tenantId) {
+		setId(CATEGORY_DEFAULT_ID);
+		setName("DEFAULT");
+		setNsPrefix(tenantId);
+		setSlug(CATEGORY_DEFAULT_ID);
+		setSlugPath(CATEGORY_DEFAULT_ID);
+		setLevel(1);
+	}
 	
 
 	/**
