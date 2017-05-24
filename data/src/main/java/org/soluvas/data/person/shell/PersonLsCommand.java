@@ -6,10 +6,8 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Email;
 import org.soluvas.commons.Email2;
 import org.soluvas.commons.Gender;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.commons.tenant.TenantRef;
@@ -22,7 +20,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Shell command to list entities of {@link Person}.
+ * Shell command to list entities of {@link Person2}.
  *
  * @author ceefour
  */

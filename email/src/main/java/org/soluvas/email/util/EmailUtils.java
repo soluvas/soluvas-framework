@@ -17,8 +17,7 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
-import org.soluvas.commons.PersonInfo;
+import org.soluvas.commons.PersonInfo2;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.data.person.PersonRepository;
@@ -227,7 +226,7 @@ public class EmailUtils {
 	 * @param personLookup
 	 * @return
 	 */
-	public static Set<Recipient> getRecipients(@Nullable PersonInfo personInfo, @Nullable EntityLookup<Person2, String> personLookup) {
+	public static Set<Recipient> getRecipients(@Nullable PersonInfo2 personInfo, @Nullable EntityLookup<Person2, String> personLookup) {
 		final Set<Recipient> recipients = Sets.newHashSet();
 		
 		if (personInfo != null) {
@@ -246,7 +245,7 @@ public class EmailUtils {
 		return recipients;
 	}
 	
-	public static Set<Recipient> getRecipients(@Nullable PersonInfo personInfo, @Nullable PersonRepository personRepo) {
+	public static Set<Recipient> getRecipients(@Nullable PersonInfo2 personInfo, @Nullable PersonRepository personRepo) {
 		final Set<Recipient> recipients = Sets.newHashSet();
 		
 		if (personInfo != null) {
@@ -280,7 +279,7 @@ public class EmailUtils {
 	 * @param roleName e.g. "registered customer"
 	 * @return
 	 */
-	public static Set<Recipient> getRecipientsNew(@Nullable PersonInfo personInfo, @Nullable EntityLookup<Person, String> personLookup,
+	public static Set<Recipient> getRecipientsNew(@Nullable PersonInfo2 personInfo, @Nullable EntityLookup<Person2, String> personLookup,
 			String roleName) {
 		final Set<Recipient> recipients = Sets.newHashSet();
 		

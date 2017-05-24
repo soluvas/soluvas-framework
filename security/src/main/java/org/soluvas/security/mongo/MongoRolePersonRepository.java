@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
 import org.soluvas.data.repository.AssocRepositoryBase;
 import org.soluvas.mongo.MongoRepositoryException;
 import org.soluvas.mongo.MongoUtils;
@@ -33,8 +32,8 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.ReadPreference;
 
 /**
- * Associates {@link Role} ID with MongoDB {@link Person} IDs, this is implemented by
- * storing the tenant-scoped {@link Role} IDs inside {@link Person#getSecurityRoleIds()}.
+ * Associates {@link Role} ID with MongoDB {@link Person2} IDs, this is implemented by
+ * storing the tenant-scoped {@link Role} IDs inside {@link Person2#getSecurityRoleIds()}.
  * @author ceefour
  * @todo App-scoped role/person assignments?
  */

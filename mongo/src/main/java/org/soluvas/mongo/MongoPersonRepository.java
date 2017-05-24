@@ -57,7 +57,7 @@ import com.mongodb.DBObject;
 import scala.util.Try;
 
 /**
- * MongoDB powered {@link Person} repository.
+ * MongoDB powered {@link Person2} repository.
  * @author ceefour
  */
 public class MongoPersonRepository extends MongoRepositoryBase<Person2> implements

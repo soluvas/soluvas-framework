@@ -8,7 +8,6 @@ import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.security.AccessControlManager;
 import org.soluvas.security.Role;
@@ -19,7 +18,7 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableSet;
 
 /**
- * Shell command to set {@link Role}s of a {@link Person}.
+ * Shell command to set {@link Role}s of a {@link Person2}.
  * 
  * @author ceefour
  * @deprecated Will be replaced by {@code commands/person.groovy}

@@ -1,25 +1,34 @@
 package org.soluvas.data.person;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
-import org.soluvas.commons.*;
-import org.soluvas.commons.impl.CustomerRole2;
-import org.soluvas.data.Existence;
-import org.soluvas.data.StatusMask;
-import org.springframework.core.env.Environment;
-import org.springframework.data.domain.*;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
+import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.CommonsException;
+import org.soluvas.commons.Person2;
+import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.impl.CustomerRole2;
+import org.soluvas.data.Existence;
+import org.soluvas.data.StatusMask;
+import org.springframework.core.env.Environment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 
 /**
  * Environment property {@code person.class} is required, it's also required by {@code commands/person.groovy}

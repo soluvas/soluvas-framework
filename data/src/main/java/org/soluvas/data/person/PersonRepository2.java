@@ -1,5 +1,9 @@
 package org.soluvas.data.person;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Person2;
 import org.soluvas.commons.impl.CustomerRole2;
@@ -9,10 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * App-scoped and tenant-scoped aware successor of {@link PersonRepository}.

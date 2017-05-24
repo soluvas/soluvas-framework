@@ -15,9 +15,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.entity.Person2;
-import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.CappedRequest;
 import org.soluvas.data.domain.Page;
@@ -109,7 +107,7 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void findOne() {
 		final String personId = "atang";
-		final Person person = personRepo.findOne(personId);
+		final Person2 person = personRepo.findOne(personId);
 		assertNull("Person tidak boleh kosong", person);
 		log.debug("result findone person {}", person);
 //		assertNull("Rules must be not null", person.getCustomerRole());

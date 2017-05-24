@@ -31,7 +31,7 @@ import org.ektorp.impl.StdCouchDbConnector;
 import org.ektorp.impl.StdCouchDbInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.security.*;
 import org.soluvas.security.impl.RealmUtils;
 
@@ -62,7 +62,7 @@ public class CouchDbRealm extends AuthorizingRealm {
 	
 	/**
 	 * Constructs a CouchDb {@link Realm} without {@link RolePersonRepository} support,
-	 * meaning you won't be able to assign tenant {@link Role}s to {@link Person}s.
+	 * meaning you won't be able to assign tenant {@link Role}s to {@link Person2}s.
 	 * @param connMgr
 	 * @param name
 	 * @param securityCatalogSupplier
@@ -107,7 +107,7 @@ public class CouchDbRealm extends AuthorizingRealm {
 	
 	/**
 	 * Constructs a CouchDb {@link Realm} with {@link RolePersonRepository} support,
-	 * so you can assign tenant {@link Role}s to {@link Person}s via {@link Person#getSecurityRoleIds()}.
+	 * so you can assign tenant {@link Role}s to {@link Person2}s via {@link Person2#getSecurityRoleIds()}.
 	 * 
 	 * @param connMgr
 	 * @param name

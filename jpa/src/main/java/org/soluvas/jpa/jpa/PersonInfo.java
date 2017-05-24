@@ -9,7 +9,6 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo2;
 import org.soluvas.commons.entity.Person2;
 
@@ -383,7 +382,7 @@ public class PersonInfo implements Serializable {
 				+ "]" + " [domain: " + getDomain() + "]" + " [mobileNumber: " + getMobileNumber() + "]";
 	}
 
-	public static PersonInfo fromPerson(Person person) {
+	public static PersonInfo fromPerson(Person2 person) {
 		return fromPerson(person, null);
 	}
 	
@@ -391,7 +390,7 @@ public class PersonInfo implements Serializable {
 		return fromPerson2(person, null);
 	}
 
-	public static PersonInfo fromPerson(Person person, @Nullable String domain) {
+	public static PersonInfo fromPerson(Person2 person, @Nullable String domain) {
 		final PersonInfo info = new PersonInfo();
 		info.setId(person.getId());
 		info.setSlug(person.getSlug());

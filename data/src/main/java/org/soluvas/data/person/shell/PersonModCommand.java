@@ -12,13 +12,10 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
-import org.soluvas.commons.CommonsFactory;
-import org.soluvas.commons.Email;
 import org.soluvas.commons.Email2;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.NameUtils;
 import org.soluvas.commons.NameUtils.PersonName;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.shell.ExtCommandSupport;
@@ -33,7 +30,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
 /**
- * Shell command to edit {@link Person}(s) in a {@link PersonRepository}.
+ * Shell command to edit {@link Person2}(s) in a {@link PersonRepository}.
  *
  * @author ceefour
  */

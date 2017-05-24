@@ -9,7 +9,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.image.store.Image;
 import org.soluvas.image.store.ImageRepository;
@@ -31,7 +30,7 @@ public class TwitterUtils {
 	private static final Logger log = LoggerFactory.getLogger(TwitterUtils.class);
 	
 	/**
-	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link Person}.
+	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link Person2}.
 	 * @param person Person name, used for the image name and for logging purposes.
 	 * @param consumerKey TODO
 	 * @param consumerSecret TODO
@@ -63,11 +62,11 @@ public class TwitterUtils {
 	}
 
 	/**
-	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link Person}.
+	 * Fetches twitter user photo from twitter, uploads it to ImageRepository, but not modify any {@link Person2}.
 	 * @param twitterScreenName twitter User ID.
 	 * @param personName Person name, used for the image name and for logging purposes.
 	 * @return ImageID from the ImageRepository.
-	 * @deprecated Use {@link #refreshPhotoFromTwitter(org.soluvas.commons.Person, String, String, org.soluvas.image.store.ImageRepository)}
+	 * @deprecated Use {@link #refreshPhotoFromTwitter(Person2, String, String, org.soluvas.image.store.ImageRepository)}
 	 */
 	@Deprecated
 	public static String refreshPhotoFromTwitter(final String twitterScreenName, final String personName,

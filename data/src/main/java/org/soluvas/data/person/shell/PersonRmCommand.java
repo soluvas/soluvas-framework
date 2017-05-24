@@ -7,7 +7,6 @@ import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.gogo.commands.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.person.PersonRepository;
@@ -15,7 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Trash {@link Person}, or can also delete permanently.
+ * Trash {@link Person2}, or can also delete permanently.
  *
  * @author ceefour
  */

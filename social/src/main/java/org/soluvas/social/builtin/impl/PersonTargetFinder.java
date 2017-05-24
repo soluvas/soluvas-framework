@@ -3,6 +3,7 @@ package org.soluvas.social.builtin.impl;
 import javax.annotation.Nullable;
 
 import org.soluvas.commons.Gender;
+import org.soluvas.commons.entity.Person2;
 import org.soluvas.data.EntityLookup;
 import org.soluvas.social.TargetFinder;
 import org.soluvas.social.builtin.Person;
@@ -16,7 +17,7 @@ import com.google.common.base.Preconditions;
  */
 public class PersonTargetFinder implements TargetFinder<Person> {
 	
-	public static class ToTarget implements Function<org.soluvas.commons.Person, Person> {
+	public static class ToTarget implements Function<Person2, Person> {
 		
 		private final SocialSchemaCatalog socialSchemaCatalog;
 		
@@ -26,7 +27,7 @@ public class PersonTargetFinder implements TargetFinder<Person> {
 		}
 
 		@Override @Nullable
-		public Person apply(@Nullable org.soluvas.commons.Person input) {
+		public Person apply(@Nullable Person2 input) {
 			final Person person = socialSchemaCatalog.createTarget(Person.class);
 			person.setId(input.getId());
 			person.setSlug(input.getSlug());
@@ -41,14 +42,14 @@ public class PersonTargetFinder implements TargetFinder<Person> {
 		}
 	}
 
-	private final EntityLookup<org.soluvas.commons.Person, String> lookup;
+	private final EntityLookup<Person2, String> lookup;
 	private final SocialSchemaCatalog socialSchemaCatalog;
 
 	/**
 	 * @param lookup
 	 */
 	public PersonTargetFinder(SocialSchemaCatalog socialSchemaCatalog,
-			EntityLookup<org.soluvas.commons.Person, String> lookup) {
+			EntityLookup<Person2, String> lookup) {
 		super();
 		this.lookup = lookup;
 		this.socialSchemaCatalog = socialSchemaCatalog;
@@ -56,7 +57,7 @@ public class PersonTargetFinder implements TargetFinder<Person> {
 
 	@Override
 	public Person findOne(String id) {
-		final org.soluvas.commons.Person socialPerson = Preconditions.checkNotNull(lookup.findOne(id),
+		final Person2 socialPerson = Preconditions.checkNotNull(lookup.findOne(id),
 				"Cannot find person %s in %s", id, lookup);
 		return new ToTarget(socialSchemaCatalog).apply(socialPerson);
 	}

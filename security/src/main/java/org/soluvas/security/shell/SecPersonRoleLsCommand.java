@@ -9,7 +9,6 @@ import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.security.AccessControlManager;
 import org.soluvas.security.Role;
@@ -19,7 +18,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Ordering;
 
 /**
- * Shell command to list tenant {@link Role}s of a {@link Person}.
+ * Shell command to list tenant {@link Role}s of a {@link Person2}.
  * 
  * @author ceefour
  */

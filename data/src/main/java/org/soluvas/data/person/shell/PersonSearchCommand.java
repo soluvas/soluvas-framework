@@ -9,7 +9,6 @@ import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.Gender;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.commons.tenant.TenantRef;
@@ -18,7 +17,7 @@ import org.soluvas.data.domain.CappedRequest;
 import org.soluvas.data.person.PersonRepository;
 
 /**
- * Shell command to search {@link Person} entities.
+ * Shell command to search {@link Person2} entities.
  *
  * @author ceefour
  */

@@ -15,13 +15,9 @@ import org.apache.felix.gogo.commands.Option;
 import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsFactory;
-import org.soluvas.commons.Email;
 import org.soluvas.commons.Email2;
 import org.soluvas.commons.Gender;
-import org.soluvas.commons.Person;
-import org.soluvas.commons.PhoneNumber;
 import org.soluvas.commons.PhoneNumber2;
-import org.soluvas.commons.PostalAddress;
 import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.entity.Person2;
@@ -36,7 +32,7 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 
 /**
- * Add {@link Person} entity.
+ * Add {@link Person2} entity.
  *
  * @author ceefour
  * @deprecated Will be replaced by {@code commands/person.groovy}
@@ -84,7 +80,7 @@ public class PersonAddCommand extends ExtCommandSupport {
 		
 		final Person2 person = new Person2();//CommonsFactory.eINSTANCE.createPerson();
 		person.setId(id);
-		person.setGuid(Person.class.getSimpleName() + "_" + id);
+		person.setGuid(Person2.class.getSimpleName() + "_" + id);
 		person.setAccountStatus(accountStatus);
 		person.setName(name);
 		person.setSlug(SlugUtils.generateValidScreenName(name,

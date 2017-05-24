@@ -220,7 +220,8 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 	protected DateTime lastTimeSynchronizeWithZendesk = LAST_TIME_SYNCHRONIZE_WITH_ZENDESK_EDEFAULT;
 	protected static final boolean ZENDESK_INTEGRATION_EDEFAULT = false;
 	protected boolean zendeskIntegration = ZENDESK_INTEGRATION_EDEFAULT;
-
+	protected String tenantId;
+	
 	public Person2() {
 		super();
 	}
@@ -255,6 +256,14 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		return person;
 	}
 	
+	public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+    
 	@Override
 	public String getName() {
 		return name;

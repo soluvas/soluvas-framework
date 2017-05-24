@@ -6,7 +6,6 @@ import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.shell.ExtCommandSupport;
 import org.soluvas.data.UntrashResult;
 import org.soluvas.data.person.PersonRepository;
@@ -14,7 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
- * Untrash a {@link Person}.
+ * Untrash a {@link Person2}.
  *
  * @author ceefour
  */

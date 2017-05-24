@@ -16,7 +16,6 @@ import org.ektorp.impl.StdCouchDbConnector;
 import org.ektorp.impl.StdCouchDbInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
 import org.soluvas.couchdb.CouchDbPersonRepository;
 import org.soluvas.couchdb.CouchDbRepositoryException;
 import org.soluvas.couchdb.SoluvasObjectMapperFactory;
@@ -35,12 +34,12 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 
 /**
- * Associates {@link Role} ID with CouchDB {@link Person} IDs, this is implemented by
- * storing the tenant-scoped {@link Role} IDs inside {@link Person#getSecurityRoleIds()}.
+ * Associates {@link Role} ID with CouchDB {@link Person2} IDs, this is implemented by
+ * storing the tenant-scoped {@link Role} IDs inside {@link Person2#getSecurityRoleIds()}.
  * 
  * <p>Note: While the implementation is decoupled from {@link CouchDbPersonRepository} for flexibility,
  * it still depends on the views created by {@link CouchDbPersonRepository}. Otherwise,
- * this implementation won't work. Also, it requires the latest schema version of {@link Person}.
+ * this implementation won't work. Also, it requires the latest schema version of {@link Person2}.
  * 
  * @author ceefour
  * @todo App-scoped role/person assignments?
