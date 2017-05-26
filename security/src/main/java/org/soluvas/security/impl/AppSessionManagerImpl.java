@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonRelated;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.data.EntityLookup;
@@ -185,7 +184,7 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 * <!-- end-user-doc -->
 	 */
 	@Override
-	public <T extends Person> T requirePerson(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
+	public <T extends Person2> T requirePerson(HttpServletRequest httpRequest, HttpServletResponse httpResponse) {
 		final Subject subject = getSubject(httpRequest, httpResponse);
 		return requirePerson(subject);
 	}
@@ -196,12 +195,12 @@ public class AppSessionManagerImpl extends EObjectImpl implements AppSessionMana
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T extends Person> T requirePerson(Subject subject) {
+	public <T extends Person2> T requirePerson(Subject subject) {
 		final String personId = (String) subject.getPrincipal();
 		if (personId == null) {
 			throw new NotLoggedInException("User is not logged in");
 		}
-		final Person person = Preconditions.checkNotNull(personLookup.findOne(personId),
+		final Person2 person = Preconditions.checkNotNull(personLookup.findOne(personId),
 				"Cannot find user %s", personId);
 		return (T) person;
 	}
