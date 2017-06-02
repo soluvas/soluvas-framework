@@ -58,45 +58,42 @@ import scala.util.Try;
 
 /**
  * MongoDB powered {@link Person2} repository.
+ * 
  * @author ceefour
  */
-public class MongoPersonRepository extends MongoRepositoryBase<Person2> implements
-		PersonRepository {
-	
+public class MongoPersonRepository extends MongoRepositoryBase<Person2> implements PersonRepository {
+
 	private final String tenantId;
 	@Nullable
 	private final CacheManager cacheMgr;
 
-	public MongoPersonRepository(String tenantId, @Nullable CacheManager cacheMgr, String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
+	public MongoPersonRepository(String tenantId, @Nullable CacheManager cacheMgr, String mongoUri,
+			boolean migrationEnabled, boolean autoExplainSlow) {
 		super(Person2.class, Person2.class, Person2.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "person",
-				ImmutableList.of("canonicalSlug"), migrationEnabled, autoExplainSlow,
-				Index.asc("name"), // for sorting in list
-				Index.desc("creationTime"),
-				Index.desc("modificationTime"),
-				Index.asc("securityRoleIds"),
-				Index.asc("customerRole"),
-				Index.asc("memberRole"),
-				Index.asc("managerRole"),
-				Index.asc("facebookId"),
+				ImmutableList.of("canonicalSlug"), migrationEnabled, autoExplainSlow, Index.asc("name"), // for
+																											// sorting
+																											// in
+																											// list
+				Index.desc("creationTime"), Index.desc("modificationTime"), Index.asc("securityRoleIds"),
+				Index.asc("customerRole"), Index.asc("memberRole"), Index.asc("managerRole"), Index.asc("facebookId"),
 				// used by MongoRealm#doGetAuthenticationInfo()
 				Index.compound("_id", Direction.ASC, "accountStatus", Direction.ASC),
 				Index.compound("canonicalSlug", Direction.ASC, "accountStatus", Direction.ASC),
-				Index.compound("emails.email", Direction.ASC, "accountStatus", Direction.ASC)
-			);
+				Index.compound("emails.email", Direction.ASC, "accountStatus", Direction.ASC));
 		this.tenantId = tenantId;
 		this.cacheMgr = cacheMgr;
-		
+
 		upgradeEntityFrom1To2();
 	}
 
 	private void upgradeEntityFrom1To2() {
 		final DBObject query = new BasicDBObject();
-		query.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
-		
+		 query.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
 		final DBCursor cursor = primary.find(query);
 		log.debug("Updating for {} row(s)", cursor.size());
 		for (final DBObject dbObject : cursor) {
-			dbObject.put("schemaVersion", Person2.serialVersionUID);
+			 dbObject.put("schemaVersion", Person2.CURRENT_SCHEMA_VERSION);
+			
 			if (dbObject.containsField("emails")) {
 				final BasicDBList objListEmails = (BasicDBList) dbObject.get("emails");
 				for (final Object object : objListEmails) {
@@ -104,12 +101,12 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 					objEmail.put("className", Email2.class.getName());
 				}
 			}
-			if (dbObject.containsField("mobileNumbers")) {
+			if (dbObject.containsField("mobileNumbers") && dbObject.get("mobileNumbers") !=null) {
 				final BasicDBList objListMobileNumbers = (BasicDBList) dbObject.get("mobileNumbers");
-				for (final Object object : objListMobileNumbers) {
-					final DBObject objMN = (DBObject) object;
-					objMN.put("className", PhoneNumber2.class.getName());
-				}
+					for (final Object object : objListMobileNumbers) {
+						final DBObject objMN = (DBObject) object;
+						objMN.put("className", PhoneNumber2.class.getName());
+					}
 			}
 			if (dbObject.containsField("addresses")) {
 				final BasicDBList objListAddresses = (BasicDBList) dbObject.get("addresses");
@@ -126,16 +123,17 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 				}
 			}
 			primary.save(dbObject);
-		}//end of looping
+		} // end of looping
 	}
-	
+
 	@Override
 	protected void beforeSave(Person2 entity, ModificationTimePolicy mtimePolicy) {
 		super.beforeSave(entity, mtimePolicy);
 		entity.setCanonicalSlug(SlugUtils.canonicalize(entity.getSlug()));
 	}
-	
-	@Override @Nullable
+
+	@Override
+	@Nullable
 	public Person2 findOneBySlug(StatusMask statusMask, String upSlug) {
 		String canonicalize = SlugUtils.canonicalize(upSlug);
 		return findOneByQuery(new BasicDBObject("canonicalSlug", canonicalize));
@@ -145,8 +143,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public Existence<String> existsBySlug(StatusMask statusMask, String upSlug) {
 		final BasicDBObject query = new BasicDBObject("canonicalSlug", SlugUtils.canonicalize(upSlug));
 		augmentQueryForStatusMask(query, statusMask);
-		final DBObject dbo = findDBObjectByQuery(query,
-				new BasicDBObject("slug", true));
+		final DBObject dbo = findDBObjectByQuery(query, new BasicDBObject("slug", true));
 		if (dbo != null) {
 			final String actualSlug = (String) dbo.get("slug");
 			if (actualSlug.equals(upSlug)) {
@@ -155,13 +152,12 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 				return Existence.mismatch(actualSlug, (String) dbo.get("_id"));
 			}
 		} else {
-			return Existence.<String>absent();
+			return Existence.<String> absent();
 		}
 	}
-	
+
 	@Override
-	public Existence<String> existsBySlugCacheable(StatusMask statusMask,
-			String upSlug) {
+	public Existence<String> existsBySlugCacheable(StatusMask statusMask, String upSlug) {
 		if (cacheMgr != null) {
 			final Cache slugsCache = cacheMgr.getCache("slugs");
 			final String key = String.format("person:%s:%s", tenantId, upSlug);
@@ -181,42 +177,45 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	}
 
 	@Override
-	public Person2 findOneByFacebook(@Nullable Long facebookId,
-			@Nullable String facebookUsername) {
+	public Person2 findOneByFacebook(@Nullable Long facebookId, @Nullable String facebookUsername) {
 		if (facebookId == null && facebookUsername == null) {
 			return null;
 		}
 		final List<DBObject> orCriteria = new ArrayList<>();
 		if (facebookId != null) {
-			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.FACEBOOK_IDENTITY__FACEBOOK_ID.getName(), 
-					facebookId));
+			orCriteria.add(
+					new BasicDBObject(CommonsPackage.Literals.FACEBOOK_IDENTITY__FACEBOOK_ID.getName(), facebookId));
 		}
 		if (facebookUsername != null) {
-			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.FACEBOOK_IDENTITY__FACEBOOK_USERNAME.getName(), 
+			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.FACEBOOK_IDENTITY__FACEBOOK_USERNAME.getName(),
 					facebookUsername));
 		}
 		final BasicDBObject query = new BasicDBObject("$or", orCriteria);
 		return findOneByQuery(query);
 	}
 
-	@Override @Nullable
+	@Override
+	@Nullable
 	public Person2 findOneByEmail(StatusMask statusMask, @Nullable String email) {
-		if (Strings.isNullOrEmpty(email))  {
+		if (Strings.isNullOrEmpty(email)) {
 			return null;
 		}
-		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		final BasicDBObject query = new BasicDBObject("emails",
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
 		augmentQueryForStatusMask(query, statusMask);
 		return findOneByQuery(query);
 	}
-	
-	@Override @Nullable
+
+	@Override
+	@Nullable
 	public Person2 findOneByEmail(AccountStatus status, String email) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
-		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		final BasicDBObject query = new BasicDBObject("emails",
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
 		query.put("accountStatus", status.name());
 		return findOneByQuery(query);
 	}
-	
+
 	@Override
 	public boolean isExistsByEmail(StatusMask statusMask, String email) {
 		final Optional<String> optExists = getIdByEmail(statusMask, email);
@@ -226,55 +225,63 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	@Override
 	public Optional<String> getIdByEmail(StatusMask statusMask, String email) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
-		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+		final BasicDBObject query = new BasicDBObject("emails",
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
 		augmentQueryForStatusMask(query, statusMask);
-		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByEmail", statusMask, email);
+		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByEmail", statusMask,
+				email);
 		if (dbObject == null) {
 			return Optional.absent();
 		} else {
 			return Optional.of(String.valueOf(dbObject.get("_id")));
 		}
 	}
-	
-	@Override @Nullable
+
+	@Override
+	@Nullable
 	public Person2 findOneById(StatusMask statusMask, @Nullable String id) {
-		if (Strings.isNullOrEmpty(id))  {
+		if (Strings.isNullOrEmpty(id)) {
 			return null;
 		}
 		final BasicDBObject query = new BasicDBObject("_id", id);
 		augmentQueryForStatusMask(query, statusMask);
 		return findOneByQuery(query);
 	}
-	
-	@Override @Nullable
+
+	@Override
+	@Nullable
 	public Person2 findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String phoneNumber) {
 		if (phoneNumber == null) {
 			return null;
 		}
 		final BasicDBObject query = new BasicDBObject();
-		final BasicDBObject qMobileNumber = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
-		final BasicDBObject qPhoneNumber = new BasicDBObject("phoneNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
-		query.put("$or", new BasicDBObject[] {qMobileNumber, qPhoneNumber});
+		final BasicDBObject qMobileNumber = new BasicDBObject("mobileNumbers",
+				new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
+		final BasicDBObject qPhoneNumber = new BasicDBObject("phoneNumbers",
+				new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
+		query.put("$or", new BasicDBObject[] { qMobileNumber, qPhoneNumber });
 		augmentQueryForStatusMask(query, statusMask);
 		return findOneByQuery(query);
 	}
-	
+
 	@Override
 	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask, String phoneNumber) {
 		final Optional<String> optExists = getIdByMobileOrPhoneNumber(statusMask, phoneNumber);
 		return optExists.isPresent();
 	}
-	
+
 	@Override
-	public Optional<String> getIdByMobileOrPhoneNumber(StatusMask statusMask,
-			String phoneNumber) {
+	public Optional<String> getIdByMobileOrPhoneNumber(StatusMask statusMask, String phoneNumber) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(phoneNumber), "Phone number must not be null or empty");
 		final BasicDBObject query = new BasicDBObject();
-		final BasicDBObject qMobileNumber = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
-		final BasicDBObject qPhoneNumber = new BasicDBObject("phoneNumbers", new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
-		query.put("$or", new BasicDBObject[] {qMobileNumber, qPhoneNumber});
+		final BasicDBObject qMobileNumber = new BasicDBObject("mobileNumbers",
+				new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
+		final BasicDBObject qPhoneNumber = new BasicDBObject("phoneNumbers",
+				new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
+		query.put("$or", new BasicDBObject[] { qMobileNumber, qPhoneNumber });
 		augmentQueryForStatusMask(query, statusMask);
-		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByPhoneNumber", statusMask, phoneNumber);
+		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByPhoneNumber",
+				statusMask, phoneNumber);
 		if (dbObject == null) {
 			return Optional.absent();
 		} else {
@@ -282,26 +289,27 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		}
 	}
 
-	@Override @Nullable
-	public Person2 findOneByTwitter(@Nullable Long twitterId,
-			@Nullable String twitterScreenName) {
+	@Override
+	@Nullable
+	public Person2 findOneByTwitter(@Nullable Long twitterId, @Nullable String twitterScreenName) {
 		if (twitterId == null && twitterScreenName == null) {
 			return null;
 		}
 		final List<DBObject> orCriteria = new ArrayList<>();
 		if (twitterId != null) {
-			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.TWITTER_IDENTITY__TWITTER_ID.getName(), 
-					twitterId));
+			orCriteria
+					.add(new BasicDBObject(CommonsPackage.Literals.TWITTER_IDENTITY__TWITTER_ID.getName(), twitterId));
 		}
 		if (twitterScreenName != null) {
-			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.TWITTER_IDENTITY__TWITTER_SCREEN_NAME.getName(), 
+			orCriteria.add(new BasicDBObject(CommonsPackage.Literals.TWITTER_IDENTITY__TWITTER_SCREEN_NAME.getName(),
 					twitterScreenName));
 		}
 		final BasicDBObject query = new BasicDBObject("$or", orCriteria);
 		return findOneByQuery(query);
 	}
 
-	@Override @Nullable
+	@Override
+	@Nullable
 	public Person2 findOneByClientAccessToken(@Nullable String clientAccessToken) {
 		if (clientAccessToken == null) {
 			return null;
@@ -320,26 +328,29 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		} else {
 			mySort = new Sort(Direction.DESC, "modificationTime");
 		}
-		
+
 		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
-		
+
 		return findAllByQuery(queryBySearchText, myPageable);
 	}
-	
+
 	private BasicDBObject getQueryByKeyword(String searchText) {
 		final Pattern regex = Pattern.compile(Pattern.quote(searchText), Pattern.CASE_INSENSITIVE);
-		
+
 		final BasicDBObject nameQuery = new BasicDBObject("name", regex);
 		final BasicDBObject idQuery = new BasicDBObject("_id", regex);
-		
+
 		final BasicDBObject emailQuery = new BasicDBObject("email", regex);
 		final BasicDBObject emailsQuery = new BasicDBObject("emails", new BasicDBObject("$elemMatch", emailQuery));
-		
+
 		final BasicDBObject phoneNumberQuery = new BasicDBObject("phoneNumber", regex);
-		final BasicDBObject mobileNumbersQuery = new BasicDBObject("mobileNumbers", new BasicDBObject("$elemMatch", phoneNumberQuery));
-		final BasicDBObject phoneNumbersQuery = new BasicDBObject("phoneNumbers", new BasicDBObject("$elemMatch", phoneNumberQuery));
-		
-		final BasicDBObject query = new BasicDBObject("$or", ImmutableList.of(nameQuery, idQuery , emailsQuery, mobileNumbersQuery, phoneNumbersQuery));
+		final BasicDBObject mobileNumbersQuery = new BasicDBObject("mobileNumbers",
+				new BasicDBObject("$elemMatch", phoneNumberQuery));
+		final BasicDBObject phoneNumbersQuery = new BasicDBObject("phoneNumbers",
+				new BasicDBObject("$elemMatch", phoneNumberQuery));
+
+		final BasicDBObject query = new BasicDBObject("$or",
+				ImmutableList.of(nameQuery, idQuery, emailsQuery, mobileNumbersQuery, phoneNumbersQuery));
 		log.debug("Query is {}", query);
 		return query;
 	}
@@ -348,12 +359,12 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public long countBySearchText(StatusMask statusMask, String searchText) {
 		final BasicDBObject query = getQueryByKeyword(searchText);
 		augmentQueryForStatusMask(query, statusMask);
-		
+
 		final long count = countByQuery(query);
 		log.debug("Got {} people by query: {}", count, query);
 		return count;
 	}
-	
+
 	@Override
 	public Page<Person2> findAll(StatusMask statusMask, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
@@ -368,9 +379,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		augmentQueryForStatusMask(query, statusMask);
 		final long total = count(statusMask);
 		final ImmutableList<Person2> people = findSecondary(query, getProjectionDBObject(projection),
-				MongoUtils.getSort(pageable.getSort()),
-				pageable.getOffset(), pageable.getPageSize(),
-				"findAll", statusMask, projection);
+				MongoUtils.getSort(pageable.getSort()), pageable.getOffset(), pageable.getPageSize(), "findAll",
+				statusMask, projection);
 		return new PageImpl<>(people, pageable, total);
 	}
 
@@ -382,7 +392,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		log.debug("Got {} record(s) by query: {}", count, query);
 		return count;
 	}
-	
+
 	protected void augmentQueryForStatusMask(BasicDBObject query, StatusMask statusMask) {
 		Preconditions.checkArgument(!query.containsField("accountStatus"),
 				"Query to be augmented using StatusMask must not already have a 'status' criteria.");
@@ -390,19 +400,18 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		case RAW:
 			break;
 		case ACTIVE_ONLY:
-			query.put("accountStatus", new BasicDBObject("$in", 
+			query.put("accountStatus", new BasicDBObject("$in",
 					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name())));
 			break;
 		case INCLUDE_INACTIVE:
-			query.put("accountStatus", new BasicDBObject("$in", 
-					ImmutableSet.of(AccountStatus.ACTIVE.name(), AccountStatus.VERIFIED.name(),
-							AccountStatus.INACTIVE.name())));
+			query.put("accountStatus", new BasicDBObject("$in", ImmutableSet.of(AccountStatus.ACTIVE.name(),
+					AccountStatus.VERIFIED.name(), AccountStatus.INACTIVE.name())));
 			break;
 		case VOID_ONLY:
 			query.put("accountStatus", AccountStatus.VOID.name());
 			break;
 		default:
-			throw new IllegalArgumentException("Unrecognized StatusMask: " + statusMask);	
+			throw new IllegalArgumentException("Unrecognized StatusMask: " + statusMask);
 		}
 	}
 
@@ -413,8 +422,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	}
 
 	@Override
-	public <S extends Person2, K extends Serializable> S lookupOne(
-			StatusMask statusMask, LookupKey lookupKey, K key)
+	public <S extends Person2, K extends Serializable> S lookupOne(StatusMask statusMask, LookupKey lookupKey, K key)
 			throws EntityLookupException {
 		final String attribute;
 		switch (lookupKey) {
@@ -454,20 +462,19 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	}
 
 	@Override
-	public <S extends Person2, K extends Serializable> Map<K, Try<S>> lookupAll(
-			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+	public <S extends Person2, K extends Serializable> Map<K, Try<S>> lookupAll(StatusMask statusMask,
+			LookupKey lookupKey, Collection<K> keys) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
-	public <K extends Serializable> Map<K, Existence<K>> checkExistsAll(
-			StatusMask statusMask, LookupKey lookupKey, Collection<K> keys) {
+	public <K extends Serializable> Map<K, Existence<K>> checkExistsAll(StatusMask statusMask, LookupKey lookupKey,
+			Collection<K> keys) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
-	public <K extends Serializable> Existence<K> checkExists(StatusMask statusMask,
-			LookupKey lookupKey, K key) {
+	public <K extends Serializable> Existence<K> checkExists(StatusMask statusMask, LookupKey lookupKey, K key) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -502,14 +509,12 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	}
 
 	@Override
-	public Map<String, Try<UntrashResult>> untrashAll(
-			Collection<Person2> entities) {
+	public Map<String, Try<UntrashResult>> untrashAll(Collection<Person2> entities) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
 	@Override
-	public Map<String, Try<UntrashResult>> untrashAllByIds(
-			Collection<String> ids) {
+	public Map<String, Try<UntrashResult>> untrashAllByIds(Collection<String> ids) {
 		throw new UnsupportedOperationException("to be implemented");
 	}
 
@@ -519,7 +524,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		augmentQueryForStatusMask(query, statusMask);
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
-	
+
 	@Override
 	public Page<Person2> findAll(StatusMask statusMask, Collection<String> ids, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$in", ids));
@@ -549,52 +554,53 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public List<Person2> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds) {
 		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
-		
+
 		return findAllByQuery(query, new CappedRequest(500)).getContent();
 	}
-	
+
 	@Override
-	public Page<Person2> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds, Pageable pageable) {
+	public Page<Person2> findAllByCustomerRoleIds(StatusMask statusMask, Collection<String> customerRoleIds,
+			Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
-		
+
 		return findAllByQuery(query, pageable);
 	}
-	
+
 	@Override
 	public long countAllByCustomerRolesIds(StatusMask statusMask, Collection<String> customerRoleIds) {
 		log.debug("customerRoleIds {}", customerRoleIds);
 		final BasicDBObject query = new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds));
 		augmentQueryForStatusMask(query, statusMask);
-		
+
 		return countByQuery(query);
 	}
 
 	@Override
-	public Page<Person2> findAllByKeywordAndStatus(
-			String keyword,
-			Collection<AccountStatus> accountStatuses, 
+	public Page<Person2> findAllByKeywordAndStatus(String keyword, Collection<AccountStatus> accountStatuses,
 			Pageable pageable) {
 		final BasicDBObject query = getQueryByKeyword(keyword);
 		if (!accountStatuses.isEmpty()) {
-			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+			query.put("accountStatus", new BasicDBObject("$in",
+					FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
 		}
-		
+
 		final Sort mySort;
 		if (pageable.getSort() != null) {
 			mySort = pageable.getSort().and(new Sort(Direction.DESC, "modificationTime"));
 		} else {
 			mySort = new Sort(Direction.DESC, "modificationTime");
 		}
-		
+
 		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
-		
+
 		return findAllByQuery(query, myPageable);
 	}
-	
+
 	/**
 	 * 
-	 * @param keyword (ID, name, emails and phone numbers)
+	 * @param keyword
+	 *            (ID, name, emails and phone numbers)
 	 * @param accountStatuses
 	 * @param customerRole
 	 * @param securityRoleIds
@@ -602,120 +608,112 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	 * @return
 	 */
 	@Override
-	public Page<Person2> findAllByKeywordAndRoles(
-			String keyword,
-			Collection<AccountStatus> accountStatuses,
-			CustomerRole2 customerRole, 
-			Collection<String> securityRoleIds,
-			Pageable pageable) {
-		
+	public Page<Person2> findAllByKeywordAndRoles(String keyword, Collection<AccountStatus> accountStatuses,
+			CustomerRole2 customerRole, Collection<String> securityRoleIds, Pageable pageable) {
+
 		BasicDBObject query;
 		if (keyword != null) {
 			query = getQueryByKeyword(keyword);
 		} else {
 			query = new BasicDBObject();
 		}
-		
-		if (accountStatuses != null && !accountStatuses.isEmpty()){
-			query.put("accountStatus", new BasicDBObject("$in", 
+
+		if (accountStatuses != null && !accountStatuses.isEmpty()) {
+			query.put("accountStatus", new BasicDBObject("$in",
 					FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
 		}
-		
-		if (customerRole != null) { 
-			query.put("customerRole", customerRole.getId()); 
+
+		if (customerRole != null) {
+			query.put("customerRole", customerRole.getId());
 		}
-		
+
 		if (securityRoleIds != null && !securityRoleIds.isEmpty()) {
-			query.put("securityRoleIds", 
-					new BasicDBObject("$in", securityRoleIds));
+			query.put("securityRoleIds", new BasicDBObject("$in", securityRoleIds));
 		}
-			
+
 		final Sort mySort;
 		if (pageable.getSort() != null) {
 			mySort = pageable.getSort().and(new Sort(Direction.DESC, "modificationTime"));
 		} else {
 			mySort = new Sort(Direction.DESC, "modificationTime");
 		}
-		
+
 		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
 
 		log.debug("Query findAllByKeywordAndRoles {}", query);
-		
+
 		return findAllByQuery(query, myPageable);
 	}
-	
+
 	/**
 	 * 
 	 * @param pageable
-	 * @param keyword (ID, name, emails and phone numbers)
+	 * @param keyword
+	 *            (ID, name, emails and phone numbers)
 	 * @param accountStatuses
 	 * @param customerRole
 	 * @param securityRoleIds
 	 * @return
 	 */
 	@Override
-	public long countAllByKeywordAndRoles(
-			String keyword,
-			Collection<AccountStatus> accountStatuses,
-			CustomerRole2 customerRole, 
-			Collection<String> securityRoleIds) {
-		
+	public long countAllByKeywordAndRoles(String keyword, Collection<AccountStatus> accountStatuses,
+			CustomerRole2 customerRole, Collection<String> securityRoleIds) {
+
 		BasicDBObject query;
 		if (keyword != null) {
 			query = getQueryByKeyword(keyword);
 		} else {
 			query = new BasicDBObject();
 		}
-		
-		if (accountStatuses != null && !accountStatuses.isEmpty()){
-			query.put("accountStatus", new BasicDBObject("$in", 
+
+		if (accountStatuses != null && !accountStatuses.isEmpty()) {
+			query.put("accountStatus", new BasicDBObject("$in",
 					FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
 		}
-		
-		if (customerRole != null) { 
-			query.put("customerRole", customerRole.getId()); 
+
+		if (customerRole != null) {
+			query.put("customerRole", customerRole.getId());
 		}
-		
+
 		if (securityRoleIds != null && !securityRoleIds.isEmpty()) {
-			query.put("securityRoleIds", 
-					new BasicDBObject("$in", securityRoleIds));
+			query.put("securityRoleIds", new BasicDBObject("$in", securityRoleIds));
 		}
-		
+
 		return countByQuery(query);
 	}
-	
-//	private BasicDBObject findAllByKeywordAndRoles() {
-//		return null;
-//	}
+
+	// private BasicDBObject findAllByKeywordAndRoles() {
+	// return null;
+	// }
 
 	@Override
-	public Page<Person2> findAll(Collection<AccountStatus> accountStatuses,
-			Pageable pageable) {
+	public Page<Person2> findAll(Collection<AccountStatus> accountStatuses, Pageable pageable) {
 		final BasicDBObject query = new BasicDBObject();
 		if (!accountStatuses.isEmpty()) {
-			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+			query.put("accountStatus", new BasicDBObject("$in",
+					FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
 		}
-		
+
 		final Sort mySort;
 		if (pageable.getSort() != null) {
 			mySort = pageable.getSort().and(new Sort(Direction.DESC, "modificationTime"));
 		} else {
 			mySort = new Sort(Direction.DESC, "modificationTime");
 		}
-		
+
 		final PageRequest myPageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), mySort);
-		
+
 		return findAllByQuery(query, myPageable);
 	}
 
 	@Override
-	public long countBySearchText(Collection<AccountStatus> accountStatuses,
-			String searchText) {
+	public long countBySearchText(Collection<AccountStatus> accountStatuses, String searchText) {
 		final BasicDBObject query = getQueryByKeyword(searchText);
 		if (!accountStatuses.isEmpty()) {
-			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+			query.put("accountStatus", new BasicDBObject("$in",
+					FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
 		}
-		
+
 		final long count = countByQuery(query);
 		log.debug("Got {} people by SearchText query: {}", count, query);
 		return count;
@@ -725,7 +723,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public long countByStatuses(Collection<AccountStatus> accountStatuses) {
 		final BasicDBObject query = new BasicDBObject();
 		if (!accountStatuses.isEmpty()) {
-			query.put("accountStatus", new BasicDBObject("$in", FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
+			query.put("accountStatus", new BasicDBObject("$in",
+					FluentIterable.from(accountStatuses).transform(new EnumNameFunction()).toList()));
 		}
 		final long count = countByQuery(query);
 		log.debug("Got {} record(s) by Statuses query: {}", count, query);
@@ -751,10 +750,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 
 	@Override
 	public void setNullCustomerRole(Collection<String> customerRoleIds) {
-		primary.update(
-				new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds)),
-				new BasicDBObject("$set", new BasicDBObject("customerRole", null)),
-				false, true);
+		primary.update(new BasicDBObject("customerRole", new BasicDBObject("$in", customerRoleIds)),
+				new BasicDBObject("$set", new BasicDBObject("customerRole", null)), false, true);
 	}
 
 	@Override
@@ -775,8 +772,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public ImmutableSet<String> findAllSlugsByStatus(StatusMask statusMask) {
 		final BasicDBObject query = new BasicDBObject();
 		augmentQueryForStatusMask(query, statusMask);
-		return findSecondary(query, new BasicDBObject(ImmutableMap.of("slug", true, "_id", false)),
-				null, 0, 0, new CursorFunction<ImmutableSet<String>>() {
+		return findSecondary(query, new BasicDBObject(ImmutableMap.of("slug", true, "_id", false)), null, 0, 0,
+				new CursorFunction<ImmutableSet<String>>() {
 					@Override
 					public ImmutableSet<String> apply(DBCursor cursor) throws Exception {
 						return FluentIterable.from(cursor).transform(new Function<DBObject, String>() {
@@ -794,8 +791,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		final BasicDBObject query = new BasicDBObject();
 		final BasicDBObject sort = MongoUtils.getSort(pageable.getSort());
 		augmentQueryForStatusMask(query, statusMask);
-		return findSecondary(query, new BasicDBObject(ImmutableMap.of("slug", true, "_id", false)),
-				sort, pageable.getOffset(), pageable.getPageSize(), new CursorFunction<ImmutableSet<String>>() {
+		return findSecondary(query, new BasicDBObject(ImmutableMap.of("slug", true, "_id", false)), sort,
+				pageable.getOffset(), pageable.getPageSize(), new CursorFunction<ImmutableSet<String>>() {
 					@Override
 					public ImmutableSet<String> apply(DBCursor cursor) throws Exception {
 						return FluentIterable.from(cursor).transform(new Function<DBObject, String>() {
@@ -809,15 +806,17 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	}
 
 	@Override
-	@Nullable public Person2 getZendeskUserId(String email) {
-		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+	@Nullable
+	public Person2 getZendeskUserId(String email) {
+		final BasicDBObject query = new BasicDBObject("emails",
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
 		query.put("zendeskIntegration", true);
 		query.put("zendeskUserId", new BasicDBObject("$exists", true));
 		query.put("customerRole", new BasicDBObject("$exists", true));
-		
+
 		final BasicDBObject fields = new BasicDBObject("zendeskUserId", true);
 		fields.put("customerRole", 1);
-		
+
 		final DBObject dbObject = findOnePrimary(query, fields, "getZendeskUserId", email);
 		if (dbObject != null) {
 			if (dbObject.get("zendeskUserId") != null && !"null".equals(dbObject.get("zendeskUserId"))) {
@@ -842,9 +841,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		query.put("_id", personId);
 		query.put("zendeskIntegration", true);
 		query.put("customerRole", new BasicDBObject("$exists", true));
-		
+
 		final BasicDBObject fields = new BasicDBObject("zendeskUserId", true);
-		
+
 		final DBObject dbObject = findOnePrimary(query, fields, "getZendeskUserIdByPersonId", personId);
 		log.debug("Found zendesk user dbObject by personId '{}': {}", personId, dbObject);
 		if (dbObject != null) {
@@ -876,19 +875,16 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		final Page<Person2> page = findAllByQuery(query, pageable);
 		return page;
 	}
-	
-	private BasicDBObject getQueryByCreationTime(@Nullable LocalDate startDate,
-			@Nullable LocalDate endDate) {
+
+	private BasicDBObject getQueryByCreationTime(@Nullable LocalDate startDate, @Nullable LocalDate endDate) {
 		final BasicDBObject query = new BasicDBObject();
 		if (startDate != null || endDate != null) {
 			final BasicDBObject creationTimeQuery = new BasicDBObject();
 			if (startDate != null) {
-				creationTimeQuery.put("$gte",
-						startDate.toDateTimeAtStartOfDay(timeZone).toDate());
+				creationTimeQuery.put("$gte", startDate.toDateTimeAtStartOfDay(timeZone).toDate());
 			}
 			if (endDate != null) {
-				creationTimeQuery.put("$lt", endDate.plusDays(1)
-						.toDateTimeAtStartOfDay(timeZone).toDate());
+				creationTimeQuery.put("$lt", endDate.plusDays(1).toDateTimeAtStartOfDay(timeZone).toDate());
 			}
 			query.put("creationTime", creationTimeQuery);
 		}
@@ -901,10 +897,11 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		augmentQueryForStatusMask(query, statusMask);
 
 		final BasicDBObject fields = new BasicDBObject("_id", true);
-		
+
 		final BasicDBObject sort = new BasicDBObject("_id", 1);
-		
-		final List<DBObject> dbObjects = findSecondaryAsDBObjects(query, fields, sort, 0, 0, "findAllIdsByCustomerRoleId", statusMask, customerRoleId);
+
+		final List<DBObject> dbObjects = findSecondaryAsDBObjects(query, fields, sort, 0, 0,
+				"findAllIdsByCustomerRoleId", statusMask, customerRoleId);
 		final List<String> ids = dbObjects.stream().map(new java.util.function.Function<DBObject, String>() {
 			@Override
 			public String apply(DBObject t) {
@@ -913,7 +910,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		}).collect(Collectors.toList());
 		return ids;
 	}
-	
+
 	@Override
 	public Optional<String> getCustomerRole(@Nonnull String personId) {
 		String customerRole = getCustomerRoleByPersonId(personId);
@@ -923,42 +920,48 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	@Override
 	public boolean existsByEmail(String email) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty for existsByEmail");
-		
-		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
-		
+
+		final BasicDBObject query = new BasicDBObject("emails",
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+
 		final long count = countByQuery(query);
 		return count > 0;
 	}
-	
+
 	@Override
 	public boolean existsByEmailAndStatus(String email, AccountStatus status) {
-		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty for existsByEmailAndStatus");
+		Preconditions.checkState(!Strings.isNullOrEmpty(email),
+				"Email must not be null or empty for existsByEmailAndStatus");
 		Preconditions.checkState(status != null, "Status must not be null for existsByEmailAndStatus");
-		
-		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+
+		final BasicDBObject query = new BasicDBObject("emails",
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
 		query.put("accountStatus", status.name());
-		
+
 		final long count = countByQuery(query);
 		return count > 0;
 	}
-	
+
 	/**
-	 * Karena satu email bisa dimiliki oleh beberapa person dengan beragam status nya..
+	 * Karena satu email bisa dimiliki oleh beberapa person dengan beragam
+	 * status nya..
 	 * 
 	 * @param email
 	 * @return
 	 */
 	@Override
 	public ImmutableList<AccountStatus> getStatusesByEmail(String email) {
-		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty for getStatusesByEmail");
-		
-		final BasicDBObject query = new BasicDBObject("emails", new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
-		
+		Preconditions.checkState(!Strings.isNullOrEmpty(email),
+				"Email must not be null or empty for getStatusesByEmail");
+
+		final BasicDBObject query = new BasicDBObject("emails",
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+
 		final BasicDBObject fields = new BasicDBObject();
 		fields.put("accountStatus", true);
-		
-		
-		final List<DBObject> dbObjectList = findSecondaryAsDBObjects(query, fields, null, 0, 0, "getStatusesByEmail", email);
+
+		final List<DBObject> dbObjectList = findSecondaryAsDBObjects(query, fields, null, 0, 0, "getStatusesByEmail",
+				email);
 		if (dbObjectList != null && !dbObjectList.isEmpty()) {
 			final ImmutableList.Builder<AccountStatus> bList = ImmutableList.builder();
 			for (final DBObject dbObject : dbObjectList) {
@@ -970,11 +973,11 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		}
 	}
 
-
-//	@Override
-//	public Existence<String> existsBySlugEx(StatusMask statusMask, String slug) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// @Override
+	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
+	// slug) {
+	// // TODO Auto-generated method stub
+	// return null;
+	// }
 
 }

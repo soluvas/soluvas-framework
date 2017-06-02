@@ -89,7 +89,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 	protected static final String REVISION_EDEFAULT = null;
 	@JsonProperty("_rev") @JsonInclude(Include.NON_NULL)
 	protected String revision = REVISION_EDEFAULT;
-	protected static final long SCHEMA_VERSION_EDEFAULT = 2L;
+	protected static final long SCHEMA_VERSION_EDEFAULT = 3L;
 	protected long schemaVersion = SCHEMA_VERSION_EDEFAULT;
 	public static final long CURRENT_SCHEMA_VERSION = SCHEMA_VERSION_EDEFAULT;
 	protected static final String FIRST_NAME_EDEFAULT = null;
