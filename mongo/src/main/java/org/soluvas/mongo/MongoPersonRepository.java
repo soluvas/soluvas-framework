@@ -104,14 +104,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 					objEmail.put("className", Email2.class.getName());
 				}
 			}
-//			if (dbObject.containsField("mobileNumbers")) {
-//				final BasicDBList objListMobileNumbers = (BasicDBList) dbObject.get("mobileNumbers");
-//				for (final Object object : objListMobileNumbers) {
-//					System.out.println(object.toString());
-//					final DBObject objMN = (DBObject) object;
-//					objMN.put("className", PhoneNumber2.class.getName());
-//				}
-//			}
+			if (dbObject.containsField("mobileNumbers")) {
+				final BasicDBList objListMobileNumbers = (BasicDBList) dbObject.get("mobileNumbers");
+				for (final Object object : objListMobileNumbers) {
+					final DBObject objMN = (DBObject) object;
+					objMN.put("className", PhoneNumber2.class.getName());
+				}
+			}
 			if (dbObject.containsField("addresses")) {
 				final BasicDBList objListAddresses = (BasicDBList) dbObject.get("addresses");
 				for (final Object object : objListAddresses) {
