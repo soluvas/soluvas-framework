@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.neo4j.graphdb.Node;
 
 /**
  * An entity typed shadow (i.e. partial entity storage) is useful to make sure that the shadow storage is "reasonably" synced with the source database.

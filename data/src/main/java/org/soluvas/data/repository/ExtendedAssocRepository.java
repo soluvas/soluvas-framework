@@ -9,7 +9,6 @@ import org.soluvas.data.domain.Edge;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
-import org.soluvas.data.neo4j.TimestampedEdge;
 
 /**
  * An {@link AssocRepository} with extended operations which mimic

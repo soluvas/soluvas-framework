@@ -2,7 +2,6 @@ package org.soluvas.data.domain;
 
 import java.io.Serializable;
 
-import org.neo4j.graphdb.Relationship;
 import org.soluvas.data.repository.EdgeRepository;
 
 /**
