@@ -71,17 +71,6 @@
 			<version>0.99.1.soluvas2</version>
 			<optional>true</optional>
 		</dependency>
-
-		<dependency>
-			<groupId>org.neo4j</groupId>
-			<artifactId>neo4j-cypher</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.neo4j</groupId>
-			<artifactId>neo4j-kernel</artifactId>
-			<optional>true</optional>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.scala-lang</groupId>

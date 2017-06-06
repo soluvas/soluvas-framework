@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.annotation.Nonnull;
 
-import org.neo4j.graphdb.Relationship;
 import org.soluvas.data.domain.Edge;
 
 /**

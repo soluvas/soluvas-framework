@@ -7,8 +7,6 @@ import java.util.NavigableMap;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Sort;
-import org.soluvas.data.neo4j.Neo4jIdRelationRepository;
-import org.soluvas.data.neo4j.Neo4jRelationRepository;
 
 import com.google.common.collect.Multimap;
 
