@@ -45,6 +45,7 @@ import com.google.common.collect.Iterables;
 @Converters({BigDecimalConverter.class, DateTimeConverter.class,
 	CurrencyUnitConverter.class, UnitConverter.class, LocalDateConverter.class})
 public class Person2 implements Serializable {
+	
 	/**
 	 * 
 	 */
