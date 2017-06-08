@@ -44,8 +44,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 @Entity(noClassnameStored=true)
-@Converters({BigDecimalConverter.class, DateTimeConverter.class,
-	CurrencyUnitConverter.class, UnitConverter.class, LocalDateConverter.class})
+@Converters({BigDecimalConverter.class, DateTimeConverter.class, CurrencyUnitConverter.class, UnitConverter.class, LocalDateConverter.class})
 public class Person2 implements Serializable, Identifiable, PersonLike  {
 	/**
 	 * 

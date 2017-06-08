@@ -14,7 +14,7 @@ import com.google.code.morphia.annotations.Id;
 
 
 @SuppressWarnings("serial")
-@Converters(DateTimeConverter.class)
+@Converters({DateTimeConverter.class})
 public class CustomerRole2 implements Serializable, Identifiable {
 	
 	public final static String COMMON_ID = "common";
@@ -262,6 +262,7 @@ public class CustomerRole2 implements Serializable, Identifiable {
 	}
 
 
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -271,6 +272,7 @@ public class CustomerRole2 implements Serializable, Identifiable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setId(String newId) {
 		id = newId;
 	}
