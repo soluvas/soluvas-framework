@@ -50,7 +50,7 @@ public class PropertyDefinition implements Serializable {
 	private String primaryUri;
 	private String language;
 	private final Set<String> sameAsUris = new HashSet<>();
-	private final Map<String, Map<String, String>> translations = new HashMap<>();
+	private Map<String, Map<String, String>> translations;
 	private boolean editabled;
 	
 	public String getId() {
@@ -195,6 +195,9 @@ public class PropertyDefinition implements Serializable {
 	 * Key: {languageTag}, e.g. {@code en-US}, {@code id-ID}. 
 	 */
 	public Map<String, Map<String, String>> getTranslations() {
+		if(translations==null){
+			translations = new HashMap<>();
+		}
 		return translations;
 	}
 	
