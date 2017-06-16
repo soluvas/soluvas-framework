@@ -9,13 +9,11 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import org.eclipse.emf.ecore.EObject;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Imageable;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.ProgressMonitor;
-import org.soluvas.commons.entity.Person2;
 import org.soluvas.image.store.ImageRepository;
 
 /**
@@ -28,7 +26,7 @@ import org.soluvas.image.store.ImageRepository;
  * @model
  * @generated
  */
-public interface ImageManager extends EObject {
+public interface ImageManager {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,9 +109,9 @@ public interface ImageManager extends EObject {
 	 * <!-- end-model-doc -->
 	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
 	 */
-	DisplayImage getSafeImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style);
+	DisplayImage2 getSafeImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style);
 	
-	@Nullable DisplayImage getImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style);
+	@Nullable DisplayImage2 getImage(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -127,7 +125,7 @@ public interface ImageManager extends EObject {
 	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" imageablesDataType="org.soluvas.commons.Collection<? extends org.soluvas.commons.Imageable>" imageablesRequired="true" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	Map<String, DisplayImage> getSafeImages(ImageType namespace, Collection<? extends Imageable> imageables, ImageStyle style);
+	Map<String, DisplayImage2> getSafeImages(ImageType namespace, Collection<? extends Imageable> imageables, ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -140,7 +138,7 @@ public interface ImageManager extends EObject {
 	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" imageIdsDataType="org.soluvas.commons.Collection<org.eclipse.emf.ecore.EString>" imageIdsRequired="true" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	Map<String, DisplayImage> getSafeImagesByIds(ImageType namespace, Collection<String> imageIds, ImageStyle style);
+	Map<String, DisplayImage2> getSafeImagesByIds(ImageType namespace, Collection<String> imageIds, ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,7 +148,7 @@ public interface ImageManager extends EObject {
 	 * <!-- end-model-doc -->
 	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
 	 */
-	DisplayImage getSafePersonPhoto(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style, @Nullable Gender gender);
+	DisplayImage2 getSafePersonPhoto(ImageType namespace, @Nullable String imageId, @Nullable ImageStyle style, @Nullable Gender gender);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,7 +159,7 @@ public interface ImageManager extends EObject {
 	 * @model required="true" namespaceDataType="org.soluvas.image.ImageType" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	DisplayImage getSafePersonPhoto(ImageType namespace, PersonLike person, ImageStyle style);
+	DisplayImage2 getSafePersonPhoto(ImageType namespace, PersonLike person, ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,7 +172,7 @@ public interface ImageManager extends EObject {
 	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" peopleDataType="org.soluvas.commons.Collection<? extends org.soluvas.commons.PersonLike>" peopleRequired="true" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	Map<String, DisplayImage> getSafePersonPhotos(ImageType namespace, Collection<? extends PersonLike> people, ImageStyle style);
+	Map<String, DisplayImage2> getSafePersonPhotos(ImageType namespace, Collection<? extends PersonLike> people, ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -187,7 +185,7 @@ public interface ImageManager extends EObject {
 	 * @model dataType="org.soluvas.commons.Map<org.eclipse.emf.ecore.EString, org.soluvas.image.DisplayImage>" required="true" namespaceDataType="org.soluvas.image.ImageType" namespaceRequired="true" peopleDataType="org.soluvas.commons.Collection<org.soluvas.commons.Person>" peopleRequired="true" styleDataType="org.soluvas.image.ImageStyle"
 	 * @generated
 	 */
-	Map<String, DisplayImage> getSafeSocialPersonPhotos(ImageType namespace, Collection<Person> people, ImageStyle style);
+	Map<String, DisplayImage2> getSafeSocialPersonPhotos(ImageType namespace, Collection<Person> people, ImageStyle style);
 
 	/**
 	 * <!-- begin-user-doc -->

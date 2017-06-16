@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.soluvas.image.*;
 import org.soluvas.image.BlitlineTransformer;
 import org.soluvas.image.DavConnector;
 import org.soluvas.image.DisplayImage;
@@ -29,6 +28,9 @@ import org.soluvas.image.ImageTransformType;
 import org.soluvas.image.ImageType;
 import org.soluvas.image.ImageTypes;
 import org.soluvas.image.ImageVariant;
+import org.soluvas.image.Media;
+import org.soluvas.image.MediaAttachment;
+import org.soluvas.image.MediaStatus;
 import org.soluvas.image.ResizeToFill;
 import org.soluvas.image.ResizeToFit;
 import org.soluvas.image.S3Connector;
@@ -36,7 +38,6 @@ import org.soluvas.image.StyledImage;
 import org.soluvas.image.ThumbnailatorTransformer;
 import org.soluvas.image.TransformGravity;
 import org.soluvas.image.UploadedImage;
-import org.soluvas.ldap.SocialPerson;
 
 /**
  * <!-- begin-user-doc -->
@@ -87,7 +88,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 			case ImagePackage.BLITLINE_TRANSFORMER: return createBlitlineTransformer();
 			case ImagePackage.THUMBNAILATOR_TRANSFORMER: return createThumbnailatorTransformer();
 			case ImagePackage.UPLOADED_IMAGE: return createUploadedImage();
-			case ImagePackage.IMAGE_MANAGER: return createImageManager();
+//			case ImagePackage.IMAGE_MANAGER: return createImageManager();
 			case ImagePackage.RESIZE_TO_FIT: return createResizeToFit();
 			case ImagePackage.RESIZE_TO_FILL: return createResizeToFill();
 			case ImagePackage.IMAGE_VARIANT: return createImageVariant();
@@ -348,6 +349,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Media createMedia() {
 		MediaImpl media = new MediaImpl();
 		return media;
@@ -358,6 +360,7 @@ public class ImageFactoryImpl extends EFactoryImpl implements ImageFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MediaAttachment createMediaAttachment() {
 		MediaAttachmentImpl mediaAttachment = new MediaAttachmentImpl();
 		return mediaAttachment;

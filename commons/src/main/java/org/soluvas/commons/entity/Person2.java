@@ -18,7 +18,7 @@ import org.soluvas.commons.Email2;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.NameUtils;
-import org.soluvas.commons.Organization;
+import org.soluvas.commons.Organization2;
 import org.soluvas.commons.PersonInfo2;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.PhoneNumber2;
@@ -210,7 +210,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 	protected String type = TYPE_EDEFAULT;
 	protected static final String VERIFY_CODE_EDEFAULT = null;
 	protected String verifyCode = VERIFY_CODE_EDEFAULT;
-	protected List<Organization> organizations;
+	protected List<Organization2> organizations;
 	protected static final Long ZENDESK_USER_ID_EDEFAULT = null;
 	protected Long zendeskUserId = ZENDESK_USER_ID_EDEFAULT;
 	protected static final DateTime CUSTOMER_ROLE_EDIT_TIME_EDEFAULT = null;
@@ -900,7 +900,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		verifyCode = newVerifyCode;
 	}
 
-	public List<Organization> getOrganizations() {
+	public List<Organization2> getOrganizations() {
 		if (organizations == null) {
 			organizations = new ArrayList<>();
 		}

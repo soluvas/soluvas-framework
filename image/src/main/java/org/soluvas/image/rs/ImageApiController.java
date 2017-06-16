@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.image.DisplayImage;
+import org.soluvas.image.DisplayImage2;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImageMvcConfig;
 import org.soluvas.image.ImageStyles;
@@ -35,32 +35,32 @@ public class ImageApiController {
 	private ImageManager imageMgr;
 	
 	@RequestMapping(method=RequestMethod.GET, value="api/product_image/detail/{imageId}")
-	public Map<ImageStyles, DisplayImage> findImagesByProductId(@PathVariable String imageId) {
-		final Map<ImageStyles, DisplayImage> imageProductMap = new HashMap<>();
+	public Map<ImageStyles, DisplayImage2> findImagesByProductId(@PathVariable String imageId) {
+		final Map<ImageStyles, DisplayImage2> imageProductMap = new HashMap<>();
 		
-		@Nullable final DisplayImage largeImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.LARGE);
+		@Nullable final DisplayImage2 largeImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.LARGE);
 		if (largeImage != null) {
 			imageProductMap.put(ImageStyles.LARGE, largeImage);
 		}
 		
-		@Nullable final DisplayImage normalImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.NORMAL);
+		@Nullable final DisplayImage2 normalImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.NORMAL);
 		if (normalImage != null) {
 			imageProductMap.put(ImageStyles.NORMAL, normalImage);
 		}
 		
-		@Nullable final DisplayImage originalImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.ORIGINAL);
+		@Nullable final DisplayImage2 originalImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.ORIGINAL);
 		if (originalImage != null) {
 			imageProductMap.put(ImageStyles.ORIGINAL, originalImage);
 		}
 		
 		
-		@Nullable final DisplayImage smallImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.SMALL);
+		@Nullable final DisplayImage2 smallImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.SMALL);
 		if (smallImage != null) {
 			imageProductMap.put(ImageStyles.SMALL, smallImage);
 		}
 		
 		
-		@Nullable final DisplayImage thumbnailImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.THUMBNAIL);
+		@Nullable final DisplayImage2 thumbnailImage = imageMgr.getImage(ImageTypes.PRODUCT, imageId, ImageStyles.THUMBNAIL);
 		if (thumbnailImage != null) {
 			imageProductMap.put(ImageStyles.THUMBNAIL, thumbnailImage);
 		}

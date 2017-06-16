@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.soluvas.commons.CommonsFactory;
-import org.soluvas.commons.Translation;
 import org.soluvas.commons.TranslationState;
 import org.soluvas.data.AttributeSemantic;
 import org.soluvas.data.Term2;
@@ -180,12 +178,7 @@ public class TermValue extends Value<String> {
 		super();
 	}
 
-	/**
-	 * @param id
-	 * @param displayValue
-	 * @deprecated Use {@link #TermValueImpl(String, String, String)}
-	 */
-	@Deprecated
+	
 	public TermValue(String id, String displayValue) {
 		super();
 		setValue(id);
@@ -409,6 +402,7 @@ public class TermValue extends Value<String> {
 		}
 	}
 	
+	@Override
 	public void copyFrom(org.soluvas.data.Value<?> upValue) {
 		super.copyFrom(upValue);
 		if (upValue instanceof org.soluvas.data.TermValue) {

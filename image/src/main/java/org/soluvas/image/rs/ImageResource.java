@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.soluvas.image.DisplayImage;
+import org.soluvas.image.DisplayImage2;
 import org.soluvas.image.ImageManager;
 import org.soluvas.image.ImageStyles;
 import org.soluvas.image.ImageTypes;
@@ -53,8 +53,8 @@ public class ImageResource {
 	}*/
 
 	@GET @Path("detail")
-	public Map<ImageStyles, DisplayImage> findImagesByProductId(@QueryParam("imageId") String imageId) {
-		final Map<ImageStyles, DisplayImage> imageProductMap = new HashMap<>();
+	public Map<ImageStyles, DisplayImage2> findImagesByProductId(@QueryParam("imageId") String imageId) {
+		final Map<ImageStyles, DisplayImage2> imageProductMap = new HashMap<>();
 		imageProductMap.put(ImageStyles.LARGE, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.LARGE));
 		imageProductMap.put(ImageStyles.NORMAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.NORMAL));
 		imageProductMap.put(ImageStyles.ORIGINAL, imageMgr.getSafeImage(ImageTypes.PRODUCT, imageId, ImageStyles.ORIGINAL));
