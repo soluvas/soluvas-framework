@@ -2,10 +2,11 @@
  */
 package org.soluvas.commons;
 
-import org.joda.time.DateTime;
+import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import java.io.Serializable;
+
+import org.joda.time.DateTime;
 
 /**
  * Type of <a href="https://schema.org/telephone">schema:telephone</a>.
@@ -16,7 +17,17 @@ public class PhoneNumber2 implements Serializable {
     protected Boolean primary;
     protected DateTime validationTime;
 
-    public String getPhoneNumber() {
+    public PhoneNumber2() {
+		super();
+	}
+
+	public PhoneNumber2(String phoneNumber, Boolean primary) {
+		super();
+		this.phoneNumber = phoneNumber;
+		this.primary = primary;
+	}
+
+	public String getPhoneNumber() {
         return phoneNumber;
     }
 

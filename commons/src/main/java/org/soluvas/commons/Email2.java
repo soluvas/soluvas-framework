@@ -2,19 +2,17 @@
  */
 package org.soluvas.commons;
 
-import com.google.common.base.MoreObjects;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Embeddable;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
+import com.google.common.base.MoreObjects;
+
+@SuppressWarnings("serial")
 @Embeddable
 public class Email2 implements Serializable {
 	protected String email;

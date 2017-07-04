@@ -17,6 +17,7 @@ import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Email2;
 import org.soluvas.commons.EnumNameFunction;
+import org.soluvas.commons.Organization2;
 import org.soluvas.commons.PhoneNumber2;
 import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.SlugUtils;
@@ -88,12 +89,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 
 	private void upgradeEntityFrom1To2() {
 		final DBObject query = new BasicDBObject();
-		 query.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
+//		query.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
+		query.put("schemaVersion", Person2.CURRENT_SCHEMA_VERSION);
 		final DBCursor cursor = primary.find(query);
 		log.debug("Updating for {} row(s)", cursor.size());
 		for (final DBObject dbObject : cursor) {
-			 dbObject.put("schemaVersion", Person2.CURRENT_SCHEMA_VERSION);
-			
+//			 dbObject.put("schemaVersion", Person2.CURRENT_SCHEMA_VERSION);
+			 dbObject.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
 			if (dbObject.containsField("emails")) {
 				final BasicDBList objListEmails = (BasicDBList) dbObject.get("emails");
 				for (final Object object : objListEmails) {
@@ -120,6 +122,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 				for (final Object object : objListPhoneNums) {
 					final DBObject objPN = (DBObject) object;
 					objPN.put("className", PhoneNumber2.class.getName());
+				}
+			}
+			if (dbObject.containsField("organizations")) {
+				final BasicDBList objListorganizations = (BasicDBList) dbObject.get("organizations");
+				for (final Object object : objListorganizations) {
+					final DBObject objOrganizations = (DBObject) object;
+					objOrganizations.put("className", Organization2.class.getName());
 				}
 			}
 			primary.save(dbObject);
