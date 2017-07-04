@@ -10,6 +10,7 @@ import com.google.code.morphia.annotations.Id;
 
 @Entity 
 @Converters(UnitConverter.class)
+
 public class UnitProduct implements Serializable {
 
 	/**
