@@ -9,7 +9,6 @@ import javax.annotation.Nullable;
 
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.PersonCustomerRoleHistory;
-import org.soluvas.commons.impl.PersonCustomerRoleHistoryImpl;
 import org.soluvas.data.EntityLookupException;
 import org.soluvas.data.Existence;
 import org.soluvas.data.LookupKey;
@@ -36,7 +35,7 @@ public class MongoPersonCustomerRoleHistoryRepository extends MongoRepositoryBas
 	private final CacheManager cacheMgr;
 
 	public MongoPersonCustomerRoleHistoryRepository(String tenantId, @Nullable CacheManager cacheMgr, String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
-		super(PersonCustomerRoleHistory.class, PersonCustomerRoleHistoryImpl.class, PersonCustomerRoleHistoryImpl.CURRENT_SCHEMA_VERSION, mongoUri, ReadPattern.DUAL, "personCustomerRoleHistory",
+		super(PersonCustomerRoleHistory.class, PersonCustomerRoleHistory.class, 1, mongoUri, ReadPattern.DUAL, "personCustomerRoleHistory",
 				ImmutableList.of("canonicalSlug"), migrationEnabled, autoExplainSlow,
 				Index.asc("name"), // for sorting in list
 				Index.desc("creationTime"),
