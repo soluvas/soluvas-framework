@@ -7,6 +7,7 @@ import org.soluvas.commons.MongoSysConfig;
 import org.soluvas.commons.PersonRelated;
 import org.soluvas.commons.config.SysConfigMapHolder;
 import org.soluvas.commons.tenant.TenantBeans;
+import org.soluvas.data.person.PersonCustomerRoleHistoryRepository;
 import org.soluvas.data.person.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
@@ -51,7 +52,6 @@ public class MongoPersonConfig implements PersonConfig {
 		return personRepoBeans().getCurrent();
 	}
 	
-	/**
 	@Override
 	@Bean(destroyMethod = "destroy")
 	public TenantBeans<PersonCustomerRoleHistoryRepository> personCustomerRoleHistoryRepoBeans(){
@@ -62,7 +62,7 @@ public class MongoPersonConfig implements PersonConfig {
 			protected MongoPersonCustomerRoleHistoryRepository create(String tenantId, AppManifest appManifest) throws Exception {
 				final MongoSysConfig sysConfig = sysConfigMapHolder.sysConfigMap().get(tenantId);
 				final String mongoUri = sysConfig.getMongoUri();
-				final MongoPersonCustomerRoleHistoryRepository personCustomerRoleHistoryRepo = new MongoPersonCustomerRoleHistoryRepository(tenantId, cacheMgr, mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
+				final MongoPersonCustomerRoleHistoryRepository personCustomerRoleHistoryRepo = new MongoPersonCustomerRoleHistoryRepository(mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
 				return personCustomerRoleHistoryRepo;
 			}
 		};
@@ -71,6 +71,6 @@ public class MongoPersonConfig implements PersonConfig {
 	@Bean(name={"personCustomerRoleHistoryRepo"}) @Scope("prototype")
 	public PersonCustomerRoleHistoryRepository personCustomerRoleHistoryRepo() {
 		return personCustomerRoleHistoryRepoBeans().getCurrent();
-	} **/
+	} 
 
 }
