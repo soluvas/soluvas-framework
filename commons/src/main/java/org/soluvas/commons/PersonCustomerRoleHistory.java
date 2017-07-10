@@ -13,7 +13,7 @@ import com.google.code.morphia.annotations.Property;
 public class PersonCustomerRoleHistory implements Identifiable {
 	@Id @Property("id")
 	private String id;
-	private PersonInfo personInfo;
+	private PersonInfo2 personInfo;
 	private String fromCustomerRole;
 	private String toCustomerRole;
 	private DateTime modificationTime;
@@ -28,11 +28,11 @@ public class PersonCustomerRoleHistory implements Identifiable {
 		this.id = value;
 	}
 
-	public PersonInfo getPersonInfo() {
+	public PersonInfo2 getPersonInfo() {
 		return personInfo;
 	}
 
-	public void setPersonInfo(PersonInfo personInfo) {
+	public void setPersonInfo(PersonInfo2 personInfo) {
 		this.personInfo = personInfo;
 	}
 
