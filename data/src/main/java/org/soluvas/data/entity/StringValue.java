@@ -90,14 +90,14 @@ public class StringValue extends Value<String> {
 		return StringValue;
 	}
 
-	@Override
-	public void copyFrom(org.soluvas.data.Value<?> upValue) {
-		super.copyFrom(upValue);
-		if (upValue instanceof org.soluvas.data.StringValue) {
-			final org.soluvas.data.StringValue upStringValue = (org.soluvas.data.StringValue) upValue;
-			setValue(upStringValue.getValue());
-		}
-	}
+//	@Override
+//	public void copyFrom(org.soluvas.data.Value<?> upValue) {
+//		super.copyFrom(upValue);
+//		if (upValue instanceof org.soluvas.data.StringValue) {
+//			final org.soluvas.data.StringValue upStringValue = (org.soluvas.data.StringValue) upValue;
+//			setValue(upStringValue.getValue());
+//		}
+//	}
 
 	public void fillAsNewDefault(Locale locale) {
 		setLanguage(locale.toLanguageTag());

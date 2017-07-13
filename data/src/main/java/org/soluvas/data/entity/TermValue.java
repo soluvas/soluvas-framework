@@ -12,25 +12,6 @@ import org.soluvas.data.Term2;
 
 import jline.internal.Preconditions;
 
-/**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Term Value</b></em>'.
- * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link org.soluvas.data.impl.TermValueImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.soluvas.data.impl.TermValueImpl#getSlug <em>Slug</em>}</li>
- *   <li>{@link org.soluvas.data.impl.TermValueImpl#getTerm <em>Term</em>}</li>
- *   <li>{@link org.soluvas.data.impl.TermValueImpl#getSlugPath <em>Slug Path</em>}</li>
- *   <li>{@link org.soluvas.data.impl.TermValueImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.soluvas.data.impl.TermValueImpl#getPrimaryUri <em>Primary Uri</em>}</li>
- *   <li>{@link org.soluvas.data.impl.TermValueImpl#getContent <em>Content</em>}</li>
- * </ul>
- *
- * @generated NOT
- */
 public class TermValue extends Value<String> {
 	public static String CONTENT_ATTR = "content";
 	
@@ -402,20 +383,20 @@ public class TermValue extends Value<String> {
 		}
 	}
 	
-	@Override
-	public void copyFrom(org.soluvas.data.Value<?> upValue) {
-		super.copyFrom(upValue);
-		if (upValue instanceof org.soluvas.data.TermValue) {
-			final org.soluvas.data.TermValue upTermValue = (org.soluvas.data.TermValue) upValue;
-			setContent( upTermValue.getContent() );
-			setId( upTermValue.getId() );
-			setPrimaryUri( upTermValue.getPrimaryUri() );
-			setSlug( upTermValue.getSlug() );
-			setSlugPath( upTermValue.getSlugPath() );
-//			setTerm( upTermValue.getTerm() );
-			setValue( upTermValue.getValue() );
-		}
-	}
+//	@Override
+//	public void copyFrom(org.soluvas.data.Value<?> upValue) {
+//		super.copyFrom(upValue);
+//		if (upValue instanceof org.soluvas.data.TermValue) {
+//			final org.soluvas.data.TermValue upTermValue = (org.soluvas.data.TermValue) upValue;
+//			setContent( upTermValue.getContent() );
+//			setId( upTermValue.getId() );
+//			setPrimaryUri( upTermValue.getPrimaryUri() );
+//			setSlug( upTermValue.getSlug() );
+//			setSlugPath( upTermValue.getSlugPath() );
+////			setTerm( upTermValue.getTerm() );
+//			setValue( upTermValue.getValue() );
+//		}
+//	}
 	
 	public void copyFromMongo(Term2 term2) {
 		setDisplayValue(term2.getName());

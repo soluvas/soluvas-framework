@@ -98,14 +98,14 @@ public class RangeValue<T> extends Value<T> {
 		return result.toString();
 	}
 	
-	@Override
-	public void copyFrom(org.soluvas.data.Value<?> upValue) {
-		super.copyFrom(upValue);
-		if (upValue instanceof org.soluvas.data.RangeValue) {
-			final org.soluvas.data.RangeValue<T> upRangeValue = (org.soluvas.data.RangeValue) upValue;
-			setEndValue( upRangeValue.getEndValue() );
-			setStartValue( upRangeValue.getStartValue() );
-		}
-	}
+//	@Override
+//	public void copyFrom(org.soluvas.data.Value<?> upValue) {
+//		super.copyFrom(upValue);
+//		if (upValue instanceof org.soluvas.data.RangeValue) {
+//			final org.soluvas.data.RangeValue<T> upRangeValue = (org.soluvas.data.RangeValue) upValue;
+//			setEndValue( upRangeValue.getEndValue() );
+//			setStartValue( upRangeValue.getStartValue() );
+//		}
+//	}
 
 } //RangeValueImpl

@@ -81,13 +81,13 @@ public class CurrencyValue extends Value<BigDecimal> {
 		return result.toString();
 	}
 	
-	@Override
-	public void copyFrom(org.soluvas.data.Value<?> upValue) {
-		super.copyFrom(upValue);
-		if (upValue instanceof org.soluvas.data.CurrencyValue) {
-			final org.soluvas.data.CurrencyValue upCurrencyValue = (org.soluvas.data.CurrencyValue) upValue;
-			setCurrencyUnit(upCurrencyValue.getCurrencyUnit());
-		}
-	}
+//	@Override
+//	public void copyFrom(org.soluvas.data.Value<?> upValue) {
+//		super.copyFrom(upValue);
+//		if (upValue instanceof org.soluvas.data.CurrencyValue) {
+//			final org.soluvas.data.CurrencyValue upCurrencyValue = (org.soluvas.data.CurrencyValue) upValue;
+//			setCurrencyUnit(upCurrencyValue.getCurrencyUnit());
+//		}
+//	}
 
 } //CurrencyValueImpl

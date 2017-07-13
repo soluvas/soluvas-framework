@@ -151,15 +151,15 @@ public class MeasureValue extends Value<BigDecimal> {
 		return (getValue() != null ? getValue().toString() : "") + " " + getValueUnit();
 	}
 	
-	@Override
-	public void copyFrom(org.soluvas.data.Value<?> upValue) {
-		super.copyFrom(upValue);
-		if (upValue instanceof org.soluvas.data.MeasureValue) {
-			final org.soluvas.data.MeasureValue upMeasureValue = (org.soluvas.data.MeasureValue) upValue;
-			setValue(upMeasureValue.getValue());
-			setValueUnit(upMeasureValue.getValueUnit());
-		}
-	}
+//	@Override
+//	public void copyFrom(org.soluvas.data.Value<?> upValue) {
+//		super.copyFrom(upValue);
+//		if (upValue instanceof org.soluvas.data.MeasureValue) {
+//			final org.soluvas.data.MeasureValue upMeasureValue = (org.soluvas.data.MeasureValue) upValue;
+//			setValue(upMeasureValue.getValue());
+//			setValueUnit(upMeasureValue.getValueUnit());
+//		}
+//	}
 
 	public void fillAsNewDefault(Locale locale, Unit<?> unit) {
 			setLanguage(locale.toLanguageTag());

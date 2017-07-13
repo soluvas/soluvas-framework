@@ -1,32 +1,39 @@
 package org.soluvas.data;
 
-import javax.annotation.Nullable;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Simple data structure used to hold a principal or attribute {@link Attribute}
  * and a corresponding singular {@link Value}. The value can be {@code null}.
  * Usually used with a ListView and ValueLabel.
- * @author haidar
+ * @author rudi
  */
-public class DisplayAttribute {
+public class DisplayAttribute implements Serializable {
 	
-	private final String attrDisplayName;
-	private final Value<?> value;
+	private static final long serialVersionUID = 1L;
 	
-	public DisplayAttribute(String principalDisplayName,
-			@Nullable Value<?> principalValue) {
+	private final PropertyDefinition propertyDefinition;
+	private final List<String> values;
+	
+	public DisplayAttribute(PropertyDefinition propertyDefinition, List<String> values) {
 		super();
-		this.attrDisplayName = principalDisplayName;
-		this.value = principalValue;
+		this.propertyDefinition = propertyDefinition;
+		this.values = values;
 	}
 
-	public String getAttrDisplayName() {
-		return attrDisplayName;
+	/**
+	 * @return the propertyDefinition
+	 */
+	public PropertyDefinition getPropertyDefinition() {
+		return propertyDefinition;
 	}
 
-	@Nullable
-	public Value<?> getValue() {
-		return value;
+	/**
+	 * @return the values
+	 */
+	public List<String> getValues() {
+		return values;
 	}
-
+	
 }
