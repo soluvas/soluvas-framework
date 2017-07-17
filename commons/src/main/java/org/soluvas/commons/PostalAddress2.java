@@ -39,7 +39,7 @@ import com.google.common.base.Preconditions;
  * 
  * @todo lat Latitude, lon Longitude, ele Elevation
  */
-@Embeddable
+@Embeddable 
 @Converters({DateTimeConverter.class, UUIDConverter.class})
 public class PostalAddress2 implements Describable2, Serializable {
 

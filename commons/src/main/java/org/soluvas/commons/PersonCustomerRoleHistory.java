@@ -8,7 +8,7 @@ import com.google.code.morphia.annotations.Entity;
 import com.google.code.morphia.annotations.Id;
 import com.google.code.morphia.annotations.Property;
 
-@Entity
+@Entity 
 @Converters({DateTimeConverter.class})
 public class PersonCustomerRoleHistory implements Identifiable {
 	@Id @Property("id")
