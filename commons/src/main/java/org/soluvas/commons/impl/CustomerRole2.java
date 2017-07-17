@@ -13,7 +13,7 @@ import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Id;
 
 
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") 
 @Converters({DateTimeConverter.class})
 public class CustomerRole2 implements Serializable, Identifiable {
 	

@@ -89,13 +89,13 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 
 	private void upgradeEntityFrom1To2() {
 		final DBObject query = new BasicDBObject();
-//		query.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
-		query.put("schemaVersion", Person2.CURRENT_SCHEMA_VERSION);
+		query.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
+//		query.put("schemaVersion", Person2.CURRENT_SCHEMA_VERSION);
 		final DBCursor cursor = primary.find(query);
 		log.debug("Updating for {} row(s)", cursor.size());
 		for (final DBObject dbObject : cursor) {
-//			 dbObject.put("schemaVersion", Person2.CURRENT_SCHEMA_VERSION);
-			 dbObject.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
+			 dbObject.put("schemaVersion", Person2.CURRENT_SCHEMA_VERSION);
+//			 dbObject.put("schemaVersion", PersonImpl.CURRENT_SCHEMA_VERSION);
 			if (dbObject.containsField("emails")) {
 				final BasicDBList objListEmails = (BasicDBList) dbObject.get("emails");
 				for (final Object object : objListEmails) {
