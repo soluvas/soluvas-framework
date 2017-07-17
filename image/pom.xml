@@ -26,6 +26,12 @@
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.data</artifactId>
 		</dependency>
+		<!-- FIXME: remove dependency on scala.util.Try from MediaRepository / Trashable -->
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.commons</artifactId>

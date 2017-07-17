@@ -71,10 +71,12 @@
 			<version>0.99.1.soluvas2</version>
 			<optional>true</optional>
 		</dependency>
-		
+
+		<!-- FIXME: remove dependency on scala.util.Try from GenericLookup and Trashable -->
 		<dependency>
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

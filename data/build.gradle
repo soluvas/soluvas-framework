@@ -1,4 +1,4 @@
 dependencies {
     compile project('commons')
-    compile libraries.neo4j, libraries.scala
+    compile libraries.neo4j
 }

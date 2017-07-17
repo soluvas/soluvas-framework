@@ -17,6 +17,12 @@
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.data</artifactId>
 		</dependency>
+		<!-- FIXME: remove dependency on scala.util.Try from PersonRepository / Trashable -->
+		<dependency>
+			<groupId>org.scala-lang</groupId>
+			<artifactId>scala-library</artifactId>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>

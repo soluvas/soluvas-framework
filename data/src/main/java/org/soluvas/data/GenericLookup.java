@@ -1,12 +1,12 @@
 package org.soluvas.data;
 
+import scala.util.Try;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
 import javax.annotation.Nullable;
-
-import scala.util.Try;
 
 /**
  * Enhanced entity lookup function which throws {@link EntityLookupException}.
@@ -42,8 +42,10 @@ public interface GenericLookup<T> {
 	 * @throws IllegalArgumentException if {@code keys} is {@code null}
 	 * @throws UnsupportedOperationException if {@code lookupKey} or {@code statusMask} is not supported due to implementation limitation
 	 * @todo Please create lookupAll() method for each {@link LookupKey}, and remove this method. Note that since it's an interface
-	 * 		most of the methods won't be implemented. 
+	 * 		most of the methods won't be implemented.
+	 * 	@deprecated Do not use scala Try.
 	 */
+	@Deprecated
 	public <S extends T, K extends Serializable> Map<K, Try<S>> lookupAll(StatusMask statusMask, LookupKey lookupKey, Collection<K> keys);
 
 	/**

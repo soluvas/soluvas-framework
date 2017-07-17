@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.soluvas.data.TrashResult;
 import org.soluvas.data.UntrashResult;
-
 import scala.util.Try;
 
 /**
@@ -15,6 +14,7 @@ import scala.util.Try;
  * <p>Untrashing is a bit problematic because most stores override the status
  * attribute when trashing, i.e. the previous status value was lost.
  * @author ceefour
+ * @deprecated Do not use scala Try
  */
 public interface Trashable<T, ID extends Serializable> {
 
