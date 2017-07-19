@@ -34,7 +34,10 @@ public class MongoPersonCustomerRoleHistoryRepository extends MongoRepositoryBas
 		final DBCursor cursor = primary.find(query);
 		log.debug("Updating for {} row(s)", cursor.size());
 		for (final DBObject dbObject : cursor) {
-			dbObject.put("personInfo.className", PersonInfo2.class.getName());
+			if (dbObject.containsField("personInfo")) {
+				final DBObject objPersonInfo = (DBObject) dbObject.get("personInfo");
+				objPersonInfo.put("className", PersonInfo2.class.getName());
+			}
 			primary.save(dbObject);
 		}//end of looping
 	}
