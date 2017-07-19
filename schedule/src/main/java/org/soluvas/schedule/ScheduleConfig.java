@@ -115,15 +115,15 @@ public class ScheduleConfig {
 		//# Configure ThreadPool  
 		//#============================================================================
 
-		props.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
-		props.put("org.quartz.threadPool.threadCount", 25);
-		props.put("org.quartz.threadPool.threadPriority", 5);
+//		props.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
+//		props.put("org.quartz.threadPool.threadCount", 25);
+//		props.put("org.quartz.threadPool.threadPriority", 5);
 
 		//#============================================================================
 		//# Configure JobStore  
 		//#============================================================================
 
-		props.put("org.quartz.jobStore.misfireThreshold", 60000);
+//		props.put("org.quartz.jobStore.misfireThreshold", 60000);
 
 		props.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
 //				props.put("org.quartz.jobStore.driverDelegateClass", "org.quartz.impl.jdbcjobstore.oracle.OracleDelegate");
@@ -132,7 +132,7 @@ public class ScheduleConfig {
 //				props.put("org.quartz.jobStore.tablePrefix", "QRTZ_");
 
 		props.put("org.quartz.jobStore.isClustered", true);
-		props.put("org.quartz.jobStore.clusterCheckinInterval", 20000);
+//		props.put("org.quartz.jobStore.clusterCheckinInterval", 20000);
 
 //				//#============================================================================
 //				//# Configure Datasources  
