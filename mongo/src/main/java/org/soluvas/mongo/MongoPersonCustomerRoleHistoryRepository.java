@@ -24,7 +24,7 @@ public class MongoPersonCustomerRoleHistoryRepository extends MongoRepositoryBas
 	public MongoPersonCustomerRoleHistoryRepository(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(PersonCustomerRoleHistory.class, PersonCustomerRoleHistory.class, 1l, mongoUri, 
 				ReadPattern.DUAL, "personCustomerRoleHistory", migrationEnabled, autoExplainSlow);
-		//upgradeEntityFrom1To2();
+		upgradeEntityFrom1To2();
 	}
 	
 	private void upgradeEntityFrom1To2() {
