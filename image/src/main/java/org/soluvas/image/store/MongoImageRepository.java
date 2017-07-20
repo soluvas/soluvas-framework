@@ -161,7 +161,7 @@ public class MongoImageRepository extends PagingAndSortingRepositoryBase<Image, 
 	
 	// should be network executor, to perform mongodb operations concurrently
 	// although probably better to do it in bulk instead, or both (i.e. 32 bulk inserts in the executor, of 10 documents each)
-	private final ListeningExecutorService executor = MoreExecutors.sameThreadExecutor();
+	private final ListeningExecutorService executor = MoreExecutors.newDirectExecutorService();
 	
 	// URI: ~repo.publicUri~{namespace}/{styleCode}/{imageId}_{styleVariant}.{extension}
 

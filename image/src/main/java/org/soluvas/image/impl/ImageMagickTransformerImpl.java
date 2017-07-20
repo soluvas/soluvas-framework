@@ -610,7 +610,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 	}
 
 	/**
-	 * Uses default {@link MoreExecutors#sameThreadExecutor()}
+	 * Uses default {@link MoreExecutors#newDirectExecutorService()}
 	 * which is better for ImageMagick's built-in parallel processing.
 	 * @param destination
 	 */
@@ -622,7 +622,7 @@ public class ImageMagickTransformerImpl extends ImageTransformerImpl implements 
 	/**
 	 * <b>Warning</b>: Running multiple instances of ImageMagick is more memory & IO intensive,
 	 * it's better to use {@link #ImageMagickTransformerImpl(ImageConnector)}
-	 * which uses the default {@link MoreExecutors#sameThreadExecutor()} (single-threaded)
+	 * which uses the default {@link MoreExecutors#newDirectExecutorService()} (single-threaded)
 	 * but does not limit ImageMagick's parallel processing.
 	 * @param executor
 	 * @param destination

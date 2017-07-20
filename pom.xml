@@ -847,12 +847,15 @@
 				<version>2.5</version>
 			</dependency>
 			<dependency>
-				<!-- WARNING: Do NOT upgrade to Guava 20.0 yet, Spring Data Cassandra 1.4 still requires a deprecated class:
+				<!--
+				WARNING: Spring Data Cassandra 1.4 still requires a deprecated class last available in Guava 19:
 				https://google.github.io/guava/releases/19.0/api/docs/com/google/common/util/concurrent/FutureFallback.html
-				http://stackoverflow.com/a/40691831/122441 -->
+				http://stackoverflow.com/a/40691831/122441
+				Should be safe to upgrade if you don't use Cassandra.
+				-->
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>19.0</version>
+				<version>22.0</version>
 			</dependency>
 			
 			<dependency>

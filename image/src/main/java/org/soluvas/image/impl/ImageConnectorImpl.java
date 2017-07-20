@@ -67,7 +67,7 @@ public abstract class ImageConnectorImpl implements ImageConnector {
 	 * @see #getExecutor()
 	 * @ordered
 	 */
-	protected static final ListeningExecutorService EXECUTOR_EDEFAULT = MoreExecutors.sameThreadExecutor();
+	protected static final ListeningExecutorService EXECUTOR_EDEFAULT = MoreExecutors.newDirectExecutorService();
 	/**
 	 * The cached value of the '{@link #getExecutor() <em>Executor</em>}' attribute.
 	 * <!-- begin-user-doc -->

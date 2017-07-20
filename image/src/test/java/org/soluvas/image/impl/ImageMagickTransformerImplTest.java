@@ -35,7 +35,7 @@ public class ImageMagickTransformerImplTest {
 			.getLogger(ImageMagickTransformerImplTest.class);
 	
 	@DataPoint
-	public static final ListeningExecutorService sameThread = MoreExecutors.sameThreadExecutor();
+	public static final ListeningExecutorService sameThread = MoreExecutors.newDirectExecutorService();
 	@DataPoint
 	public static final ListeningExecutorService multi = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(
 			Runtime.getRuntime().availableProcessors()));

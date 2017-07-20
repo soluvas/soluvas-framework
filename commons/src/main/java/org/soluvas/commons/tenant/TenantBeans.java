@@ -82,7 +82,7 @@ public abstract class TenantBeans<T> implements TenantRepositoryListener {
 	 * <p>Perhaps wait for Spring 4?
 	 */
 //	@Inject @Cpu
-	private final ListeningExecutorService cpuExecutor = MoreExecutors.sameThreadExecutor();
+	private final ListeningExecutorService cpuExecutor = MoreExecutors.newDirectExecutorService();
 
 	/**
 	 * @param implClass Must be the implementation class, because {@code init()} and {@code destroy()}
