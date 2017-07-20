@@ -24,7 +24,7 @@ public class MongoPersonCustomerRoleHistoryRepository extends MongoRepositoryBas
 	public MongoPersonCustomerRoleHistoryRepository(String mongoUri, boolean migrationEnabled, boolean autoExplainSlow) {
 		super(PersonCustomerRoleHistory.class, PersonCustomerRoleHistory.class, 1l, mongoUri, 
 				ReadPattern.DUAL, "personCustomerRoleHistory", migrationEnabled, autoExplainSlow);
-		//upgradeEntityFrom1To2();
+		upgradeEntityFrom1To2();
 	}
 	
 	private void upgradeEntityFrom1To2() {
@@ -34,7 +34,10 @@ public class MongoPersonCustomerRoleHistoryRepository extends MongoRepositoryBas
 		final DBCursor cursor = primary.find(query);
 		log.debug("Updating for {} row(s)", cursor.size());
 		for (final DBObject dbObject : cursor) {
-			dbObject.put("personInfo.className", PersonInfo2.class.getName());
+			if (dbObject.containsField("personInfo")) {
+				final DBObject objPersonInfo = (DBObject) dbObject.get("personInfo");
+				objPersonInfo.put("className", PersonInfo2.class.getName());
+			}
 			primary.save(dbObject);
 		}//end of looping
 	}
