@@ -49,6 +49,7 @@ public class Person2 implements Serializable {
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	protected static final String NAME_EDEFAULT = null;
