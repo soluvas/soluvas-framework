@@ -50,6 +50,7 @@ public class Imgix {
         params.put("w", size);
         params.put("h", size);
         params.put("fit", "crop");
+        params.put("crop", "faces");
         return this;
     }
 
