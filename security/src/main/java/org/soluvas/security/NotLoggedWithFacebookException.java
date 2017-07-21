@@ -10,6 +10,10 @@ package org.soluvas.security;
 @SuppressWarnings("serial")
 public class NotLoggedWithFacebookException extends SecurityException {
 
+	private String error;
+	private String errorCode;
+	private String errorReason;
+
 	/**
 	 * 
 	 */
@@ -46,5 +50,30 @@ public class NotLoggedWithFacebookException extends SecurityException {
 	public NotLoggedWithFacebookException(Throwable cause, String message, Object... args) {
 		super(cause, message, args);
 	}
-	
+
+	/**
+	 * Sets error details from Facebook.
+	 * @param error
+	 * @param errorCode
+	 * @param errorReason
+	 * @return
+	 */
+	public NotLoggedWithFacebookException error(String error, String errorCode, String errorReason) {
+		this.error = error;
+		this.errorCode = errorCode;
+		this.errorReason = errorReason;
+		return this;
+	}
+
+	public String getError() {
+		return error;
+	}
+
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+	public String getErrorReason() {
+		return errorReason;
+	}
 }
