@@ -367,7 +367,7 @@ public abstract class PageImpl extends TemplateImpl implements Page {
 		final List<Email> emails = ImmutableList.copyOf( Lists.transform(getRecipients(), new Function<Recipient, Email>() {
 			@Override @Nullable
 			public Email apply(@Nullable Recipient input) {
-				return compose(input);
+				return PageImpl.this.compose(input);
 			}
 		}) );
 		return emails;
