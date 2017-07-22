@@ -13,6 +13,12 @@ public interface CountryRepository {
 	 */
 	List<Country> findAll();
 
+	/**
+	 * List all countries with calling code.
+	 * @return
+	 */
+	List<Country> findAllWithCallingCode();
+
 	Country getCountry(String iso2orIso3)
 			throws IllegalArgumentException;
 	

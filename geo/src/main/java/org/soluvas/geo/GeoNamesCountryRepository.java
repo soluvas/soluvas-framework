@@ -6,10 +6,12 @@ import java.net.URL;
 import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.collect.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,11 +24,6 @@ import com.opencsv.CSVReader;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 import com.googlecode.concurrenttrees.radix.ConcurrentRadixTree;
 import com.googlecode.concurrenttrees.radix.RadixTree;
 import com.googlecode.concurrenttrees.radix.node.concrete.DefaultCharArrayNodeFactory;
@@ -67,6 +64,13 @@ public class GeoNamesCountryRepository implements CountryRepository {
     @Override
     public List<Country> findAll() {
         return ImmutableList.copyOf(countryMap.values());
+    }
+
+    @Override
+    public List<Country> findAllWithCallingCode() {
+        final List<Country> unsorted = countryMap.values().stream().filter(it -> !it.getCallingCodes().isEmpty()).collect(Collectors.toList());
+        final Ordering<Country> ordering = Ordering.<Country>from((a, b) -> a.getName().compareToIgnoreCase(b.getName()));
+        return ordering.immutableSortedCopy(unsorted);
     }
 
     @Override
