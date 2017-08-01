@@ -219,6 +219,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>4.0.4.RELEASE</version>
+<!-- 				<optional>true</optional> -->
+			</dependency>
 
 			<dependency>
 				<groupId>org.apache.karaf.shell</groupId>
