@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import com.google.common.base.Optional;
 
 /**
@@ -63,12 +65,16 @@ public class CategoryInfo2 implements Serializable {
 				if (!translations.containsKey(curLanguageTag)) {
 					return getName();
 				} else {
-					final Map<String, String> translation = translations.get(curLanguageTag);
-					if (!translation.containsKey(CategoryInfo.NAME_ATTR)) {
-						return getName();
+					@Nullable final Map<String, String> translation = translations.get(curLanguageTag);
+					if (translation != null) {
+						if (!translation.containsKey(CategoryInfo.NAME_ATTR)) {
+							return getName();
+						} else {
+							final String translatedValue = translation.get(CategoryInfo.NAME_ATTR);
+							return translatedValue;
+						}
 					} else {
-						final String translatedValue = translation.get(CategoryInfo.NAME_ATTR);
-						return translatedValue;
+						return getName();
 					}
 				}
 			}
