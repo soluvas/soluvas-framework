@@ -11,7 +11,7 @@ package org.soluvas.security;
 public class NotLoggedWithFacebookException extends SecurityException {
 
 	private String error;
-	private String errorCode;
+	private Integer errorCode;
 	private String errorReason;
 
 	/**
@@ -54,11 +54,11 @@ public class NotLoggedWithFacebookException extends SecurityException {
 	/**
 	 * Sets error details from Facebook.
 	 * @param error
-	 * @param errorCode
+	 * @param errorCode Must be integer because will be passed to Google Analytics event.
 	 * @param errorReason
 	 * @return
 	 */
-	public NotLoggedWithFacebookException error(String error, String errorCode, String errorReason) {
+	public NotLoggedWithFacebookException error(String error, Integer errorCode, String errorReason) {
 		this.error = error;
 		this.errorCode = errorCode;
 		this.errorReason = errorReason;
@@ -69,7 +69,7 @@ public class NotLoggedWithFacebookException extends SecurityException {
 		return error;
 	}
 
-	public String getErrorCode() {
+	public Integer getErrorCode() {
 		return errorCode;
 	}
 
