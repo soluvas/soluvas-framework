@@ -10,6 +10,8 @@ import org.soluvas.commons.config.CommonsWebConfig;
 import org.soluvas.commons.config.MultiTenantWebAddressConfig;
 import org.soluvas.commons.tenant.TenantBeans;
 import org.soluvas.commons.tenant.TenantRepository;
+import org.soluvas.email.BouncedEmailConfig;
+import org.soluvas.email.BouncedEmailRepository;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailFactory;
 import org.soluvas.email.EmailManager;
@@ -19,11 +21,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 
 import com.google.common.eventbus.EventBus;
 
+@Import(BouncedEmailConfig.class)
 @Configuration
 @ComponentScan("org.soluvas.email.shell")
 public class EmailConfig {
@@ -36,6 +40,8 @@ public class EmailConfig {
 	private MultiTenantWebAddressConfig webAddressConfig;
 	@Autowired(required=false) @Nullable
 	private TenantRepository<?> tenantRepo;
+	@Inject
+	private BouncedEmailRepository bouncedEmailRepo;
 	
 	@Bean
 	public EmailCatalog emailCatalog() {
@@ -78,7 +84,7 @@ public class EmailConfig {
 				final WebAddress webAddress = webAddressConfig.webAddressMap().get(tenantId);
 				final EmailManagerImpl emailMgr = new EmailManagerImpl(emailCatalog(), layoutClass, layoutNsPrefix,
 						layoutName, smtpHost, smtpPort, smtpUser, smtpPassword,
-						smtpSecurity, appManifest, webAddress);
+						smtpSecurity, appManifest, webAddress, bouncedEmailRepo);
 				return emailMgr;
 			}
 		};

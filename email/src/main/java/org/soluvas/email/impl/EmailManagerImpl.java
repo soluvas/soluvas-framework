@@ -9,10 +9,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -30,6 +33,7 @@ import org.soluvas.commons.locale.FormatCurrency;
 import org.soluvas.commons.locale.FormatDateTime;
 import org.soluvas.commons.locale.FormatMeasure;
 import org.soluvas.commons.util.AppUtils;
+import org.soluvas.email.BouncedEmailRepository;
 import org.soluvas.email.DefaultScope;
 import org.soluvas.email.EmailCatalog;
 import org.soluvas.email.EmailException;
@@ -79,7 +83,10 @@ import com.google.common.collect.Maps;
  */
 public class EmailManagerImpl extends MinimalEObjectImpl.Container implements EmailManager {
 	
-	private static final MustacheFactory MF = new DefaultMustacheFactory(); 
+	private static final MustacheFactory MF = new DefaultMustacheFactory();
+	
+	@Inject
+	private final BouncedEmailRepository bouncedEmailRepo;
 	
 	/**
 	 * The default value of the '{@link #getSmtpUser() <em>Smtp User</em>}' attribute.
@@ -216,7 +223,8 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 			Class<?> defaultLayoutClass, String defaultLayoutNsPrefix,
 			String defaultLayoutName, String smtpHost, Integer smtpPort,
 			String smtpUser, String smtpPassword,
-			EmailSecurity smtpSecurity, AppManifest appManifest, WebAddress webAddress) {
+			EmailSecurity smtpSecurity, AppManifest appManifest, WebAddress webAddress,
+			final BouncedEmailRepository bouncedEmailRepo) {
 		super();
 		this.emailCatalog = emailCatalog;
 		this.defaultLayoutClass = defaultLayoutClass;
@@ -230,6 +238,7 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 		mailSession = EmailUtils.createSmtpSession(smtpHost, smtpPort, smtpUser, smtpPassword, smtpSecurity);
 		this.appManifest = appManifest;
 		this.webAddress = webAddress;
+		this.bouncedEmailRepo = bouncedEmailRepo;
 	}
 
 	/**
@@ -448,11 +457,35 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 			Email email = entry.getValue();
 			email.setMailSession(mailSession);
 			try {
-				String messageId = email.send();
-				SendResult<T> result = new SendResult<>(template, model, email, messageId);
-				results.put(entry.getKey(), result);
-				log.info("Sent email {} '{}' using {} from {} to {}", 
-						messageId, email.getSubject(), model.getClass().getName(), email.getFromAddress(), email.getToAddresses());
+				final List<String> emailList = getEmailList(email);
+				final Map<String, Boolean> bouncedEmail = bouncedEmailRepo.existsByEmails(emailList);
+				bouncedEmail.entrySet().stream().forEach(new Consumer<Map.Entry<String, Boolean>>() {
+					@Override
+					public void accept(Map.Entry<String,Boolean> entry) {
+						if (entry.getValue().booleanValue()){
+							email.getToAddresses().removeIf(new java.util.function.Predicate<InternetAddress>() {
+								@Override
+								public boolean test(InternetAddress ia) {
+									return ia.getAddress().equals(entry.getKey());
+								};
+							});
+							log.warn(
+									String.format("Email '%s' has been registered as Bounced Email, so it will not be send!!!", 
+											entry.getKey()));
+						}
+					};
+				});
+				if (email.getToAddresses() == null || email.getToAddresses().isEmpty()) {
+					log.warn("No send email becuase no recipients!");
+					results.put(entry.getKey(), null);
+				} else {
+					String messageId = email.send();
+					SendResult<T> result = new SendResult<>(template, model, email, messageId);
+					results.put(entry.getKey(), result);
+					log.info("Sent email {} '{}' using {} from {} to {}", 
+							messageId, email.getSubject(), model.getClass().getName(), email.getFromAddress(), email.getToAddresses());
+				}
+				
 			} catch (org.apache.commons.mail.EmailException e) {
 				log.error(String.format("Cannot send email '%s' using %s from %s to %s: %s", 
 						email.getSubject(), model.getClass().getName(), email.getFromAddress(), email.getToAddresses(), e), e);
@@ -506,10 +539,34 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 					}
 					Preconditions.checkNotNull(email.getMailSession(),
 							"Invalid mailSession for %s", email);
-					result = email.send();
-					log.info("Email '{}' sent from {} to {}: {}",
-							email.getSubject(),
-							email.getFromAddress(), email.getToAddresses(), result);
+	
+					final List<String> emailList = getEmailList(email);
+					final Map<String, Boolean> bouncedEmail = bouncedEmailRepo.existsByEmails(emailList);
+					bouncedEmail.entrySet().stream().forEach(new Consumer<Map.Entry<String, Boolean>>() {
+						@Override
+						public void accept(Map.Entry<String,Boolean> entry) {
+							if (entry.getValue().booleanValue()){
+								email.getToAddresses().removeIf(new java.util.function.Predicate<InternetAddress>() {
+									@Override
+									public boolean test(InternetAddress ia) {
+										return ia.getAddress().equals(entry.getKey());
+									};
+								});
+								log.warn(
+										String.format("Email '%s' has been registered as Bounced Email, so it will not be send!!!", 
+												entry.getKey()));
+							}
+						};
+					});
+					if (email.getToAddresses() == null || email.getToAddresses().isEmpty()) {
+						log.warn("No send email becuase no recipients!");
+						result = null;
+					} else {
+						result = email.send();
+						log.info("Email '{}' sent from {} to {}: {}",
+								email.getSubject(),
+								email.getFromAddress(), email.getToAddresses(), result);
+					}
 					return result;
 				} catch (org.apache.commons.mail.EmailException e) {
 					log.error("Cannot send email from " + email.getFromAddress() + " to " +
@@ -529,6 +586,15 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 	@Override
 	public List<String> sendAll(Page page, Session mailSession) {
 		return doSendAll(page, Optional.of(mailSession));
+	}
+	
+	private List<String> getEmailList(final Email email) {
+		return email.getToAddresses().stream().map(new java.util.function.Function<InternetAddress, String>() {
+			@Override
+			public String apply(InternetAddress t) {
+				return t.getAddress();
+			}
+		}).collect(Collectors.toList());
 	}
 
 	/**
