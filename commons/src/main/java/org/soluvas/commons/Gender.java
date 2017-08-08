@@ -244,5 +244,15 @@ public enum Gender implements Enumerator {
 	public String toString() {
 		return literal;
 	}
+
+	public Gender getOther() {
+		if (this == MALE) {
+			return FEMALE;
+		} else if (this == FEMALE) {
+			return MALE;
+		} else {
+			return this; // unknown
+		}
+	}
 	
 } //Gender
