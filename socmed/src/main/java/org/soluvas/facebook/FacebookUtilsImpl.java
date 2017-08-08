@@ -117,7 +117,7 @@ public class FacebookUtilsImpl implements FacebookUtils {
 	public static String refreshPhotoFromFacebook(final Long facebookId, final String personName,
 			ImageRepository imageRepo) {
 		// Get Image
-		final String photoUrl = "http://graph.facebook.com/"+ facebookId + "/picture?type=large";
+		final String photoUrl = "http://graph.facebook.com/"+ facebookId + "/picture?width=4288";
 		try (final CloseableHttpClient httpClient = HttpClients.createDefault()) {
 			final HttpGet httpGet = new HttpGet(photoUrl);
 			log.debug("Photo URL for Facebook user {} ({}) is {}", facebookId, personName, photoUrl);
