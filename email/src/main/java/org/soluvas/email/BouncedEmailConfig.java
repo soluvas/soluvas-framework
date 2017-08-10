@@ -18,14 +18,17 @@ public class BouncedEmailConfig {
 	
 	@Bean @Scope("prototype")
 	public BouncedEmailRepository bouncedEmailRepository() {
-		final String mongoUri = env.getProperty("bouncedEmailMongoUri", "");
+		String mongoUri = env.getRequiredProperty("adminMongoUri");
+		String dbname = "bippo_email";
+		String realMongoUri = mongoUri.replace("admin", dbname);
+
 		Preconditions.checkState(!Strings.isNullOrEmpty(mongoUri), 
 				"Mongo URI 'bouncedEmailMongoUri' must not be null or empty for creating '%s'",
 				BouncedEmailRepository.class.getName());
-		final boolean mongoMigrationEnabled = env.getProperty("mongoMigrationEnabled", Boolean.class, true);
-		final boolean mongoAutoExplainSlow = env.getProperty("mongoAutoExplainSlow", Boolean.class, true);
+		boolean mongoMigrationEnabled = env.getProperty("mongoMigrationEnabled", Boolean.class, true);
+		boolean mongoAutoExplainSlow = env.getProperty("mongoAutoExplainSlow", Boolean.class, true);
 		
-		return new BouncedEmailRepositoryImpl(mongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
+		return new BouncedEmailRepositoryImpl(realMongoUri, mongoMigrationEnabled, mongoAutoExplainSlow);
 	}
 
 }
