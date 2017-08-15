@@ -42,5 +42,19 @@ public class BouncedEmailRepositoryImpl extends MongoRepositoryBase<BouncedEmail
 		log.debug("Bounced for email: {}", bouncedEmailMap.entrySet());
 		return bouncedEmailMap;
 	}
+	
+	
+	@Override
+	public boolean existByEmail(String email){
+		final BasicDBObject query = new BasicDBObject("email", email);
+		boolean exists = countByQuery(query) > 0;
+		return exists;
+	}
+	
+	@Override
+	public BouncedEmail findByEmail(String email){
+		final BasicDBObject query = new BasicDBObject("email", email);
+		return findOneByQuery(query);
+	}
 
 }

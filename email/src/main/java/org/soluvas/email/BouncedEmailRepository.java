@@ -14,4 +14,8 @@ public interface BouncedEmailRepository extends PagingAndSortingRepository<Bounc
 
 	Map<String, Boolean> existsByEmails(Collection<String> emailList);
 
+	boolean existByEmail(String email);
+
+	BouncedEmail findByEmail(String trim);
+
 }

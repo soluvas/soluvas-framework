@@ -17,6 +17,7 @@ public class BouncedEmail implements Serializable, Identifiable {
 	private String email;
 	private String bounceType;
 	private Date timestamp;
+	private Integer count;
 	
 	@Override
 	public String getId() {
@@ -43,6 +44,12 @@ public class BouncedEmail implements Serializable, Identifiable {
 	}
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
+	}
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 	
 	
