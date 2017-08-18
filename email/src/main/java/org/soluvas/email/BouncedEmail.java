@@ -2,6 +2,7 @@ package org.soluvas.email;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 import org.soluvas.commons.Identifiable;
 
@@ -17,7 +18,7 @@ public class BouncedEmail implements Serializable, Identifiable {
 	private String email;
 	private String bounceType;
 	private Date timestamp;
-	private Integer count;
+	private Map<String, Integer> count;
 	
 	@Override
 	public String getId() {
@@ -45,12 +46,11 @@ public class BouncedEmail implements Serializable, Identifiable {
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
-	public Integer getCount() {
+	public Map<String, Integer> getCount() {
 		return count;
 	}
-	public void setCount(Integer count) {
+	public void setCount(Map<String, Integer> count) {
 		this.count = count;
 	}
-	
 	
 }
