@@ -9,7 +9,11 @@ import java.util.Map;
 import org.soluvas.commons.TranslationState;
 import org.soluvas.data.AttributeSemantic;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 @SuppressWarnings("serial")
+@JsonTypeInfo(use=com.fasterxml.jackson.annotation.JsonTypeInfo.Id.CLASS)
 public abstract class Value<T> implements Serializable {
 	
 	public static String VALUE_ATTR = "value";
@@ -38,10 +42,6 @@ public abstract class Value<T> implements Serializable {
 	protected static final String DISPLAY_VALUE_EDEFAULT = null;
 
 	protected String displayValue = DISPLAY_VALUE_EDEFAULT;
-
-	public Value() {
-		super();
-	}
 
 	public TranslationState getTranslationState() {
 		return translationState;
@@ -95,6 +95,7 @@ public abstract class Value<T> implements Serializable {
 		this.displayValue = newDisplayValue;
 	}
 
+	@JsonIgnore
 	public String getString() {
 		return getValue() != null ? getValue().toString() : null;
 	}
@@ -153,85 +154,5 @@ public abstract class Value<T> implements Serializable {
 		return true;
 	}
 	
-//	public void copyFrom(org.soluvas.data.Value<?> upValue) {
-//		setDisplayValue(upValue.getDisplayValue());
-//		setLanguage(upValue.getLanguage());
-//		setOriginalLanguage(upValue.getOriginalLanguage());
-//		setSemantic(upValue.getSemantic());
-//		setTranslationState(upValue.getTranslationState());
-//		getTranslations().putAll(Maps.transformValues(upValue.getTranslations().map(), new Function<org.soluvas.commons.Translation, Map<String, String>>() {
-//			@Override
-//			public Map<String, String> apply(org.soluvas.commons.Translation input) {
-//				final Map<String, String> upTranslation = new HashMap<>();
-//				upTranslation.putAll(input.getMessages().map());
-//				return upTranslation;
-//			}
-//		}));
-//	}
-	
-//	public org.soluvas.data.Value<?> castToEmf() {
-//		final org.soluvas.data.Value<?> emfValue;
-//		if (this instanceof org.soluvas.data.entity.CurrencyValue) {
-//			final CurrencyValue upCurrencyValue = new CurrencyValue();
-//			fillDefaultValue(upCurrencyValue);
-//			
-//			upCurrencyValue.setCurrencyUnit(((org.soluvas.data.entity.CurrencyValue) this).getCurrencyUnit());
-//			
-//			emfValue = upCurrencyValue;
-//		} else if (this instanceof org.soluvas.data.entity.MeasureValue) {
-//			final MeasureValue upMeasureValue = new MeasureValue();
-//			fillDefaultValue(upMeasureValue);
-//			
-//			upMeasureValue.setValue(((org.soluvas.data.entity.MeasureValue) this).getValue());
-//			upMeasureValue.setValueUnit(((org.soluvas.data.entity.MeasureValue) this).getValueUnit());
-//
-//			emfValue = upMeasureValue;
-//		} else if (this instanceof org.soluvas.data.entity.RangeValue) {
-//			final RangeValue<T> upRangeValue = new RangeValue();
-//			fillDefaultValue(upRangeValue);
-//			
-//			upRangeValue.setStartValue(((org.soluvas.data.entity.RangeValue<T>) this).getStartValue());
-//			upRangeValue.setEndValue(((org.soluvas.data.entity.RangeValue<T>) this).getEndValue());
-//			
-//			emfValue = upRangeValue;
-//		} else if (this instanceof org.soluvas.data.entity.StringValue) {
-//			final StringValue upStringValue = new StringValue();
-//			fillDefaultValue(upStringValue);
-//			
-//			upStringValue.setValue(((org.soluvas.data.entity.StringValue)this).getValue());
-//			
-//			emfValue = upStringValue;
-//		} else if (this instanceof org.soluvas.data.entity.TermValue) {
-//			final TermValue upTermValue = new TermValue();
-//			fillDefaultValue(upTermValue);
-//			
-//			upTermValue.setContent(((org.soluvas.data.entity.TermValue) this).getContent());
-//			upTermValue.setId(((org.soluvas.data.entity.TermValue) this).getId());
-//			upTermValue.setPrimaryUri(((org.soluvas.data.entity.TermValue) this).getPrimaryUri());
-//			upTermValue.setSlug(((org.soluvas.data.entity.TermValue) this).getSlug());
-//			upTermValue.setSlugPath(((org.soluvas.data.entity.TermValue) this).getSlugPath());
-//			upTermValue.setValue(((org.soluvas.data.entity.TermValue) this).getValue());
-//			
-//			emfValue = upTermValue;
-//		} else {
-//			throw new DataException(String.format("Unsupported for value '%s'", this.getClass().getName()));
-//		}
-//		
-//		return emfValue;
-//	}
-//	
-//	private void fillDefaultValue(org.soluvas.data.Value<?> emfValue) {
-//		emfValue.setDisplayValue( getDisplayValue() );
-//		emfValue.setLanguage( getLanguage() );
-//		emfValue.setOriginalLanguage( getOriginalLanguage() );
-//		emfValue.setSemantic( getSemantic() );
-//		emfValue.getTranslations().putAll( Maps.transformValues(getTranslations(), new Function<Map<String, String>, org.soluvas.commons.Translation>() {
-//			@Override
-//			public org.soluvas.commons.Translation apply(Map<String, String> input) {
-//				return new TranslationImpl(getLanguage(), input);
-//			}
-//		}) );
-//		emfValue.setTranslationState( getTranslationState() );
-//	}
 	
 } //ValueImpl
