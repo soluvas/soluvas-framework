@@ -35,7 +35,13 @@ public class CurrencyUnitConverter extends TypeConverter implements SimpleValueC
 
 	@Override
 	public @Nullable String encode(Object value, MappedField optionalExtraInfo) {
-		return value != null ? value.toString() : null;
+//		return value != null ? value.toString() : null;
+		if (value != null && value instanceof CurrencyUnit) {
+			final CurrencyUnit currency = (CurrencyUnit) value;
+			return currency.getCurrencyCode();
+		} else {
+			return null;
+		}
 	}
 
 }
