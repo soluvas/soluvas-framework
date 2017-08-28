@@ -10,5 +10,7 @@ public interface PersonCustomerRoleHistoryRepository {
 	public void addNewHistory(PersonCustomerRoleHistory newHistory);
 
 	public List<PersonCustomerRoleHistory> findByToCustomerRoleId(Set<String> toCustomerRoleIds);
+
+	public List<PersonCustomerRoleHistory> findByPersonInfoId(String id);
 	
 }

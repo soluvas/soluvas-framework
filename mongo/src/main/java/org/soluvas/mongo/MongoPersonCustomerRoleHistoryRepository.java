@@ -7,6 +7,9 @@ import org.soluvas.commons.PersonCustomerRoleHistory;
 import org.soluvas.commons.PersonInfo2;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageOffsetRequest;
+import org.soluvas.data.domain.PageRequest;
+import org.soluvas.data.domain.Sort;
+import org.soluvas.data.domain.Sort.Direction;
 import org.soluvas.data.person.PersonCustomerRoleHistoryRepository;
 
 import com.mongodb.BasicDBObject;
@@ -56,5 +59,14 @@ public class MongoPersonCustomerRoleHistoryRepository extends MongoRepositoryBas
 		Page<PersonCustomerRoleHistory> page = findAllByQuery(query, new PageOffsetRequest(0, 100));
 		
 		return page.getContent();
+	}
+
+	@Override
+	public List<PersonCustomerRoleHistory> findByPersonInfoId(String id) {
+		BasicDBObject query = new BasicDBObject();
+		query.put("personInfo.id", id);
+			
+		Sort sort = new Sort(Direction.DESC, "modificationTime");
+	    return findAllByQuery(query, new PageRequest(0, 100, sort)).getContent();
 	}
 }
