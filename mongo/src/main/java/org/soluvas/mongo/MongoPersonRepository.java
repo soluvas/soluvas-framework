@@ -274,7 +274,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	}
 
 	@Override
-	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask, String phoneNumber) {
+	public boolean isMobilePhoneNumberAlreadyRegistered(StatusMask statusMask, String phoneNumber) {
 		final Optional<String> optExists = getIdByMobileOrPhoneNumber(statusMask, phoneNumber);
 		return optExists.isPresent();
 	}

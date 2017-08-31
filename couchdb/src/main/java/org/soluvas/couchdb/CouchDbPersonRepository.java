@@ -638,7 +638,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	}
 
 	@Override
-	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask,
+	public boolean isMobilePhoneNumberAlreadyRegistered(StatusMask statusMask,
 			String mobileNumber) {
 		throw new UnsupportedOperationException();
 	}

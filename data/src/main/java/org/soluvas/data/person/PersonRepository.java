@@ -76,7 +76,7 @@ public interface PersonRepository extends
 	@Nullable
 	public Person2 findOneByMobileOrPhoneNumber(StatusMask statusMask, @Nullable String mobileOrPhoneNumber);
 	
-	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask, String mobileOrPhoneNumber);
+	public boolean isMobilePhoneNumberAlreadyRegistered(StatusMask statusMask, String mobileOrPhoneNumber);
 	
 	Optional<String> getIdByMobileOrPhoneNumber(StatusMask statusMask, String mobileOrPhoneNumber);
 

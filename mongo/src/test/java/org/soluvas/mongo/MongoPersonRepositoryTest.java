@@ -123,7 +123,7 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void existsByPhoneNumberOrMobileNumber() {
 		final String mobileOrPhoneNumber = "081655649656";
-		final boolean existsByMobileOrPhoneNumber = personRepo.isExistsByMobileOrPhoneNumber(StatusMask.RAW, mobileOrPhoneNumber);
+		final boolean existsByMobileOrPhoneNumber = personRepo.isMobilePhoneNumberAlreadyRegistered(StatusMask.RAW, mobileOrPhoneNumber);
 		assertTrue(existsByMobileOrPhoneNumber);
 	}
 	

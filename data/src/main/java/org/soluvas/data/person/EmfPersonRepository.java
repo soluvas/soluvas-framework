@@ -446,7 +446,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public boolean isExistsByMobileOrPhoneNumber(StatusMask statusMask,
+	public boolean isMobilePhoneNumberAlreadyRegistered(StatusMask statusMask,
 			String mobileNumber) {
 		throw new UnsupportedOperationException();
 	}
