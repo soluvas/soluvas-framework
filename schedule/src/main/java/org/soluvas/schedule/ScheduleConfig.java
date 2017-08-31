@@ -109,30 +109,30 @@ public class ScheduleConfig {
 		//#============================================================================
 
 //				props.put("org.quartz.scheduler.instanceName", "SoluvasClusteredScheduler");
-		// /*$*/ props.put("org.quartz.scheduler.instanceId", "AUTO");
+		/*$*/ props.put("org.quartz.scheduler.instanceId", "AUTO");
 
 		//#============================================================================
 		//# Configure ThreadPool  
 		//#============================================================================
 
-		// /*$*/ props.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
-		// /*$*/ props.put("org.quartz.threadPool.threadCount", String.valueOf(25));
-		// /*$*/ props.put("org.quartz.threadPool.threadPriority", String.valueOf(5));
+		/*$*/ props.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
+		/*$*/ props.put("org.quartz.threadPool.threadCount", String.valueOf(25));
+		/*$*/ props.put("org.quartz.threadPool.threadPriority", String.valueOf(5));
 
 		//#============================================================================
 		//# Configure JobStore  
 		//#============================================================================
 
-		// /*$*/ props.put("org.quartz.jobStore.misfireThreshold", String.valueOf(60000));
+		/*$*/ props.put("org.quartz.jobStore.misfireThreshold", String.valueOf(60000));
 
-		// /*$*/ props.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
+		/*$*/ props.put("org.quartz.jobStore.class", "org.quartz.impl.jdbcjobstore.JobStoreTX");
 //				props.put("org.quartz.jobStore.driverDelegateClass", "org.quartz.impl.jdbcjobstore.oracle.OracleDelegate"); --> postgres
-		// /*$*/ props.put("org.quartz.jobStore.useProperties", false);
+		/*$*/ props.put("org.quartz.jobStore.useProperties", false);
 //				props.put("org.quartz.jobStore.dataSource", "myDS"); --> di atas defini ds nya
 //				props.put("org.quartz.jobStore.tablePrefix", "QRTZ_" --> public.qrtz_);
 
-		// /*$*/ props.put("org.quartz.jobStore.isClustered", true);
-		// /*$*/ props.put("org.quartz.jobStore.clusterCheckinInterval", String.valueOf(20000));
+		/*$*/ props.put("org.quartz.jobStore.isClustered", true);
+		/*$*/ props.put("org.quartz.jobStore.clusterCheckinInterval", String.valueOf(20000));
 
 //				//#============================================================================
 //				//# Configure Datasources  --> GA PERLU, karna udh di set di atas
