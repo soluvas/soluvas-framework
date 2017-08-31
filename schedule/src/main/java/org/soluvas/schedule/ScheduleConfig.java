@@ -100,7 +100,7 @@ public class ScheduleConfig {
 //		props.put("org.quartz.threadPool.threadCount", String.valueOf(4));
 		
 		props.put("org.quartz.jobStore.driverDelegateClass", PostgreSQLDelegate.class.getName());
-		props.put(StdSchedulerFactory.PROP_SCHED_SKIP_UPDATE_CHECK, "true");
+//		props.put(StdSchedulerFactory.PROP_SCHED_SKIP_UPDATE_CHECK, "true"); https://github.com/psi-probe/psi-probe/issues/1053
 		props.put(StdSchedulerFactory.PROP_JOB_STORE_PREFIX + "." + StdSchedulerFactory.PROP_TABLE_PREFIX, "public.qrtz_");
 		
 		//Example Properties For A Clustered Scheduler

@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
 import org.quartz.impl.jdbcjobstore.PostgreSQLDelegate;
 import org.quartz.plugins.history.LoggingJobHistoryPlugin;
@@ -101,7 +100,7 @@ public class ScheduleMultiConfig {
 			schedulerFactoryBean.setTransactionManager(txMgr);
 			final Properties props = new Properties();
 			props.put("org.quartz.jobStore.driverDelegateClass", PostgreSQLDelegate.class.getName());
-			props.put(StdSchedulerFactory.PROP_SCHED_SKIP_UPDATE_CHECK, "true");
+//			props.put(StdSchedulerFactory.PROP_SCHED_SKIP_UPDATE_CHECK, "true"); https://github.com/psi-probe/psi-probe/issues/1053
 			props.put(StdSchedulerFactory.PROP_JOB_STORE_PREFIX + "." + StdSchedulerFactory.PROP_TABLE_PREFIX, tenantId + ".qrtz_");
 			schedulerFactoryBean.setQuartzProperties(props);
 			
