@@ -116,7 +116,7 @@ public class ScheduleConfig {
 		//#============================================================================
 
 		/*$*/ props.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
-		/*$*/ props.put("org.quartz.threadPool.threadCount", String.valueOf(4));
+		/*$*/ props.put("org.quartz.threadPool.threadCount", String.valueOf(1));
 		/*$*/ props.put("org.quartz.threadPool.threadPriority", String.valueOf(5));
 
 		//#============================================================================
