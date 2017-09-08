@@ -220,6 +220,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 	protected static final boolean ZENDESK_INTEGRATION_EDEFAULT = false;
 	protected boolean zendeskIntegration = ZENDESK_INTEGRATION_EDEFAULT;
 	protected String tenantId;
+	protected Double performanceValue;
 	
 	public Person2() {
 		super();
@@ -1030,6 +1031,14 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		return photoId;
 	}
 	
+	public Double getPerformanceValue() {
+		return performanceValue;
+	}
+
+	public void setPerformanceValue(Double performanceValue) {
+		this.performanceValue = performanceValue;
+	}
+
 	@JsonIgnore
 	private void setImageId(String imageId) {
 		// serialization only, no deserialization
