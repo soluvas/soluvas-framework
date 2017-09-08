@@ -11,7 +11,6 @@ import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo2;
 import org.soluvas.commons.entity.Person2;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Preconditions;
 
@@ -55,7 +54,7 @@ public class PersonInfo implements Serializable {
 		setSlug(personInfoUp.getSlug());
 		setMobileNumber(personInfoUp.getMobileNumber());
 	}
-	
+
 	public PersonInfo(PersonInfo2 personInfo2) {
 		Preconditions.checkNotNull(personInfo2, "Person Info EMF must not be null!");
 		setEmail(personInfo2.getEmail());
@@ -66,7 +65,7 @@ public class PersonInfo implements Serializable {
 		setSlug(personInfo2.getSlug());
 		setMobileNumber(personInfo2.getMobileNumber());
 	}
-	
+
 	public PersonInfo2 toInfo2() {
 		final PersonInfo2 info2 = new PersonInfo2();
 		info2.setEmail(getEmail());
@@ -102,7 +101,7 @@ public class PersonInfo implements Serializable {
 	 * 
 	 */
 	@Basic()
-	@Type(type = "org.soluvas.jpa.PersistentEnum", parameters = @Parameter(name = "enumClass", value = "org.soluvas.commons.Gender") )
+	@Type(type = "org.soluvas.jpa.PersistentEnum", parameters = @Parameter(name = "enumClass", value = "org.soluvas.commons.Gender"))
 	private Gender gender = null;
 
 	/**
@@ -385,7 +384,7 @@ public class PersonInfo implements Serializable {
 	public static PersonInfo fromPerson(Person2 person) {
 		return fromPerson(person, null);
 	}
-	
+
 	public static PersonInfo fromPerson2(Person2 person) {
 		return fromPerson2(person, null);
 	}
@@ -401,7 +400,7 @@ public class PersonInfo implements Serializable {
 		info.setDomain(domain);
 		return info;
 	}
-	
+
 	public static PersonInfo fromPerson2(Person2 person, @Nullable String domain) {
 		final PersonInfo info = new PersonInfo();
 		info.setId(person.getId());
@@ -424,9 +423,9 @@ public class PersonInfo implements Serializable {
 		personInfoCommons.setSlug(personInfoJpa.getSlug());
 		return personInfoCommons;
 	}
-	
-	public static org.soluvas.commons.PersonInfo2 toClasic(PersonInfo personInfoJpa) {
-		final org.soluvas.commons.PersonInfo2 personInfoCommons =new PersonInfo2();
+
+	public static PersonInfo2 toClasic(PersonInfo personInfoJpa) {
+		final PersonInfo2 personInfoCommons = new PersonInfo2();
 		personInfoCommons.setEmail(personInfoJpa.getEmail());
 		personInfoCommons.setGender(personInfoJpa.getGender());
 		personInfoCommons.setId(personInfoJpa.getId());
