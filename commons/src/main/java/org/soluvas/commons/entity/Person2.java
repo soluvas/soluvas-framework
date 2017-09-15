@@ -25,6 +25,7 @@ import org.soluvas.commons.PhoneNumber2;
 import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.PublicationStatus;
 import org.soluvas.commons.SignupSourceType;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.CurrencyUnitConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
@@ -45,7 +46,7 @@ import com.google.common.collect.Iterables;
 
 @Entity(noClassnameStored=true)
 @Converters({BigDecimalConverter.class, DateTimeConverter.class, CurrencyUnitConverter.class, UnitConverter.class, LocalDateConverter.class})
-public class Person2 implements Serializable, Identifiable, PersonLike  {
+public class Person2 implements Serializable, Identifiable, PersonLike, Timestamped  {
 	/**
 	 * 
 	 */
@@ -290,17 +291,21 @@ public class Person2 implements Serializable, Identifiable, PersonLike  {
 		id = newId;
 	}
 
+	@Override
 	public DateTime getCreationTime() {
 		return creationTime;
 	}
+	@Override
 	public void setCreationTime(DateTime newCreationTime) {
 		creationTime = newCreationTime;
 	}
 
+	@Override
 	public DateTime getModificationTime() {
 		return modificationTime;
 	}
 
+	@Override
 	public void setModificationTime(DateTime newModificationTime) {
 		modificationTime = newModificationTime;
 	}
