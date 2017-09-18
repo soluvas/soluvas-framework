@@ -58,25 +58,29 @@ public class CategoryInfo2 implements Serializable {
 		if (Optional.fromNullable(getLanguage()).or("id-ID").equals(curLanguageTag)) {
 			return getName();
 		} else {
-			final Map<String, Map<String, String>> translations = getTranslations();
-			if (translations.isEmpty()) {
-				return getName();
-			} else {
-				if (!translations.containsKey(curLanguageTag)) {
+			@Nullable final Map<String, Map<String, String>> translations = getTranslations();
+			if (translations != null) {
+				if (translations.isEmpty()) {
 					return getName();
 				} else {
-					@Nullable final Map<String, String> translation = translations.get(curLanguageTag);
-					if (translation != null) {
-						if (!translation.containsKey(CategoryInfo.NAME_ATTR)) {
-							return getName();
-						} else {
-							final String translatedValue = translation.get(CategoryInfo.NAME_ATTR);
-							return translatedValue;
-						}
-					} else {
+					if (!translations.containsKey(curLanguageTag)) {
 						return getName();
+					} else {
+						@Nullable final Map<String, String> translation = translations.get(curLanguageTag);
+						if (translation != null) {
+							if (!translation.containsKey(CategoryInfo.NAME_ATTR)) {
+								return getName();
+							} else {
+								final String translatedValue = translation.get(CategoryInfo.NAME_ATTR);
+								return translatedValue;
+							}
+						} else {
+							return getName();
+						}
 					}
 				}
+			} else {
+				return getName();
 			}
 		}
 	}
