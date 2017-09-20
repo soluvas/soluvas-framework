@@ -1,16 +1,20 @@
 package org.soluvas.jpa.jpa;
 
 import java.io.Serializable;
+
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
+
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
 import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo2;
+import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.entity.Person2;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Preconditions;
 
@@ -22,7 +26,7 @@ import com.google.common.base.Preconditions;
 @Embeddable()
 @MappedSuperclass
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PersonInfo implements Serializable {
+public class PersonInfo implements Serializable, PersonLike {
 
 	private static final long serialVersionUID = 1L;
 
@@ -158,6 +162,7 @@ public class PersonInfo implements Serializable {
 	 * @return the value of '<em><b>id</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -185,6 +190,7 @@ public class PersonInfo implements Serializable {
 	 * @return the value of '<em><b>name</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -211,6 +217,7 @@ public class PersonInfo implements Serializable {
 	 * @return the value of '<em><b>gender</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public Gender getGender() {
 		return gender;
 	}
@@ -237,6 +244,7 @@ public class PersonInfo implements Serializable {
 	 * @return the value of '<em><b>slug</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getSlug() {
 		return slug;
 	}
@@ -263,6 +271,7 @@ public class PersonInfo implements Serializable {
 	 * @return the value of '<em><b>email</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getEmail() {
 		return email;
 	}
@@ -289,6 +298,7 @@ public class PersonInfo implements Serializable {
 	 * @return the value of '<em><b>photoId</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getPhotoId() {
 		return photoId;
 	}

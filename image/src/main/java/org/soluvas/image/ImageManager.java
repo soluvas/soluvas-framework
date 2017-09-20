@@ -173,7 +173,7 @@ public interface ImageManager {
 	 * @generated
 	 */
 	Map<String, DisplayImage2> getSafePersonPhotos(ImageType namespace, Collection<? extends PersonLike> people, ImageStyle style);
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
