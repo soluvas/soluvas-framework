@@ -4,10 +4,15 @@ import java.io.Serializable;
 
 import javax.measure.unit.Unit;
 
+import org.soluvas.commons.mongo.UnitConverter;
+
+import com.google.code.morphia.annotations.Converters;
+
 /**
  * @author eki
  *
  */
+@Converters({UnitConverter.class})
 public class PropertyDefinitionInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -69,6 +74,14 @@ public class PropertyDefinitionInfo implements Serializable {
 	public String toString() {
 		return "PropertyDefinitionInfo [id=" + id + ", name=" + name + ", defaultEnum=" + defaultEnum + ", defaultKind="
 				+ defaultKind + ", defaultUnit=" + defaultUnit + "]";
+	}
+
+	public void copyFrom(PropertyDefinition object) {
+		setDefaultEnum(object.getDefaultEnum());
+		setDefaultKind(object.getDefaultKind());
+		setDefaultUnit(object.getDefaultUnit());
+		setId(object.getId());
+		setName(object.getName());
 	}
 	
 }

@@ -104,5 +104,13 @@ public class StringValue extends Value<String> {
 		setOriginalLanguage(locale.toLanguageTag());
 		setTranslationState(TranslationState.ORIGINAL);
 	}
+	
+	public void fillAsNew(Locale locale, String value) {
+		setLanguage(locale.toLanguageTag());
+		setOriginalLanguage(locale.toLanguageTag());
+		setTranslationState(TranslationState.ORIGINAL);
+		setValue(value);
+		setDisplayValue(value);
+	}
 
 } // StringValueImpl

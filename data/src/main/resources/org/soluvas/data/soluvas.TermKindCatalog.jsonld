@@ -112,5 +112,12 @@
     "expandable" : null,
     "language" : "en_US",
     "translations" : { }
+  }, {
+    "id" : "Flavor",
+    "name" : "Flavor",
+    "description" : "Flavor",
+    "expandable" : null,
+    "language" : "en_US",
+    "translations" : { }
   } ]
 }

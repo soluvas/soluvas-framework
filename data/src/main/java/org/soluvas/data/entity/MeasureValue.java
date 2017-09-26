@@ -162,10 +162,10 @@ public class MeasureValue extends Value<BigDecimal> {
 //	}
 
 	public void fillAsNewDefault(Locale locale, Unit<?> unit) {
-			setLanguage(locale.toLanguageTag());
-			setOriginalLanguage(locale.toLanguageTag());
-			setTranslationState(TranslationState.ORIGINAL);
-			setValueUnit(unit);
+		setLanguage(locale.toLanguageTag());
+		setOriginalLanguage(locale.toLanguageTag());
+		setTranslationState(TranslationState.ORIGINAL);
+		setValueUnit(unit);
 	}
 
 } //MeasureValueImpl
