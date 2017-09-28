@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 
 import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
-import org.soluvas.commons.CustomerRole;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.entity.Person2;
@@ -194,5 +193,7 @@ public interface PersonRepository extends
 
 	Person2 findOneByEmail(AccountStatus status, String email);
 
+	double getPerformanceValue(String id);
+	
 }
 

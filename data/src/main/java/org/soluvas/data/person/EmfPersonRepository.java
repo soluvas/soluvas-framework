@@ -41,6 +41,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
+
 import scala.util.Try;
 
 /**
@@ -523,6 +524,12 @@ public class EmfPersonRepository extends
 	@Override
 	public Person2 findOneByEmail(AccountStatus status, String email) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public double getPerformanceValue(String id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

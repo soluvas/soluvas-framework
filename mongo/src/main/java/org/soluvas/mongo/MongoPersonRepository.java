@@ -982,6 +982,20 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		}
 	}
 
+	@Override
+	public double getPerformanceValue(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("performanceValue", true);
+		final DBObject dbObject = findOneSecondary(query, fields, "getPerformanceValue", id);
+		if (dbObject != null) {
+			if (dbObject.containsField("performanceValue")) {
+				return Double.valueOf( String.valueOf(dbObject.get("performanceValue")) );
+			}
+			return 0;
+		}
+		return 0;
+	}
+
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
 	// slug) {

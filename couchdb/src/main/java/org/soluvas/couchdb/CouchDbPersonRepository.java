@@ -717,4 +717,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public double getPerformanceValue(String id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
