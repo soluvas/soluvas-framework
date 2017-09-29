@@ -59,6 +59,7 @@ import org.soluvas.data.repository.StatusAwareRepositoryBase;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.env.Environment;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -120,6 +121,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	private BeanFactory beanFactory;
 	@Autowired(required=false)
 	private TenantRepository<?> tenantRepo;
+	@Inject
+	private Environment env;
 	
 	protected EntityManager em;
 	protected Class<T> entityClass;
@@ -133,6 +136,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	private String liquibasePath;
 	@Nullable
 	private Set<String> initialTenantIds;
+	
+	
 	
 	/**
 	 * At this point, {@link EntityManager} is not yet ready, so use {@link #onAfterInit(TransactionStatus)} for that.
@@ -256,7 +261,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	public final void init() throws SQLException, LiquibaseException, IOException {
 		Preconditions.checkNotNull(txManager, "PlatformTransactionManager txManager was not @Inject-ed properly.");
 		
-		if (liquibasePath != null) {
+		final boolean liquibaseMigrateEnabled = env.containsProperty("liquibaseMigrateEnabled") ? env.getProperty("liquibaseMigrateEnabled", Boolean.class) : true;
+		if (liquibasePath != null && liquibaseMigrateEnabled) {
 			Preconditions.checkNotNull(dataSource, "dataSource was not @Inject-ed properly.");
 			migrate(initialTenantIds);
 		}
