@@ -46,7 +46,7 @@ public class PostalAddress2 implements Describable2, Serializable {
 	private static final Logger log = LoggerFactory
 			.getLogger(PostalAddress2.class);
 
-	public static PostalAddress2 getDefaultPrimaryAddress() {
+	public static PostalAddress2 createPrimary() {
 		final PostalAddress2 postalAddress = new PostalAddress2();
 		postalAddress.setId(UUID.randomUUID());
 		postalAddress.setPrimary(true);
