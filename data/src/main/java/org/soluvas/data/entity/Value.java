@@ -127,32 +127,51 @@ public abstract class Value<T> implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((getString() == null) ? 0 : getString().hashCode());
+		result = prime * result + ((displayValue == null) ? 0 : displayValue.hashCode());
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((originalLanguage == null) ? 0 : originalLanguage.hashCode());
+		result = prime * result + ((semantic == null) ? 0 : semantic.hashCode());
+		result = prime * result + ((translationState == null) ? 0 : translationState.hashCode());
+		result = prime * result + ((translations == null) ? 0 : translations.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (!(obj instanceof Value)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		Value other = (Value) obj;
-		if (getString() == null) {
-			if (other.getString() != null) {
+		if (displayValue == null) {
+			if (other.displayValue != null)
 				return false;
-			}
-		} else if (!getString().equals(other.getString())) {
+		} else if (!displayValue.equals(other.displayValue))
 			return false;
-		}
+		if (language == null) {
+			if (other.language != null)
+				return false;
+		} else if (!language.equals(other.language))
+			return false;
+		if (originalLanguage == null) {
+			if (other.originalLanguage != null)
+				return false;
+		} else if (!originalLanguage.equals(other.originalLanguage))
+			return false;
+		if (semantic != other.semantic)
+			return false;
+		if (translationState != other.translationState)
+			return false;
+		if (translations == null) {
+			if (other.translations != null)
+				return false;
+		} else if (!translations.equals(other.translations))
+			return false;
 		return true;
 	}
 	
+
 	
 } //ValueImpl
