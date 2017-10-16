@@ -166,6 +166,7 @@ public class MeasureValue extends Value<BigDecimal> {
 		setOriginalLanguage(locale.toLanguageTag());
 		setTranslationState(TranslationState.ORIGINAL);
 		setValueUnit(unit);
+		setDisplayValue(getValue().toString());
 	}
 
 } //MeasureValueImpl
