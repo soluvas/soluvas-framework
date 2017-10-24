@@ -723,4 +723,9 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		return 0;
 	}
 
+	@Override
+	public boolean updatePerformanceValues(Map<String, Double> upPerformanceMap) {
+		return false;
+	}
+
 }

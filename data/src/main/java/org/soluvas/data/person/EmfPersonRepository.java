@@ -532,4 +532,9 @@ public class EmfPersonRepository extends
 		return 0;
 	}
 
+	@Override
+	public boolean updatePerformanceValues(Map<String, Double> upPerformanceMap) {
+		return false;
+	}
+
 }

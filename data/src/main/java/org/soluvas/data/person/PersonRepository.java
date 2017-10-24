@@ -2,6 +2,7 @@ package org.soluvas.data.person;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -194,6 +195,8 @@ public interface PersonRepository extends
 	Person2 findOneByEmail(AccountStatus status, String email);
 
 	double getPerformanceValue(String id);
+	
+	boolean updatePerformanceValues(final Map<String, Double> upPerformanceMap);
 	
 }
 

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -52,6 +54,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.BulkWriteOperation;
+import com.mongodb.BulkWriteResult;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
@@ -994,6 +998,39 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 			return 0;
 		}
 		return 0;
+	}
+
+	@Override
+	public boolean updatePerformanceValues(Map<String, Double> upPerformanceMap) {
+		final BulkWriteOperation bulk = primary.initializeUnorderedBulkOperation();
+		
+		upPerformanceMap.entrySet().forEach(new Consumer<Entry<String, Double>>() {
+			@Override
+			public void accept(Entry<String, Double> entry) {
+				final Double performanceValue = entry.getValue();
+				final String id = entry.getKey();
+				
+				final DBObject query = new BasicDBObject();
+				query.put("_id", id);
+				
+				final DBObject update = new BasicDBObject();
+				update.put("$set", new BasicDBObject("performanceValue", performanceValue));
+
+				bulk.find(query).updateOne(update);
+			}
+		});
+		
+		final BulkWriteResult writeResult = bulk.execute();
+		
+		if (upPerformanceMap.size() != writeResult.getMatchedCount()) {
+			log.error("Expected {} matched, but got {}. inserted={}, modified={} of {}, upserted={}",
+					upPerformanceMap.size(), writeResult.getMatchedCount(), writeResult.getInsertedCount(), writeResult.getModifiedCount(), writeResult.getMatchedCount(), writeResult.getUpserts().size());
+			return false;
+		} else {
+			log.info("Succeeded updating {} qtys (actual modified={}). Input: {}",
+					writeResult.getMatchedCount(), writeResult.getModifiedCount(), upPerformanceMap);
+			return true;
+		}
 	}
 
 	// @Override
