@@ -1,7 +1,6 @@
 package org.soluvas.mongo;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -58,6 +57,7 @@ import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 import com.mongodb.ReadPreference;
 import com.mongodb.WriteResult;
+
 /**
  * {@link PagingAndSortingRepository} implemented using MongoDB, with {@link SchemaVersionable} support.
  * <p>{@link SchemaVersionable#getSchemaVersion()} is <b>not</b> used for filtering documents,
@@ -100,14 +100,14 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	}
 	
 	/**
-	 * Closure used by {@link MongoRepositoryBase#findPrimary(DBObject, DBObject, String, Object[], CursorFunction)}
-	 * and {@link MongoRepositoryBase#findSecondary(DBObject, DBObject, String, Object[], CursorFunction)}
+	 * Closure used by {@link MongoRepositoryBase#findPrimary(DBObject, DBObject, DBObject, long, long, CursorFunction, String, Object...)}
+	 * and {@link MongoRepositoryBase#findPrimary(DBObject, DBObject, DBObject, long, long, CursorFunction, String, Object...)}
 	 * to process {@link DBCursor}.
 	 * @author rudi
 	 *
 	 * @param <R>
 	 */
-	protected static interface CursorFunction<R> {
+	protected interface CursorFunction<R> {
 		/**
 		 * @param cursor This cursor will be {@link Closeable#close()}d by {@link MongoRepositoryBase}.
 		 * @return
@@ -120,7 +120,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * Determines which {@link MongoClient}s will be used by this repository.
 	 * @author ceefour
 	 */
-	protected static enum ReadPattern {
+	protected enum ReadPattern {
 		/**
 		 * Only use a {@link MongoClient} with {@link ReadPreference#primary()}.
 		 * This is seldom used, and has better data consistency.
@@ -181,8 +181,11 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param intfClass
 	 * @param currentSchemaVersion e.g. {@link PersonImpl#CURRENT_SCHEMA_VERSION}.
 	 * @param mongoUri
+	 * @param readPattern
 	 * @param collName
-	 * @param indexedFields
+	 * @param migrationEnabled
+	 * @param autoExplainSlow
+	 * @param indexes
 	 */
 	public MongoRepositoryBase(Class<T> intfClass, Class<? extends T> implClass, long currentSchemaVersion, 
 			String mongoUri, ReadPattern readPattern, String collName, boolean migrationEnabled, boolean autoExplainSlow,
@@ -208,9 +211,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				Preconditions.checkState(primDb.getMongo().getReadPreference() == ReadPreference.primary(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo primDb %s",
 						ReadPreference.primary(), primDb.getMongo().getReadPreference(), primDb.getMongo());
-				Preconditions.checkState(primDb.getMongo().getConnector().isOpen(),
-						"Primary %s Mongo %s %s must be open", 
-						intfClass.getSimpleName(), primDb.getMongo(), primDb.getMongo().getReadPreference());
 				primary = primDb.getCollection(collName);
 				secondary = primary;
 				break;
@@ -220,9 +220,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				Preconditions.checkState(spDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo spDb %s",
 						ReadPreference.secondaryPreferred(), spDb.getMongo().getReadPreference(), spDb.getMongo());
-				Preconditions.checkState(spDb.getMongo().getConnector().isOpen(),
-						"SecondaryPreferred %s Mongo %s %s must be open", 
-						intfClass.getSimpleName(), spDb.getMongo(), spDb.getMongo().getReadPreference());
 				secondary = spDb.getCollection(collName);
 				primary = secondary;
 				break;
@@ -232,17 +229,11 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 				Preconditions.checkState(primaryDb.getMongo().getReadPreference() == ReadPreference.primary(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo primaryDb %s",
 						ReadPreference.primary(), primaryDb.getMongo().getReadPreference(), primaryDb.getMongo());
-				Preconditions.checkState(primaryDb.getMongo().getConnector().isOpen(),
-						"Primary %s Mongo %s %s must be open", 
-						intfClass.getSimpleName(), primaryDb.getMongo(), primaryDb.getMongo().getReadPreference());
 				primary = primaryDb.getCollection(collName);
 				final DB secondaryDb = MongoUtils.getDb(realMongoUri, ReadPreference.secondaryPreferred());
 				Preconditions.checkState(secondaryDb.getMongo().getReadPreference() == ReadPreference.secondaryPreferred(),
 						"Expected ReadPreference '%s' but got '%s' for Mongo secondaryDb %s",
 						ReadPreference.secondaryPreferred(), secondaryDb.getMongo().getReadPreference(), secondaryDb.getMongo());
-				Preconditions.checkState(secondaryDb.getMongo().getConnector().isOpen(),
-						"SecondaryPreferred %s Mongo %s %s must be open", 
-						intfClass.getSimpleName(), secondaryDb.getMongo(), secondaryDb.getMongo().getReadPreference());
 				secondary = secondaryDb.getCollection(collName);
 				break;
 			default:
@@ -287,8 +278,12 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param intfClass
 	 * @param currentSchemaVersion e.g. {@link PersonImpl#CURRENT_SCHEMA_VERSION}.
 	 * @param mongoUri
+	 * @param readPattern
 	 * @param collName
-	 * @param indexedFields
+	 * @param uniqueFields
+	 * @param migrationEnabled
+	 * @param autoExplainSlow
+	 * @param indexes
 	 * @deprecated Use {@link #MongoRepositoryBase(Class, Class, long, String, ReadPattern, String, boolean, boolean, Index...)}
 	 */
 	@Deprecated
@@ -369,7 +364,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		beforeEnsureIndexes();
 		log.debug("Ensuring {} indexes on {}: {}", indexedFields.length, collName, indexedFields);
 		for (String field : indexedFields) {
-			primary.ensureIndex(new BasicDBObject(field, 1));
+			primary.createIndex(new BasicDBObject(field, 1));
 		}
 	}
 	
@@ -449,8 +444,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 
 	/**
 	 * @see org.soluvas.data.repository.PagingAndSortingRepositoryBase#add(java.util.Collection)
-	 * @throws MongoException
-	 * @throws MongoException.DuplicateKey
+	 * @throws MongoRepositoryException
 	 */
 	@Override
 	public <S extends T> Collection<S> add(Collection<S> entities) {
@@ -474,18 +468,10 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 					.transform(entities, new EntityToDBObject()));
 			beforeSaveDBObjects(dbObjs, ModificationTimePolicy.UPDATE);
 			dbObjsStr = dbObjs.toString();
-			final WriteResult writeResult = primary.insert(dbObjs);
-//			log.debug("writeResult: {}", writeResult);
-			if (writeResult.getLastError() != null
-					&& writeResult.getLastError().getException() != null) {
-				throw new MongoRepositoryException(writeResult.getLastError()
-						.getException(), "%s: Cannot add %d %s documents: %s",
-						db.getName(), entities.size(), collName, ids);
-			}
-			log.info("Added {} {} documents: {}", entities.size(), collName,
-					ids);
+			primary.insert(dbObjs);
+			log.info("Added {} {} documents: {}", entities.size(), collName, ids);
 			return ImmutableList.copyOf(entities);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new MongoRepositoryException(e, "Cannot add %s %s documents: %s", entities.size(), collName, ids);
 		}
 	}
@@ -495,7 +481,7 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * setCreationTime and setModificationTime is already handled if entity implements
 	 * {@link Timestamped}.
 	 * @param entity
-	 * @param mtimePolicy TODO
+	 * @param mtimePolicy
 	 */
 	protected void beforeSave(T entity, org.soluvas.data.repository.CrudRepository.ModificationTimePolicy mtimePolicy) {
 		if (entity instanceof Timestamped) {
@@ -544,13 +530,14 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 			final S entity = Iterables.getOnlyElement(entities.values());
 			final DBObject dbo = new EntityToDBObject().apply(entity);
 			beforeSaveDBObject(dbo, mtimePolicy);
-			final WriteResult writeResult = primary.update(new BasicDBObject("_id", entityId), dbo);
-			if (writeResult.getLastError() != null && writeResult.getLastError().getException() != null) {
-				throw new MongoRepositoryException(writeResult.getLastError().getException(),
+			try {
+				primary.update(new BasicDBObject("_id", entityId), dbo);
+				log.info("Modified {} document '{}'", collName, entityId);
+				return ImmutableList.of(entity);
+			} catch (Exception e) {
+				throw new MongoRepositoryException(e,
 						"%s: Cannot modify %s documents '%s'", db.getName(), collName, entityId);
 			}
-			log.info("Modified {} document '{}'", collName, entityId);
-			return ImmutableList.of(entity);
 		} else {
 			// bulk update (requires MongoDB ≥ 2.6)
 			final ImmutableList.Builder<S> modifiedb = ImmutableList.builder();
@@ -638,13 +625,13 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	@Override
 	public final long deleteIds(Collection<String> ids) {
 		log.debug("Deleting {} {}: {}", ids.size(), collName, ids);
-		final WriteResult result = primary.remove(new BasicDBObject("_id", new BasicDBObject("$in", ids)));
-		if (result.getLastError().getException() != null) {
-			throw new MongoRepositoryException(result.getLastError().getException(),
-					"%s: Cannot delete %s %s", db.getName(), collName, ids);
+		try {
+			final WriteResult result = primary.remove(new BasicDBObject("_id", new BasicDBObject("$in", ids)));
+			log.info("Deleted {} out of {} {} ({})", result.getN(), ids.size(), collName, ids);
+			return result.getN();
+		} catch (Exception e) {
+			throw new MongoRepositoryException(e, "%s: Cannot delete %s %s", db.getName(), collName, ids);
 		}
-		log.info("Deleted {} out of {} {} ({})", result.getN(), ids.size(), collName, ids);
-		return result.getN();
 	}
 
 	@Override
@@ -848,7 +835,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param limit 0 means no limit.
 	 * @param methodName
 	 * @param params
-	 * @param func
 	 * @return
 	 */
 	protected ImmutableList<T> findPrimary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
@@ -865,7 +851,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param limit 0 means no limit.
 	 * @param methodName
 	 * @param params
-	 * @param func
 	 * @return
 	 */
 	protected List<DBObject> findPrimaryAsDBObjects(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
@@ -922,7 +907,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param limit 0 means no limit.
 	 * @param methodName
 	 * @param params
-	 * @param func
 	 * @return
 	 */
 	protected ImmutableList<T> findSecondary(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
@@ -939,7 +923,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * @param limit 0 means no limit.
 	 * @param methodName
 	 * @param params
-	 * @param func
 	 * @return
 	 */
 	protected List<DBObject> findSecondaryAsDBObjects(@Nullable DBObject query, @Nullable DBObject fields, @Nullable DBObject sort, long skip, long limit,
@@ -1047,7 +1030,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #primary} client.
 	 * @param query
 	 * @param fields
-	 * @param orderBy
 	 * @param methodName
 	 * @param params
 	 * @return
@@ -1108,7 +1090,6 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	 * Runs {@link DBCollection#findOne(DBObject, DBObject, DBObject)} with specified parameters using {@link #secondary} client.
 	 * @param query
 	 * @param fields
-	 * @param orderBy
 	 * @param methodName
 	 * @param params
 	 * @return
@@ -1153,13 +1134,13 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 		final BasicDBObject query = new BasicDBObject();
 		query.put("_id", id);
 		query.put("modificationTime", prevModificationTime.toDate());
-		final WriteResult writeResult = primary.update(query, dbo);
-		if (writeResult.getN() != 1) {
-			throw new MongoRepositoryException(writeResult.getLastError().getException(),
-					"%s: Cannot modify %s documents '%s'", db.getName(), collName, id);
+		try {
+			primary.update(query, dbo);
+			log.info("Modified {} document '{}'", collName, id);
+			return entity;
+		} catch (MongoRepositoryException e) {
+			throw new MongoRepositoryException(e, "%s: Cannot modify %s documents '%s'", db.getName(), collName, id);
 		}
-		log.info("Modified {} document '{}'", collName, id);
-		return entity;
 	}
 
 }

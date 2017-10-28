@@ -12,6 +12,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import com.mongodb.client.MongoDatabase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.data.domain.Sort;
@@ -29,7 +30,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
-import com.mongodb.CommandFailureException;
+import com.mongodb.MongoCommandException;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -152,7 +153,8 @@ public class MongoUtils {
 	 * 		No tag set is needed unless you actually want to target specific secondary servers.
 	 * @return
 	 * @throws UnknownHostException
-	 * @throws UnsupportedEncodingException 
+	 * @throws UnsupportedEncodingException
+	 * @deprecated Use {@link #getDatabase(MongoClientURI, ReadPreference)}
 	 */
 	public static DB getDb(MongoClientURI realMongoUri, ReadPreference readPreference) throws UnknownHostException, UnsupportedEncodingException {
 		final MongoClient client = getClient(realMongoUri, readPreference);
@@ -160,6 +162,29 @@ public class MongoUtils {
 		return client.getDB(dbname);
 	}
 	
+	/**
+	 * Gets a {@link com.mongodb.client.MongoDatabase} with dbname corresponding to {@link MongoClientURI#getDatabase()},
+	 * reusing a single {@link MongoClient}, with custom {@link ReadPreference}.
+	 *
+	 * <p>Note: Authentication is already performed by internal call to {@link #getClient(MongoClientURI, ReadPreference)}
+	 * using the username and password in the {@link MongoClientURI}.
+	 *
+	 * @param realMongoUri
+	 * @param readPreference {@link ReadPreference} for the pooled {@link MongoClient} of this DB.
+	 * 		For most repositories you'll use {@link ReadPreference#secondaryPreferred()}.
+	 * 		No tag set is needed unless you actually want to target specific secondary servers.
+	 * @return
+	 * @throws UnknownHostException
+	 * @throws UnsupportedEncodingException
+	 */
+	public static MongoDatabase getDatabase(MongoClientURI realMongoUri, ReadPreference readPreference)
+			throws UnknownHostException, UnsupportedEncodingException {
+		final MongoClient client = getClient(realMongoUri, readPreference);
+		final String dbname = Preconditions.checkNotNull(realMongoUri.getDatabase(),
+				"MongoClientURI must contain dbname part");
+		return client.getDatabase(dbname);
+	}
+
 	/**
 	 * Wrap MongoDB {@link DBCursor} results in immutable {@link List},
 	 * and closes the cursor.
@@ -268,7 +293,7 @@ public class MongoUtils {
 					coll.dropIndex(name);
 					log.info("Dropped non-unique index {} from {}", name, coll.getName());
 				}
-				coll.ensureIndex(new BasicDBObject(field, 1), new BasicDBObject("unique", true));
+				coll.createIndex(new BasicDBObject(field, 1), new BasicDBObject("unique", true));
 				ensuredNames.add(name);
 			}
 		}
@@ -303,13 +328,13 @@ public class MongoUtils {
 				indexName += key + "_" + indexObj.get(key);
 			}
 			try {
-				coll.ensureIndex(indexObj, indexName, index.isUnique());
-			} catch (CommandFailureException e) {
+				coll.createIndex(indexObj, indexName, index.isUnique());
+			} catch (MongoCommandException e) {
 				if (e.getCode() == 85) {
 					log.warn("Recreating {} index {} on collection {} due to mismatched options: {}",
 							index.isUnique() ? "unique" : "non-unique", indexName, coll.getName(), indexObj); 
 					coll.dropIndex(indexName);
-					coll.ensureIndex(indexObj, indexName, index.isUnique());
+					coll.createIndex(indexObj, indexName, index.isUnique());
 				} else {
 					throw e;
 				}
@@ -336,7 +361,7 @@ public class MongoUtils {
 		log.debug("Ensuring collection {} has {} indexes: {}", 
 				coll.getName(), fields.size(), fields);
 		for (final Map.Entry<String, Integer> entry : fields.entrySet()) {
-			coll.ensureIndex(new BasicDBObject(entry.getKey(), entry.getValue()));
+			coll.createIndex(new BasicDBObject(entry.getKey(), entry.getValue()));
 			ensuredNames.add(entry.getKey() + "_" + entry.getValue());
 		}
 		return ensuredNames;

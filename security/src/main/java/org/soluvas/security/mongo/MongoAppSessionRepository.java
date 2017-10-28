@@ -123,16 +123,16 @@ public class MongoAppSessionRepository extends CrudRepositoryBase<AppSession, St
 			// connecting to mongoDB
 			final DB db = MongoUtils.getDb(realMongoUri, ReadPreference.primary());
 			coll  = db.getCollection("appSession");
-			coll.ensureIndex(new BasicDBObject("className", 1));
-			coll.ensureIndex(new BasicDBObject("schemaVersion", 1));
-			coll.ensureIndex(new BasicDBObject("status", 1));
-			coll.ensureIndex(new BasicDBObject("person.id", 1));
-			coll.ensureIndex(new BasicDBObject("creationTime", -1));
-			coll.ensureIndex(new BasicDBObject("modificationTime", -1));
-			coll.ensureIndex(new BasicDBObject("accessTime", -1));
-			coll.ensureIndex(new BasicDBObject("ipAddress", 1));
-			coll.ensureIndex(new BasicDBObject("ipv6Address", 1));
-			coll.ensureIndex(new BasicDBObject("userAgent", 1));
+			coll.createIndex(new BasicDBObject("className", 1));
+			coll.createIndex(new BasicDBObject("schemaVersion", 1));
+			coll.createIndex(new BasicDBObject("status", 1));
+			coll.createIndex(new BasicDBObject("person.id", 1));
+			coll.createIndex(new BasicDBObject("creationTime", -1));
+			coll.createIndex(new BasicDBObject("modificationTime", -1));
+			coll.createIndex(new BasicDBObject("accessTime", -1));
+			coll.createIndex(new BasicDBObject("ipAddress", 1));
+			coll.createIndex(new BasicDBObject("ipv6Address", 1));
+			coll.createIndex(new BasicDBObject("userAgent", 1));
 			
 			morphia = new Morphia();
 			morphia.map(AppSessionImpl.class);
