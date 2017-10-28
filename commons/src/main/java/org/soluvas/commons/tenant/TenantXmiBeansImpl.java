@@ -110,11 +110,13 @@ public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryLi
 	@PostConstruct
 	public void init() {
 		final ImmutableSet<String> initialTenantIds = tenantConfig.tenantMap().keySet();
-		log.info("Loading {} initial {}s: {}", initialTenantIds.size(), eClass.getName(), initialTenantIds);
+		log.info("Loading {} initial {}s (URI template={}): {}",
+				initialTenantIds.size(), eClass.getName(), pathTemplate, initialTenantIds);
 		for (final String tenantId : initialTenantIds) {
 			reload(tenantId);
 		}
-		log.info("Loaded {} initial {}s: {}", initialTenantIds.size(), eClass.getName(), initialTenantIds);
+		log.info("Loaded {} initial {}s (URI template={}): {}",
+				initialTenantIds.size(), eClass.getName(), pathTemplate, initialTenantIds);
 		
 		tenantRepo.addListener(this);
 	}
@@ -128,9 +130,14 @@ public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryLi
 	}
 	
 	protected File getFileFor(String tenantId) {
+		String dataDir = tenantConfig.dataDirMap().get(tenantId).toString();
+		if (dataDir.contains("\\")) {
+			// convert from Windows to Unix-like path
+			dataDir = "/" + dataDir.replace('\\', '/');
+		}
 		final ImmutableMap<String, Object> scope = ImmutableMap.<String, Object>of(
 				"tenantId", tenantId, "tenantEnv", tenantConfig.getTenantEnv(), 
-				"dataDir", tenantConfig.dataDirMap().get(tenantId).toString());
+				"dataDir", dataDir);
 //				"dataDir", tenantConfig.dataDirMap().get(tenantId).toURI().toString().replace("file:/", "")); ini tuk windows malah duplicate "home dir"-nya
 		final String path;
 		try {
