@@ -69,7 +69,9 @@ import com.google.common.collect.ImmutableSet;
  * @see TenantBeans
  * @see org.soluvas.data.repository.XmiRepositoryBase
  * @author ceefour
+ * @deprecated To be cloud native, we now prefer configuration using database-storage (e.g. MongoDB) than filesystem.
  */
+@Deprecated
 public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryListener, TenantXmiBeans<T> {
 	
 	protected final Logger log;
@@ -100,6 +102,10 @@ public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryLi
 		log = LoggerFactory.getLogger(getClass().getName() + "/" + eClass.getName());
 		this.eClass = eClass;
 		this.versioningMode = xmiVersioningMode;
+		// sanity check
+		Preconditions.checkArgument(!pathTemplate.contains("\\"),
+			"pathTemplate must be a proper file://-based template without Windows-style directory separator: %s",
+				pathTemplate);
 		try {
 			this.pathTemplate = UriTemplate.fromTemplate(pathTemplate);
 		} catch (MalformedUriTemplateException e) {
@@ -111,12 +117,12 @@ public class TenantXmiBeansImpl<T extends EObject> implements TenantRepositoryLi
 	public void init() {
 		final ImmutableSet<String> initialTenantIds = tenantConfig.tenantMap().keySet();
 		log.info("Loading {} initial {}s (URI template={}): {}",
-				initialTenantIds.size(), eClass.getName(), pathTemplate, initialTenantIds);
+				initialTenantIds.size(), eClass.getName(), pathTemplate.getTemplate(), initialTenantIds);
 		for (final String tenantId : initialTenantIds) {
 			reload(tenantId);
 		}
 		log.info("Loaded {} initial {}s (URI template={}): {}",
-				initialTenantIds.size(), eClass.getName(), pathTemplate, initialTenantIds);
+				initialTenantIds.size(), eClass.getName(), pathTemplate.getTemplate(), initialTenantIds);
 		
 		tenantRepo.addListener(this);
 	}
