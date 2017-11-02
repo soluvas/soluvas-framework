@@ -285,7 +285,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 
 	@Override
 	public Optional<String> getIdByMobileOrPhoneNumber(StatusMask statusMask, String phoneNumber) {
-		Preconditions.checkState(!Strings.isNullOrEmpty(phoneNumber), "Phone number must not be null or empty");
+//		Preconditions.checkState(!Strings.isNullOrEmpty(phoneNumber), "Phone number must not be null or empty");
 		final BasicDBObject query = new BasicDBObject();
 		final BasicDBObject qMobileNumber = new BasicDBObject("mobileNumbers",
 				new BasicDBObject("$elemMatch", new BasicDBObject("phoneNumber", phoneNumber)));
