@@ -347,6 +347,26 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			return null;
 		}
 	}
+
+	@Override
+	public boolean isBookingEnabled(String customerRole) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(customerRole), "Customer Role must not be null or empty.");
+		final BasicDBObject query = new BasicDBObject("_id", customerRole);
+		final BasicDBObject fields = new BasicDBObject("bookingEnabled", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "isBookingEnabled", customerRole);
+		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object isBookingEnabledObj = dbObj.get("isBookingEnabled");
+			if (isBookingEnabledObj != null && !"null".equals(isBookingEnabledObj)) {
+				final boolean bookingEnabled = Boolean.valueOf(String.valueOf(isBookingEnabledObj)).booleanValue();
+				return bookingEnabled;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 	
 	
 }
