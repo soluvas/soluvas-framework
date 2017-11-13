@@ -14,8 +14,8 @@ public class PersonCustomerRoleHistory implements Identifiable {
 	@Id @Property("id")
 	private String id;
 	private PersonInfo2 personInfo;
-	private String fromCustomerRole;
-	private String toCustomerRole;
+	private String customerRole;
+	private DateTime creationTime;
 	private DateTime modificationTime;
 	
 	@Override
@@ -36,22 +36,6 @@ public class PersonCustomerRoleHistory implements Identifiable {
 		this.personInfo = personInfo;
 	}
 
-	public String getFromCustomerRole() {
-		return fromCustomerRole;
-	}
-
-	public void setFromCustomerRole(String fromCustomerRole) {
-		this.fromCustomerRole = fromCustomerRole;
-	}
-
-	public String getToCustomerRole() {
-		return toCustomerRole;
-	}
-
-	public void setToCustomerRole(String toCustomerRole) {
-		this.toCustomerRole = toCustomerRole;
-	}
-
 	public DateTime getModificationTime() {
 		return modificationTime;
 	}
@@ -60,11 +44,26 @@ public class PersonCustomerRoleHistory implements Identifiable {
 		this.modificationTime = creationTime;
 	}
 
+	public String getCustomerRole() {
+		return customerRole;
+	}
+
+	public void setCustomerRole(String customerRole) {
+		this.customerRole = customerRole;
+	}
+
+	public DateTime getCreationTime() {
+		return creationTime;
+	}
+
+	public void setCreationTime(DateTime creationTime) {
+		this.creationTime = creationTime;
+	}
+
 	@Override
 	public String toString() {
-		return "PersonCustomerRoleHistory [id=" + id + ", personInfo=" + personInfo + ", fromCustomerRole="
-				+ fromCustomerRole + ", toCustomerRole=" + toCustomerRole + ", modificationTime=" + modificationTime
-				+ "]";
+		return "PersonCustomerRoleHistory [id=" + id + ", personInfo=" + personInfo + ", customerRole=" + customerRole
+				+ ", creationTime=" + creationTime + ", modificationTime=" + modificationTime + "]";
 	}
 	
 	

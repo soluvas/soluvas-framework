@@ -44,17 +44,11 @@ public class MongoPersonCustomerRoleHistoryRepository extends MongoRepositoryBas
 			primary.save(dbObject);
 		}//end of looping
 	}
-
-	
-	@Override
-	public void addNewHistory(PersonCustomerRoleHistory newHistory) {
-		add(newHistory);
-	}
 	
 	@Override
 	public List<PersonCustomerRoleHistory> findByToCustomerRoleId(Set<String> toCustomerRoleIds) {
 		BasicDBObject query = new BasicDBObject();
-		query.put("toCustomerRole", new BasicDBObject("$in", toCustomerRoleIds));
+		query.put("customerRole", new BasicDBObject("$in", toCustomerRoleIds));
 		
 		Page<PersonCustomerRoleHistory> page = findAllByQuery(query, new PageOffsetRequest(0, 100));
 		

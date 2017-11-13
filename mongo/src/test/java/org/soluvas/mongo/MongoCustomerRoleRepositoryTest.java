@@ -2,7 +2,6 @@ package org.soluvas.mongo;
 
 import java.util.UUID;
 
-import org.joda.time.DateTime;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,11 +34,6 @@ public class MongoCustomerRoleRepositoryTest {
 	public void add() {
 		PersonCustomerRoleHistory newHistory = new PersonCustomerRoleHistory();
 		newHistory.setId(UUID.randomUUID().toString());
-//		newHistory.setPersonInfo(new PersonInfoImpl());
-		newHistory.setFromCustomerRole("common");
-		newHistory.setToCustomerRole("drop_ship");
-		newHistory.setModificationTime(new DateTime());
-		repo.addNewHistory(newHistory);
 	}
 
 }

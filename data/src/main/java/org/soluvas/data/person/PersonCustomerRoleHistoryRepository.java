@@ -4,10 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.soluvas.commons.PersonCustomerRoleHistory;
+import org.soluvas.data.repository.PagingAndSortingRepository;
 
-public interface PersonCustomerRoleHistoryRepository {
-	
-	public void addNewHistory(PersonCustomerRoleHistory newHistory);
+public interface PersonCustomerRoleHistoryRepository  extends PagingAndSortingRepository<PersonCustomerRoleHistory, String> {
 
 	public List<PersonCustomerRoleHistory> findByToCustomerRoleId(Set<String> toCustomerRoleIds);
 
