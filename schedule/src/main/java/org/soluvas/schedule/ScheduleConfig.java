@@ -35,6 +35,7 @@ import com.google.common.base.Preconditions;
  */
 @Configuration
 @Order(Ordered.LOWEST_PRECEDENCE)
+//@Import({ScheduleLiquibaseConfig.class})
 public class ScheduleConfig {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduleConfig.class);
