@@ -16,6 +16,7 @@ import javax.money.format.MonetaryFormats;
 import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.soluvas.commons.MoneyUtils;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
@@ -46,6 +47,7 @@ public class FormatCurrency implements
 	private static final Pattern embeddedPattern = Pattern.compile("(.+) (.+)");
 	private final CurrencyUnit defaultCurrency;
 	private final MonetaryAmountFormat formatter;
+	private final Locale locale;
 
 	@Deprecated
 	public FormatCurrency() {
@@ -65,6 +67,7 @@ public class FormatCurrency implements
 		super();
 		this.defaultCurrency = defaultCurrency;
 		formatter = MonetaryFormats.getAmountFormat(locale);
+		this.locale = locale;
 	}
 
 	@Override @Nullable
@@ -84,8 +87,9 @@ public class FormatCurrency implements
 							input);
 					scaled = new BigDecimal(input);
 				}
+				final String symbol = MoneyUtils.getSymbol(locale, currency);
 				final Money money = Money.of(scaled, currency);
-				return formatter.format(money);
+				return symbol + formatter.format(money).replace(currency.getCurrencyCode(), "");
 			} catch (Exception e) {
 				log.error("Cannot formatCurrency from " + input, e);
 				return input;
