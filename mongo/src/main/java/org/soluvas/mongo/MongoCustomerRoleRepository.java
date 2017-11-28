@@ -356,9 +356,9 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final DBObject dbObj = findOnePrimary(query, fields, "isBookingEnabled", customerRole);
 		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
-			final Object isBookingEnabledObj = dbObj.get("isBookingEnabled");
-			if (isBookingEnabledObj != null && !"null".equals(isBookingEnabledObj)) {
-				final boolean bookingEnabled = Boolean.valueOf(String.valueOf(isBookingEnabledObj)).booleanValue();
+			final Object bookingEnabledObj = dbObj.get("bookingEnabled");
+			if (bookingEnabledObj != null && !"null".equals(bookingEnabledObj)) {
+				final boolean bookingEnabled = Boolean.valueOf(String.valueOf(bookingEnabledObj)).booleanValue();
 				return bookingEnabled;
 			} else {
 				return false;
