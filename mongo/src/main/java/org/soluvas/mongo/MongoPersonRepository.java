@@ -33,6 +33,7 @@ import org.soluvas.data.UntrashResult;
 import org.soluvas.data.domain.CappedRequest;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
+import org.soluvas.data.domain.PageOffsetRequest;
 import org.soluvas.data.domain.PageRequest;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.domain.Projection;
@@ -980,6 +981,20 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		} else {
 			return ImmutableList.of();
 		}
+	}
+	
+	public String findJneAreaCode(String district, String city, String province, String country) {
+		BasicDBObject basicDb = new BasicDBObject();
+		
+		BasicDBObject elemDbo = new BasicDBObject();
+		elemDbo.put("district", district);
+		elemDbo.put("city", city);
+		elemDbo.put("province", province);
+		elemDbo.put("country", country);
+		basicDb.put("addresses", new BasicDBObject("$elemMatch", elemDbo));
+		
+		Page<Person2> address = findAllByQuery(basicDb, new PageOffsetRequest(0, 100));
+		return null;
 	}
 
 	// @Override
