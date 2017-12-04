@@ -3,6 +3,7 @@ package org.soluvas.email.impl;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -29,7 +30,6 @@ import org.soluvas.email.Template;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import com.google.common.collect.ImmutableMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -344,11 +344,12 @@ public abstract class TemplateImpl extends MinimalEObjectImpl.Container implemen
 		try {
 			final Mustache mustache = MF.compile(new StringReader(template), "subject");
 			final StringWriter stringWriter = new StringWriter();
-			final Map<String, Object> extras = ImmutableMap.of("recipient", recipient,
-					"formatMeasure", new FormatMeasure(appManifest.getDefaultLocale()),
-					"formatCurrency", new FormatCurrency(appManifest.getDefaultLocale(), appManifest.getDefaultCurrency()),
-					"formatDateTime", new FormatDateTime(appManifest.getDefaultLocale()),
-					"emailLogoUri", AppUtils.getEmailLogoUri(appManifest, webAddress));
+			final Map<String, Object> extras = new HashMap<>();
+			extras.put("recipient", recipient);
+			extras.put("formatMeasure", new FormatMeasure(appManifest.getDefaultLocale()));
+			extras.put("formatCurrency", new FormatCurrency(appManifest.getDefaultLocale(), appManifest.getDefaultCurrency()));
+			extras.put("formatDateTime", new FormatDateTime(appManifest.getDefaultLocale()));
+			extras.put("emailLogoUri", AppUtils.getEmailLogoUri(appManifest, webAddress));
 			mustache.execute(stringWriter, new Object[] { extras, this });
 			return stringWriter.toString();
 		} catch (Exception e) {
