@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -1188,6 +1189,20 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 		result.append(zendeskIntegration);
 		result.append(')');
 		return result.toString();
+	}
+
+	public static Person2 createPerson(String personId, String personSlug, String name, Gender gender) {
+		final Person2 person = new Person2();
+		person.setId(personId);
+		person.setSlug(personSlug);
+		person.setName(name);
+		final String[] nameArray = StringUtils.split(person.getName(), " ", 2);
+		person.setFirstName(nameArray[0]);
+		if (nameArray.length > 1) {
+			person.setLastName(nameArray[1]);
+		}
+		person.setGender(gender);
+		return person;
 	}
 
 
