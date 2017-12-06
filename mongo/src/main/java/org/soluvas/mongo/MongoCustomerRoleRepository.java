@@ -368,6 +368,23 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		}
 	}
 	
+	@Override @Nullable
+	public String getName(String customerRoleId) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", customerRoleId);
+		
+		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("name", 1), "getName", customerRoleId);
+		if (dbObject != null) {
+			if (dbObject.get("name") != null && !"null".equals(dbObject.get("name"))) {
+				return dbObject.get("name").toString();
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+	
 	
 }
 	
