@@ -74,6 +74,7 @@ public class FormatCurrency implements
 				final Matcher matcher = embeddedPattern.matcher(input);
 				final CurrencyUnit currency;
 				final BigDecimal scaled;
+				
 				if (matcher.matches()) {
 					final String currencyCode = matcher.group(1);
 					currency = Monetary.getCurrency(currencyCode);
@@ -87,7 +88,7 @@ public class FormatCurrency implements
 				final Money money = Money.of(scaled, currency);
 				return formatter.format(money);
 			} catch (Exception e) {
-				log.error("Cannot formatCurrency from " + input, e);
+				log.error(String.format("Cannot formatCurrency from '%s'", input), e);
 				return input;
 			}
 		} else {
