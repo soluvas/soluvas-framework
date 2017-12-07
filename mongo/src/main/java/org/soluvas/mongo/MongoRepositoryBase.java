@@ -54,7 +54,6 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
-import com.mongodb.MongoException;
 import com.mongodb.ReadPreference;
 import com.mongodb.WriteResult;
 
@@ -393,6 +392,9 @@ public class MongoRepositoryBase<T extends Identifiable> extends PagingAndSortin
 	public final void destroy() {
 		log.info("Shutting down {} MongoDB repository", collName);
 		// DO NOT CALL THIS: mongoClient.close();
+		/**
+		 * [11:38 PM, 12/6/2017] Boss Hendy Bippo: kynya karena mongoClient itu dipake rame2 oleh MongoRepository yang lain. mohon tambahkan commentnya biar lebih jleas 
+		 */
 	}
 
 	@Override
