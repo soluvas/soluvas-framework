@@ -2,6 +2,7 @@ package org.soluvas.commons.locale;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.base.Throwables;
 
 /**
  * Function to format a {@link BigDecimal} monetary value using a specified currency.
@@ -88,7 +90,12 @@ public class FormatCurrency implements
 				final Money money = Money.of(scaled, currency);
 				return formatter.format(money);
 			} catch (Exception e) {
-				log.error(String.format("Cannot formatCurrency from '%s'", input), e);
+				final List<Throwable> causes = Throwables.getCausalChain(e);
+				if (causes.stream().anyMatch((it) -> it instanceof NumberFormatException)) {
+					log.warn(String.format("Cannot formatCurrency from '%s'", input), e);
+				} else {
+					log.error(String.format("Cannot formatCurrency from '%s'", input), e);
+				}
 				return input;
 			}
 		} else {
