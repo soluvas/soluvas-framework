@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.soluvas.commons.locale;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -16,6 +13,8 @@ import javax.money.Monetary;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
@@ -26,6 +25,8 @@ import com.google.common.collect.ImmutableMap;
  *
  */
 public class FormatCurrencyTest {
+	
+	private static final Logger log = LoggerFactory.getLogger(FormatCurrencyTest.class);
 
 	private FormatCurrency formatCurrencyId;
 	private FormatCurrency formatCurrencyEn;
@@ -52,6 +53,12 @@ public class FormatCurrencyTest {
 		assertThat(formatCurrencyId.apply("IDR 75000"), equalTo("Rp75.000"));
 		assertThat(formatCurrencyId.apply("IDR 75000.23"), equalTo("Rp75.000"));
 		assertThat(formatCurrencyId.apply("IDR 75000.2375"), equalTo("Rp75.000"));
+	}
+	
+	@Test
+	public void checkNumberFormatException() {
+		final String result = formatCurrencyId.apply("IDR 557400.00000000");
+		log.debug("Result: '{}'", result);
 	}
 
 	@Test
