@@ -205,6 +205,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 					facebookUsername));
 		}
 		final BasicDBObject query = new BasicDBObject("$or", orCriteria);
+		log.debug("Try to find one by facebook id '{}' or userName '{}: {}", facebookId, facebookUsername, query);
 		return findOneByQuery(query);
 	}
 
