@@ -7,6 +7,7 @@ import java.io.Serializable;
 import org.joda.time.DateTime;
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.Identifiable;
+import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.mongo.DateTimeConverter;
 
 import com.google.code.morphia.annotations.Converters;
@@ -15,7 +16,7 @@ import com.google.code.morphia.annotations.Id;
 
 @SuppressWarnings("serial") 
 @Converters({DateTimeConverter.class})
-public class CustomerRole2 implements Serializable, Identifiable {
+public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	
 	public final static String COMMON_ID = "common";
 	public final static String MEMBER_ID = "member"; 
@@ -300,6 +301,7 @@ public class CustomerRole2 implements Serializable, Identifiable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getCreationTime() {
 		return creationTime;
 	}
@@ -309,6 +311,7 @@ public class CustomerRole2 implements Serializable, Identifiable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCreationTime(DateTime newCreationTime) {
 		creationTime = newCreationTime;
 	}
@@ -318,6 +321,7 @@ public class CustomerRole2 implements Serializable, Identifiable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DateTime getModificationTime() {
 		return modificationTime;
 	}
@@ -327,6 +331,7 @@ public class CustomerRole2 implements Serializable, Identifiable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setModificationTime(DateTime newModificationTime) {
 		modificationTime = newModificationTime;
 	}
