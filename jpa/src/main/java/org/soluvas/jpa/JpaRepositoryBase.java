@@ -473,7 +473,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final List<S> addeds = FluentIterable.from(entities).transform(new Function<S, S>() {
 			@Override @Nullable
 			public S apply(@Nullable S input) {
-				beforeSave(input);
+				beforeSave(input, ModificationTimePolicy.UPDATE);
 //				em.persist(input); //error --> EntityExistsException A different object with the same identifier value was already associated with the session
 //				return input;
 				return em.merge(input);
@@ -492,7 +492,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final List<S> mergedEntities = FluentIterable.from(entities.entrySet()).transform(new Function<Entry<ID, S>, S>() {
 			@Override
 			public S apply(Entry<ID, S> input) {
-				beforeSave(input.getValue());
+				beforeSave(input.getValue(), ModificationTimePolicy.UPDATE);
 				final S mergedEntity = em.merge(input.getValue());
 				return mergedEntity;
 			};
@@ -508,7 +508,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final T existing = em.find(entityClass, id);
 		Preconditions.checkState(lastModificationTime.equals(existing.getModificationTime()), "%s %s on database has already modified by different modification time with %s on memory.",
 				entityClass.getSimpleName(), id, entityClass.getSimpleName());
-		beforeSave(entity);
+		beforeSave(entity, ModificationTimePolicy.UPDATE);
 		final S mergedEntity = em.merge(entity);
 		log.debug("{} '{}' have been modified from {} to {}", entityClass.getSimpleName(), id,
 				lastModificationTime, entity.getModificationTime());
@@ -709,11 +709,11 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	 */
 	protected abstract E getStatus(T entity);
 	
-	protected void beforeSave(T entity) {
+	protected void beforeSave(T entity, org.soluvas.data.repository.CrudRepository.ModificationTimePolicy mtimePolicy) {
 		if (entity.getCreationTime() == null) {
 			entity.setCreationTime(new DateTime(getAppManifest().getDefaultTimeZone()));
 		}
-		if (entity.getModificationTime() == null) {
+		if (mtimePolicy == ModificationTimePolicy.UPDATE || entity.getModificationTime() == null) {
 			entity.setModificationTime(new DateTime(getAppManifest().getDefaultTimeZone()));
 		}
 	}
