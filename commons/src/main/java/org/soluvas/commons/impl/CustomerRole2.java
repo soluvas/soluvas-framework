@@ -252,6 +252,8 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	 * @ordered
 	 */
 	protected Long zendeskOrganizationId = ZENDESK_ORGANIZATION_ID_EDEFAULT;
+	
+	private boolean depositEnabled;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -612,53 +614,31 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	public void setZendeskOrganizationId(Long newZendeskOrganizationId) {
 		zendeskOrganizationId = newZendeskOrganizationId;
 	}
+	
+	public boolean isDepositEnabled() {
+		return depositEnabled;
+	}
+
+
+	public void setDepositEnabled(boolean depositEnabled) {
+		this.depositEnabled = depositEnabled;
+	}
+
 
 	@Override
 	public String toString() {
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
-		result.append(", name: ");
-		result.append(name);
-		result.append(", creationTime: ");
-		result.append(creationTime);
-		result.append(", modificationTime: ");
-		result.append(modificationTime);
-		result.append(", description: ");
-		result.append(description);
-		result.append(", schemaVersion: ");
-		result.append(schemaVersion);
-		result.append(", status: ");
-		result.append(status);
-		result.append(", readOnly: ");
-		result.append(readOnly);
-		result.append(", quickShopEnabled: ");
-		result.append(quickShopEnabled);
-		result.append(", salesOrderReportEnabled: ");
-		result.append(salesOrderReportEnabled);
-		result.append(", historySalesOrderEnabled: ");
-		result.append(historySalesOrderEnabled);
-		result.append(", agentSalesReportEnabled: ");
-		result.append(agentSalesReportEnabled);
-		result.append(", transactionHistoryEnabled: ");
-		result.append(transactionHistoryEnabled);
-		result.append(", bookingEnabled: ");
-		result.append(bookingEnabled);
-		result.append(", paymentGatewayEnabled: ");
-		result.append(paymentGatewayEnabled);
-		result.append(", bookingExpiryTimeInMinutes: ");
-		result.append(bookingExpiryTimeInMinutes);
-		result.append(", dropshipEnabled: ");
-		result.append(dropshipEnabled);
-		result.append(", reviewReminderEnabled: ");
-		result.append(reviewReminderEnabled);
-		result.append(", zendeskIntegration: ");
-		result.append(zendeskIntegration);
-		result.append(", zendeskOrganizationId: ");
-		result.append(zendeskOrganizationId);
-		result.append(')');
-		return result.toString();
+		return "CustomerRole2 [id=" + id + ", name=" + name + ", creationTime=" + creationTime + ", modificationTime="
+				+ modificationTime + ", description=" + description + ", schemaVersion=" + schemaVersion + ", status="
+				+ status + ", readOnly=" + readOnly + ", quickShopEnabled=" + quickShopEnabled
+				+ ", salesOrderReportEnabled=" + salesOrderReportEnabled + ", historySalesOrderEnabled="
+				+ historySalesOrderEnabled + ", agentSalesReportEnabled=" + agentSalesReportEnabled
+				+ ", transactionHistoryEnabled=" + transactionHistoryEnabled + ", bookingEnabled=" + bookingEnabled
+				+ ", paymentGatewayEnabled=" + paymentGatewayEnabled + ", bookingExpiryTimeInMinutes="
+				+ bookingExpiryTimeInMinutes + ", dropshipEnabled=" + dropshipEnabled + ", reviewReminderEnabled="
+				+ reviewReminderEnabled + ", zendeskIntegration=" + zendeskIntegration + ", zendeskOrganizationId="
+				+ zendeskOrganizationId + ", depositEnabled=" + depositEnabled + "]";
 	}
+
+	
 
 } //CustomerRole
