@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -110,6 +111,12 @@ public class BigDecimalConverterTest {
 		final BigDecimalProduct product = morphia.fromDBObject(BigDecimalProduct.class, dbo);
 		assertNotNull(product);
 		assertEquals(new BigDecimal(12900), product.getPrice());
+	}
+	
+	@Test
+	public void roundingDown() {
+		final BigDecimal bigDecimal = new BigDecimal("33000.07700000");
+		System.err.println(bigDecimal.setScale(1, RoundingMode.UP));
 	}
 
 }
