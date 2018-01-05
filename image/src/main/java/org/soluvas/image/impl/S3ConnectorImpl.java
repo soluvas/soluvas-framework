@@ -6,12 +6,10 @@ import java.util.concurrent.Callable;
 
 import javax.annotation.PreDestroy;
 
-import org.eclipse.emf.ecore.EClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.image.ImageException;
 import org.soluvas.image.ImageFactory;
-import org.soluvas.image.ImagePackage;
 import org.soluvas.image.S3Connector;
 import org.soluvas.image.UploadedImage;
 import org.soluvas.image.store.ImageRepository;
@@ -295,9 +293,11 @@ public class S3ConnectorImpl extends ImageConnectorImpl implements S3Connector {
 			acl.grantPermission(new CanonicalGrantee(canonicalUserId), Permission.FullControl);
 		}
 		acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
+		// ReducedRedundancy class is now deprecated and MORE EXPENSIVE than standard
+		// StandardInfrequentAccess is now used for original images, which is cheaper for long-term storage
 		final PutObjectRequest putReq = new PutObjectRequest(bucket, key, file)
 			.withAccessControlList(acl)
-			.withStorageClass(useHi ? StorageClass.Standard : StorageClass.ReducedRedundancy);
+			.withStorageClass(useHi ? StorageClass.StandardInfrequentAccess : StorageClass.Standard);
 		final Upload upload = transferMgr.upload(putReq);
 		final String s3Uri = "s3://" + bucket + "/" + key;
 //		upload.addProgressListener(new ProgressListener() {
