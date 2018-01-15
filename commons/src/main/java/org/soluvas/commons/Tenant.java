@@ -1,6 +1,5 @@
 package org.soluvas.commons;
 
-import org.joda.time.DateTimeZone;
 import org.springframework.core.env.Environment;
 
 import javax.persistence.MappedSuperclass;
@@ -16,7 +15,7 @@ public class Tenant implements ITenant, Serializable {
     private String title;
     private String summary;
     private String description;
-    private DateTimeZone defaultTimeZone;
+    private ZoneId defaultTimeZone;
 
     public Tenant() {
     }
@@ -25,6 +24,7 @@ public class Tenant implements ITenant, Serializable {
         this.title = env.getRequiredProperty("tenant.title");
         this.summary = env.getRequiredProperty("tenant.summary");
         this.description = env.getRequiredProperty("tenant.description");
+        this.defaultTimeZone = ZoneId.of(env.getRequiredProperty("tenant.default-time-zone"));
     }
 
     @Override
@@ -32,7 +32,6 @@ public class Tenant implements ITenant, Serializable {
         return title;
     }
 
-    @Override
     public void setTitle(String title) {
         this.title = title;
     }
@@ -42,7 +41,6 @@ public class Tenant implements ITenant, Serializable {
         return summary;
     }
 
-    @Override
     public void setSummary(String summary) {
         this.summary = summary;
     }
@@ -52,17 +50,16 @@ public class Tenant implements ITenant, Serializable {
         return description;
     }
 
-    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
     @Override
-    public DateTimeZone getDefaultTimeZone() {
+    public ZoneId getDefaultTimeZone() {
         return defaultTimeZone;
     }
 
-    public void setDefaultTimeZone(DateTimeZone defaultTimeZone) {
+    public void setDefaultTimeZone(ZoneId defaultTimeZone) {
         this.defaultTimeZone = defaultTimeZone;
     }
 }
