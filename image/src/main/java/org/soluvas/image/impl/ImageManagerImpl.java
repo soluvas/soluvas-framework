@@ -650,6 +650,10 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			}
 		});
 		
+		/**
+		 * pake map biasa karna:
+		 * https://idbippo.atlassian.net/browse/BC-4581
+		 */
 //		final ImmutableMap.Builder<String, DisplayImage2> b = ImmutableMap.builder();
 		final Map<String, DisplayImage2> displayImageMap = new HashMap<>();
 		for (final String imageId : imageIds) {
