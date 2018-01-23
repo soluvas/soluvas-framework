@@ -559,7 +559,7 @@ public class EmailManagerImpl extends MinimalEObjectImpl.Container implements Em
 						};
 					});
 					if (email.getToAddresses() == null || email.getToAddresses().isEmpty()) {
-						log.warn("No send email becuase no recipients!");
+						log.warn("No send email because no recipients!");
 						result = null;
 					} else {
 						result = email.send();

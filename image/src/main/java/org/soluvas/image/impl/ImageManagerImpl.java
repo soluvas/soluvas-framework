@@ -650,18 +650,28 @@ public class ImageManagerImpl extends EObjectImpl implements ImageManager {
 			}
 		});
 		
-		final ImmutableMap.Builder<String, DisplayImage2> b = ImmutableMap.builder();
-//		final Map<String, DisplayImage> displayImageMap = new HashMap<>();
+		/**
+		 * pake map biasa karna:
+		 * https://idbippo.atlassian.net/browse/BC-4581
+		 */
+//		final ImmutableMap.Builder<String, DisplayImage2> b = ImmutableMap.builder();
+		final Map<String, DisplayImage2> displayImageMap = new HashMap<>();
 		for (final String imageId : imageIds) {
 			final Image image = imageMap.get(imageId);
 			final DisplayImage2 displayImage = grabDisplayImage(namespace, imageRepo.getStyles(),
 					imageId, style, image);
 //			log.debug("Display image: {}", displayImage);
-			b.put(imageId, displayImage);
-//			displayImageMap.put(imageId, displayImage);
+			
+//			b.put(imageId, displayImage);
+			if (!displayImageMap.containsKey(imageId)) {
+				displayImageMap.put(imageId, displayImage);
+			} else {
+				log.warn(String.format("There are duplicate images for id '%s - nameSpace '%s''",
+						imageId, namespace));
+			}
 		}
-		return b.build();
-//		return displayImageMap;
+//		return b.build();
+		return ImmutableMap.copyOf(displayImageMap);
 	}
 
 	/**
