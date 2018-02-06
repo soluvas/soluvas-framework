@@ -241,6 +241,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 			personInfo.setGender(input.getGender());
 			personInfo.setEmail(input.getEmail());
 			personInfo.setMobileNumber(input.getMobileNumber());
+			personInfo.setRole(input.getCustomerRole());
 			return personInfo;
 		}
 	}

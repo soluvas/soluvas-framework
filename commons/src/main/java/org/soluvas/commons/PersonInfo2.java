@@ -15,6 +15,7 @@ public class PersonInfo2 implements Identifiable, Serializable {
 	private String photoId;
 	private String slug;
 	private Gender gender;
+	private String role;
 	
 	@Override
 	public String getId() {
@@ -65,6 +66,12 @@ public class PersonInfo2 implements Identifiable, Serializable {
 	}
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }
