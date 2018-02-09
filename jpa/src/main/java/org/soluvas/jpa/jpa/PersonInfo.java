@@ -150,14 +150,6 @@ public class PersonInfo implements Serializable, PersonLike {
 	private String mobileNumber = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	@Basic()
-	private String customerRole = null;
-
-	/**
 	 * Returns the value of '<em><b>id</b></em>' feature.
 	 *
 	 * <!-- begin-user-doc --> <!-- end-user-doc --> <!-- begin-model-doc -->
@@ -378,33 +370,6 @@ public class PersonInfo implements Serializable, PersonLike {
 	}
 
 	/**
-	 * Returns the value of '<em><b>customerRole</b></em>' feature.
-	 *
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the value of '<em><b>customerRole</b></em>' feature
-	 * @generated
-	 */
-	public String getCustomerRole() {
-		return customerRole;
-	}
-
-	/**
-	 * Sets the '{@link PersonInfo#getCustomerRole() <em>customerRole</em>}'
-	 * feature.
-	 *
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param newCustomerRole
-	 *            the new value of the '{@link PersonInfo#getCustomerRole()
-	 *            customerRole}' feature.
-	 * @generated
-	 */
-	public void setCustomerRole(String newCustomerRole) {
-		customerRole = newCustomerRole;
-	}
-
-	/**
 	 * A toString method which prints the values of all EAttributes of this
 	 * instance. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -414,8 +379,7 @@ public class PersonInfo implements Serializable, PersonLike {
 	public String toString() {
 		return "PersonInfo " + " [id: " + getId() + "]" + " [name: " + getName() + "]" + " [gender: " + getGender()
 				+ "]" + " [slug: " + getSlug() + "]" + " [email: " + getEmail() + "]" + " [photoId: " + getPhotoId()
-				+ "]" + " [domain: " + getDomain() + "]" + " [mobileNumber: " + getMobileNumber() + "]"
-				+ " [customerRole: " + getCustomerRole() + "]";
+				+ "]" + " [domain: " + getDomain() + "]" + " [mobileNumber: " + getMobileNumber() + "]";
 	}
 
 	public static PersonInfo fromPerson(Person2 person) {
