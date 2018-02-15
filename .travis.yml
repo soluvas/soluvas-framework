@@ -3,6 +3,7 @@ branches:
   - master
   - 2.2.x
   - develop
+  - feature
 language: java
 jdk: oraclejdk8
 # https://coderwall.com/p/9b_lfq/deploying-maven-artifacts-from-travis
