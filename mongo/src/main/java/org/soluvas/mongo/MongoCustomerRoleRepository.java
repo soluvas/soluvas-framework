@@ -384,6 +384,26 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			return null;
 		}
 	}
+
+	@Override
+	public boolean isBankTransferPaymentEnabled(String customerRole) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(customerRole), "Customer Role must not be null or empty.");
+		final BasicDBObject query = new BasicDBObject("_id", customerRole);
+		final BasicDBObject fields = new BasicDBObject("bankTransferPaymentEnabled", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "isBankTransferPaymentEnabled", customerRole);
+		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object objBankTransferPaymentEnabled = dbObj.get("bankTransferPaymentEnabled");
+			if (objBankTransferPaymentEnabled != null && !"null".equals(objBankTransferPaymentEnabled)) {
+				final boolean bankTransferPaymentEnabled = Boolean.valueOf(String.valueOf(objBankTransferPaymentEnabled)).booleanValue();
+				return bankTransferPaymentEnabled;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 	
 	
 }

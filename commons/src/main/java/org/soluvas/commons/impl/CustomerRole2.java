@@ -254,6 +254,8 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	protected Long zendeskOrganizationId = ZENDESK_ORGANIZATION_ID_EDEFAULT;
 	
 	private boolean depositEnabled;
+	
+	private boolean bankTransferPaymentEnabled;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -623,6 +625,15 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	public void setDepositEnabled(boolean depositEnabled) {
 		this.depositEnabled = depositEnabled;
 	}
+	
+	public boolean isBankTransferPaymentEnabled() {
+		return bankTransferPaymentEnabled;
+	}
+
+
+	public void setBankTransferPaymentEnabled(boolean bankTransferPaymentEnabled) {
+		this.bankTransferPaymentEnabled = bankTransferPaymentEnabled;
+	}
 
 
 	@Override
@@ -636,9 +647,9 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 				+ ", paymentGatewayEnabled=" + paymentGatewayEnabled + ", bookingExpiryTimeInMinutes="
 				+ bookingExpiryTimeInMinutes + ", dropshipEnabled=" + dropshipEnabled + ", reviewReminderEnabled="
 				+ reviewReminderEnabled + ", zendeskIntegration=" + zendeskIntegration + ", zendeskOrganizationId="
-				+ zendeskOrganizationId + ", depositEnabled=" + depositEnabled + "]";
+				+ zendeskOrganizationId + ", depositEnabled=" + depositEnabled + ", bankTransferPaymentEnabled="
+				+ bankTransferPaymentEnabled + "]";
 	}
 
-	
 
 } //CustomerRole
