@@ -137,6 +137,8 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 	protected String nickname = NICKNAME_EDEFAULT;
 	protected static final String CUSTOMER_ROLE_EDEFAULT = null;
 	protected String customerRole = CUSTOMER_ROLE_EDEFAULT;
+	protected static final DateTime CUSTOMER_ROLE_VALID_THRU_EDEFAULT = null;
+	protected DateTime customerRoleValidThru = CUSTOMER_ROLE_VALID_THRU_EDEFAULT;
 	protected static final String MEMBER_ROLE_EDEFAULT = null;
 	protected String memberRole = MEMBER_ROLE_EDEFAULT;
 	protected static final String MANAGER_ROLE_EDEFAULT = null;
@@ -679,6 +681,14 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 
 	public void setCustomerRole(String newCustomerRole) {
 		customerRole = newCustomerRole;
+	}
+	
+	public DateTime getCustomerRoleValidThru() {
+		return customerRoleValidThru;
+	}
+	
+	public void setCustomerRoleValidThru(DateTime customerRoleValidThru) {
+		this.customerRoleValidThru = customerRoleValidThru;
 	}
 
 	public String getMemberRole() {

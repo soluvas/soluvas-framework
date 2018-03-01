@@ -1048,6 +1048,14 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 			return true;
 		}
 	}
+	
+	@Override
+	public Page<Person2> findAllWhereCustomerRoleValidThruNotNull(StatusMask statusMask, Pageable pageable) {
+		BasicDBObject query = new BasicDBObject("customerRoleValidThru", new BasicDBObject("$exists", true));
+		augmentQueryForStatusMask(query, statusMask);
+		return findAllByQuery(query, pageable);
+	}
+ 
 
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
