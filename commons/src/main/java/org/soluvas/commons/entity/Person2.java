@@ -3,7 +3,9 @@ package org.soluvas.commons.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
@@ -224,8 +226,14 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 	protected String tenantId;
 	protected Double performanceValue;
 	
+	private final Set<String> firebaseCloudMessagingTokens = new HashSet<>();
+	
 	public Person2() {
 		super();
+	}
+	
+	public Set<String> getFirebaseCloudMessagingTokens() {
+		return firebaseCloudMessagingTokens;
 	}
 
 	public static class ToPersonInfo implements Function<Person2, PersonInfo2> {
