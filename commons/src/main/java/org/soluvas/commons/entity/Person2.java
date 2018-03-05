@@ -226,6 +226,7 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 	protected String tenantId;
 	protected Double performanceValue;
 	
+	private String firebaseUserId;
 	private final Set<String> firebaseCloudMessagingTokens = new HashSet<>();
 	
 	public Person2() {
@@ -1214,5 +1215,12 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 		return person;
 	}
 
+	public String getFirebaseUserId() {
+		return firebaseUserId;
+	}
+
+	public void setFirebaseUserId(String firebaseUserId) {
+		this.firebaseUserId = firebaseUserId;
+	}
 
 } //Person
