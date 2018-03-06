@@ -728,4 +728,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		return false;
 	}
 
+	@Override
+	public void removeFcmToken(String userId, String oldFirebaseCloudMessagingToken) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -59,6 +59,7 @@ import com.mongodb.BulkWriteOperation;
 import com.mongodb.BulkWriteResult;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
 
 import scala.util.Try;
 
@@ -1047,6 +1048,16 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 					writeResult.getMatchedCount(), writeResult.getModifiedCount(), upPerformanceMap);
 			return true;
 		}
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public void removeFcmToken(String userId, String oldFirebaseCloudMessagingToken) {
+		final BasicDBObject query = new BasicDBObject("_id", userId);
+		final BasicDBObject update = new BasicDBObject("$pull", new BasicDBObject("firebaseCloudMessagingTokens", oldFirebaseCloudMessagingToken));
+		final WriteResult result = primary.update(query, update);
+		log.debug("Update person by removing firebase cloud messaging token '{}' for personId '{}': {}",
+				oldFirebaseCloudMessagingToken, userId, result);
 	}
 
 	// @Override

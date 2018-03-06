@@ -197,6 +197,8 @@ public interface PersonRepository extends
 	double getPerformanceValue(String id);
 	
 	boolean updatePerformanceValues(final Map<String, Double> upPerformanceMap);
+
+	public void removeFcmToken(String userId, String oldFirebaseCloudMessagingToken);
 	
 }
 
