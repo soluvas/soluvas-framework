@@ -537,4 +537,16 @@ public class EmfPersonRepository extends
 		return false;
 	}
 
+	@Override
+	public void removeFcmToken(String userId, String oldFirebaseCloudMessagingToken) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Page<Person2> findAllWhereCustomerRoleValidThruNotNull(StatusMask statusMask, Pageable pageable) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

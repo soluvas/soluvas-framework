@@ -199,6 +199,8 @@ public interface PersonRepository extends
 	boolean updatePerformanceValues(final Map<String, Double> upPerformanceMap);
 
 	Page<Person2> findAllWhereCustomerRoleValidThruNotNull(StatusMask statusMask, Pageable pageable);
+
+	public void removeFcmToken(String userId, String oldFirebaseCloudMessagingToken);
 	
 }
 
