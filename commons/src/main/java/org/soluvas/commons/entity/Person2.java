@@ -229,6 +229,9 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 	protected Double performanceValue;
 	
 	private String firebaseUserId;
+	private String firebaseUidCustomToken;
+	private String firebaseCustomToken;
+	private DateTime expiryTimeFirebaseCustomToken;
 	private final Set<String> firebaseCloudMessagingTokens = new HashSet<>();
 	
 	public Person2() {
@@ -1232,5 +1235,30 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 	public void setFirebaseUserId(String firebaseUserId) {
 		this.firebaseUserId = firebaseUserId;
 	}
+
+	public String getFirebaseUidCustomToken() {
+		return firebaseUidCustomToken;
+	}
+
+	public void setFirebaseUidCustomToken(String firebaseUidCustomToken) {
+		this.firebaseUidCustomToken = firebaseUidCustomToken;
+	}
+
+	public String getFirebaseCustomToken() {
+		return firebaseCustomToken;
+	}
+
+	public void setFirebaseCustomToken(String firebaseCustomToken) {
+		this.firebaseCustomToken = firebaseCustomToken;
+	}
+
+	public DateTime getExpiryTimeFirebaseCustomToken() {
+		return expiryTimeFirebaseCustomToken;
+	}
+
+	public void setExpiryTimeFirebaseCustomToken(DateTime expiryTimeFirebaseCustomToken) {
+		this.expiryTimeFirebaseCustomToken = expiryTimeFirebaseCustomToken;
+	}
+
 
 } //Person
