@@ -51,9 +51,11 @@ public class AppUtils {
 				Preconditions.checkNotNull(webAddress.getImagesUri(),
 						"WebAddress.imagesUri is required");
 				final UriTemplate template = UriTemplate.fromTemplate(appManifest.getEmailLogoUriTemplate());
-				return template.expand(ImmutableMap.<String, Object>of(
+				final String expand = template.expand(ImmutableMap.<String, Object>of(
 						"baseUri", webAddress.getBaseUri(),
 						"imagesUri", webAddress.getImagesUri()));
+				log.trace("Expanding email logo uri template '{}': {}", appManifest.getEmailLogoUriTemplate(), expand);
+				return expand;
 			} else {
 				return appManifest.getEmailLogoUriTemplate();
 			}
@@ -71,9 +73,11 @@ public class AppUtils {
 				Preconditions.checkNotNull(webAddress.getImagesUri(),
 						"WebAddress.imagesUri is required");
 				final UriTemplate template = UriTemplate.fromTemplate(appManifest.getShipmentLogoUriTemplate());
-				return template.expand(ImmutableMap.<String, Object>of(
+				final String expand = template.expand(ImmutableMap.<String, Object>of(
 						"baseUri", webAddress.getBaseUri(),
 						"imagesUri", webAddress.getImagesUri()));
+				log.trace("Expanding shipment logo uri template '{}': {}", appManifest.getShipmentLogoUriTemplate(), expand);
+				return expand;
 			} else {
 				return appManifest.getShipmentLogoUriTemplate();
 			}
