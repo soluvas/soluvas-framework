@@ -854,6 +854,39 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	void setSupportEmail(String value);
 
 	/**
+	 * Returns the value of the '<em><b>Shipment Logo Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png
+	 * 
+	 * <p>Width of 127 pixels is recommended with landscape ratio.
+	 * 
+	 * <p>Supported parameter is "imagesUri", which is from {link WebAddress#getImagesUri()}.
+	 * 
+	 * <p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png
+	 * 
+	 * <p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Shipment Logo Uri Template</em>' attribute.
+	 * @see #setShipmentLogoUriTemplate(String)
+	 * @see org.soluvas.commons.CommonsPackage#getAppManifest_ShipmentLogoUriTemplate()
+	 * @model
+	 * @generated
+	 */
+	String getShipmentLogoUriTemplate();
+
+	/**
+	 * Sets the value of the '{@link org.soluvas.commons.AppManifest#getShipmentLogoUriTemplate <em>Shipment Logo Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Shipment Logo Uri Template</em>' attribute.
+	 * @see #getShipmentLogoUriTemplate()
+	 * @generated
+	 */
+	void setShipmentLogoUriTemplate(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Default Time Zone Id</b></em>' attribute.
 	 * The default value is <code>"UTC"</code>.
 	 * <!-- begin-user-doc -->

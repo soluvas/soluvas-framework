@@ -1361,6 +1361,15 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAppManifest_ShipmentLogoUriTemplate() {
+		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(37);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public EAttribute getAppManifest_DefaultTimeZoneId() {
 		return (EAttribute)appManifestEClass.getEStructuralFeatures().get(14);
@@ -4576,6 +4585,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_PERIOD);
 		createEAttribute(appManifestEClass, APP_MANIFEST__REMINDER_SCHEDULE_STR);
 		createEAttribute(appManifestEClass, APP_MANIFEST__SUPPORT_EMAIL);
+		createEAttribute(appManifestEClass, APP_MANIFEST__SHIPMENT_LOGO_URI_TEMPLATE);
 
 		personInfoEClass = createEClass(PERSON_INFO);
 		createEAttribute(personInfoEClass, PERSON_INFO__GENDER);
@@ -5222,6 +5232,7 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		initEAttribute(getAppManifest_ReminderPeriod(), this.getPeriod(), "reminderPeriod", null, 0, 1, AppManifest.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_ReminderScheduleStr(), ecorePackage.getEString(), "reminderScheduleStr", "18:00:00", 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAppManifest_SupportEmail(), ecorePackage.getEString(), "supportEmail", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAppManifest_ShipmentLogoUriTemplate(), ecorePackage.getEString(), "shipmentLogoUriTemplate", null, 0, 1, AppManifest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(appManifestEClass, this.getLocale(), "getDefaultLocale", 1, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -6044,6 +6055,12 @@ public class CommonsPackageImpl extends EPackageImpl implements CommonsPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Email address (current environment) used for general inquiries, e.g. cantik@berbatik.com. This address is usually handled by a Customer Care application.\nThe default templated generalEmail is \"{+userName}@{+fqdn}\" so that in a development environment, a default postfix and dovecot installation will allow the developer to receive incoming emails and replies.\n\n<p>Templated using URI templates.\n\n<p>TODO: this should be read-only"
+		   });	
+		addAnnotation
+		  (getAppManifest_ShipmentLogoUriTemplate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "URI to tenant logo usable when sending email notifications, by default the tenant logo URI template is: {+imagesUri}tenant_common/logo_email.png\n\n<p>Width of 127 pixels is recommended with landscape ratio.\n\n<p>Supported parameter is \"imagesUri\", which is from {link WebAddress#getImagesUri()}.\n\n<p>You can have app-wide logo without any tenant_common folder by using URI template such as: {+imagesUri}/com.aksimata.app/aksimata_email_192x92.png\n\n<p>To get the actual URI, call {@link AppUtils#getEmailLogoUri(AppManifest, WebAddress)}."
 		   });	
 		addAnnotation
 		  (personInfoEClass, 

@@ -90,6 +90,7 @@ import java.lang.reflect.InvocationTargetException;
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderPeriod <em>Reminder Period</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getReminderScheduleStr <em>Reminder Schedule Str</em>}</li>
  *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getSupportEmail <em>Support Email</em>}</li>
+ *   <li>{@link org.soluvas.commons.impl.AppManifestImpl#getShipmentLogoUriTemplate <em>Shipment Logo Uri Template</em>}</li>
  * </ul>
  *
  * @generated
@@ -883,6 +884,25 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	protected String supportEmail = SUPPORT_EMAIL_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getShipmentLogoUriTemplate() <em>Shipment Logo Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getShipmentLogoUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SHIPMENT_LOGO_URI_TEMPLATE_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getShipmentLogoUriTemplate() <em>Shipment Logo Uri Template</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getShipmentLogoUriTemplate()
+	 * @generated
+	 * @ordered
+	 */
+	protected String shipmentLogoUriTemplate = SHIPMENT_LOGO_URI_TEMPLATE_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1662,6 +1682,27 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getShipmentLogoUriTemplate() {
+		return shipmentLogoUriTemplate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setShipmentLogoUriTemplate(String newShipmentLogoUriTemplate) {
+		String oldShipmentLogoUriTemplate = shipmentLogoUriTemplate;
+		shipmentLogoUriTemplate = newShipmentLogoUriTemplate;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, CommonsPackage.APP_MANIFEST__SHIPMENT_LOGO_URI_TEMPLATE, oldShipmentLogoUriTemplate, shipmentLogoUriTemplate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getDefaultTimeZoneId() {
 		return defaultTimeZoneId;
@@ -2085,6 +2126,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return getReminderScheduleStr();
 			case CommonsPackage.APP_MANIFEST__SUPPORT_EMAIL:
 				return getSupportEmail();
+			case CommonsPackage.APP_MANIFEST__SHIPMENT_LOGO_URI_TEMPLATE:
+				return getShipmentLogoUriTemplate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2213,6 +2256,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__SUPPORT_EMAIL:
 				setSupportEmail((String)newValue);
 				return;
+			case CommonsPackage.APP_MANIFEST__SHIPMENT_LOGO_URI_TEMPLATE:
+				setShipmentLogoUriTemplate((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2339,6 +2385,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 			case CommonsPackage.APP_MANIFEST__SUPPORT_EMAIL:
 				setSupportEmail(SUPPORT_EMAIL_EDEFAULT);
 				return;
+			case CommonsPackage.APP_MANIFEST__SHIPMENT_LOGO_URI_TEMPLATE:
+				setShipmentLogoUriTemplate(SHIPMENT_LOGO_URI_TEMPLATE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2437,6 +2486,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				return REMINDER_SCHEDULE_STR_EDEFAULT == null ? reminderScheduleStr != null : !REMINDER_SCHEDULE_STR_EDEFAULT.equals(reminderScheduleStr);
 			case CommonsPackage.APP_MANIFEST__SUPPORT_EMAIL:
 				return SUPPORT_EMAIL_EDEFAULT == null ? supportEmail != null : !SUPPORT_EMAIL_EDEFAULT.equals(supportEmail);
+			case CommonsPackage.APP_MANIFEST__SHIPMENT_LOGO_URI_TEMPLATE:
+				return SHIPMENT_LOGO_URI_TEMPLATE_EDEFAULT == null ? shipmentLogoUriTemplate != null : !SHIPMENT_LOGO_URI_TEMPLATE_EDEFAULT.equals(shipmentLogoUriTemplate);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2589,6 +2640,8 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 		result.append(reminderScheduleStr);
 		result.append(", supportEmail: ");
 		result.append(supportEmail);
+		result.append(", shipmentLogoUriTemplate: ");
+		result.append(shipmentLogoUriTemplate);
 		result.append(')');
 		return result.toString();
 	}

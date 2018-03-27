@@ -63,6 +63,26 @@ public class AppUtils {
 		}
 	}
 	
+	public static String getShipmentLogoUri(AppManifest appManifest, WebAddress webAddress) {
+		try {
+			Preconditions.checkNotNull(appManifest.getShipmentLogoUriTemplate(),
+					"AppManifest.shipmentLogoUriTemplate is required");
+			if (appManifest.getShipmentLogoUriTemplate().contains("{")) {
+				Preconditions.checkNotNull(webAddress.getImagesUri(),
+						"WebAddress.imagesUri is required");
+				final UriTemplate template = UriTemplate.fromTemplate(appManifest.getShipmentLogoUriTemplate());
+				return template.expand(ImmutableMap.<String, Object>of(
+						"baseUri", webAddress.getBaseUri(),
+						"imagesUri", webAddress.getImagesUri()));
+			} else {
+				return appManifest.getShipmentLogoUriTemplate();
+			}
+		} catch (MalformedUriTemplateException | VariableExpansionException e) {
+			throw new CommonsException(e, "Cannot expand imagesUri '%s' from AppManifest '%s' using template '%s'",
+					webAddress.getImagesUri(), appManifest.getTitle(), appManifest.getShipmentLogoUriTemplate());
+		}
+	}
+	
 	/**
 	 * Create a {@link ThreadPoolExecutor} with {@link Runtime#availableProcessors()} named threads.
 	 * 
