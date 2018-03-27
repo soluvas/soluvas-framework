@@ -51,15 +51,39 @@ public class AppUtils {
 				Preconditions.checkNotNull(webAddress.getImagesUri(),
 						"WebAddress.imagesUri is required");
 				final UriTemplate template = UriTemplate.fromTemplate(appManifest.getEmailLogoUriTemplate());
-				return template.expand(ImmutableMap.<String, Object>of(
+				final String expand = template.expand(ImmutableMap.<String, Object>of(
 						"baseUri", webAddress.getBaseUri(),
 						"imagesUri", webAddress.getImagesUri()));
+				log.trace("Expanding email logo uri template '{}': {}", appManifest.getEmailLogoUriTemplate(), expand);
+				return expand;
 			} else {
 				return appManifest.getEmailLogoUriTemplate();
 			}
 		} catch (MalformedUriTemplateException | VariableExpansionException e) {
 			throw new CommonsException(e, "Cannot expand imagesUri '%s' from AppManifest '%s' using template '%s'",
 					webAddress.getImagesUri(), appManifest.getTitle(), appManifest.getEmailLogoUriTemplate());
+		}
+	}
+	
+	public static String getShipmentLogoUri(AppManifest appManifest, WebAddress webAddress) {
+		try {
+			Preconditions.checkNotNull(appManifest.getShipmentLogoUriTemplate(),
+					"AppManifest.shipmentLogoUriTemplate is required");
+			if (appManifest.getShipmentLogoUriTemplate().contains("{")) {
+				Preconditions.checkNotNull(webAddress.getImagesUri(),
+						"WebAddress.imagesUri is required");
+				final UriTemplate template = UriTemplate.fromTemplate(appManifest.getShipmentLogoUriTemplate());
+				final String expand = template.expand(ImmutableMap.<String, Object>of(
+						"baseUri", webAddress.getBaseUri(),
+						"imagesUri", webAddress.getImagesUri()));
+				log.trace("Expanding shipment logo uri template '{}': {}", appManifest.getShipmentLogoUriTemplate(), expand);
+				return expand;
+			} else {
+				return appManifest.getShipmentLogoUriTemplate();
+			}
+		} catch (MalformedUriTemplateException | VariableExpansionException e) {
+			throw new CommonsException(e, "Cannot expand imagesUri '%s' from AppManifest '%s' using template '%s'",
+					webAddress.getImagesUri(), appManifest.getTitle(), appManifest.getShipmentLogoUriTemplate());
 		}
 	}
 	

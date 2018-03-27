@@ -529,13 +529,22 @@ public interface CommonsPackage extends EPackage {
 	int APP_MANIFEST__SUPPORT_EMAIL = POSITIONABLE_FEATURE_COUNT + 41;
 
 	/**
+	 * The feature id for the '<em><b>Shipment Logo Uri Template</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APP_MANIFEST__SHIPMENT_LOGO_URI_TEMPLATE = POSITIONABLE_FEATURE_COUNT + 42;
+
+	/**
 	 * The number of structural features of the '<em>App Manifest</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 42;
+	int APP_MANIFEST_FEATURE_COUNT = POSITIONABLE_FEATURE_COUNT + 43;
 
 	/**
 	 * The meta object id for the '{@link org.soluvas.commons.Identifiable <em>Identifiable</em>}' class.
@@ -5309,6 +5318,17 @@ public interface CommonsPackage extends EPackage {
 	EAttribute getAppManifest_SupportEmail();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.soluvas.commons.AppManifest#getShipmentLogoUriTemplate <em>Shipment Logo Uri Template</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Shipment Logo Uri Template</em>'.
+	 * @see org.soluvas.commons.AppManifest#getShipmentLogoUriTemplate()
+	 * @see #getAppManifest()
+	 * @generated
+	 */
+	EAttribute getAppManifest_ShipmentLogoUriTemplate();
+
+	/**
 	 * Returns the meta object for class '{@link org.soluvas.commons.PersonInfo <em>Person Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9014,6 +9034,14 @@ public interface CommonsPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute APP_MANIFEST__SUPPORT_EMAIL = eINSTANCE.getAppManifest_SupportEmail();
+
+		/**
+		 * The meta object literal for the '<em><b>Shipment Logo Uri Template</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute APP_MANIFEST__SHIPMENT_LOGO_URI_TEMPLATE = eINSTANCE.getAppManifest_ShipmentLogoUriTemplate();
 
 		/**
 		 * The meta object literal for the '{@link org.soluvas.commons.impl.PersonInfoImpl <em>Person Info</em>}' class.
