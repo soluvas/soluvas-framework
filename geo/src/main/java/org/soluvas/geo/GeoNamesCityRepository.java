@@ -128,11 +128,12 @@ public class GeoNamesCityRepository implements CityRepository {
 		this(ImmutableSet.<String>of(), countryRepo);
 	}
 	
-	@Override
+	@Override @Nullable
 	public City getCity(String countryCodeNormalizedProvinceAndName) throws IllegalArgumentException {
-		final City city = tree.getValueForExactKey(countryCodeNormalizedProvinceAndName);
-		Preconditions.checkArgument(city != null,
-				"Invalid city for '%s'.", countryCodeNormalizedProvinceAndName);
+		@Nullable final City city = tree.getValueForExactKey(countryCodeNormalizedProvinceAndName);
+		log.debug("Got city by key '{}': {}", countryCodeNormalizedProvinceAndName, city);
+//		Preconditions.checkArgument(city != null,
+//				"Invalid city for '%s'.", countryCodeNormalizedProvinceAndName);
 		return city;
 	}
 	

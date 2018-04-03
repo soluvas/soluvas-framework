@@ -17,7 +17,7 @@ public interface CityRepository {
 
 	long count();
 
-	City getCity(String normalizedNameProvinceAndCountryCode) throws IllegalArgumentException;
+	@Nullable City getCity(String normalizedNameProvinceAndCountryCode) throws IllegalArgumentException;
 	
 	City getCity(String name, @Nullable String province, String countryCode);
 
