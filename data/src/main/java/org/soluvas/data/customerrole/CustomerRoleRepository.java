@@ -48,6 +48,8 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 	
 	boolean isBankTransferPaymentEnabled(String customerRole);
 	
+	boolean isPaymentGatewayEnabled(String customerRole);
+	
 	@Nullable Long getZendeskOrganizationId(String customerRoleId);
 
 	@Nullable String getName(String customerRoleId);
