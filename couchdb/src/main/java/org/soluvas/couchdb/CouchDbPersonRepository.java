@@ -740,4 +740,15 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		return null;
 	}
 
+	@Override
+	public boolean addPrimaryEmail(String id, String primaryEmail) {
+		return false;
+	}
+
+	@Override
+	public boolean addPrimaryMobileNumber(String id, String mobileNumber) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

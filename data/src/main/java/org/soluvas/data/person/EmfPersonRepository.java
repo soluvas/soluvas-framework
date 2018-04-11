@@ -549,4 +549,16 @@ public class EmfPersonRepository extends
 		return null;
 	}
 
+	@Override
+	public boolean addPrimaryEmail(String id, String primaryEmail) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addPrimaryMobileNumber(String id, String mobileNumber) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
