@@ -201,6 +201,10 @@ public interface PersonRepository extends
 	Page<Person2> findAllWhereCustomerRoleValidThruNotNull(StatusMask statusMask, Pageable pageable);
 
 	public void removeFcmToken(String userId, String oldFirebaseCloudMessagingToken);
+
+	boolean addPrimaryEmail(String id, String primaryEmail);
+
+	boolean addPrimaryMobileNumber(String id, String mobileNumber);
 	
 }
 

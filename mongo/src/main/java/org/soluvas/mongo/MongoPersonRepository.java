@@ -1068,6 +1068,30 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 				oldFirebaseCloudMessagingToken, userId, result);
 	}
 
+	@Override
+	public boolean addPrimaryEmail(String id, String primaryEmail) {
+		final DBObject query = new BasicDBObject("_id", id);
+		final DBObject objPrimaryEmail = new BasicDBObject(ImmutableMap.of("email", primaryEmail, "primary", true));
+		final BasicDBList emails = new BasicDBList();
+		emails.add(objPrimaryEmail);
+		
+		final WriteResult update = primary.update(query, new BasicDBObject("$set", ImmutableMap.of("emails", emails)));
+		log.debug("Added primary email '{}' to '{}': {}", primaryEmail, id, update);
+		return update.getN() == 1;
+	}
+	
+	@Override
+	public boolean addPrimaryMobileNumber(String id, String mobileNumber) {
+		final DBObject query = new BasicDBObject("_id", id);
+		final DBObject objPrimaryMobileNumber = new BasicDBObject(ImmutableMap.of("phoneNumber", mobileNumber, "primary", true));
+		final BasicDBList mobileNumbers = new BasicDBList();
+		mobileNumbers.add(objPrimaryMobileNumber);
+		
+		final WriteResult update = primary.update(query, new BasicDBObject("$set", ImmutableMap.of("mobileNumbers", mobileNumbers)));
+		log.debug("Added primary mobileNumber '{}' to '{}': {}", mobileNumber, id, update);
+		return update.getN() == 1;
+	}
+
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
 	// slug) {
