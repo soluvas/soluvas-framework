@@ -409,7 +409,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		}
 	}
 	
-	@Override @Nullable
+	@Override
 	public Entry<BigDecimal, Unit<?>> getMaxBookedQtyShopping(String customerRoleId) {
 		final BasicDBObject query = new BasicDBObject();
 		query.put("_id", customerRoleId);
@@ -424,10 +424,10 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 						new BigDecimal(dbObject.get("maxBookedQtyShopping").toString()),
 						Unit.valueOf(dbObject.get("maxBookedQtyShoppingUnit").toString()));
 			} else {
-				return null;
+				return new AbstractMap.SimpleEntry(BigDecimal.ZERO, Unit.ONE);
 			}
 		} else {
-			return null;
+			return new AbstractMap.SimpleEntry(BigDecimal.ZERO, Unit.ONE);
 		}
 	}
 	
