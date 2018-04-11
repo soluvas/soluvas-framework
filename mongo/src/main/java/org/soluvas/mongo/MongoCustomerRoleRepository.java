@@ -1,12 +1,16 @@
 package org.soluvas.mongo;
 
+import java.math.BigDecimal;
+import java.util.AbstractMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.measure.unit.Unit;
 
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.impl.CustomerRole2;
@@ -402,6 +406,28 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			}
 		} else {
 			return false;
+		}
+	}
+	
+	@Override @Nullable
+	public Entry<BigDecimal, Unit<?>> getMaxBookedQtyShopping(String customerRoleId) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", customerRoleId);
+		
+		final BasicDBObject fields = new BasicDBObject("maxBookedQtyShopping", 1).append("maxBookedQtyShoppingUnit", 1);
+		
+		final DBObject dbObject = findOnePrimary(query, fields, "getMaxBookedQtyShopping", customerRoleId);
+		
+		if (dbObject != null) {
+			if (dbObject.get("maxBookedQtyShopping") != null && !"null".equals(dbObject.get("maxBookedQtyShopping"))) {
+				return new AbstractMap.SimpleEntry(
+						new BigDecimal(dbObject.get("maxBookedQtyShopping").toString()),
+						Unit.valueOf(dbObject.get("maxBookedQtyShoppingUnit").toString()));
+			} else {
+				return null;
+			}
+		} else {
+			return null;
 		}
 	}
 	

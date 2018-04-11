@@ -1,6 +1,10 @@
 package org.soluvas.data.customerrole;
 
+import java.math.BigDecimal;
+import java.util.Map.Entry;
+
 import javax.annotation.Nullable;
+import javax.measure.unit.Unit;
 
 import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.StatusMask;
@@ -51,5 +55,7 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 	@Nullable Long getZendeskOrganizationId(String customerRoleId);
 
 	@Nullable String getName(String customerRoleId);
+
+	Entry<BigDecimal, Unit<?>> getMaxBookedQtyShopping(String customerRoleId);
 	
 }
