@@ -3,19 +3,24 @@
 package org.soluvas.commons.impl;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
+import javax.measure.unit.Unit;
 
 import org.joda.time.DateTime;
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Timestamped;
+import org.soluvas.commons.mongo.BigDecimalConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
+import org.soluvas.commons.mongo.UnitConverter;
 
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Id;
 
 
 @SuppressWarnings("serial") 
-@Converters({DateTimeConverter.class})
+@Converters({DateTimeConverter.class, UnitConverter.class, BigDecimalConverter.class})
 public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	
 	public final static String COMMON_ID = "common";
@@ -253,9 +258,44 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	 */
 	protected Long zendeskOrganizationId = ZENDESK_ORGANIZATION_ID_EDEFAULT;
 	
+	/**
+	 * Zero Or null means NO max!!
+	 * @return
+	 */
+	public BigDecimal getMaxBookedQtyShopping() {
+		return maxBookedQtyShopping;
+	}
+
+
+	/**
+	 * Zero Or null means NO max!!
+	 * 
+	 * @param maxBookedQtyShopping
+	 */
+	public void setMaxBookedQtyShopping(BigDecimal maxBookedQtyShopping) {
+		this.maxBookedQtyShopping = maxBookedQtyShopping;
+	}
+
 	private boolean depositEnabled;
 	
 	private boolean bankTransferPaymentEnabled;
+	
+	/**
+	 * Zero Or null means NO max!!
+	 */
+	private BigDecimal maxBookedQtyShopping = BigDecimal.ZERO;
+	
+	private Unit<?> maxBookedQtyShoppingUnit;
+
+	public Unit<?> getMaxBookedQtyShoppingUnit() {
+		return maxBookedQtyShoppingUnit;
+	}
+
+
+	public void setMaxBookedQtyShoppingUnit(Unit<?> maxBookedQtyShoppingUnit) {
+		this.maxBookedQtyShoppingUnit = maxBookedQtyShoppingUnit;
+	}
+
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -648,7 +688,8 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 				+ bookingExpiryTimeInMinutes + ", dropshipEnabled=" + dropshipEnabled + ", reviewReminderEnabled="
 				+ reviewReminderEnabled + ", zendeskIntegration=" + zendeskIntegration + ", zendeskOrganizationId="
 				+ zendeskOrganizationId + ", depositEnabled=" + depositEnabled + ", bankTransferPaymentEnabled="
-				+ bankTransferPaymentEnabled + "]";
+				+ bankTransferPaymentEnabled + ", maxBookedQtyShopping=" + maxBookedQtyShopping
+				+ ", maxBookedQtyShoppingUnit=" + maxBookedQtyShoppingUnit + "]";
 	}
 
 
