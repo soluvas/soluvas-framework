@@ -4,7 +4,6 @@ import liquibase.Contexts;
 import liquibase.Liquibase;
 import liquibase.database.core.PostgresDatabase;
 import liquibase.database.jvm.JdbcConnection;
-import liquibase.exception.LiquibaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,7 +39,7 @@ public class ScheduleLiquibaseConfig {
             final Liquibase liquibase;
             try {
                 liquibase = new Liquibase(QUARTZ_LIQUIBASE_XML, resourceAccessor, db);
-            } catch (LiquibaseException e) {
+            } catch (Exception e) {
                 throw new ScheduleException(e, "Cannot migrate Quartz using '%s': %s", QUARTZ_LIQUIBASE_XML, e);
             }
             log.info("Migrating Quartz using {}", QUARTZ_LIQUIBASE_XML);
