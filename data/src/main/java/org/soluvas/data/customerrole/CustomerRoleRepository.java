@@ -46,11 +46,15 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 	
 	int getBookingExpiryTime(String id);
 	
-	boolean isDropShipEnabled(String customerRole);
+	boolean isDropShipEnabled(String customerRoleId);
 	
-	boolean isBookingEnabled(String customerRole);
+	boolean isBookingEnabled(String customerRoleId);
 	
-	boolean isBankTransferPaymentEnabled(String customerRole);
+	boolean isBankTransferPaymentEnabled(String customerRoleId);
+	
+	boolean isPaymentGatewayEnabled(String customerRoleId);
+	
+	boolean isMultiPaymentBankMandiri(String customerRoleId);
 	
 	@Nullable Long getZendeskOrganizationId(String customerRoleId);
 

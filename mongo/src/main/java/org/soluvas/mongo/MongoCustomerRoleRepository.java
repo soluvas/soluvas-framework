@@ -313,11 +313,11 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 
 	@Override
-	public boolean isDropShipEnabled(String customerRole) {
-		Preconditions.checkState(!Strings.isNullOrEmpty(customerRole), "Customer Role must not be null or empty.");
-		final BasicDBObject query = new BasicDBObject("_id", customerRole);
+	public boolean isDropShipEnabled(String customerRoleId) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(customerRoleId), "Customer Role must not be null or empty.");
+		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("dropshipEnabled", true);
-		final DBObject dbObj = findOnePrimary(query, fields, "isDropShipEnabled", customerRole);
+		final DBObject dbObj = findOnePrimary(query, fields, "isDropShipEnabled", customerRoleId);
 		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object isDropShipEnabledObj = dbObj.get("dropshipEnabled");
@@ -353,11 +353,11 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 
 	@Override
-	public boolean isBookingEnabled(String customerRole) {
-		Preconditions.checkState(!Strings.isNullOrEmpty(customerRole), "Customer Role must not be null or empty.");
-		final BasicDBObject query = new BasicDBObject("_id", customerRole);
+	public boolean isBookingEnabled(String customerRoleId) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(customerRoleId), "Customer Role must not be null or empty.");
+		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("bookingEnabled", true);
-		final DBObject dbObj = findOnePrimary(query, fields, "isBookingEnabled", customerRole);
+		final DBObject dbObj = findOnePrimary(query, fields, "isBookingEnabled", customerRoleId);
 		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object bookingEnabledObj = dbObj.get("bookingEnabled");
@@ -390,11 +390,11 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 
 	@Override
-	public boolean isBankTransferPaymentEnabled(String customerRole) {
-		Preconditions.checkState(!Strings.isNullOrEmpty(customerRole), "Customer Role must not be null or empty.");
-		final BasicDBObject query = new BasicDBObject("_id", customerRole);
+	public boolean isBankTransferPaymentEnabled(String customerRoleId) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(customerRoleId), "Customer Role must not be null or empty.");
+		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("bankTransferPaymentEnabled", true);
-		final DBObject dbObj = findOnePrimary(query, fields, "isBankTransferPaymentEnabled", customerRole);
+		final DBObject dbObj = findOnePrimary(query, fields, "isBankTransferPaymentEnabled", customerRoleId);
 		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object objBankTransferPaymentEnabled = dbObj.get("bankTransferPaymentEnabled");
@@ -428,6 +428,46 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			}
 		} else {
 			return new AbstractMap.SimpleEntry(BigDecimal.ZERO, Unit.ONE);
+		}
+	}
+
+	@Override
+	public boolean isMultiPaymentBankMandiri(String customerRoleId) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(customerRoleId), "Customer Role must not be null or empty.");
+		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
+		final BasicDBObject fields = new BasicDBObject("multiPaymentBankMandiriEnabled", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "isMultiPaymentBankMandiri", customerRoleId);
+		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object objMultiPaymentBankMandiriEnabled = dbObj.get("multiPaymentBankMandiriEnabled");
+			if (objMultiPaymentBankMandiriEnabled != null && !"null".equals(objMultiPaymentBankMandiriEnabled)) {
+				final boolean multiPaymentBankMandiriEnabled = Boolean.valueOf(String.valueOf(objMultiPaymentBankMandiriEnabled)).booleanValue();
+				return multiPaymentBankMandiriEnabled;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPaymentGatewayEnabled(String customerRoleId) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(customerRoleId), "Customer Role must not be null or empty.");
+		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
+		final BasicDBObject fields = new BasicDBObject("paymentGatewayEnabled", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "isPaymentGatewayEnabled", customerRoleId);
+		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object objPaymentGatewayEnabled = dbObj.get("paymentGatewayEnabled");
+			if (objPaymentGatewayEnabled != null && !"null".equals(objPaymentGatewayEnabled)) {
+				final boolean paymentGatewayEnabled = Boolean.valueOf(String.valueOf(objPaymentGatewayEnabled)).booleanValue();
+				return paymentGatewayEnabled;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
 	}
 	
