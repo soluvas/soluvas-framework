@@ -85,7 +85,6 @@ import liquibase.Contexts;
 import liquibase.Liquibase;
 import liquibase.database.core.PostgresDatabase;
 import liquibase.database.jvm.JdbcConnection;
-import liquibase.exception.LiquibaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import scala.util.Failure;
 import scala.util.Success;
@@ -224,7 +223,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 			final Liquibase liquibase;
 			try {
 				liquibase = new Liquibase(liquibasePath, resourceAccessor, db);
-			} catch (LiquibaseException e) {
+			} catch (Exception e) {
 				throw new RepositoryException(e, "Cannot migrate tenants %s using '%s': %s", tenantIds, liquibasePath, e);
 			}
 			for (String tenantId : tenantIds) {
@@ -258,7 +257,7 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 	}
 	
 	@PostConstruct
-	public final void init() throws SQLException, LiquibaseException, IOException {
+	public final void init() throws SQLException, IOException {
 		Preconditions.checkNotNull(txManager, "PlatformTransactionManager txManager was not @Inject-ed properly.");
 		
 		final boolean liquibaseMigrateEnabled = env.containsProperty("liquibaseMigrateEnabled") ? env.getProperty("liquibaseMigrateEnabled", Boolean.class) : true;
