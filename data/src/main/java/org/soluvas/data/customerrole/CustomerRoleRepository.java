@@ -62,4 +62,6 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 
 	Entry<BigDecimal, Unit<?>> getMaxBookedQtyShopping(String customerRoleId);
 	
+	@Nullable String getUriMultiPaymentBankMandiri(String customerRoleId);
+	
 }

@@ -470,6 +470,23 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			return false;
 		}
 	}
+
+	@Override
+	public String getUriMultiPaymentBankMandiri(String customerRoleId) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", customerRoleId);
+		
+		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("uriMultiPaymentBankMandiri", 1), "getUriMultiPaymentBankMandiri", customerRoleId);
+		if (dbObject != null) {
+			if (dbObject.get("uriMultiPaymentBankMandiri") != null && !"null".equals(dbObject.get("uriMultiPaymentBankMandiri"))) {
+				return dbObject.get("uriMultiPaymentBankMandiri").toString();
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 	
 	
 }
