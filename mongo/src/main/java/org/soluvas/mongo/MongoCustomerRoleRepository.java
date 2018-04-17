@@ -410,26 +410,6 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 
 	@Override
-	public boolean isPaymentGatewayEnabled(String customerRole) {
-		Preconditions.checkState(!Strings.isNullOrEmpty(customerRole), "Customer Role must not be null or empty.");
-		final BasicDBObject query = new BasicDBObject("_id", customerRole);
-		final BasicDBObject fields = new BasicDBObject("paymentGatewayEnabled", true);
-		final DBObject dbObj = findOnePrimary(query, fields, "isPaymentGatewayEnabled", customerRole);
-		log.debug("dbObj: {}", dbObj);
-		if (dbObj != null && !"null".equals(dbObj)) {
-			final Object objBankPaymentGatewayEnabled = dbObj.get("paymentGatewayEnabled");
-			if (objBankPaymentGatewayEnabled != null && !"null".equals(objBankPaymentGatewayEnabled)) {
-				final boolean paymentGatewayEnabled = Boolean.valueOf(String.valueOf(objBankPaymentGatewayEnabled)).booleanValue();
-				return paymentGatewayEnabled;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-	
-	@Override
 	public Entry<BigDecimal, Unit<?>> getMaxBookedQtyShopping(String customerRoleId) {
 		final BasicDBObject query = new BasicDBObject();
 		query.put("_id", customerRoleId);
