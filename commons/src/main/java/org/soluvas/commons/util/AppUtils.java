@@ -75,7 +75,7 @@ public class AppUtils {
 				final UriTemplate template = UriTemplate.fromTemplate(appManifest.getShipmentLogoUriTemplate());
 				final String expand = template.expand(ImmutableMap.<String, Object>of(
 						"baseUri", webAddress.getBaseUri(),
-						"imagesUri", webAddress.getImagesUri()));
+						"imagesUri", webAddress.getSecureImagesUri()));
 				log.trace("Expanding shipment logo uri template '{}': {}", appManifest.getShipmentLogoUriTemplate(), expand);
 				return expand;
 			} else {

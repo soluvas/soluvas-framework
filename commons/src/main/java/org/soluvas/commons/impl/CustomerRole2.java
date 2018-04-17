@@ -280,6 +280,29 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	
 	private boolean bankTransferPaymentEnabled;
 	
+	private boolean multiPaymentBankMandiriEnabled;
+	
+	private String uriMultiPaymentBankMandiri;
+	
+	public String getUriMultiPaymentBankMandiri() {
+		return uriMultiPaymentBankMandiri;
+	}
+
+
+	public void setUriMultiPaymentBankMandiri(String uriMultiPaymentBankMandiri) {
+		this.uriMultiPaymentBankMandiri = uriMultiPaymentBankMandiri;
+	}
+
+
+	public boolean isMultiPaymentBankMandiriEnabled() {
+		return multiPaymentBankMandiriEnabled;
+	}
+
+
+	public void setMultiPaymentBankMandiriEnabled(boolean multiPaymentBankMandiriEnabled) {
+		this.multiPaymentBankMandiriEnabled = multiPaymentBankMandiriEnabled;
+	}
+
 	/**
 	 * Zero Or null means NO max!!
 	 */
@@ -688,9 +711,9 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 				+ bookingExpiryTimeInMinutes + ", dropshipEnabled=" + dropshipEnabled + ", reviewReminderEnabled="
 				+ reviewReminderEnabled + ", zendeskIntegration=" + zendeskIntegration + ", zendeskOrganizationId="
 				+ zendeskOrganizationId + ", depositEnabled=" + depositEnabled + ", bankTransferPaymentEnabled="
-				+ bankTransferPaymentEnabled + ", maxBookedQtyShopping=" + maxBookedQtyShopping
-				+ ", maxBookedQtyShoppingUnit=" + maxBookedQtyShoppingUnit + "]";
+				+ bankTransferPaymentEnabled + ", multiPaymentBankMandiriEnabled=" + multiPaymentBankMandiriEnabled
+				+ ", uriMultiPaymentBankMandiri=" + uriMultiPaymentBankMandiri + ", maxBookedQtyShopping="
+				+ maxBookedQtyShopping + ", maxBookedQtyShoppingUnit=" + maxBookedQtyShoppingUnit + "]";
 	}
-
 
 } //CustomerRole
