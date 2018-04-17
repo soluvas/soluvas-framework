@@ -54,7 +54,9 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 	
 	boolean isPaymentGatewayEnabled(String customerRoleId);
 	
-	boolean isMultiPaymentBankMandiri(String customerRoleId);
+	boolean isMultiPaymentBankMandiriEnabled(String customerRoleId);
+	
+	boolean isDepositEnabled(String customerRoleId);
 	
 	@Nullable Long getZendeskOrganizationId(String customerRoleId);
 
