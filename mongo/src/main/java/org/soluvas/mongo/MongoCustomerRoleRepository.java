@@ -470,6 +470,11 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			return false;
 		}
 	}
+
+	@Override
+	public String getUriMultiPaymentBankMandiri(String customerRoleId) {
+		return null;
+	}
 	
 	
 }
