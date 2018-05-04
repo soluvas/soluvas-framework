@@ -432,7 +432,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 
 	@Override
-	public boolean isMultiPaymentBankMandiri(String customerRoleId) {
+	public boolean isMultiPaymentBankMandiriEnabled(String customerRoleId) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(customerRoleId), "Customer Role must not be null or empty.");
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("multiPaymentBankMandiriEnabled", true);
@@ -463,6 +463,43 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			if (objPaymentGatewayEnabled != null && !"null".equals(objPaymentGatewayEnabled)) {
 				final boolean paymentGatewayEnabled = Boolean.valueOf(String.valueOf(objPaymentGatewayEnabled)).booleanValue();
 				return paymentGatewayEnabled;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public String getUriMultiPaymentBankMandiri(String customerRoleId) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", customerRoleId);
+		
+		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("uriMultiPaymentBankMandiri", 1), "getUriMultiPaymentBankMandiri", customerRoleId);
+		if (dbObject != null) {
+			if (dbObject.get("uriMultiPaymentBankMandiri") != null && !"null".equals(dbObject.get("uriMultiPaymentBankMandiri"))) {
+				return dbObject.get("uriMultiPaymentBankMandiri").toString();
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public boolean isDepositEnabled(String customerRoleId) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(customerRoleId), "Customer Role must not be null or empty.");
+		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
+		final BasicDBObject fields = new BasicDBObject("depositEnabled", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "isDepositEnabled", customerRoleId);
+		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object objDepositEnabled = dbObj.get("depositEnabled");
+			if (objDepositEnabled != null && !"null".equals(objDepositEnabled)) {
+				final boolean depositEnabled = Boolean.valueOf(String.valueOf(objDepositEnabled)).booleanValue();
+				return depositEnabled;
 			} else {
 				return false;
 			}
