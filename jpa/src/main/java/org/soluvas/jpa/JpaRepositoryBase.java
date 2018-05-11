@@ -22,11 +22,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 import javax.persistence.metamodel.EntityType;
 import javax.sql.DataSource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,6 +87,7 @@ import liquibase.Contexts;
 import liquibase.Liquibase;
 import liquibase.database.core.PostgresDatabase;
 import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.LiquibaseException;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import scala.util.Failure;
 import scala.util.Success;
@@ -389,7 +392,29 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 			@Override
 			@Nullable
 			public javax.persistence.criteria.Order apply(@Nullable Order input) {
-				return input.getDirection() == Direction.ASC ? cb.asc(root.get(input.getProperty())) : cb.desc(root.get(input.getProperty()));
+				final String[] properties = StringUtils.split(input.getProperty(), ".");
+//				log.debug("properties: {}", properties);
+				Path<Object> path = null;
+				int i = 0;
+				for (int j = 0; j < properties.length; j++) {
+//					log.debug("Path: {}", path);
+					i++;
+					if (i == properties.length) {
+						if (path == null) {
+							path = root.get(properties[j]);
+						} else {
+							path = path.get(properties[j]);
+						}
+					} else {
+						if (path == null) {
+							path = root.get(properties[j]);
+						} else {
+							path = path.get(properties[j]);
+						}
+					}
+				}
+				return input.getDirection() == Direction.ASC ? cb.asc(path) : cb.desc(path);
+//				return input.getDirection() == Direction.ASC ? cb.asc(root.get(input.getProperty())) : cb.desc(root.get(input.getProperty()));
 			}
 		}).toList();
 		cq.orderBy(jpaOrders);
