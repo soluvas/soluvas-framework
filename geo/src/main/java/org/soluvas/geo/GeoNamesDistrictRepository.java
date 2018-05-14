@@ -45,7 +45,7 @@ import com.opencsv.CSVReader;
  */
 public class GeoNamesDistrictRepository implements DistrictRepository {
 
-    public static final String DISTRICTS_ID_JNE_2015_12_TSV = "districts_ID_jne_2016-04.csv";
+    public static final String DISTRICTS_ID_JNE_2015_12_CSV = "districts_ID_jne_2016-04.csv";
 
     private final CityRepository cityRepo;
     private int entryCount = 0;
@@ -63,7 +63,7 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
      * @return
      */
     public static URL getDistrictTsv() {
-        return GeoNamesDistrictRepository.class.getResource(DISTRICTS_ID_JNE_2015_12_TSV);
+        return GeoNamesDistrictRepository.class.getResource(DISTRICTS_ID_JNE_2015_12_CSV);
     }
 
     public GeoNamesDistrictRepository(CityRepository cityRepo) throws IOException {
