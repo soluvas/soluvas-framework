@@ -19,6 +19,8 @@ import org.ektorp.support.DesignDocument;
 import org.ektorp.support.DesignDocument.View;
 import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.PersonInfo2;
+import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.impl.CustomerRole2;
@@ -749,6 +751,18 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	public boolean addPrimaryMobileNumber(String id, String mobileNumber) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public PersonInfo2 findOneAsInfo(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ImmutableList<PostalAddress2> getAddresses(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

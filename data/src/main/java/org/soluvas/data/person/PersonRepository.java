@@ -11,6 +11,8 @@ import org.joda.time.DateTime;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
+import org.soluvas.commons.PersonInfo2;
+import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.Existence;
@@ -205,6 +207,10 @@ public interface PersonRepository extends
 	boolean addPrimaryEmail(String id, String primaryEmail);
 
 	boolean addPrimaryMobileNumber(String id, String mobileNumber);
+	
+	@Nullable PersonInfo2 findOneAsInfo(String id);
+	
+	ImmutableList<PostalAddress2> getAddresses(String id);
 	
 }
 

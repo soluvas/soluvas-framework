@@ -3,10 +3,13 @@ package org.soluvas.mongo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -14,12 +17,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.CommonsPackage;
 import org.soluvas.commons.Email2;
 import org.soluvas.commons.EnumNameFunction;
+import org.soluvas.commons.Gender;
 import org.soluvas.commons.Organization2;
+import org.soluvas.commons.PersonInfo2;
 import org.soluvas.commons.PhoneNumber2;
 import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.SlugUtils;
@@ -51,6 +57,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBList;
@@ -89,7 +96,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 				Index.compound("emails.email", Direction.ASC, "accountStatus", Direction.ASC));
 		this.tenantId = tenantId;
 		this.cacheMgr = cacheMgr;
-
+		
 		upgradeEntityFrom1To2();
 	}
 
@@ -1090,6 +1097,227 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		final WriteResult update = primary.update(query, new BasicDBObject("$set", ImmutableMap.of("mobileNumbers", mobileNumbers)));
 		log.debug("Added primary mobileNumber '{}' to '{}': {}", mobileNumber, id, update);
 		return update.getN() == 1;
+	}
+
+	@Override @Nullable
+	public PersonInfo2 findOneAsInfo(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		
+		final HashMap<String, Boolean> map = new HashMap<>();
+		map.put("_id", true);
+		map.put("slug", true);
+		map.put("name", true);
+		map.put("photoId", true);
+		map.put("gender", true);
+		map.put("emails", true);
+		map.put("mobileNumbers", true);
+		map.put("customerRole", true);
+		final BasicDBObject fields = new BasicDBObject(map);
+		
+		final DBObject dbObj = findOneSecondary(query, fields, "findOneAsInfo", id);
+		if (dbObj == null) {
+			return null;
+		}
+		
+		final PersonInfo2 personInfo = new PersonInfo2();
+		if (dbObj.containsField("_id")) {
+			personInfo.setId(String.valueOf(dbObj.get("_id")));
+		}
+		if (dbObj.containsField("slug")) {
+			personInfo.setSlug(String.valueOf(dbObj.get("slug")));
+		}
+		if (dbObj.containsField("name")) {
+			personInfo.setName(String.valueOf(dbObj.get("name")));
+		}
+		if (dbObj.containsField("photoId")) {
+			personInfo.setPhotoId(String.valueOf(dbObj.get("photoId")));
+		}
+		if (dbObj.containsField("gender")) {
+			personInfo.setGender(Gender.valueOf(String.valueOf(dbObj.get("gender"))));
+		}
+		if (dbObj.containsField("emails")) {
+			final BasicDBList objEmails = (BasicDBList) dbObj.get("emails");
+			final java.util.Optional<Object> optPrimaryEmail = objEmails.stream().filter(new Predicate<Object>() {
+				@Override
+				public boolean test(Object t) {
+					final DBObject objEmail = (DBObject) t;
+					if (objEmail.containsField("email") && objEmail.containsField("primary")) {
+						return Boolean.valueOf(String.valueOf(objEmail.get("primary")));
+					}
+					return false;
+				}
+			}).findFirst();
+			if (optPrimaryEmail.isPresent()) {
+				final DBObject objPrimaryEmail = (DBObject) optPrimaryEmail.get();
+				personInfo.setEmail(String.valueOf(objPrimaryEmail.get("email")));
+			} else {
+				final DBObject objFirstEmail = (DBObject) objEmails.get(0);
+				personInfo.setEmail(String.valueOf(objFirstEmail.get("email")));
+			}
+		}
+		if (dbObj.containsField("mobileNumbers")) {
+			final BasicDBList objMobileNumbers = (BasicDBList) dbObj.get("mobileNumbers");
+			final java.util.Optional<Object> optPrimaryMobileNumber = objMobileNumbers.stream().filter(new Predicate<Object>() {
+				@Override
+				public boolean test(Object t) {
+					final DBObject objEmail = (DBObject) t;
+					if (objEmail.containsField("phoneNumber") && objEmail.containsField("primary")) {
+						return Boolean.valueOf(String.valueOf(objEmail.get("primary")));
+					}
+					return false;
+				}
+			}).findFirst();
+			if (optPrimaryMobileNumber.isPresent()) {
+				final DBObject objPrimaryMobileNumber = (DBObject) optPrimaryMobileNumber.get();
+				personInfo.setMobileNumber(String.valueOf(objPrimaryMobileNumber.get("phoneNumber")));
+			} else {
+				final DBObject objFirstMobileNumber = (DBObject) objMobileNumbers.get(0);
+				personInfo.setMobileNumber(String.valueOf(objFirstMobileNumber.get("phoneNumber")));
+			}
+		}
+		if (dbObj.containsField("customerRole")) {
+			personInfo.setRole(String.valueOf(dbObj.get("customerRole")));
+		}
+		
+		return personInfo;
+	}
+
+	@Override
+	public ImmutableList<PostalAddress2> getAddresses(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		
+		final BasicDBObject fields = new BasicDBObject("addresses", 1);
+		
+		final DBObject dbObj = findOneSecondary(query, fields, "getAddresses", id);
+		if (dbObj == null) {
+			return ImmutableList.of();
+		}
+		final Builder<PostalAddress2> bList = ImmutableList.builder();
+		if (dbObj.containsField("addresses")) {
+			final BasicDBList objAddresses = (BasicDBList) dbObj.get("addresses");
+			objAddresses.forEach(new Consumer<Object>() {
+				@Override
+				public void accept(Object t) {
+					final DBObject objAddress = (DBObject) t;
+					
+					final PostalAddress2 address = new PostalAddress2();
+					if (objAddress.containsField("city")) {
+						address.setCity(String.valueOf(objAddress.get("city")));
+					}
+					if (objAddress.containsField("country")) {
+						address.setCountry(String.valueOf(objAddress.get("country")));
+					}
+					if (objAddress.containsField("countryCode")) {
+						address.setCountryCode(String.valueOf(objAddress.get("countryCode")));
+					}
+					if (objAddress.containsField("description")) {
+						address.setDescription(String.valueOf(objAddress.get("description")));
+					}
+					if (objAddress.containsField("district")) {
+						address.setDistrict(String.valueOf(objAddress.get("district")));
+					}
+					if (objAddress.containsField("emails")) {
+						final BasicDBList objEmails = (BasicDBList) objAddress.get("emails");
+						address.setEmails(objEmails.stream().map(new java.util.function.Function<Object, String>() {
+							@Override
+							public String apply(Object t) {
+								return String.valueOf(t);
+							}
+						}).collect(Collectors.toList()));
+					}
+					if (objAddress.containsField("homePhones")) {
+						final BasicDBList objHomePhones = (BasicDBList) objAddress.get("homePhones");
+						address.setHomePhones(objHomePhones.stream().map(new java.util.function.Function<Object, String>() {
+							@Override
+							public String apply(Object t) {
+								return String.valueOf(t);
+							}
+						}).collect(Collectors.toList()));
+					}
+					if (objAddress.containsField("id")) {
+						address.setId(UUID.fromString(String.valueOf(objAddress.get("id"))));
+					}
+					if (objAddress.containsField("jneAreaCode")) {
+						address.setJneAreaCode(String.valueOf(objAddress.get("jneAreaCode")));
+					}
+					if (objAddress.containsField("mobiles")) {
+						final BasicDBList objMobiles = (BasicDBList) objAddress.get("mobiles");
+						address.setMobiles(objMobiles.stream().map(new java.util.function.Function<Object, String>() {
+							@Override
+							public String apply(Object t) {
+								return String.valueOf(t);
+							}
+						}).collect(Collectors.toList()));
+					}
+					if (objAddress.containsField("name")) {
+						address.setName(String.valueOf(objAddress.get("name")));
+					}
+					if (objAddress.containsField("organization")) {
+						address.setOrganization(String.valueOf(objAddress.get("organization")));
+					}
+					if (objAddress.containsField("phones")) {
+						final BasicDBList objPhones = (BasicDBList) objAddress.get("phones");
+						address.setPhones(objPhones.stream().map(new java.util.function.Function<Object, String>() {
+							@Override
+							public String apply(Object t) {
+								return String.valueOf(t);
+							}
+						}).collect(Collectors.toList()));
+					}
+					if (objAddress.containsField("postalCode")) {
+						address.setPostalCode(String.valueOf(objAddress.get("postalCode")));
+					}
+					if (objAddress.containsField("primary")) {
+						address.setPrimary(Boolean.valueOf(String.valueOf(objAddress.get("primary"))));
+					}
+					if (objAddress.containsField("primaryBilling")) {
+						address.setPrimaryBilling(Boolean.valueOf(String.valueOf(objAddress.get("primaryBilling"))));
+					}
+					if (objAddress.containsField("primaryEmail")) {
+						address.setPrimaryEmail(String.valueOf(objAddress.get("primaryEmail")));
+					}
+					if (objAddress.containsField("primaryHomePhone")) {
+						address.setPrimaryHomePhone(String.valueOf(objAddress.get("primaryHomePhone")));
+					}
+					if (objAddress.containsField("primaryMobile")) {
+						address.setPrimaryMobile(String.valueOf(objAddress.get("primaryMobile")));
+					}
+					if (objAddress.containsField("primaryPhone")) {
+						address.setPrimaryPhone(String.valueOf(objAddress.get("primaryPhone")));
+					}
+					if (objAddress.containsField("primaryShipping")) {
+						address.setPrimaryShipping(Boolean.valueOf(String.valueOf(objAddress.get("primaryShipping"))));
+					}
+					if (objAddress.containsField("primaryWorkPhone")) {
+						address.setPrimaryWorkPhone(String.valueOf(objAddress.get("primaryWorkPhone")));
+					}
+					if (objAddress.containsField("province")) {
+						address.setProvince(String.valueOf(objAddress.get("province")));
+					}
+					if (objAddress.containsField("street")) {
+						address.setStreet(String.valueOf(objAddress.get("street")));
+					}
+					if (objAddress.containsField("validationTime")) {
+						address.setValidationTime(new DateTime(objAddress.get("validationTime")));
+					}
+					if (objAddress.containsField("validationTime_zone")) {
+						address.setValidationTime_zone(DateTimeZone.forID(String.valueOf(objAddress.get("validationTime_zone"))));
+					}
+					if (objAddress.containsField("workPhones")) {
+						final BasicDBList objWorkPhones = (BasicDBList) objAddress.get("workPhones");
+						address.setWorkPhones(objWorkPhones.stream().map(new java.util.function.Function<Object, String>() {
+							@Override
+							public String apply(Object t) {
+								return String.valueOf(t);
+							}
+						}).collect(Collectors.toList()));
+					}
+					bList.add(address);
+				}
+			});
+		}
+		
+		return bList.build();
 	}
 
 	// @Override

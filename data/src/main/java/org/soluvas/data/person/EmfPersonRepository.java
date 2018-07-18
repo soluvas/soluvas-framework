@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.IdPredicate;
 import org.soluvas.commons.PersonCatalog;
+import org.soluvas.commons.PersonInfo2;
+import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.EntityLookupException;
@@ -559,6 +561,18 @@ public class EmfPersonRepository extends
 	public boolean addPrimaryMobileNumber(String id, String mobileNumber) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public PersonInfo2 findOneAsInfo(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ImmutableList<PostalAddress2> getAddresses(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
