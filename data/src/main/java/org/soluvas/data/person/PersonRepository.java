@@ -3,6 +3,7 @@ package org.soluvas.data.person;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -211,6 +212,8 @@ public interface PersonRepository extends
 	@Nullable PersonInfo2 findOneAsInfo(String id);
 	
 	ImmutableList<PostalAddress2> getAddresses(String id);
+
+	public void setJneAreaCode(String id, UUID addressId, String areaCode);
 	
 }
 

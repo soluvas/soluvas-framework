@@ -1320,6 +1320,22 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		return bList.build();
 	}
 
+	/**
+	 * db.person.update({_id: 'ingga_bia_putri', 'addresses.id': '104d04ca-50a5-4611-8fa6-9e33c8656581'}, {$set: {'addresses.$.street': 'ubah jalan'}});
+	 */
+	@Override
+	public void setJneAreaCode(String id, UUID addressId, String areaCode) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", id);
+		query.put("addresses.id", addressId.toString());
+		
+		final BasicDBObject update = new BasicDBObject("$set", new BasicDBObject("addresses.$.jneAreaCode", areaCode));
+		
+		final WriteResult result = primary.update(query, update);
+		log.debug("Result update JNE area code for person '{}' - address '{}' - jneCode '{}': {}",
+				id, addressId, areaCode, result);
+	}
+
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
 	// slug) {

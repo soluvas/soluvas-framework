@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.annotation.Nullable;
 
@@ -763,6 +764,12 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	public ImmutableList<PostalAddress2> getAddresses(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setJneAreaCode(String id, UUID addressId, String areaCode) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
