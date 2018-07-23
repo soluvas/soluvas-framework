@@ -215,5 +215,7 @@ public interface PersonRepository extends
 
 	public void setJneAreaCode(String id, UUID addressId, String areaCode);
 	
+	public void addAddress(String id, PostalAddress2 address);
+	
 }
 

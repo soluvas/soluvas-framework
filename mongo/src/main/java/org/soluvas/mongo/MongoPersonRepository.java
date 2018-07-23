@@ -1336,6 +1336,31 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 				id, addressId, areaCode, result);
 	}
 
+	@Override
+	public void addAddress(String id, PostalAddress2 address) {
+		final DBObject objAddress = new BasicDBObject();
+		objAddress.put("id", address.getId().toString()); 
+		objAddress.put("name", address.getName()); 
+		objAddress.put("street", address.getStreet()); 
+		objAddress.put("city", address.getCity()); 
+		objAddress.put("postalCode", address.getPostalCode()); 
+		objAddress.put("province", address.getProvince()); 
+		objAddress.put("country", address.getCountry()); 
+		objAddress.put("countryCode", address.getCountryCode()); 
+		objAddress.put("primaryMobile", address.getPrimaryMobile()); 
+		objAddress.put("primaryEmail", address.getPrimaryEmail()); 
+		objAddress.put("primary", address.isPrimary()); 
+		objAddress.put("primaryBilling", address.isPrimaryBilling());
+		objAddress.put("primaryShipping", address.isPrimaryShipping()); 
+		objAddress.put("district", address.getDistrict());
+		
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		
+		final BasicDBObject update = new BasicDBObject("$push", new BasicDBObject("addresses", objAddress));
+		final WriteResult result = primary.update(query, update);
+		log.debug("Added new address '{}' for personId '{}': {}", address.getId(), id, result);
+	}
+
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
 	// slug) {

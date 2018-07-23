@@ -772,4 +772,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		
 	}
 
+	@Override
+	public void addAddress(String id, PostalAddress2 address) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
