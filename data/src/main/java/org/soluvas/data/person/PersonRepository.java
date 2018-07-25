@@ -217,5 +217,7 @@ public interface PersonRepository extends
 	
 	public void addAddress(String id, PostalAddress2 address);
 	
+	@Nullable PostalAddress2 getBillingAddress(String id);
+	
 }
 

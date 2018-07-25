@@ -1361,6 +1361,21 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		log.debug("Added new address '{}' for personId '{}': {}", address.getId(), id, result);
 	}
 
+	@Override
+	public PostalAddress2 getBillingAddress(String id) {
+		final ImmutableList<PostalAddress2> addresses = getAddresses(id);
+		if (addresses.isEmpty()) {
+			return null;
+		}
+		
+		return addresses.stream().filter(new Predicate<PostalAddress2>() {
+			@Override
+			public boolean test(PostalAddress2 t) {
+				return t.isPrimaryBilling();
+			}
+		}).findFirst().orElse(addresses.get(0));
+	}
+
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
 	// slug) {

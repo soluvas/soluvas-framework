@@ -778,4 +778,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		
 	}
 
+	@Override
+	public PostalAddress2 getBillingAddress(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

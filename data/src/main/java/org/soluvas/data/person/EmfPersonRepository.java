@@ -588,4 +588,10 @@ public class EmfPersonRepository extends
 		
 	}
 
+	@Override
+	public PostalAddress2 getBillingAddress(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
