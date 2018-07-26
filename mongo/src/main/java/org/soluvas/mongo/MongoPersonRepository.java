@@ -1376,6 +1376,33 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		}).findFirst().orElse(addresses.get(0));
 	}
 
+	@Override
+	public void modifyAddress(String personId, PostalAddress2 postalAddress) {
+		final BasicDBObject query = new BasicDBObject();
+		query.put("_id", personId);
+		query.put("addresses.id", postalAddress.getId());
+		
+		final BasicDBObject update = new BasicDBObject();
+		final Map<String, Object> map = new HashMap<>();
+		update.put("addresses.$.name", postalAddress.getName()); 
+		update.put("addresses.$.street", postalAddress.getStreet()); 
+		update.put("addresses.$.city", postalAddress.getCity()); 
+		update.put("addresses.$.postalCode", postalAddress.getPostalCode()); 
+		update.put("addresses.$.province", postalAddress.getProvince()); 
+		update.put("addresses.$.country", postalAddress.getCountry()); 
+		update.put("addresses.$.countryCode", postalAddress.getCountryCode()); 
+		update.put("addresses.$.primaryMobile", postalAddress.getPrimaryMobile()); 
+		update.put("addresses.$.primaryEmail", postalAddress.getPrimaryEmail()); 
+		update.put("addresses.$.primary", postalAddress.isPrimary()); 
+		update.put("addresses.$.primaryBilling", postalAddress.isPrimaryBilling());
+		update.put("addresses.$.primaryShipping", postalAddress.isPrimaryShipping()); 
+		update.put("addresses.$.district", postalAddress.getDistrict());
+		update.put("$set", map);
+		
+		final WriteResult result = primary.update(query, update);
+		log.debug("Update address for personId '{}': {}", personId, postalAddress);
+	}
+
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
 	// slug) {

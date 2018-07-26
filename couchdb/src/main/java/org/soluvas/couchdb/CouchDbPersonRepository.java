@@ -784,4 +784,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		return null;
 	}
 
+	@Override
+	public void modifyAddress(String personId, PostalAddress2 postalAddress) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

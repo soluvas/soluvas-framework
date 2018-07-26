@@ -594,4 +594,10 @@ public class EmfPersonRepository extends
 		return null;
 	}
 
+	@Override
+	public void modifyAddress(String personId, PostalAddress2 postalAddress) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
