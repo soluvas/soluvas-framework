@@ -24,6 +24,7 @@ import org.soluvas.data.person.PersonRepository;
 import com.google.code.morphia.logging.MorphiaLoggerFactory;
 import com.google.code.morphia.logging.slf4j.SLF4JLogrImplFactory;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 
 /**
  * @author atang
@@ -44,7 +45,7 @@ public class MongoPersonRepositoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		personRepo = new MongoPersonRepository("demo", null, "mongodb://127.0.0.1:27017/demo_dev", false, true);
+		personRepo = new MongoPersonRepository("tuneeca", null, "mongodb://127.0.0.1:27017/tuneeca_dev", false, true);
 	}
 	
 	@Test
@@ -137,6 +138,12 @@ public class MongoPersonRepositoryTest {
 			final String lastName = nameArray[1];
 			log.debug("lastName '{}'", lastName);
 		}
+	}
+	
+	@Test
+	public void getFcmTokens() {
+		final ImmutableSet<String> fcmTokens = personRepo.getFcmTokens("ingga_bia_putri");
+		
 	}
 	
 }

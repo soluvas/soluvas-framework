@@ -60,6 +60,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet.Builder;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.BulkWriteOperation;
@@ -1099,6 +1100,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		return update.getN() == 1;
 	}
 
+<<<<<<< HEAD
 	@Override @Nullable
 	public PersonInfo2 findOneAsInfo(String id) {
 		final BasicDBObject query = new BasicDBObject("_id", id);
@@ -1401,6 +1403,37 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		
 		final WriteResult result = primary.update(query, update);
 		log.debug("Update address for personId '{}': {}", personId, postalAddress);
+	}
+	
+	@Override
+	public ImmutableSet<String> getFcmTokens(String id) {
+		final DBObject query = new BasicDBObject(ImmutableMap.of("_id", id, "firebaseCloudMessagingTokens", new BasicDBObject("$exists", true)));
+		final BasicDBObject fields = new BasicDBObject("firebaseCloudMessagingTokens", true);
+		final List<DBObject> dbObjects = findSecondaryAsDBObjects(query, fields, null, 0, 0, "getFcmTokens", id);
+		
+//		log.debug("Got dbObjects by query '{}' and fields '{}': {}",
+//				query, fields , dbObjects);
+		
+		final Builder<String> bSet = ImmutableSet.builder();
+		
+		if (!dbObjects.isEmpty()) {
+			dbObjects.forEach(new Consumer<DBObject>() {
+				@Override
+				public void accept(DBObject objDoc) {
+					final BasicDBList objTokens = (BasicDBList) objDoc.get("firebaseCloudMessagingTokens");
+					objTokens.forEach(new Consumer<Object>() {
+						@Override
+						public void accept(Object token) {
+							bSet.add(String.valueOf(token));
+						}
+					});
+				}
+			});
+		}
+		
+		final ImmutableSet<String> result = bSet.build();
+		log.debug("Got fcm tokens for person '{}': {}", id, result);
+		return result;
 	}
 
 	// @Override

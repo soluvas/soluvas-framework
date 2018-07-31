@@ -755,6 +755,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	}
 
 	@Override
+<<<<<<< HEAD
 	public PersonInfo2 findOneAsInfo(String id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -787,7 +788,12 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	@Override
 	public void modifyAddress(String personId, PostalAddress2 postalAddress) {
 		// TODO Auto-generated method stub
-		
+	}
+	
+	@Override
+	public ImmutableSet<String> getFcmTokens(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

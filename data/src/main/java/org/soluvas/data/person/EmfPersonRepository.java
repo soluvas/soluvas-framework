@@ -565,6 +565,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
+<<<<<<< HEAD
 	public PersonInfo2 findOneAsInfo(String id) {
 		// TODO Auto-generated method stub
 		return null;
@@ -597,7 +598,12 @@ public class EmfPersonRepository extends
 	@Override
 	public void modifyAddress(String personId, PostalAddress2 postalAddress) {
 		// TODO Auto-generated method stub
+	}
 		
+	@Override
+	public ImmutableSet<String> getFcmTokens(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
