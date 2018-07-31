@@ -561,4 +561,10 @@ public class EmfPersonRepository extends
 		return false;
 	}
 
+	@Override
+	public ImmutableSet<String> getFcmTokens(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

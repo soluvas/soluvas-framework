@@ -53,6 +53,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet.Builder;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.BulkWriteOperation;
@@ -1090,6 +1091,32 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		final WriteResult update = primary.update(query, new BasicDBObject("$set", ImmutableMap.of("mobileNumbers", mobileNumbers)));
 		log.debug("Added primary mobileNumber '{}' to '{}': {}", mobileNumber, id, update);
 		return update.getN() == 1;
+	}
+
+	@Override
+	public ImmutableSet<String> getFcmTokens(String id) {
+		final DBObject query = new BasicDBObject(ImmutableMap.of("_id", id, "firebaseCloudMessagingTokens", new BasicDBObject("$exists", true)));
+		final BasicDBObject fields = new BasicDBObject("firebaseCloudMessagingTokens", true);
+		final List<DBObject> dbObjects = findSecondaryAsDBObjects(query, fields, null, 0, 0, "getFcmTokens", id);
+		
+		final Builder<String> bSet = ImmutableSet.builder();
+		
+		if (dbObjects.isEmpty()) {
+			dbObjects.forEach(new Consumer<DBObject>() {
+				@Override
+				public void accept(DBObject objDoc) {
+					final BasicDBList objTokens = (BasicDBList) objDoc.get("firebaseCloudMessagingTokens");
+					objTokens.forEach(new Consumer<Object>() {
+						@Override
+						public void accept(Object token) {
+							bSet.add(String.valueOf(token));
+						}
+					});
+				}
+			});
+		}
+		
+		return bSet.build();
 	}
 
 	// @Override

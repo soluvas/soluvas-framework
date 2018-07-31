@@ -751,4 +751,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		return false;
 	}
 
+	@Override
+	public ImmutableSet<String> getFcmTokens(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

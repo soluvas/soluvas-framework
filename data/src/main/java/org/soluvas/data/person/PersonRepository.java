@@ -206,5 +206,7 @@ public interface PersonRepository extends
 
 	boolean addPrimaryMobileNumber(String id, String mobileNumber);
 	
+	ImmutableSet<String> getFcmTokens(String id);
+	
 }
 
