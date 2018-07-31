@@ -1099,9 +1099,12 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		final BasicDBObject fields = new BasicDBObject("firebaseCloudMessagingTokens", true);
 		final List<DBObject> dbObjects = findSecondaryAsDBObjects(query, fields, null, 0, 0, "getFcmTokens", id);
 		
+//		log.debug("Got dbObjects by query '{}' and fields '{}': {}",
+//				query, fields , dbObjects);
+		
 		final Builder<String> bSet = ImmutableSet.builder();
 		
-		if (dbObjects.isEmpty()) {
+		if (!dbObjects.isEmpty()) {
 			dbObjects.forEach(new Consumer<DBObject>() {
 				@Override
 				public void accept(DBObject objDoc) {
@@ -1116,7 +1119,9 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 			});
 		}
 		
-		return bSet.build();
+		final ImmutableSet<String> result = bSet.build();
+		log.debug("Got fcm tokens for person '{}': {}", id, result);
+		return result;
 	}
 
 	// @Override
