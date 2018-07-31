@@ -57,10 +57,8 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSet.Builder;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.BulkWriteOperation;
@@ -1100,7 +1098,6 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		return update.getN() == 1;
 	}
 
-<<<<<<< HEAD
 	@Override @Nullable
 	public PersonInfo2 findOneAsInfo(String id) {
 		final BasicDBObject query = new BasicDBObject("_id", id);
@@ -1194,7 +1191,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		if (dbObj == null) {
 			return ImmutableList.of();
 		}
-		final Builder<PostalAddress2> bList = ImmutableList.builder();
+		final ImmutableList.Builder<PostalAddress2> bList = ImmutableList.builder();
 		if (dbObj.containsField("addresses")) {
 			final BasicDBList objAddresses = (BasicDBList) dbObj.get("addresses");
 			objAddresses.forEach(new Consumer<Object>() {
@@ -1414,7 +1411,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 //		log.debug("Got dbObjects by query '{}' and fields '{}': {}",
 //				query, fields , dbObjects);
 		
-		final Builder<String> bSet = ImmutableSet.builder();
+		final ImmutableSet.Builder<String> bSet = ImmutableSet.builder();
 		
 		if (!dbObjects.isEmpty()) {
 			dbObjects.forEach(new Consumer<DBObject>() {
