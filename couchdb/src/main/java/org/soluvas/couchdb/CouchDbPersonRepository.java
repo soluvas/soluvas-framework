@@ -755,7 +755,6 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	}
 
 	@Override
-<<<<<<< HEAD
 	public PersonInfo2 findOneAsInfo(String id) {
 		// TODO Auto-generated method stub
 		return null;

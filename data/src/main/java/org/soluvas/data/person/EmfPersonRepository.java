@@ -565,7 +565,6 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-<<<<<<< HEAD
 	public PersonInfo2 findOneAsInfo(String id) {
 		// TODO Auto-generated method stub
 		return null;
