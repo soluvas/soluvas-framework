@@ -1433,6 +1433,21 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		return result;
 	}
 
+	@Override
+	public PostalAddress2 getShippingAddress(String id) {
+		final ImmutableList<PostalAddress2> addresses = getAddresses(id);
+		if (addresses.isEmpty()) {
+			return null;
+		}
+		
+		return addresses.stream().filter(new Predicate<PostalAddress2>() {
+			@Override
+			public boolean test(PostalAddress2 t) {
+				return t.isPrimaryShipping();
+			}
+		}).findFirst().orElse(addresses.get(0));
+	}
+
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
 	// slug) {

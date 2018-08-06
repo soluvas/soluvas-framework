@@ -222,6 +222,8 @@ public interface PersonRepository extends
 	public void modifyAddress(String personId, PostalAddress2 postalAddress);
 	
 	ImmutableSet<String> getFcmTokens(String id);
+
+	@Nullable PostalAddress2 getShippingAddress(String id);
 	
 }
 

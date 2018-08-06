@@ -605,4 +605,10 @@ public class EmfPersonRepository extends
 		return null;
 	}
 
+	@Override
+	public PostalAddress2 getShippingAddress(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
