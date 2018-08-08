@@ -19,6 +19,7 @@ import org.soluvas.commons.mongo.DateTimeConverter;
 
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.converters.UUIDConverter;
+import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 
 /**
@@ -1418,6 +1419,27 @@ public class PostalAddress2 implements Describable2, Serializable {
 		} else if (!workPhones.equals(other.workPhones))
 			return false;
 		return true;
+	}
+	
+	public boolean isSame(final PostalAddress2 toAddress) {
+		if (toAddress == null) {
+			return false;
+		}
+		if ( Optional.fromNullable(getName()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getName()).or("-"))
+    			&& Optional.fromNullable(getPrimaryEmail()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getPrimaryEmail()).or("-")) 
+    			&& Optional.fromNullable(getPrimaryMobile()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getPrimaryMobile()).or("-"))
+    			&& Optional.fromNullable(getCountry()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getCountry()).or("-"))
+    			&& Optional.fromNullable(getCountryCode()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getCountryCode()).or("-"))
+    			&& Optional.fromNullable(getProvince()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getProvince()).or("-"))
+    			&& Optional.fromNullable(getCity()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getCity()).or("-"))
+    			&& Optional.fromNullable(getDistrict()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getDistrict()).or("-"))
+    			&& Optional.fromNullable(getStreet()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getStreet()).or("-"))
+    			&& Optional.fromNullable(getPostalCode()).or("").equalsIgnoreCase(Optional.fromNullable(toAddress.getPostalCode()).or("-"))
+    			) {
+    		return true;
+    	} else {
+    		return false;
+    	}
 	}
 
 }
