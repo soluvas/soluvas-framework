@@ -540,6 +540,25 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 				lastModificationTime, entity.getModificationTime());
 		return mergedEntity;
 	}
+	
+	@Override
+	public <S extends T> Collection<S> add(Collection<S> entities, org.soluvas.data.repository.CrudRepository.ModificationTimePolicy mTimePolicy) {
+		log.debug("Adding {} {} entities: {}", entities.size(), entityClass.getSimpleName(), 
+				FluentIterable.from(entities).transform(new IdFunction()).limit(10));
+		final List<S> addeds = FluentIterable.from(entities).transform(new Function<S, S>() {
+			@Override @Nullable
+			public S apply(@Nullable S input) {
+				beforeSave(input, mTimePolicy);
+//				em.persist(input); //error --> EntityExistsException A different object with the same identifier value was already associated with the session
+//				return input;
+				return em.merge(input);
+			}
+		}).toList();
+		log.info("Added {} {} entities: {}", addeds.size(), entityClass.getSimpleName(),
+				FluentIterable.from(addeds).transform(new IdFunction()).limit(10));
+		return addeds;
+	}
+	
 
 	@Override @Transactional(readOnly=true)
 	public Set<ID> exists(Collection<ID> ids) {

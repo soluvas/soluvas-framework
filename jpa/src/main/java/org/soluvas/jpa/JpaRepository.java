@@ -14,9 +14,9 @@ import org.soluvas.data.Existence;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.repository.StatusAwareRepository;
 
-import scala.util.Try;
-
 import com.google.common.eventbus.EventBus;
+
+import scala.util.Try;
 
 /**
  * JPA-specific repository operations.
@@ -33,5 +33,7 @@ public interface JpaRepository<T extends JpaEntity<ID>, ID extends Serializable>
 	public <S extends T> S lookupOneById(StatusMask statusMask, @Nullable ID id) throws EntityLookupException;
 	public <S extends T> Map<ID, Try<S>> lookupAllById(StatusMask statusMask, Collection<ID> ids);
 	public <S extends T> S modify(ID id, S entity, DateTime lastModificationTime);
+	
+	public <S extends T> Collection<S> add(Collection<S> entities, ModificationTimePolicy mTimePolicy);
 	
 }
