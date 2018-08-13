@@ -1337,21 +1337,45 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 
 	@Override
 	public void addAddress(String id, PostalAddress2 address) {
+		Preconditions.checkState(address.getId() != null,
+				"For adding new address, id must not be null!");
+		
 		final DBObject objAddress = new BasicDBObject();
-		objAddress.put("id", address.getId().toString()); 
-		objAddress.put("name", address.getName()); 
-		objAddress.put("street", address.getStreet()); 
-		objAddress.put("city", address.getCity()); 
-		objAddress.put("postalCode", address.getPostalCode()); 
-		objAddress.put("province", address.getProvince()); 
-		objAddress.put("country", address.getCountry()); 
-		objAddress.put("countryCode", address.getCountryCode()); 
-		objAddress.put("primaryMobile", address.getPrimaryMobile()); 
-		objAddress.put("primaryEmail", address.getPrimaryEmail()); 
-		objAddress.put("primary", address.isPrimary()); 
-		objAddress.put("primaryBilling", address.isPrimaryBilling());
-		objAddress.put("primaryShipping", address.isPrimaryShipping()); 
-		objAddress.put("district", address.getDistrict());
+		objAddress.put("id", address.getId().toString());
+		
+		if (!Strings.isNullOrEmpty(address.getName())) {
+			objAddress.put("name", address.getName()); 
+		}
+		if (!Strings.isNullOrEmpty(address.getStreet())) {
+			objAddress.put("street", address.getStreet()); 
+		}
+		if (!Strings.isNullOrEmpty(address.getCity())){
+			objAddress.put("city", address.getCity()); 
+		}
+		if (!Strings.isNullOrEmpty(address.getPostalCode())){
+			objAddress.put("postalCode", address.getPostalCode()); 
+		}
+		if (!Strings.isNullOrEmpty(address.getProvince())){
+			objAddress.put("province", address.getProvince()); 
+		}
+		if (!Strings.isNullOrEmpty(address.getCountry())){
+			objAddress.put("country", address.getCountry()); 
+		}
+		if (!Strings.isNullOrEmpty(address.getCountryCode())){
+			objAddress.put("countryCode", address.getCountryCode()); 
+		}
+		if (!Strings.isNullOrEmpty(address.getPrimaryMobile())){
+			objAddress.put("primaryMobile", address.getPrimaryMobile()); 
+		}
+		if (!Strings.isNullOrEmpty(address.getPrimaryEmail())){
+			objAddress.put("primaryEmail", address.getPrimaryEmail()); 
+		}
+		objAddress.put("primary", Optional.fromNullable(address.isPrimary()).or(false)); 
+		objAddress.put("primaryBilling", Optional.fromNullable(address.isPrimaryBilling()).or(false));
+		objAddress.put("primaryShipping", Optional.fromNullable(address.isPrimaryShipping()).or(false));
+		if (!Strings.isNullOrEmpty(address.getDistrict())){
+			objAddress.put("district", address.getDistrict());
+		}
 		
 		final BasicDBObject query = new BasicDBObject("_id", id);
 		
@@ -1379,24 +1403,46 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public void modifyAddress(String personId, PostalAddress2 postalAddress) {
 		final BasicDBObject query = new BasicDBObject();
 		query.put("_id", personId);
-		query.put("addresses.id", postalAddress.getId());
+		query.put("addresses.id", postalAddress.getId().toString());
 		
 		final BasicDBObject update = new BasicDBObject();
 		final Map<String, Object> map = new HashMap<>();
-		update.put("addresses.$.name", postalAddress.getName()); 
-		update.put("addresses.$.street", postalAddress.getStreet()); 
-		update.put("addresses.$.city", postalAddress.getCity()); 
-		update.put("addresses.$.postalCode", postalAddress.getPostalCode()); 
-		update.put("addresses.$.province", postalAddress.getProvince()); 
-		update.put("addresses.$.country", postalAddress.getCountry()); 
-		update.put("addresses.$.countryCode", postalAddress.getCountryCode()); 
-		update.put("addresses.$.primaryMobile", postalAddress.getPrimaryMobile()); 
-		update.put("addresses.$.primaryEmail", postalAddress.getPrimaryEmail()); 
-		update.put("addresses.$.primary", postalAddress.isPrimary()); 
-		update.put("addresses.$.primaryBilling", postalAddress.isPrimaryBilling());
-		update.put("addresses.$.primaryShipping", postalAddress.isPrimaryShipping()); 
-		update.put("addresses.$.district", postalAddress.getDistrict());
+		if (!Strings.isNullOrEmpty(postalAddress.getName())){
+			map.put("addresses.$.name", postalAddress.getName()); 
+		}
+		if (!Strings.isNullOrEmpty(postalAddress.getStreet())){
+			map.put("addresses.$.street", postalAddress.getStreet()); 
+		}
+		if (!Strings.isNullOrEmpty(postalAddress.getCity())){
+			map.put("addresses.$.city", postalAddress.getCity()); 
+		}
+		if (!Strings.isNullOrEmpty(postalAddress.getPostalCode())){
+			map.put("addresses.$.postalCode", postalAddress.getPostalCode()); 
+		}
+		if (!Strings.isNullOrEmpty(postalAddress.getProvince())){
+			map.put("addresses.$.province", postalAddress.getProvince()); 
+		}
+		if (!Strings.isNullOrEmpty(postalAddress.getCountry())){
+			map.put("addresses.$.country", postalAddress.getCountry()); 
+		}
+		if (!Strings.isNullOrEmpty(postalAddress.getCountryCode())){
+			map.put("addresses.$.countryCode", postalAddress.getCountryCode()); 
+		}
+		if (!Strings.isNullOrEmpty(postalAddress.getPrimaryMobile())){
+			map.put("addresses.$.primaryMobile", postalAddress.getPrimaryMobile()); 
+		}
+		if (!Strings.isNullOrEmpty(postalAddress.getPrimaryEmail())){
+			map.put("addresses.$.primaryEmail", postalAddress.getPrimaryEmail()); 
+		}
+		map.put("addresses.$.primary", Optional.fromNullable(postalAddress.isPrimary()).or(false)); 
+		map.put("addresses.$.primaryBilling", Optional.fromNullable(postalAddress.isPrimaryBilling()).or(false));
+		map.put("addresses.$.primaryShipping", Optional.fromNullable(postalAddress.isPrimaryShipping()).or(false));
+		if (!Strings.isNullOrEmpty(postalAddress.getDistrict())){
+			map.put("addresses.$.district", postalAddress.getDistrict());
+		}
 		update.put("$set", map);
+		
+//		log.debug("Updating person's address by query '{}': {}", query, update);
 		
 		final WriteResult result = primary.update(query, update);
 		log.debug("Update address for personId '{}': {}", personId, postalAddress);

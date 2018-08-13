@@ -7,7 +7,7 @@ import org.soluvas.data.domain.Pageable;
 public interface DistrictRepository {
 
 	/**
-	 * @param name: "province, city, district". Ex: "Jawa Barat, Bandung, Cidadap", "Jawa Barat, Sumedang, Cidadap"
+	 * @param name (lower cases): "countryIso, province, city, district". Ex: "ID, jawa barat, bandung, cidadap", "ID, jawa barat, sumedang, cidadap"
 	 * @return
 	 */
 	District getByCountryProvinceCityName(String countryProvinceCityName);
