@@ -187,7 +187,8 @@ public class GeoNamesDistrictRepository implements DistrictRepository {
         }
     }
 
-    /* The name contains: "province, city, district". Ex: "Jawa Barat, Bandung, Cidadap", "Jawa Barat, Sumedang, Cidadap"
+    /* 
+     * @param name (lower cases): "countryIso, province, city, district". Ex: "ID, jawa barat, bandung, cidadap", "ID, jawa barat, sumedang, cidadap"
      * @see org.soluvas.geo.DistrictRepository#getByName(java.lang.String)
      */
     @Override
