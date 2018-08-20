@@ -353,16 +353,14 @@ public class Term2 implements Serializable, Identifiable {
 		}
 	}
 	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
 	@Override
 	public String toString() {
-		return "Term2 [" + id + ", name=" + name
-				+ ", imageId=" + imageId + ", positioner=" + positioner
-				+ ", color=" + color + ", language=" + language
-				+ ", translations=" + translations + ", kindName=" + enumerationId + ", primaryUri="
-				+ primaryUri + ", sameAsUris=" + sameAsUris + "]";
+		return "Term2 [id=" + id + ", formalId=" + formalId + ", name=" + name + ", imageId=" + imageId + ", imageUri="
+				+ imageUri + ", positioner=" + positioner + ", color=" + color + ", language=" + language
+				+ ", translations=" + translations + ", enumerationId=" + enumerationId + ", primaryUri=" + primaryUri
+				+ ", sameAsUris=" + sameAsUris + ", description=" + description + ", enabled=" + enabled
+				+ ", overridden=" + overridden + ", content=" + content + "]";
 	}
 
 	/**
