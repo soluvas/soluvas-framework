@@ -280,6 +280,8 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	
 	private boolean bankTransferPaymentEnabled;
 	
+	private BigDecimal targetSales = BigDecimal.ZERO;
+	
 	private boolean multiPaymentBankMandiriEnabled;
 	
 	private String uriMultiPaymentBankMandiri;
@@ -317,6 +319,16 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 
 	public void setMaxBookedQtyShoppingUnit(Unit<?> maxBookedQtyShoppingUnit) {
 		this.maxBookedQtyShoppingUnit = maxBookedQtyShoppingUnit;
+	}
+
+
+	public BigDecimal getTargetSales() {
+		return targetSales;
+	}
+
+
+	public void setTargetSales(BigDecimal targetSales) {
+		this.targetSales = targetSales;
 	}
 
 
