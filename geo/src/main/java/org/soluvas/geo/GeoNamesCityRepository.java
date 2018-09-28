@@ -131,7 +131,7 @@ public class GeoNamesCityRepository implements CityRepository {
 	@Override @Nullable
 	public City getCity(String countryCodeNormalizedProvinceAndName) throws IllegalArgumentException {
 		@Nullable final City city = tree.getValueForExactKey(countryCodeNormalizedProvinceAndName);
-		log.debug("Got city by key '{}': {}", countryCodeNormalizedProvinceAndName, city);
+//		log.debug("Got city by key '{}': {}", countryCodeNormalizedProvinceAndName, city);
 //		Preconditions.checkArgument(city != null,
 //				"Invalid city for '%s'.", countryCodeNormalizedProvinceAndName);
 		return city;
