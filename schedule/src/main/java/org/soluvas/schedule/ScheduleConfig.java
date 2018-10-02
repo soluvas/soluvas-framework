@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
@@ -35,7 +36,7 @@ import com.google.common.base.Preconditions;
  */
 @Configuration
 @Order(Ordered.LOWEST_PRECEDENCE)
-//@Import({ScheduleLiquibaseConfig.class})
+@Import({ScheduleLiquibaseConfig.class})
 public class ScheduleConfig {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduleConfig.class);
