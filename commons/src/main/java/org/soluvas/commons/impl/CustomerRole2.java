@@ -4,14 +4,17 @@ package org.soluvas.commons.impl;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Map;
 
 import javax.measure.unit.Unit;
+import javax.money.CurrencyUnit;
 
 import org.joda.time.DateTime;
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.mongo.BigDecimalConverter;
+import org.soluvas.commons.mongo.CurrencyUnitConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
 import org.soluvas.commons.mongo.UnitConverter;
 
@@ -20,8 +23,8 @@ import com.google.code.morphia.annotations.Id;
 
 
 @SuppressWarnings("serial") 
-@Converters({DateTimeConverter.class, UnitConverter.class, BigDecimalConverter.class})
-public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
+@Converters({DateTimeConverter.class, UnitConverter.class, BigDecimalConverter.class, CurrencyUnitConverter.class})
+public class CustomerRole2 implements Serializable, Identifiable, Timestamped, LoyaltyPointConfiguration {
 	
 	public final static String COMMON_ID = "common";
 	public final static String MEMBER_ID = "member"; 
@@ -710,6 +713,107 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 		this.bankTransferPaymentEnabled = bankTransferPaymentEnabled;
 	}
 
+	private BigDecimal netShoppingAmount;
+	private BigDecimal netReturnAmount;
+	private boolean allowedRedeemFromProductSn;
+	private boolean allowedReceivePoint;
+	private boolean allowedSendPoint;
+	private BigDecimal expiryPointPeriodInDays;
+	private Map<RewardType, BigDecimal> rewards;
+	private CurrencyUnit currency;
+
+	@Override
+	public BigDecimal getNetShoppingAmount() {
+		return netShoppingAmount;
+	}
+
+
+	@Override
+	public void setNetShoppingAmount(BigDecimal netShoppingAmount) {
+		this.netShoppingAmount = netShoppingAmount;
+	}
+
+
+	@Override
+	public BigDecimal getNetReturnAmount() {
+		return netReturnAmount;
+	}
+
+
+	@Override
+	public void setNetReturnAmount(BigDecimal netReturnAmount) {
+		this.netReturnAmount = netReturnAmount;
+	}
+
+
+	@Override
+	public boolean isAllowedRedeemFromProductSn() {
+		return allowedRedeemFromProductSn;
+	}
+
+
+	@Override
+	public void setAllowedRedeemFromProductSn(boolean allowedRedeemFromProductSn) {
+		this.allowedRedeemFromProductSn = allowedRedeemFromProductSn;
+	}
+
+
+	@Override
+	public boolean isAllowedReceivePoint() {
+		return allowedReceivePoint;
+	}
+
+
+	@Override
+	public void setAllowedReceivePoint(boolean allowedReceivePoint) {
+		this.allowedReceivePoint = allowedReceivePoint;
+	}
+
+
+	@Override
+	public boolean isAllowedSendPoint() {
+		return allowedSendPoint;
+	}
+
+
+	@Override
+	public void setAllowedSendPoint(boolean allowedSendPoint) {
+		this.allowedSendPoint = allowedSendPoint;
+	}
+
+
+	@Override
+	public BigDecimal getExpiryPointPeriodInDays() {
+		return expiryPointPeriodInDays;
+	}
+
+
+	@Override
+	public void setExpiryPointPeriodInDays(BigDecimal expiryPointPeriodInDays) {
+		this.expiryPointPeriodInDays = expiryPointPeriodInDays;
+	}
+
+
+	@Override
+	public Map<RewardType, BigDecimal> getRewards() {
+		return rewards;
+	}
+
+
+	@Override
+	public void setRewards(Map<RewardType, BigDecimal> rewards) {
+		this.rewards = rewards;
+	}
+	
+	public CurrencyUnit getCurrency() {
+		return currency;
+	}
+
+
+	public void setCurrency(CurrencyUnit currency) {
+		this.currency = currency;
+	}
+
 
 	@Override
 	public String toString() {
@@ -723,9 +827,14 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 				+ bookingExpiryTimeInMinutes + ", dropshipEnabled=" + dropshipEnabled + ", reviewReminderEnabled="
 				+ reviewReminderEnabled + ", zendeskIntegration=" + zendeskIntegration + ", zendeskOrganizationId="
 				+ zendeskOrganizationId + ", depositEnabled=" + depositEnabled + ", bankTransferPaymentEnabled="
-				+ bankTransferPaymentEnabled + ", multiPaymentBankMandiriEnabled=" + multiPaymentBankMandiriEnabled
-				+ ", uriMultiPaymentBankMandiri=" + uriMultiPaymentBankMandiri + ", maxBookedQtyShopping="
-				+ maxBookedQtyShopping + ", maxBookedQtyShoppingUnit=" + maxBookedQtyShoppingUnit + "]";
+				+ bankTransferPaymentEnabled + ", targetSales=" + targetSales + ", multiPaymentBankMandiriEnabled="
+				+ multiPaymentBankMandiriEnabled + ", uriMultiPaymentBankMandiri=" + uriMultiPaymentBankMandiri
+				+ ", maxBookedQtyShopping=" + maxBookedQtyShopping + ", maxBookedQtyShoppingUnit="
+				+ maxBookedQtyShoppingUnit + ", netShoppingAmount=" + netShoppingAmount + ", netReturnAmount="
+				+ netReturnAmount + ", allowedRedeemFromProductSn=" + allowedRedeemFromProductSn
+				+ ", allowedReceivePoint=" + allowedReceivePoint + ", allowedSendPoint=" + allowedSendPoint
+				+ ", expiryPointPeriodInDays=" + expiryPointPeriodInDays + ", rewards=" + rewards + ", currency="
+				+ currency + "]";
 	}
 
 } //CustomerRole
