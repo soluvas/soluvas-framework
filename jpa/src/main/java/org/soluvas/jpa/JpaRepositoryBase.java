@@ -370,7 +370,8 @@ public abstract class JpaRepositoryBase<T extends JpaEntity<ID>, ID extends Seri
 		final CriteriaQuery<Long> countCq = cb.createQuery(Long.class);
 		final Root<T> countRoot = countCq.from(entityClass);
 		countCq.select(cb.count(countRoot));
-		if (expectedStatuses != null) {
+//		if (expectedStatuses != null) {
+		if (expectedStatuses != null && !expectedStatuses.isEmpty()) {
 			countCq.where(countRoot.<E>get(statusProperty).in(expectedStatuses));			
 		}
 		final long totalRowCount = em.createQuery(countCq).getSingleResult();
