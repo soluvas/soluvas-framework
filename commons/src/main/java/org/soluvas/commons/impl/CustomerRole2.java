@@ -714,7 +714,9 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	}
 
 	private BigDecimal netShoppingAmount;
+	private int pointAddition = 0;
 	private BigDecimal netReturnAmount;
+	private int pointReduction = 0;
 	private boolean allowedRedeemFromProductSn;
 	private boolean allowedReceivePoint;
 	private boolean allowedSendPoint;
@@ -813,6 +815,25 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	public void setCurrency(CurrencyUnit currency) {
 		this.currency = currency;
 	}
+	
+	public int getPointAddition() {
+		return pointAddition;
+	}
+
+
+	public void setPointAddition(int pointAddition) {
+		this.pointAddition = pointAddition;
+	}
+
+
+	public int getPointReduction() {
+		return pointReduction;
+	}
+
+
+	public void setPointReduction(int pointReduction) {
+		this.pointReduction = pointReduction;
+	}
 
 
 	@Override
@@ -830,11 +851,11 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 				+ bankTransferPaymentEnabled + ", targetSales=" + targetSales + ", multiPaymentBankMandiriEnabled="
 				+ multiPaymentBankMandiriEnabled + ", uriMultiPaymentBankMandiri=" + uriMultiPaymentBankMandiri
 				+ ", maxBookedQtyShopping=" + maxBookedQtyShopping + ", maxBookedQtyShoppingUnit="
-				+ maxBookedQtyShoppingUnit + ", netShoppingAmount=" + netShoppingAmount + ", netReturnAmount="
-				+ netReturnAmount + ", allowedRedeemFromProductSn=" + allowedRedeemFromProductSn
-				+ ", allowedReceivePoint=" + allowedReceivePoint + ", allowedSendPoint=" + allowedSendPoint
-				+ ", expiryPointPeriodInDays=" + expiryPointPeriodInDays + ", rewards=" + rewards + ", currency="
-				+ currency + "]";
+				+ maxBookedQtyShoppingUnit + ", netShoppingAmount=" + netShoppingAmount + ", pointAddition="
+				+ pointAddition + ", netReturnAmount=" + netReturnAmount + ", pointReduction=" + pointReduction
+				+ ", allowedRedeemFromProductSn=" + allowedRedeemFromProductSn + ", allowedReceivePoint="
+				+ allowedReceivePoint + ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriodInDays="
+				+ expiryPointPeriodInDays + ", rewards=" + rewards + ", currency=" + currency + "]";
 	}
 
 } //CustomerRole
