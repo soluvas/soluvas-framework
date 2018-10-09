@@ -720,7 +720,8 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	private boolean allowedRedeemFromProductSn;
 	private boolean allowedReceivePoint;
 	private boolean allowedSendPoint;
-	private BigDecimal expiryPointPeriodInDays;
+	private BigDecimal expiryPointPeriod;
+	private PeriodUnit expiryPointPeriodUnit;
 	private Map<RewardType, BigDecimal> rewards;
 	private CurrencyUnit currency;
 
@@ -785,14 +786,14 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 
 
 	@Override
-	public BigDecimal getExpiryPointPeriodInDays() {
-		return expiryPointPeriodInDays;
+	public BigDecimal getExpiryPointPeriod() {
+		return expiryPointPeriod;
 	}
 
 
 	@Override
-	public void setExpiryPointPeriodInDays(BigDecimal expiryPointPeriodInDays) {
-		this.expiryPointPeriodInDays = expiryPointPeriodInDays;
+	public void setExpiryPointPeriod(BigDecimal expiryPointPeriod) {
+		this.expiryPointPeriod = expiryPointPeriod;
 	}
 
 
@@ -834,6 +835,15 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	public void setPointReduction(int pointReduction) {
 		this.pointReduction = pointReduction;
 	}
+	
+	public PeriodUnit getExpiryPointPeriodUnit() {
+		return expiryPointPeriodUnit;
+	}
+
+
+	public void setExpiryPointPeriodUnit(PeriodUnit expiryPointPeriodUnit) {
+		this.expiryPointPeriodUnit = expiryPointPeriodUnit;
+	}
 
 
 	@Override
@@ -854,8 +864,10 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 				+ maxBookedQtyShoppingUnit + ", netShoppingAmount=" + netShoppingAmount + ", pointAddition="
 				+ pointAddition + ", netReturnAmount=" + netReturnAmount + ", pointReduction=" + pointReduction
 				+ ", allowedRedeemFromProductSn=" + allowedRedeemFromProductSn + ", allowedReceivePoint="
-				+ allowedReceivePoint + ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriodInDays="
-				+ expiryPointPeriodInDays + ", rewards=" + rewards + ", currency=" + currency + "]";
+				+ allowedReceivePoint + ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod="
+				+ expiryPointPeriod + ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", rewards=" + rewards
+				+ ", currency=" + currency + "]";
 	}
+
 
 } //CustomerRole

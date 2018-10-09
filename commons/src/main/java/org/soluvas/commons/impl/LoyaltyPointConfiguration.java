@@ -29,9 +29,9 @@ public interface LoyaltyPointConfiguration {
 	
 	void setAllowedSendPoint(boolean allowedSendPoint);
 	
-	BigDecimal getExpiryPointPeriodInDays();
+	BigDecimal getExpiryPointPeriod();
 	
-	void setExpiryPointPeriodInDays(BigDecimal expiryPointPeriodInDays);
+	void setExpiryPointPeriod(BigDecimal expiryPointPeriodInDays);
 	
 	/**
 	 * {"UMROH": 3000, "5_DAYS_IN_JAPAN": 2000}
