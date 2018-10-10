@@ -41,6 +41,7 @@ import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Ordering;
@@ -607,6 +608,12 @@ public class EmfPersonRepository extends
 
 	@Override
 	public PostalAddress2 getShippingAddress(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ImmutableMap<String, String> findCustomerRoleIdMap(Collection<String> personIds) {
 		// TODO Auto-generated method stub
 		return null;
 	}

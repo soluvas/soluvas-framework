@@ -801,4 +801,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		return null;
 	}
 
+	@Override
+	public ImmutableMap<String, String> findCustomerRoleIdMap(Collection<String> personIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
