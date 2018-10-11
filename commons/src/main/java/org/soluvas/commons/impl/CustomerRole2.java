@@ -724,6 +724,14 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	private PeriodUnit expiryPointPeriodUnit;
 	private Map<RewardType, BigDecimal> rewards;
 	private CurrencyUnit currency;
+	/**
+	 * per month
+	 */
+	private BigDecimal pointAdditionManuallyByTargetSales;
+	/**
+	 * per month
+	 */
+	private BigDecimal pointAdditionManuallyByNoReturns;
 
 	@Override
 	public BigDecimal getNetShoppingAmount() {
@@ -844,6 +852,25 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	public void setExpiryPointPeriodUnit(PeriodUnit expiryPointPeriodUnit) {
 		this.expiryPointPeriodUnit = expiryPointPeriodUnit;
 	}
+	
+	public BigDecimal getPointAdditionManuallyByTargetSales() {
+		return pointAdditionManuallyByTargetSales;
+	}
+
+
+	public void setPointAdditionManuallyByTargetSales(BigDecimal pointAdditionManuallyByTargetSales) {
+		this.pointAdditionManuallyByTargetSales = pointAdditionManuallyByTargetSales;
+	}
+
+
+	public BigDecimal getPointAdditionManuallyByNoReturns() {
+		return pointAdditionManuallyByNoReturns;
+	}
+
+
+	public void setPointAdditionManuallyByNoReturns(BigDecimal pointAdditionManuallyByNoReturns) {
+		this.pointAdditionManuallyByNoReturns = pointAdditionManuallyByNoReturns;
+	}
 
 
 	@Override
@@ -866,7 +893,9 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 				+ ", allowedRedeemFromProductSn=" + allowedRedeemFromProductSn + ", allowedReceivePoint="
 				+ allowedReceivePoint + ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod="
 				+ expiryPointPeriod + ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", rewards=" + rewards
-				+ ", currency=" + currency + "]";
+				+ ", currency=" + currency + ", pointAdditionManuallyByTargetSales="
+				+ pointAdditionManuallyByTargetSales + ", pointAdditionManuallyByNoReturns="
+				+ pointAdditionManuallyByNoReturns + "]";
 	}
 
 
