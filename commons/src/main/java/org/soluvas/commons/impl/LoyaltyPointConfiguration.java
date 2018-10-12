@@ -1,7 +1,7 @@
 package org.soluvas.commons.impl;
 
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author rudi
@@ -33,14 +33,9 @@ public interface LoyaltyPointConfiguration {
 	
 	void setExpiryPointPeriod(BigDecimal expiryPointPeriodInDays);
 	
-	/**
-	 * {"UMROH": 3000, "5_DAYS_IN_JAPAN": 2000}
-	 * 
-	 * @return
-	 */
-	Map<RewardType, BigDecimal> getRewards();
+	List<Long> getRedeemIds();
 	
-	void setRewards(Map<RewardType, BigDecimal> rewards);
+	void setRedeemIds(List<Long> redeemIds);
 	
 	
 

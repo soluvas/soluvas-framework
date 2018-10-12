@@ -4,7 +4,7 @@ package org.soluvas.commons.impl;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
 
 import javax.measure.unit.Unit;
 import javax.money.CurrencyUnit;
@@ -722,7 +722,7 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	private boolean allowedSendPoint;
 	private BigDecimal expiryPointPeriod;
 	private PeriodUnit expiryPointPeriodUnit;
-	private Map<RewardType, BigDecimal> rewards;
+	private List<Long> redeemIds;
 	private CurrencyUnit currency;
 	/**
 	 * per month
@@ -804,18 +804,8 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 		this.expiryPointPeriod = expiryPointPeriod;
 	}
 
-
-	@Override
-	public Map<RewardType, BigDecimal> getRewards() {
-		return rewards;
-	}
-
-
-	@Override
-	public void setRewards(Map<RewardType, BigDecimal> rewards) {
-		this.rewards = rewards;
-	}
 	
+
 	public CurrencyUnit getCurrency() {
 		return currency;
 	}
@@ -892,10 +882,22 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 				+ pointAddition + ", netReturnAmount=" + netReturnAmount + ", pointReduction=" + pointReduction
 				+ ", allowedRedeemFromProductSn=" + allowedRedeemFromProductSn + ", allowedReceivePoint="
 				+ allowedReceivePoint + ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod="
-				+ expiryPointPeriod + ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", rewards=" + rewards
+				+ expiryPointPeriod + ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", rewardIds=" + redeemIds
 				+ ", currency=" + currency + ", pointAdditionManuallyByTargetSales="
 				+ pointAdditionManuallyByTargetSales + ", pointAdditionManuallyByNoReturns="
 				+ pointAdditionManuallyByNoReturns + "]";
+	}
+
+
+	@Override
+	public List<Long> getRedeemIds() {
+		return this.redeemIds;
+	}
+
+
+	@Override
+	public void setRedeemIds(List<Long> redeemIds) {
+		this.redeemIds = redeemIds;
 	}
 
 
