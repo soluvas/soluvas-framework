@@ -17,9 +17,9 @@ public interface LoyaltyPointConfiguration {
 	
 	void setNetReturnAmount(BigDecimal netReturnAmount);
 	
-	boolean isAllowedRedeemFromProductSn();
-	
-	void setAllowedRedeemFromProductSn(boolean allowedRedeemFromProductSn);
+	boolean isRedeemFromTokenOnly();
+
+	void setRedeemFromTokenOnly(boolean redeemFromTokenOnly);
 	
 	boolean isAllowedReceivePoint();
 	

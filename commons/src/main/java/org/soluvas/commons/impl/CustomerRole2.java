@@ -717,7 +717,7 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	private int pointAddition = 0;
 	private BigDecimal netReturnAmount;
 	private int pointReduction = 0;
-	private boolean allowedRedeemFromProductSn;
+	private boolean redeemFromTokenOnly;
 	private boolean allowedReceivePoint;
 	private boolean allowedSendPoint;
 	private BigDecimal expiryPointPeriod;
@@ -757,15 +757,13 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	}
 
 
-	@Override
-	public boolean isAllowedRedeemFromProductSn() {
-		return allowedRedeemFromProductSn;
+	public boolean isRedeemFromTokenOnly() {
+		return redeemFromTokenOnly;
 	}
 
 
-	@Override
-	public void setAllowedRedeemFromProductSn(boolean allowedRedeemFromProductSn) {
-		this.allowedRedeemFromProductSn = allowedRedeemFromProductSn;
+	public void setRedeemFromTokenOnly(boolean redeemFromTokenOnly) {
+		this.redeemFromTokenOnly = redeemFromTokenOnly;
 	}
 
 
@@ -880,12 +878,11 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 				+ ", maxBookedQtyShopping=" + maxBookedQtyShopping + ", maxBookedQtyShoppingUnit="
 				+ maxBookedQtyShoppingUnit + ", netShoppingAmount=" + netShoppingAmount + ", pointAddition="
 				+ pointAddition + ", netReturnAmount=" + netReturnAmount + ", pointReduction=" + pointReduction
-				+ ", allowedRedeemFromProductSn=" + allowedRedeemFromProductSn + ", allowedReceivePoint="
-				+ allowedReceivePoint + ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod="
-				+ expiryPointPeriod + ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", rewardIds=" + redeemIds
-				+ ", currency=" + currency + ", pointAdditionManuallyByTargetSales="
-				+ pointAdditionManuallyByTargetSales + ", pointAdditionManuallyByNoReturns="
-				+ pointAdditionManuallyByNoReturns + "]";
+				+ ", redeemFromTokenOnly=" + redeemFromTokenOnly + ", allowedReceivePoint=" + allowedReceivePoint
+				+ ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod=" + expiryPointPeriod
+				+ ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", redeemIds=" + redeemIds + ", currency="
+				+ currency + ", pointAdditionManuallyByTargetSales=" + pointAdditionManuallyByTargetSales
+				+ ", pointAdditionManuallyByNoReturns=" + pointAdditionManuallyByNoReturns + "]";
 	}
 
 
