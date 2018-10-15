@@ -12,6 +12,7 @@ import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.Pageable;
 import org.soluvas.data.repository.CrudRepository;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -65,5 +66,9 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 	Entry<BigDecimal, Unit<?>> getMaxBookedQtyShopping(String customerRoleId);
 	
 	@Nullable String getUriMultiPaymentBankMandiri(String customerRoleId);
+	
+	ImmutableList<Long> getRedeemIds(String id);
+	
+	boolean hasRedeemId(String id, long redeemId);
 	
 }

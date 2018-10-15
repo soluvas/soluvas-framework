@@ -5,6 +5,7 @@ import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,10 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -506,6 +509,36 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public ImmutableList<Long> getRedeemIds(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("redeemIds", 1);
+		final DBObject dbObject = findOnePrimary(query, fields, "getRedeemIds", id);
+		if (dbObject == null) {
+			return ImmutableList.of();
+		}
+		if (dbObject.containsField("redeemIds")) {
+			final Builder<Long> bList = ImmutableList.builder();
+			((BasicDBList)dbObject.get("redeemIds")).forEach(new Consumer<Object>() {
+				@Override
+				public void accept(Object t) {
+					bList.add(Long.valueOf(String.valueOf(t)));
+				}
+			});
+			return bList.build();
+		} else {
+			return ImmutableList.of();
+		}
+	}
+
+	@Override
+	public boolean hasRedeemId(String id, long redeemId) {
+		final BasicDBObject query = new BasicDBObject("_id", id).append("redeemIds", redeemId);
+		return primary.count(query) > 0;
+		
+		
 	}
 	
 	
