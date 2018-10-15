@@ -733,7 +733,7 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 	 */
 	private BigDecimal pointAdditionManuallyByNoReturns;
 	
-	private BigDecimal minimumBalanceAfterSendPoints;
+	private BigDecimal minimumBalanceAfterSendPoints = BigDecimal.ZERO;
 
 	@Override
 	public BigDecimal getNetShoppingAmount() {
