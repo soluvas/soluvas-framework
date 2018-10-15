@@ -24,7 +24,7 @@ import com.google.code.morphia.annotations.Id;
 
 @SuppressWarnings("serial") 
 @Converters({DateTimeConverter.class, UnitConverter.class, BigDecimalConverter.class, CurrencyUnitConverter.class})
-public class CustomerRole2 implements Serializable, Identifiable, Timestamped, LoyaltyPointConfiguration {
+public class CustomerRole2 implements Serializable, Identifiable, Timestamped, PointConfiguration {
 	
 	public final static String COMMON_ID = "common";
 	public final static String MEMBER_ID = "member"; 
@@ -725,13 +725,15 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	private List<Long> redeemIds;
 	private CurrencyUnit currency;
 	/**
-	 * per month
+	 * target sales is per month
 	 */
 	private BigDecimal pointAdditionManuallyByTargetSales;
 	/**
-	 * per month
+	 * no returns is per month
 	 */
 	private BigDecimal pointAdditionManuallyByNoReturns;
+	
+	private BigDecimal minimumBalanceAfterSendPoints;
 
 	@Override
 	public BigDecimal getNetShoppingAmount() {
@@ -757,11 +759,13 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 	}
 
 
+	@Override
 	public boolean isRedeemFromTokenOnly() {
 		return redeemFromTokenOnly;
 	}
 
 
+	@Override
 	public void setRedeemFromTokenOnly(boolean redeemFromTokenOnly) {
 		this.redeemFromTokenOnly = redeemFromTokenOnly;
 	}
@@ -860,6 +864,29 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 		this.pointAdditionManuallyByNoReturns = pointAdditionManuallyByNoReturns;
 	}
 
+	@Override
+	public List<Long> getRedeemIds() {
+		return this.redeemIds;
+	}
+
+
+	@Override
+	public void setRedeemIds(List<Long> redeemIds) {
+		this.redeemIds = redeemIds;
+	}
+
+
+	@Override
+	public BigDecimal getMinimumBalanceAfterSendPoints() {
+		return minimumBalanceAfterSendPoints;
+	}
+
+
+	@Override
+	public void setMinimumBalanceAfterSendPoints(BigDecimal minimumBalanceAfterSendPoints) {
+		this.minimumBalanceAfterSendPoints = minimumBalanceAfterSendPoints;
+	}
+
 
 	@Override
 	public String toString() {
@@ -882,20 +909,8 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, L
 				+ ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod=" + expiryPointPeriod
 				+ ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", redeemIds=" + redeemIds + ", currency="
 				+ currency + ", pointAdditionManuallyByTargetSales=" + pointAdditionManuallyByTargetSales
-				+ ", pointAdditionManuallyByNoReturns=" + pointAdditionManuallyByNoReturns + "]";
+				+ ", pointAdditionManuallyByNoReturns=" + pointAdditionManuallyByNoReturns
+				+ ", minimumBalanceAfterSendPoints=" + minimumBalanceAfterSendPoints + "]";
 	}
-
-
-	@Override
-	public List<Long> getRedeemIds() {
-		return this.redeemIds;
-	}
-
-
-	@Override
-	public void setRedeemIds(List<Long> redeemIds) {
-		this.redeemIds = redeemIds;
-	}
-
 
 } //CustomerRole

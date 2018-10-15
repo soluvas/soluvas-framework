@@ -7,7 +7,7 @@ import java.util.List;
  * @author rudi
  *
  */
-public interface LoyaltyPointConfiguration {
+public interface PointConfiguration {
 	
 	BigDecimal getNetShoppingAmount();
 	
@@ -37,6 +37,8 @@ public interface LoyaltyPointConfiguration {
 	
 	void setRedeemIds(List<Long> redeemIds);
 	
+	BigDecimal getMinimumBalanceAfterSendPoints();
 	
+	void setMinimumBalanceAfterSendPoints(BigDecimal minimumBalanceAfterSendPoints);
 
 }
