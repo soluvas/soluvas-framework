@@ -71,4 +71,6 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 	
 	boolean hasRedeemId(String id, long redeemId);
 	
+	boolean canSendPoint(String id);
+	
 }

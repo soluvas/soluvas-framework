@@ -540,6 +540,25 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		
 		
 	}
+
+	@Override
+	public boolean canSendPoint(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("allowedSendPoint", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "canSendPoint", id);
+		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object isDropShipEnabledObj = dbObj.get("allowedSendPoint");
+			if (isDropShipEnabledObj != null && !"null".equals(isDropShipEnabledObj)) {
+				final boolean dropShipEnabled = Boolean.valueOf(String.valueOf(isDropShipEnabledObj)).booleanValue();
+				return dropShipEnabled;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 	
 	
 }
