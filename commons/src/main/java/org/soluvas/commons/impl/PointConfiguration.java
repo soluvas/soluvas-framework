@@ -33,9 +33,9 @@ public interface PointConfiguration {
 	
 	void setExpiryPointPeriod(BigDecimal expiryPointPeriodInDays);
 	
-	List<Long> getRedeemIds();
+	List<Long> getRewardIds();
 	
-	void setRedeemIds(List<Long> redeemIds);
+	void setRewardIds(List<Long> rewardIds);
 	
 	BigDecimal getMinimumBalanceAfterSendPoints();
 	

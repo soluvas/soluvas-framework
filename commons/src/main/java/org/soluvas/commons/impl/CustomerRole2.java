@@ -722,7 +722,7 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 	private boolean allowedSendPoint;
 	private BigDecimal expiryPointPeriod;
 	private PeriodUnit expiryPointPeriodUnit;
-	private List<Long> redeemIds;
+	private List<Long> rewardIds;
 	private CurrencyUnit currency;
 	/**
 	 * target sales is per month
@@ -865,14 +865,14 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 	}
 
 	@Override
-	public List<Long> getRedeemIds() {
-		return this.redeemIds;
+	public List<Long> getRewardIds() {
+		return this.rewardIds;
 	}
 
 
 	@Override
-	public void setRedeemIds(List<Long> redeemIds) {
-		this.redeemIds = redeemIds;
+	public void setRewardIds(List<Long> redeemIds) {
+		this.rewardIds = redeemIds;
 	}
 
 
@@ -907,7 +907,7 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 				+ pointAddition + ", netReturnAmount=" + netReturnAmount + ", pointReduction=" + pointReduction
 				+ ", redeemFromTokenOnly=" + redeemFromTokenOnly + ", allowedReceivePoint=" + allowedReceivePoint
 				+ ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod=" + expiryPointPeriod
-				+ ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", redeemIds=" + redeemIds + ", currency="
+				+ ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", rewardIds=" + rewardIds + ", currency="
 				+ currency + ", pointAdditionManuallyByTargetSales=" + pointAdditionManuallyByTargetSales
 				+ ", pointAdditionManuallyByNoReturns=" + pointAdditionManuallyByNoReturns
 				+ ", minimumBalanceAfterSendPoints=" + minimumBalanceAfterSendPoints + "]";
