@@ -1,10 +1,12 @@
 package org.soluvas.jpa.jpa;
 
 import java.io.Serializable;
+
 import javax.annotation.Nullable;
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import javax.persistence.MappedSuperclass;
+
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.soluvas.commons.CommonsFactory;
@@ -12,6 +14,7 @@ import org.soluvas.commons.Gender;
 import org.soluvas.commons.PersonInfo2;
 import org.soluvas.commons.PersonLike;
 import org.soluvas.commons.entity.Person2;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.base.Preconditions;
 
@@ -55,7 +58,7 @@ public class PersonInfo implements Serializable, PersonLike {
 		setSlug(personInfoUp.getSlug());
 		setMobileNumber(personInfoUp.getMobileNumber());
 	}
-
+	
 	public PersonInfo(PersonInfo2 personInfo2) {
 		Preconditions.checkNotNull(personInfo2, "Person Info EMF must not be null!");
 		setEmail(personInfo2.getEmail());
@@ -159,6 +162,7 @@ public class PersonInfo implements Serializable, PersonLike {
 	 * @return the value of '<em><b>id</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getId() {
 		return id;
 	}
@@ -186,6 +190,7 @@ public class PersonInfo implements Serializable, PersonLike {
 	 * @return the value of '<em><b>name</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -212,6 +217,7 @@ public class PersonInfo implements Serializable, PersonLike {
 	 * @return the value of '<em><b>gender</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public Gender getGender() {
 		return gender;
 	}
@@ -238,6 +244,7 @@ public class PersonInfo implements Serializable, PersonLike {
 	 * @return the value of '<em><b>slug</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getSlug() {
 		return slug;
 	}
@@ -264,6 +271,7 @@ public class PersonInfo implements Serializable, PersonLike {
 	 * @return the value of '<em><b>email</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getEmail() {
 		return email;
 	}
@@ -290,6 +298,7 @@ public class PersonInfo implements Serializable, PersonLike {
 	 * @return the value of '<em><b>photoId</b></em>' feature
 	 * @generated
 	 */
+	@Override
 	public String getPhotoId() {
 		return photoId;
 	}

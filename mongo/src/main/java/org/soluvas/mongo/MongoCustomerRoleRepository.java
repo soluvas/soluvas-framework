@@ -512,16 +512,16 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 
 	@Override
-	public ImmutableList<Long> getRedeemIds(String id) {
+	public ImmutableList<Long> getRewardIds(String id) {
 		final BasicDBObject query = new BasicDBObject("_id", id);
-		final BasicDBObject fields = new BasicDBObject("redeemIds", 1);
-		final DBObject dbObject = findOnePrimary(query, fields, "getRedeemIds", id);
+		final BasicDBObject fields = new BasicDBObject("rewardIds", 1);
+		final DBObject dbObject = findOnePrimary(query, fields, "getRewardIds", id);
 		if (dbObject == null) {
 			return ImmutableList.of();
 		}
-		if (dbObject.containsField("redeemIds")) {
+		if (dbObject.containsField("rewardIds")) {
 			final Builder<Long> bList = ImmutableList.builder();
-			((BasicDBList)dbObject.get("redeemIds")).forEach(new Consumer<Object>() {
+			((BasicDBList)dbObject.get("rewardIds")).forEach(new Consumer<Object>() {
 				@Override
 				public void accept(Object t) {
 					bList.add(Long.valueOf(String.valueOf(t)));
@@ -534,8 +534,8 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 
 	@Override
-	public boolean hasRedeemId(String id, long redeemId) {
-		final BasicDBObject query = new BasicDBObject("_id", id).append("redeemIds", redeemId);
+	public boolean hasRewardId(String id, long redeemId) {
+		final BasicDBObject query = new BasicDBObject("_id", id).append("rewardIds", redeemId);
 		return primary.count(query) > 0;
 		
 		

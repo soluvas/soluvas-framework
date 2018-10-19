@@ -67,9 +67,9 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 	
 	@Nullable String getUriMultiPaymentBankMandiri(String customerRoleId);
 	
-	ImmutableList<Long> getRedeemIds(String id);
+	ImmutableList<Long> getRewardIds(String id);
 	
-	boolean hasRedeemId(String id, long redeemId);
+	boolean hasRewardId(String id, long redeemId);
 	
 	boolean canSendPoint(String id);
 	
