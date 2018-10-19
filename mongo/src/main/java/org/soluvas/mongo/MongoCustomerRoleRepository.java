@@ -321,7 +321,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("dropshipEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isDropShipEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object isDropShipEnabledObj = dbObj.get("dropshipEnabled");
 			if (isDropShipEnabledObj != null && !"null".equals(isDropShipEnabledObj)) {
@@ -361,7 +361,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("bookingEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isBookingEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object bookingEnabledObj = dbObj.get("bookingEnabled");
 			if (bookingEnabledObj != null && !"null".equals(bookingEnabledObj)) {
@@ -398,7 +398,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("bankTransferPaymentEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isBankTransferPaymentEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object objBankTransferPaymentEnabled = dbObj.get("bankTransferPaymentEnabled");
 			if (objBankTransferPaymentEnabled != null && !"null".equals(objBankTransferPaymentEnabled)) {
@@ -440,7 +440,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("multiPaymentBankMandiriEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isMultiPaymentBankMandiri", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object objMultiPaymentBankMandiriEnabled = dbObj.get("multiPaymentBankMandiriEnabled");
 			if (objMultiPaymentBankMandiriEnabled != null && !"null".equals(objMultiPaymentBankMandiriEnabled)) {
@@ -460,7 +460,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("paymentGatewayEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isPaymentGatewayEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object objPaymentGatewayEnabled = dbObj.get("paymentGatewayEnabled");
 			if (objPaymentGatewayEnabled != null && !"null".equals(objPaymentGatewayEnabled)) {
@@ -497,7 +497,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("depositEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isDepositEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object objDepositEnabled = dbObj.get("depositEnabled");
 			if (objDepositEnabled != null && !"null".equals(objDepositEnabled)) {
@@ -546,7 +546,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", id);
 		final BasicDBObject fields = new BasicDBObject("allowedSendPoint", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "canSendPoint", id);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object isDropShipEnabledObj = dbObj.get("allowedSendPoint");
 			if (isDropShipEnabledObj != null && !"null".equals(isDropShipEnabledObj)) {
