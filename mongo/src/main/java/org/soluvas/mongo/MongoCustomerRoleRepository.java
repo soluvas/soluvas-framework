@@ -548,10 +548,29 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final DBObject dbObj = findOnePrimary(query, fields, "canSendPoint", id);
 //		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
-			final Object isDropShipEnabledObj = dbObj.get("allowedSendPoint");
-			if (isDropShipEnabledObj != null && !"null".equals(isDropShipEnabledObj)) {
-				final boolean dropShipEnabled = Boolean.valueOf(String.valueOf(isDropShipEnabledObj)).booleanValue();
-				return dropShipEnabled;
+			final Object canSendPointObj = dbObj.get("allowedSendPoint");
+			if (canSendPointObj != null && !"null".equals(canSendPointObj)) {
+				final boolean canSendPoint = Boolean.valueOf(String.valueOf(canSendPointObj)).booleanValue();
+				return canSendPoint;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean redeemFromTokenOnly(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("redeemFromTokenOnly", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "redeemFromTokenOnly", id);
+//		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object redeemFromTokenOnlyObj = dbObj.get("redeemFromTokenOnly");
+			if (redeemFromTokenOnlyObj != null && !"null".equals(redeemFromTokenOnlyObj)) {
+				final boolean redeemFromTokenOnly = Boolean.valueOf(String.valueOf(redeemFromTokenOnlyObj)).booleanValue();
+				return redeemFromTokenOnly;
 			} else {
 				return false;
 			}

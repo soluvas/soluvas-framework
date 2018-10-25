@@ -73,4 +73,6 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 	
 	boolean canSendPoint(String id);
 	
+	boolean redeemFromTokenOnly(String id);
+	
 }
