@@ -3,6 +3,7 @@ package org.soluvas.mongo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1494,6 +1495,23 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		}).findFirst().orElse(addresses.get(0));
 	}
 
+	@Override	
+	public void setAddressToResellerStartUp(String personId, UUID addressId, String startUpId, Date regDate) {
+		BasicDBObject query = new BasicDBObject();
+		query.put("_id", personId);
+		query.put("addresses.id", addressId.toString());
+		
+		BasicDBObject setQuery = new BasicDBObject();
+		setQuery.put("addresses.$.startupReseller", Boolean.TRUE);
+		setQuery.put("addresses.$.startupResellerId", startUpId);
+		setQuery.put("addresses.$.startupResellerRegistartion", regDate);
+		BasicDBObject update = new BasicDBObject("$set", setQuery);
+		
+		WriteResult result = primary.update(query, update);
+		log.debug("Result update address to reseller startup for person '{}' - address '{}' - startup ID '{}': reg date {}",
+				personId, addressId, startUpId, regDate);
+	}
+	
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
 	// slug) {

@@ -1,6 +1,7 @@
 package org.soluvas.data.person;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -224,6 +225,8 @@ public interface PersonRepository extends
 	ImmutableSet<String> getFcmTokens(String id);
 
 	@Nullable PostalAddress2 getShippingAddress(String id);
+
+	void setAddressToResellerStartUp(String personId, UUID addressId, String startUpId, Date regDate);
 	
 }
 
