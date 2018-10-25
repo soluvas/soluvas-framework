@@ -345,8 +345,8 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		
 		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("zendeskOrganizationId", 1), "getZendeskOrganizationId", customerRoleId);
 		if (dbObject != null) {
-			if (dbObject.get("getZendeskOrganizationId") != null && !"null".equals(dbObject.get("getZendeskOrganizationId"))) {
-				return Long.valueOf(dbObject.get("getZendeskOrganizationId").toString());
+			if (dbObject.containsField("zendeskOrganizationId")) {
+				return Long.valueOf(dbObject.get("zendeskOrganizationId").toString());
 			} else {
 				return null;
 			}
