@@ -3,6 +3,7 @@ package org.soluvas.data.person;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -609,6 +610,16 @@ public class EmfPersonRepository extends
 	public PostalAddress2 getShippingAddress(String id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private void setAddressToResellerStartUp() {
+
+	}
+
+	@Override
+	public void setAddressToResellerStartUp(String personId, UUID addressId, String startUpId, Date regDate) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
