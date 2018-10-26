@@ -717,7 +717,7 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 	private int pointAddition = 0;
 	private BigDecimal netReturnAmount;
 	private int pointReduction = 0;
-	private boolean redeemFromTokenOnly;
+	private boolean getPointFromTokenOnly;
 	private boolean allowedReceivePoint;
 	private boolean allowedSendPoint;
 	private BigDecimal expiryPointPeriod;
@@ -760,14 +760,14 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 
 
 	@Override
-	public boolean isRedeemFromTokenOnly() {
-		return redeemFromTokenOnly;
+	public boolean isGetPointFromTokenOnly() {
+		return getPointFromTokenOnly;
 	}
 
 
 	@Override
-	public void setRedeemFromTokenOnly(boolean redeemFromTokenOnly) {
-		this.redeemFromTokenOnly = redeemFromTokenOnly;
+	public void setGetPointFromTokenOnly(boolean getPointFromTokenOnly) {
+		this.getPointFromTokenOnly = getPointFromTokenOnly;
 	}
 
 
@@ -905,7 +905,7 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 				+ ", maxBookedQtyShopping=" + maxBookedQtyShopping + ", maxBookedQtyShoppingUnit="
 				+ maxBookedQtyShoppingUnit + ", netShoppingAmount=" + netShoppingAmount + ", pointAddition="
 				+ pointAddition + ", netReturnAmount=" + netReturnAmount + ", pointReduction=" + pointReduction
-				+ ", redeemFromTokenOnly=" + redeemFromTokenOnly + ", allowedReceivePoint=" + allowedReceivePoint
+				+ ", redeemFromTokenOnly=" + getPointFromTokenOnly + ", allowedReceivePoint=" + allowedReceivePoint
 				+ ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod=" + expiryPointPeriod
 				+ ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", rewardIds=" + rewardIds + ", currency="
 				+ currency + ", pointAdditionManuallyByTargetSales=" + pointAdditionManuallyByTargetSales

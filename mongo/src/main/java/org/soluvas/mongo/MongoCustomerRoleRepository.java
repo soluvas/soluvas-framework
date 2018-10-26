@@ -561,13 +561,13 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 	}
 
 	@Override
-	public boolean redeemFromTokenOnly(String id) {
+	public boolean getPointFromTokenOnly(String id) {
 		final BasicDBObject query = new BasicDBObject("_id", id);
-		final BasicDBObject fields = new BasicDBObject("redeemFromTokenOnly", true);
-		final DBObject dbObj = findOnePrimary(query, fields, "redeemFromTokenOnly", id);
+		final BasicDBObject fields = new BasicDBObject("getPointFromTokenOnly", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "getPointFromTokenOnly", id);
 //		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
-			final Object redeemFromTokenOnlyObj = dbObj.get("redeemFromTokenOnly");
+			final Object redeemFromTokenOnlyObj = dbObj.get("getPointFromTokenOnly");
 			if (redeemFromTokenOnlyObj != null && !"null".equals(redeemFromTokenOnlyObj)) {
 				final boolean redeemFromTokenOnly = Boolean.valueOf(String.valueOf(redeemFromTokenOnlyObj)).booleanValue();
 				return redeemFromTokenOnly;

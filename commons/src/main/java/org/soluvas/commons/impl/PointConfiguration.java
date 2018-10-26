@@ -17,9 +17,9 @@ public interface PointConfiguration {
 	
 	void setNetReturnAmount(BigDecimal netReturnAmount);
 	
-	boolean isRedeemFromTokenOnly();
+	boolean isGetPointFromTokenOnly();
 
-	void setRedeemFromTokenOnly(boolean redeemFromTokenOnly);
+	void setGetPointFromTokenOnly(boolean getPointFromTokenOnly);
 	
 	boolean isAllowedReceivePoint();
 	
