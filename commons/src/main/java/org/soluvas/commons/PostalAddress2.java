@@ -2,6 +2,7 @@ package org.soluvas.commons;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -427,7 +428,7 @@ public class PostalAddress2 implements Describable2, Serializable {
 	 */
 	@Basic()
 	private String description = null;
-
+	
 	@Basic()
 	// @Columns(columns = { @Column(name = "validationtime"),
 	@Column(columnDefinition = "varchar(255)")
@@ -437,6 +438,12 @@ public class PostalAddress2 implements Describable2, Serializable {
 	protected static final String JNE_AREA_CODE_EDEFAULT = null;
 	@Transient
 	protected String jneAreaCode = JNE_AREA_CODE_EDEFAULT;
+	@Transient
+	private boolean startupReseller = false;
+	@Transient
+	private String startupResellerId = null;
+	@Transient
+	private Date startupResellerRegistartion;
 		
 	public PostalAddress2() {
 		super();
@@ -1220,6 +1227,31 @@ public class PostalAddress2 implements Describable2, Serializable {
 	public void setJneAreaCode(String code) {
 		jneAreaCode = code;
 	}
+	
+	public boolean isStartupReseller() {
+		return startupReseller;
+	}
+
+	public void setStartupReseller(boolean startupReseller) {
+		this.startupReseller = startupReseller;
+	}
+
+	public String getStartupResellerId() {
+		return startupResellerId;
+	}
+
+	public void setStartupResellerId(String startupResellerId) {
+		this.startupResellerId = startupResellerId;
+	}
+
+	public Date getStartupResellerRegistartion() {
+		return startupResellerRegistartion;
+	}
+
+	public void setStartupResellerRegistartion(Date startupResellerRegistartion) {
+		this.startupResellerRegistartion = startupResellerRegistartion;
+	}
+
 	/**
 	 * A toString method which prints the values of all EAttributes of this
 	 * instance. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1421,7 +1453,7 @@ public class PostalAddress2 implements Describable2, Serializable {
 		return true;
 	}
 	
-	public boolean isSame(final PostalAddress2 toAddress) {
+	public boolean isEqualWith(final PostalAddress2 toAddress) {
 		if (toAddress == null) {
 			return false;
 		}

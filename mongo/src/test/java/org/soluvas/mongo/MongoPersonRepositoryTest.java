@@ -8,13 +8,18 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.AccountStatus;
+import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.data.StatusMask;
 import org.soluvas.data.domain.CappedRequest;
@@ -143,6 +148,47 @@ public class MongoPersonRepositoryTest {
 	@Test
 	public void getFcmTokens() {
 		final ImmutableSet<String> fcmTokens = personRepo.getFcmTokens("ingga_bia_putri");
+	}
+	
+	@Test
+	public void checkStartUpResellerAdd() {
+		Person2 person = personRepo.findOne("atang");
+		PostalAddress2 inputAddr = new PostalAddress2();
+		inputAddr.setId(UUID.fromString("ea27abc2-af4d-4791-aac5-c97f03bd2a17"));
+		inputAddr.setName("batman");
+		inputAddr.setStreet("fasdf asdf");
+		inputAddr.setCity("Bandung");
+		inputAddr.setPostalCode("12345");
+		inputAddr.setProvince("Jawa Barat");
+		inputAddr.setCountry("Indonesia");
+		inputAddr.setCountryCode("ID");
+		inputAddr.setPrimaryMobile("08912333377");
+		inputAddr.setPrimaryEmail("batman@gmail.com");
+		inputAddr.setPrimary(Boolean.FALSE);
+		inputAddr.setPrimaryBilling(Boolean.FALSE);
+		inputAddr.setPrimaryShipping(Boolean.FALSE);
+		inputAddr.setDistrict("Andir");
+		inputAddr.setStartupReseller(Boolean.TRUE);
+		inputAddr.setStartupResellerId("atang");
+		inputAddr.setStartupResellerRegistartion(new Date(1539795600000L));
+		
+		java.util.Optional<PostalAddress2> resellerAddr = person.getAddresses().stream().filter(new java.util.function.Predicate<PostalAddress2>() {
+			@Override
+			public boolean test(PostalAddress2 t) {
+				return t.isEqualWith(inputAddr) && t.isStartupReseller();
+			}
+		}).findFirst();
+		
+		if (!resellerAddr.isPresent()) {
+			System.out.println("gak ade");
+		} else {
+			Date regDate = resellerAddr.get().getStartupResellerRegistartion();
+			boolean lessThan3Month = regDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().isBefore(
+					LocalDate.now().minusMonths(3)
+					);
+			System.out.println(!lessThan3Month);
+		}
+		
 		
 	}
 	

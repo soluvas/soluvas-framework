@@ -2,6 +2,7 @@ package org.soluvas.couchdb;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -805,6 +806,12 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	public ImmutableMap<String, String> findCustomerRoleIdMap(Collection<String> personIds) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public void setAddressToResellerStartUp(String personId, UUID addressId, String startUpId, Date regDate) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
