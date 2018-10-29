@@ -75,4 +75,6 @@ public interface CustomerRoleRepository extends CrudRepository<CustomerRole2, St
 	
 	boolean getPointFromTokenOnly(String id);
 	
+	@Nullable BigDecimal getNetShoppintAmountForPoint(String id);
+	
 }

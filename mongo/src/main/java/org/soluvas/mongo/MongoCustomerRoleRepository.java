@@ -578,6 +578,25 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			return false;
 		}
 	}
+
+	@Override @Nullable
+	public BigDecimal getNetShoppintAmountForPoint(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("netShoppingAmount", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "getNetShoppintAmountForPoint", id);
+//		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object netShoppingAmountObj = dbObj.get("netShoppingAmount");
+			if (netShoppingAmountObj != null && !"null".equals(netShoppingAmountObj)) {
+				final BigDecimal netShoppingAmount = new BigDecimal(String.valueOf(netShoppingAmountObj));
+				return netShoppingAmount;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
 	
 	
 }
