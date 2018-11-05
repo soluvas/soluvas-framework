@@ -1511,6 +1511,27 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		log.debug("Result update address to reseller startup for person '{}' - address '{}' - startup ID '{}': reg date {}",
 				personId, addressId, startUpId, regDate);
 	}
+
+	@Override
+	public Map<String, Double> getPerformanceValue(Collection<String> ids) {
+		final BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$in", ids));
+		final BasicDBObject fields = new BasicDBObject("performanceValue", true);
+		final List<DBObject> dbObjects = findSecondaryAsDBObjects(query, fields, null, 0, 0, "getPerformanceValue", ids);
+		
+		final Map<String, Double> map = new HashMap<>();
+		dbObjects.forEach(new Consumer<DBObject>() {
+			@Override
+			public void accept(DBObject t) {
+				if (t.containsField("performanceValue")) {
+					map.put(String.valueOf(t.get("_id")),
+							Double.valueOf( String.valueOf(t.get("performanceValue")) ) );
+				} else {
+					map.put(String.valueOf(t.get("_id")), 0.0);
+				}
+			}
+		});
+		return map;
+	}
 	
 	// @Override
 	// public Existence<String> existsBySlugEx(StatusMask statusMask, String

@@ -622,4 +622,10 @@ public class EmfPersonRepository extends
 		
 	}
 
+	@Override
+	public Map<String, Double> getPerformanceValue(Collection<String> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
