@@ -814,4 +814,10 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 		
 	}
 
+	@Override
+	public Map<String, Double> getPerformanceValue(Collection<String> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

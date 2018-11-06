@@ -201,6 +201,8 @@ public interface PersonRepository extends
 
 	double getPerformanceValue(String id);
 	
+	Map<String, Double> getPerformanceValue(Collection<String> ids);
+	
 	boolean updatePerformanceValues(final Map<String, Double> upPerformanceMap);
 
 	Page<Person2> findAllWhereCustomerRoleValidThruNotNull(StatusMask statusMask, Pageable pageable);
