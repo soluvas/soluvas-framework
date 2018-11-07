@@ -18,8 +18,6 @@ import org.soluvas.commons.mongo.UnitConverter;
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Id;
 
-import id.co.bippo.common.AllocatePreOrderMethod;
-
 
 @SuppressWarnings("serial") 
 @Converters({DateTimeConverter.class, UnitConverter.class, BigDecimalConverter.class})
