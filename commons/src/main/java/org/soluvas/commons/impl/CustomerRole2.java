@@ -18,6 +18,8 @@ import org.soluvas.commons.mongo.UnitConverter;
 import com.google.code.morphia.annotations.Converters;
 import com.google.code.morphia.annotations.Id;
 
+import id.co.bippo.common.AllocatePreOrderMethod;
+
 
 @SuppressWarnings("serial") 
 @Converters({DateTimeConverter.class, UnitConverter.class, BigDecimalConverter.class})
@@ -258,6 +260,16 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	 */
 	protected Long zendeskOrganizationId = ZENDESK_ORGANIZATION_ID_EDEFAULT;
 	
+	private boolean depositEnabled;
+	
+	private boolean bankTransferPaymentEnabled;
+	
+	private BigDecimal targetSales = BigDecimal.ZERO;
+	
+	private boolean multiPaymentBankMandiriEnabled;
+	
+	private String uriMultiPaymentBankMandiri;
+	
 	/**
 	 * Zero Or null means NO max!!
 	 * @return
@@ -275,16 +287,6 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 	public void setMaxBookedQtyShopping(BigDecimal maxBookedQtyShopping) {
 		this.maxBookedQtyShopping = maxBookedQtyShopping;
 	}
-
-	private boolean depositEnabled;
-	
-	private boolean bankTransferPaymentEnabled;
-	
-	private BigDecimal targetSales = BigDecimal.ZERO;
-	
-	private boolean multiPaymentBankMandiriEnabled;
-	
-	private String uriMultiPaymentBankMandiri;
 	
 	public String getUriMultiPaymentBankMandiri() {
 		return uriMultiPaymentBankMandiri;
@@ -723,9 +725,13 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 				+ bookingExpiryTimeInMinutes + ", dropshipEnabled=" + dropshipEnabled + ", reviewReminderEnabled="
 				+ reviewReminderEnabled + ", zendeskIntegration=" + zendeskIntegration + ", zendeskOrganizationId="
 				+ zendeskOrganizationId + ", depositEnabled=" + depositEnabled + ", bankTransferPaymentEnabled="
-				+ bankTransferPaymentEnabled + ", multiPaymentBankMandiriEnabled=" + multiPaymentBankMandiriEnabled
-				+ ", uriMultiPaymentBankMandiri=" + uriMultiPaymentBankMandiri + ", maxBookedQtyShopping="
-				+ maxBookedQtyShopping + ", maxBookedQtyShoppingUnit=" + maxBookedQtyShoppingUnit + "]";
+				+ bankTransferPaymentEnabled + ", targetSales=" + targetSales + ", multiPaymentBankMandiriEnabled="
+				+ multiPaymentBankMandiriEnabled + ", uriMultiPaymentBankMandiri=" + uriMultiPaymentBankMandiri
+				+ ", maxBookedQtyShopping=" + maxBookedQtyShopping + ", maxBookedQtyShoppingUnit="
+				+ maxBookedQtyShoppingUnit + "]";
 	}
 
+
+
+	
 } //CustomerRole

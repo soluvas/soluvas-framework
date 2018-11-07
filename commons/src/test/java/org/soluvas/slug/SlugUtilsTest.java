@@ -2,6 +2,9 @@ package org.soluvas.slug;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -104,6 +107,18 @@ public class SlugUtilsTest {
 		assertEquals("arumpuspita", SlugUtils.canonicalize("Ar um. @#%#_ P-us .p I t.-a"));
 		assertEquals("almuwattaimammalik", SlugUtils.canonicalize("al-muwatta-imam-malik"));
 		assertEquals("almuwatta/imammalik", SlugUtils.canonicalizePath("al-muwatta/imam-malik"));
+	}
+	
+	@Test
+	public void testBigDecimal() {
+		final BigDecimal one = BigDecimal.valueOf(1.0);
+//		final BigDecimal two = BigDecimal.valueOf(21.0);
+		final BigDecimal two = new BigDecimal(21.0);
+		final BigDecimal three = BigDecimal.valueOf(137.0);
+		
+		
+		final BigDecimal tmp = one.divide(two, 8, RoundingMode.HALF_EVEN).multiply(three);
+		System.err.println("tmp: " + tmp);
 	}
 
 }
