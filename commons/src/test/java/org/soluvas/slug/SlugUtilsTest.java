@@ -4,10 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.regex.Pattern;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.soluvas.commons.SlugUtils;
 
 /**
@@ -15,6 +18,8 @@ import org.soluvas.commons.SlugUtils;
  * @author ceefour
  */
 public class SlugUtilsTest {
+	
+	private static final Logger log = LoggerFactory.getLogger(SlugUtilsTest.class);
 
 	private SlugUtils slugUtils;
 
@@ -119,6 +124,13 @@ public class SlugUtilsTest {
 		
 		final BigDecimal tmp = one.divide(two, 8, RoundingMode.HALF_EVEN).multiply(three);
 		System.err.println("tmp: " + tmp);
+	}
+	
+	public void testUsername() {
+		final Pattern USERNAME = Pattern.compile("[a-zA-Z0-9_][a-zA-Z0-9_.]+");
+		
+		log.info("space: {}", USERNAME.matcher("rudi w").matches());
+		log.info("clean: {}", USERNAME.matcher("rudiw").matches());
 	}
 
 }
