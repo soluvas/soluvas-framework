@@ -261,6 +261,16 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 	 */
 	protected Long zendeskOrganizationId = ZENDESK_ORGANIZATION_ID_EDEFAULT;
 	
+	private boolean depositEnabled;
+	
+	private boolean bankTransferPaymentEnabled;
+	
+	private BigDecimal targetSales = BigDecimal.ZERO;
+	
+	private boolean multiPaymentBankMandiriEnabled;
+	
+	private String uriMultiPaymentBankMandiri;
+	
 	/**
 	 * Zero Or null means NO max!!
 	 * @return
@@ -278,16 +288,6 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 	public void setMaxBookedQtyShopping(BigDecimal maxBookedQtyShopping) {
 		this.maxBookedQtyShopping = maxBookedQtyShopping;
 	}
-
-	private boolean depositEnabled;
-	
-	private boolean bankTransferPaymentEnabled;
-	
-	private BigDecimal targetSales = BigDecimal.ZERO;
-	
-	private boolean multiPaymentBankMandiriEnabled;
-	
-	private String uriMultiPaymentBankMandiri;
 	
 	public String getUriMultiPaymentBankMandiri() {
 		return uriMultiPaymentBankMandiri;
@@ -905,7 +905,7 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 				+ ", maxBookedQtyShopping=" + maxBookedQtyShopping + ", maxBookedQtyShoppingUnit="
 				+ maxBookedQtyShoppingUnit + ", netShoppingAmount=" + netShoppingAmount + ", pointAddition="
 				+ pointAddition + ", netReturnAmount=" + netReturnAmount + ", pointReduction=" + pointReduction
-				+ ", redeemFromTokenOnly=" + getPointFromTokenOnly + ", allowedReceivePoint=" + allowedReceivePoint
+				+ ", getPointFromTokenOnly=" + getPointFromTokenOnly + ", allowedReceivePoint=" + allowedReceivePoint
 				+ ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod=" + expiryPointPeriod
 				+ ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", rewardIds=" + rewardIds + ", currency="
 				+ currency + ", pointAdditionManuallyByTargetSales=" + pointAdditionManuallyByTargetSales
@@ -913,4 +913,5 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 				+ ", minimumBalanceAfterSendPoints=" + minimumBalanceAfterSendPoints + "]";
 	}
 
+	
 } //CustomerRole
