@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import org.junit.After;
@@ -12,6 +14,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.soluvas.commons.SlugUtils;
+
+import com.google.common.collect.ImmutableSet;
 
 /**
  * Tests {@link SlugUtils}.
@@ -131,6 +135,20 @@ public class SlugUtilsTest {
 		
 		log.info("space: {}", USERNAME.matcher("rudi w").matches());
 		log.info("clean: {}", USERNAME.matcher("rudiw").matches());
+	}
+	
+	@Test
+	public void testContainsAll() {
+		final Set<String> exists = ImmutableSet.of("a", "b", "c", "d", "e");
+		final Set<String> contains = ImmutableSet.of("b", "f");
+		
+		System.err.println(String.format("contains: %s", exists.containsAll(contains)));
+	}
+	
+	@Test
+	public void testPararel() {
+		final TreeSet<String> exists = new TreeSet<>(ImmutableSet.of("a", "b", "c", "d", "e"));
+		final TreeSet<String> contains = new TreeSet<>(ImmutableSet.of("b", "f"));
 	}
 
 }
