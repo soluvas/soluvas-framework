@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.soluvas</groupId>
 	<artifactId>org.soluvas.parent</artifactId>
-	<version>2.3.0-CASHBACK-SNAPSHOT</version>
+	<version>2.3.0-DEVELOP-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Soluvas Framework - Parent</name>
 	<description>Soluvas Framework - Parent</description>

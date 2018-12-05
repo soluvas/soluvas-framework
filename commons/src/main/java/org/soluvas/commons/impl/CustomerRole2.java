@@ -4,14 +4,17 @@ package org.soluvas.commons.impl;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.measure.unit.Unit;
+import javax.money.CurrencyUnit;
 
 import org.joda.time.DateTime;
 import org.soluvas.commons.CustomerRoleStatus;
 import org.soluvas.commons.Identifiable;
 import org.soluvas.commons.Timestamped;
 import org.soluvas.commons.mongo.BigDecimalConverter;
+import org.soluvas.commons.mongo.CurrencyUnitConverter;
 import org.soluvas.commons.mongo.DateTimeConverter;
 import org.soluvas.commons.mongo.UnitConverter;
 
@@ -20,8 +23,8 @@ import com.google.code.morphia.annotations.Id;
 
 
 @SuppressWarnings("serial") 
-@Converters({DateTimeConverter.class, UnitConverter.class, BigDecimalConverter.class})
-public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
+@Converters({DateTimeConverter.class, UnitConverter.class, BigDecimalConverter.class, CurrencyUnitConverter.class})
+public class CustomerRole2 implements Serializable, Identifiable, Timestamped, PointConfiguration {
 	
 	public final static String COMMON_ID = "common";
 	public final static String MEMBER_ID = "member"; 
@@ -710,6 +713,180 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 		this.bankTransferPaymentEnabled = bankTransferPaymentEnabled;
 	}
 
+	private BigDecimal netShoppingAmount;
+	private int pointAddition = 0;
+	private BigDecimal netReturnAmount;
+	private int pointReduction = 0;
+	private boolean getPointFromTokenOnly;
+	private boolean allowedReceivePoint;
+	private boolean allowedSendPoint;
+	private BigDecimal expiryPointPeriod;
+	private PeriodUnit expiryPointPeriodUnit;
+	private List<Long> rewardIds;
+	private CurrencyUnit currency;
+	/**
+	 * target sales is per month
+	 */
+	private BigDecimal pointAdditionManuallyByTargetSales;
+	/**
+	 * no returns is per month
+	 */
+	private BigDecimal pointAdditionManuallyByNoReturns;
+	
+	private BigDecimal minimumBalanceAfterSendPoints = BigDecimal.ZERO;
+
+	@Override
+	public BigDecimal getNetShoppingAmount() {
+		return netShoppingAmount;
+	}
+
+
+	@Override
+	public void setNetShoppingAmount(BigDecimal netShoppingAmount) {
+		this.netShoppingAmount = netShoppingAmount;
+	}
+
+
+	@Override
+	public BigDecimal getNetReturnAmount() {
+		return netReturnAmount;
+	}
+
+
+	@Override
+	public void setNetReturnAmount(BigDecimal netReturnAmount) {
+		this.netReturnAmount = netReturnAmount;
+	}
+
+
+	@Override
+	public boolean isGetPointFromTokenOnly() {
+		return getPointFromTokenOnly;
+	}
+
+
+	@Override
+	public void setGetPointFromTokenOnly(boolean getPointFromTokenOnly) {
+		this.getPointFromTokenOnly = getPointFromTokenOnly;
+	}
+
+
+	@Override
+	public boolean isAllowedReceivePoint() {
+		return allowedReceivePoint;
+	}
+
+
+	@Override
+	public void setAllowedReceivePoint(boolean allowedReceivePoint) {
+		this.allowedReceivePoint = allowedReceivePoint;
+	}
+
+
+	@Override
+	public boolean isAllowedSendPoint() {
+		return allowedSendPoint;
+	}
+
+
+	@Override
+	public void setAllowedSendPoint(boolean allowedSendPoint) {
+		this.allowedSendPoint = allowedSendPoint;
+	}
+
+
+	@Override
+	public BigDecimal getExpiryPointPeriod() {
+		return expiryPointPeriod;
+	}
+
+
+	@Override
+	public void setExpiryPointPeriod(BigDecimal expiryPointPeriod) {
+		this.expiryPointPeriod = expiryPointPeriod;
+	}
+
+	
+
+	public CurrencyUnit getCurrency() {
+		return currency;
+	}
+
+
+	public void setCurrency(CurrencyUnit currency) {
+		this.currency = currency;
+	}
+	
+	public int getPointAddition() {
+		return pointAddition;
+	}
+
+
+	public void setPointAddition(int pointAddition) {
+		this.pointAddition = pointAddition;
+	}
+
+
+	public int getPointReduction() {
+		return pointReduction;
+	}
+
+
+	public void setPointReduction(int pointReduction) {
+		this.pointReduction = pointReduction;
+	}
+	
+	public PeriodUnit getExpiryPointPeriodUnit() {
+		return expiryPointPeriodUnit;
+	}
+
+
+	public void setExpiryPointPeriodUnit(PeriodUnit expiryPointPeriodUnit) {
+		this.expiryPointPeriodUnit = expiryPointPeriodUnit;
+	}
+	
+	public BigDecimal getPointAdditionManuallyByTargetSales() {
+		return pointAdditionManuallyByTargetSales;
+	}
+
+
+	public void setPointAdditionManuallyByTargetSales(BigDecimal pointAdditionManuallyByTargetSales) {
+		this.pointAdditionManuallyByTargetSales = pointAdditionManuallyByTargetSales;
+	}
+
+
+	public BigDecimal getPointAdditionManuallyByNoReturns() {
+		return pointAdditionManuallyByNoReturns;
+	}
+
+
+	public void setPointAdditionManuallyByNoReturns(BigDecimal pointAdditionManuallyByNoReturns) {
+		this.pointAdditionManuallyByNoReturns = pointAdditionManuallyByNoReturns;
+	}
+
+	@Override
+	public List<Long> getRewardIds() {
+		return this.rewardIds;
+	}
+
+
+	@Override
+	public void setRewardIds(List<Long> redeemIds) {
+		this.rewardIds = redeemIds;
+	}
+
+
+	@Override
+	public BigDecimal getMinimumBalanceAfterSendPoints() {
+		return minimumBalanceAfterSendPoints;
+	}
+
+
+	@Override
+	public void setMinimumBalanceAfterSendPoints(BigDecimal minimumBalanceAfterSendPoints) {
+		this.minimumBalanceAfterSendPoints = minimumBalanceAfterSendPoints;
+	}
+
 
 	@Override
 	public String toString() {
@@ -726,10 +903,15 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped {
 				+ bankTransferPaymentEnabled + ", targetSales=" + targetSales + ", multiPaymentBankMandiriEnabled="
 				+ multiPaymentBankMandiriEnabled + ", uriMultiPaymentBankMandiri=" + uriMultiPaymentBankMandiri
 				+ ", maxBookedQtyShopping=" + maxBookedQtyShopping + ", maxBookedQtyShoppingUnit="
-				+ maxBookedQtyShoppingUnit + "]";
+				+ maxBookedQtyShoppingUnit + ", netShoppingAmount=" + netShoppingAmount + ", pointAddition="
+				+ pointAddition + ", netReturnAmount=" + netReturnAmount + ", pointReduction=" + pointReduction
+				+ ", getPointFromTokenOnly=" + getPointFromTokenOnly + ", allowedReceivePoint=" + allowedReceivePoint
+				+ ", allowedSendPoint=" + allowedSendPoint + ", expiryPointPeriod=" + expiryPointPeriod
+				+ ", expiryPointPeriodUnit=" + expiryPointPeriodUnit + ", rewardIds=" + rewardIds + ", currency="
+				+ currency + ", pointAdditionManuallyByTargetSales=" + pointAdditionManuallyByTargetSales
+				+ ", pointAdditionManuallyByNoReturns=" + pointAdditionManuallyByNoReturns
+				+ ", minimumBalanceAfterSendPoints=" + minimumBalanceAfterSendPoints + "]";
 	}
-
-
 
 	
 } //CustomerRole
