@@ -59,6 +59,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMap.Builder;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
@@ -1493,6 +1494,23 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 				return t.isPrimaryShipping();
 			}
 		}).findFirst().orElse(addresses.get(0));
+	}
+
+	@Override
+	public ImmutableMap<String, String> findCustomerRoleIdMap(Collection<String> personIds) {
+		final BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$in", personIds));
+		final BasicDBObject fields = new BasicDBObject("customerRole", 1);
+		
+		final List<DBObject> dbObjects = findPrimaryAsDBObjects(query, fields, null, 0, 0, "findCustomerRoleIdMap", personIds);
+		final Builder<String, String> bMap = ImmutableMap.builder();
+		dbObjects.forEach(new Consumer<DBObject>() {
+			@Override
+			public void accept(DBObject t) {
+				bMap.put(String.valueOf(t.get("_id")), String.valueOf(t.get("customerRole")));
+			}
+		});
+		
+		return bMap.build();
 	}
 
 	@Override	

@@ -29,6 +29,7 @@ import org.soluvas.data.repository.Trashable;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 /**
@@ -228,6 +229,8 @@ public interface PersonRepository extends
 
 	@Nullable PostalAddress2 getShippingAddress(String id);
 
+	public ImmutableMap<String, String> findCustomerRoleIdMap(Collection<String> personIds);
+	
 	void setAddressToResellerStartUp(String personId, UUID addressId, String startUpId, Date regDate);
 	
 }

@@ -5,6 +5,7 @@ import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,10 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -318,7 +321,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("dropshipEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isDropShipEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object isDropShipEnabledObj = dbObj.get("dropshipEnabled");
 			if (isDropShipEnabledObj != null && !"null".equals(isDropShipEnabledObj)) {
@@ -342,8 +345,8 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		
 		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("zendeskOrganizationId", 1), "getZendeskOrganizationId", customerRoleId);
 		if (dbObject != null) {
-			if (dbObject.get("getZendeskOrganizationId") != null && !"null".equals(dbObject.get("getZendeskOrganizationId"))) {
-				return Long.valueOf(dbObject.get("getZendeskOrganizationId").toString());
+			if (dbObject.containsField("zendeskOrganizationId")) {
+				return Long.valueOf(dbObject.get("zendeskOrganizationId").toString());
 			} else {
 				return null;
 			}
@@ -358,7 +361,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("bookingEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isBookingEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object bookingEnabledObj = dbObj.get("bookingEnabled");
 			if (bookingEnabledObj != null && !"null".equals(bookingEnabledObj)) {
@@ -395,7 +398,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("bankTransferPaymentEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isBankTransferPaymentEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object objBankTransferPaymentEnabled = dbObj.get("bankTransferPaymentEnabled");
 			if (objBankTransferPaymentEnabled != null && !"null".equals(objBankTransferPaymentEnabled)) {
@@ -437,7 +440,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("multiPaymentBankMandiriEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isMultiPaymentBankMandiri", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object objMultiPaymentBankMandiriEnabled = dbObj.get("multiPaymentBankMandiriEnabled");
 			if (objMultiPaymentBankMandiriEnabled != null && !"null".equals(objMultiPaymentBankMandiriEnabled)) {
@@ -457,7 +460,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("paymentGatewayEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isPaymentGatewayEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object objPaymentGatewayEnabled = dbObj.get("paymentGatewayEnabled");
 			if (objPaymentGatewayEnabled != null && !"null".equals(objPaymentGatewayEnabled)) {
@@ -494,7 +497,7 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		final BasicDBObject query = new BasicDBObject("_id", customerRoleId);
 		final BasicDBObject fields = new BasicDBObject("depositEnabled", true);
 		final DBObject dbObj = findOnePrimary(query, fields, "isDepositEnabled", customerRoleId);
-		log.debug("dbObj: {}", dbObj);
+//		log.debug("dbObj: {}", dbObj);
 		if (dbObj != null && !"null".equals(dbObj)) {
 			final Object objDepositEnabled = dbObj.get("depositEnabled");
 			if (objDepositEnabled != null && !"null".equals(objDepositEnabled)) {
@@ -505,6 +508,93 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 			}
 		} else {
 			return false;
+		}
+	}
+
+	@Override
+	public ImmutableList<Long> getRewardIds(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("rewardIds", 1);
+		final DBObject dbObject = findOnePrimary(query, fields, "getRewardIds", id);
+		if (dbObject == null) {
+			return ImmutableList.of();
+		}
+		if (dbObject.containsField("rewardIds")) {
+			final Builder<Long> bList = ImmutableList.builder();
+			((BasicDBList)dbObject.get("rewardIds")).forEach(new Consumer<Object>() {
+				@Override
+				public void accept(Object t) {
+					bList.add(Long.valueOf(String.valueOf(t)));
+				}
+			});
+			return bList.build();
+		} else {
+			return ImmutableList.of();
+		}
+	}
+
+	@Override
+	public boolean hasRewardId(String id, long redeemId) {
+		final BasicDBObject query = new BasicDBObject("_id", id).append("rewardIds", redeemId);
+		return primary.count(query) > 0;
+		
+		
+	}
+
+	@Override
+	public boolean canSendPoint(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("allowedSendPoint", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "canSendPoint", id);
+//		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object canSendPointObj = dbObj.get("allowedSendPoint");
+			if (canSendPointObj != null && !"null".equals(canSendPointObj)) {
+				final boolean canSendPoint = Boolean.valueOf(String.valueOf(canSendPointObj)).booleanValue();
+				return canSendPoint;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean getPointFromTokenOnly(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("getPointFromTokenOnly", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "getPointFromTokenOnly", id);
+//		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object redeemFromTokenOnlyObj = dbObj.get("getPointFromTokenOnly");
+			if (redeemFromTokenOnlyObj != null && !"null".equals(redeemFromTokenOnlyObj)) {
+				final boolean redeemFromTokenOnly = Boolean.valueOf(String.valueOf(redeemFromTokenOnlyObj)).booleanValue();
+				return redeemFromTokenOnly;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	@Override @Nullable
+	public BigDecimal getNetShoppintAmountForPoint(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("netShoppingAmount", true);
+		final DBObject dbObj = findOnePrimary(query, fields, "getNetShoppintAmountForPoint", id);
+//		log.debug("dbObj: {}", dbObj);
+		if (dbObj != null && !"null".equals(dbObj)) {
+			final Object netShoppingAmountObj = dbObj.get("netShoppingAmount");
+			if (netShoppingAmountObj != null && !"null".equals(netShoppingAmountObj)) {
+				final BigDecimal netShoppingAmount = new BigDecimal(String.valueOf(netShoppingAmountObj));
+				return netShoppingAmount;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
 		}
 	}
 	

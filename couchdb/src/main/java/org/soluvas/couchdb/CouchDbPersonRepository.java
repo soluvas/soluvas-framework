@@ -803,6 +803,12 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	}
 
 	@Override
+	public ImmutableMap<String, String> findCustomerRoleIdMap(Collection<String> personIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public void setAddressToResellerStartUp(String personId, UUID addressId, String startUpId, Date regDate) {
 		// TODO Auto-generated method stub
 		
