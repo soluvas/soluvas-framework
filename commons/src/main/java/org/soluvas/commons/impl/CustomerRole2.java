@@ -713,6 +713,7 @@ public class CustomerRole2 implements Serializable, Identifiable, Timestamped, P
 		this.bankTransferPaymentEnabled = bankTransferPaymentEnabled;
 	}
 
+	/*point configuration fields*/
 	private BigDecimal netShoppingAmount;
 	private int pointAddition = 0;
 	private BigDecimal netReturnAmount;
