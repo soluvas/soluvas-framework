@@ -234,6 +234,8 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 	private DateTime expiryTimeFirebaseCustomToken;
 	private final Set<String> firebaseCloudMessagingTokens = new HashSet<>();
 	
+	protected List<CommunicatorChannel> communicatorChannels;
+	
 	public Person2() {
 		super();
 	}
@@ -1260,5 +1262,12 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 		this.expiryTimeFirebaseCustomToken = expiryTimeFirebaseCustomToken;
 	}
 
+	public List<CommunicatorChannel> getCommunicatorChannels() {
+		if (communicatorChannels == null) {
+			communicatorChannels = new ArrayList<>();
+		}
+		
+		return communicatorChannels;
+	}
 
 } //Person
