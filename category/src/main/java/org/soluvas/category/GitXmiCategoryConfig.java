@@ -22,14 +22,15 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.eventbus.EventBus;
 
-@Configuration
-@Import(MultiTenantCategoryConfig.class)
+//@Configuration
+//@Import(MultiTenantCategoryConfig.class)
+//sudah tidak digunakan, sekarang sudah menggunakan mongocategory
 public class GitXmiCategoryConfig {
 	
-	@Inject
-	private MultiTenantConfig tenantConfig;
-	@Inject
-	private Environment env;
+//	@Inject
+//	private MultiTenantConfig tenantConfig;
+//	@Inject
+//	private Environment env;
 	
 //	@Bean
 //	public TenantBeans<CategoryRepository> categoryRepoBeans() {
