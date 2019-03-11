@@ -31,6 +31,7 @@ import org.soluvas.commons.PhoneNumber2;
 import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.SlugUtils;
 import org.soluvas.commons.entity.Person2;
+import org.soluvas.commons.entity.Performance;
 import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.commons.impl.PersonImpl;
 import org.soluvas.data.EntityLookupException;
@@ -1551,11 +1552,47 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 		return map;
 	}
 	
-	// @Override
-	// public Existence<String> existsBySlugEx(StatusMask statusMask, String
-	// slug) {
-	// // TODO Auto-generated method stub
-	// return null;
-	// }
+	@Override
+	public List<Performance> getPerformance(Collection<String> ids) {
+		BasicDBObject query = new BasicDBObject("_id", new BasicDBObject("$in", ids));
+		BasicDBObject fields = new BasicDBObject("performanceValue", true);
+		List<DBObject> dbObjects = findSecondaryAsDBObjects(query, fields, null, 0, 0, "getPerformanceValue", ids);
+		
+		List<Performance> performances = new ArrayList<>();
+		dbObjects.forEach(new Consumer<DBObject>() {
+			@Override
+			public void accept(DBObject t) {
+				if (t.containsField("performanceValue")) {
+					Double value = Double.valueOf( String.valueOf(t.get("performanceValue")) );
+					String personId = String.valueOf(t.get("_id"));
+					performances.add(new Performance(personId, value));
+				} else {
+					String personId = String.valueOf(t.get("_id"));
+					performances.add(new Performance(personId, 0.0));
+				}
+			}
+		});
+		
+		return performances;
+	}
+	
+	@Override
+	public Performance getPerformance(String id) {
+		final BasicDBObject query = new BasicDBObject("_id", id);
+		final BasicDBObject fields = new BasicDBObject("performanceValue", true);
+		final DBObject dbObject = findOneSecondary(query, fields, "getPerformanceValue", id);
+		
+		Performance performance = new Performance(id, new Double(0));
+		if (dbObject != null) {
+			if (dbObject.containsField("performanceValue")) {
+				Double value = Double.valueOf( String.valueOf(dbObject.get("performanceValue")) );
+				return new Performance(id, value);
+			}
+			
+		}
+		
+		return performance;
+	}
+	
 
 }

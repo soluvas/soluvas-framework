@@ -15,6 +15,7 @@ import org.soluvas.commons.Email;
 import org.soluvas.commons.Person;
 import org.soluvas.commons.PersonInfo2;
 import org.soluvas.commons.PostalAddress2;
+import org.soluvas.commons.entity.Performance;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.Existence;
@@ -232,6 +233,10 @@ public interface PersonRepository extends
 	public ImmutableMap<String, String> findCustomerRoleIdMap(Collection<String> personIds);
 	
 	void setAddressToResellerStartUp(String personId, UUID addressId, String startUpId, Date regDate);
+
+	List<Performance> getPerformance(Collection<String> ids);
+
+	Performance getPerformance(String id);
 	
 }
 
