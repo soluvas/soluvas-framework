@@ -24,6 +24,7 @@ import org.soluvas.commons.AccountStatus;
 import org.soluvas.commons.PersonInfo2;
 import org.soluvas.commons.PostalAddress2;
 import org.soluvas.commons.SlugUtils;
+import org.soluvas.commons.entity.Performance;
 import org.soluvas.commons.entity.Person2;
 import org.soluvas.commons.impl.CustomerRole2;
 import org.soluvas.data.EntityLookupException;
@@ -816,6 +817,18 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 
 	@Override
 	public Map<String, Double> getPerformanceValue(Collection<String> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Performance> getPerformance(Collection<String> ids) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Performance getPerformance(String id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
