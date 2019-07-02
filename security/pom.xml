@@ -53,11 +53,11 @@
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.couchdb</artifactId>
 			<optional>true</optional>
-		</dependency>
+		</dependency>-->
 		<dependency>
 			<groupId>org.soluvas</groupId>
 			<artifactId>org.soluvas.mongo</artifactId>
