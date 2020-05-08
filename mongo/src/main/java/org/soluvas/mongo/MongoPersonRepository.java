@@ -251,7 +251,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public Optional<String> getIdByEmail(StatusMask statusMask, String email) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
 		final BasicDBObject query = new BasicDBObject("emails",
-				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.trim())));
 		augmentQueryForStatusMask(query, statusMask);
 		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByEmail", statusMask,
 				email);
