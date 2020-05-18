@@ -194,11 +194,12 @@ public class SlugUtils {
 		if (validator.apply(id))
 			return id;
 		else {
-			for (int i = 2; i <= 99; i++) {
+			for (int i = 2; i <= 199; i++) {
 				id = generateId(name, i);
 				if (validator.apply(id))
 					return id;
 			}
+			
 			throw new CommonsException("Cannot generate valid ID for '" + name + "' after 99 retries.");
 		}
 	}
