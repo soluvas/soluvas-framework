@@ -226,9 +226,18 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 			return null;
 		}
 		final BasicDBObject query = new BasicDBObject("emails",
-				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.trim())));
 		augmentQueryForStatusMask(query, statusMask);
-		return findOneByQuery(query);
+		Page<Person2> persons = findAllByQuery(query, new PageOffsetRequest(0,100));
+		if (persons.getContent().isEmpty()) {
+			return null;
+		}
+		
+		if (persons.getContent().size() > 1) {
+			throw new NonUniqueResultException("Found multiple person with same email: " + email);
+		}
+		
+		return persons.getContent().get(0);
 	}
 
 	@Override
@@ -236,7 +245,7 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	public Person2 findOneByEmail(AccountStatus status, String email) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
 		final BasicDBObject query = new BasicDBObject("emails",
-				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.toLowerCase().trim())));
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.trim())));
 		query.put("accountStatus", status.name());
 		return findOneByQuery(query);
 	}
