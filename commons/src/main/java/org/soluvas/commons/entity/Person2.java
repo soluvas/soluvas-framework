@@ -234,6 +234,10 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 	private DateTime expiryTimeFirebaseCustomToken;
 	private final Set<String> firebaseCloudMessagingTokens = new HashSet<>();
 	
+	private Boolean phoneVerified;
+    private Boolean emailVerified;
+    private DateTime verifyExpiryTime;	
+	
 	protected List<CommunicatorChannel> communicatorChannels;
 	
 	public Person2() {
@@ -1269,5 +1273,30 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 		
 		return communicatorChannels;
 	}
+	
+	public boolean isPhoneVerified() {
+		return phoneVerified;
+	}
+	
+	public void setPhoneVerified(boolean phoneVerified) {
+		this.phoneVerified = phoneVerified;
+	}
+	
+	public boolean isEmailVerified() {
+		return emailVerified;
+	}
+	
+	public void setEmailVerified(boolean emailVerified) {
+		this.emailVerified = emailVerified;
+	}
+
+	public DateTime getVerifyExpiryTime() {
+		return verifyExpiryTime;
+	}
+	
+	public void setVerifyExpiryTime(DateTime verifyExpiryTime) {
+		this.verifyExpiryTime = verifyExpiryTime;
+	}
+	
 
 } //Person
