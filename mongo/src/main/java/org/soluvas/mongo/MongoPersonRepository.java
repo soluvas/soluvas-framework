@@ -259,10 +259,11 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	@Override
 	public Optional<String> getIdByEmail(StatusMask statusMask, String email) {
 		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
-		final BasicDBObject query = new BasicDBObject("emails",
-				new BasicDBObject("$elemMatch", new BasicDBObject("email", email.trim())));
+		Pattern regex = Pattern.compile(Pattern.quote(email.trim()), Pattern.CASE_INSENSITIVE);
+		BasicDBObject query = new BasicDBObject("emails",
+				new BasicDBObject("$elemMatch", new BasicDBObject("email", regex)));
 		augmentQueryForStatusMask(query, statusMask);
-		final DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByEmail", statusMask,
+		DBObject dbObject = findOnePrimary(query, new BasicDBObject("_id", true), "getIdByEmail", statusMask,
 				email);
 		if (dbObject == null) {
 			return Optional.absent();
