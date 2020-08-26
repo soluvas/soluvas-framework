@@ -1901,7 +1901,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				setDomain(getDomainDev());
 			}
 		} else {
-			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'");
+			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'!!");
 		}
 	}
 
