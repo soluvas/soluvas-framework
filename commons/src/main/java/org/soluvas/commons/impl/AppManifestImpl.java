@@ -1901,7 +1901,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				setDomain(getDomainDev());
 			}
 		} else {
-			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'!!");
+			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'!! on setDomainByTenantEnv");
 		}
 	}
 
@@ -1915,7 +1915,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				log.trace("Set generalEmail from prd: {}", getGeneralEmailPrd());
 				setGeneralEmail(getGeneralEmailPrd());
 			}
-		} else if (tenantEnv.startsWith(ENV_STG_PREFIX)) {
+		} else if (tenantEnv.startsWith(ENV_STG_PREFIX) 
+				|| ENV_INTLEGACY.equals(tenantEnv)
+				|| ENV_UATLEGAXY.equals(tenantEnv)) {
 			if (getGeneralEmailStg() != null) {
 				log.trace("Set generalEmail from stg: {}", getGeneralEmailStg());
 				setGeneralEmail(getGeneralEmailStg());
@@ -1926,7 +1928,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				setGeneralEmail(getGeneralEmailDev());
 			}
 		} else {
-			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "'");
+			throw new CommonsException("Unrecognized tenantEnv '" + tenantEnv + "' on setGeneralEmailByTenantEnv");
 		}
 	}
 
