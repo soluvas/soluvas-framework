@@ -79,6 +79,8 @@ public interface AppManifest extends Positionable, ResourceAware, BundleAware, E
 	
 	public static final String ENV_DEV = "dev";
 	public static final String ENV_STG_PREFIX = "st";
+	public static final String ENV_INTLEGACY = "intlegacy";
+	public static final String ENV_UATLEGAXY = "uatlegacy";
 	public static final String ENV_PRD = "prd";
 	
 	/**

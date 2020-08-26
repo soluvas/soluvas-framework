@@ -1888,7 +1888,9 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				log.trace("Set domain from prd: {}", getDomainPrd());
 				setDomain(getDomainPrd());
 			}
-		} else if (tenantEnv.startsWith(ENV_STG_PREFIX)) {
+		} else if (tenantEnv.startsWith(ENV_STG_PREFIX) 
+					|| ENV_INTLEGACY.equals(tenantEnv)
+					|| ENV_UATLEGAXY.equals(tenantEnv)) {
 			if (getDomainStg() != null) {
 				log.trace("Set domain from stg: {}", getDomainStg());
 				setDomain(getDomainStg());
