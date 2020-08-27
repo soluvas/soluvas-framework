@@ -1888,9 +1888,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				log.trace("Set domain from prd: {}", getDomainPrd());
 				setDomain(getDomainPrd());
 			}
-		} else if (tenantEnv.startsWith(ENV_STG_PREFIX) 
-					|| ENV_INTLEGACY.equals(tenantEnv)
-					|| ENV_UATLEGAXY.equals(tenantEnv)) {
+		} else if (tenantEnv.startsWith(ENV_STG_PREFIX)) {
 			if (getDomainStg() != null) {
 				log.trace("Set domain from stg: {}", getDomainStg());
 				setDomain(getDomainStg());
@@ -1915,9 +1913,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 				log.trace("Set generalEmail from prd: {}", getGeneralEmailPrd());
 				setGeneralEmail(getGeneralEmailPrd());
 			}
-		} else if (tenantEnv.startsWith(ENV_STG_PREFIX) 
-				|| ENV_INTLEGACY.equals(tenantEnv)
-				|| ENV_UATLEGAXY.equals(tenantEnv)) {
+		} else if (tenantEnv.startsWith(ENV_STG_PREFIX)) {
 			if (getGeneralEmailStg() != null) {
 				log.trace("Set generalEmail from stg: {}", getGeneralEmailStg());
 				setGeneralEmail(getGeneralEmailStg());
