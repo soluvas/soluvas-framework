@@ -8,6 +8,7 @@ import org.soluvas.commons.config.SysConfigMapHolder;
 import org.soluvas.commons.tenant.TenantBeans;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
@@ -17,6 +18,7 @@ import org.springframework.core.env.Environment;
  *
  */
 @Configuration
+@ComponentScan("org.soluvas.category.shell")
 public class MongoCategoryConfig {
 	
 	@Inject
