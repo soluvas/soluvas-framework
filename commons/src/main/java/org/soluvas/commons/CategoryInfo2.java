@@ -2,6 +2,7 @@ package org.soluvas.commons;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -273,6 +274,10 @@ public class CategoryInfo2 implements Serializable {
 	}
 
 	public Map<String, Map<String, String>> getTranslations() {
+		if (translations == null) {
+			translations = new HashMap<>();
+		}
+		
 		return translations;
 	}
 	

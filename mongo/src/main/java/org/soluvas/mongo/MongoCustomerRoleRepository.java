@@ -414,18 +414,18 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 
 	@Override
 	public Entry<BigDecimal, Unit<?>> getMaxBookedQtyShopping(String customerRoleId) {
-		final BasicDBObject query = new BasicDBObject();
+		BasicDBObject query = new BasicDBObject();
 		query.put("_id", customerRoleId);
 		
-		final BasicDBObject fields = new BasicDBObject("maxBookedQtyShopping", 1).append("maxBookedQtyShoppingUnit", 1);
+		BasicDBObject projection = new BasicDBObject("maxBookedQtyShopping", 1).append("maxBookedQtyShoppingUnit", 1);
 		
-		final DBObject dbObject = findOnePrimary(query, fields, "getMaxBookedQtyShopping", customerRoleId);
+		DBObject queryResult = findOnePrimary(query, projection, "getMaxBookedQtyShopping", customerRoleId);
 		
-		if (dbObject != null) {
-			if (dbObject.get("maxBookedQtyShopping") != null && !"null".equals(dbObject.get("maxBookedQtyShopping"))) {
+		if (queryResult != null) {
+			if (queryResult.get("maxBookedQtyShopping") != null && !"null".equals(queryResult.get("maxBookedQtyShopping"))) {
 				return new AbstractMap.SimpleEntry(
-						new BigDecimal(dbObject.get("maxBookedQtyShopping").toString()),
-						Unit.valueOf(dbObject.get("maxBookedQtyShoppingUnit").toString()));
+						new BigDecimal(queryResult.get("maxBookedQtyShopping").toString()),
+						Unit.valueOf(queryResult.get("maxBookedQtyShoppingUnit").toString()));
 			} else {
 				return new AbstractMap.SimpleEntry(BigDecimal.ZERO, Unit.ONE);
 			}
