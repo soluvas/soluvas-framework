@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class CatalogMessageOnly {
 	
-	private Map<String, List<MessageOnly>> messageMap;
+	private Map<String, List<MessageOnly>> messages;
 
 	public CatalogMessageOnly() {
 		super();
@@ -20,25 +20,25 @@ public class CatalogMessageOnly {
 	/**
 	 * Initialize for messages group by INFO, WARN and ERROR.
 	 */
-	public CatalogMessageOnly byDefault() {
-		this.messageMap = new HashMap<>();
-		this.messageMap.put(MessageOnly.INFO_STATUS, new ArrayList<MessageOnly>());
-		this.messageMap.put(MessageOnly.WARN_STATUS, new ArrayList<MessageOnly>());
-		this.messageMap.put(MessageOnly.ERROR_STATUS, new ArrayList<MessageOnly>());
+	public CatalogMessageOnly initMessages() {
+		this.messages = new HashMap<>();
+		this.messages.put(MessageOnly.INFO_STATUS, new ArrayList<MessageOnly>());
+		this.messages.put(MessageOnly.WARN_STATUS, new ArrayList<MessageOnly>());
+		this.messages.put(MessageOnly.ERROR_STATUS, new ArrayList<MessageOnly>());
 		return this;
 	}
 
 	public Map<String, List<MessageOnly>> getMessageMap() {
-		return messageMap;
+		return messages;
 	}
 
 	public void setMessageMap(Map<String, List<MessageOnly>> messageMap) {
-		this.messageMap = messageMap;
+		this.messages = messageMap;
 	}
 
 	@Override
 	public String toString() {
-		return "CatalogMessageOnly [messageMap=" + messageMap + "]";
+		return "CatalogMessageOnly [messageMap=" + messages + "]";
 	}
 	
 }
