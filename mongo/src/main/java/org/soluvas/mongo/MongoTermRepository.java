@@ -3,6 +3,7 @@ package org.soluvas.mongo;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
@@ -39,5 +40,7 @@ public interface MongoTermRepository extends PagingAndSortingRepository<Term2, S
 	@Nullable Term2 findOneByExCacheable(String id);
 
 	@Nullable Term2 existsByEx(String id);
+	
+	Map<String, Term2> findByIds(Collection<String> ids);
 
 }

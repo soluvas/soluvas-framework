@@ -3,7 +3,9 @@ package org.soluvas.mongo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
@@ -15,6 +17,7 @@ import org.soluvas.data.Term2Catalog;
 import org.soluvas.data.domain.Page;
 import org.soluvas.data.domain.PageImpl;
 import org.soluvas.data.domain.Pageable;
+import org.soluvas.data.domain.Sort;
 import org.soluvas.json.JsonUtils;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -169,6 +172,26 @@ public class MongoTermRepositoryImpl extends MongoRepositoryBase<Term2> implemen
 			}
 		}
 		return term2;
+	}
+	
+	@Override
+	public Map<String, Term2> findByIds(Collection<String> ids) {
+		Map<String, Term2> terms = new HashMap<>();
+		
+		BasicDBObject query = new BasicDBObject();
+		query.put("_id", new BasicDBObject("$in", ids));
+		
+		long offset = 0;
+		long limit = 3000;
+		BasicDBObject sortQuery = MongoUtils.getSort(null, "modificationTime", Sort.Direction.DESC);
+		List<Term2> entities = findSecondary(query, null, sortQuery, offset, limit, "findAllByQuery");
+		log.debug("findAllByQuery {} {} returned {} out of {} documents, sort {} skip {} limit {}",
+				collName, query, entities.size(), limit, sortQuery, offset, limit);
+		for (Term2 term : entities) {
+			terms.put(term.getId(), term);
+		}
+		
+		return terms;
 	}
 	
 }
