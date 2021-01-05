@@ -524,7 +524,7 @@ public class AppManifestImpl extends MinimalEObjectImpl.Container implements App
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DEFAULT_CURRENCY_CODE_EDEFAULT = "USD";
+	protected static final String DEFAULT_CURRENCY_CODE_EDEFAULT = "IDR";
 
 	/**
 	 * The cached value of the '{@link #getDefaultCurrencyCode() <em>Default Currency Code</em>}' attribute.
