@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.measure.quantity.Dimensionless;
 import javax.measure.unit.Unit;
 
 import org.soluvas.commons.CustomerRoleStatus;
@@ -420,18 +421,24 @@ public class MongoCustomerRoleRepository extends MongoRepositoryBase<CustomerRol
 		BasicDBObject projection = new BasicDBObject("maxBookedQtyShopping", 1).append("maxBookedQtyShoppingUnit", 1);
 		
 		DBObject queryResult = findOnePrimary(query, projection, "getMaxBookedQtyShopping", customerRoleId);
-		
-		if (queryResult != null) {
-			if (queryResult.get("maxBookedQtyShopping") != null && !"null".equals(queryResult.get("maxBookedQtyShopping"))) {
-				return new AbstractMap.SimpleEntry(
-						new BigDecimal(queryResult.get("maxBookedQtyShopping").toString()),
-						Unit.valueOf(queryResult.get("maxBookedQtyShoppingUnit").toString()));
-			} else {
-				return new AbstractMap.SimpleEntry(BigDecimal.ZERO, Unit.ONE);
-			}
-		} else {
-			return new AbstractMap.SimpleEntry(BigDecimal.ZERO, Unit.ONE);
+		if (queryResult == null) {
+			return new AbstractMap.SimpleEntry<BigDecimal, Unit<?>>(BigDecimal.ZERO, Unit.ONE);
 		}
+		
+		if (queryResult.get("maxBookedQtyShopping") != null 
+				&& !"null".equals(queryResult.get("maxBookedQtyShopping"))) {
+			
+			Unit<?> quantityUnit = Unit.ONE;
+			if (queryResult.get("maxBookedQtyShoppingUnit") != null 
+					&& !"null".equals(queryResult.get("maxBookedQtyShoppingUnit"))) {
+				quantityUnit = Unit.valueOf(queryResult.get("maxBookedQtyShoppingUnit").toString()); 
+			}			
+			
+			return new AbstractMap.SimpleEntry<BigDecimal, Unit<?>>(
+					new BigDecimal(queryResult.get("maxBookedQtyShopping").toString()), quantityUnit);
+		} 
+		
+		return new AbstractMap.SimpleEntry<BigDecimal, Unit<?>>(BigDecimal.ZERO, Unit.ONE);
 	}
 
 	@Override
