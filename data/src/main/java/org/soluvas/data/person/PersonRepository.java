@@ -72,7 +72,7 @@ public interface PersonRepository extends
 	@Nullable
 	public Person2 findOneByEmail(StatusMask statusMask, @Nullable String email);
 	
-	public boolean isExistsByEmail(StatusMask statusMask, String email);
+	public boolean isEmailAlreadyExists(StatusMask statusMask, String email);
 	
 	Optional<String> getIdByEmail(StatusMask statusMask, String email);
 	
@@ -237,6 +237,5 @@ public interface PersonRepository extends
 	List<Performance> getPerformance(Collection<String> ids);
 
 	Performance getPerformance(String id);
-	
 }
 

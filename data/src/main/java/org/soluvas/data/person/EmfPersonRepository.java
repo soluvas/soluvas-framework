@@ -465,7 +465,7 @@ public class EmfPersonRepository extends
 	}
 
 	@Override
-	public boolean isExistsByEmail(StatusMask statusMask, String email) {
+	public boolean isEmailAlreadyExists(StatusMask statusMask, String email) {
 		throw new UnsupportedOperationException();
 	}
 

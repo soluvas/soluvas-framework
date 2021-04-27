@@ -45,6 +45,7 @@ import com.google.code.morphia.annotations.Id;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 
 @Entity(noClassnameStored=true)
@@ -1296,6 +1297,14 @@ public class Person2 implements Serializable, Identifiable, PersonLike, Timestam
 	
 	public void setVerifyExpiryTime(DateTime verifyExpiryTime) {
 		this.verifyExpiryTime = verifyExpiryTime;
+	}
+	
+	public String getFullName() {
+		if (getLastName() == null) {
+			return getFirstName();	
+		}
+		
+		return getFirstName() + " " + getLastName();
 	}
 	
 

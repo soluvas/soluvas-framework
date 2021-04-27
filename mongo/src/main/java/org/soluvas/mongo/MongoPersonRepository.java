@@ -251,7 +251,8 @@ public class MongoPersonRepository extends MongoRepositoryBase<Person2> implemen
 	}
 
 	@Override
-	public boolean isExistsByEmail(StatusMask statusMask, String email) {
+	public boolean isEmailAlreadyExists(StatusMask statusMask, String email) {
+		Preconditions.checkState(!Strings.isNullOrEmpty(email), "Email must not be null or empty");
 		final Optional<String> optExists = getIdByEmail(statusMask, email);
 		return optExists.isPresent();
 	}

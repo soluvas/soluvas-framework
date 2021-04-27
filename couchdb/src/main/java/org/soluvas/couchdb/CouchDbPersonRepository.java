@@ -655,7 +655,7 @@ public class CouchDbPersonRepository extends CouchDbRepositoryBase<Person2, Acco
 	}
 
 	@Override
-	public boolean isExistsByEmail(StatusMask statusMask, String email) {
+	public boolean isEmailAlreadyExists(StatusMask statusMask, String email) {
 		throw new UnsupportedOperationException();
 	}
 
