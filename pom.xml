@@ -94,7 +94,7 @@
 
 		<shiro.version>1.5.0</shiro.version>
 		<akka.version>2.4.17</akka.version>
-		<scala.version>2.11.6</scala.version>
+		<scala.version>2.13.1</scala.version>
 		
 		<metrics.version>3.1.2</metrics.version>
 		<jackson.version>2.10.0</jackson.version>
